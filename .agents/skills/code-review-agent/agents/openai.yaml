@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Review Agent"
+  short_description: "项目结构、模块职责与开发规范"
+  default_prompt: "帮我继续开发 code-review-agent 项目"

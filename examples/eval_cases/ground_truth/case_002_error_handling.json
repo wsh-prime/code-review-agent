@@ -1,0 +1,14 @@
+{
+  "case_id": "case_002_error_handling",
+  "patch": "patches/case_002_error_handling.patch",
+  "expected_findings": [
+    {
+      "category": "error_handling_change",
+      "file": "src/shop/service.py",
+      "line_range": [12, 18],
+      "severity": "medium",
+      "key_bug": true
+    }
+  ],
+  "expected_no_finding": false
+}

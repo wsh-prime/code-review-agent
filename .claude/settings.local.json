@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /d/learn/code-review-agent/src -name \"*.py\" -exec wc -l {} +)",
+      "Bash(find /d/learn/code-review-agent/tests -name \"*.py\" -exec wc -l {} +)"
+    ]
+  }
+}

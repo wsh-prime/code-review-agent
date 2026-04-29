@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent Research"
+  short_description: "调研 Agent 论文与最新方法，整理笔记"
+  default_prompt: "帮我调研最新的 Agent 相关方法，并整理到 docs/research/"

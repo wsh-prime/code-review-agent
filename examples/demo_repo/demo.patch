@@ -1,0 +1,9 @@
+diff --git a/src/app.py b/src/app.py
+index 0000000..1111111 100644
+--- a/src/app.py
++++ b/src/app.py
+@@ -1,3 +1,4 @@
+ def normalize_name(name):
++    # Demo-only patch for Phase 0 CLI validation.
+     return name.strip().lower()
+

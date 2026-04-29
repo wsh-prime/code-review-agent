@@ -1,0 +1,14 @@
+{
+  "case_id": "case_001_test_gap",
+  "patch": "patches/case_001_test_gap.patch",
+  "expected_findings": [
+    {
+      "category": "test_gap",
+      "file": "src/shop/service.py",
+      "line_range": [30, 36],
+      "severity": "medium",
+      "key_bug": true
+    }
+  ],
+  "expected_no_finding": false
+}
