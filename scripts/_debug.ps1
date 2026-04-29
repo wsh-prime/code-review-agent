@@ -1,5 +1,0 @@
-Write-Host "PSScriptRoot=[$PSScriptRoot]"
-Write-Host "MyCommand.Path=[$($MyInvocation.MyCommand.Path)]"
-$ef = "$PSScriptRoot\review-live.env.local"
-Write-Host "EnvFile=[$ef]"
-Write-Host "Exists=$(Test-Path $ef)"
