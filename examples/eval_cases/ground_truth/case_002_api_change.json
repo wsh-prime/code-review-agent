@@ -1,0 +1,14 @@
+{
+  "case_id": "case_002_api_change",
+  "patch": "patches/case_002_api_change.patch",
+  "expected_findings": [
+    {
+      "category": "api_change",
+      "file": "src/shop/api.py",
+      "line_range": [5, 8],
+      "severity": "medium",
+      "key_bug": true
+    }
+  ],
+  "expected_no_finding": false
+}

@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any
 
 
-REVIEW_REPORT_SCHEMA_VERSION = "1.1"
+REVIEW_REPORT_SCHEMA_VERSION = "1.3"
 
 
 def normalize_review_report(report: dict[str, Any]) -> dict[str, Any]:
@@ -26,11 +26,67 @@ def normalize_review_report(report: dict[str, Any]) -> dict[str, Any]:
         "missing_evidence_ids": list(report.get("missing_evidence_ids", [])),
         "agent_runs": list(report.get("agent_runs", [])),
         "prompt_exports": dict(report.get("prompt_exports", {})),
+        "context_budget": dict(report.get("context_budget", {})),
+        "loop": dict(report.get("loop", {})),
+        "tracing": dict(report.get("tracing", {})),
     }
     normalized["summary"].setdefault("target_repo_modified", False)
     normalized["summary"].setdefault("discarded_count", len(normalized["discarded"]))
     normalized["summary"].setdefault("agent_run_count", len(normalized["agent_runs"]))
     normalized["summary"].setdefault("prompt_exported", bool(normalized["prompt_exports"]))
+    normalized["summary"].setdefault(
+        "context_budget_enabled",
+        bool(normalized["context_budget"].get("enabled", False)),
+    )
+    normalized["summary"].setdefault(
+        "context_truncated",
+        bool(normalized["context_budget"].get("context_truncated", False)),
+    )
+    normalized["summary"].setdefault(
+        "selected_evidence_count",
+        int(normalized["context_budget"].get("selected_evidence_count", 0)),
+    )
+    normalized["summary"].setdefault(
+        "omitted_evidence_count",
+        int(normalized["context_budget"].get("omitted_evidence_count", 0)),
+    )
+    normalized["summary"].setdefault(
+        "review_shard_count",
+        int(normalized["context_budget"].get("shard_count", 0)),
+    )
+    normalized["summary"].setdefault(
+        "context_refill_count",
+        int(normalized["context_budget"].get("refill_count", 0)),
+    )
+    normalized["summary"].setdefault(
+        "context_request_count",
+        int(normalized["context_budget"].get("context_request_count", 0)),
+    )
+    normalized["summary"].setdefault("loop_enabled", bool(normalized["loop"].get("enabled")))
+    normalized["summary"].setdefault(
+        "loop_iterations_completed",
+        normalized["loop"].get("iterations_completed", 0),
+    )
+    normalized["summary"].setdefault(
+        "loop_converged",
+        normalized["loop"].get("converged", False),
+    )
+    normalized["summary"].setdefault("fallback_used", False)
+    normalized["summary"].setdefault("fallback_reason", None)
+    normalized["summary"].setdefault("resume_used", False)
+    normalized["summary"].setdefault("resume_ignored_reason", None)
+    normalized["summary"].setdefault(
+        "total_latency_ms",
+        normalized["tracing"].get("total_latency_ms", 0),
+    )
+    normalized["summary"].setdefault(
+        "total_token_count_in",
+        normalized["tracing"].get("total_token_count_in", 0),
+    )
+    normalized["summary"].setdefault(
+        "total_token_count_out",
+        normalized["tracing"].get("total_token_count_out", 0),
+    )
     return normalized
 
 

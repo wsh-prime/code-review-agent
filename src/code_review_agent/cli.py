@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Sequence
 
 from code_review_agent.context.repo_map import build_repo_map, render_repo_map_markdown
+from code_review_agent.eval.runner import run_eval_benchmark
 from code_review_agent.hygiene.classifier import classify_files, classify_files_semantic
 from code_review_agent.hygiene.llm_classifier import FakeLLMClassifier
 from code_review_agent.hygiene.planner import (
@@ -129,7 +130,102 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Write fake review/critic prompt files and redacted input JSON.",
     )
+    review_parser.add_argument(
+        "--max-iter",
+        type=int,
+        default=2,
+        metavar="N",
+        help=(
+            "Maximum loop iterations for hybrid modes. "
+            "1 = single pass. Default: 2."
+        ),
+    )
+    review_parser.add_argument(
+        "--resume",
+        action="store_true",
+        help=(
+            "Resume a hybrid loop from the last checkpoint in --out when "
+            "the checkpoint matches the current package."
+        ),
+    )
+    review_parser.add_argument(
+        "--context-budget",
+        type=int,
+        default=24000,
+        metavar="TOKENS",
+        help=(
+            "Maximum estimated input tokens for each hybrid-live review call. "
+            "Ignored by rules and hybrid-fake modes. Default: 24000."
+        ),
+    )
+    review_parser.add_argument(
+        "--max-files-per-agent-call",
+        type=int,
+        default=8,
+        metavar="N",
+        help=(
+            "Maximum changed file summaries included in the hybrid-live "
+            "context. Default: 8."
+        ),
+    )
+    review_parser.add_argument(
+        "--max-evidence-per-file",
+        type=int,
+        default=80,
+        metavar="N",
+        help=(
+            "Maximum selected evidence items per file for hybrid-live context. "
+            "Default: 80."
+        ),
+    )
+    review_parser.add_argument(
+        "--max-context-refill-rounds",
+        type=int,
+        default=1,
+        metavar="N",
+        help=(
+            "Maximum bounded context refill rounds for hybrid-live. "
+            "Default: 1."
+        ),
+    )
+    review_parser.add_argument(
+        "--max-context-requests",
+        type=int,
+        default=8,
+        metavar="N",
+        help=(
+            "Maximum context requests accepted per hybrid-live shard. "
+            "Default: 8."
+        ),
+    )
     review_parser.set_defaults(handler=run_review_command)
+
+    eval_parser = subparsers.add_parser(
+        "eval",
+        help="Run deterministic planted-bug review benchmarks.",
+    )
+    eval_parser.add_argument(
+        "--cases",
+        required=True,
+        type=Path,
+        help="Path to an eval_cases directory.",
+    )
+    eval_parser.add_argument(
+        "--out",
+        required=True,
+        type=Path,
+        help="Directory where eval reports will be written.",
+    )
+    eval_parser.add_argument(
+        "--mode",
+        choices=["rules", "hybrid-fake", "all"],
+        default="rules",
+        help=(
+            "Eval variant set to run. Use all to compare rules, "
+            "hybrid-fake-iter1, and hybrid-fake-iter2."
+        ),
+    )
+    eval_parser.set_defaults(handler=run_eval_command)
 
     return parser
 
@@ -246,6 +342,13 @@ def run_review_command(args: argparse.Namespace) -> int:
         hygiene_path=args.hygiene,
         mode=args.mode,
         export_prompts=args.export_prompts,
+        max_iter=args.max_iter,
+        resume=args.resume,
+        context_budget=args.context_budget,
+        max_files_per_agent_call=args.max_files_per_agent_call,
+        max_evidence_per_file=args.max_evidence_per_file,
+        max_context_refill_rounds=args.max_context_refill_rounds,
+        max_context_requests=args.max_context_requests,
     )
 
     json_path = args.out / "review_report.json"
@@ -255,16 +358,67 @@ def run_review_command(args: argparse.Namespace) -> int:
     print(f"Repo:                {args.repo}")
     print(f"Diff:                {args.diff}")
     print(f"Out:                 {args.out}")
-    print(f"Mode:                {args.mode}")
+    print(f"Mode:                {summary['mode']}")
     print(f"Changed files:       {summary['changed_file_count']}")
     print(f"Risk signals:        {summary['risk_signal_count']}")
     print(f"Findings:            {summary['finding_count']}")
     print(f"Needs human review:  {summary['needs_human_review_count']}")
     print(f"Discarded:           {summary.get('discarded_count', 0)}")
+    if summary.get("loop_enabled", False):
+        print(f"Loop iterations:     {summary['loop_iterations_completed']}")
+        print(f"Loop converged:      {summary['loop_converged']}")
+    if summary.get("fallback_used", False):
+        print(f"Fallback reason:     {summary.get('fallback_reason')}")
+    if summary.get("context_budget_enabled", False):
+        print(f"Context truncated:   {summary['context_truncated']}")
+        print(f"Selected evidence:   {summary['selected_evidence_count']}")
+        print(f"Omitted evidence:    {summary['omitted_evidence_count']}")
+        print(f"Review shards:       {summary.get('review_shard_count', 0)}")
+        print(f"Context requests:    {summary.get('context_request_count', 0)}")
     print(f"Wrote: {json_path}")
     print(f"Wrote: {markdown_path}")
     if args.export_prompts:
         print(f"Wrote prompts: {args.out / 'prompts'}")
+    print("No target repository files were modified.")
+    return 0
+
+
+def run_eval_command(args: argparse.Namespace) -> int:
+    """Run deterministic eval benchmark cases."""
+
+    metrics = run_eval_benchmark(args.cases, args.out, mode=args.mode)
+    metrics_path = args.out / "metrics.json"
+    report_path = args.out / "eval_report.md"
+    case_results_path = args.out / "case_results.json"
+    print("Code Review Agent Harness - eval")
+    print(f"Cases:              {args.cases}")
+    print(f"Out:                {args.out}")
+    print(f"Mode:               {args.mode}")
+    print(f"Case count:         {metrics['case_count']}")
+    for item in metrics["profile_frontier"]:
+        if item["profile"] != "balanced":
+            continue
+        print(
+            "Balanced "
+            f"{item['variant']}: "
+            f"precision={item['precision']:.4f}, "
+            f"recall={item['recall']:.4f}, "
+            f"spurious/pr={item['false_positives_per_pr']:.4f}, "
+            f"no_finding={item['no_finding_accuracy']:.4f}"
+        )
+    smoke = metrics.get("phase16_smoke", {})
+    if smoke:
+        checkpoint_resume = smoke["checkpoint_resume"]
+        fallback_rules = smoke["fallback_rules"]
+        print(
+            "Phase16 smoke: "
+            f"checkpoint={checkpoint_resume['checkpoint_written']}, "
+            f"resume={checkpoint_resume['resume_used']}, "
+            f"fallback={fallback_rules['fallback_used']}"
+        )
+    print(f"Wrote: {metrics_path}")
+    print(f"Wrote: {report_path}")
+    print(f"Wrote: {case_results_path}")
     print("No target repository files were modified.")
     return 0
 

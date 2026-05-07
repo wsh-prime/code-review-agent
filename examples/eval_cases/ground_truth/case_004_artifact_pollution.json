@@ -1,0 +1,14 @@
+{
+  "case_id": "case_004_artifact_pollution",
+  "patch": "patches/case_004_artifact_pollution.patch",
+  "expected_findings": [
+    {
+      "category": "experiment_artifact",
+      "file": "src/shop/debug_order_flow.py",
+      "line_range": [1, 8],
+      "severity": "medium",
+      "key_bug": true
+    }
+  ],
+  "expected_no_finding": false
+}

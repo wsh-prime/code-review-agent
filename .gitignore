@@ -12,6 +12,7 @@ build/
 dist/
 *.egg-info/
 outputs/
+/changes.patch
 scripts/*.env.local
 .env
 .env.*

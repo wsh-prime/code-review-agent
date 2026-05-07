@@ -1,0 +1,6 @@
+{
+  "case_id": "case_006_no_finding_test_only",
+  "patch": "patches/case_006_no_finding_test_only.patch",
+  "expected_findings": [],
+  "expected_no_finding": true
+}

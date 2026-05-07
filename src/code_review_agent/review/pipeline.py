@@ -3,11 +3,13 @@
 from __future__ import annotations
 
 import json
+import hashlib
 from pathlib import Path
 from typing import Any
 
 from code_review_agent.context.repo_map import build_repo_map
 from code_review_agent.models import (
+    AgentRun,
     FileClassification,
     PythonModuleSummary,
     RepoMap,
@@ -23,17 +25,29 @@ from code_review_agent.output.json_report import (
 from code_review_agent.output.review_markdown import render_review_markdown
 from code_review_agent.review.agents import (
     CROSS_STRATEGY,
+    FakeLLMCriticAgent,
+    FakeLLMReviewAgent,
+    OpenAICompatibleReviewAgent,
+    _AgentFatalError,
+    _AgentTransientError,
     export_agent_prompts,
-    run_fake_hybrid_agents,
-    run_openai_compatible_review_agent,
 )
 from code_review_agent.review.changed_entity import extract_changed_entities
+from code_review_agent.review.context_budget import (
+    DEFAULT_CONTEXT_BUDGET_TOKENS,
+    DEFAULT_MAX_EVIDENCE_PER_FILE,
+    DEFAULT_MAX_FILES_PER_AGENT_CALL,
+    aggregate_context_budget,
+    build_reviewer_contexts,
+    context_budget_disabled_summary,
+)
 from code_review_agent.review.diff_parser import parse_unified_diff
 from code_review_agent.review.evidence import (
     build_evidence_package,
     find_missing_evidence_ids,
 )
 from code_review_agent.review.filter import filter_issues
+from code_review_agent.review.loop import IterativeHarnessRunner, LoopResult
 from code_review_agent.review.risk import classify_risks
 from code_review_agent.review.rules import run_rules
 
@@ -48,6 +62,13 @@ def run_review_pipeline(
     hygiene_path: Path | str | None = None,
     mode: str = "rules",
     export_prompts: bool = False,
+    max_iter: int = 2,
+    resume: bool = False,
+    context_budget: int = DEFAULT_CONTEXT_BUDGET_TOKENS,
+    max_files_per_agent_call: int = DEFAULT_MAX_FILES_PER_AGENT_CALL,
+    max_evidence_per_file: int = DEFAULT_MAX_EVIDENCE_PER_FILE,
+    max_context_refill_rounds: int = 1,
+    max_context_requests: int = 8,
 ) -> dict[str, Any]:
     """Run the MVP review pipeline and write JSON/Markdown reports."""
 
@@ -57,8 +78,11 @@ def run_review_pipeline(
     repo = Path(repo_path)
     diff_file = Path(diff_path)
     out = Path(out_path)
+    effective_mode = mode
 
-    changes = parse_unified_diff(diff_file.read_text(encoding="utf-8", errors="replace"))
+    diff_text = diff_file.read_text(encoding="utf-8", errors="replace")
+    diff_hash = _stable_hash_text(diff_text)
+    changes = parse_unified_diff(diff_text)
     repo_map = (
         load_repo_map(repo_map_path)
         if repo_map_path is not None
@@ -88,23 +112,78 @@ def run_review_pipeline(
     agent_runs = []
     agent_findings: list[ReviewIssue] = []
     agent_needs_human_review: list[ReviewIssue] = []
+    agent_candidate_scope: list[ReviewIssue] = []
+    loop_result: LoopResult | None = None
+    changed_paths = _changed_paths(changes)
+    context_budget_report = context_budget_disabled_summary()
     if mode == "hybrid-fake":
-        fake_result = run_fake_hybrid_agents(package, pair_strategy=CROSS_STRATEGY)
-        agent_findings = fake_result.findings
-        agent_needs_human_review = fake_result.needs_human_review
-        agent_runs = fake_result.agent_runs
+        loop_result = IterativeHarnessRunner(
+            reviewer=FakeLLMReviewAgent(),
+            critic=FakeLLMCriticAgent(),
+            max_iter=max_iter,
+            out_dir=out,
+            mode=mode,
+            diff_hash=diff_hash,
+        ).run(package, changed_paths, resume=resume)
+        agent_findings = loop_result.final_issues
+        agent_needs_human_review = loop_result.needs_human_review
+        agent_runs = loop_result.agent_runs
+        agent_candidate_scope = _loop_candidate_scope(loop_result)
     elif mode == "hybrid-live":
-        live_result = run_openai_compatible_review_agent(package)
-        agent_findings = live_result.findings
-        agent_needs_human_review = live_result.needs_human_review
-        agent_runs = live_result.agent_runs
+        reviewer = None
+        preview_contexts = build_reviewer_contexts(
+            package,
+            max_input_tokens=context_budget,
+            max_files=max_files_per_agent_call,
+            max_evidence_per_file=max_evidence_per_file,
+        )
+        context_budget_report = aggregate_context_budget(preview_contexts)
+        try:
+            reviewer = OpenAICompatibleReviewAgent.from_env()
+            _configure_live_reviewer(
+                reviewer,
+                context_budget=context_budget,
+                max_files_per_agent_call=max_files_per_agent_call,
+                max_evidence_per_file=max_evidence_per_file,
+                max_context_refill_rounds=max_context_refill_rounds,
+                max_context_requests=max_context_requests,
+                out_dir=out,
+                package_hash=_stable_hash_value(package.to_dict()),
+                diff_hash=diff_hash,
+                resume=resume,
+            )
+            loop_result = IterativeHarnessRunner(
+                reviewer=reviewer,
+                critic=FakeLLMCriticAgent(),
+                max_iter=max_iter,
+                out_dir=out,
+                mode=mode,
+                diff_hash=diff_hash,
+            ).run(package, changed_paths, resume=resume)
+            agent_findings = loop_result.final_issues
+            agent_needs_human_review = loop_result.needs_human_review
+            agent_runs = loop_result.agent_runs
+            agent_candidate_scope = _loop_candidate_scope(loop_result)
+            live_budget = getattr(reviewer, "last_context_budget", None)
+            if isinstance(live_budget, dict) and live_budget:
+                context_budget_report = live_budget
+        except (ValueError, _AgentFatalError, _AgentTransientError) as exc:
+            effective_mode = "hybrid-live/fallback-rules"
+            loop_result = LoopResult(
+                final_issues=[],
+                agent_runs=[_fallback_agent_run(exc, reviewer)],
+                iterations_completed=0,
+                converged=False,
+                fallback_used=True,
+                fallback_reason=str(exc),
+            )
+            agent_runs = loop_result.agent_runs
 
     candidate_findings = [*rules_result.findings, *agent_findings]
     candidate_needs_human_review = [
         *rules_result.needs_human_review,
         *agent_needs_human_review,
     ]
-    changed_paths = _changed_paths(changes)
     filter_result = filter_issues(
         candidate_findings,
         candidate_needs_human_review,
@@ -118,22 +197,35 @@ def run_review_pipeline(
         export_agent_prompts(
             package,
             out / "prompts",
-            mode=mode,
+            mode=effective_mode,
             pair_strategy=CROSS_STRATEGY,
+            context_budget_tokens=context_budget,
+            max_files_per_agent_call=max_files_per_agent_call,
+            max_evidence_per_file=max_evidence_per_file,
         )
         if export_prompts
         else {}
     )
 
     report = _build_report_dict(
-        mode=mode,
+        mode=effective_mode,
         package=package,
         findings=findings,
         needs_human_review=needs_human_review,
-        candidate_issues=[*candidate_findings, *candidate_needs_human_review],
-        discarded=filter_result.to_dict()["discarded"],
+        candidate_issues=[
+            *candidate_findings,
+            *candidate_needs_human_review,
+            *agent_candidate_scope,
+        ],
+        discarded=[
+            *filter_result.to_dict()["discarded"],
+            *_loop_discarded(loop_result),
+        ],
         agent_runs=agent_runs,
         prompt_exports=prompt_exports,
+        loop_result=loop_result,
+        max_iter=max_iter,
+        context_budget=context_budget_report,
     )
 
     json_path = out / "review_report.json"
@@ -197,6 +289,9 @@ def _build_report_dict(
     discarded: list[dict[str, Any]] | None = None,
     agent_runs: list | None = None,
     prompt_exports: dict[str, Any] | None = None,
+    loop_result: LoopResult | None = None,
+    max_iter: int = 2,
+    context_budget: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     evidence_issue_scope = (
         candidate_issues
@@ -209,6 +304,9 @@ def _build_report_dict(
     discarded_items = discarded or []
     agent_run_items = agent_runs or []
     prompt_export_data = prompt_exports or {}
+    loop_data = _loop_report(loop_result, max_iter=max_iter)
+    tracing_data = _tracing_report(agent_run_items)
+    context_budget_data = context_budget or context_budget_disabled_summary()
     return {
         "schema_version": REVIEW_REPORT_SCHEMA_VERSION,
         "summary": {
@@ -223,6 +321,45 @@ def _build_report_dict(
             "missing_evidence_id_count": len(missing_evidence_ids),
             "agent_run_count": len(agent_run_items),
             "prompt_exported": bool(prompt_export_data),
+            "loop_enabled": loop_result is not None,
+            "loop_iterations_completed": (
+                loop_result.iterations_completed if loop_result is not None else 0
+            ),
+            "loop_converged": (
+                loop_result.converged if loop_result is not None else False
+            ),
+            "fallback_used": (
+                loop_result.fallback_used if loop_result is not None else False
+            ),
+            "fallback_reason": (
+                loop_result.fallback_reason if loop_result is not None else None
+            ),
+            "resume_used": (
+                loop_result.resume_used if loop_result is not None else False
+            ),
+            "resume_ignored_reason": (
+                loop_result.resume_ignored_reason
+                if loop_result is not None
+                else None
+            ),
+            "total_latency_ms": tracing_data["total_latency_ms"],
+            "total_token_count_in": tracing_data["total_token_count_in"],
+            "total_token_count_out": tracing_data["total_token_count_out"],
+            "context_budget_enabled": bool(context_budget_data.get("enabled", False)),
+            "context_truncated": bool(
+                context_budget_data.get("context_truncated", False)
+            ),
+            "selected_evidence_count": int(
+                context_budget_data.get("selected_evidence_count", 0)
+            ),
+            "omitted_evidence_count": int(
+                context_budget_data.get("omitted_evidence_count", 0)
+            ),
+            "review_shard_count": int(context_budget_data.get("shard_count", 0)),
+            "context_refill_count": int(context_budget_data.get("refill_count", 0)),
+            "context_request_count": int(
+                context_budget_data.get("context_request_count", 0)
+            ),
             "target_repo_modified": False,
         },
         "findings": [issue.to_dict() for issue in findings],
@@ -242,6 +379,9 @@ def _build_report_dict(
         "missing_evidence_ids": missing_evidence_ids,
         "agent_runs": [run.to_dict() for run in agent_run_items],
         "prompt_exports": prompt_export_data,
+        "context_budget": context_budget_data,
+        "loop": loop_data,
+        "tracing": tracing_data,
     }
 
 
@@ -254,6 +394,136 @@ def _changed_paths(changes) -> set[str]:
         if change.new_path is not None:
             paths.add(change.new_path)
     return paths
+
+
+def _loop_candidate_scope(loop_result: LoopResult | None) -> list[ReviewIssue]:
+    if loop_result is None:
+        return []
+    return [item.issue for item in loop_result.discarded]
+
+
+def _loop_discarded(loop_result: LoopResult | None) -> list[dict[str, Any]]:
+    if loop_result is None:
+        return []
+    return [item.to_dict() for item in loop_result.discarded]
+
+
+def _loop_report(loop_result: LoopResult | None, *, max_iter: int) -> dict[str, Any]:
+    if loop_result is None:
+        return {
+            "enabled": False,
+            "max_iter": max_iter,
+            "iterations_completed": 0,
+            "converged": False,
+            "fallback_used": False,
+            "fallback_reason": None,
+            "checkpoint_path": None,
+            "resume_used": False,
+            "resume_ignored_reason": None,
+            "iterations": [],
+        }
+    return {
+        "enabled": True,
+        "max_iter": max_iter,
+        "iterations_completed": loop_result.iterations_completed,
+        "converged": loop_result.converged,
+        "fallback_used": loop_result.fallback_used,
+        "fallback_reason": loop_result.fallback_reason,
+        "checkpoint_path": loop_result.checkpoint_path,
+        "resume_used": loop_result.resume_used,
+        "resume_ignored_reason": loop_result.resume_ignored_reason,
+        "iterations": [record.to_dict() for record in loop_result.iterations],
+    }
+
+
+def _configure_live_reviewer(
+    reviewer: object,
+    *,
+    context_budget: int,
+    max_files_per_agent_call: int,
+    max_evidence_per_file: int,
+    max_context_refill_rounds: int,
+    max_context_requests: int,
+    out_dir: Path,
+    package_hash: str,
+    diff_hash: str,
+    resume: bool,
+) -> None:
+    for name, value in {
+        "context_budget_tokens": context_budget,
+        "max_files_per_agent_call": max_files_per_agent_call,
+        "max_evidence_per_file": max_evidence_per_file,
+        "max_context_refill_rounds": max_context_refill_rounds,
+        "max_context_requests": max_context_requests,
+        "context_checkpoint_path": str(out_dir / "live_context_checkpoint.json"),
+        "context_checkpoint_package_hash": package_hash,
+        "context_checkpoint_diff_hash": diff_hash,
+        "context_checkpoint_resume": resume,
+    }.items():
+        if hasattr(reviewer, name):
+            setattr(reviewer, name, value)
+
+
+def _tracing_report(agent_runs: list) -> dict[str, Any]:
+    status_counts: dict[str, int] = {}
+    for run in agent_runs:
+        status = run.status or "unknown"
+        status_counts[status] = status_counts.get(status, 0) + 1
+    return {
+        "total_latency_ms": sum(run.latency_ms for run in agent_runs),
+        "total_token_count_in": sum(run.token_count_in for run in agent_runs),
+        "total_token_count_out": sum(run.token_count_out for run in agent_runs),
+        "total_retry_count": sum(run.retry_count for run in agent_runs),
+        "run_count": len(agent_runs),
+        "status_counts": status_counts,
+    }
+
+
+def _fallback_agent_run(exc: Exception, reviewer: object | None) -> AgentRun:
+    live_run = getattr(reviewer, "last_agent_run", None)
+    if isinstance(live_run, AgentRun):
+        return AgentRun(
+            agent_name=live_run.agent_name,
+            model=live_run.model,
+            prompt_hash=live_run.prompt_hash,
+            input_evidence_ids=list(live_run.input_evidence_ids),
+            output_issue_ids=[],
+            fallback_used=True,
+            iteration=live_run.iteration,
+            feedback_hash=live_run.feedback_hash,
+            retry_count=live_run.retry_count,
+            retry_log=list(live_run.retry_log),
+            latency_ms=live_run.latency_ms,
+            token_count_in=live_run.token_count_in,
+            token_count_out=live_run.token_count_out,
+            trace_id=live_run.trace_id,
+            span_id=live_run.span_id,
+            parent_span_id=live_run.parent_span_id,
+            status="fallback",
+            error_type=exc.__class__.__name__,
+            shard_id=live_run.shard_id,
+            shard_index=live_run.shard_index,
+            shard_count=live_run.shard_count,
+            context_request_count=live_run.context_request_count,
+            context_refill_used=live_run.context_refill_used,
+        )
+    return AgentRun(
+        agent_name="openai_compatible_reviewer",
+        model=getattr(reviewer, "model", None),
+        prompt_hash=None,
+        fallback_used=True,
+        status="fallback",
+        error_type=exc.__class__.__name__,
+    )
+
+
+def _stable_hash_text(text: str) -> str:
+    return "sha256:" + hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def _stable_hash_value(value: Any) -> str:
+    raw = json.dumps(value, sort_keys=True, ensure_ascii=False)
+    return "sha256:" + hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
 
 def _python_module_from_dict(data: dict[str, Any]) -> PythonModuleSummary:

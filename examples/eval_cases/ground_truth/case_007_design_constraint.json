@@ -1,0 +1,14 @@
+{
+  "case_id": "case_007_design_constraint",
+  "patch": "patches/case_007_design_constraint.patch",
+  "expected_findings": [
+    {
+      "category": "design_constraint_violation",
+      "file": "src/shop/discounts.py",
+      "line_range": [44, 48],
+      "severity": "medium",
+      "key_bug": true
+    }
+  ],
+  "expected_no_finding": false
+}

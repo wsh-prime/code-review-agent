@@ -8,7 +8,7 @@
 
 `code-review-agent` 是一个面向 AI Coding 工作流的**本地 PR 预审 harness**。
 
-它在 Codex / Cursor / Claude Code 生成的改动进入 PR 之前，先把 diff 解析成结构化证据，再用确定性规则和受约束的 Agent 输出带证据的 review report。
+它在 Codex / Cursor / Claude Code 生成的改动进入 PR 之前，先把 diff 解析成结构化证据、上下文和 guardrails，再由 deterministic baseline 或受约束 Agent 输出带证据的 review report。
 
 核心主张：
 
@@ -24,7 +24,7 @@
 2. **误报难控**：裸 LLM 追求高召回，signal-to-noise ratio 极低；能保持沉默才是稀缺能力（Pereira et al. 2026）。
 3. **无法评估**：用 LLM-as-judge 评估 LLM review，对 prompt 微小变化高度敏感，测量的是 prompt artifact 而不是真实能力（Zhao et al. 2026）。
 
-本项目的答案：deterministic 工具收集证据，受约束 agent 做语义判断，schema + verifier 控制噪音，planted-bug oracle 做评估。
+本项目的答案：deterministic 工具收集证据和 guardrails，受约束 agent 做语义判断，schema + verifier 控制噪音，planted-bug oracle 做评估。规则层不是产品主语，而是 baseline、回归锚点和 agent 输出的校验支架。
 
 ---
 
@@ -42,7 +42,7 @@ Context Layer
   RepoMap  ·  ChangedEntity[]  ·  EvidencePackage
   HygieneEvidence  ·  RiskSignal[]  ·  StyleBaseline
 
-Agent Layer（可选，MVP 用 Fake / rules-only）
+Agent Layer（MVP 用 Fake / baseline，Post-MVP 强化 live agent）
   ReviewAgent  ·  CriticAgent  ·  ReportAgent
 
 Harness Layer
@@ -86,7 +86,7 @@ code-review-agent eval    --cases examples/eval_cases     --out .cra/eval
 5.  load hygiene signals
 6.  run risk classification
 7.  build EvidencePackage
-8.  run rules-only findings
+8.  run deterministic baseline / guardrail findings
 9.  run ReviewAgent（可选，MVP 用 Fake 或跳过）
 10. run CriticAgent / ReviewFilter
 11. deduplicate, downgrade weak findings
@@ -250,11 +250,13 @@ class ChangedEntity:
 
 Phase 5/6 实现补充：Risk classification 已落地到 `review/risk.py`，EvidencePackage builder 已落地到 `review/evidence.py`。
 
-Phase 7/8 实现补充：Rules-only review 已落地到 `review/rules.py`，pipeline 已落地到 `review/pipeline.py`，CLI 已支持 `code-review-agent review --repo <repo> --diff <patch> --out <out>`。当前 MVP 能在无 LLM/API key 环境下输出 `review_report.json` / `review_report.md`；完整 report output 抽象仍留给 Phase 10。
+Phase 7/8 实现补充：Deterministic baseline 已落地到 `review/rules.py`，pipeline 已落地到 `review/pipeline.py`，CLI 已支持 `code-review-agent review --repo <repo> --diff <patch> --out <out>`。当前 MVP 能在无 LLM/API key 环境下输出 `review_report.json` / `review_report.md`；这里的 baseline 用于回归、guardrail 和 agent harness 对照，不代表项目最终要做规则扫描器。
 
 Phase 9/10 实现补充：Micro eval metrics 已落地到 `eval/metrics.py`，并加入 test gap / error handling / doc-only 三个 micro fixtures；Report output 已落地到 `output/json_report.py` 和 `output/review_markdown.py`，`review_report.json` 带 `schema_version`，Markdown 章节顺序固定。
 
 Phase 11/12 实现补充：正式 filter 已落地到 `review/filter.py` 并接入 `review/pipeline.py`，`discarded` 分区只写入 JSON，记录 `filter_reason`。Fake/Hybrid agent interface 已落地到 `review/agents.py`，CLI 支持 `--mode hybrid-fake` 与 `--export-prompts`，prompt export 会写入 prompt hash 和 redacted input JSON；真实 LLM backend 仍保持后置。
+
+Phase 13/14 实现补充：内置 planted-bug eval 已落地到 `eval/cases.py` 和 `eval/runner.py`，CLI 支持 `code-review-agent eval --cases examples/eval_cases --out <out> --mode rules|hybrid-fake|all`，输出 `metrics.json`、`case_results.json` 和 `eval_report.md`。`examples/eval_cases` 已扩展为 7 个可复现 cases，用于开发回归和 demo 指标；外部 benchmark adapter 属于 Post-MVP。`examples/demo_repo` 已打磨为可复现 demo shop 项目，README 已加入架构、demo 命令、sample review、eval 指标表和当前限制。
 
 ### RiskSignal
 
@@ -404,7 +406,7 @@ Eval 报告用表格展示 profile frontier：
 
 | Variant | 描述 |
 |---|---|
-| `rules_only` | 只用 deterministic checks |
+| `rules_only` | deterministic baseline / guardrail，只用于回归和对照 |
 | `prompt_only` | 只把 diff 给 LLM |
 | `evidence_backed` | RepoMap + risk + evidence + optional LLM |
 
@@ -445,15 +447,15 @@ examples/demo_repo/
 
 Findings 在最前。每条 finding 必须包含 file / line / severity / confidence / evidence list。No Finding 要说明检查了什么、为什么没有输出。
 
-当前 Phase 10/11/12 输出链路已包含上述章节，并写入 `review_report.json` / `review_report.md`。`discarded`、`agent_runs` 和 `prompt_exports` 只进入 JSON；Markdown 主报告继续保持 README-friendly。
+当前 Phase 10/11/12 输出链路已包含上述章节，并写入 `review_report.json` / `review_report.md`。`discarded`、`agent_runs` 和 `prompt_exports` 只进入 JSON；Markdown 主报告继续保持 README-friendly。Phase 13/14 补充了 eval 输出：`metrics.json`、`case_results.json` 和 `eval_report.md`。
 
 ---
 
 ## 15. 产品边界
 
-**MVP 内**：Python · 本地 CLI · 只读 · unified diff · AST · changed entity · RepoMap · hygiene signal · deterministic risk · evidence-backed report · eval benchmark。
+**MVP 内**：Python · 本地 CLI · 只读 · unified diff · AST · changed entity · RepoMap · hygiene signal · deterministic risk/guardrail · fake/live-compatible agent harness · evidence-backed report · 内置 planted-bug eval。
 
-**MVP 外**：GitHub webhook · PR comment 自动发布 · 自动修复 · 多语言 · MCP server · Draft→Ground→Critic 三阶段 · 真实 LLM SDK · `references.py`（call graph，post-MVP）。
+**MVP 外**：外部 benchmark adapter · GitHub webhook · PR comment 自动发布 · 自动修复 · 多语言 · MCP server · Draft→Ground→Critic 三阶段强化 · `references.py`（call graph，post-MVP）。
 
 ---
 
@@ -461,11 +463,11 @@ Findings 在最前。每条 finding 必须包含 file / line / severity / confid
 
 英文：
 
-> Built an evidence-first local PR quality gate for AI-generated patches. The tool parses unified diffs, extracts changed functions and classes with Python AST, builds repository context, and detects test gaps, process-artifact pollution, and design constraint violations beyond what test pass rate captures. Every finding is backed by traceable evidence. Evaluation uses a planted-bug corpus with a deterministic line-range oracle rather than LLM-as-a-judge to avoid prompt-artifact bias. Benchmark compares prompt-only, rules-only, and evidence-backed review variants on precision, recall, spurious-findings rate, and no-finding accuracy.
+> Built an evidence-first local code review agent harness for AI-generated patches. The tool parses unified diffs, extracts changed functions and classes with Python AST, builds repository context, and packages traceable evidence for constrained reviewer / critic agents. Deterministic checks serve as baseline and guardrails rather than the product endpoint. Evaluation uses a built-in planted-bug corpus with a deterministic line-range oracle rather than LLM-as-a-judge to track precision, recall, spurious-findings rate, and no-finding accuracy.
 
 中文：
 
-> 实现了一个面向 AI Coding 工作流的本地 PR 预审系统。先解析 diff、提取 changed entity、构建 RepoMap、识别测试缺口和过程资产污染，再生成每条问题都有证据支撑的结构化 review report。通过小型 benchmark 对比 prompt-only、rules-only 和 evidence-backed review 的误报率与召回率，评估使用 planted-bug + deterministic oracle，不依赖 LLM judge。
+> 实现了一个面向 AI Coding 工作流的本地 code review agent harness。先解析 diff、提取 changed entity、构建 RepoMap 和 evidence package，再让受约束 reviewer / critic agent 在 schema 和 verifier 约束下输出 review report。确定性规则是 baseline 和 guardrail，不是最终产品主语。评估使用内置 planted-bug cases + deterministic oracle，不依赖 LLM judge。
 
 面试时强调：为什么不是 API wrapper、如何控制 LLM 误报、如何设计 evidence schema、如何把 diff hunk 映射到函数/类、如何发现测试缺口、如何评估 review agent。
 

@@ -14,6 +14,8 @@ from code_review_agent.review.risk import (
     risk_evidence_id,
 )
 
+MAX_RULE_ISSUE_EVIDENCE_IDS = 12
+
 
 @dataclass(slots=True)
 class RulesReviewResult:
@@ -109,10 +111,10 @@ def _dependency_issue(signal: RiskSignal, package: EvidencePackage) -> ReviewIss
 def _issue_evidence_ids(
     signal: RiskSignal, package: EvidencePackage
 ) -> list[str]:
-    evidence_ids = list(signal.evidence_ids)
+    evidence_ids = list(signal.evidence_ids[:MAX_RULE_ISSUE_EVIDENCE_IDS])
     signal_evidence_id = risk_evidence_id(signal)
     if signal_evidence_id in package.evidence_index:
-        evidence_ids.append(signal_evidence_id)
+        evidence_ids.insert(0, signal_evidence_id)
     return sorted(dict.fromkeys(evidence_ids))
 
 

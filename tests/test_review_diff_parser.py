@@ -18,25 +18,25 @@ def test_parse_demo_patch_preserves_hunk_line_numbers() -> None:
 
     assert len(changes) == 1
     change = changes[0]
-    assert change.old_path == "src/app.py"
-    assert change.new_path == "src/app.py"
+    assert change.old_path == "src/shop/service.py"
+    assert change.new_path == "src/shop/service.py"
     assert change.change_type == "modified"
     assert len(change.hunks) == 1
 
     hunk = change.hunks[0]
-    assert hunk.old_start == 1
-    assert hunk.old_count == 3
-    assert hunk.new_start == 1
-    assert hunk.new_count == 4
+    assert hunk.old_start == 16
+    assert hunk.old_count == 5
+    assert hunk.new_start == 16
+    assert hunk.new_count == 5
     assert hunk.lines[0].line_type == "context"
-    assert hunk.lines[0].old_lineno == 1
-    assert hunk.lines[0].new_lineno == 1
+    assert hunk.lines[0].old_lineno == 16
+    assert hunk.lines[0].new_lineno == 16
 
     added = [line for line in hunk.lines if line.line_type == "added"]
     assert len(added) == 1
     assert added[0].old_lineno is None
-    assert added[0].new_lineno == 2
-    assert "Demo-only patch" in added[0].content
+    assert added[0].new_lineno == 18
+    assert "10_000" in added[0].content
 
 
 def test_parse_added_deleted_and_renamed_files() -> None:

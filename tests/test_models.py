@@ -3,20 +3,27 @@ from __future__ import annotations
 from code_review_agent.models import (
     AgentRun,
     ChangedEntity,
+    ContextRequest,
+    CritiqueResult,
     DiffFileChange,
     DiffHunk,
     DiffLine,
     EvidencePackage,
     FileClassification,
     MoveSuggestion,
+    PriorFeedback,
     PythonModuleSummary,
     RepoMap,
     ReviewEvidence,
     ReviewIssue,
     ReviewReport,
+    ReviewerContext,
+    ReviewShard,
     RiskSignal,
+    ShardReviewResult,
     StyleBaseline,
     SymbolSummary,
+    UncertainFeedbackItem,
 )
 
 
@@ -212,6 +219,80 @@ def test_review_pipeline_models_serialize_references() -> None:
     assert agent_data["fallback_used"] is True
 
 
+def test_loop_feedback_models_serialize() -> None:
+    feedback_item = UncertainFeedbackItem(
+        issue_id="test_gap:src/app.py:12",
+        category="test_gap",
+        critic_reason="low confidence",
+        original_confidence=0.55,
+        evidence_ids=["diff:src/app.py:12"],
+    )
+    prior_feedback = PriorFeedback(iteration=0, uncertain_items=[feedback_item])
+    critique = CritiqueResult(uncertain=[feedback_item])
+
+    assert prior_feedback.to_dict()["uncertain_items"][0]["critic_reason"] == (
+        "low confidence"
+    )
+    assert critique.to_dict()["uncertain"][0]["issue_id"] == (
+        "test_gap:src/app.py:12"
+    )
+
+
+def test_agent_run_loop_and_tracing_defaults() -> None:
+    run = AgentRun(agent_name="fake", model="fake-llm", prompt_hash="abc")
+
+    data = run.to_dict()
+    assert data["iteration"] == 0
+    assert data["feedback_hash"] == ""
+    assert data["retry_count"] == 0
+    assert data["retry_log"] == []
+    assert data["latency_ms"] == 0
+    assert data["token_count_in"] == 0
+    assert data["token_count_out"] == 0
+    assert data["status"] == "ok"
+
+
+def test_reviewer_context_models_serialize() -> None:
+    request = ContextRequest(
+        request_type="risk_evidence",
+        path="src/app.py",
+        risk_tag="test_gap",
+        reason="Need the risk summary.",
+    )
+    context = ReviewerContext(
+        schema="live_review_input_v1",
+        selection_strategy="risk_first_v1",
+        repo_root="/repo",
+        shard_id="shard-001",
+        shard_index=0,
+        shard_count=2,
+        evidence_index={
+            "diff:src/app.py:2": {
+                "id": "diff:src/app.py:2",
+                "kind": "diff",
+                "source": "src/app.py:2",
+                "message": "Added line.",
+            }
+        },
+    )
+    shard = ReviewShard(
+        shard_id="shard-001",
+        shard_index=0,
+        shard_count=2,
+        paths=["src/app.py"],
+        selected_evidence_ids=["diff:src/app.py:2"],
+    )
+    result = ShardReviewResult(
+        shard_id="shard-001",
+        context_requests=[request],
+        status="ok",
+    )
+
+    assert context.to_dict()["shard_count"] == 2
+    assert shard.to_dict()["paths"] == ["src/app.py"]
+    assert result.to_dict()["context_requests"][0]["request_type"] == "risk_evidence"
+
+
 def test_new_models_use_slots() -> None:
     models = [
         SymbolSummary,
@@ -224,7 +305,14 @@ def test_new_models_use_slots() -> None:
         ChangedEntity,
         RiskSignal,
         EvidencePackage,
+        ContextRequest,
+        ReviewerContext,
+        ReviewShard,
+        ShardReviewResult,
+        UncertainFeedbackItem,
+        PriorFeedback,
         AgentRun,
+        CritiqueResult,
     ]
 
     for model in models:

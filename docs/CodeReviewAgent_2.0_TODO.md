@@ -1,7 +1,7 @@
 # Code Review Agent Harness 2.0 TODO
 
 > 日期：2026-04-25  
-> 主线：evidence-first review harness → 真实 LLM 后置  
+> 主线：evidence-first review agent harness → deterministic guardrails → 受约束真实 Agent  
 > 依据：`CodeReviewAgent_2.0项目方案.md` · `CodeReviewAgent_2.0实现计划.md`
 
 **规则**：新模块必须同步加测试。MVP 只写 `--out` 目录，不修改被分析仓库，不依赖真实 LLM。
@@ -17,7 +17,7 @@
 4  Changed Entity    hunk → function/class/method
 5  Risk              deterministic risk tags
 6  Evidence          EvidencePackage builder
-7  Rules Review      rules-only findings，无 LLM 也能跑
+7  Baseline Review   deterministic baseline / guardrail，无 LLM 也能跑
 8  Pipeline CLI      review 命令串起全链路
 9  Micro Eval        3 个 case，pipeline 跑通后立刻加，防回归
 10 Report Output     Markdown/JSON 报告
@@ -29,7 +29,7 @@
 
 做到第 8 步：最小可演示 review harness。  
 做到第 9 步：有防回归保护。  
-做到第 13 步：有"不是 toy"的 eval 可信度。
+做到第 13 步：有可复现内置 eval；外部 benchmark adapter 留到 Post-MVP。
 
 ---
 
@@ -180,7 +180,7 @@ CLI：`code-review-agent map --repo <repo> --out <out>` → `repo_map.json` + `r
 
 文件：`src/code_review_agent/review/rules.py` · `tests/test_review_rules.py`
 
-四条规则（只做高信号，宁少勿滥）：
+四条 baseline guardrails（只做高信号，宁少勿滥）：
 
 | Rule | 条件 | tag | severity | confidence |
 |---|---|---|---|---|
@@ -194,7 +194,7 @@ CLI：`code-review-agent map --repo <repo> --out <out>` → `repo_map.json` + `r
 - [x] `test_gap` 和 `experiment_artifact` 能在 demo case 中触发
 - [x] no-finding patch（doc-only / test-only）不输出正式 finding
 
-实现记录：`review/rules.py` 已落地。`test_gap` / `experiment_artifact` / broad `error_handling_change` 会生成正式 finding；`dependency_change` 进入 `needs_human_review`；doc-only patch 保持无正式 finding。
+实现记录：`review/rules.py` 已落地。它是 deterministic baseline / guardrail，用于回归、对照和 agent 输出校验，不是项目最终产品主语。`test_gap` / `experiment_artifact` / broad `error_handling_change` 会生成 baseline finding；`dependency_change` 进入 `needs_human_review`；doc-only patch 保持无正式 finding。
 
 ---
 
@@ -357,18 +357,20 @@ Threshold profiles：`strict` / `balanced` / `recall`
 命令：`code-review-agent eval --cases examples/eval_cases --out outputs/eval --mode rules`
 
 **完成标准**：
-- [ ] eval 命令可跑通，输出 `metrics.json` + `eval_report.md` + `case_results.json`
-- [ ] oracle 使用 planted bug + line range overlap，不用 LLM judge
-- [ ] eval report 展示 profile frontier 表
-- [ ] 能对比 rules-only 与 fake/evidence-backed variant
+- [x] eval 命令可跑通，输出 `metrics.json` + `eval_report.md` + `case_results.json`
+- [x] oracle 使用 planted bug + line range overlap，不用 LLM judge
+- [x] eval report 展示 profile frontier 表
+- [x] 能对比 deterministic baseline 与 fake/evidence-backed agent variant
+
+实现记录：Phase 13 已完成。`eval` CLI 支持 `rules` / `hybrid-fake` / `all`，benchmark 已扩展到 7 个内置 planted-bug cases。这里的 `rules` 是 deterministic baseline；外部 benchmark adapter 属于 Post-MVP。
 
 ---
 
 ## Phase 14 — Demo Polish
 
-- [ ] `examples/demo_repo/` 像真实 Python 项目（不是碎片文件）
-- [ ] demo patch 覆盖：test gap / artifact pollution / error handling / no-finding doc-only / no-finding test-only
-- [ ] README 包含：一句话定位 / 为什么不是普通 Review Bot / 架构图 / demo 命令 / sample report / eval 指标表 / 当前限制
+- [x] `examples/demo_repo/` 像真实 Python 项目（不是碎片文件）
+- [x] demo patch 覆盖：test gap / artifact pollution / error handling / no-finding doc-only / no-finding test-only
+- [x] README 包含：一句话定位 / 为什么不是普通 Review Bot / 架构图 / demo 命令 / sample report / eval 指标表 / 当前限制
 
 Demo 命令（必须可复现）：
 
@@ -377,13 +379,15 @@ pip install -e ".[dev]"
 code-review-agent hygiene --repo examples/demo_repo --out outputs/demo-hygiene
 code-review-agent map     --repo examples/demo_repo --out outputs/demo-map
 code-review-agent review  --repo examples/demo_repo --diff examples/demo_repo/patches/case_001_test_gap.patch --out outputs/demo-review
-code-review-agent eval    --cases examples/eval_cases --out outputs/demo-eval
+code-review-agent eval    --cases examples/eval_cases --out outputs/demo-eval --mode all
 ```
 
 **完成标准**：
-- [ ] README 3 分钟内讲清楚项目价值
-- [ ] demo 命令可复现
-- [ ] report 里有至少一个高质量 finding 和一个 No Finding case
+- [x] README 3 分钟内讲清楚项目价值
+- [x] demo 命令可复现
+- [x] report 里有至少一个高质量 finding 和一个 No Finding case
+
+实现记录：Phase 14 已完成。README、用户指南和 demo repo 已同步更新。
 
 ---
 
@@ -392,6 +396,7 @@ code-review-agent eval    --cases examples/eval_cases --out outputs/demo-eval
 不阻塞 MVP 的方向，按价值排序：
 
 - [ ] 真实 OpenAI-compatible LLM backend（reviewer / critic 可选不同模型族）
+- [ ] 外部 benchmark adapter（优先 AACR-Bench Python 子集；Martian Code Review Bench 作为对照）
 - [ ] Draft → Ground → Critic 三阶段 pipeline
 - [ ] GitHub PR URL 输入 + dry-run comment
 - [ ] MCP tools（暴露 repo_map / review report / hygiene scan）

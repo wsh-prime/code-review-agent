@@ -5,7 +5,7 @@
     {
       "category": "test_gap",
       "file": "src/shop/service.py",
-      "line_range": [30, 36],
+      "line_range": [16, 22],
       "severity": "medium",
       "key_bug": true
     }

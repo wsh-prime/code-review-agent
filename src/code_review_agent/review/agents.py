@@ -5,12 +5,32 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import time
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Protocol
 from urllib import error, request
+from uuid import uuid4
 
-from code_review_agent.models import AgentRun, EvidencePackage, ReviewIssue, RiskSignal
+from code_review_agent.models import (
+    AgentRun,
+    ContextRequest,
+    CritiqueResult,
+    EvidencePackage,
+    PriorFeedback,
+    ReviewerContext,
+    ReviewIssue,
+    RiskSignal,
+    UncertainFeedbackItem,
+)
+from code_review_agent.review.context_budget import (
+    DEFAULT_CONTEXT_BUDGET_TOKENS,
+    DEFAULT_MAX_EVIDENCE_PER_FILE,
+    DEFAULT_MAX_FILES_PER_AGENT_CALL,
+    aggregate_context_budget,
+    build_context_refill,
+    build_reviewer_contexts,
+)
 from code_review_agent.review.risk import DOC_ONLY, risk_evidence_id
 
 
@@ -22,22 +42,47 @@ FAKE_MODEL_NAME = "fake-llm"
 DEFAULT_OPENAI_COMPATIBLE_BASE_URL = "https://api.siliconflow.cn/v1"
 DEFAULT_OPENAI_COMPATIBLE_MODEL = "deepseek-ai/DeepSeek-V4-Flash"
 OPENAI_COMPATIBLE_TIMEOUT_SECONDS = 60
+RETRYABLE_HTTP_STATUS_CODES = frozenset({429, 500, 502, 503, 504})
+DEFAULT_RETRY_ATTEMPTS = 3
+DEFAULT_BACKOFF_SECONDS = 1.0
+LIVE_CONTEXT_CHECKPOINT_SCHEMA_VERSION = "live_context_checkpoint_v1"
+ALLOWED_CONTEXT_REQUEST_TYPES = frozenset(
+    {
+        "same_file_more_evidence",
+        "related_tests",
+        "related_symbol",
+        "risk_evidence",
+    }
+)
 
 _PROMPT_DIR = Path(__file__).with_name("prompts")
 _REVIEW_PROMPT = "review_agent.md"
 _CRITIC_PROMPT = "critic_agent.md"
 
 
+class _AgentFatalError(RuntimeError):
+    """Non-retryable agent failure."""
+
+
+class _AgentTransientError(RuntimeError):
+    """Retryable agent failure that exhausted all attempts."""
+
+
 class ReviewAgent(Protocol):
-    def review(self, package: EvidencePackage) -> list[ReviewIssue]:
+    def review(
+        self,
+        package: EvidencePackage,
+        *,
+        prior_feedback: PriorFeedback | None = None,
+    ) -> list[ReviewIssue]:
         """Return candidate review issues for one evidence package."""
 
 
 class CriticAgent(Protocol):
-    def filter(
+    def critique(
         self, issues: list[ReviewIssue], package: EvidencePackage
-    ) -> list[ReviewIssue]:
-        """Return candidate issues after agent-side criticism."""
+    ) -> CritiqueResult:
+        """Return structured critic decisions for candidate issues."""
 
 
 @dataclass(slots=True)
@@ -64,19 +109,25 @@ class FakeLLMReviewAgent:
 
     strategy: str = RECALL_BIASED_REVIEWER
 
-    def review(self, package: EvidencePackage) -> list[ReviewIssue]:
+    def review(
+        self,
+        package: EvidencePackage,
+        *,
+        prior_feedback: PriorFeedback | None = None,
+    ) -> list[ReviewIssue]:
         if self.strategy == PRECISION_BIASED_CRITIC:
-            return [
+            issues = [
                 issue
                 for issue in _issues_from_risk_signals(package)
                 if issue.confidence >= 0.75
             ]
+            return _apply_prior_feedback(issues, prior_feedback)
 
         issues = _issues_from_risk_signals(package)
         invalid = _invalid_evidence_probe(package)
         if invalid is not None:
             issues.append(invalid)
-        return issues
+        return _apply_prior_feedback(issues, prior_feedback)
 
 
 @dataclass(slots=True)
@@ -88,21 +139,43 @@ class FakeLLMCriticAgent:
     def filter(
         self, issues: list[ReviewIssue], package: EvidencePackage
     ) -> list[ReviewIssue]:
-        if self.strategy == RECALL_BIASED_REVIEWER:
-            return list(issues)
+        critique = self.critique(issues, package)
+        uncertain_ids = {item.issue_id for item in critique.uncertain}
+        uncertain_issues = [
+            _downgrade_uncertain_issue(issue)
+            for issue in issues
+            if _issue_id(issue) in uncertain_ids
+        ]
+        return [*critique.keep, *uncertain_issues]
 
-        reviewed: list[ReviewIssue] = []
+    def critique(
+        self, issues: list[ReviewIssue], package: EvidencePackage
+    ) -> CritiqueResult:
+        if self.strategy == RECALL_BIASED_REVIEWER:
+            return CritiqueResult(keep=list(issues))
+
+        keep: list[ReviewIssue] = []
+        uncertain: list[UncertainFeedbackItem] = []
+        reject: list[ReviewIssue] = []
         for issue in issues:
             if _looks_like_style_nit(issue):
+                reject.append(issue)
                 continue
             if not any(eid in package.evidence_index for eid in issue.evidence_ids):
-                reviewed.append(_with_confidence(issue, min(issue.confidence, 0.45)))
+                uncertain.append(
+                    _feedback_item(issue, "ungrounded evidence")
+                )
                 continue
             if issue.category in {"api_change", "behavior_change", "security_sensitive"}:
-                reviewed.append(_with_confidence(issue, min(issue.confidence, 0.55)))
+                uncertain.append(
+                    _feedback_item(issue, "requires semantic confirmation")
+                )
                 continue
-            reviewed.append(issue)
-        return reviewed
+            if issue.confidence < 0.6:
+                uncertain.append(_feedback_item(issue, "low confidence"))
+                continue
+            keep.append(issue)
+        return CritiqueResult(keep=keep, uncertain=uncertain, reject=reject)
 
 
 @dataclass(slots=True)
@@ -113,6 +186,21 @@ class OpenAICompatibleReviewAgent:
     base_url: str = DEFAULT_OPENAI_COMPATIBLE_BASE_URL
     model: str = DEFAULT_OPENAI_COMPATIBLE_MODEL
     timeout_seconds: int = OPENAI_COMPATIBLE_TIMEOUT_SECONDS
+    context_budget_tokens: int = DEFAULT_CONTEXT_BUDGET_TOKENS
+    max_files_per_agent_call: int = DEFAULT_MAX_FILES_PER_AGENT_CALL
+    max_evidence_per_file: int = DEFAULT_MAX_EVIDENCE_PER_FILE
+    max_context_refill_rounds: int = 1
+    max_context_requests: int = 8
+    context_checkpoint_path: str | None = None
+    context_checkpoint_package_hash: str = ""
+    context_checkpoint_diff_hash: str = ""
+    context_checkpoint_resume: bool = False
+    last_agent_run: AgentRun | None = field(default=None, init=False, repr=False)
+    last_agent_runs: list[AgentRun] = field(default_factory=list, init=False, repr=False)
+    last_context_budget: dict | None = field(default=None, init=False, repr=False)
+    last_context_requests: list[ContextRequest] = field(
+        default_factory=list, init=False, repr=False
+    )
 
     @classmethod
     def from_env(cls) -> "OpenAICompatibleReviewAgent":
@@ -142,34 +230,277 @@ class OpenAICompatibleReviewAgent:
             ),
         )
 
-    def review(self, package: EvidencePackage) -> list[ReviewIssue]:
-        body = {
-            "model": self.model,
-            "temperature": 0,
-            "max_tokens": 1200,
-            "messages": [
-                {
-                    "role": "system",
-                    "content": _load_prompt(_REVIEW_PROMPT),
-                },
-                {
-                    "role": "user",
-                    "content": (
-                        "Return only a JSON array of ReviewIssue objects. "
-                        "Use only evidence_ids present in evidence_index.\n\n"
-                        f"EvidencePackage:\n{json.dumps(package.to_dict(), ensure_ascii=False)}"
-                    ),
-                },
-            ],
-        }
-        response = _post_openai_compatible_json(
-            f"{self.base_url.rstrip('/')}/chat/completions",
-            api_key=self.api_key,
-            body=body,
-            timeout_seconds=self.timeout_seconds,
+    def review(
+        self,
+        package: EvidencePackage,
+        *,
+        prior_feedback: PriorFeedback | None = None,
+    ) -> list[ReviewIssue]:
+        self.last_agent_run = None
+        self.last_agent_runs = []
+        self.last_context_requests = []
+        contexts = build_reviewer_contexts(
+            package,
+            max_input_tokens=self.context_budget_tokens,
+            max_files=self.max_files_per_agent_call,
+            max_evidence_per_file=self.max_evidence_per_file,
         )
-        content = _chat_completion_text(response)
-        return _issues_from_llm_json(content)
+        reviewed_contexts: list[ReviewerContext] = list(contexts)
+        issues: list[ReviewIssue] = []
+        for context in contexts:
+            shard_issues, context_requests = self._review_context(
+                package,
+                context,
+                prior_feedback=prior_feedback,
+                context_refill_used=False,
+            )
+            issues.extend(shard_issues)
+            self.last_context_requests.extend(context_requests)
+            if context_requests and self.max_context_refill_rounds > 0:
+                refill_context = build_context_refill(
+                    package,
+                    context,
+                    context_requests,
+                    max_input_tokens=self.context_budget_tokens,
+                    max_evidence_per_file=self.max_evidence_per_file,
+                    max_context_requests=self.max_context_requests,
+                )
+                if refill_context is not None:
+                    reviewed_contexts.append(refill_context)
+                    refill_issues, refill_requests = self._review_context(
+                        package,
+                        refill_context,
+                        prior_feedback=prior_feedback,
+                        context_refill_used=True,
+                    )
+                    issues.extend(refill_issues)
+                    self.last_context_requests.extend(refill_requests)
+
+        self.last_context_budget = aggregate_context_budget(
+            reviewed_contexts,
+            context_requests=self.last_context_requests,
+        )
+        return _apply_prior_feedback(_merge_review_issues(issues), prior_feedback)
+
+    def _review_context(
+        self,
+        package: EvidencePackage,
+        context: ReviewerContext,
+        *,
+        prior_feedback: PriorFeedback | None,
+        context_refill_used: bool,
+    ) -> tuple[list[ReviewIssue], list[ContextRequest]]:
+        checkpoint_key = _context_checkpoint_key(context, prior_feedback)
+        restored = self._load_context_checkpoint_item(checkpoint_key)
+        if restored is not None:
+            issues = [
+                _issue_from_dict(item)
+                for item in restored.get("issues", [])
+                if isinstance(item, dict)
+            ]
+            context_requests = [
+                _context_request_from_dict(item, source_shard_id=context.shard_id)
+                for item in restored.get("context_requests", [])
+                if isinstance(item, dict)
+            ]
+            run = _openai_agent_run(
+                model=self.model,
+                prompt_digest=prompt_hash(_REVIEW_PROMPT),
+                package=package,
+                input_evidence_ids=sorted(context.evidence_index),
+                context_budget=context.context_budget,
+                context=context,
+                output_issues=issues,
+                retry_log=[],
+                latency_ms=0,
+                token_count_in=0,
+                token_count_out=0,
+                trace_id=uuid4().hex,
+                span_id=uuid4().hex[:16],
+                status="resumed",
+                error_type="",
+                context_request_count=len(context_requests),
+                context_refill_used=context_refill_used,
+            )
+            self.last_agent_run = run
+            self.last_agent_runs.append(run)
+            return issues, context_requests
+
+        started = time.monotonic()
+        retry_log: list[str] = []
+        trace_id = uuid4().hex
+        span_id = uuid4().hex[:16]
+        review_prompt_hash = prompt_hash(_REVIEW_PROMPT)
+        selected_evidence_ids = list(context.evidence_index)
+        body = _live_review_body(
+            model=self.model,
+            prior_feedback=prior_feedback,
+            context=context,
+        )
+        try:
+            response = _retry_with_backoff(
+                lambda: _post_openai_compatible_json(
+                    f"{self.base_url.rstrip('/')}/chat/completions",
+                    api_key=self.api_key,
+                    body=body,
+                    timeout_seconds=self.timeout_seconds,
+                ),
+                retry_log=retry_log,
+            )
+            content = _chat_completion_text(response)
+            issues, context_requests = _review_response_from_llm_json(
+                content,
+                source_shard_id=context.shard_id,
+                max_context_requests=self.max_context_requests,
+            )
+        except (_AgentFatalError, _AgentTransientError) as exc:
+            run = _openai_agent_run(
+                model=self.model,
+                prompt_digest=review_prompt_hash,
+                package=package,
+                input_evidence_ids=selected_evidence_ids,
+                context_budget=context.context_budget,
+                context=context,
+                output_issues=[],
+                retry_log=retry_log,
+                latency_ms=_elapsed_ms(started),
+                token_count_in=0,
+                token_count_out=0,
+                trace_id=trace_id,
+                span_id=span_id,
+                status="error",
+                error_type=exc.__class__.__name__,
+                context_request_count=0,
+                context_refill_used=context_refill_used,
+            )
+            self.last_agent_run = run
+            self.last_agent_runs.append(run)
+            raise
+        except (json.JSONDecodeError, ValueError, TypeError) as exc:
+            run = _openai_agent_run(
+                model=self.model,
+                prompt_digest=review_prompt_hash,
+                package=package,
+                input_evidence_ids=selected_evidence_ids,
+                context_budget=context.context_budget,
+                context=context,
+                output_issues=[],
+                retry_log=retry_log,
+                latency_ms=_elapsed_ms(started),
+                token_count_in=0,
+                token_count_out=0,
+                trace_id=trace_id,
+                span_id=span_id,
+                status="error",
+                error_type=exc.__class__.__name__,
+                context_request_count=0,
+                context_refill_used=context_refill_used,
+            )
+            self.last_agent_run = run
+            self.last_agent_runs.append(run)
+            raise _AgentFatalError(
+                f"OpenAI-compatible reviewer produced invalid output: {exc}"
+            ) from exc
+
+        run = _openai_agent_run(
+            model=self.model,
+            prompt_digest=review_prompt_hash,
+            package=package,
+            input_evidence_ids=selected_evidence_ids,
+            context_budget=context.context_budget,
+            context=context,
+            output_issues=issues,
+            retry_log=retry_log,
+            latency_ms=_elapsed_ms(started),
+            token_count_in=_usage_tokens(response, "prompt_tokens", "input_tokens"),
+            token_count_out=_usage_tokens(
+                response, "completion_tokens", "output_tokens"
+            ),
+            trace_id=trace_id,
+            span_id=span_id,
+            status="ok",
+            error_type="",
+            context_request_count=len(context_requests),
+            context_refill_used=context_refill_used,
+        )
+        self.last_agent_run = run
+        self.last_agent_runs.append(run)
+        self._save_context_checkpoint_item(
+            checkpoint_key,
+            context=context,
+            issues=issues,
+            context_requests=context_requests,
+            run=run,
+        )
+        return issues, context_requests
+
+    def _load_context_checkpoint_item(self, key: str) -> dict | None:
+        if not self.context_checkpoint_resume or self.context_checkpoint_path is None:
+            return None
+        path = Path(self.context_checkpoint_path)
+        if not path.exists():
+            return None
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            return None
+        if data.get("schema_version") != LIVE_CONTEXT_CHECKPOINT_SCHEMA_VERSION:
+            return None
+        if data.get("package_hash") != self.context_checkpoint_package_hash:
+            return None
+        if data.get("diff_hash") != self.context_checkpoint_diff_hash:
+            return None
+        item = data.get("shards", {}).get(key)
+        if not isinstance(item, dict) or item.get("status") != "completed":
+            return None
+        return item
+
+    def _save_context_checkpoint_item(
+        self,
+        key: str,
+        *,
+        context: ReviewerContext,
+        issues: list[ReviewIssue],
+        context_requests: list[ContextRequest],
+        run: AgentRun,
+    ) -> None:
+        if self.context_checkpoint_path is None:
+            return
+        path = Path(self.context_checkpoint_path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        data = {
+            "schema_version": LIVE_CONTEXT_CHECKPOINT_SCHEMA_VERSION,
+            "package_hash": self.context_checkpoint_package_hash,
+            "diff_hash": self.context_checkpoint_diff_hash,
+            "shards": {},
+        }
+        if path.exists():
+            try:
+                existing = json.loads(path.read_text(encoding="utf-8"))
+            except json.JSONDecodeError:
+                existing = {}
+            if (
+                existing.get("schema_version")
+                == LIVE_CONTEXT_CHECKPOINT_SCHEMA_VERSION
+                and existing.get("package_hash") == self.context_checkpoint_package_hash
+                and existing.get("diff_hash") == self.context_checkpoint_diff_hash
+            ):
+                data = existing
+                data.setdefault("shards", {})
+        data["shards"][key] = {
+            "status": "completed",
+            "shard_id": context.shard_id,
+            "is_refill": context.is_refill,
+            "parent_shard_id": context.parent_shard_id,
+            "selected_evidence_ids": sorted(context.evidence_index),
+            "context_requests": [
+                context_request.to_dict()
+                for context_request in context_requests
+            ],
+            "issues": [issue.to_dict() for issue in issues],
+            "agent_run": run.to_dict(),
+        }
+        path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
 def run_fake_hybrid_agents(
@@ -229,9 +560,11 @@ def run_openai_compatible_review_agent(
 
     reviewer = agent or OpenAICompatibleReviewAgent.from_env()
     issues = reviewer.review(package)
-    return FakeAgentResult(
-        findings=issues,
-        agent_runs=[
+    live_run = getattr(reviewer, "last_agent_run", None)
+    if isinstance(live_run, AgentRun):
+        agent_runs = [live_run]
+    else:
+        agent_runs = [
             AgentRun(
                 agent_name="openai_compatible_reviewer",
                 model=reviewer.model,
@@ -240,7 +573,10 @@ def run_openai_compatible_review_agent(
                 output_issue_ids=[_issue_id(issue) for issue in issues],
                 fallback_used=False,
             )
-        ],
+        ]
+    return FakeAgentResult(
+        findings=issues,
+        agent_runs=agent_runs,
     )
 
 
@@ -250,6 +586,9 @@ def export_agent_prompts(
     *,
     mode: str,
     pair_strategy: str = CROSS_STRATEGY,
+    context_budget_tokens: int = DEFAULT_CONTEXT_BUDGET_TOKENS,
+    max_files_per_agent_call: int = DEFAULT_MAX_FILES_PER_AGENT_CALL,
+    max_evidence_per_file: int = DEFAULT_MAX_EVIDENCE_PER_FILE,
 ) -> dict:
     """Export prompt templates and redacted agent inputs for demos."""
 
@@ -271,18 +610,31 @@ def export_agent_prompts(
         _render_prompt_export(_CRITIC_PROMPT, critic_hash),
         encoding="utf-8",
     )
+    review_input = {
+        "mode": mode,
+        "pair_strategy": pair_strategy,
+        "prompt_hash": review_hash,
+        "redacted_metadata_fields": package.metadata.get("redacted", []),
+    }
+    if mode.startswith("hybrid-live"):
+        reviewer_contexts = build_reviewer_contexts(
+            package,
+            max_input_tokens=context_budget_tokens,
+            max_files=max_files_per_agent_call,
+            max_evidence_per_file=max_evidence_per_file,
+        )
+        review_input["reviewer_contexts"] = [
+            _llm_context_payload(context) for context in reviewer_contexts
+        ]
+        review_input["live_review_input"] = _llm_context_payload(reviewer_contexts[0])
+        review_input["context_budget"] = aggregate_context_budget(reviewer_contexts)
+        review_input["full_package_exported"] = False
+    else:
+        review_input["package"] = package.to_dict()
+        review_input["full_package_exported"] = True
+
     review_input_path.write_text(
-        json.dumps(
-            {
-                "mode": mode,
-                "pair_strategy": pair_strategy,
-                "prompt_hash": review_hash,
-                "package": package.to_dict(),
-                "redacted_metadata_fields": package.metadata.get("redacted", []),
-            },
-            indent=2,
-            ensure_ascii=False,
-        ),
+        json.dumps(review_input, indent=2, ensure_ascii=False),
         encoding="utf-8",
     )
     critic_input_path.write_text(
@@ -336,17 +688,213 @@ def _post_openai_compatible_json(
             "Authorization": f"Bearer {api_key}",
         },
     )
-    try:
-        with request.urlopen(req, timeout=timeout_seconds) as response:
-            raw = response.read().decode("utf-8", errors="replace")
-    except error.HTTPError as exc:
-        raw = exc.read().decode("utf-8", errors="replace")
-        raise RuntimeError(
-            f"OpenAI-compatible API returned HTTP {exc.code}: {_truncate(raw)}"
-        ) from exc
-    except error.URLError as exc:
-        raise RuntimeError(f"OpenAI-compatible API request failed: {exc.reason}") from exc
+    with request.urlopen(req, timeout=timeout_seconds) as response:
+        raw = response.read().decode("utf-8", errors="replace")
     return json.loads(raw)
+
+
+def _retry_with_backoff(
+    call,
+    *,
+    retry_log: list[str],
+    max_attempts: int = DEFAULT_RETRY_ATTEMPTS,
+    base_delay_seconds: float = DEFAULT_BACKOFF_SECONDS,
+) -> dict:
+    attempts = max(1, max_attempts)
+    for attempt in range(1, attempts + 1):
+        try:
+            return call()
+        except error.HTTPError as exc:
+            if exc.code not in RETRYABLE_HTTP_STATUS_CODES:
+                raise _AgentFatalError(
+                    f"OpenAI-compatible API returned HTTP {exc.code}: "
+                    f"{_truncate(_error_body(exc))}"
+                ) from exc
+            if attempt >= attempts:
+                raise _AgentTransientError(
+                    f"OpenAI-compatible API returned HTTP {exc.code} after "
+                    f"{attempts} attempts."
+                ) from exc
+            delay = _retry_delay_seconds(exc, attempt, base_delay_seconds)
+            retry_log.append(f"attempt={attempt} error=http_{exc.code} delay={delay:.2f}s")
+            time.sleep(delay)
+        except error.URLError as exc:
+            if attempt >= attempts:
+                raise _AgentTransientError(
+                    f"OpenAI-compatible API request failed after {attempts} attempts: "
+                    f"{exc.reason}"
+                ) from exc
+            delay = base_delay_seconds * (2 ** (attempt - 1))
+            retry_log.append(f"attempt={attempt} error=url_error delay={delay:.2f}s")
+            time.sleep(delay)
+        except TimeoutError as exc:
+            if attempt >= attempts:
+                raise _AgentTransientError(
+                    f"OpenAI-compatible API request timed out after "
+                    f"{attempts} attempts."
+                ) from exc
+            delay = base_delay_seconds * (2 ** (attempt - 1))
+            retry_log.append(f"attempt={attempt} error=timeout delay={delay:.2f}s")
+            time.sleep(delay)
+
+    raise _AgentTransientError(
+        f"OpenAI-compatible API request failed after {attempts} attempts."
+    )
+
+
+def _retry_delay_seconds(
+    exc: error.HTTPError, attempt: int, base_delay_seconds: float
+) -> float:
+    retry_after = _retry_after_seconds(getattr(exc, "headers", None))
+    if retry_after is not None:
+        return retry_after
+    return base_delay_seconds * (2 ** (attempt - 1))
+
+
+def _retry_after_seconds(headers) -> float | None:
+    raw = headers.get("Retry-After") if headers is not None else None
+    if raw is None:
+        return None
+    try:
+        return max(0.0, float(raw))
+    except (TypeError, ValueError):
+        return None
+
+
+def _error_body(exc: error.HTTPError) -> str:
+    try:
+        return exc.read().decode("utf-8", errors="replace")
+    except Exception:
+        return ""
+
+
+def _openai_agent_run(
+    *,
+    model: str,
+    prompt_digest: str,
+    package: EvidencePackage,
+    input_evidence_ids: list[str],
+    context_budget: dict,
+    context: ReviewerContext,
+    output_issues: list[ReviewIssue],
+    retry_log: list[str],
+    latency_ms: int,
+    token_count_in: int,
+    token_count_out: int,
+    trace_id: str,
+    span_id: str,
+    status: str,
+    error_type: str,
+    context_request_count: int,
+    context_refill_used: bool,
+) -> AgentRun:
+    del package, context_budget
+    return AgentRun(
+        agent_name="openai_compatible_reviewer",
+        model=model,
+        prompt_hash=prompt_digest,
+        input_evidence_ids=sorted(input_evidence_ids),
+        output_issue_ids=[_issue_id(issue) for issue in output_issues],
+        retry_count=len(retry_log),
+        retry_log=list(retry_log),
+        latency_ms=latency_ms,
+        token_count_in=token_count_in,
+        token_count_out=token_count_out,
+        trace_id=trace_id,
+        span_id=span_id,
+        status=status,
+        error_type=error_type,
+        shard_id=context.shard_id,
+        shard_index=context.shard_index,
+        shard_count=context.shard_count,
+        context_request_count=context_request_count,
+        context_refill_used=context_refill_used,
+    )
+
+
+def _elapsed_ms(started: float) -> int:
+    return max(0, round((time.monotonic() - started) * 1000))
+
+
+def _usage_tokens(response: dict, *keys: str) -> int:
+    usage = response.get("usage", {})
+    if not isinstance(usage, dict):
+        return 0
+    for key in keys:
+        value = usage.get(key)
+        if value is None:
+            continue
+        try:
+            return int(value)
+        except (TypeError, ValueError):
+            return 0
+    return 0
+
+
+def _live_review_body(
+    *,
+    model: str,
+    prior_feedback: PriorFeedback | None,
+    context: ReviewerContext,
+) -> dict:
+    return {
+        "model": model,
+        "temperature": 0,
+        "max_tokens": 1200,
+        "messages": [
+            {
+                "role": "system",
+                "content": _load_prompt(_REVIEW_PROMPT),
+            },
+            {
+                "role": "user",
+                "content": (
+                    "Return only JSON. Prefer an object with keys "
+                    "`issues` and `context_requests`; a plain issue array is "
+                    "also accepted for compatibility. "
+                    "Use only evidence_ids present in "
+                    "reviewer_context.evidence_index. "
+                    "If evidence is insufficient, request at most controlled "
+                    "context types: same_file_more_evidence, related_tests, "
+                    "related_symbol, risk_evidence.\n\n"
+                    f"PriorFeedback:\n{_feedback_payload(prior_feedback)}\n\n"
+                    "ReviewerContext:\n"
+                    f"{json.dumps(_llm_context_payload(context), ensure_ascii=False)}"
+                ),
+            },
+        ],
+    }
+
+
+def _llm_context_payload(context: ReviewerContext) -> dict:
+    """Return the compact context view sent to the live reviewer."""
+
+    payload = context.to_dict()
+    payload.pop("context_budget", None)
+    return payload
+
+
+def _feedback_payload(prior_feedback: PriorFeedback | None) -> str:
+    if prior_feedback is None:
+        return "null"
+    return json.dumps(prior_feedback.to_dict(), ensure_ascii=False)
+
+
+def _context_checkpoint_key(
+    context: ReviewerContext,
+    prior_feedback: PriorFeedback | None,
+) -> str:
+    payload = {
+        "shard_id": context.shard_id,
+        "is_refill": context.is_refill,
+        "parent_shard_id": context.parent_shard_id,
+        "evidence_ids": sorted(context.evidence_index),
+        "feedback": (
+            prior_feedback.to_dict() if prior_feedback is not None else None
+        ),
+    }
+    raw = json.dumps(payload, sort_keys=True, ensure_ascii=False)
+    return hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
 
 def _chat_completion_text(response: dict) -> str:
@@ -357,23 +905,65 @@ def _chat_completion_text(response: dict) -> str:
 
 
 def _issues_from_llm_json(content: str) -> list[ReviewIssue]:
-    parsed = json.loads(_extract_json_array(content))
+    issues, _ = _review_response_from_llm_json(
+        content,
+        source_shard_id="",
+        max_context_requests=0,
+    )
+    return issues
+
+
+def _review_response_from_llm_json(
+    content: str,
+    *,
+    source_shard_id: str,
+    max_context_requests: int,
+) -> tuple[list[ReviewIssue], list[ContextRequest]]:
+    parsed = json.loads(_extract_json_value(content))
     if not isinstance(parsed, list):
-        raise ValueError("LLM review output must be a JSON array.")
-    return [_issue_from_dict(item) for item in parsed]
+        if not isinstance(parsed, dict):
+            raise ValueError("LLM review output must be an object or array.")
+        issues_data = parsed.get("issues", [])
+        requests_data = parsed.get("context_requests", [])
+        if not isinstance(issues_data, list):
+            raise ValueError("LLM review output issues must be a JSON array.")
+        if not isinstance(requests_data, list):
+            raise ValueError("LLM context_requests must be a JSON array.")
+        return (
+            [_issue_from_dict(item) for item in issues_data],
+            [
+                _context_request_from_dict(item, source_shard_id=source_shard_id)
+                for item in requests_data[: max(0, max_context_requests)]
+                if isinstance(item, dict)
+            ],
+        )
+    return [_issue_from_dict(item) for item in parsed], []
 
 
 def _extract_json_array(content: str) -> str:
+    extracted = _extract_json_value(content)
+    if not extracted.lstrip().startswith("["):
+        raise ValueError("LLM review output did not contain a JSON array.")
+    return extracted
+
+
+def _extract_json_value(content: str) -> str:
     stripped = content.strip()
     if stripped.startswith("```"):
         stripped = stripped.removeprefix("```json").removeprefix("```").strip()
         stripped = stripped.removesuffix("```").strip()
-    if stripped.startswith("["):
+    if stripped.startswith("[") or stripped.startswith("{"):
         return stripped
-    start = stripped.find("[")
-    end = stripped.rfind("]")
+    array_start = stripped.find("[")
+    object_start = stripped.find("{")
+    starts = [item for item in [array_start, object_start] if item != -1]
+    if not starts:
+        raise ValueError("LLM review output did not contain JSON.")
+    start = min(starts)
+    close = "]" if stripped[start] == "[" else "}"
+    end = stripped.rfind(close)
     if start == -1 or end == -1 or end <= start:
-        raise ValueError("LLM review output did not contain a JSON array.")
+        raise ValueError("LLM review output did not contain a complete JSON value.")
     return stripped[start : end + 1]
 
 
@@ -392,6 +982,30 @@ def _issue_from_dict(data: dict) -> ReviewIssue:
     )
 
 
+def _context_request_from_dict(
+    data: dict,
+    *,
+    source_shard_id: str,
+) -> ContextRequest:
+    request_type = str(
+        data.get("request_type", data.get("type", "same_file_more_evidence"))
+    )
+    if request_type not in ALLOWED_CONTEXT_REQUEST_TYPES:
+        raise ValueError(f"Unsupported context request type: {request_type}")
+    evidence_ids = data.get("evidence_ids", [])
+    if not isinstance(evidence_ids, list):
+        evidence_ids = []
+    return ContextRequest(
+        request_type=request_type,
+        path=_optional_str(data.get("path")),
+        evidence_ids=[str(item) for item in evidence_ids[:20]],
+        risk_tag=_optional_str(data.get("risk_tag")),
+        symbol=_optional_str(data.get("symbol")),
+        reason=str(data.get("reason", ""))[:500],
+        source_shard_id=source_shard_id,
+    )
+
+
 def _optional_int(value) -> int | None:
     if value is None:
         return None
@@ -407,6 +1021,12 @@ def _confidence(value) -> float:
     except (TypeError, ValueError):
         return 0.5
     return min(max(confidence, 0.0), 1.0)
+
+
+def _optional_str(value) -> str | None:
+    if value is None:
+        return None
+    return str(value)
 
 
 def _truncate(text: str, limit: int = 240) -> str:
@@ -503,6 +1123,62 @@ def _with_confidence(issue: ReviewIssue, confidence: float) -> ReviewIssue:
         confidence=confidence,
         evidence_ids=list(issue.evidence_ids),
     )
+
+
+def _apply_prior_feedback(
+    issues: list[ReviewIssue],
+    prior_feedback: PriorFeedback | None,
+) -> list[ReviewIssue]:
+    if prior_feedback is None or not prior_feedback.uncertain_items:
+        return issues
+
+    uncertain_ids = {item.issue_id for item in prior_feedback.uncertain_items}
+    revised: list[ReviewIssue] = []
+    for issue in issues:
+        if _issue_id(issue) not in uncertain_ids:
+            revised.append(issue)
+            continue
+        revised.append(_with_confidence(issue, issue.confidence * 0.8))
+    return revised
+
+
+def _merge_review_issues(issues: list[ReviewIssue]) -> list[ReviewIssue]:
+    seen: dict[tuple[str, str, int | None], ReviewIssue] = {}
+    for issue in issues:
+        key = (issue.category, issue.file, issue.line)
+        existing = seen.get(key)
+        if existing is None:
+            seen[key] = issue
+            continue
+        winner = existing if existing.confidence >= issue.confidence else issue
+        evidence_ids = sorted(dict.fromkeys(existing.evidence_ids + issue.evidence_ids))
+        seen[key] = ReviewIssue(
+            file=winner.file,
+            line=winner.line,
+            severity=winner.severity,
+            category=winner.category,
+            message=winner.message,
+            suggestion=winner.suggestion,
+            confidence=max(existing.confidence, issue.confidence),
+            evidence_ids=evidence_ids,
+        )
+    return list(seen.values())
+
+
+def _feedback_item(issue: ReviewIssue, reason: str) -> UncertainFeedbackItem:
+    return UncertainFeedbackItem(
+        issue_id=_issue_id(issue),
+        category=issue.category,
+        critic_reason=reason,
+        original_confidence=issue.confidence,
+        evidence_ids=list(issue.evidence_ids),
+    )
+
+
+def _downgrade_uncertain_issue(issue: ReviewIssue) -> ReviewIssue:
+    if not issue.evidence_ids:
+        return _with_confidence(issue, min(issue.confidence, 0.45))
+    return _with_confidence(issue, min(issue.confidence, 0.55))
 
 
 def _looks_like_style_nit(issue: ReviewIssue) -> bool:

@@ -9,6 +9,8 @@ from code_review_agent.eval.metrics import (
     line_range_overlap,
     summarize_case_results,
 )
+from code_review_agent.eval.cases import load_eval_cases
+from code_review_agent.eval.runner import run_eval_benchmark
 
 
 def test_line_range_overlap_uses_expected_range_width() -> None:
@@ -108,14 +110,100 @@ def test_micro_eval_fixtures_are_loadable() -> None:
     cases_root = project_root / "examples" / "eval_cases"
     expected_cases = {
         "case_001_test_gap",
-        "case_002_error_handling",
-        "case_003_no_finding_doc_only",
+        "case_002_api_change",
+        "case_003_error_handling",
+        "case_004_artifact_pollution",
+        "case_005_no_finding_doc_only",
+        "case_006_no_finding_test_only",
+        "case_007_design_constraint",
     }
 
-    loaded_cases = set()
-    for ground_truth_path in sorted((cases_root / "ground_truth").glob("*.json")):
-        data = json.loads(ground_truth_path.read_text(encoding="utf-8"))
-        loaded_cases.add(data["case_id"])
-        assert (cases_root / data["patch"]).exists()
+    loaded_cases = {case.case_id for case in load_eval_cases(cases_root)}
 
-    assert expected_cases.issubset(loaded_cases)
+    assert loaded_cases == expected_cases
+
+
+def test_eval_runner_writes_metrics_case_results_and_markdown(tmp_path: Path) -> None:
+    project_root = Path(__file__).resolve().parents[1]
+    cases_root = project_root / "examples" / "eval_cases"
+
+    metrics = run_eval_benchmark(cases_root, tmp_path / "eval", mode="rules")
+
+    assert metrics["case_count"] == 7
+    assert "rules" in metrics["variants"]
+    assert "balanced" in metrics["variants"]["rules"]
+    assert metrics["variants"]["rules"]["balanced"]["discarded_count"] >= 0
+    assert metrics["variants"]["rules"]["balanced"]["needs_human_review_count"] >= 0
+    assert metrics["variants"]["rules"]["balanced"]["checkpoint_written_count"] == 0
+    assert metrics["phase16_smoke"] == {}
+    assert (tmp_path / "eval" / "metrics.json").exists()
+    assert (tmp_path / "eval" / "case_results.json").exists()
+    assert (tmp_path / "eval" / "eval_report.md").exists()
+
+    data = json.loads((tmp_path / "eval" / "metrics.json").read_text(encoding="utf-8"))
+    assert data["schema_version"] == "1.1"
+    assert data["target_repo_modified"] is False
+    assert data["variants"]["rules"]["balanced"]["no_finding_accuracy"] == 1.0
+
+
+def test_eval_runner_all_mode_compares_loop_variants(tmp_path: Path) -> None:
+    project_root = Path(__file__).resolve().parents[1]
+    cases_root = project_root / "examples" / "eval_cases"
+
+    metrics = run_eval_benchmark(cases_root, tmp_path / "eval", mode="all")
+
+    assert list(metrics["variants"]) == [
+        "rules",
+        "hybrid-fake-iter1",
+        "hybrid-fake-iter2",
+    ]
+    assert metrics["variant_descriptions"]["hybrid-fake-iter2"]
+    assert (
+        metrics["variants"]["hybrid-fake-iter1"]["balanced"][
+            "loop_iterations_completed"
+        ]
+        == 7
+    )
+    assert (
+        metrics["variants"]["hybrid-fake-iter2"]["balanced"][
+            "loop_enabled_count"
+        ]
+        == 7
+    )
+    assert (
+        metrics["variants"]["hybrid-fake-iter2"]["balanced"][
+            "checkpoint_written_count"
+        ]
+        == 7
+    )
+    assert (
+        metrics["variants"]["hybrid-fake-iter2"]["balanced"]["fallback_used_count"]
+        == 0
+    )
+    assert (
+        metrics["variants"]["hybrid-fake-iter2"]["balanced"]["tracing_run_count"]
+        >= 14
+    )
+    assert (
+        metrics["variants"]["hybrid-fake-iter2"]["balanced"][
+            "tracing_status_counts"
+        ]["ok"]
+        >= 14
+    )
+    smoke = metrics["phase16_smoke"]
+    assert smoke["checkpoint_resume"]["checkpoint_written"] is True
+    assert smoke["checkpoint_resume"]["resume_used"] is True
+    assert smoke["checkpoint_resume"]["resume_ignored_reason"] is None
+    assert smoke["checkpoint_resume"]["target_repo_modified"] is False
+    assert smoke["fallback_rules"]["mode"] == "hybrid-live/fallback-rules"
+    assert smoke["fallback_rules"]["fallback_used"] is True
+    assert smoke["fallback_rules"]["fallback_reason_present"] is True
+    assert "fallback" in smoke["fallback_rules"]["agent_statuses"]
+    assert smoke["fallback_rules"]["target_repo_modified"] is False
+
+    report = (tmp_path / "eval" / "eval_report.md").read_text(encoding="utf-8")
+    assert "`hybrid-fake-iter1`" in report
+    assert "`hybrid-fake-iter2`" in report
+    assert "Needs Human Review" in report
+    assert "Phase 16 Reliability Smoke" in report
+    assert "Checkpoints" in report

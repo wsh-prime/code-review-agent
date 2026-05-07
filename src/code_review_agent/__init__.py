@@ -3,6 +3,7 @@
 from code_review_agent.models import (
     AgentRun,
     ChangedEntity,
+    ContextRequest,
     DiffFileChange,
     DiffHunk,
     DiffLine,
@@ -14,7 +15,10 @@ from code_review_agent.models import (
     ReviewEvidence,
     ReviewIssue,
     ReviewReport,
+    ReviewerContext,
+    ReviewShard,
     RiskSignal,
+    ShardReviewResult,
     StyleBaseline,
     SymbolSummary,
 )
@@ -22,6 +26,7 @@ from code_review_agent.models import (
 __all__ = [
     "AgentRun",
     "ChangedEntity",
+    "ContextRequest",
     "DiffFileChange",
     "DiffHunk",
     "DiffLine",
@@ -33,7 +38,10 @@ __all__ = [
     "ReviewEvidence",
     "ReviewIssue",
     "ReviewReport",
+    "ReviewerContext",
+    "ReviewShard",
     "RiskSignal",
+    "ShardReviewResult",
     "StyleBaseline",
     "SymbolSummary",
 ]

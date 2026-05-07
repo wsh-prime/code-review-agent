@@ -1,8 +1,0 @@
-diff --git a/src/shop/service.py b/src/shop/service.py
---- a/src/shop/service.py
-+++ b/src/shop/service.py
-@@ -30,7 +30,7 @@ def create_order(total: int) -> bool:
-     if total <= 0:
-         return False
--    return True
-+    return total > 10

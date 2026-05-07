@@ -6,7 +6,7 @@
 
 ## 1. 原则
 
-**只做 review harness，不做大而全 agent。** 面试时有价值的是"能把 context、evidence、误报控制和 eval 做出来"，而不是"接了一个 API"。
+**只做 review agent harness，不做大而全 agent。** 面试时有价值的是"能把 context、evidence、误报控制、agent 约束和 eval 做出来"，而不是"接了一个 API"。规则层只作为 deterministic baseline / guardrail，不是项目主语。
 
 **零第三方运行时依赖。** 标准库：`ast` `pathlib` `json` `dataclasses` `re` `difflib` `subprocess`。真实 LLM backend 后置。
 
@@ -33,7 +33,7 @@
 - `review/changed_entity.py`：hunk → function/class/method
 - `review/risk.py`：deterministic risk tags
 - `review/evidence.py`：EvidencePackage builder
-- `review/rules.py`：rules-only findings
+- `review/rules.py`：deterministic baseline / guardrail findings
 - `review/pipeline.py`：串起来的 review 命令
 - `eval/`：benchmark + deterministic oracle
 
@@ -334,7 +334,7 @@ Metadata redaction 规则（见项目方案第 11 节）：PR title/commit messa
 
 ## 12. Phase 7：Rules-only Review
 
-**目标**：在没有真实 LLM 的情况下跑通 review pipeline。
+**目标**：在没有真实 LLM 的情况下跑通 review pipeline，并提供 deterministic baseline / guardrail。它用于回归、对照和证据链验证，不代表最终要做规则扫描器。
 
 **新增文件**：
 
@@ -385,7 +385,7 @@ code-review-agent review --repo examples/demo_repo --diff examples/demo_repo/pat
 --mode rules|hybrid-fake
 ```
 
-Phase 8 第一版只需支持 `--mode rules`；Phase 12 已补上 `--mode hybrid-fake`。
+Phase 8 第一版只需支持 `--mode rules` 作为 baseline；Phase 12 已补上 `--mode hybrid-fake` 来展示 agent harness 路径。
 
 **Pipeline 步骤**：
 
@@ -415,7 +415,7 @@ write report
 
 ## 14. Phase 9：Micro Eval Benchmark
 
-**目标**：在 rules-only review pipeline 跑通后，立刻加入最小回归集，避免 risk/rules/filter 后续调整时行为漂移。
+**目标**：在 deterministic baseline review pipeline 跑通后，立刻加入最小回归集，避免 risk/baseline/filter 后续调整时行为漂移。
 
 **新增或复用文件**：
 
@@ -572,7 +572,7 @@ code-review-agent review --repo . --diff changes.patch --out outputs/review --ex
 
 ## 18. Phase 13：Full Eval Benchmark
 
-**目标**：用小型 benchmark 证明项目不是 toy。必须使用 deterministic oracle，不使用 LLM judge。
+**目标**：用内置 planted-bug benchmark 做可复现回归和 demo 指标。必须使用 deterministic oracle，不使用 LLM judge。它不是外部权威 benchmark，外部 benchmark adapter 留到 Post-MVP。
 
 **新增文件**：
 
@@ -604,14 +604,16 @@ code-review-agent eval --cases examples/eval_cases --out outputs/eval --mode rul
 **Threshold Profiles**：`strict` / `balanced` / `recall`（见项目方案第 12 节）
 
 **完成标准**：
-- [ ] 至少 5 个 eval cases
-- [ ] 至少 2 个 no-finding cases（doc-only 和 test-only）
-- [ ] eval 命令可跑通
-- [ ] oracle 使用 planted bug + line range overlap
-- [ ] eval 不依赖 LLM judge
-- [ ] 报告展示 strict/balanced/recall frontier 表
-- [ ] README 可以展示一张指标表
-- [ ] 能对比 rules-only 与 fake/evidence-backed variant
+- [x] 至少 5 个 eval cases
+- [x] 至少 2 个 no-finding cases（doc-only 和 test-only）
+- [x] eval 命令可跑通
+- [x] oracle 使用 planted bug + line range overlap
+- [x] eval 不依赖 LLM judge
+- [x] 报告展示 strict/balanced/recall frontier 表
+- [x] README 可以展示一张指标表
+- [x] 能对比 deterministic baseline 与 fake/evidence-backed agent variant
+
+实现记录：`src/code_review_agent/eval/cases.py` / `runner.py` 已落地，`code-review-agent eval` 支持 `--mode rules`、`--mode hybrid-fake`、`--mode all`。这里的 `rules` 是 deterministic baseline，不是项目主线终点。`examples/eval_cases` 已包含 7 个 planted-bug fixtures，其中 `case_005_no_finding_doc_only` 和 `case_006_no_finding_test_only` 用于衡量 no-finding accuracy。输出为 `metrics.json`、`case_results.json` 和 `eval_report.md`。
 
 ---
 
@@ -627,7 +629,7 @@ code-review-agent eval --cases examples/eval_cases --out outputs/eval --mode rul
 - demo 命令
 - sample report 截图或文本片段
 - eval 指标表
-- 当前限制（只做 Python，无真实 LLM）
+- 当前限制（Python/local CLI 优先，真实 LLM 为可选 backend，GitHub comment / auto-fix 属于 Post-MVP）
 
 **Demo 命令（必须可复现）**：
 
@@ -636,7 +638,7 @@ pip install -e ".[dev]"
 code-review-agent hygiene --repo examples/demo_repo --out outputs/demo-hygiene
 code-review-agent map     --repo examples/demo_repo --out outputs/demo-map
 code-review-agent review  --repo examples/demo_repo --diff examples/demo_repo/patches/case_001_test_gap.patch --out outputs/demo-review
-code-review-agent eval    --cases examples/eval_cases --out outputs/demo-eval
+code-review-agent eval    --cases examples/eval_cases --out outputs/demo-eval --mode all
 ```
 
 **面试讲解顺序**：
@@ -649,10 +651,12 @@ code-review-agent eval    --cases examples/eval_cases --out outputs/demo-eval
 6. 解释 hygiene 模块如何识别过程资产污染
 
 **完成标准**：
-- [ ] README 能在 3 分钟内讲清楚项目
-- [ ] demo 命令可复现
-- [ ] 报告里有至少一个高质量 finding 和一个 No Finding case
-- [ ] eval 输出能支撑"不是 toy"的叙事
+- [x] README 能在 3 分钟内讲清楚项目
+- [x] demo 命令可复现
+- [x] 报告里有至少一个高质量 finding 和一个 No Finding case
+- [x] eval 输出能支撑"不是 toy"的叙事
+
+实现记录：`examples/demo_repo` 已打磨为小型 demo shop 项目，包含 `src/shop` 主代码、`tests`、`docs`、`scripts` 和 hygiene 可识别的过程资产。`examples/demo_repo/patches` 覆盖 test gap、artifact pollution、error handling、doc-only no finding 和 test-only no finding。README 已加入架构图、demo 命令、sample review、eval 指标表和当前限制。
 
 ---
 
@@ -686,19 +690,21 @@ code-review-agent eval    --cases examples/eval_cases --out outputs/demo-eval
 - [x] `review` 能输出 evidence-backed findings 或 No Finding
 - [x] 每条 finding 都有 evidence
 - [x] 无 LLM/API key 环境可运行
-- [ ] 至少 5 个 eval cases，至少 2 个 no-finding cases
-- [ ] eval 使用 deterministic oracle，不依赖 LLM judge
-- [ ] eval 能输出 precision / recall / false positives / key bug inclusion
-- [ ] eval 能展示 strict/balanced/recall 的 trade-off frontier
-- [ ] README 有可复现 demo 命令和 sample report
+- [x] 至少 5 个 eval cases，至少 2 个 no-finding cases
+- [x] eval 使用 deterministic oracle，不依赖 LLM judge
+- [x] eval 能输出 precision / recall / false positives / key bug inclusion
+- [x] eval 能展示 strict/balanced/recall 的 trade-off frontier
+- [x] README 有可复现 demo 命令和 sample report
 
 ---
 
 ## 22. 后续增强（MVP 后再考虑）
 
-**真实 LLM Backend**：OpenAI-compatible API，API key 只读环境变量，prompt hash，model 记录，timeout/fallback，schema validation。reviewer 和 critic 可选使用不同模型族作为 correlated failure 防御增强。
+**真实 Agent Harness**：OpenAI-compatible API，API key 只读环境变量，prompt hash，model 记录，timeout/fallback，schema validation。reviewer 和 critic 可选使用不同模型族作为 correlated failure 防御增强。
 
 **Draft → Ground → Critic Pipeline**：DraftAgent 输出 CandidateFinding，GroundingVerifier 绑定 evidence id，CriticFilter 做最终过滤。不进入 MVP，避免过早增加 pipeline 状态和测试复杂度。
+
+**外部 Benchmark Adapter**：优先考虑 AACR-Bench 的 Python 子集，把外部 PR / comment 标注转成当前 `ground_truth.json` 风格，再用 deterministic file/category/line overlap oracle 评估。Martian Code Review Bench 可作为工具横评参考，但不能把 LLM judge 作为唯一标准。
 
 **GitHub Integration**：输入 PR URL，拉取 diff，dry-run report，可选发布 PR comment。
 
@@ -712,7 +718,7 @@ code-review-agent eval    --cases examples/eval_cases --out outputs/demo-eval
 
 | 风险 | 控制 |
 |---|---|
-| 范围过大 | 先完成 Python + local CLI + rules-only |
+| 范围过大 | 先完成 Python + local CLI + deterministic baseline + fake/live-compatible agent harness |
 | 误报太多 | 只输出高证据 finding，低置信度降级 |
 | LLM 成为项目瓶颈 | MVP 不依赖真实 API |
 | Demo 不可信 | 做 eval cases 和 no-finding case |

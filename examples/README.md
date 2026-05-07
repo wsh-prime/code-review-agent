@@ -6,33 +6,34 @@ This directory contains demo repositories and sample patches used to show the pr
 
 ## Current Status
 
-Phase 0 includes `demo_repo/` as a placeholder repository and `demo.patch` for CLI argument validation.
+Phase 14 includes a reviewable `demo_repo/` shop project and `eval_cases/` benchmark fixtures for deterministic evaluation.
 
 ## Files
 
 | File or Directory | Responsibility |
 |---|---|
-| `demo_repo/` | Placeholder demo repository for CLI validation now; later a full reviewable fixture. |
-| `demo_repo/README.md` | Explains the current placeholder demo repository. |
-| `demo_repo/demo.patch` | Minimal patch used by the Phase 0 placeholder review command. |
+| `demo_repo/` | Small Python shop project used by map, hygiene, and review demos. |
+| `demo_repo/patches/` | Reviewable demo patches covering findings and no-finding cases. |
+| `demo_repo/demo.patch` | Compatibility alias for the test-gap demo patch. |
+| `eval_cases/` | Full planted-bug benchmark with patches, ground truth, and a shared demo repo. |
 
 ## Inputs
 
 - Local CLI commands.
-- Future sample source files, scripts, docs, and patches.
+- Demo source files, scripts, docs, and patches.
 
 ## Outputs
 
 - Reproducible demo inputs for manual and automated verification.
-- Future report examples under `outputs/` when explicitly generated.
+- Benchmark inputs for `code-review-agent eval`.
+- Report examples under `outputs/` only when explicitly generated.
 
 ## Not Responsible For
 
 - Unit test assertions; those belong in `tests/`.
-- Benchmark-grade datasets; those belong in `eval/`.
+- Core eval implementation logic; that belongs in `src/code_review_agent/eval/`.
 - Core implementation logic.
 
 ## Next Changes
 
-- Expand `demo_repo/` with main code, tests, temporary scripts, prompt experiments, todo docs, design docs, and a reviewable patch.
-
+- Keep demo patches aligned with README commands and eval fixtures.

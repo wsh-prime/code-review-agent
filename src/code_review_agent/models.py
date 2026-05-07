@@ -253,6 +253,104 @@ class EvidencePackage:
 
 
 @dataclass(slots=True)
+class ContextRequest:
+    """A bounded request for one extra context refill."""
+
+    request_type: str
+    path: str | None = None
+    evidence_ids: list[str] = field(default_factory=list)
+    risk_tag: str | None = None
+    symbol: str | None = None
+    reason: str = ""
+    source_shard_id: str = ""
+    fulfilled_evidence_ids: list[str] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass(slots=True)
+class ReviewerContext:
+    """LLM-facing review context selected from a full EvidencePackage."""
+
+    schema: str
+    selection_strategy: str
+    repo_root: str
+    shard_id: str
+    shard_index: int
+    shard_count: int
+    changed_files: list[dict[str, Any]] = field(default_factory=list)
+    omitted_changed_file_count: int = 0
+    changed_entities: list[dict[str, Any]] = field(default_factory=list)
+    risk_signals: list[dict[str, Any]] = field(default_factory=list)
+    evidence_index: dict[str, dict[str, Any]] = field(default_factory=dict)
+    context_budget: dict[str, Any] = field(default_factory=dict)
+    is_refill: bool = False
+    parent_shard_id: str | None = None
+    request_types: list[str] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass(slots=True)
+class ReviewShard:
+    """Audit metadata for one context shard."""
+
+    shard_id: str
+    shard_index: int
+    shard_count: int
+    paths: list[str] = field(default_factory=list)
+    selected_evidence_ids: list[str] = field(default_factory=list)
+    omitted_evidence_ids: list[str] = field(default_factory=list)
+    estimated_tokens: int = 0
+    context_truncated: bool = False
+    status: str = "pending"
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass(slots=True)
+class ShardReviewResult:
+    """Reviewer output for one shard before global verification/filtering."""
+
+    shard_id: str
+    issues: list[ReviewIssue] = field(default_factory=list)
+    context_requests: list[ContextRequest] = field(default_factory=list)
+    agent_runs: list[AgentRun] = field(default_factory=list)
+    status: str = "ok"
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass(slots=True)
+class UncertainFeedbackItem:
+    """Structured critic feedback for an issue that needs another pass."""
+
+    issue_id: str
+    category: str
+    critic_reason: str
+    original_confidence: float
+    evidence_ids: list[str] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass(slots=True)
+class PriorFeedback:
+    """Feedback from a previous loop iteration passed back to a reviewer."""
+
+    iteration: int
+    uncertain_items: list[UncertainFeedbackItem] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass(slots=True)
 class AgentRun:
     """Audit metadata for an optional review or critic agent invocation."""
 
@@ -262,6 +360,36 @@ class AgentRun:
     input_evidence_ids: list[str] = field(default_factory=list)
     output_issue_ids: list[str] = field(default_factory=list)
     fallback_used: bool = False
+    iteration: int = 0
+    feedback_hash: str = ""
+    retry_count: int = 0
+    retry_log: list[str] = field(default_factory=list)
+    latency_ms: int = 0
+    token_count_in: int = 0
+    token_count_out: int = 0
+    trace_id: str = ""
+    span_id: str = ""
+    parent_span_id: str = ""
+    status: str = "ok"
+    error_type: str = ""
+    shard_id: str = ""
+    shard_index: int = 0
+    shard_count: int = 0
+    context_request_count: int = 0
+    context_refill_used: bool = False
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass(slots=True)
+class CritiqueResult:
+    """Structured critic output for one review loop iteration."""
+
+    keep: list[ReviewIssue] = field(default_factory=list)
+    uncertain: list[UncertainFeedbackItem] = field(default_factory=list)
+    reject: list[ReviewIssue] = field(default_factory=list)
+    agent_runs: list[AgentRun] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)

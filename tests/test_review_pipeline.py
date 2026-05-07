@@ -8,8 +8,8 @@ from pathlib import Path
 
 from code_review_agent.context.repo_map import build_repo_map
 from code_review_agent.hygiene.classifier import EXPERIMENT
-from code_review_agent.models import AgentRun, ReviewIssue
-from code_review_agent.review.agents import FakeAgentResult
+from code_review_agent.models import ReviewIssue
+from code_review_agent.review.agents import _AgentTransientError
 from code_review_agent.review import pipeline as pipeline_module
 from code_review_agent.review.pipeline import run_review_pipeline
 from code_review_agent.review.risk import DOC_ONLY, EXPERIMENT_ARTIFACT, TEST_GAP
@@ -163,7 +163,10 @@ def test_review_pipeline_hybrid_fake_filters_invalid_agent_evidence(
     report = run_review_pipeline(repo, patch, out, mode="hybrid-fake")
 
     assert report["summary"]["mode"] == "hybrid-fake"
-    assert report["summary"]["agent_run_count"] == 2
+    assert report["summary"]["agent_run_count"] >= 2
+    assert report["summary"]["loop_enabled"] is True
+    assert report["summary"]["loop_iterations_completed"] >= 1
+    assert report["loop"]["enabled"] is True
     assert report["summary"]["discarded_count"] >= 1
     assert any(
         item["filter_reason"] == "invalid_evidence_ids"
@@ -172,6 +175,20 @@ def test_review_pipeline_hybrid_fake_filters_invalid_agent_evidence(
     assert "fake:invalid:evidence" in report["missing_evidence_ids"]
     assert report["summary"]["missing_evidence_id_count"] >= 1
     assert report["findings"][0]["category"] == TEST_GAP
+
+
+def test_report_contains_tracing_summary(tmp_path: Path) -> None:
+    repo = tmp_path / "repo"
+    out = tmp_path / "out"
+    patch = tmp_path / "change.patch"
+    _write_repo(repo)
+    patch.write_text(_test_gap_patch(), encoding="utf-8")
+
+    report = run_review_pipeline(repo, patch, out, mode="hybrid-fake")
+
+    assert report["tracing"]["run_count"] == report["summary"]["agent_run_count"]
+    assert report["tracing"]["total_retry_count"] == 0
+    assert report["tracing"]["status_counts"]["ok"] >= 1
 
 
 def test_review_pipeline_exports_prompts(tmp_path: Path) -> None:
@@ -205,9 +222,11 @@ def test_review_pipeline_hybrid_live_uses_openai_compatible_agent(
     _write_repo(repo)
     patch.write_text(_test_gap_patch(), encoding="utf-8")
 
-    def fake_live_agent(package):
-        return FakeAgentResult(
-            findings=[
+    class FakeLiveAgent:
+        model = "test-live-model"
+
+        def review(self, package, *, prior_feedback=None):
+            return [
                 ReviewIssue(
                     file="src/shop/service.py",
                     line=4,
@@ -218,30 +237,157 @@ def test_review_pipeline_hybrid_live_uses_openai_compatible_agent(
                     confidence=0.72,
                     evidence_ids=["diff:src/shop/service.py:4"],
                 )
-            ],
-            agent_runs=[
-                AgentRun(
-                    agent_name="openai_compatible_reviewer",
-                    model="test-live-model",
-                    prompt_hash="abc",
-                    input_evidence_ids=sorted(package.evidence_index),
-                    output_issue_ids=["test_gap:src/shop/service.py:4"],
-                )
-            ],
-        )
+            ]
 
     monkeypatch.setattr(
-        pipeline_module,
-        "run_openai_compatible_review_agent",
-        fake_live_agent,
+        pipeline_module.OpenAICompatibleReviewAgent,
+        "from_env",
+        classmethod(lambda cls: FakeLiveAgent()),
     )
 
     report = run_review_pipeline(repo, patch, out, mode="hybrid-live")
 
     assert report["summary"]["mode"] == "hybrid-live"
-    assert report["summary"]["agent_run_count"] == 1
+    assert report["summary"]["context_budget_enabled"] is True
+    assert report["summary"]["selected_evidence_count"] >= 1
+    assert report["context_budget"]["strategy"] == "risk_first_v1"
+    assert report["summary"]["agent_run_count"] == 2
+    assert report["summary"]["loop_enabled"] is True
     assert report["agent_runs"][0]["model"] == "test-live-model"
     assert report["findings"][0]["category"] == TEST_GAP
+    assert (out / "loop_checkpoint.json").exists()
+    assert report["loop"]["checkpoint_path"] == str(out / "loop_checkpoint.json")
+
+
+def test_review_pipeline_large_live_patch_uses_context_shards(
+    tmp_path: Path,
+    monkeypatch,
+) -> None:
+    repo = tmp_path / "repo"
+    out = tmp_path / "out"
+    patch = tmp_path / "large.patch"
+    _write_large_repo(repo, file_count=5)
+    patch.write_text(_large_patch(file_count=5), encoding="utf-8")
+    calls: list[dict] = []
+
+    def fake_post(url, *, api_key, body, timeout_seconds):
+        del url, api_key, timeout_seconds
+        calls.append(body)
+        content = body["messages"][1]["content"]
+        context = json.loads(content.split("ReviewerContext:\n", 1)[1])
+        evidence_id = sorted(context["evidence_index"])[0]
+        evidence = context["evidence_index"][evidence_id]
+        path, _, raw_line = evidence["source"].rpartition(":")
+        return {
+            "choices": [
+                {
+                    "message": {
+                        "content": json.dumps(
+                            {
+                                "issues": [
+                                    {
+                                        "file": path,
+                                        "line": int(raw_line),
+                                        "severity": "medium",
+                                        "category": TEST_GAP,
+                                        "message": "Shard candidate.",
+                                        "suggestion": "Update tests.",
+                                        "confidence": 0.75,
+                                        "evidence_ids": [evidence_id],
+                                    }
+                                ],
+                                "context_requests": [],
+                            }
+                        )
+                    }
+                }
+            ],
+            "usage": {"prompt_tokens": 50, "completion_tokens": 10},
+        }
+
+    monkeypatch.setenv("OPENAI_COMPATIBLE_API_KEY", "test-key")
+    monkeypatch.setattr(
+        pipeline_module,
+        "_post_openai_compatible_json",
+        fake_post,
+        raising=False,
+    )
+    monkeypatch.setattr(
+        "code_review_agent.review.agents._post_openai_compatible_json",
+        fake_post,
+    )
+
+    report = run_review_pipeline(
+        repo,
+        patch,
+        out,
+        mode="hybrid-live",
+        max_iter=1,
+        context_budget=900,
+        max_files_per_agent_call=2,
+        max_evidence_per_file=3,
+    )
+
+    assert len(calls) == 3
+    assert report["summary"]["review_shard_count"] == 3
+    assert report["context_budget"]["strategy"] == "file_risk_shards_v1"
+    assert report["context_budget"]["shards"]
+    assert (out / "live_context_checkpoint.json").exists()
+
+
+def test_fallback_rules_preserved_on_live_failure(
+    tmp_path: Path,
+    monkeypatch,
+) -> None:
+    repo = tmp_path / "repo"
+    out = tmp_path / "out"
+    patch = tmp_path / "change.patch"
+    _write_repo(repo)
+    patch.write_text(_test_gap_patch(), encoding="utf-8")
+
+    class FailingLiveAgent:
+        model = "test-live-model"
+
+        def review(self, package, *, prior_feedback=None):
+            del package, prior_feedback
+            raise _AgentTransientError("temporary outage")
+
+    monkeypatch.setattr(
+        pipeline_module.OpenAICompatibleReviewAgent,
+        "from_env",
+        classmethod(lambda cls: FailingLiveAgent()),
+    )
+
+    report = run_review_pipeline(repo, patch, out, mode="hybrid-live")
+
+    assert report["summary"]["mode"] == "hybrid-live/fallback-rules"
+    assert report["summary"]["fallback_used"] is True
+    assert report["summary"]["fallback_reason"] == "temporary outage"
+    assert report["findings"][0]["category"] == TEST_GAP
+    assert report["agent_runs"][0]["status"] == "fallback"
+    assert report["agent_runs"][0]["fallback_used"] is True
+    assert report["loop"]["iterations_completed"] == 0
+
+
+def test_review_pipeline_hybrid_fake_accepts_max_iter(
+    tmp_path: Path,
+) -> None:
+    repo = tmp_path / "repo"
+    out = tmp_path / "out"
+    patch = tmp_path / "change.patch"
+    _write_repo(repo)
+    patch.write_text(_test_gap_patch(), encoding="utf-8")
+
+    report = run_review_pipeline(
+        repo,
+        patch,
+        out,
+        mode="hybrid-fake",
+        max_iter=1,
+    )
+
+    assert report["loop"]["max_iter"] == 1
+    assert report["summary"]["loop_iterations_completed"] == 1
 
 
 def _write_repo(root: Path) -> None:
@@ -275,3 +421,35 @@ def _test_gap_patch() -> str:
 -    return True
 +    return total > 10
 """
+
+
+def _write_large_repo(root: Path, *, file_count: int) -> None:
+    (root / "src" / "shop").mkdir(parents=True)
+    (root / "tests").mkdir()
+    for index in range(file_count):
+        (root / "src" / "shop" / f"service_{index}.py").write_text(
+            f"def create_order_{index}(total: int) -> bool:\n"
+            "    if total <= 0:\n"
+            "        return False\n"
+            "    return True\n",
+            encoding="utf-8",
+        )
+
+
+def _large_patch(*, file_count: int) -> str:
+    parts: list[str] = []
+    for index in range(file_count):
+        path = f"src/shop/service_{index}.py"
+        parts.append(
+            f"""diff --git a/{path} b/{path}
+--- a/{path}
++++ b/{path}
+@@ -1,4 +1,4 @@
+ def create_order_{index}(total: int) -> bool:
+     if total <= 0:
+         return False
+-    return True
++    return total > {index}
+"""
+        )
+    return "".join(parts)
