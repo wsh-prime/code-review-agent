@@ -208,6 +208,19 @@ def test_discard_low_signal_maintainability_comment_request():
     assert result.discarded[0].reason == "low_signal_suggestion"
 
 
+def test_keep_low_value_category_with_concrete_failure():
+    pkg = _make_package(["diff:src/foo.py:10"])
+    issue = _make_issue(
+        category="maintainability",
+        message="This duplicates evidence ids and causes an incorrect refill.",
+        suggestion="Deduplicate ids before returning them.",
+    )
+
+    result = filter_issues([issue], [], pkg, CHANGED)
+
+    assert len(result.findings) == 1
+
+
 def test_discard_speculative_correctness_without_failure_scenario():
     pkg = _make_package(["diff:src/foo.py:10"])
     issue = _make_issue(

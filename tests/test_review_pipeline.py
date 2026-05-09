@@ -8,7 +8,7 @@ from pathlib import Path
 
 from code_review_agent.context.repo_map import build_repo_map
 from code_review_agent.hygiene.classifier import EXPERIMENT
-from code_review_agent.models import ReviewIssue
+from code_review_agent.models import AgentRun, ReviewIssue
 from code_review_agent.review.agents import _AgentTransientError
 from code_review_agent.review import pipeline as pipeline_module
 from code_review_agent.review.pipeline import run_review_pipeline
@@ -328,8 +328,8 @@ def test_review_pipeline_large_live_patch_uses_context_shards(
         max_evidence_per_file=3,
     )
 
-    assert len(calls) == 3
-    assert report["summary"]["review_shard_count"] == 3
+    assert len(calls) == report["summary"]["review_shard_count"]
+    assert report["summary"]["review_shard_count"] >= 3
     assert report["context_budget"]["strategy"] == "file_risk_shards_v1"
     assert report["context_budget"]["shards"]
     assert (out / "live_context_checkpoint.json").exists()
@@ -367,6 +367,80 @@ def test_fallback_rules_preserved_on_live_failure(
     assert report["agent_runs"][0]["status"] == "fallback"
     assert report["agent_runs"][0]["fallback_used"] is True
     assert report["loop"]["iterations_completed"] == 0
+
+
+def test_live_failure_after_checkpoint_preserves_partial_loop_result(
+    tmp_path: Path,
+    monkeypatch,
+) -> None:
+    repo = tmp_path / "repo"
+    out = tmp_path / "out"
+    patch = tmp_path / "change.patch"
+    _write_repo(repo)
+    patch.write_text(_test_gap_patch(), encoding="utf-8")
+
+    class FailingSecondIterationLiveAgent:
+        model = "test-live-model"
+
+        def __init__(self) -> None:
+            self.calls = 0
+            self.last_agent_run = None
+            self.last_agent_runs = []
+            self.last_context_budget = {}
+
+        def review(self, package, *, prior_feedback=None):
+            del package, prior_feedback
+            self.calls += 1
+            if self.calls == 1:
+                run = AgentRun(
+                    agent_name="test-live",
+                    model=self.model,
+                    prompt_hash="test",
+                    status="ok",
+                    token_count_in=10,
+                    token_count_out=5,
+                )
+                self.last_agent_run = run
+                self.last_agent_runs = [run]
+                return [
+                    ReviewIssue(
+                        file="src/shop/service.py",
+                        line=4,
+                        severity="medium",
+                        category="behavior_change",
+                        message="Return condition changed and requires semantic confirmation.",
+                        suggestion="Confirm behavior.",
+                        confidence=0.8,
+                        evidence_ids=["diff:src/shop/service.py:4"],
+                    )
+                ]
+            run = AgentRun(
+                agent_name="test-live",
+                model=self.model,
+                prompt_hash="test",
+                status="error",
+                error_type="_AgentTransientError",
+                token_count_in=3,
+            )
+            self.last_agent_run = run
+            self.last_agent_runs = [run]
+            raise _AgentTransientError("second iteration timeout")
+
+    monkeypatch.setattr(
+        pipeline_module.OpenAICompatibleReviewAgent,
+        "from_env",
+        classmethod(lambda cls: FailingSecondIterationLiveAgent()),
+    )
+
+    report = run_review_pipeline(repo, patch, out, mode="hybrid-live", max_iter=2)
+
+    assert report["summary"]["mode"] == "hybrid-live/fallback-rules"
+    assert report["summary"]["fallback_used"] is True
+    assert report["summary"]["loop_iterations_completed"] == 1
+    assert report["loop"]["iterations"][0]["uncertain_count"] == 1
+    assert report["summary"]["agent_run_count"] == 3
+    assert report["agent_runs"][0]["status"] == "ok"
+    assert report["agent_runs"][-1]["status"] == "fallback"
 
 
 def test_review_pipeline_hybrid_fake_accepts_max_iter(

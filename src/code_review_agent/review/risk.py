@@ -120,6 +120,10 @@ def diff_evidence_id(path: str, line: int) -> str:
     return f"diff:{path}:{line}"
 
 
+def diff_hunk_evidence_id(path: str, start_line: int) -> str:
+    return f"diff_hunk:{path}:{start_line}"
+
+
 def entity_evidence_id(entity: ChangedEntity) -> str:
     return f"entity:{entity.path}:{entity.qualified_name}"
 
@@ -592,7 +596,7 @@ def _symbol_has_docstring(repo_map: RepoMap, entity: ChangedEntity) -> bool:
 def _path_from_evidence_ids(evidence_ids: list[str]) -> str | None:
     for evidence_id in evidence_ids:
         parts = evidence_id.split(":")
-        if len(parts) >= 2 and parts[0] in {"diff", "entity", "hygiene"}:
+        if len(parts) >= 2 and parts[0] in {"diff", "diff_hunk", "entity", "hygiene"}:
             return parts[1]
     return None
 

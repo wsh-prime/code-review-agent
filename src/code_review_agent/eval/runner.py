@@ -506,7 +506,7 @@ def _line_range_from_evidence(
 ) -> list[int] | None:
     issue_file = issue.get("file")
     for evidence_id in issue.get("evidence_ids", []):
-        if evidence_id.startswith("diff:"):
+        if evidence_id.startswith(("diff:", "diff_hunk:")):
             path, line = _diff_location(evidence_id)
             if path == issue_file and line is not None:
                 return [line, line]
@@ -526,7 +526,7 @@ def _line_range_from_evidence(
 
 def _diff_location(evidence_id: str) -> tuple[str | None, int | None]:
     parts = evidence_id.split(":")
-    if len(parts) < 3 or parts[0] != "diff":
+    if len(parts) < 3 or parts[0] not in {"diff", "diff_hunk"}:
         return None, None
     line = int(parts[-1]) if parts[-1].isdigit() else None
     return ":".join(parts[1:-1]), line

@@ -241,7 +241,7 @@ def _path_from_evidence(evidence_id: str, source: str | None) -> str | None:
     parts = evidence_id.split(":")
     if len(parts) >= 2 and parts[0] in {"entity", "hygiene", "test_discovery"}:
         return parts[1]
-    if len(parts) >= 3 and parts[0] == "diff":
+    if len(parts) >= 3 and parts[0] in {"diff", "diff_hunk"}:
         return ":".join(parts[1:-1])
     if len(parts) >= 3 and parts[0] == "risk":
         return ":".join(parts[2:])

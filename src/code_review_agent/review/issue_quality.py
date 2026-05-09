@@ -75,12 +75,15 @@ def is_low_signal_review_suggestion(issue: ReviewIssue) -> bool:
     """
 
     text = f"{issue.message} {issue.suggestion}".lower()
+    has_concrete_failure = any(
+        keyword in text for keyword in CONCRETE_FAILURE_KEYWORDS
+    )
     if issue.category in LOW_VALUE_CATEGORIES and any(
         keyword in text for keyword in LOW_VALUE_REVIEW_KEYWORDS
     ):
-        return True
+        return not has_concrete_failure
     if issue.category == "correctness" and any(
         keyword in text for keyword in SPECULATIVE_KEYWORDS
     ):
-        return not any(keyword in text for keyword in CONCRETE_FAILURE_KEYWORDS)
+        return not has_concrete_failure
     return False

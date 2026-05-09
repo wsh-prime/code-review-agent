@@ -1,0 +1,79 @@
+data:
+  train:
+    json_dataset_path: /inspire/hdd/project/agentend2end/xieyuan-24039/wsh/PredCoT-VLA/temp/trainval_cot_72b_reasoning_need_sft_ready
+    sensor_data_path: /inspire/hdd/project/agentend2end/xieyuan-24039/wsh/predcot_data/navsim_workspace/sensor_blobs/trainval
+  val:
+    json_dataset_path: /inspire/hdd/project/agentend2end/xieyuan-24039/wsh/PredCoT-VLA/temp/trainval_cot_72b_sft_ready
+    sensor_data_path: /inspire/hdd/project/agentend2end/xieyuan-24039/wsh/predcot_data/navsim_workspace/sensor_blobs/trainval
+description: 'AutoVLA Stage-1 SFT on the available nuPlan trainval CoT subset. Defaults
+  target 8xH200 with FSDP, while `tools/run_sft.py` CLI overrides can downscale to
+  a 1-GPU smoke test for shared-disk validation.
+
+  '
+inference:
+  batch_size: 1
+  num_workers: 2
+  sample:
+    max_length: 2048
+    temperature: 0.8
+    top_k: 20
+    top_p: 0.2
+model:
+  codebook_cache_path: /inspire/hdd/project/agentend2end/xieyuan-24039/wsh/PredCoT-VLA/codebook_cache/agent_vocab_trainval.pkl
+  latent_cot:
+    action_query_head:
+      dropout: 0.1
+      enabled: true
+      num_heads: 8
+      num_layers: 1
+      num_queries: 10
+    action_slot_head:
+      dropout: 0.1
+      enabled: true
+      num_heads: 8
+      num_layers: 1
+      num_queries: 10
+      output_projection: true
+      tied_lm_head: true
+    enabled: true
+    initial_hidden_source: upper_layer_start
+    pass_attention_mask: true
+    safe_action_pad: true
+  pretrained_model_path: /inspire/hdd/project/agentend2end/xieyuan-24039/wsh/predcot_models/Qwen2.5-VL-3B-Instruct
+  reasoning_mode: legacy
+  tokens:
+    action_start_id: 151665
+    assistant_id:
+    - 151644
+    - 77091
+    ignore_index: -100
+  train_lm_backbone: true
+  train_vision_backbone: false
+  trajectory:
+    interval_length: 0.5
+    num_poses: 10
+    time_horizon: 5.0
+  use_cot: true
+  video:
+    max_pixels: 109760
+    min_pixels: 109760
+name: qwen2.5-vl-3B-nuplan-trainval-cot-sft
+training:
+  accelerator: gpu
+  accumulate_grad_batches: 2
+  batch_size: 4
+  ddp_timeout_minutes: 240
+  devices: 8
+  epochs: 10
+  learning_rate: 1.0e-05
+  log_every_n_steps: 10
+  lr_step_frequency: 1000
+  lr_step_gamma: 0.98
+  lr_warmup_step: 300
+  num_nodes: 1
+  num_sanity_val_steps: 2
+  num_workers: 8
+  train_sample_size: null
+  use_fsdp: false
+  val_sample_size: 4096
+  weight_decay: 0.05

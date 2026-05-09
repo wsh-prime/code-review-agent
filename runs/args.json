@@ -1,0 +1,30 @@
+{
+  "config": "training/qwen2.5-vl-3B-nuplan-trainval-cot-sft",
+  "checkpoint": "runs/sft/2026-04-29_22-17-57/epoch=3-loss=0.2936.ckpt",
+  "output_dir": "runs/ptr_cot_slots_b8_acc2_lr2e4_ace03_distill1_e12",
+  "json_dataset_path": "/inspire/hdd/project/agentend2end/xieyuan-24039/wsh/PredCoT-VLA/temp/trainval_cot_72b_reasoning_need_sft_ready",
+  "sensor_data_path": "/inspire/hdd/project/agentend2end/xieyuan-24039/wsh/predcot_data/navsim_workspace/sensor_blobs/trainval",
+  "device": "cuda:0",
+  "epochs": 12,
+  "lr": 0.0002,
+  "weight_decay": 0.0001,
+  "batch_size": 8,
+  "accum_steps": 1,
+  "seed": 42,
+  "val_ratio": 0.05,
+  "num_workers": 4,
+  "log_interval": 10,
+  "save_interval": 1,
+  "max_samples": null,
+  "reasoning_only": true,
+  "w_action_ce": 0.3,
+  "w_distill": 1.0,
+  "w_traj_mse": 0.0,
+  "max_iterations": null,
+  "num_thought_tokens": null,
+  "action_query_head": true,
+  "assistant_id": [
+    151644,
+    77091
+  ]
+}

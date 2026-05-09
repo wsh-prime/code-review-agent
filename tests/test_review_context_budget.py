@@ -47,7 +47,8 @@ def test_build_live_review_input_selects_subset_and_audits_omitted() -> None:
     assert budget["enabled"] is True
     assert budget["context_truncated"] is True
     assert budget["omitted_evidence_count"] > 0
-    assert "diff:src/auth.py:1" in selected_ids
+    assert "diff_hunk:src/auth.py:1" in selected_ids
+    assert "diff:src/auth.py:1" not in selected_ids
     assert selected_ids <= set(package.evidence_index)
     assert len(live_input.payload["evidence_index"]) == budget["selected_evidence_count"]
     assert len(live_input.payload["evidence_index"]) < len(package.evidence_index)
@@ -120,6 +121,24 @@ def test_build_live_review_input_uses_manifest_for_redundant_evidence() -> None:
     assert "risk_evidence" in payload["available_context"]["request_types"]
 
 
+def test_hunk_selection_satisfies_required_diff_line_warning() -> None:
+    package = _large_package()
+
+    live_input = build_live_review_input(
+        package,
+        max_input_tokens=900,
+        max_evidence_per_file=2,
+    )
+
+    assert "diff_hunk:src/auth.py:1" in live_input.context_budget[
+        "selected_evidence_ids"
+    ]
+    assert not any(
+        warning.endswith("diff:src/auth.py:1")
+        for warning in live_input.context_budget["warnings"]
+    )
+
+
 def test_build_reviewer_contexts_splits_large_multi_file_package() -> None:
     package = _multi_file_package(file_count=5)
 
@@ -139,6 +158,27 @@ def test_build_reviewer_contexts_splits_large_multi_file_package() -> None:
     }
     assert budget["shard_count"] == 3
     assert budget["selected_evidence_count"] == 5
+
+
+def test_build_reviewer_contexts_caps_shard_input_below_large_live_budget() -> None:
+    package = _multi_file_package(file_count=6)
+    for evidence in package.evidence_index.values():
+        evidence.message += " " + ("x" * 10000)
+
+    contexts = build_reviewer_contexts(
+        package,
+        max_input_tokens=24000,
+        max_files=8,
+        max_evidence_per_file=2,
+    )
+
+    assert len(contexts) > 1
+    assert all(context.context_budget["max_input_tokens"] == 9000 for context in contexts)
+    assert all(
+        context.context_budget["estimated_input_tokens"] <= 9000
+        or len(context.changed_files) == 1
+        for context in contexts
+    )
 
 
 def test_shards_do_not_expand_primary_evidence_from_other_paths() -> None:
@@ -261,6 +301,7 @@ def test_build_context_refill_fulfills_each_request_with_its_own_ids() -> None:
     assert ordinary_request.fulfilled_evidence_ids == [
         "diff:src/ordinary.py:5",
         "diff:src/ordinary.py:6",
+        "diff_hunk:src/ordinary.py:1",
     ]
 
 
@@ -271,6 +312,12 @@ def _large_package() -> EvidencePackage:
             kind="diff",
             source="src/auth.py:1",
             message="Added line: token validation changed.",
+        ),
+        "diff_hunk:src/auth.py:1": ReviewEvidence(
+            id="diff_hunk:src/auth.py:1",
+            kind="diff_hunk",
+            source="src/auth.py:1",
+            message="@@ -1,1 +1,1 @@ def run\n+    return True",
         ),
         "risk:security_sensitive:src/auth.py": ReviewEvidence(
             id="risk:security_sensitive:src/auth.py",
@@ -286,6 +333,12 @@ def _large_package() -> EvidencePackage:
             source=f"src/ordinary.py:{index}",
             message="Added line: ordinary low-risk change " + ("x" * 120),
         )
+    evidence_index["diff_hunk:src/ordinary.py:1"] = ReviewEvidence(
+        id="diff_hunk:src/ordinary.py:1",
+        kind="diff_hunk",
+        source="src/ordinary.py:1",
+        message="@@ -1,40 +1,40 @@ def run\n+    return True",
+    )
     return EvidencePackage(
         repo_root="/repo",
         changed_files=[
@@ -316,6 +369,12 @@ def _cross_file_risk_package() -> EvidencePackage:
             source=f"{path}:1",
             message=f"Added line: changed behavior in {path}.",
         )
+        evidence_index[f"diff_hunk:{path}:1"] = ReviewEvidence(
+            id=f"diff_hunk:{path}:1",
+            kind="diff_hunk",
+            source=f"{path}:1",
+            message=f"@@ -1,1 +1,1 @@ def run\n+    return {path!r}",
+        )
     return EvidencePackage(
         repo_root="/repo",
         changed_files=changes,
@@ -345,6 +404,12 @@ def _multi_file_package(*, file_count: int) -> EvidencePackage:
             source=f"{path}:1",
             message="Added line: changed behavior.",
         )
+        evidence_index[f"diff_hunk:{path}:1"] = ReviewEvidence(
+            id=f"diff_hunk:{path}:1",
+            kind="diff_hunk",
+            source=f"{path}:1",
+            message="@@ -1,1 +1,1 @@ def run\n+    return True",
+        )
         signals.append(
             RiskSignal(
                 tag="behavior_change",
@@ -369,9 +434,9 @@ def _change(path: str) -> DiffFileChange:
         hunks=[
             DiffHunk(
                 old_start=1,
-                old_count=1,
+                old_count=40,
                 new_start=1,
-                new_count=1,
+                new_count=40,
                 section_header="def run",
                 lines=[
                     DiffLine("added", None, 1, "    return True"),

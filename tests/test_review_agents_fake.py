@@ -356,6 +356,60 @@ def test_openai_compatible_agent_resumes_completed_context_shard(
     assert second.last_agent_runs[0].status == "resumed"
 
 
+def test_openai_compatible_agent_keeps_successful_shards_after_transient_failure(
+    monkeypatch,
+) -> None:
+    def fake_post(url, *, api_key, body, timeout_seconds):
+        del url, api_key, timeout_seconds
+        content = body["messages"][1]["content"]
+        context = json.loads(content.split("ReviewerContext:\n", 1)[1])
+        evidence_id = sorted(context["evidence_index"])[0]
+        evidence = context["evidence_index"][evidence_id]
+        if evidence["source"].startswith("src/bar.py"):
+            raise TimeoutError("slow shard")
+        return {
+            "choices": [
+                {
+                    "message": {
+                        "content": json.dumps(
+                            {
+                                "issues": [
+                                    {
+                                        "file": "src/foo.py",
+                                        "line": 9,
+                                        "severity": "medium",
+                                        "category": TEST_GAP,
+                                        "message": "Foo shard candidate.",
+                                        "suggestion": "Update tests.",
+                                        "confidence": 0.72,
+                                        "evidence_ids": [evidence_id],
+                                    }
+                                ],
+                                "context_requests": [],
+                            }
+                        )
+                    }
+                }
+            ],
+            "usage": {"prompt_tokens": 20, "completion_tokens": 8},
+        }
+
+    monkeypatch.setattr(
+        "code_review_agent.review.agents._post_openai_compatible_json",
+        fake_post,
+    )
+    monkeypatch.setattr("code_review_agent.review.agents.time.sleep", lambda _: None)
+    agent = OpenAICompatibleReviewAgent(api_key="test-key")
+    agent.max_files_per_agent_call = 1
+
+    issues = agent.review(_two_file_package())
+
+    assert len(issues) == 1
+    assert issues[0].file == "src/foo.py"
+    assert [run.status for run in agent.last_agent_runs] == ["ok", "error"]
+    assert agent.last_agent_runs[-1].error_type == "_AgentTransientError"
+
+
 def test_retry_on_503_then_success(monkeypatch) -> None:
     calls = 0
     sleeps: list[float] = []
@@ -535,4 +589,58 @@ def _package() -> EvidencePackage:
             "redacted": ["pr_title", "pr_description", "commit_message", "author"],
             "target_repo_modified": False,
         },
+    )
+
+
+def _two_file_package() -> EvidencePackage:
+    changes: list[DiffFileChange] = []
+    evidence_index: dict[str, ReviewEvidence] = {}
+    risk_signals: list[RiskSignal] = []
+    for path in ("src/foo.py", "src/bar.py"):
+        changes.append(
+            DiffFileChange(
+                old_path=path,
+                new_path=path,
+                change_type="modified",
+                hunks=[
+                    DiffHunk(
+                        old_start=8,
+                        old_count=2,
+                        new_start=8,
+                        new_count=2,
+                        section_header="def run",
+                        lines=[
+                            DiffLine("context", 8, 8, "def run():"),
+                            DiffLine("removed", 9, None, "    return False"),
+                            DiffLine("added", None, 9, "    return True"),
+                        ],
+                    )
+                ],
+            )
+        )
+        evidence_index[f"diff:{path}:9"] = ReviewEvidence(
+            id=f"diff:{path}:9",
+            kind="diff",
+            source=f"{path}:9",
+            message="Added line.",
+        )
+        evidence_index[f"diff_hunk:{path}:8"] = ReviewEvidence(
+            id=f"diff_hunk:{path}:8",
+            kind="diff_hunk",
+            source=f"{path}:8",
+            message="@@ -8,2 +8,2 @@ def run\n-    return False\n+    return True",
+        )
+        risk_signals.append(
+            RiskSignal(
+                tag=TEST_GAP,
+                confidence=0.8,
+                reason="Related tests exist but no test changed.",
+                evidence_ids=[f"diff:{path}:9"],
+            )
+        )
+    return EvidencePackage(
+        repo_root="/repo",
+        changed_files=changes,
+        risk_signals=risk_signals,
+        evidence_index=evidence_index,
     )

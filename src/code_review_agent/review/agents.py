@@ -247,13 +247,18 @@ class OpenAICompatibleReviewAgent:
         )
         reviewed_contexts: list[ReviewerContext] = list(contexts)
         issues: list[ReviewIssue] = []
+        failed_primary_contexts = 0
         for context in contexts:
-            shard_issues, context_requests = self._review_context(
-                package,
-                context,
-                prior_feedback=prior_feedback,
-                context_refill_used=False,
-            )
+            try:
+                shard_issues, context_requests = self._review_context(
+                    package,
+                    context,
+                    prior_feedback=prior_feedback,
+                    context_refill_used=False,
+                )
+            except _AgentTransientError:
+                failed_primary_contexts += 1
+                continue
             issues.extend(shard_issues)
             self.last_context_requests.extend(context_requests)
             if context_requests and self.max_context_refill_rounds > 0:
@@ -267,12 +272,15 @@ class OpenAICompatibleReviewAgent:
                 )
                 if refill_context is not None:
                     reviewed_contexts.append(refill_context)
-                    refill_issues, refill_requests = self._review_context(
-                        package,
-                        refill_context,
-                        prior_feedback=prior_feedback,
-                        context_refill_used=True,
-                    )
+                    try:
+                        refill_issues, refill_requests = self._review_context(
+                            package,
+                            refill_context,
+                            prior_feedback=prior_feedback,
+                            context_refill_used=True,
+                        )
+                    except _AgentTransientError:
+                        continue
                     issues.extend(refill_issues)
                     self.last_context_requests.extend(refill_requests)
 
@@ -280,6 +288,8 @@ class OpenAICompatibleReviewAgent:
             reviewed_contexts,
             context_requests=self.last_context_requests,
         )
+        if failed_primary_contexts >= len(contexts) and not issues:
+            raise _AgentTransientError("All live review context shards failed.")
         return _apply_prior_feedback(_merge_review_issues(issues), prior_feedback)
 
     def _review_context(
@@ -1155,7 +1165,7 @@ def _first_location(
 ) -> tuple[str, int | None]:
     for evidence_id in signal.evidence_ids:
         parts = evidence_id.split(":")
-        if len(parts) >= 3 and parts[0] == "diff":
+        if len(parts) >= 3 and parts[0] in {"diff", "diff_hunk"}:
             line = int(parts[-1]) if parts[-1].isdigit() else None
             return ":".join(parts[1:-1]), line
         if len(parts) >= 3 and parts[0] == "entity":

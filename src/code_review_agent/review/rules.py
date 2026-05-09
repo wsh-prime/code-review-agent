@@ -143,7 +143,7 @@ def _first_changed_location(
 def _first_path_from_signal(signal: RiskSignal) -> str | None:
     for evidence_id in signal.evidence_ids:
         parts = evidence_id.split(":")
-        if len(parts) >= 2 and parts[0] in {"entity", "hygiene", "diff"}:
+        if len(parts) >= 2 and parts[0] in {"entity", "hygiene", "diff", "diff_hunk"}:
             return parts[1]
     return None
 

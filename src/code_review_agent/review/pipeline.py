@@ -47,7 +47,15 @@ from code_review_agent.review.evidence import (
     find_missing_evidence_ids,
 )
 from code_review_agent.review.filter import filter_issues
-from code_review_agent.review.loop import IterativeHarnessRunner, LoopResult
+from code_review_agent.review.loop import (
+    LOOP_CHECKPOINT_FILENAME,
+    IterativeHarnessRunner,
+    _all_agent_runs,
+    _exclude_final,
+    _iteration_record_from_dict,
+    _merge_duplicates,
+    LoopResult,
+)
 from code_review_agent.review.risk import (
     API_CHANGE,
     BEHAVIOR_CHANGE,
@@ -87,6 +95,8 @@ def run_review_pipeline(
     diff_file = Path(diff_path)
     out = Path(out_path)
     effective_mode = mode
+    if mode in {"hybrid-fake", "hybrid-live"} and not resume:
+        _clear_stale_checkpoints(out)
 
     diff_text = diff_file.read_text(encoding="utf-8", errors="replace")
     diff_hash = _stable_hash_text(diff_text)
@@ -123,6 +133,7 @@ def run_review_pipeline(
     agent_candidate_scope: list[ReviewIssue] = []
     loop_result: LoopResult | None = None
     changed_paths = _changed_paths(changes)
+    package_hash = _stable_hash_value(package.to_dict())
     context_budget_report = context_budget_disabled_summary()
     if mode == "hybrid-fake":
         loop_result = IterativeHarnessRunner(
@@ -156,7 +167,7 @@ def run_review_pipeline(
                 max_context_refill_rounds=max_context_refill_rounds,
                 max_context_requests=max_context_requests,
                 out_dir=out,
-                package_hash=_stable_hash_value(package.to_dict()),
+                package_hash=package_hash,
                 diff_hash=diff_hash,
                 resume=resume,
             )
@@ -177,22 +188,40 @@ def run_review_pipeline(
                 context_budget_report = live_budget
         except (ValueError, _AgentFatalError, _AgentTransientError) as exc:
             effective_mode = "hybrid-live/fallback-rules"
-            loop_result = LoopResult(
+            fallback_runs = _fallback_agent_runs(exc, reviewer)
+            loop_result = _partial_loop_result_from_checkpoint(
+                out,
+                mode=mode,
+                package_hash=package_hash,
+                diff_hash=diff_hash,
+                fallback_reason=str(exc),
+                fallback_runs=fallback_runs,
+                resume_used=False,
+                resume_ignored_reason=None,
+            ) or LoopResult(
                 final_issues=[],
-                agent_runs=[_fallback_agent_run(exc, reviewer)],
+                agent_runs=fallback_runs,
                 iterations_completed=0,
                 converged=False,
                 fallback_used=True,
                 fallback_reason=str(exc),
             )
             agent_runs = loop_result.agent_runs
-            agent_needs_human_review = _fallback_risk_review_issues(
+            agent_findings = loop_result.final_issues
+            agent_needs_human_review = loop_result.needs_human_review
+            agent_candidate_scope = _loop_candidate_scope(loop_result)
+            live_budget = getattr(reviewer, "last_context_budget", None)
+            if isinstance(live_budget, dict) and live_budget:
+                context_budget_report = live_budget
+            agent_needs_human_review.extend(_fallback_risk_review_issues(
                 package,
                 existing_issues=[
                     *rules_result.findings,
                     *rules_result.needs_human_review,
+                    *agent_findings,
+                    *agent_needs_human_review,
                 ],
-            )
+            ))
 
     candidate_findings = [*rules_result.findings, *agent_findings]
     candidate_needs_human_review = [
@@ -470,13 +499,21 @@ def _risk_issue_evidence_ids(signal, package) -> list[str]:
 
 def _risk_location(signal) -> tuple[str, int | None]:
     for evidence_id in signal.evidence_ids:
-        if not evidence_id.startswith(("diff:", "entity:", "hygiene:")):
+        if not evidence_id.startswith(("diff:", "diff_hunk:", "entity:", "hygiene:")):
             continue
         parts = evidence_id.split(":")
         if len(parts) < 2:
             continue
-        line = int(parts[-1]) if evidence_id.startswith("diff:") and parts[-1].isdigit() else None
-        path = ":".join(parts[1:-1]) if evidence_id.startswith("diff:") else parts[1]
+        line = (
+            int(parts[-1])
+            if evidence_id.startswith(("diff:", "diff_hunk:")) and parts[-1].isdigit()
+            else None
+        )
+        path = (
+            ":".join(parts[1:-1])
+            if evidence_id.startswith(("diff:", "diff_hunk:"))
+            else parts[1]
+        )
         return path, line
     return "patch", None
 
@@ -549,6 +586,66 @@ def _configure_live_reviewer(
             setattr(reviewer, name, value)
 
 
+def _clear_stale_checkpoints(out_dir: Path) -> None:
+    for name in (LOOP_CHECKPOINT_FILENAME, "live_context_checkpoint.json"):
+        path = out_dir / name
+        if path.is_file() or path.is_symlink():
+            path.unlink()
+
+
+def _partial_loop_result_from_checkpoint(
+    out_dir: Path,
+    *,
+    mode: str,
+    package_hash: str,
+    diff_hash: str,
+    fallback_reason: str,
+    fallback_runs: list[AgentRun],
+    resume_used: bool,
+    resume_ignored_reason: str | None,
+) -> LoopResult | None:
+    path = out_dir / LOOP_CHECKPOINT_FILENAME
+    if not path.exists():
+        return None
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return None
+    if data.get("mode") != mode:
+        return None
+    if data.get("package_hash") != package_hash or data.get("diff_hash") != diff_hash:
+        return None
+    records = [
+        _iteration_record_from_dict(item)
+        for item in data.get("iterations", [])
+        if isinstance(item, dict)
+    ]
+    if not records:
+        return None
+    final_issues = list(records[-1].keep)
+    needs_human_review = [
+        issue for record in records for issue in record.needs_human_review
+    ]
+    discarded = [item for record in records for item in record.discarded]
+    return LoopResult(
+        final_issues=final_issues,
+        needs_human_review=_exclude_final(
+            _merge_duplicates(needs_human_review),
+            final_issues,
+        ),
+        discarded=discarded,
+        agent_runs=[*_all_agent_runs(records), *fallback_runs],
+        iterations=records,
+        iterations_completed=len(records),
+        converged=False,
+        fallback_used=True,
+        fallback_reason=fallback_reason,
+        checkpoint_path=str(path),
+        resume_used=resume_used,
+        resume_ignored_reason=resume_ignored_reason,
+    )
+
+
 def _tracing_report(agent_runs: list) -> dict[str, Any]:
     status_counts: dict[str, int] = {}
     for run in agent_runs:
@@ -564,34 +661,55 @@ def _tracing_report(agent_runs: list) -> dict[str, Any]:
     }
 
 
-def _fallback_agent_run(exc: Exception, reviewer: object | None) -> AgentRun:
+def _fallback_agent_runs(exc: Exception, reviewer: object | None) -> list[AgentRun]:
+    live_runs = getattr(reviewer, "last_agent_runs", None)
+    if isinstance(live_runs, list) and live_runs:
+        runs = [
+            run
+            for run in live_runs
+            if isinstance(run, AgentRun)
+        ]
+        if runs:
+            runs[-1] = _fallback_agent_run_from_live(exc, runs[-1])
+            return runs
+    return [_fallback_agent_run_from_reviewer(exc, reviewer)]
+
+
+def _fallback_agent_run_from_live(exc: Exception, live_run: AgentRun) -> AgentRun:
+    return AgentRun(
+        agent_name=live_run.agent_name,
+        model=live_run.model,
+        prompt_hash=live_run.prompt_hash,
+        input_evidence_ids=list(live_run.input_evidence_ids),
+        output_issue_ids=list(live_run.output_issue_ids),
+        fallback_used=True,
+        iteration=live_run.iteration,
+        feedback_hash=live_run.feedback_hash,
+        retry_count=live_run.retry_count,
+        retry_log=list(live_run.retry_log),
+        latency_ms=live_run.latency_ms,
+        token_count_in=live_run.token_count_in,
+        token_count_out=live_run.token_count_out,
+        trace_id=live_run.trace_id,
+        span_id=live_run.span_id,
+        parent_span_id=live_run.parent_span_id,
+        status="fallback",
+        error_type=exc.__class__.__name__,
+        shard_id=live_run.shard_id,
+        shard_index=live_run.shard_index,
+        shard_count=live_run.shard_count,
+        context_request_count=live_run.context_request_count,
+        context_refill_used=live_run.context_refill_used,
+    )
+
+
+def _fallback_agent_run_from_reviewer(
+    exc: Exception,
+    reviewer: object | None,
+) -> AgentRun:
     live_run = getattr(reviewer, "last_agent_run", None)
     if isinstance(live_run, AgentRun):
-        return AgentRun(
-            agent_name=live_run.agent_name,
-            model=live_run.model,
-            prompt_hash=live_run.prompt_hash,
-            input_evidence_ids=list(live_run.input_evidence_ids),
-            output_issue_ids=[],
-            fallback_used=True,
-            iteration=live_run.iteration,
-            feedback_hash=live_run.feedback_hash,
-            retry_count=live_run.retry_count,
-            retry_log=list(live_run.retry_log),
-            latency_ms=live_run.latency_ms,
-            token_count_in=live_run.token_count_in,
-            token_count_out=live_run.token_count_out,
-            trace_id=live_run.trace_id,
-            span_id=live_run.span_id,
-            parent_span_id=live_run.parent_span_id,
-            status="fallback",
-            error_type=exc.__class__.__name__,
-            shard_id=live_run.shard_id,
-            shard_index=live_run.shard_index,
-            shard_count=live_run.shard_count,
-            context_request_count=live_run.context_request_count,
-            context_refill_used=live_run.context_refill_used,
-        )
+        return _fallback_agent_run_from_live(exc, live_run)
     return AgentRun(
         agent_name="openai_compatible_reviewer",
         model=getattr(reviewer, "model", None),

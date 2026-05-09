@@ -44,6 +44,11 @@ def test_build_evidence_package_indexes_diff_entity_risk_and_tests(
 
     assert package.repo_root == str(tmp_path.resolve())
     assert "diff:src/shop/service.py:4" in package.evidence_index
+    assert "diff_hunk:src/shop/service.py:1" in package.evidence_index
+    hunk = package.evidence_index["diff_hunk:src/shop/service.py:1"]
+    assert hunk.kind == "diff_hunk"
+    assert "-    return True" in hunk.message
+    assert "+    return total > 10" in hunk.message
     assert "entity:src/shop/service.py:create_order" in package.evidence_index
     assert "test_discovery:tests/test_service.py" in package.evidence_index
     assert any(

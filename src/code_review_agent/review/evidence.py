@@ -8,6 +8,7 @@ from typing import Iterable
 from code_review_agent.models import (
     ChangedEntity,
     DiffFileChange,
+    DiffHunk,
     DiffLine,
     EvidencePackage,
     FileClassification,
@@ -17,6 +18,7 @@ from code_review_agent.models import (
 )
 from code_review_agent.review.risk import (
     diff_evidence_id,
+    diff_hunk_evidence_id,
     entity_evidence_id,
     hygiene_evidence_id,
     risk_evidence_id,
@@ -31,6 +33,8 @@ REDACTED_METADATA_FIELDS = [
     "author",
     "reviewer",
 ]
+MAX_HUNK_EVIDENCE_LINES = 80
+MAX_HUNK_LINE_CHARS = 200
 
 
 def build_evidence_package(
@@ -107,6 +111,7 @@ def _diff_evidence(changes: list[DiffFileChange]) -> list[ReviewEvidence]:
             continue
 
         for hunk in change.hunks:
+            evidence.append(_hunk_evidence(path, hunk))
             for line in hunk.lines:
                 if line.line_type not in {"added", "removed"}:
                     continue
@@ -120,6 +125,16 @@ def _diff_evidence(changes: list[DiffFileChange]) -> list[ReviewEvidence]:
                     )
                 )
     return evidence
+
+
+def _hunk_evidence(path: str, hunk: DiffHunk) -> ReviewEvidence:
+    start_line = _hunk_start_line(hunk)
+    return ReviewEvidence(
+        id=diff_hunk_evidence_id(path, start_line),
+        kind="diff_hunk",
+        source=f"{path}:{start_line}",
+        message=_diff_hunk_message(hunk),
+    )
 
 
 def _entity_evidence(entities: list[ChangedEntity]) -> list[ReviewEvidence]:
@@ -207,8 +222,38 @@ def _diff_line_message(line: DiffLine) -> str:
     return f"{action} line: {content}"
 
 
+def _diff_hunk_message(hunk: DiffHunk) -> str:
+    header = (
+        f"@@ -{hunk.old_start},{hunk.old_count} "
+        f"+{hunk.new_start},{hunk.new_count} @@ {hunk.section_header}".rstrip()
+    )
+    lines = [header]
+    omitted_count = max(0, len(hunk.lines) - MAX_HUNK_EVIDENCE_LINES)
+    for line in hunk.lines[:MAX_HUNK_EVIDENCE_LINES]:
+        prefix = _diff_prefix(line)
+        content = line.content
+        if len(content) > MAX_HUNK_LINE_CHARS:
+            content = f"{content[:MAX_HUNK_LINE_CHARS - 3]}..."
+        lines.append(f"{prefix}{content}")
+    if omitted_count:
+        lines.append(f"... omitted {omitted_count} hunk line(s)")
+    return "\n".join(lines)
+
+
+def _diff_prefix(line: DiffLine) -> str:
+    if line.line_type == "added":
+        return "+"
+    if line.line_type == "removed":
+        return "-"
+    return " "
+
+
 def _line_number(line: DiffLine) -> int:
     return line.new_lineno or line.old_lineno or 1
+
+
+def _hunk_start_line(hunk: DiffHunk) -> int:
+    return hunk.new_start or hunk.old_start or 1
 
 
 def _change_path(change: DiffFileChange) -> str | None:
