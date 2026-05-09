@@ -12,6 +12,24 @@ param(
 
     [string]$EnvFile = "",
 
+    [string]$RepoMap = "",
+
+    [string]$Hygiene = "",
+
+    [int]$MaxIter = 2,
+
+    [switch]$Resume,
+
+    [int]$ContextBudget = 24000,
+
+    [int]$MaxFilesPerAgentCall = 8,
+
+    [int]$MaxEvidencePerFile = 80,
+
+    [int]$MaxContextRefillRounds = 1,
+
+    [int]$MaxContextRequests = 8,
+
     [switch]$ExportPrompts
 )
 
@@ -87,11 +105,26 @@ $argsList = @(
     "--repo", $Repo,
     "--diff", $Diff,
     "--out", $Out,
-    "--mode", $Mode
+    "--mode", $Mode,
+    "--max-iter", "$MaxIter",
+    "--context-budget", "$ContextBudget",
+    "--max-files-per-agent-call", "$MaxFilesPerAgentCall",
+    "--max-evidence-per-file", "$MaxEvidencePerFile",
+    "--max-context-refill-rounds", "$MaxContextRefillRounds",
+    "--max-context-requests", "$MaxContextRequests"
 )
 
+if ($RepoMap -and (Test-Path -LiteralPath $RepoMap)) {
+    $argsList += @("--repo-map", $RepoMap)
+}
+if ($Hygiene -and (Test-Path -LiteralPath $Hygiene)) {
+    $argsList += @("--hygiene", $Hygiene)
+}
 if ($ExportPrompts) {
     $argsList += "--export-prompts"
+}
+if ($Resume) {
+    $argsList += "--resume"
 }
 
 Write-Host "Code Review Agent live runner"
@@ -99,6 +132,12 @@ Write-Host "Repo:  $Repo"
 Write-Host "Diff:  $Diff"
 Write-Host "Out:   $Out"
 Write-Host "Mode:  $Mode"
+if ($RepoMap) {
+    Write-Host "Map:   $RepoMap"
+}
+if ($Hygiene) {
+    Write-Host "Hyg:   $Hygiene"
+}
 if ($Mode -eq "hybrid-live") {
     $model = if ($env:SILICONFLOW_MODEL) { $env:SILICONFLOW_MODEL } else { $env:OPENAI_COMPATIBLE_MODEL }
     $baseUrl = if ($env:SILICONFLOW_BASE_URL) { $env:SILICONFLOW_BASE_URL } else { $env:OPENAI_COMPATIBLE_BASE_URL }

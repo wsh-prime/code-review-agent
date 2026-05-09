@@ -1,24 +1,28 @@
-param()
+param(
+    [string]$Repo = ".",
+    [string]$BaseRef = "origin/main",
+    [string]$Diff = ".tmp/changes.patch",
+    [string]$Out = "",
+    [string]$EnvFile = "scripts/review-live.env.local",
+    [string]$RepoMap = "outputs/my-map/repo_map.json",
+    [string]$Hygiene = "outputs/my-hygiene/project_hygiene.json",
+    [switch]$ExportPrompts,
+    [switch]$Resume,
+    [bool]$FetchBaseRef = $true,
+    [bool]$GenerateDiff = $true,
+    [int]$ContextBudget = 24000,
+    [int]$MaxFilesPerAgentCall = 8,
+    [int]$MaxEvidencePerFile = 80,
+    [int]$MaxContextRefillRounds = 1,
+    [int]$MaxContextRequests = 8
+)
 
 $ErrorActionPreference = "Stop"
 
-# Edit these values before running.
-$Repo = "."
-$BaseRef = "origin/main"
-$Diff = ".tmp/changes.patch"
-$Out = "outputs/my-review-live"
-$EnvFile = "scripts/review-live.env.local"
-$RepoMap = "outputs/my-map/repo_map.json"
-$Hygiene = "outputs/my-hygiene/project_hygiene.json"
-$ExportPrompts = $true
-$Resume = $true
-$FetchBaseRef = $true
-$GenerateDiff = $true
-$ContextBudget = 24000
-$MaxFilesPerAgentCall = 8
-$MaxEvidencePerFile = 80
-$MaxContextRefillRounds = 1
-$MaxContextRequests = 8
+# Edit these values before running or pass parameters.
+if (-not $Out) {
+    $Out = "outputs/runs/$(Get-Date -Format 'yyyyMMdd-HHmmss')/review"
+}
 
 function Import-EnvFile {
     param([string]$Path)

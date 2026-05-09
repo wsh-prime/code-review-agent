@@ -24,6 +24,7 @@ from code_review_agent.review.agents import (
     FakeLLMReviewAgent,
     OpenAICompatibleReviewAgent,
     _AgentFatalError,
+    _review_response_from_llm_json,
     _retry_with_backoff,
     export_agent_prompts,
     run_openai_compatible_review_agent,
@@ -184,8 +185,45 @@ def test_openai_compatible_agent_sends_budgeted_live_input(monkeypatch) -> None:
     assert "live_review_input_v1" in content
     context = json.loads(content.split("ReviewerContext:\n", 1)[1])
     assert "context_budget" not in context
+    assert "available_context" in context
+    assert "risk:test_gap:src/foo.py" not in context["evidence_index"]
     assert agent.last_agent_run is not None
-    assert agent.last_agent_run.input_evidence_ids == sorted(_package().evidence_index)
+    assert agent.last_agent_run.input_evidence_ids == ["diff:src/foo.py:9"]
+
+
+def test_live_response_parser_extracts_fenced_json_with_trailing_text() -> None:
+    content = """```json
+{
+  "issues": [
+    {
+      "file": "src/foo.py",
+      "line": 9,
+      "severity": "medium",
+      "category": "test_gap",
+      "message": "Live model candidate.",
+      "suggestion": "Update tests.",
+      "confidence": 0.7,
+      "evidence_ids": ["diff:src/foo.py:9"]
+    }
+  ],
+  "context_requests": [
+    {"request_type": "unsupported", "reason": "ignored"},
+    {"request_type": "risk_evidence", "risk_tag": "test_gap"}
+  ]
+}
+```
+extra text that should not break parsing
+"""
+
+    issues, requests = _review_response_from_llm_json(
+        content,
+        source_shard_id="shard-001",
+        max_context_requests=4,
+    )
+
+    assert issues[0].category == TEST_GAP
+    assert len(requests) == 1
+    assert requests[0].request_type == "risk_evidence"
 
 
 def test_openai_compatible_agent_accepts_context_request_and_refills(monkeypatch) -> None:

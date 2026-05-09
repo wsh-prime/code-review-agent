@@ -840,7 +840,7 @@ def _live_review_body(
     return {
         "model": model,
         "temperature": 0,
-        "max_tokens": 1200,
+        "max_tokens": 4000,
         "messages": [
             {
                 "role": "system",
@@ -849,14 +849,17 @@ def _live_review_body(
             {
                 "role": "user",
                 "content": (
-                    "Return only JSON. Prefer an object with keys "
+                    "Return only compact valid JSON, with no markdown fences "
+                    "or explanatory prose. Prefer an object with keys "
                     "`issues` and `context_requests`; a plain issue array is "
                     "also accepted for compatibility. "
                     "Use only evidence_ids present in "
                     "reviewer_context.evidence_index. "
-                    "If evidence is insufficient, request at most controlled "
-                    "context types: same_file_more_evidence, related_tests, "
-                    "related_symbol, risk_evidence.\n\n"
+                    "The available_context manifest lists additional evidence "
+                    "you may request if the primary evidence is insufficient. "
+                    "Request at most controlled context types: "
+                    "same_file_more_evidence, related_tests, related_symbol, "
+                    "risk_evidence.\n\n"
                     f"PriorFeedback:\n{_feedback_payload(prior_feedback)}\n\n"
                     "ReviewerContext:\n"
                     f"{json.dumps(_llm_context_payload(context), ensure_ascii=False)}"
@@ -930,14 +933,47 @@ def _review_response_from_llm_json(
         if not isinstance(requests_data, list):
             raise ValueError("LLM context_requests must be a JSON array.")
         return (
-            [_issue_from_dict(item) for item in issues_data],
-            [
-                _context_request_from_dict(item, source_shard_id=source_shard_id)
-                for item in requests_data[: max(0, max_context_requests)]
-                if isinstance(item, dict)
-            ],
+            _issues_from_items(issues_data),
+            _context_requests_from_items(
+                requests_data,
+                source_shard_id=source_shard_id,
+                max_context_requests=max_context_requests,
+            ),
         )
-    return [_issue_from_dict(item) for item in parsed], []
+    return _issues_from_items(parsed), []
+
+
+def _issues_from_items(items: list) -> list[ReviewIssue]:
+    issues: list[ReviewIssue] = []
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        try:
+            issues.append(_issue_from_dict(item))
+        except (TypeError, ValueError):
+            continue
+    return issues
+
+
+def _context_requests_from_items(
+    items: list,
+    *,
+    source_shard_id: str,
+    max_context_requests: int,
+) -> list[ContextRequest]:
+    requests: list[ContextRequest] = []
+    for item in items:
+        if len(requests) >= max(0, max_context_requests):
+            break
+        if not isinstance(item, dict):
+            continue
+        try:
+            requests.append(
+                _context_request_from_dict(item, source_shard_id=source_shard_id)
+            )
+        except ValueError:
+            continue
+    return requests
 
 
 def _extract_json_array(content: str) -> str:
@@ -951,20 +987,48 @@ def _extract_json_value(content: str) -> str:
     stripped = content.strip()
     if stripped.startswith("```"):
         stripped = stripped.removeprefix("```json").removeprefix("```").strip()
-        stripped = stripped.removesuffix("```").strip()
-    if stripped.startswith("[") or stripped.startswith("{"):
-        return stripped
+        if "```" in stripped:
+            stripped = stripped.split("```", 1)[0].strip()
     array_start = stripped.find("[")
     object_start = stripped.find("{")
     starts = [item for item in [array_start, object_start] if item != -1]
     if not starts:
         raise ValueError("LLM review output did not contain JSON.")
     start = min(starts)
-    close = "]" if stripped[start] == "[" else "}"
-    end = stripped.rfind(close)
-    if start == -1 or end == -1 or end <= start:
+    end = _balanced_json_end(stripped, start)
+    if end is None:
         raise ValueError("LLM review output did not contain a complete JSON value.")
-    return stripped[start : end + 1]
+    return stripped[start:end]
+
+
+def _balanced_json_end(text: str, start: int) -> int | None:
+    stack: list[str] = []
+    in_string = False
+    escaped = False
+    for index in range(start, len(text)):
+        char = text[index]
+        if in_string:
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == '"':
+                in_string = False
+            continue
+
+        if char == '"':
+            in_string = True
+            continue
+        if char in "{[":
+            stack.append("}" if char == "{" else "]")
+            continue
+        if char in "}]":
+            if not stack or stack[-1] != char:
+                return None
+            stack.pop()
+            if not stack:
+                return index + 1
+    return None
 
 
 def _issue_from_dict(data: dict) -> ReviewIssue:

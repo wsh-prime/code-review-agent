@@ -1,0 +1,15 @@
+diff --git a/tests/test_service.py b/tests/test_service.py
+--- a/tests/test_service.py
++++ b/tests/test_service.py
+@@ -23,3 +23,10 @@ def test_cancel_order_marks_status() -> None:
+     )
+ 
+     assert cancel_order(order).status == "cancelled"
++
++
++def test_create_order_keeps_customer_id() -> None:
++    order = create_order(
++        "cust_999",
++        [OrderItem(sku="sku_1", quantity=1, unit_price_cents=1500)],
++    )
++    assert order.customer_id == "cust_999"

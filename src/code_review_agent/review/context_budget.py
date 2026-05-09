@@ -20,10 +20,13 @@ DEFAULT_MAX_FILES_PER_AGENT_CALL = 8
 DEFAULT_MAX_EVIDENCE_PER_FILE = 80
 DEFAULT_MAX_EVIDENCE_ITEMS = 400
 DEFAULT_MAX_RISK_EVIDENCE_IDS = 5
+DEFAULT_PRIMARY_EVIDENCE_PER_RISK = 4
+DEFAULT_MANIFEST_EVIDENCE_ID_LIMIT = 120
 LIVE_REVIEW_INPUT_SCHEMA = "live_review_input_v1"
 SELECTION_STRATEGY = "risk_first_v1"
 SHARDING_STRATEGY = "file_risk_shards_v1"
 REFILL_STRATEGY = "one_shot_refill_v1"
+COMPACT_CONTEXT_PROFILE = "risk_compact_manifest_v1"
 ALLOWED_CONTEXT_REQUEST_TYPES = frozenset(
     {
         "same_file_more_evidence",
@@ -51,6 +54,7 @@ _KIND_SCORE = {
     "test_discovery": 25.0,
     "hygiene": 15.0,
 }
+_DEFAULT_EXPANDED_EVIDENCE_KINDS = frozenset({"diff", "test_discovery", "hygiene"})
 
 
 @dataclass(slots=True)
@@ -143,7 +147,7 @@ def build_live_review_input(
     max_evidence_items = max(1, max_evidence_items)
 
     selected: list[SelectedEvidenceAudit] = []
-    omitted: list[SelectedEvidenceAudit] = []
+    omitted_by_id: dict[str, SelectedEvidenceAudit] = {}
     selected_index: dict[str, ReviewEvidence] = {}
     selected_ids: set[str] = set()
     per_file_counts: dict[str, int] = {}
@@ -151,7 +155,12 @@ def build_live_review_input(
 
     base_payload = _base_payload(package, max_files=max_files, allowed_paths=allowed_paths)
     used_tokens = estimate_tokens(base_payload)
-    candidate_ids = _ranked_candidate_ids(
+    available_ids = _available_evidence_ids(
+        package,
+        allowed_paths=allowed_paths,
+        forced_evidence_ids=forced_evidence_ids,
+    )
+    candidate_ids = _expanded_candidate_ids(
         package,
         allowed_paths=allowed_paths,
         forced_evidence_ids=forced_evidence_ids,
@@ -179,7 +188,9 @@ def build_live_review_input(
             max_evidence_per_file=max_evidence_per_file,
         )
         if omit_reason is not None:
-            omitted.append(_replace_status(audit, status="omitted", reason=omit_reason))
+            omitted_by_id[evidence_id] = _replace_status(
+                audit, status="omitted", reason=omit_reason
+            )
             continue
 
         selected.append(audit)
@@ -187,6 +198,21 @@ def build_live_review_input(
         selected_ids.add(evidence_id)
         per_file_counts[path] = per_file_count + 1
         used_tokens = projected
+
+    for evidence_id in available_ids:
+        if evidence_id in selected_ids or evidence_id in omitted_by_id:
+            continue
+        omitted_by_id[evidence_id] = _audit_entry(
+            package,
+            evidence_id,
+            status="omitted",
+            reason="manifest_only",
+        )
+
+    omitted = sorted(
+        omitted_by_id.values(),
+        key=lambda item: (-item.score, item.evidence_id),
+    )
 
     for required_id in _required_risk_evidence_ids(package):
         if required_id not in selected_ids and required_id in package.evidence_index:
@@ -196,14 +222,26 @@ def build_live_review_input(
         evidence_id: evidence.to_dict()
         for evidence_id, evidence in selected_index.items()
     }
-    estimated_tokens = estimate_tokens({**base_payload, "evidence_index": evidence_payload})
+    available_context = _available_context_manifest(
+        package,
+        available_ids=available_ids,
+        selected_ids=selected_ids,
+        allowed_paths=allowed_paths,
+    )
+    estimated_tokens = estimate_tokens(
+        {
+            **base_payload,
+            "evidence_index": evidence_payload,
+            "available_context": available_context,
+        }
+    )
     context_budget = _context_budget_summary(
         selected=selected,
         omitted=omitted,
         warnings=warnings,
         max_input_tokens=max_input_tokens,
         estimated_tokens=estimated_tokens,
-        selected_risk_signal_count=len(package.risk_signals),
+        selected_risk_signal_count=len(base_payload["risk_signals"]),
         shard_count=shard_count,
         shard_id=shard_id,
         shard_index=shard_index,
@@ -223,6 +261,7 @@ def build_live_review_input(
         changed_entities=list(base_payload["changed_entities"]),
         risk_signals=list(base_payload["risk_signals"]),
         evidence_index=evidence_payload,
+        available_context=available_context,
         context_budget=context_budget,
         is_refill=is_refill,
         parent_shard_id=parent_shard_id,
@@ -379,6 +418,7 @@ def aggregate_context_budget(
     return {
         "enabled": True,
         "strategy": SHARDING_STRATEGY if len(contexts) > 1 else SELECTION_STRATEGY,
+        "context_profile": COMPACT_CONTEXT_PROFILE,
         "max_input_tokens": max_tokens,
         "estimated_input_tokens": estimated_tokens,
         "selected_evidence_count": len(selected_unique),
@@ -405,6 +445,7 @@ def context_budget_disabled_summary() -> dict[str, Any]:
     return {
         "enabled": False,
         "strategy": SELECTION_STRATEGY,
+        "context_profile": COMPACT_CONTEXT_PROFILE,
         "max_input_tokens": 0,
         "estimated_input_tokens": 0,
         "selected_evidence_count": 0,
@@ -422,7 +463,7 @@ def context_budget_disabled_summary() -> dict[str, Any]:
     }
 
 
-def _ranked_candidate_ids(
+def _available_evidence_ids(
     package: EvidencePackage,
     *,
     allowed_paths: set[str] | None = None,
@@ -436,12 +477,6 @@ def _ranked_candidate_ids(
         }
     else:
         candidate_ids = set(package.evidence_index)
-    for signal in package.risk_signals:
-        candidate_ids.update(
-            evidence_id
-            for evidence_id in signal.evidence_ids
-            if evidence_id in package.evidence_index
-        )
     if allowed_paths is not None:
         candidate_ids = {
             evidence_id
@@ -452,6 +487,49 @@ def _ranked_candidate_ids(
             in allowed_paths
         }
     return sorted(candidate_ids, key=lambda item: (-score_evidence(package, item), item))
+
+
+def _expanded_candidate_ids(
+    package: EvidencePackage,
+    *,
+    allowed_paths: set[str] | None = None,
+    forced_evidence_ids: set[str] | None = None,
+) -> list[str]:
+    if forced_evidence_ids is not None:
+        return _available_evidence_ids(
+            package,
+            allowed_paths=allowed_paths,
+            forced_evidence_ids=forced_evidence_ids,
+        )
+
+    candidate_ids: list[str] = []
+    for signal in sorted(
+        _risk_signals(package, allowed_paths=allowed_paths),
+        key=_risk_sort_key,
+    ):
+        candidate_ids.extend(
+            _primary_evidence_ids_for_signal(
+                package,
+                signal,
+                max_evidence_ids=DEFAULT_PRIMARY_EVIDENCE_PER_RISK,
+                expanded_only=True,
+            )
+        )
+
+    for change in package.changed_files:
+        path = change.new_path or change.old_path
+        if path is None or (allowed_paths is not None and path not in allowed_paths):
+            continue
+        first_diff = _first_diff_evidence_id(package, path)
+        if first_diff is not None:
+            candidate_ids.append(first_diff)
+
+    deduped = [
+        evidence_id
+        for evidence_id in dict.fromkeys(candidate_ids)
+        if evidence_id in package.evidence_index
+    ]
+    return sorted(deduped, key=lambda item: (-score_evidence(package, item), item))
 
 
 def _base_payload(
@@ -465,6 +543,7 @@ def _base_payload(
     return {
         "schema": LIVE_REVIEW_INPUT_SCHEMA,
         "selection_strategy": SELECTION_STRATEGY,
+        "context_profile": COMPACT_CONTEXT_PROFILE,
         "repo_root": package.repo_root,
         "changed_files": changed_files,
         "omitted_changed_file_count": max(
@@ -498,9 +577,11 @@ def _changed_file_summaries(
             continue
         summaries.append(
             {
+                "path": path,
                 "old_path": change.old_path,
                 "new_path": change.new_path,
                 "change_type": change.change_type,
+                "file_role": _file_role(path),
                 "hunk_count": len(change.hunks),
                 "changed_line_count": sum(
                     1
@@ -509,6 +590,7 @@ def _changed_file_summaries(
                     if line.line_type in {"added", "removed"}
                 ),
                 "first_diff_evidence_id": _first_diff_evidence_id(package, path),
+                "available_evidence_count": len(_evidence_ids_for_path(package, path)),
             }
         )
     return summaries
@@ -551,23 +633,167 @@ def _risk_card(
     *,
     max_evidence_ids: int = DEFAULT_MAX_RISK_EVIDENCE_IDS,
 ) -> dict[str, Any]:
+    risk_id = _risk_evidence_id(signal)
     evidence_ids = [
         evidence_id
         for evidence_id in signal.evidence_ids
         if evidence_id in package.evidence_index
     ]
-    risk_id = _risk_evidence_id(signal)
-    if risk_id in package.evidence_index:
-        evidence_ids.insert(0, risk_id)
+    primary_ids = _primary_evidence_ids_for_signal(
+        package,
+        signal,
+        max_evidence_ids=max_evidence_ids,
+        expanded_only=True,
+    )
     deduped = list(dict.fromkeys(evidence_ids))
-    selected = deduped[: max(1, max_evidence_ids)]
     return {
         "tag": signal.tag,
         "confidence": signal.confidence,
         "reason": signal.reason,
-        "primary_evidence_ids": selected,
-        "omitted_evidence_id_count": max(0, len(deduped) - len(selected)),
+        "risk_evidence_id": risk_id if risk_id in package.evidence_index else None,
+        "primary_evidence_ids": primary_ids,
+        "related_evidence_id_count": len(deduped),
+        "omitted_evidence_id_count": max(0, len(deduped) - len(primary_ids)),
     }
+
+
+def _primary_evidence_ids_for_signal(
+    package: EvidencePackage,
+    signal: RiskSignal,
+    *,
+    max_evidence_ids: int,
+    expanded_only: bool,
+) -> list[str]:
+    ids: list[str] = []
+    for evidence_id in signal.evidence_ids:
+        evidence = package.evidence_index.get(evidence_id)
+        if evidence is None:
+            continue
+        if expanded_only and evidence.kind not in _DEFAULT_EXPANDED_EVIDENCE_KINDS:
+            continue
+        ids.append(evidence_id)
+        if len(ids) >= max(1, max_evidence_ids):
+            break
+    return list(dict.fromkeys(ids))
+
+
+def _available_context_manifest(
+    package: EvidencePackage,
+    *,
+    available_ids: list[str],
+    selected_ids: set[str],
+    allowed_paths: set[str] | None,
+) -> dict[str, Any]:
+    omitted_ids = [evidence_id for evidence_id in available_ids if evidence_id not in selected_ids]
+    omitted_by_path: dict[str, list[str]] = {}
+    for evidence_id in omitted_ids:
+        evidence = package.evidence_index.get(evidence_id)
+        path = _path_for_evidence(evidence_id, evidence) or "<unknown>"
+        omitted_by_path.setdefault(path, []).append(evidence_id)
+
+    paths: list[dict[str, Any]] = []
+    for path, evidence_ids in sorted(omitted_by_path.items()):
+        kinds = _kind_counts(package, evidence_ids)
+        paths.append(
+            {
+                "path": path,
+                "omitted_evidence_count": len(evidence_ids),
+                "kinds": kinds,
+                "sample_evidence_ids": evidence_ids[:8],
+                "request_hints": _request_hints_for_kinds(kinds),
+            }
+        )
+
+    risks: list[dict[str, Any]] = []
+    available_set = set(available_ids)
+    for signal in sorted(
+        _risk_signals(package, allowed_paths=allowed_paths),
+        key=_risk_sort_key,
+    ):
+        related_ids = [
+            evidence_id
+            for evidence_id in signal.evidence_ids
+            if evidence_id in package.evidence_index and evidence_id in available_set
+        ]
+        omitted_related = [
+            evidence_id for evidence_id in related_ids if evidence_id not in selected_ids
+        ]
+        risks.append(
+            {
+                "tag": signal.tag,
+                "confidence": signal.confidence,
+                "path": _path_from_evidence_ids(signal.evidence_ids, package),
+                "selected_evidence_ids": [
+                    evidence_id for evidence_id in related_ids if evidence_id in selected_ids
+                ],
+                "omitted_evidence_count": len(omitted_related),
+                "sample_omitted_evidence_ids": omitted_related[:8],
+            }
+        )
+
+    return {
+        "profile": COMPACT_CONTEXT_PROFILE,
+        "request_types": sorted(ALLOWED_CONTEXT_REQUEST_TYPES),
+        "available_evidence_count": len(available_ids),
+        "selected_evidence_count": len(selected_ids),
+        "omitted_evidence_count": len(omitted_ids),
+        "omitted_evidence_ids": omitted_ids[:DEFAULT_MANIFEST_EVIDENCE_ID_LIMIT],
+        "omitted_evidence_id_limit": DEFAULT_MANIFEST_EVIDENCE_ID_LIMIT,
+        "paths": paths[:50],
+        "risks": risks,
+    }
+
+
+def _kind_counts(package: EvidencePackage, evidence_ids: list[str]) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for evidence_id in evidence_ids:
+        evidence = package.evidence_index.get(evidence_id)
+        kind = evidence.kind if evidence is not None else "unknown"
+        counts[kind] = counts.get(kind, 0) + 1
+    return dict(sorted(counts.items()))
+
+
+def _request_hints_for_kinds(kinds: dict[str, int]) -> list[str]:
+    hints: list[str] = []
+    if kinds.get("diff", 0):
+        hints.append("same_file_more_evidence")
+    if kinds.get("test_discovery", 0):
+        hints.append("related_tests")
+    if kinds.get("entity", 0):
+        hints.append("related_symbol")
+    if kinds.get("risk", 0):
+        hints.append("risk_evidence")
+    return hints
+
+
+def _file_role(path: str | None) -> str:
+    if path is None:
+        return "unknown"
+    normalized = path.replace("\\", "/")
+    name = normalized.rsplit("/", 1)[-1]
+    if normalized.startswith("docs/") or name.endswith((".md", ".rst", ".txt")):
+        return "docs"
+    if "tests/" in f"{normalized}/" or name.startswith("test_") or name.endswith("_test.py"):
+        return "test"
+    if name in {"pyproject.toml", "setup.py", "setup.cfg"} or normalized.startswith(
+        ".github/workflows/"
+    ):
+        return "config"
+    if normalized.startswith("src/"):
+        return "source"
+    return "other"
+
+
+def _path_from_evidence_ids(
+    evidence_ids: list[str],
+    package: EvidencePackage,
+) -> str | None:
+    for evidence_id in evidence_ids:
+        evidence = package.evidence_index.get(evidence_id)
+        path = _path_for_evidence(evidence_id, evidence)
+        if path is not None:
+            return path
+    return None
 
 
 def _changed_paths(package: EvidencePackage) -> list[str]:
@@ -687,6 +913,7 @@ def _context_budget_summary(
     return {
         "enabled": True,
         "strategy": SELECTION_STRATEGY,
+        "context_profile": COMPACT_CONTEXT_PROFILE,
         "max_input_tokens": max_input_tokens,
         "estimated_input_tokens": estimated_tokens,
         "selected_evidence_count": len(selected_ids),

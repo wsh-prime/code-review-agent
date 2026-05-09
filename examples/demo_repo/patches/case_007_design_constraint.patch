@@ -1,0 +1,11 @@
+diff --git a/src/shop/discounts.py b/src/shop/discounts.py
+--- a/src/shop/discounts.py
++++ b/src/shop/discounts.py
+@@ -29,5 +29,5 @@ def coupon_label(coupon: str | None) -> str:
+ 
+ 
+ def estimate_shipping_days(total_cents: int) -> int:
+-    if total_cents >= 10_000:
++    if total_cents >= 8_000:
+         return 2
+     return 5

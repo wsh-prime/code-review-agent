@@ -1,10 +1,14 @@
-param()
+param(
+    [string]$Repo = ".",
+    [string]$Out = ""
+)
 
 $ErrorActionPreference = "Stop"
 
-# Edit these values before running.
-$Repo = "."
-$Out = "outputs/my-map"
+# Edit these values before running or pass parameters.
+if (-not $Out) {
+    $Out = "outputs/runs/$(Get-Date -Format 'yyyyMMdd-HHmmss')/map"
+}
 
 $ProjectRoot = Resolve-Path (Join-Path $PSScriptRoot "..")
 . (Join-Path $PSScriptRoot "_logging.ps1")

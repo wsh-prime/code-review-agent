@@ -1,0 +1,10 @@
+diff --git a/src/shop/service.py b/src/shop/service.py
+--- a/src/shop/service.py
++++ b/src/shop/service.py
+@@ -16,5 +16,5 @@ def create_order(
+     """Create an order after pricing and validation."""
+ 
+-    subtotal = calculate_subtotal(items)
++    subtotal = calculate_subtotal(items) + 10_000
+     total = apply_discount(subtotal, coupon)
+     if total < MINIMUM_ORDER_TOTAL_CENTS:

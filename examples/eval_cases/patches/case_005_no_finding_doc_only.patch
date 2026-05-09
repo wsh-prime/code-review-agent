@@ -1,0 +1,9 @@
+diff --git a/docs/design.md b/docs/design.md
+--- a/docs/design.md
++++ b/docs/design.md
+@@ -1,3 +1,5 @@
+ # Demo Shop Design
+ 
+ Keep order pricing logic small enough for review demos.
++
++Document that demo patches are intentionally tiny and deterministic.

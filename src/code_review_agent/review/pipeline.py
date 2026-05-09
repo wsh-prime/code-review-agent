@@ -48,7 +48,15 @@ from code_review_agent.review.evidence import (
 )
 from code_review_agent.review.filter import filter_issues
 from code_review_agent.review.loop import IterativeHarnessRunner, LoopResult
-from code_review_agent.review.risk import classify_risks
+from code_review_agent.review.risk import (
+    API_CHANGE,
+    BEHAVIOR_CHANGE,
+    CONFIG_CHANGE,
+    ERROR_HANDLING_CHANGE,
+    SECURITY_SENSITIVE,
+    classify_risks,
+    risk_evidence_id,
+)
 from code_review_agent.review.rules import run_rules
 
 
@@ -178,6 +186,13 @@ def run_review_pipeline(
                 fallback_reason=str(exc),
             )
             agent_runs = loop_result.agent_runs
+            agent_needs_human_review = _fallback_risk_review_issues(
+                package,
+                existing_issues=[
+                    *rules_result.findings,
+                    *rules_result.needs_human_review,
+                ],
+            )
 
     candidate_findings = [*rules_result.findings, *agent_findings]
     candidate_needs_human_review = [
@@ -394,6 +409,76 @@ def _changed_paths(changes) -> set[str]:
         if change.new_path is not None:
             paths.add(change.new_path)
     return paths
+
+
+def _fallback_risk_review_issues(
+    package,
+    *,
+    existing_issues: list[ReviewIssue],
+) -> list[ReviewIssue]:
+    """Route important non-rule risks to humans when live review cannot run."""
+
+    surfaced = {
+        (issue.category, issue.file)
+        for issue in existing_issues
+    }
+    review_tags = {
+        API_CHANGE,
+        BEHAVIOR_CHANGE,
+        CONFIG_CHANGE,
+        ERROR_HANDLING_CHANGE,
+        SECURITY_SENSITIVE,
+    }
+    issues: list[ReviewIssue] = []
+    for signal in package.risk_signals:
+        if signal.tag not in review_tags:
+            continue
+        path, line = _risk_location(signal)
+        if (signal.tag, path) in surfaced:
+            continue
+        evidence_ids = _risk_issue_evidence_ids(signal, package)
+        if not evidence_ids:
+            continue
+        issues.append(
+            ReviewIssue(
+                file=path,
+                line=line,
+                severity="medium",
+                category=signal.tag,
+                message=(
+                    "Live reviewer was unavailable; this deterministic risk "
+                    "needs human review."
+                ),
+                suggestion=(
+                    "Inspect the linked evidence and decide whether the "
+                    "change requires follow-up."
+                ),
+                confidence=min(max(signal.confidence, 0.55), 0.74),
+                evidence_ids=evidence_ids,
+            )
+        )
+    return issues
+
+
+def _risk_issue_evidence_ids(signal, package) -> list[str]:
+    evidence_ids = list(signal.evidence_ids[:12])
+    signal_id = risk_evidence_id(signal)
+    if signal_id in package.evidence_index:
+        evidence_ids.insert(0, signal_id)
+    return sorted(dict.fromkeys(evidence_ids))
+
+
+def _risk_location(signal) -> tuple[str, int | None]:
+    for evidence_id in signal.evidence_ids:
+        if not evidence_id.startswith(("diff:", "entity:", "hygiene:")):
+            continue
+        parts = evidence_id.split(":")
+        if len(parts) < 2:
+            continue
+        line = int(parts[-1]) if evidence_id.startswith("diff:") and parts[-1].isdigit() else None
+        path = ":".join(parts[1:-1]) if evidence_id.startswith("diff:") else parts[1]
+        return path, line
+    return "patch", None
 
 
 def _loop_candidate_scope(loop_result: LoopResult | None) -> list[ReviewIssue]:

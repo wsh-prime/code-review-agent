@@ -1,0 +1,13 @@
+diff --git a/src/shop/debug_order_flow.py b/src/shop/debug_order_flow.py
+new file mode 100644
+--- /dev/null
++++ b/src/shop/debug_order_flow.py
+@@ -0,0 +1,8 @@
++"""Temporary debug entry point for local order experiments."""
++
++from .models import OrderItem
++from .service import create_order
++
++
++def run_debug_flow() -> None:
++    print(create_order("debug", [OrderItem("sku", 1, 1500)]))

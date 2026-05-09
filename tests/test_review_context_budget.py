@@ -102,6 +102,24 @@ def test_build_live_review_input_sends_compact_risk_cards() -> None:
     assert risk_card["omitted_evidence_id_count"] > 0
 
 
+def test_build_live_review_input_uses_manifest_for_redundant_evidence() -> None:
+    package = _large_package()
+
+    live_input = build_live_review_input(
+        package,
+        max_input_tokens=900,
+        max_evidence_per_file=2,
+    )
+
+    payload = live_input.payload
+    assert "risk:security_sensitive:src/auth.py" not in payload["evidence_index"]
+    assert payload["available_context"]["profile"] == "risk_compact_manifest_v1"
+    assert "risk:security_sensitive:src/auth.py" in payload["available_context"][
+        "omitted_evidence_ids"
+    ]
+    assert "risk_evidence" in payload["available_context"]["request_types"]
+
+
 def test_build_reviewer_contexts_splits_large_multi_file_package() -> None:
     package = _multi_file_package(file_count=5)
 

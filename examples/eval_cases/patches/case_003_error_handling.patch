@@ -1,0 +1,19 @@
+diff --git a/src/shop/service.py b/src/shop/service.py
+--- a/src/shop/service.py
++++ b/src/shop/service.py
+@@ -16,8 +16,11 @@ def create_order(
+     """Create an order after pricing and validation."""
+ 
+     subtotal = calculate_subtotal(items)
+-    total = apply_discount(subtotal, coupon)
+-    if total < MINIMUM_ORDER_TOTAL_CENTS:
+-        raise ValueError("order total is too small")
++    try:
++        total = apply_discount(subtotal, coupon)
++        if total < MINIMUM_ORDER_TOTAL_CENTS:
++            raise ValueError("order total is too small")
++    except Exception:
++        total = MINIMUM_ORDER_TOTAL_CENTS
+     return Order(customer_id=customer_id, total_cents=total)
+ 
+ 

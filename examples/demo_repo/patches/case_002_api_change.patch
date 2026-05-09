@@ -1,0 +1,12 @@
+diff --git a/src/shop/api.py b/src/shop/api.py
+--- a/src/shop/api.py
++++ b/src/shop/api.py
+@@ -3,7 +3,7 @@
+ from __future__ import annotations
+ 
+ 
+-def create_order_payload(customer_id: str, total_cents: int) -> dict[str, object]:
++def create_order_payload(customer_id: str, total_cents: int, currency: str) -> dict[str, object]:
+     """Build a response payload for a created order."""
+ 
+     return {

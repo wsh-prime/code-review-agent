@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from fnmatch import fnmatch
 from pathlib import Path
 
 
@@ -10,16 +11,45 @@ DEFAULT_IGNORED_DIRS = frozenset(
     {
         ".git",
         ".hg",
+        ".conda",
+        ".cache",
+        ".checkpoints",
+        ".ipynb_checkpoints",
         ".mypy_cache",
         ".pytest_cache",
         ".ruff_cache",
         ".tox",
         ".venv",
         "__pycache__",
+        ".tmp",
+        "artifacts",
         "build",
+        "checkpoints",
         "dist",
+        "htmlcov",
+        "log",
+        "logs",
         "node_modules",
+        "output",
+        "outputs",
+        "reports",
+        "temp",
+        "tmp",
+        "test_tmp",
         "venv",
+    }
+)
+
+DEFAULT_IGNORED_FILE_PATTERNS = frozenset(
+    {
+        "*.checkpoint",
+        "*.ckpt",
+        "*.diff",
+        "*.log",
+        "*.patch",
+        "*.tmp",
+        ".coverage",
+        "coverage.xml",
     }
 )
 
@@ -61,6 +91,7 @@ def scan_repository(
     repo_path: Path | str,
     *,
     ignored_dirs: set[str] | frozenset[str] = DEFAULT_IGNORED_DIRS,
+    ignored_file_patterns: set[str] | frozenset[str] = DEFAULT_IGNORED_FILE_PATTERNS,
     binary_extensions: set[str] | frozenset[str] = DEFAULT_BINARY_EXTENSIONS,
     max_file_bytes: int = DEFAULT_MAX_FILE_BYTES,
     content_bytes: int = DEFAULT_CONTENT_BYTES,
@@ -79,11 +110,16 @@ def scan_repository(
         raise NotADirectoryError(f"Repository path is not a directory: {root}")
 
     scanned: list[ScannedFile] = []
+    gitignore_rules = _load_gitignore_rules(root)
     for path in sorted(root.rglob("*")):
         if not path.is_file():
             continue
         relative = path.relative_to(root)
         if _is_ignored_path(relative, ignored_dirs):
+            continue
+        if _matches_ignored_file_pattern(relative, ignored_file_patterns):
+            continue
+        if _is_gitignored(relative, gitignore_rules):
             continue
         if path.suffix.lower() in binary_extensions:
             continue
@@ -109,6 +145,108 @@ def scan_repository(
 
 def _is_ignored_path(relative: Path, ignored_dirs: set[str] | frozenset[str]) -> bool:
     return any(part in ignored_dirs for part in relative.parts)
+
+
+def _matches_ignored_file_pattern(
+    relative: Path, ignored_file_patterns: set[str] | frozenset[str]
+) -> bool:
+    relative_posix = relative.as_posix()
+    name = relative.name
+    return any(
+        fnmatch(name, pattern) or fnmatch(relative_posix, pattern)
+        for pattern in ignored_file_patterns
+    )
+
+
+@dataclass(frozen=True, slots=True)
+class _GitignoreRule:
+    pattern: str
+    negated: bool
+    directory_only: bool
+    anchored: bool
+    has_slash: bool
+
+
+def _load_gitignore_rules(root: Path) -> list[_GitignoreRule]:
+    gitignore = root / ".gitignore"
+    try:
+        lines = gitignore.read_text(encoding="utf-8", errors="replace").splitlines()
+    except OSError:
+        return []
+
+    rules: list[_GitignoreRule] = []
+    for raw_line in lines:
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if line.startswith("\\#"):
+            line = line[1:]
+
+        negated = line.startswith("!")
+        if negated:
+            line = line[1:].strip()
+        if not line:
+            continue
+
+        anchored = line.startswith("/")
+        if anchored:
+            line = line[1:]
+        directory_only = line.endswith("/")
+        if directory_only:
+            line = line.rstrip("/")
+        if not line:
+            continue
+
+        rules.append(
+            _GitignoreRule(
+                pattern=line,
+                negated=negated,
+                directory_only=directory_only,
+                anchored=anchored,
+                has_slash="/" in line,
+            )
+        )
+    return rules
+
+
+def _is_gitignored(relative: Path, rules: list[_GitignoreRule]) -> bool:
+    ignored = False
+    for rule in rules:
+        if _matches_gitignore_rule(relative, rule):
+            ignored = not rule.negated
+    return ignored
+
+
+def _matches_gitignore_rule(relative: Path, rule: _GitignoreRule) -> bool:
+    relative_posix = relative.as_posix()
+    parts = relative.parts
+
+    if rule.directory_only:
+        return _matches_directory_rule(relative_posix, parts, rule)
+    if rule.anchored:
+        return fnmatch(relative_posix, rule.pattern)
+    if rule.has_slash:
+        return fnmatch(relative_posix, rule.pattern) or fnmatch(
+            relative_posix, f"*/{rule.pattern}"
+        )
+    return fnmatch(relative.name, rule.pattern) or any(
+        fnmatch(part, rule.pattern) for part in parts
+    )
+
+
+def _matches_directory_rule(
+    relative_posix: str, parts: tuple[str, ...], rule: _GitignoreRule
+) -> bool:
+    pattern = rule.pattern.rstrip("/")
+    if rule.anchored:
+        return relative_posix == pattern or relative_posix.startswith(f"{pattern}/")
+    if rule.has_slash:
+        return (
+            relative_posix == pattern
+            or relative_posix.startswith(f"{pattern}/")
+            or f"/{pattern}/" in f"/{relative_posix}/"
+        )
+    return any(part == pattern or fnmatch(part, pattern) for part in parts[:-1])
 
 
 def _looks_binary(path: Path) -> bool:
