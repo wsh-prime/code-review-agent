@@ -5,24 +5,9 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 from code_review_agent.models import EvidencePackage, ReviewIssue
-
-
-_STYLE_KEYWORDS: frozenset[str] = frozenset(
-    {
-        "blank line",
-        "code style",
-        "format",
-        "import order",
-        "indentation",
-        "line length",
-        "naming convention",
-        "pep 8",
-        "pep8",
-        "style preference",
-        "trailing space",
-        "variable name",
-        "whitespace",
-    }
+from code_review_agent.review.issue_quality import (
+    is_low_signal_review_suggestion,
+    is_style_preference,
 )
 
 
@@ -98,8 +83,11 @@ def filter_issues(
             evidence_ids=valid_ids,
         )
 
-        if _is_style_preference(clean_issue):
+        if is_style_preference(clean_issue):
             discard(clean_issue, "style_preference")
+            return
+        if is_low_signal_review_suggestion(clean_issue):
+            discard(clean_issue, "low_signal_suggestion")
             return
 
         if clean_issue.file not in changed_paths:
@@ -129,11 +117,6 @@ def filter_issues(
     result.findings = _merge_duplicates(result.findings)
     result.needs_human_review = _merge_duplicates(result.needs_human_review)
     return result
-
-
-def _is_style_preference(issue: ReviewIssue) -> bool:
-    lower = issue.message.lower()
-    return any(keyword in lower for keyword in _STYLE_KEYWORDS)
 
 
 def _merge_duplicates(issues: list[ReviewIssue]) -> list[ReviewIssue]:

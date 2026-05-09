@@ -229,6 +229,41 @@ def test_build_context_refill_filters_request_types_before_limiting() -> None:
     assert refill.request_types == ["risk_evidence"]
 
 
+def test_build_context_refill_fulfills_each_request_with_its_own_ids() -> None:
+    package = _large_package()
+    live_input = build_live_review_input(
+        package,
+        max_input_tokens=900,
+        max_evidence_per_file=1,
+    )
+    auth_request = ContextRequest(
+        request_type="same_file_more_evidence",
+        path="src/auth.py",
+        evidence_ids=["risk:security_sensitive:src/auth.py"],
+    )
+    ordinary_request = ContextRequest(
+        request_type="same_file_more_evidence",
+        path="src/ordinary.py",
+        evidence_ids=["diff:src/ordinary.py:5", "diff:src/ordinary.py:6"],
+    )
+
+    refill = build_context_refill(
+        package,
+        live_input.reviewer_context,
+        [auth_request, ordinary_request],
+        max_input_tokens=900,
+    )
+
+    assert refill is not None
+    assert auth_request.fulfilled_evidence_ids == [
+        "risk:security_sensitive:src/auth.py"
+    ]
+    assert ordinary_request.fulfilled_evidence_ids == [
+        "diff:src/ordinary.py:5",
+        "diff:src/ordinary.py:6",
+    ]
+
+
 def _large_package() -> EvidencePackage:
     evidence_index = {
         "diff:src/auth.py:1": ReviewEvidence(

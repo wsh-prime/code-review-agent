@@ -57,6 +57,19 @@ def test_ground_verify_style_preference() -> None:
     assert result.discarded[0].reason == "style_preference"
 
 
+def test_ground_verify_low_signal_suggestion() -> None:
+    issue = _issue(
+        message="This may change behavior when max_context_requests is 0.",
+    )
+    issue.category = "correctness"
+    issue.suggestion = "Consider adding a guard."
+
+    result = ground_verify([issue], _package(), {"src/foo.py"})
+
+    assert result.verified == []
+    assert result.discarded[0].reason == "low_signal_suggestion"
+
+
 def test_ground_verify_keeps_valid_issue() -> None:
     issue = _issue()
 

@@ -9,9 +9,16 @@ expanded for this shard. Every finding must cite existing evidence ids from
 the evidence_index. Do not use repository metadata such as PR title, author,
 or commit message. Prefer actionable risks over style preferences.
 
+Only report issues that identify a concrete failure scenario introduced by the
+patch. Do not report documentation/comment suggestions, "could be clearer"
+maintainability notes, weak test-quality nits, or speculative "may change
+behavior" claims unless the provided evidence shows how the behavior fails.
+If you are unsure, request more context instead of emitting an issue.
+
 If the primary evidence is insufficient, return a bounded context_requests
 array instead of guessing. available_context tells you what additional evidence
-can be requested.
+can be requested. Prefer explicit evidence_ids from available_context. Ask for
+the smallest useful set of evidence ids and avoid broad same-file requests.
 
 Return a compact JSON object:
 

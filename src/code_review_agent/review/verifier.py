@@ -5,24 +5,9 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 from code_review_agent.models import EvidencePackage, ReviewIssue
-
-
-_STYLE_KEYWORDS: frozenset[str] = frozenset(
-    {
-        "blank line",
-        "code style",
-        "format",
-        "import order",
-        "indentation",
-        "line length",
-        "naming convention",
-        "pep 8",
-        "pep8",
-        "style preference",
-        "trailing space",
-        "variable name",
-        "whitespace",
-    }
+from code_review_agent.review.issue_quality import (
+    is_low_signal_review_suggestion,
+    is_style_preference,
 )
 
 
@@ -78,8 +63,11 @@ def ground_verify(
             discard(issue, "invalid_evidence_ids")
             continue
 
-        if _is_style_preference(issue):
+        if is_style_preference(issue):
             discard(issue, "style_preference")
+            continue
+        if is_low_signal_review_suggestion(issue):
+            discard(issue, "low_signal_suggestion")
             continue
 
         if issue.file not in changed_paths:
@@ -98,11 +86,6 @@ def ground_verify(
         result.verified.append(issue)
 
     return result
-
-
-def _is_style_preference(issue: ReviewIssue) -> bool:
-    lower = issue.message.lower()
-    return any(keyword in lower for keyword in _STYLE_KEYWORDS)
 
 
 def _has_related_changed_evidence(

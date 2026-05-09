@@ -22,6 +22,7 @@ DEFAULT_MAX_EVIDENCE_ITEMS = 400
 DEFAULT_MAX_RISK_EVIDENCE_IDS = 5
 DEFAULT_PRIMARY_EVIDENCE_PER_RISK = 4
 DEFAULT_MANIFEST_EVIDENCE_ID_LIMIT = 120
+DEFAULT_MAX_REFILL_EVIDENCE_PER_REQUEST = 12
 LIVE_REVIEW_INPUT_SCHEMA = "live_review_input_v1"
 SELECTION_STRATEGY = "risk_first_v1"
 SHARDING_STRATEGY = "file_risk_shards_v1"
@@ -330,6 +331,7 @@ def build_context_refill(
     max_input_tokens: int = DEFAULT_CONTEXT_BUDGET_TOKENS,
     max_evidence_per_file: int = DEFAULT_MAX_EVIDENCE_PER_FILE,
     max_context_requests: int = 8,
+    max_evidence_per_request: int = DEFAULT_MAX_REFILL_EVIDENCE_PER_REQUEST,
 ) -> ReviewerContext | None:
     """Build a one-shot refill context for bounded model requests."""
 
@@ -339,7 +341,17 @@ def build_context_refill(
         for request in requests
         if request.request_type in ALLOWED_CONTEXT_REQUEST_TYPES
     ][: max(0, max_context_requests)]
-    evidence_ids = _requested_evidence_ids(package, selected_ids, request_slice)
+    evidence_by_request = _requested_evidence_ids_by_request(
+        package,
+        selected_ids,
+        request_slice,
+        max_evidence_per_request=max_evidence_per_request,
+    )
+    evidence_ids = {
+        evidence_id
+        for ids in evidence_by_request.values()
+        for evidence_id in ids
+    }
     if not evidence_ids:
         return None
 
@@ -366,8 +378,11 @@ def build_context_refill(
     )
     fulfilled_ids = set(refill.reviewer_context.evidence_index)
     for request in request_slice:
+        requested_ids = evidence_by_request.get(id(request), [])
         request.fulfilled_evidence_ids = sorted(
-            evidence_id for evidence_id in evidence_ids if evidence_id in fulfilled_ids
+            evidence_id
+            for evidence_id in requested_ids
+            if evidence_id in fulfilled_ids
         )
     return refill.reviewer_context
 
@@ -953,33 +968,75 @@ def _context_budget_summary(
     }
 
 
-def _requested_evidence_ids(
+def _requested_evidence_ids_by_request(
     package: EvidencePackage,
     selected_ids: set[str],
     requests: list[ContextRequest],
-) -> set[str]:
-    requested: set[str] = set()
+    *,
+    max_evidence_per_request: int,
+) -> dict[int, list[str]]:
+    requested_by_id: dict[int, list[str]] = {}
     for context_request in requests:
-        explicit_ids = [
-            evidence_id
-            for evidence_id in context_request.evidence_ids
-            if evidence_id in package.evidence_index
-        ]
-        requested.update(explicit_ids)
-        if context_request.request_type == "same_file_more_evidence":
-            if context_request.path is not None:
-                requested.update(_evidence_ids_for_path(package, context_request.path))
-        elif context_request.request_type == "related_tests":
-            requested.update(_test_evidence_ids(package, context_request.path))
-        elif context_request.request_type == "related_symbol":
-            requested.update(_entity_evidence_ids(package, context_request.path))
-        elif context_request.request_type == "risk_evidence":
-            requested.update(_risk_related_evidence_ids(package, context_request))
-    return {
+        requested_by_id[id(context_request)] = _requested_evidence_ids_for_request(
+            package,
+            selected_ids,
+            context_request,
+            max_evidence_per_request=max_evidence_per_request,
+        )
+    return requested_by_id
+
+
+def _requested_evidence_ids_for_request(
+    package: EvidencePackage,
+    selected_ids: set[str],
+    context_request: ContextRequest,
+    *,
+    max_evidence_per_request: int = DEFAULT_MAX_REFILL_EVIDENCE_PER_REQUEST,
+) -> list[str]:
+    explicit_ids = [
         evidence_id
-        for evidence_id in requested
+        for evidence_id in context_request.evidence_ids
         if evidence_id in package.evidence_index and evidence_id not in selected_ids
-    }
+    ]
+    if explicit_ids:
+        return _rank_refill_ids(package, explicit_ids, max_evidence_per_request)
+
+    requested: set[str] = set()
+    if context_request.request_type == "same_file_more_evidence":
+        if context_request.path is not None:
+            requested.update(_evidence_ids_for_path(package, context_request.path))
+    elif context_request.request_type == "related_tests":
+        requested.update(_test_evidence_ids(package, context_request.path))
+    elif context_request.request_type == "related_symbol":
+        requested.update(_entity_evidence_ids(package, context_request.path))
+    elif context_request.request_type == "risk_evidence":
+        requested.update(_risk_related_evidence_ids(package, context_request))
+
+    return _rank_refill_ids(
+        package,
+        [
+            evidence_id
+            for evidence_id in requested
+            if evidence_id in package.evidence_index and evidence_id not in selected_ids
+        ],
+        max_evidence_per_request,
+    )
+
+
+def _rank_refill_ids(
+    package: EvidencePackage,
+    evidence_ids: list[str],
+    limit: int,
+) -> list[str]:
+    candidates = [
+        evidence_id
+        for evidence_id in dict.fromkeys(evidence_ids)
+        if evidence_id in package.evidence_index
+    ]
+    return sorted(
+        candidates,
+        key=lambda item: (-score_evidence(package, item), item),
+    )[: max(0, limit)]
 
 
 def _evidence_ids_for_path(package: EvidencePackage, path: str) -> set[str]:

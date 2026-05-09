@@ -52,6 +52,7 @@ def _make_issue(
     confidence: float = 0.8,
     evidence_ids: list[str] | None = None,
     message: str = "Business logic changed without test update.",
+    suggestion: str = "Update tests.",
 ) -> ReviewIssue:
     return ReviewIssue(
         file=file,
@@ -59,7 +60,7 @@ def _make_issue(
         severity="medium",
         category=category,
         message=message,
-        suggestion="Update tests.",
+        suggestion=suggestion,
         confidence=confidence,
         evidence_ids=evidence_ids if evidence_ids is not None else ["diff:src/foo.py:10"],
     )
@@ -191,6 +192,47 @@ def test_style_heuristic_case_insensitive():
     issue = _make_issue(message="Violates PEP8 style preference.")
     result = filter_issues([issue], [], pkg, CHANGED)
     assert len(result.discarded) == 1
+
+
+def test_discard_low_signal_maintainability_comment_request():
+    pkg = _make_package(["diff:src/foo.py:10"])
+    issue = _make_issue(
+        category="maintainability",
+        message="allowed_paths=None is not explicitly documented.",
+        suggestion="Add a comment clarifying that None means all paths.",
+    )
+
+    result = filter_issues([issue], [], pkg, CHANGED)
+
+    assert result.findings == []
+    assert result.discarded[0].reason == "low_signal_suggestion"
+
+
+def test_discard_speculative_correctness_without_failure_scenario():
+    pkg = _make_package(["diff:src/foo.py:10"])
+    issue = _make_issue(
+        category="correctness",
+        message="This may change behavior when max_context_requests is 0.",
+        suggestion="Consider adding a guard.",
+    )
+
+    result = filter_issues([issue], [], pkg, CHANGED)
+
+    assert result.findings == []
+    assert result.discarded[0].reason == "low_signal_suggestion"
+
+
+def test_keep_concrete_correctness_failure():
+    pkg = _make_package(["diff:src/foo.py:10"])
+    issue = _make_issue(
+        category="correctness",
+        message="This drops requested evidence ids and causes an incorrect refill.",
+        suggestion="Preserve explicit evidence ids before filtering.",
+    )
+
+    result = filter_issues([issue], [], pkg, CHANGED)
+
+    assert len(result.findings) == 1
 
 
 # ── Rule 5: low confidence → needs_human_review ───────────────────────────────
