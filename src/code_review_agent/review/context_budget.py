@@ -214,7 +214,10 @@ def build_live_review_input(
         key=lambda item: (-item.score, item.evidence_id),
     )
 
-    for required_id in _required_risk_evidence_ids(package):
+    for required_id in _required_risk_evidence_ids(
+        package,
+        allowed_paths=allowed_paths,
+    ):
         if required_id not in selected_ids and required_id in package.evidence_index:
             warnings.append(f"required_risk_evidence_omitted:{required_id}")
 
@@ -333,9 +336,9 @@ def build_context_refill(
     selected_ids = set(parent.evidence_index)
     request_slice = [
         request
-        for request in requests[: max(0, max_context_requests)]
+        for request in requests
         if request.request_type in ALLOWED_CONTEXT_REQUEST_TYPES
-    ]
+    ][: max(0, max_context_requests)]
     evidence_ids = _requested_evidence_ids(package, selected_ids, request_slice)
     if not evidence_ids:
         return None
@@ -513,6 +516,7 @@ def _expanded_candidate_ids(
                 signal,
                 max_evidence_ids=DEFAULT_PRIMARY_EVIDENCE_PER_RISK,
                 expanded_only=True,
+                allowed_paths=allowed_paths,
             )
         )
 
@@ -556,7 +560,7 @@ def _base_payload(
             ]
         ],
         "risk_signals": [
-            _risk_card(package, signal)
+            _risk_card(package, signal, allowed_paths=allowed_paths)
             for signal in sorted(
                 _risk_signals(package, allowed_paths=allowed_paths),
                 key=_risk_sort_key,
@@ -632,6 +636,7 @@ def _risk_card(
     signal: RiskSignal,
     *,
     max_evidence_ids: int = DEFAULT_MAX_RISK_EVIDENCE_IDS,
+    allowed_paths: set[str] | None = None,
 ) -> dict[str, Any]:
     risk_id = _risk_evidence_id(signal)
     evidence_ids = [
@@ -644,6 +649,7 @@ def _risk_card(
         signal,
         max_evidence_ids=max_evidence_ids,
         expanded_only=True,
+        allowed_paths=allowed_paths,
     )
     deduped = list(dict.fromkeys(evidence_ids))
     return {
@@ -663,11 +669,17 @@ def _primary_evidence_ids_for_signal(
     *,
     max_evidence_ids: int,
     expanded_only: bool,
+    allowed_paths: set[str] | None = None,
 ) -> list[str]:
     ids: list[str] = []
     for evidence_id in signal.evidence_ids:
         evidence = package.evidence_index.get(evidence_id)
         if evidence is None:
+            continue
+        if (
+            allowed_paths is not None
+            and _path_for_evidence(evidence_id, evidence) not in allowed_paths
+        ):
             continue
         if expanded_only and evidence.kind not in _DEFAULT_EXPANDED_EVIDENCE_KINDS:
             continue
@@ -805,13 +817,24 @@ def _changed_paths(package: EvidencePackage) -> list[str]:
     return paths
 
 
-def _required_risk_evidence_ids(package: EvidencePackage) -> list[str]:
+def _required_risk_evidence_ids(
+    package: EvidencePackage,
+    *,
+    allowed_paths: set[str] | None = None,
+) -> list[str]:
     ids: list[str] = []
     for signal in sorted(package.risk_signals, key=_risk_sort_key):
         for evidence_id in signal.evidence_ids:
-            if evidence_id in package.evidence_index:
-                ids.append(evidence_id)
-                break
+            evidence = package.evidence_index.get(evidence_id)
+            if evidence is None:
+                continue
+            if (
+                allowed_paths is not None
+                and _path_for_evidence(evidence_id, evidence) not in allowed_paths
+            ):
+                continue
+            ids.append(evidence_id)
+            break
     return ids
 
 

@@ -141,6 +141,34 @@ def test_build_reviewer_contexts_splits_large_multi_file_package() -> None:
     assert budget["selected_evidence_count"] == 5
 
 
+def test_shards_do_not_expand_primary_evidence_from_other_paths() -> None:
+    package = _cross_file_risk_package()
+
+    contexts = build_reviewer_contexts(
+        package,
+        max_input_tokens=700,
+        max_files=1,
+        max_evidence_per_file=4,
+    )
+
+    assert len(contexts) == 2
+    for context in contexts:
+        shard_paths = {item["path"] for item in context.changed_files}
+        evidence_paths = {
+            evidence_id.split(":", 2)[1]
+            for evidence_id in context.evidence_index
+            if evidence_id.startswith("diff:")
+        }
+        primary_paths = {
+            evidence_id.split(":", 2)[1]
+            for risk in context.risk_signals
+            for evidence_id in risk["primary_evidence_ids"]
+            if evidence_id.startswith("diff:")
+        }
+        assert evidence_paths <= shard_paths
+        assert primary_paths <= shard_paths
+
+
 def test_build_context_refill_uses_bounded_request_types() -> None:
     package = _large_package()
     live_input = build_live_review_input(
@@ -167,6 +195,38 @@ def test_build_context_refill_uses_bounded_request_types() -> None:
     assert refill.is_refill is True
     assert refill.parent_shard_id == "shard-001"
     assert "risk:security_sensitive:src/auth.py" in refill.evidence_index
+
+
+def test_build_context_refill_filters_request_types_before_limiting() -> None:
+    package = _large_package()
+    live_input = build_live_review_input(
+        package,
+        max_input_tokens=900,
+        max_evidence_per_file=1,
+    )
+    requests = [
+        ContextRequest(request_type="unsupported", path="src/auth.py")
+        for _ in range(8)
+    ]
+    requests.append(
+        ContextRequest(
+            request_type="risk_evidence",
+            path="src/auth.py",
+            risk_tag="security_sensitive",
+            reason="Need risk summary.",
+        )
+    )
+
+    refill = build_context_refill(
+        package,
+        live_input.reviewer_context,
+        requests,
+        max_input_tokens=900,
+        max_context_requests=1,
+    )
+
+    assert refill is not None
+    assert refill.request_types == ["risk_evidence"]
 
 
 def _large_package() -> EvidencePackage:
@@ -203,6 +263,33 @@ def _large_package() -> EvidencePackage:
                 confidence=0.9,
                 reason="Security-sensitive keywords changed.",
                 evidence_ids=["diff:src/auth.py:1"],
+            )
+        ],
+        evidence_index=evidence_index,
+    )
+
+
+def _cross_file_risk_package() -> EvidencePackage:
+    evidence_index = {}
+    changes = []
+    for path in ["src/a.py", "src/b.py"]:
+        evidence_id = f"diff:{path}:1"
+        changes.append(_change(path))
+        evidence_index[evidence_id] = ReviewEvidence(
+            id=evidence_id,
+            kind="diff",
+            source=f"{path}:1",
+            message=f"Added line: changed behavior in {path}.",
+        )
+    return EvidencePackage(
+        repo_root="/repo",
+        changed_files=changes,
+        risk_signals=[
+            RiskSignal(
+                tag="behavior_change",
+                confidence=0.7,
+                reason="Cross-file behavior changed.",
+                evidence_ids=["diff:src/a.py:1", "diff:src/b.py:1"],
             )
         ],
         evidence_index=evidence_index,
