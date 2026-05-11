@@ -685,6 +685,8 @@ def _changed_file_summaries(
     summaries: list[dict[str, Any]] = []
     for change in package.changed_files:
         path = change.new_path or change.old_path
+        if path is None:
+            continue
         if allowed_paths is not None and path not in allowed_paths:
             continue
         summaries.append(

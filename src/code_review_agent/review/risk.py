@@ -240,7 +240,7 @@ def _test_gap_risks(
 ) -> list[RiskSignal]:
     changed_paths = {_change_path(change) for change in changes}
     changed_paths.discard(None)
-    changed_test_paths = {path for path in changed_paths if _is_test_path(path)}
+    changed_test_paths = {path for path in changed_paths if path is not None and _is_test_path(path)}
     signals: list[RiskSignal] = []
 
     for change in changes:

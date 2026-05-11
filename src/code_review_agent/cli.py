@@ -450,7 +450,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         parser.print_help()
         return 0
 
-    return args.handler(args)
+    result: int = args.handler(args)
+    return result
 
 
 if __name__ == "__main__":

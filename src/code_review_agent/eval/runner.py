@@ -306,7 +306,7 @@ def _evidence_coverage(case_results: list[dict[str, Any]]) -> float:
     )
     if issue_count == 0:
         return 0.0
-    return round(with_evidence_count / issue_count, 4)
+    return float(round(with_evidence_count / issue_count, 4))
 
 
 def _review_burden_summary(case_results: list[dict[str, Any]]) -> dict[str, Any]:

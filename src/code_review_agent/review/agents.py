@@ -8,7 +8,7 @@ import os
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Protocol
+from typing import Any, Protocol
 from urllib import error, request
 from uuid import uuid4
 
@@ -478,7 +478,7 @@ class OpenAICompatibleReviewAgent:
             return
         path = Path(self.context_checkpoint_path)
         path.parent.mkdir(parents=True, exist_ok=True)
-        data = {
+        data: dict[str, Any] = {
             "schema_version": LIVE_CONTEXT_CHECKPOINT_SCHEMA_VERSION,
             "package_hash": self.context_checkpoint_package_hash,
             "diff_hash": self.context_checkpoint_diff_hash,
@@ -486,7 +486,7 @@ class OpenAICompatibleReviewAgent:
         }
         if path.exists():
             try:
-                existing = json.loads(path.read_text(encoding="utf-8"))
+                existing: dict[str, Any] = json.loads(path.read_text(encoding="utf-8"))
             except json.JSONDecodeError:
                 existing = {}
             if (
@@ -700,7 +700,8 @@ def _post_openai_compatible_json(
     )
     with request.urlopen(req, timeout=timeout_seconds) as response:
         raw = response.read().decode("utf-8", errors="replace")
-    return json.loads(raw)
+    result: dict[str, Any] = json.loads(raw)
+    return result
 
 
 def _retry_with_backoff(
@@ -713,7 +714,8 @@ def _retry_with_backoff(
     attempts = max(1, max_attempts)
     for attempt in range(1, attempts + 1):
         try:
-            return call()
+            result: dict[str, Any] = call()
+            return result
         except error.HTTPError as exc:
             if exc.code not in RETRYABLE_HTTP_STATUS_CODES:
                 raise _AgentFatalError(
@@ -757,8 +759,8 @@ def _retry_delay_seconds(
 ) -> float:
     retry_after = _retry_after_seconds(getattr(exc, "headers", None))
     if retry_after is not None:
-        return retry_after
-    return base_delay_seconds * (2 ** (attempt - 1))
+        return float(retry_after)
+    return float(base_delay_seconds * (2 ** (attempt - 1)))
 
 
 def _retry_after_seconds(headers) -> float | None:
@@ -910,9 +912,10 @@ def _context_checkpoint_key(
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
 
-def _chat_completion_text(response: dict) -> str:
+def _chat_completion_text(response: dict[str, Any]) -> str:
     try:
-        return response["choices"][0]["message"]["content"]
+        text: str = response["choices"][0]["message"]["content"]
+        return text
     except (KeyError, IndexError, TypeError) as exc:
         raise ValueError("OpenAI-compatible response missing choices[0].message.content") from exc
 

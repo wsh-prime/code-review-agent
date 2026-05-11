@@ -12,8 +12,13 @@ build/
 dist/
 *.egg-info/
 outputs/
+runs/
 /changes.patch
 scripts/*.env.local
 .env
 .env.*
 !.env.example
+docs/
+简历/
+*.docx
+*.pdf
