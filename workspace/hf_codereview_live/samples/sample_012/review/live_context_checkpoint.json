@@ -1,0 +1,60 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:ca92c3bd033cdeb6f014f276464381d7b3a1298a5e3e06cc6b3e90177d9343ec",
+  "diff_hash": "sha256:f11833295ba9e9146432523cefcbc108adcc7c1fd85863194cec204e61190e8b",
+  "shards": {
+    "40c8acd3f8efaa06435b06f1bc742bd43fdebaa3dfd8595cc87c3b167816b75e": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:gpt_engineer/main.py:18"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "gpt_engineer/main.py",
+          "line": 18,
+          "severity": "low",
+          "category": "correctness",
+          "message": "Removed TODO comment that indicated a potential issue: dumping messages even when step returns None. The patch removes the comment but does not add a guard, so the original risk of dumping None remains unaddressed.",
+          "suggestion": "Add a check to skip dumping if step returns None, e.g., 'if messages is not None: dbs.logs[step.__name__] = json.dumps(messages)'.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:gpt_engineer/main.py:18"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:gpt_engineer/main.py:18"
+        ],
+        "output_issue_ids": [
+          "correctness:gpt_engineer/main.py:18"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 3588,
+        "token_count_in": 1315,
+        "token_count_out": 176,
+        "trace_id": "58fc79fdbfb14cfa94682715fc5654d0",
+        "span_id": "01ff99ac81204120",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

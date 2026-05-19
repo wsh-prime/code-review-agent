@@ -1,0 +1,3422 @@
+{
+  "schema_version": "1.3",
+  "summary": {
+    "mode": "hybrid-live",
+    "changed_file_count": 3,
+    "changed_entity_count": 3,
+    "risk_signal_count": 0,
+    "finding_count": 0,
+    "needs_human_review_count": 1,
+    "discarded_count": 1,
+    "evidence_count": 224,
+    "missing_evidence_id_count": 0,
+    "agent_run_count": 2,
+    "prompt_exported": false,
+    "loop_enabled": true,
+    "loop_iterations_completed": 1,
+    "loop_converged": false,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "total_latency_ms": 12010,
+    "total_token_count_in": 6065,
+    "total_token_count_out": 403,
+    "context_budget_enabled": true,
+    "context_truncated": true,
+    "selected_evidence_count": 3,
+    "omitted_evidence_count": 200,
+    "review_shard_count": 1,
+    "context_refill_count": 0,
+    "context_request_count": 0,
+    "target_repo_modified": false
+  },
+  "findings": [],
+  "needs_human_review": [
+    {
+      "file": "src/Components/Endpoints/test/TestComponents/GenericComponent.razor",
+      "line": 1,
+      "severity": "medium",
+      "category": "style",
+      "message": "New file GenericComponent.razor is missing the required MIT license header. Review guideline 'All C# Source Files Must Include MIT License Header' requires the exact two-line comment header at the start of every .cs file. Although this is a .razor file, the guideline applies to all C# source files; .razor files with @code blocks are considered C# source files.",
+      "suggestion": "Add the license header at the top of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1"
+      ]
+    }
+  ],
+  "discarded": [
+    {
+      "file": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs",
+      "line": 10,
+      "severity": "medium",
+      "category": "style",
+      "message": "Test class 'ServerComponentDeserializerTest' does not follow the naming convention. Review guideline 'Test Classes Must Follow Naming Convention' requires test class names to end with 'Test' or 'Tests' suffix. The class name ends with 'Test' but the guideline expects a clear suffix; however, the class name is acceptable as it ends with 'Test'. No issue.",
+      "suggestion": "",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:1"
+      ],
+      "filter_reason": "style_preference"
+    }
+  ],
+  "changed_files": [
+    {
+      "old_path": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs",
+      "new_path": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 718,
+          "old_count": 6,
+          "new_start": 718,
+          "new_count": 133,
+          "section_header": "public async Task CanPrerender_ComponentWithNullParameters_ServerPrerenderedMode",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 718,
+              "new_lineno": 718,
+              "content": "        Assert.Null(epilogueMarker.Type);"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 719,
+              "new_lineno": 719,
+              "content": "    }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 720,
+              "new_lineno": 720,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 721,
+              "content": "    [Fact]"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 722,
+              "content": "    public async Task CanRender_ClosedGenericComponent()"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 723,
+              "content": "    {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 724,
+              "content": "        // Arrange"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 725,
+              "content": "        var httpContext = GetHttpContext();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 726,
+              "content": "        var writer = new StringWriter();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 727,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 728,
+              "content": "        // Act"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 729,
+              "content": "        var parameters = ParameterView.FromDictionary(new Dictionary<string, object> { { \"Value\", 42 } });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 730,
+              "content": "        var result = await renderer.PrerenderComponentAsync(httpContext, typeof(GenericComponent<int>), null, parameters);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 731,
+              "content": "        await renderer.Dispatcher.InvokeAsync(() => result.WriteTo(writer, HtmlEncoder.Default));"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 732,
+              "content": "        var content = writer.ToString();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 733,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 734,
+              "content": "        // Assert"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 735,
+              "content": "        Assert.Equal(\"<p>Generic value: 42</p>\", content);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 736,
+              "content": "    }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 737,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 738,
+              "content": "    [Fact]"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 739,
+              "content": "    public async Task CanRender_ClosedGenericComponent_ServerMode()"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 740,
+              "content": "    {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 741,
+              "content": "        // Arrange"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 742,
+              "content": "        var httpContext = GetHttpContext();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 743,
+              "content": "        var protector = _dataprotectorProvider.CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 744,
+              "content": "            .ToTimeLimitedDataProtector();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 745,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 746,
+              "content": "        // Act"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 747,
+              "content": "        var parameters = ParameterView.FromDictionary(new Dictionary<string, object> { { \"Value\", \"TestString\" } });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 748,
+              "content": "        var result = await renderer.PrerenderComponentAsync(httpContext, typeof(GenericComponent<string>), new InteractiveServerRenderMode(false), parameters);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 749,
+              "content": "        var content = await renderer.Dispatcher.InvokeAsync(() => HtmlContentToString(result));"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 750,
+              "content": "        var match = Regex.Match(content, ComponentPattern);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 751,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 752,
+              "content": "        // Assert"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 753,
+              "content": "        Assert.True(match.Success);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 754,
+              "content": "        var marker = JsonSerializer.Deserialize<ComponentMarker>(match.Groups[1].Value, ServerComponentSerializationSettings.JsonSerializationOptions);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 755,
+              "content": "        Assert.Equal(0, marker.Sequence);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 756,
+              "content": "        Assert.Null(marker.PrerenderId);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 757,
+              "content": "        Assert.NotNull(marker.Descriptor);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 758,
+              "content": "        Assert.Equal(\"server\", marker.Type);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 759,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 760,
+              "content": "        var unprotectedServerComponent = protector.Unprotect(marker.Descriptor);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 761,
+              "content": "        var serverComponent = JsonSerializer.Deserialize<ServerComponent>(unprotectedServerComponent, ServerComponentSerializationSettings.JsonSerializationOptions);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 762,
+              "content": "        Assert.Equal(0, serverComponent.Sequence);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 763,
+              "content": "        Assert.Equal(typeof(GenericComponent<string>).Assembly.GetName().Name, serverComponent.AssemblyName);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 764,
+              "content": "        Assert.Equal(typeof(GenericComponent<string>).FullName, serverComponent.TypeName);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 765,
+              "content": "        Assert.NotEqual(Guid.Empty, serverComponent.InvocationId);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 766,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 767,
+              "content": "        var parameterDefinition = Assert.Single(serverComponent.ParameterDefinitions);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 768,
+              "content": "        Assert.Equal(\"Value\", parameterDefinition.Name);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 769,
+              "content": "        Assert.Equal(\"System.String\", parameterDefinition.TypeName);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 770,
+              "content": "        Assert.Equal(\"System.Private.CoreLib\", parameterDefinition.Assembly);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 771,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 772,
+              "content": "        var value = Assert.Single(serverComponent.ParameterValues);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 773,
+              "content": "        var rawValue = Assert.IsType<JsonElement>(value);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 774,
+              "content": "        Assert.Equal(\"TestString\", rawValue.GetString());"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 775,
+              "content": "    }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 776,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 777,
+              "content": "    [Fact]"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 778,
+              "content": "    public async Task CanPrerender_ClosedGenericComponent_ServerMode()"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 779,
+              "content": "    {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 780,
+              "content": "        // Arrange"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 781,
+              "content": "        var httpContext = GetHttpContext();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 782,
+              "content": "        var protector = _dataprotectorProvider.CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 783,
+              "content": "            .ToTimeLimitedDataProtector();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 784,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 785,
+              "content": "        // Act"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 786,
+              "content": "        var parameters = ParameterView.FromDictionary(new Dictionary<string, object> { { \"Value\", 123 } });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 787,
+              "content": "        var result = await renderer.PrerenderComponentAsync(httpContext, typeof(GenericComponent<int>), RenderMode.InteractiveServer, parameters);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 788,
+              "content": "        var content = await renderer.Dispatcher.InvokeAsync(() => HtmlContentToString(result));"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 789,
+              "content": "        var match = Regex.Match(content, PrerenderedComponentPattern, RegexOptions.Multiline);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 790,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 791,
+              "content": "        // Assert"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 792,
+              "content": "        Assert.True(match.Success);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 793,
+              "content": "        var preamble = match.Groups[\"preamble\"].Value;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 794,
+              "content": "        var preambleMarker = JsonSerializer.Deserialize<ComponentMarker>(preamble, ServerComponentSerializationSettings.JsonSerializationOptions);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 795,
+              "content": "        Assert.Equal(0, preambleMarker.Sequence);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 796,
+              "content": "        Assert.NotNull(preambleMarker.PrerenderId);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 797,
+              "content": "        Assert.NotNull(preambleMarker.Descriptor);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 798,
+              "content": "        Assert.Equal(\"server\", preambleMarker.Type);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 799,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 800,
+              "content": "        var unprotectedServerComponent = protector.Unprotect(preambleMarker.Descriptor);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 801,
+              "content": "        var serverComponent = JsonSerializer.Deserialize<ServerComponent>(unprotectedServerComponent, ServerComponentSerializationSettings.JsonSerializationOptions);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 802,
+              "content": "        Assert.NotEqual(default, serverComponent);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 803,
+              "content": "        Assert.Equal(0, serverComponent.Sequence);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 804,
+              "content": "        Assert.Equal(typeof(GenericComponent<int>).Assembly.GetName().Name, serverComponent.AssemblyName);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 805,
+              "content": "        Assert.Equal(typeof(GenericComponent<int>).FullName, serverComponent.TypeName);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 806,
+              "content": "        Assert.NotEqual(Guid.Empty, serverComponent.InvocationId);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 807,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 808,
+              "content": "        var prerenderedContent = match.Groups[\"content\"].Value;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 809,
+              "content": "        Assert.Equal(\"<p>Generic value: 123</p>\", prerenderedContent);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 810,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 811,
+              "content": "        var epilogue = match.Groups[\"epilogue\"].Value;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 812,
+              "content": "        var epilogueMarker = JsonSerializer.Deserialize<ComponentMarker>(epilogue, ServerComponentSerializationSettings.JsonSerializationOptions);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 813,
+              "content": "        Assert.Equal(preambleMarker.PrerenderId, epilogueMarker.PrerenderId);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 814,
+              "content": "    }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 815,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 816,
+              "content": "    [Fact]"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 817,
+              "content": "    public async Task CanPrerender_ClosedGenericComponent_ClientMode()"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 818,
+              "content": "    {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 819,
+              "content": "        // Arrange"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 820,
+              "content": "        var httpContext = GetHttpContext();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 821,
+              "content": "        var writer = new StringWriter();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 822,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 823,
+              "content": "        // Act"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 824,
+              "content": "        var parameters = ParameterView.FromDictionary(new Dictionary<string, object> { { \"Value\", 456 } });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 825,
+              "content": "        var result = await renderer.PrerenderComponentAsync(httpContext, typeof(GenericComponent<int>), RenderMode.InteractiveWebAssembly, parameters);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 826,
+              "content": "        await renderer.Dispatcher.InvokeAsync(() => result.WriteTo(writer, HtmlEncoder.Default));"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 827,
+              "content": "        var content = writer.ToString();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 828,
+              "content": "        content = AssertAndStripWebAssemblyOptions(content);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 829,
+              "content": "        var match = Regex.Match(content, PrerenderedComponentPattern, RegexOptions.Multiline);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 830,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 831,
+              "content": "        // Assert"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 832,
+              "content": "        Assert.True(match.Success);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 833,
+              "content": "        var preamble = match.Groups[\"preamble\"].Value;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 834,
+              "content": "        var preambleMarker = JsonSerializer.Deserialize<ComponentMarker>(preamble, ServerComponentSerializationSettings.JsonSerializationOptions);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 835,
+              "content": "        Assert.NotNull(preambleMarker.PrerenderId);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 836,
+              "content": "        Assert.Equal(\"webassembly\", preambleMarker.Type);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 837,
+              "content": "        Assert.Equal(typeof(GenericComponent<string>).Assembly.GetName().Name, preambleMarker.Assembly);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 838,
+              "content": "        Assert.Equal(typeof(GenericComponent<string>).FullName, preambleMarker.TypeName);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 839,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 840,
+              "content": "        var prerenderedContent = match.Groups[\"content\"].Value;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 841,
+              "content": "        Assert.Equal(\"<p>Generic value: 456</p>\", prerenderedContent);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 842,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 843,
+              "content": "        var epilogue = match.Groups[\"epilogue\"].Value;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 844,
+              "content": "        var epilogueMarker = JsonSerializer.Deserialize<ComponentMarker>(epilogue, ServerComponentSerializationSettings.JsonSerializationOptions);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 845,
+              "content": "        Assert.Equal(preambleMarker.PrerenderId, epilogueMarker.PrerenderId);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 846,
+              "content": "    }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 847,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 721,
+              "new_lineno": 848,
+              "content": "    [Fact]"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 722,
+              "new_lineno": 849,
+              "content": "    public async Task ComponentWithInvalidRenderMode_Throws()"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 723,
+              "new_lineno": 850,
+              "content": "    {"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": null,
+      "new_path": "src/Components/Endpoints/test/TestComponents/GenericComponent.razor",
+      "change_type": "added",
+      "hunks": [
+        {
+          "old_start": 0,
+          "old_count": 0,
+          "new_start": 1,
+          "new_count": 6,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1,
+              "content": "@typeparam TValue"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 2,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 3,
+              "content": "<p>Generic value: @(Value?.ToString() ?? \"(null)\")</p>"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 4,
+              "content": "@code {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 5,
+              "content": "    [Parameter] public TValue Value { get; set; }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 6,
+              "content": "}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs",
+      "new_path": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 1,
+          "old_count": 15,
+          "new_start": 1,
+          "new_count": 16,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 1,
+              "new_lineno": 1,
+              "content": "// Licensed to the .NET Foundation under one or more agreements."
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 2,
+              "new_lineno": 2,
+              "content": "// The .NET Foundation licenses this file to you under the MIT license."
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 3,
+              "new_lineno": 3,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 4,
+              "content": "using System.Globalization;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 4,
+              "new_lineno": 5,
+              "content": "using System.Text.Json;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 5,
+              "new_lineno": 6,
+              "content": "using Microsoft.AspNetCore.Components.Endpoints;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 6,
+              "new_lineno": 7,
+              "content": "using Microsoft.AspNetCore.DataProtection;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 7,
+              "new_lineno": 8,
+              "content": "using Microsoft.Extensions.Logging.Abstractions;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 8,
+              "new_lineno": 9,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 9,
+              "new_lineno": null,
+              "content": "namespace Microsoft.AspNetCore.Components.Server.Circuits;"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 10,
+              "new_lineno": null,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 11,
+              "new_lineno": null,
+              "content": "public class ServerComponentDeserializerTest"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 10,
+              "content": "namespace Microsoft.AspNetCore.Components.Server.Circuits"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 12,
+              "new_lineno": 11,
+              "content": "{"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 12,
+              "content": "    public class ServerComponentDeserializerTest"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 13,
+              "content": "    {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 13,
+              "new_lineno": 14,
+              "content": "    private readonly IDataProtectionProvider _ephemeralDataProtectionProvider;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 14,
+              "new_lineno": 15,
+              "content": "    private readonly ITimeLimitedDataProtector _protector;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 15,
+              "new_lineno": 16,
+              "content": "    private ServerComponentInvocationSequence _invocationSequence = new();"
+            }
+          ]
+        },
+        {
+          "old_start": 75,
+          "old_count": 6,
+          "new_start": 76,
+          "new_count": 74,
+          "section_header": "public void CanParseSingleMarkerWithNullParameters()",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 75,
+              "new_lineno": 76,
+              "content": "        Assert.Null(parameters[\"Parameter\"]);"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 76,
+              "new_lineno": 77,
+              "content": "    }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 77,
+              "new_lineno": 78,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 79,
+              "content": "    [Fact]"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 80,
+              "content": "    public void CanParseSingleMarkerForClosedGenericComponent()"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 81,
+              "content": "    {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 82,
+              "content": "        // Arrange"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 83,
+              "content": "        var markers = SerializeMarkers(CreateMarkers(typeof(GenericTestComponent<int>)));"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 84,
+              "content": "        var serverComponentDeserializer = CreateServerComponentDeserializer();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 85,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 86,
+              "content": "        // Act & assert"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 87,
+              "content": "        Assert.True(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 88,
+              "content": "        var deserializedDescriptor = Assert.Single(descriptors);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 89,
+              "content": "        Assert.Equal(typeof(GenericTestComponent<int>).FullName, deserializedDescriptor.ComponentType.FullName);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 90,
+              "content": "        Assert.Equal(0, deserializedDescriptor.Sequence);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 91,
+              "content": "    }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 92,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 93,
+              "content": "    [Fact]"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 94,
+              "content": "    public void CanParseSingleMarkerForClosedGenericComponentWithStringTypeParameter()"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 95,
+              "content": "    {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 96,
+              "content": "        // Arrange"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 97,
+              "content": "        var markers = SerializeMarkers(CreateMarkers(typeof(GenericTestComponent<string>)));"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 98,
+              "content": "        var serverComponentDeserializer = CreateServerComponentDeserializer();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 99,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 100,
+              "content": "        // Act & assert"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 101,
+              "content": "        Assert.True(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 102,
+              "content": "        var deserializedDescriptor = Assert.Single(descriptors);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 103,
+              "content": "        Assert.Equal(typeof(GenericTestComponent<string>).FullName, deserializedDescriptor.ComponentType.FullName);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 104,
+              "content": "        Assert.Equal(0, deserializedDescriptor.Sequence);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 105,
+              "content": "    }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 106,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 107,
+              "content": "    [Fact]"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 108,
+              "content": "    public void CanParseSingleMarkerForClosedGenericComponentWithParameters()"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 109,
+              "content": "    {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 110,
+              "content": "        // Arrange"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 111,
+              "content": "        var markers = SerializeMarkers(CreateMarkers("
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 112,
+              "content": "            (typeof(GenericTestComponent<int>), new Dictionary<string, object> { [\"Value\"] = 42 })));"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 113,
+              "content": "        var serverComponentDeserializer = CreateServerComponentDeserializer();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 114,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 115,
+              "content": "        // Act & assert"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 116,
+              "content": "        Assert.True(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 117,
+              "content": "        var deserializedDescriptor = Assert.Single(descriptors);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 118,
+              "content": "        Assert.Equal(typeof(GenericTestComponent<int>).FullName, deserializedDescriptor.ComponentType.FullName);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 119,
+              "content": "        Assert.Equal(0, deserializedDescriptor.Sequence);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 120,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 121,
+              "content": "        var parameters = deserializedDescriptor.Parameters.ToDictionary();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 122,
+              "content": "        Assert.Single(parameters);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 123,
+              "content": "        Assert.Contains(\"Value\", parameters.Keys);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 124,
+              "content": "        Assert.Equal(42, Convert.ToInt64(parameters[\"Value\"]!, CultureInfo.InvariantCulture));"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 125,
+              "content": "    }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 126,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 127,
+              "content": "    [Fact]"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 128,
+              "content": "    public void CanParseMultipleMarkersForClosedGenericComponents()"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 129,
+              "content": "    {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 130,
+              "content": "        // Arrange"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 131,
+              "content": "        var markers = SerializeMarkers(CreateMarkers(typeof(GenericTestComponent<int>), typeof(GenericTestComponent<string>)));"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 132,
+              "content": "        var serverComponentDeserializer = CreateServerComponentDeserializer();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 133,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 134,
+              "content": "        // Act & assert"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 135,
+              "content": "        Assert.True(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 136,
+              "content": "        Assert.Equal(2, descriptors.Count);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 137,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 138,
+              "content": "        var firstDescriptor = descriptors[0];"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 139,
+              "content": "        Assert.Equal(typeof(GenericTestComponent<int>).FullName, firstDescriptor.ComponentType.FullName);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 140,
+              "content": "        Assert.Equal(0, firstDescriptor.Sequence);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 141,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 142,
+              "content": "        var secondDescriptor = descriptors[1];"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 143,
+              "content": "        Assert.Equal(typeof(GenericTestComponent<string>).FullName, secondDescriptor.ComponentType.FullName);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 144,
+              "content": "        Assert.Equal(0, secondDescriptor.Sequence);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 145,
+              "content": "    }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 146,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 78,
+              "new_lineno": 147,
+              "content": "    [Fact]"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 79,
+              "new_lineno": 148,
+              "content": "    public void CanParseMultipleMarkers()"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 80,
+              "new_lineno": 149,
+              "content": "    {"
+            }
+          ]
+        },
+        {
+          "old_start": 517,
+          "old_count": 4,
+          "new_start": 586,
+          "new_count": 13,
+          "section_header": "private class DynamicallyAddedComponent : IComponent",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 517,
+              "new_lineno": 586,
+              "content": "        public void Attach(RenderHandle renderHandle) => throw new NotImplementedException();"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 518,
+              "new_lineno": 587,
+              "content": "        public Task SetParametersAsync(ParameterView parameters) => throw new NotImplementedException();"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 519,
+              "new_lineno": 588,
+              "content": "    }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 589,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 590,
+              "content": "    private class GenericTestComponent<T> : IComponent"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 591,
+              "content": "    {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 592,
+              "content": "        [Parameter] public T Value { get; set; }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 593,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 594,
+              "content": "        public void Attach(RenderHandle renderHandle) => throw new NotImplementedException();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 595,
+              "content": "        public Task SetParametersAsync(ParameterView parameters) => throw new NotImplementedException();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 596,
+              "content": "    }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 597,
+              "content": "}"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 520,
+              "new_lineno": 598,
+              "content": "}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "changed_entities": [
+    {
+      "path": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs",
+      "entity_type": "module",
+      "name": "EndpointHtmlRendererTest.cs",
+      "qualified_name": "src.Components.Endpoints.test.EndpointHtmlRendererTest",
+      "line_start": 721,
+      "line_end": 847,
+      "hunk_ids": [
+        "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:718"
+      ]
+    },
+    {
+      "path": "src/Components/Endpoints/test/TestComponents/GenericComponent.razor",
+      "entity_type": "module",
+      "name": "GenericComponent.razor",
+      "qualified_name": "src.Components.Endpoints.test.TestComponents.GenericComponent",
+      "line_start": 1,
+      "line_end": 6,
+      "hunk_ids": [
+        "src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1"
+      ]
+    },
+    {
+      "path": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs",
+      "entity_type": "module",
+      "name": "ServerComponentDeserializerTest.cs",
+      "qualified_name": "src.Components.Server.test.Circuits.ServerComponentDeserializerTest",
+      "line_start": 4,
+      "line_end": 13,
+      "hunk_ids": [
+        "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:1",
+        "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:76",
+        "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:586"
+      ]
+    }
+  ],
+  "risk_signals": [],
+  "evidence_index": {
+    "diff_hunk:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:718": {
+      "id": "diff_hunk:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:718",
+      "kind": "diff_hunk",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:718",
+      "message": "@@ -718,6 +718,133 @@ public async Task CanPrerender_ComponentWithNullParameters_ServerPrerenderedMode\n         Assert.Null(epilogueMarker.Type);\n     }\n \n+    [Fact]\n+    public async Task CanRender_ClosedGenericComponent()\n+    {\n+        // Arrange\n+        var httpContext = GetHttpContext();\n+        var writer = new StringWriter();\n+\n+        // Act\n+        var parameters = ParameterView.FromDictionary(new Dictionary<string, object> { { \"Value\", 42 } });\n+        var result = await renderer.PrerenderComponentAsync(httpContext, typeof(GenericComponent<int>), null, parameters);\n+        await renderer.Dispatcher.InvokeAsync(() => result.WriteTo(writer, HtmlEncoder.Default));\n+        var content = writer.ToString();\n+\n+        // Assert\n+        Assert.Equal(\"<p>Generic value: 42</p>\", content);\n+    }\n+\n+    [Fact]\n+    public async Task CanRender_ClosedGenericComponent_ServerMode()\n+    {\n+        // Arrange\n+        var httpContext = GetHttpContext();\n+        var protector = _dataprotectorProvider.CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)\n+            .ToTimeLimitedDataProtector();\n+\n+        // Act\n+        var parameters = ParameterView.FromDictionary(new Dictionary<string, object> { { \"Value\", \"TestString\" } });\n+        var result = await renderer.PrerenderComponentAsync(httpContext, typeof(GenericComponent<string>), new InteractiveServerRenderMode(false), parameters);\n+        var content = await renderer.Dispatcher.InvokeAsync(() => HtmlContentToString(result));\n+        var match = Regex.Match(content, ComponentPattern);\n+\n+        // Assert\n+        Assert.True(match.Success);\n+        var marker = JsonSerializer.Deserialize<ComponentMarker>(match.Groups[1].Value, ServerComponentSerializationSettings.JsonSerializationOptions);\n+        Assert.Equal(0, marker.Sequence);\n+        Assert.Null(marker.PrerenderId);\n+        Assert.NotNull(marker.Descriptor);\n+        Assert.Equal(\"server\", marker.Type);\n+\n+        var unprotectedServerComponent = protector.Unprotect(marker.Descriptor);\n+        var serverComponent = JsonSerializer.Deserialize<ServerComponent>(unprotectedServerComponent, ServerComponentSerializationSettings.JsonSerializationOptions);\n+        Assert.Equal(0, serverComponent.Sequence);\n+        Assert.Equal(typeof(GenericComponent<string>).Assembly.GetName().Name, serverComponent.AssemblyName);\n+        Assert.Equal(typeof(GenericComponent<string>).FullName, serverComponent.TypeName);\n+        Assert.NotEqual(Guid.Empty, serverComponent.InvocationId);\n+\n+        var parameterDefinition = Assert.Single(serverComponent.ParameterDefinitions);\n+        Assert.Equal(\"Value\", parameterDefinition.Name);\n+        Assert.Equal(\"System.String\", parameterDefinition.TypeName);\n+        Assert.Equal(\"System.Private.CoreLib\", parameterDefinition.Assembly);\n+\n+        var value = Assert.Single(serverComponent.ParameterValues);\n+        var rawValue = Assert.IsType<JsonElement>(value);\n+        Assert.Equal(\"TestString\", rawValue.GetString());\n+    }\n+\n+    [Fact]\n+    public async Task CanPrerender_ClosedGenericComponent_ServerMode()\n+    {\n+        // Arrange\n+        var httpContext = GetHttpContext();\n+        var protector = _dataprotectorProvider.CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)\n+            .ToTimeLimitedDataProtector();\n+\n+        // Act\n+        var parameters = ParameterView.FromDictionary(new Dictionary<string, object> { { \"Value\", 123 } });\n+        var result = await renderer.PrerenderComponentAsync(httpContext, typeof(GenericComponent<int>), RenderMode.InteractiveServer, parameters);\n+        var content = await renderer.Dispatcher.InvokeAsync(() => HtmlContentToString(result));\n+        var match = Regex.Match(content, PrerenderedComponentPattern, RegexOptions.Multiline);\n+\n+        // Assert\n+        Assert.True(match.Success);\n+        var preamble = match.Groups[\"preamble\"].Value;\n+        var preambleMarker = JsonSerializer.Deserialize<ComponentMarker>(preamble, ServerComponentSerializationSettings.JsonSerializationOptions);\n+        Assert.Equal(0, preambleMarker.Sequence);\n+        Assert.NotNull(preambleMarker.PrerenderId);\n+        Assert.NotNull(preambleMarker.Descriptor);\n... omitted 53 hunk line(s)"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:721": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:721",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:721",
+      "message": "Added line: [Fact]"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:722": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:722",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:722",
+      "message": "Added line: public async Task CanRender_ClosedGenericComponent()"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:723": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:723",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:723",
+      "message": "Added line: {"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:724": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:724",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:724",
+      "message": "Added line: // Arrange"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:725": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:725",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:725",
+      "message": "Added line: var httpContext = GetHttpContext();"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:726": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:726",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:726",
+      "message": "Added line: var writer = new StringWriter();"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:727": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:727",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:727",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:728": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:728",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:728",
+      "message": "Added line: // Act"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:729": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:729",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:729",
+      "message": "Added line: var parameters = ParameterView.FromDictionary(new Dictionary<string, object> { { \"Value\", 42 } });"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:730": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:730",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:730",
+      "message": "Added line: var result = await renderer.PrerenderComponentAsync(httpContext, typeof(GenericComponent<int>), null, parameters);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:731": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:731",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:731",
+      "message": "Added line: await renderer.Dispatcher.InvokeAsync(() => result.WriteTo(writer, HtmlEncoder.Default));"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:732": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:732",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:732",
+      "message": "Added line: var content = writer.ToString();"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:733": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:733",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:733",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:734": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:734",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:734",
+      "message": "Added line: // Assert"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:735": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:735",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:735",
+      "message": "Added line: Assert.Equal(\"<p>Generic value: 42</p>\", content);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:736": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:736",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:736",
+      "message": "Added line: }"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:737": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:737",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:737",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:738": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:738",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:738",
+      "message": "Added line: [Fact]"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:739": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:739",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:739",
+      "message": "Added line: public async Task CanRender_ClosedGenericComponent_ServerMode()"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:740": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:740",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:740",
+      "message": "Added line: {"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:741": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:741",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:741",
+      "message": "Added line: // Arrange"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:742": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:742",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:742",
+      "message": "Added line: var httpContext = GetHttpContext();"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:743": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:743",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:743",
+      "message": "Added line: var protector = _dataprotectorProvider.CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPur..."
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:744": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:744",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:744",
+      "message": "Added line: .ToTimeLimitedDataProtector();"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:745": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:745",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:745",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:746": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:746",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:746",
+      "message": "Added line: // Act"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:747": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:747",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:747",
+      "message": "Added line: var parameters = ParameterView.FromDictionary(new Dictionary<string, object> { { \"Value\", \"TestString\" } });"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:748": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:748",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:748",
+      "message": "Added line: var result = await renderer.PrerenderComponentAsync(httpContext, typeof(GenericComponent<string>), new InteractiveSer..."
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:749": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:749",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:749",
+      "message": "Added line: var content = await renderer.Dispatcher.InvokeAsync(() => HtmlContentToString(result));"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:750": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:750",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:750",
+      "message": "Added line: var match = Regex.Match(content, ComponentPattern);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:751": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:751",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:751",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:752": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:752",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:752",
+      "message": "Added line: // Assert"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:753": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:753",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:753",
+      "message": "Added line: Assert.True(match.Success);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:754": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:754",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:754",
+      "message": "Added line: var marker = JsonSerializer.Deserialize<ComponentMarker>(match.Groups[1].Value, ServerComponentSerializationSettings...."
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:755": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:755",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:755",
+      "message": "Added line: Assert.Equal(0, marker.Sequence);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:756": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:756",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:756",
+      "message": "Added line: Assert.Null(marker.PrerenderId);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:757": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:757",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:757",
+      "message": "Added line: Assert.NotNull(marker.Descriptor);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:758": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:758",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:758",
+      "message": "Added line: Assert.Equal(\"server\", marker.Type);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:759": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:759",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:759",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:760": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:760",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:760",
+      "message": "Added line: var unprotectedServerComponent = protector.Unprotect(marker.Descriptor);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:761": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:761",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:761",
+      "message": "Added line: var serverComponent = JsonSerializer.Deserialize<ServerComponent>(unprotectedServerComponent, ServerComponentSerializ..."
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:762": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:762",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:762",
+      "message": "Added line: Assert.Equal(0, serverComponent.Sequence);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:763": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:763",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:763",
+      "message": "Added line: Assert.Equal(typeof(GenericComponent<string>).Assembly.GetName().Name, serverComponent.AssemblyName);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:764": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:764",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:764",
+      "message": "Added line: Assert.Equal(typeof(GenericComponent<string>).FullName, serverComponent.TypeName);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:765": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:765",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:765",
+      "message": "Added line: Assert.NotEqual(Guid.Empty, serverComponent.InvocationId);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:766": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:766",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:766",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:767": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:767",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:767",
+      "message": "Added line: var parameterDefinition = Assert.Single(serverComponent.ParameterDefinitions);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:768": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:768",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:768",
+      "message": "Added line: Assert.Equal(\"Value\", parameterDefinition.Name);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:769": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:769",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:769",
+      "message": "Added line: Assert.Equal(\"System.String\", parameterDefinition.TypeName);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:770": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:770",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:770",
+      "message": "Added line: Assert.Equal(\"System.Private.CoreLib\", parameterDefinition.Assembly);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:771": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:771",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:771",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:772": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:772",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:772",
+      "message": "Added line: var value = Assert.Single(serverComponent.ParameterValues);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:773": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:773",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:773",
+      "message": "Added line: var rawValue = Assert.IsType<JsonElement>(value);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:774": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:774",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:774",
+      "message": "Added line: Assert.Equal(\"TestString\", rawValue.GetString());"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:775": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:775",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:775",
+      "message": "Added line: }"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:776": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:776",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:776",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:777": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:777",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:777",
+      "message": "Added line: [Fact]"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:778": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:778",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:778",
+      "message": "Added line: public async Task CanPrerender_ClosedGenericComponent_ServerMode()"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:779": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:779",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:779",
+      "message": "Added line: {"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:780": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:780",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:780",
+      "message": "Added line: // Arrange"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:781": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:781",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:781",
+      "message": "Added line: var httpContext = GetHttpContext();"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:782": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:782",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:782",
+      "message": "Added line: var protector = _dataprotectorProvider.CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPur..."
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:783": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:783",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:783",
+      "message": "Added line: .ToTimeLimitedDataProtector();"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:784": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:784",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:784",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:785": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:785",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:785",
+      "message": "Added line: // Act"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:786": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:786",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:786",
+      "message": "Added line: var parameters = ParameterView.FromDictionary(new Dictionary<string, object> { { \"Value\", 123 } });"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:787": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:787",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:787",
+      "message": "Added line: var result = await renderer.PrerenderComponentAsync(httpContext, typeof(GenericComponent<int>), RenderMode.Interactiv..."
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:788": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:788",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:788",
+      "message": "Added line: var content = await renderer.Dispatcher.InvokeAsync(() => HtmlContentToString(result));"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:789": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:789",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:789",
+      "message": "Added line: var match = Regex.Match(content, PrerenderedComponentPattern, RegexOptions.Multiline);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:790": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:790",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:790",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:791": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:791",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:791",
+      "message": "Added line: // Assert"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:792": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:792",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:792",
+      "message": "Added line: Assert.True(match.Success);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:793": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:793",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:793",
+      "message": "Added line: var preamble = match.Groups[\"preamble\"].Value;"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:794": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:794",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:794",
+      "message": "Added line: var preambleMarker = JsonSerializer.Deserialize<ComponentMarker>(preamble, ServerComponentSerializationSettings.JsonS..."
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:795": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:795",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:795",
+      "message": "Added line: Assert.Equal(0, preambleMarker.Sequence);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:796": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:796",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:796",
+      "message": "Added line: Assert.NotNull(preambleMarker.PrerenderId);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:797": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:797",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:797",
+      "message": "Added line: Assert.NotNull(preambleMarker.Descriptor);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:798": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:798",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:798",
+      "message": "Added line: Assert.Equal(\"server\", preambleMarker.Type);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:799": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:799",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:799",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:800": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:800",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:800",
+      "message": "Added line: var unprotectedServerComponent = protector.Unprotect(preambleMarker.Descriptor);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:801": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:801",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:801",
+      "message": "Added line: var serverComponent = JsonSerializer.Deserialize<ServerComponent>(unprotectedServerComponent, ServerComponentSerializ..."
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:802": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:802",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:802",
+      "message": "Added line: Assert.NotEqual(default, serverComponent);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:803": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:803",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:803",
+      "message": "Added line: Assert.Equal(0, serverComponent.Sequence);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:804": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:804",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:804",
+      "message": "Added line: Assert.Equal(typeof(GenericComponent<int>).Assembly.GetName().Name, serverComponent.AssemblyName);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:805": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:805",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:805",
+      "message": "Added line: Assert.Equal(typeof(GenericComponent<int>).FullName, serverComponent.TypeName);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:806": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:806",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:806",
+      "message": "Added line: Assert.NotEqual(Guid.Empty, serverComponent.InvocationId);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:807": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:807",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:807",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:808": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:808",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:808",
+      "message": "Added line: var prerenderedContent = match.Groups[\"content\"].Value;"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:809": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:809",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:809",
+      "message": "Added line: Assert.Equal(\"<p>Generic value: 123</p>\", prerenderedContent);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:810": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:810",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:810",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:811": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:811",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:811",
+      "message": "Added line: var epilogue = match.Groups[\"epilogue\"].Value;"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:812": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:812",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:812",
+      "message": "Added line: var epilogueMarker = JsonSerializer.Deserialize<ComponentMarker>(epilogue, ServerComponentSerializationSettings.JsonS..."
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:813": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:813",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:813",
+      "message": "Added line: Assert.Equal(preambleMarker.PrerenderId, epilogueMarker.PrerenderId);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:814": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:814",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:814",
+      "message": "Added line: }"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:815": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:815",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:815",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:816": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:816",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:816",
+      "message": "Added line: [Fact]"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:817": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:817",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:817",
+      "message": "Added line: public async Task CanPrerender_ClosedGenericComponent_ClientMode()"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:818": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:818",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:818",
+      "message": "Added line: {"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:819": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:819",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:819",
+      "message": "Added line: // Arrange"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:820": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:820",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:820",
+      "message": "Added line: var httpContext = GetHttpContext();"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:821": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:821",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:821",
+      "message": "Added line: var writer = new StringWriter();"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:822": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:822",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:822",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:823": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:823",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:823",
+      "message": "Added line: // Act"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:824": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:824",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:824",
+      "message": "Added line: var parameters = ParameterView.FromDictionary(new Dictionary<string, object> { { \"Value\", 456 } });"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:825": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:825",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:825",
+      "message": "Added line: var result = await renderer.PrerenderComponentAsync(httpContext, typeof(GenericComponent<int>), RenderMode.Interactiv..."
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:826": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:826",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:826",
+      "message": "Added line: await renderer.Dispatcher.InvokeAsync(() => result.WriteTo(writer, HtmlEncoder.Default));"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:827": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:827",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:827",
+      "message": "Added line: var content = writer.ToString();"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:828": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:828",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:828",
+      "message": "Added line: content = AssertAndStripWebAssemblyOptions(content);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:829": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:829",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:829",
+      "message": "Added line: var match = Regex.Match(content, PrerenderedComponentPattern, RegexOptions.Multiline);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:830": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:830",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:830",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:831": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:831",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:831",
+      "message": "Added line: // Assert"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:832": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:832",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:832",
+      "message": "Added line: Assert.True(match.Success);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:833": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:833",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:833",
+      "message": "Added line: var preamble = match.Groups[\"preamble\"].Value;"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:834": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:834",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:834",
+      "message": "Added line: var preambleMarker = JsonSerializer.Deserialize<ComponentMarker>(preamble, ServerComponentSerializationSettings.JsonS..."
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:835": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:835",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:835",
+      "message": "Added line: Assert.NotNull(preambleMarker.PrerenderId);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:836": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:836",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:836",
+      "message": "Added line: Assert.Equal(\"webassembly\", preambleMarker.Type);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:837": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:837",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:837",
+      "message": "Added line: Assert.Equal(typeof(GenericComponent<string>).Assembly.GetName().Name, preambleMarker.Assembly);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:838": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:838",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:838",
+      "message": "Added line: Assert.Equal(typeof(GenericComponent<string>).FullName, preambleMarker.TypeName);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:839": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:839",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:839",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:840": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:840",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:840",
+      "message": "Added line: var prerenderedContent = match.Groups[\"content\"].Value;"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:841": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:841",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:841",
+      "message": "Added line: Assert.Equal(\"<p>Generic value: 456</p>\", prerenderedContent);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:842": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:842",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:842",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:843": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:843",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:843",
+      "message": "Added line: var epilogue = match.Groups[\"epilogue\"].Value;"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:844": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:844",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:844",
+      "message": "Added line: var epilogueMarker = JsonSerializer.Deserialize<ComponentMarker>(epilogue, ServerComponentSerializationSettings.JsonS..."
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:845": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:845",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:845",
+      "message": "Added line: Assert.Equal(preambleMarker.PrerenderId, epilogueMarker.PrerenderId);"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:846": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:846",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:846",
+      "message": "Added line: }"
+    },
+    "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:847": {
+      "id": "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:847",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:847",
+      "message": "Added line: "
+    },
+    "diff_hunk:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1": {
+      "id": "diff_hunk:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1",
+      "kind": "diff_hunk",
+      "source": "src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1",
+      "message": "@@ -0,0 +1,6 @@\n+@typeparam TValue\n+\n+<p>Generic value: @(Value?.ToString() ?? \"(null)\")</p>\n+@code {\n+    [Parameter] public TValue Value { get; set; }\n+}"
+    },
+    "diff:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1": {
+      "id": "diff:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1",
+      "message": "Added line: @typeparam TValue"
+    },
+    "diff:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:2": {
+      "id": "diff:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:2",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/TestComponents/GenericComponent.razor:2",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:3": {
+      "id": "diff:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:3",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/TestComponents/GenericComponent.razor:3",
+      "message": "Added line: <p>Generic value: @(Value?.ToString() ?? \"(null)\")</p>"
+    },
+    "diff:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:4": {
+      "id": "diff:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:4",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/TestComponents/GenericComponent.razor:4",
+      "message": "Added line: @code {"
+    },
+    "diff:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:5": {
+      "id": "diff:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:5",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/TestComponents/GenericComponent.razor:5",
+      "message": "Added line: [Parameter] public TValue Value { get; set; }"
+    },
+    "diff:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:6": {
+      "id": "diff:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:6",
+      "kind": "diff",
+      "source": "src/Components/Endpoints/test/TestComponents/GenericComponent.razor:6",
+      "message": "Added line: }"
+    },
+    "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:1": {
+      "id": "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:1",
+      "kind": "diff_hunk",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:1",
+      "message": "@@ -1,15 +1,16 @@\n // Licensed to the .NET Foundation under one or more agreements.\n // The .NET Foundation licenses this file to you under the MIT license.\n \n+using System.Globalization;\n using System.Text.Json;\n using Microsoft.AspNetCore.Components.Endpoints;\n using Microsoft.AspNetCore.DataProtection;\n using Microsoft.Extensions.Logging.Abstractions;\n \n-namespace Microsoft.AspNetCore.Components.Server.Circuits;\n-\n-public class ServerComponentDeserializerTest\n+namespace Microsoft.AspNetCore.Components.Server.Circuits\n {\n+    public class ServerComponentDeserializerTest\n+    {\n     private readonly IDataProtectionProvider _ephemeralDataProtectionProvider;\n     private readonly ITimeLimitedDataProtector _protector;\n     private ServerComponentInvocationSequence _invocationSequence = new();"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:4": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:4",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:4",
+      "message": "Added line: using System.Globalization;"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:9": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:9",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:9",
+      "message": "Removed line: namespace Microsoft.AspNetCore.Components.Server.Circuits;"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:10": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:10",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:10",
+      "message": "Added line: namespace Microsoft.AspNetCore.Components.Server.Circuits"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:11": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:11",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:11",
+      "message": "Removed line: public class ServerComponentDeserializerTest"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:12": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:12",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:12",
+      "message": "Added line: public class ServerComponentDeserializerTest"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:13": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:13",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:13",
+      "message": "Added line: {"
+    },
+    "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:76": {
+      "id": "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:76",
+      "kind": "diff_hunk",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:76",
+      "message": "@@ -75,6 +76,74 @@ public void CanParseSingleMarkerWithNullParameters()\n         Assert.Null(parameters[\"Parameter\"]);\n     }\n \n+    [Fact]\n+    public void CanParseSingleMarkerForClosedGenericComponent()\n+    {\n+        // Arrange\n+        var markers = SerializeMarkers(CreateMarkers(typeof(GenericTestComponent<int>)));\n+        var serverComponentDeserializer = CreateServerComponentDeserializer();\n+\n+        // Act & assert\n+        Assert.True(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));\n+        var deserializedDescriptor = Assert.Single(descriptors);\n+        Assert.Equal(typeof(GenericTestComponent<int>).FullName, deserializedDescriptor.ComponentType.FullName);\n+        Assert.Equal(0, deserializedDescriptor.Sequence);\n+    }\n+\n+    [Fact]\n+    public void CanParseSingleMarkerForClosedGenericComponentWithStringTypeParameter()\n+    {\n+        // Arrange\n+        var markers = SerializeMarkers(CreateMarkers(typeof(GenericTestComponent<string>)));\n+        var serverComponentDeserializer = CreateServerComponentDeserializer();\n+\n+        // Act & assert\n+        Assert.True(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));\n+        var deserializedDescriptor = Assert.Single(descriptors);\n+        Assert.Equal(typeof(GenericTestComponent<string>).FullName, deserializedDescriptor.ComponentType.FullName);\n+        Assert.Equal(0, deserializedDescriptor.Sequence);\n+    }\n+\n+    [Fact]\n+    public void CanParseSingleMarkerForClosedGenericComponentWithParameters()\n+    {\n+        // Arrange\n+        var markers = SerializeMarkers(CreateMarkers(\n+            (typeof(GenericTestComponent<int>), new Dictionary<string, object> { [\"Value\"] = 42 })));\n+        var serverComponentDeserializer = CreateServerComponentDeserializer();\n+\n+        // Act & assert\n+        Assert.True(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));\n+        var deserializedDescriptor = Assert.Single(descriptors);\n+        Assert.Equal(typeof(GenericTestComponent<int>).FullName, deserializedDescriptor.ComponentType.FullName);\n+        Assert.Equal(0, deserializedDescriptor.Sequence);\n+\n+        var parameters = deserializedDescriptor.Parameters.ToDictionary();\n+        Assert.Single(parameters);\n+        Assert.Contains(\"Value\", parameters.Keys);\n+        Assert.Equal(42, Convert.ToInt64(parameters[\"Value\"]!, CultureInfo.InvariantCulture));\n+    }\n+\n+    [Fact]\n+    public void CanParseMultipleMarkersForClosedGenericComponents()\n+    {\n+        // Arrange\n+        var markers = SerializeMarkers(CreateMarkers(typeof(GenericTestComponent<int>), typeof(GenericTestComponent<string>)));\n+        var serverComponentDeserializer = CreateServerComponentDeserializer();\n+\n+        // Act & assert\n+        Assert.True(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));\n+        Assert.Equal(2, descriptors.Count);\n+\n+        var firstDescriptor = descriptors[0];\n+        Assert.Equal(typeof(GenericTestComponent<int>).FullName, firstDescriptor.ComponentType.FullName);\n+        Assert.Equal(0, firstDescriptor.Sequence);\n+\n+        var secondDescriptor = descriptors[1];\n+        Assert.Equal(typeof(GenericTestComponent<string>).FullName, secondDescriptor.ComponentType.FullName);\n+        Assert.Equal(0, secondDescriptor.Sequence);\n+    }\n+\n     [Fact]\n     public void CanParseMultipleMarkers()\n     {"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:79": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:79",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:79",
+      "message": "Added line: [Fact]"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:80": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:80",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:80",
+      "message": "Added line: public void CanParseSingleMarkerForClosedGenericComponent()"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:81": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:81",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:81",
+      "message": "Added line: {"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:82": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:82",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:82",
+      "message": "Added line: // Arrange"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:83": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:83",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:83",
+      "message": "Added line: var markers = SerializeMarkers(CreateMarkers(typeof(GenericTestComponent<int>)));"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:84": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:84",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:84",
+      "message": "Added line: var serverComponentDeserializer = CreateServerComponentDeserializer();"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:85": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:85",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:85",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:86": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:86",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:86",
+      "message": "Added line: // Act & assert"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:87": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:87",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:87",
+      "message": "Added line: Assert.True(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:88": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:88",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:88",
+      "message": "Added line: var deserializedDescriptor = Assert.Single(descriptors);"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:89": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:89",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:89",
+      "message": "Added line: Assert.Equal(typeof(GenericTestComponent<int>).FullName, deserializedDescriptor.ComponentType.FullName);"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:90": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:90",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:90",
+      "message": "Added line: Assert.Equal(0, deserializedDescriptor.Sequence);"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:91": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:91",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:91",
+      "message": "Added line: }"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:92": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:92",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:92",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:93": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:93",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:93",
+      "message": "Added line: [Fact]"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:94": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:94",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:94",
+      "message": "Added line: public void CanParseSingleMarkerForClosedGenericComponentWithStringTypeParameter()"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:95": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:95",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:95",
+      "message": "Added line: {"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:96": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:96",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:96",
+      "message": "Added line: // Arrange"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:97": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:97",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:97",
+      "message": "Added line: var markers = SerializeMarkers(CreateMarkers(typeof(GenericTestComponent<string>)));"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:98": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:98",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:98",
+      "message": "Added line: var serverComponentDeserializer = CreateServerComponentDeserializer();"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:99": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:99",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:99",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:100": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:100",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:100",
+      "message": "Added line: // Act & assert"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:101": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:101",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:101",
+      "message": "Added line: Assert.True(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:102": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:102",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:102",
+      "message": "Added line: var deserializedDescriptor = Assert.Single(descriptors);"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:103": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:103",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:103",
+      "message": "Added line: Assert.Equal(typeof(GenericTestComponent<string>).FullName, deserializedDescriptor.ComponentType.FullName);"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:104": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:104",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:104",
+      "message": "Added line: Assert.Equal(0, deserializedDescriptor.Sequence);"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:105": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:105",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:105",
+      "message": "Added line: }"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:106": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:106",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:106",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:107": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:107",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:107",
+      "message": "Added line: [Fact]"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:108": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:108",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:108",
+      "message": "Added line: public void CanParseSingleMarkerForClosedGenericComponentWithParameters()"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:109": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:109",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:109",
+      "message": "Added line: {"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:110": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:110",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:110",
+      "message": "Added line: // Arrange"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:111": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:111",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:111",
+      "message": "Added line: var markers = SerializeMarkers(CreateMarkers("
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:112": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:112",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:112",
+      "message": "Added line: (typeof(GenericTestComponent<int>), new Dictionary<string, object> { [\"Value\"] = 42 })));"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:113": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:113",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:113",
+      "message": "Added line: var serverComponentDeserializer = CreateServerComponentDeserializer();"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:114": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:114",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:114",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:115": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:115",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:115",
+      "message": "Added line: // Act & assert"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:116": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:116",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:116",
+      "message": "Added line: Assert.True(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:117": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:117",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:117",
+      "message": "Added line: var deserializedDescriptor = Assert.Single(descriptors);"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:118": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:118",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:118",
+      "message": "Added line: Assert.Equal(typeof(GenericTestComponent<int>).FullName, deserializedDescriptor.ComponentType.FullName);"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:119": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:119",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:119",
+      "message": "Added line: Assert.Equal(0, deserializedDescriptor.Sequence);"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:120": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:120",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:120",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:121": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:121",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:121",
+      "message": "Added line: var parameters = deserializedDescriptor.Parameters.ToDictionary();"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:122": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:122",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:122",
+      "message": "Added line: Assert.Single(parameters);"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:123": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:123",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:123",
+      "message": "Added line: Assert.Contains(\"Value\", parameters.Keys);"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:124": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:124",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:124",
+      "message": "Added line: Assert.Equal(42, Convert.ToInt64(parameters[\"Value\"]!, CultureInfo.InvariantCulture));"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:125": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:125",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:125",
+      "message": "Added line: }"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:126": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:126",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:126",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:127": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:127",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:127",
+      "message": "Added line: [Fact]"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:128": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:128",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:128",
+      "message": "Added line: public void CanParseMultipleMarkersForClosedGenericComponents()"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:129": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:129",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:129",
+      "message": "Added line: {"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:130": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:130",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:130",
+      "message": "Added line: // Arrange"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:131": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:131",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:131",
+      "message": "Added line: var markers = SerializeMarkers(CreateMarkers(typeof(GenericTestComponent<int>), typeof(GenericTestComponent<string>)));"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:132": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:132",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:132",
+      "message": "Added line: var serverComponentDeserializer = CreateServerComponentDeserializer();"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:133": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:133",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:133",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:134": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:134",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:134",
+      "message": "Added line: // Act & assert"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:135": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:135",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:135",
+      "message": "Added line: Assert.True(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:136": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:136",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:136",
+      "message": "Added line: Assert.Equal(2, descriptors.Count);"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:137": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:137",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:137",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:138": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:138",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:138",
+      "message": "Added line: var firstDescriptor = descriptors[0];"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:139": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:139",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:139",
+      "message": "Added line: Assert.Equal(typeof(GenericTestComponent<int>).FullName, firstDescriptor.ComponentType.FullName);"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:140": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:140",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:140",
+      "message": "Added line: Assert.Equal(0, firstDescriptor.Sequence);"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:141": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:141",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:141",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:142": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:142",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:142",
+      "message": "Added line: var secondDescriptor = descriptors[1];"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:143": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:143",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:143",
+      "message": "Added line: Assert.Equal(typeof(GenericTestComponent<string>).FullName, secondDescriptor.ComponentType.FullName);"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:144": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:144",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:144",
+      "message": "Added line: Assert.Equal(0, secondDescriptor.Sequence);"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:145": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:145",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:145",
+      "message": "Added line: }"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:146": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:146",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:146",
+      "message": "Added line: "
+    },
+    "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:586": {
+      "id": "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:586",
+      "kind": "diff_hunk",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:586",
+      "message": "@@ -517,4 +586,13 @@ private class DynamicallyAddedComponent : IComponent\n         public void Attach(RenderHandle renderHandle) => throw new NotImplementedException();\n         public Task SetParametersAsync(ParameterView parameters) => throw new NotImplementedException();\n     }\n+\n+    private class GenericTestComponent<T> : IComponent\n+    {\n+        [Parameter] public T Value { get; set; }\n+\n+        public void Attach(RenderHandle renderHandle) => throw new NotImplementedException();\n+        public Task SetParametersAsync(ParameterView parameters) => throw new NotImplementedException();\n+    }\n+}\n }"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:589": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:589",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:589",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:590": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:590",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:590",
+      "message": "Added line: private class GenericTestComponent<T> : IComponent"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:591": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:591",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:591",
+      "message": "Added line: {"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:592": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:592",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:592",
+      "message": "Added line: [Parameter] public T Value { get; set; }"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:593": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:593",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:593",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:594": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:594",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:594",
+      "message": "Added line: public void Attach(RenderHandle renderHandle) => throw new NotImplementedException();"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:595": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:595",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:595",
+      "message": "Added line: public Task SetParametersAsync(ParameterView parameters) => throw new NotImplementedException();"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:596": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:596",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:596",
+      "message": "Added line: }"
+    },
+    "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:597": {
+      "id": "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:597",
+      "kind": "diff",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:597",
+      "message": "Added line: }"
+    },
+    "entity:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:src.Components.Endpoints.test.EndpointHtmlRendererTest": {
+      "id": "entity:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:src.Components.Endpoints.test.EndpointHtmlRendererTest",
+      "kind": "entity",
+      "source": "src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:721-847",
+      "message": "Changed module src.Components.Endpoints.test.EndpointHtmlRendererTest touched by 1 hunk(s)."
+    },
+    "entity:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:src.Components.Endpoints.test.TestComponents.GenericComponent": {
+      "id": "entity:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:src.Components.Endpoints.test.TestComponents.GenericComponent",
+      "kind": "entity",
+      "source": "src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1-6",
+      "message": "Changed module src.Components.Endpoints.test.TestComponents.GenericComponent touched by 1 hunk(s)."
+    },
+    "entity:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:src.Components.Server.test.Circuits.ServerComponentDeserializerTest": {
+      "id": "entity:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:src.Components.Server.test.Circuits.ServerComponentDeserializerTest",
+      "kind": "entity",
+      "source": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:4-13",
+      "message": "Changed module src.Components.Server.test.Circuits.ServerComponentDeserializerTest touched by 3 hunk(s)."
+    }
+  },
+  "missing_evidence_ids": [],
+  "agent_runs": [
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+      "input_evidence_ids": [
+        "diff_hunk:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:718",
+        "diff_hunk:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1",
+        "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:1"
+      ],
+      "output_issue_ids": [
+        "style:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1",
+        "style:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:10"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 12010,
+      "token_count_in": 6065,
+      "token_count_out": 403,
+      "trace_id": "8a0d7277bb284f199eec54ac20af2d5a",
+      "span_id": "1719e3d72a4544e2",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001",
+      "shard_index": 0,
+      "shard_count": 1,
+      "context_request_count": 0,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+      "model": null,
+      "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+      "input_evidence_ids": [
+        "diff_hunk:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1"
+      ],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 0,
+      "token_count_in": 0,
+      "token_count_out": 0,
+      "trace_id": "",
+      "span_id": "",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "",
+      "shard_index": 0,
+      "shard_count": 0,
+      "context_request_count": 0,
+      "context_refill_used": false
+    }
+  ],
+  "prompt_exports": {},
+  "context_budget": {
+    "enabled": true,
+    "strategy": "risk_first_v1",
+    "context_profile": "risk_compact_manifest_v1",
+    "max_input_tokens": 9000,
+    "estimated_input_tokens": 5452,
+    "selected_evidence_count": 3,
+    "omitted_evidence_count": 200,
+    "selected_evidence_ids": [
+      "diff_hunk:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:718",
+      "diff_hunk:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1",
+      "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:1"
+    ],
+    "omitted_evidence_ids": [
+      "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:586",
+      "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:76",
+      "entity:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:src.Components.Endpoints.test.EndpointHtmlRendererTest",
+      "entity:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:src.Components.Endpoints.test.TestComponents.GenericComponent",
+      "entity:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:src.Components.Server.test.Circuits.ServerComponentDeserializerTest",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:721",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:722",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:723",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:724",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:725",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:726",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:727",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:728",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:729",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:730",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:731",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:732",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:733",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:734",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:735",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:736",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:737",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:738",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:739",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:740",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:741",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:742",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:743",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:744",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:745",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:746",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:747",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:748",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:749",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:750",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:751",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:752",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:753",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:754",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:755",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:756",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:757",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:758",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:759",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:760",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:761",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:762",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:763",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:764",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:765",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:766",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:767",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:768",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:769",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:770",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:771",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:772",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:773",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:774",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:775",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:776",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:777",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:778",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:779",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:780",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:781",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:782",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:783",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:784",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:785",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:786",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:787",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:788",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:789",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:790",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:791",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:792",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:793",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:794",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:795",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:796",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:797",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:798",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:799",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:800",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:801",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:802",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:803",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:804",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:805",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:806",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:807",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:808",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:809",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:810",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:811",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:812",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:813",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:814",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:815",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:816",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:817",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:818",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:819",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:820",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:821",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:822",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:823",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:824",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:825",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:826",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:827",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:828",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:829",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:830",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:831",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:832",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:833",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:834",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:835",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:836",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:837",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:838",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:839",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:840",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:841",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:842",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:843",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:844",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:845",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:846",
+      "diff:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:847",
+      "diff:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1",
+      "diff:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:2",
+      "diff:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:3",
+      "diff:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:4",
+      "diff:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:5",
+      "diff:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:6",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:10",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:100",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:101",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:102",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:103",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:104",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:105",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:106",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:107",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:108",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:109",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:11",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:110",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:111",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:112",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:113",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:114",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:115",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:116",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:117",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:118",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:119",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:12",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:120",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:121",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:122",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:123",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:124",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:125",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:126",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:127",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:128",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:129",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:13",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:130",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:131",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:132",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:133",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:134",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:135",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:136",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:137",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:138",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:139",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:140",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:141",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:142",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:143",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:144",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:145",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:146",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:4",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:589",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:590",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:591",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:592",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:593",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:594",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:595",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:596",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:597",
+      "diff:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:79"
+    ],
+    "selected_risk_signal_count": 0,
+    "context_truncated": true,
+    "shard_count": 1,
+    "refill_count": 0,
+    "context_request_count": 0,
+    "context_requests": [],
+    "shards": [
+      {
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 3,
+        "omitted_evidence_count": 200,
+        "estimated_input_tokens": 5452,
+        "context_truncated": true
+      }
+    ],
+    "warnings": []
+  },
+  "loop": {
+    "enabled": true,
+    "max_iter": 1,
+    "iterations_completed": 1,
+    "converged": false,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "checkpoint_path": "D:\\learn\\code-review-agent\\workspace\\qodo_pr_review_bench_live_guideline_rerank\\samples\\qodo_017\\review\\loop_checkpoint.json",
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "iterations": [
+      {
+        "i": 0,
+        "candidate_issue_count": 2,
+        "verified_count": 1,
+        "needs_human_review_count": 0,
+        "discarded_count": 1,
+        "keep_count": 0,
+        "uncertain_count": 1,
+        "reject_count": 0,
+        "feedback_sent": [
+          {
+            "issue_id": "style:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1",
+            "category": "style",
+            "critic_reason": "low confidence",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1"
+            ]
+          }
+        ],
+        "agent_runs": [
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+            "input_evidence_ids": [
+              "diff_hunk:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:718",
+              "diff_hunk:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1",
+              "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:1"
+            ],
+            "output_issue_ids": [
+              "style:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1",
+              "style:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:10"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 12010,
+            "token_count_in": 6065,
+            "token_count_out": 403,
+            "trace_id": "8a0d7277bb284f199eec54ac20af2d5a",
+            "span_id": "1719e3d72a4544e2",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001",
+            "shard_index": 0,
+            "shard_count": 1,
+            "context_request_count": 0,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+            "model": null,
+            "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+            "input_evidence_ids": [
+              "diff_hunk:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1"
+            ],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 0,
+            "token_count_in": 0,
+            "token_count_out": 0,
+            "trace_id": "",
+            "span_id": "",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "",
+            "shard_index": 0,
+            "shard_count": 0,
+            "context_request_count": 0,
+            "context_refill_used": false
+          }
+        ],
+        "issue_set": [
+          "style:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1"
+        ],
+        "keep": [],
+        "needs_human_review": [
+          {
+            "file": "src/Components/Endpoints/test/TestComponents/GenericComponent.razor",
+            "line": 1,
+            "severity": "medium",
+            "category": "style",
+            "message": "New file GenericComponent.razor is missing the required MIT license header. Review guideline 'All C# Source Files Must Include MIT License Header' requires the exact two-line comment header at the start of every .cs file. Although this is a .razor file, the guideline applies to all C# source files; .razor files with @code blocks are considered C# source files.",
+            "suggestion": "Add the license header at the top of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1"
+            ]
+          }
+        ],
+        "discarded": [
+          {
+            "file": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs",
+            "line": 10,
+            "severity": "medium",
+            "category": "style",
+            "message": "Test class 'ServerComponentDeserializerTest' does not follow the naming convention. Review guideline 'Test Classes Must Follow Naming Convention' requires test class names to end with 'Test' or 'Tests' suffix. The class name ends with 'Test' but the guideline expects a clear suffix; however, the class name is acceptable as it ends with 'Test'. No issue.",
+            "suggestion": "",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:1"
+            ],
+            "filter_reason": "style_preference"
+          }
+        ]
+      }
+    ]
+  },
+  "tracing": {
+    "total_latency_ms": 12010,
+    "total_token_count_in": 6065,
+    "total_token_count_out": 403,
+    "total_retry_count": 0,
+    "run_count": 2,
+    "status_counts": {
+      "ok": 2
+    }
+  }
+}

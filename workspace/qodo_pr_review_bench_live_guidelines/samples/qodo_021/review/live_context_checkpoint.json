@@ -1,0 +1,258 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:556efdd9d0eceee80478ef811681a6769ec07b9b7bcb89b171d2151208e047bd",
+  "diff_hash": "sha256:b88e76da8dc8cf83202eeb6782ee5e970f2c338fe9c141e7fd4571ad01376e0d",
+  "shards": {
+    "5d1af7d18a904b7b6b7914c3be2596966924c8debe41b0fb72cbb58f250d73fb": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:.azure/pipelines/jobs/default-build.yml:103",
+        "diff_hunk:.azure/pipelines/jobs/default-build.yml:164",
+        "diff_hunk:.azure/pipelines/jobs/default-build.yml:319",
+        "diff_hunk:.azure/pipelines/jobs/default-build.yml:390",
+        "diff_hunk:NuGet.config:4",
+        "diff_hunk:eng/PackageOverrides.txt:1",
+        "diff_hunk:eng/PlatformManifest.txt:1"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": ".azure/pipelines/jobs/default-build.yml",
+          "line": 167,
+          "severity": "medium",
+          "category": "compatibility",
+          "message": "Xcode version updated from 15.2.0 to 16.4.0 but macOS image updated to macOS-15. Xcode 16.4.0 may not be available on macOS-15 runner, causing build failure.",
+          "suggestion": "Verify that Xcode 16.4.0 is pre-installed on the macOS-15 Azure Pipelines image, or align the Xcode version with what is available on that image.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:.azure/pipelines/jobs/default-build.yml:164",
+            "diff_hunk:.azure/pipelines/jobs/default-build.yml:103"
+          ]
+        },
+        {
+          "file": ".azure/pipelines/jobs/default-build.yml",
+          "line": 393,
+          "severity": "medium",
+          "category": "compatibility",
+          "message": "Xcode version updated from 15.2.0 to 16.4.0 but macOS image updated to macOS-15. Xcode 16.4.0 may not be pre-installed on macOS-15 runner, causing build failure.",
+          "suggestion": "Verify that Xcode 16.4.0 is pre-installed on the macOS-15 Azure Pipelines image, or align the Xcode version with what is available on that image.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:.azure/pipelines/jobs/default-build.yml:390",
+            "diff_hunk:.azure/pipelines/jobs/default-build.yml:319"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:.azure/pipelines/jobs/default-build.yml:103",
+          "diff_hunk:.azure/pipelines/jobs/default-build.yml:164",
+          "diff_hunk:.azure/pipelines/jobs/default-build.yml:319",
+          "diff_hunk:.azure/pipelines/jobs/default-build.yml:390",
+          "diff_hunk:NuGet.config:4",
+          "diff_hunk:eng/PackageOverrides.txt:1",
+          "diff_hunk:eng/PlatformManifest.txt:1"
+        ],
+        "output_issue_ids": [
+          "compatibility:.azure/pipelines/jobs/default-build.yml:167",
+          "compatibility:.azure/pipelines/jobs/default-build.yml:393"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 14353,
+        "token_count_in": 9862,
+        "token_count_out": 401,
+        "trace_id": "4c43b1c6e3fe4273b960d3e9db1ca492",
+        "span_id": "933d2caaed484e39",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 4,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "3b67be3d365549fe15681a1bf722b7cdba84f69059991e384c016bcd09741618": {
+      "status": "completed",
+      "shard_id": "shard-002",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:eng/Version.Details.props:6",
+        "diff_hunk:eng/Version.Details.xml:8",
+        "diff_hunk:eng/Versions.props:9",
+        "diff_hunk:eng/common/SetupNugetSources.ps1:1",
+        "diff_hunk:eng/common/SetupNugetSources.ps1:174"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:eng/Version.Details.props:6",
+          "diff_hunk:eng/Version.Details.xml:8",
+          "diff_hunk:eng/Versions.props:9",
+          "diff_hunk:eng/common/SetupNugetSources.ps1:1",
+          "diff_hunk:eng/common/SetupNugetSources.ps1:174"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 5641,
+        "token_count_in": 10166,
+        "token_count_out": 12,
+        "trace_id": "bf70da6479de4f429761bdebf59e48d7",
+        "span_id": "4fdc9aca76834a96",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "shard_count": 4,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "0f498449076be6ba254a733bfd775a6d0bab44f5cfe1b4a7db7cc3c58f7261ab": {
+      "status": "completed",
+      "shard_id": "shard-003",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:eng/common/SetupNugetSources.sh:1",
+        "diff_hunk:eng/common/core-templates/steps/install-microbuild.yml:11",
+        "diff_hunk:eng/targets/ResolveReferences.targets:208",
+        "diff_hunk:global.json:1"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "eng/common/core-templates/steps/install-microbuild.yml",
+          "line": 23,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "The installation path for the .NET 8.0 SDK has been changed from a parameterized path (${{ parameters.microBuildOutputFolder }}/.dotnet) to a hardcoded path ($(Agent.TempDirectory)/.dotnet-microbuild). This removes the ability for consumers to control the SDK installation location via the microBuildOutputFolder parameter, which may break builds that rely on the previous path for subsequent steps.",
+          "suggestion": "Consider retaining the parameterized path or documenting the breaking change. If the path must be hardcoded, ensure all downstream consumers are updated to reference the new location.",
+          "confidence": 0.85,
+          "evidence_ids": [
+            "diff_hunk:eng/common/core-templates/steps/install-microbuild.yml:11"
+          ]
+        },
+        {
+          "file": "eng/targets/ResolveReferences.targets",
+          "line": 211,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "The error condition for servicing builds now additionally requires '$(AspNetCorePatchVersion)' == '1' to trigger BUILD002. This narrows the error check, potentially allowing unused baseline package references to go undetected in servicing builds where AspNetCorePatchVersion is not '1'.",
+          "suggestion": "Verify that the new condition correctly captures all intended servicing scenarios. If the intent is to only block changes in the first patch version, ensure the logic is consistent with the release policy.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:eng/targets/ResolveReferences.targets:208"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:eng/common/SetupNugetSources.sh:1",
+          "diff_hunk:eng/common/core-templates/steps/install-microbuild.yml:11",
+          "diff_hunk:eng/targets/ResolveReferences.targets:208",
+          "diff_hunk:global.json:1"
+        ],
+        "output_issue_ids": [
+          "correctness:eng/common/core-templates/steps/install-microbuild.yml:23",
+          "correctness:eng/targets/ResolveReferences.targets:211"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 14430,
+        "token_count_in": 6149,
+        "token_count_out": 407,
+        "trace_id": "09a95666436346f2a470fa57200da5a7",
+        "span_id": "b63935db73384b7f",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-003",
+        "shard_index": 2,
+        "shard_count": 4,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "58324290ab5061144a319d6cd2ef02b39462122960775a1652598b6356d30575": {
+      "status": "completed",
+      "shard_id": "shard-004",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:7"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs",
+          "line": 14,
+          "severity": "medium",
+          "category": "style",
+          "message": "Namespace declaration uses block-scoped syntax instead of file-scoped namespace declaration, violating the 'Use File-Scoped Namespace Declarations' guideline.",
+          "suggestion": "Replace the block-scoped namespace with a file-scoped declaration: 'namespace Microsoft.AspNetCore.Components.E2ETests.ServerExecutionTests;' and remove the opening/closing braces.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:7"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:7"
+        ],
+        "output_issue_ids": [
+          "style:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:14"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 22113,
+        "token_count_in": 3795,
+        "token_count_out": 186,
+        "trace_id": "2330f6bf369643879632917aa34ea760",
+        "span_id": "6660ea631fe64ffa",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-004",
+        "shard_index": 3,
+        "shard_count": 4,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

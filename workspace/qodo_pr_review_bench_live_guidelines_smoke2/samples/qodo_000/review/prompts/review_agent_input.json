@@ -1,0 +1,1081 @@
+{
+  "mode": "hybrid-live",
+  "pair_strategy": "cross_strategy",
+  "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+  "redacted_metadata_fields": [
+    "pr_title",
+    "pr_description",
+    "commit_message",
+    "author",
+    "reviewer"
+  ],
+  "reviewer_contexts": [
+    {
+      "schema": "live_review_input_v1",
+      "selection_strategy": "risk_first_v1",
+      "repo_root": "D:\\learn\\code-review-agent\\workspace\\qodo_pr_review_bench_live_guidelines_smoke2\\samples\\qodo_000\\repo",
+      "shard_id": "shard-001",
+      "shard_index": 0,
+      "shard_count": 1,
+      "changed_files": [
+        {
+          "path": "ghost/core/core/boot.js",
+          "old_path": "ghost/core/core/boot.js",
+          "new_path": "ghost/core/core/boot.js",
+          "change_type": "modified",
+          "file_role": "other",
+          "hunk_count": 3,
+          "changed_line_count": 10,
+          "first_diff_evidence_id": "diff_hunk:ghost/core/core/boot.js:310",
+          "available_evidence_count": 14
+        },
+        {
+          "path": "ghost/core/core/server/services/xmlrpc.js",
+          "old_path": "ghost/core/core/server/services/xmlrpc.js",
+          "new_path": null,
+          "change_type": "deleted",
+          "file_role": "other",
+          "hunk_count": 1,
+          "changed_line_count": 134,
+          "first_diff_evidence_id": "diff_hunk:ghost/core/core/server/services/xmlrpc.js:1",
+          "available_evidence_count": 137
+        },
+        {
+          "path": "ghost/core/core/shared/config/env/config.development.json",
+          "old_path": "ghost/core/core/shared/config/env/config.development.json",
+          "new_path": "ghost/core/core/shared/config/env/config.development.json",
+          "change_type": "modified",
+          "file_role": "other",
+          "hunk_count": 1,
+          "changed_line_count": 1,
+          "first_diff_evidence_id": "diff_hunk:ghost/core/core/shared/config/env/config.development.json:23",
+          "available_evidence_count": 3
+        },
+        {
+          "path": "ghost/core/test/unit/server/services/xmlrpc.test.js",
+          "old_path": "ghost/core/test/unit/server/services/xmlrpc.test.js",
+          "new_path": null,
+          "change_type": "deleted",
+          "file_role": "other",
+          "hunk_count": 1,
+          "changed_line_count": 277,
+          "first_diff_evidence_id": "diff_hunk:ghost/core/test/unit/server/services/xmlrpc.test.js:1",
+          "available_evidence_count": 280
+        }
+      ],
+      "omitted_changed_file_count": 0,
+      "changed_entities": [
+        {
+          "path": "ghost/core/core/boot.js",
+          "entity_type": "module",
+          "name": "boot.js",
+          "qualified_name": "ghost.core.core.boot",
+          "line_start": 313,
+          "line_end": 318,
+          "hunk_ids": [
+            "ghost/core/core/boot.js:310",
+            "ghost/core/core/boot.js:347",
+            "ghost/core/core/boot.js:361"
+          ]
+        },
+        {
+          "path": "ghost/core/core/server/services/xmlrpc.js",
+          "entity_type": "module",
+          "name": "xmlrpc.js",
+          "qualified_name": "ghost.core.core.server.services.xmlrpc",
+          "line_start": 1,
+          "line_end": 134,
+          "hunk_ids": [
+            "ghost/core/core/server/services/xmlrpc.js:1"
+          ]
+        },
+        {
+          "path": "ghost/core/core/shared/config/env/config.development.json",
+          "entity_type": "module",
+          "name": "config.development.json",
+          "qualified_name": "ghost.core.core.shared.config.env.config.development",
+          "line_start": 26,
+          "line_end": 26,
+          "hunk_ids": [
+            "ghost/core/core/shared/config/env/config.development.json:23"
+          ]
+        },
+        {
+          "path": "ghost/core/test/unit/server/services/xmlrpc.test.js",
+          "entity_type": "module",
+          "name": "xmlrpc.test.js",
+          "qualified_name": "ghost.core.test.unit.server.services.xmlrpc.test",
+          "line_start": 1,
+          "line_end": 277,
+          "hunk_ids": [
+            "ghost/core/test/unit/server/services/xmlrpc.test.js:1"
+          ]
+        }
+      ],
+      "risk_signals": [
+        {
+          "tag": "security_sensitive",
+          "confidence": 0.74,
+          "reason": "Security-sensitive keywords changed in ghost/core/core/server/services/xmlrpc.js.",
+          "risk_evidence_id": "risk:security_sensitive:ghost/core/core/server/services/xmlrpc.js",
+          "primary_evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/xmlrpc.js:1"
+          ],
+          "related_evidence_id_count": 134,
+          "omitted_evidence_id_count": 133
+        },
+        {
+          "tag": "security_sensitive",
+          "confidence": 0.74,
+          "reason": "Security-sensitive keywords changed in ghost/core/test/unit/server/services/xmlrpc.test.js.",
+          "risk_evidence_id": "risk:security_sensitive:ghost/core/test/unit/server/services/xmlrpc.test.js",
+          "primary_evidence_ids": [
+            "diff_hunk:ghost/core/test/unit/server/services/xmlrpc.test.js:1"
+          ],
+          "related_evidence_id_count": 277,
+          "omitted_evidence_id_count": 276
+        }
+      ],
+      "review_guidelines": [
+        {
+          "title": "Migration Files Must Follow Strict Naming Convention",
+          "body": "Ensure database migration files follow the required timestamp-based naming pattern to maintain chronological order and enable proper migration tracking Migration files in core/server/data/migrations/versions/ (excluding versions 1.x, 2.x, 3.x) match the pattern: YYYY-MM-DD-HH-MM-descriptive-name-with-hyphens (e.g., 2022-04-05-12-00-add-member-alert-setting.js) Migration files do not follow the required timestamp format or use underscores, camelCase, or other naming styles"
+        },
+        {
+          "title": "Enforce Module Boundary Between core/shared and core/server",
+          "body": "Maintain architectural separation by preventing core/shared modules from depending on core/server code, ensuring shared code remains truly reusable across server and frontend Files in core/shared/ do not contain require() or import statements that reference core/server/ paths Files in core/shared/ import or require modules from core/server/"
+        },
+        {
+          "title": "Enforce Module Boundary Between core/shared and core/frontend",
+          "body": "Maintain architectural separation by preventing core/shared modules from depending on core/frontend code, ensuring shared code remains truly reusable across server and frontend Files in core/shared/ do not contain require() or import statements that reference core/frontend/ paths Files in core/shared/ import or require modules from core/frontend/"
+        },
+        {
+          "title": "Database Schema Must Not Include User Audit Fields",
+          "body": "Prevent using created_by and updated_by fields in database schema to enforce the use of the action log for tracking user actions, providing better audit trails and separation of concerns The schema definition in core/server/data/schema/schema.js does not contain properties named 'created_by' or 'updated_by' The schema definition includes 'created_by' or 'updated_by' fields"
+        },
+        {
+          "title": "Database Migrations Must Not Use Loop Constructs",
+          "body": "Prevent performance issues in database migrations by prohibiting loop constructs (for, while, forEach) that can cause migrations to run slowly or fail on large datasets Migration files in core/server/data/migrations/versions/ do not contain for statements, for-of statements, for-in statements, while statements, forEach calls, or _.each calls Migration files contain any loop constructs including for, for-of, for-in, while, forEach, or _.each"
+        },
+        {
+          "title": "Database Migrations Must Not Use Multiple JOIN Statements",
+          "body": "Prevent complex and poorly performing database queries in migrations by prohibiting multiple JOIN operations in a single Knex query block Migration files do not chain multiple join/innerJoin/leftJoin calls on a single Knex query object Migration files contain Knex queries with multiple chained join operations"
+        },
+        {
+          "title": "Database Migrations Must Not Return Early from Loops",
+          "body": "Prevent data processing errors in migrations by ensuring all records are processed when loops are used (in legacy migrations or utility functions) Migration files do not contain return statements inside loop bodies Migration files contain return statements within loop constructs"
+        },
+        {
+          "title": "API Endpoint Controllers Must Have Type Annotations",
+          "body": "Ensure type safety and IDE support for API endpoint controllers by requiring JSDoc type annotations from @tryghost/api-framework API endpoint controller objects in core/server/api/endpoints/ include JSDoc type comment '@type {import('@tryghost/api-framework').Controller}' API endpoint controllers lack the required JSDoc type annotation"
+        },
+        {
+          "title": "API Endpoints Must Enforce Complexity Limits",
+          "body": "Maintain code quality and prevent overly complex API endpoint implementations by enforcing complexity metrics on endpoint handler functions API endpoint files in core/server/api/endpoints/ pass the 'ghost/ghost-custom/max-api-complexity' ESLint rule API endpoint functions exceed the maximum allowed cyclomatic complexity threshold"
+        },
+        {
+          "title": "Internationalization Files Must Use Kebab-Case Naming",
+          "body": "Ensure consistent file naming across all i18n translation files to maintain a uniform codebase structure and simplify automated tooling All files in ghost/i18n/ use kebab-case naming (lowercase letters, numbers, hyphens, and dots only): matching pattern ^[a-z0-9.-]+$ i18n files use camelCase, PascalCase, snake_case, or contain uppercase letters"
+        },
+        {
+          "title": "Admin React Apps Must Use Kebab-Case File Naming",
+          "body": "Enforce consistent kebab-case file naming convention across React admin applications to align with the codebase migration to kebab-case naming standards All files in apps/admin-x-* directories use kebab-case naming (lowercase letters, numbers, hyphens, and dots only): matching pattern ^[a-z0-9.-]+$ Admin app files use camelCase, PascalCase, snake_case, or contain uppercase letters"
+        },
+        {
+          "title": "React Components Must Sort JSX Props in Standard Order",
+          "body": "Maintain consistent and readable JSX code by enforcing a standard ordering of component props: reserved props first, callbacks last, shorthand props last JSX elements in React files have props ordered according to: reserved props (key, ref) first, then regular props alphabetically, then callbacks, then shorthand props last JSX elements have props in non-standard order (e.g., callbacks before regular props, shorthand before callbacks)"
+        },
+        {
+          "title": "React Button Elements Must Have Explicit Type Attribute",
+          "body": "Prevent unintended form submissions and unclear button semantics by requiring all button elements to explicitly specify their type attribute (button, submit, or reset) All <button> elements in React files include an explicit type attribute Button elements lack a type attribute or rely on browser default behavior"
+        },
+        {
+          "title": "React List Rendering Must Not Use Array Index as Key",
+          "body": "Prevent rendering bugs and performance issues by prohibiting the use of array indices as React key props, which can cause incorrect component state when lists are reordered or modified React components rendering lists use stable, unique identifiers (e.g., item.id) as key props, not array indices List items use array index as the key prop (e.g., key={index} or key={i})"
+        },
+        {
+          "title": "Tailwind CSS Classes Must Follow Standard Ordering",
+          "body": "Ensure consistent and maintainable Tailwind CSS class lists by enforcing the standard ordering convention defined in the Tailwind configuration Tailwind utility classes in className attributes follow the ordering specified in tailwind.config.cjs (layout, positioning, sizing, spacing, typography, visual, etc.) Tailwind classes are in non-standard order or randomly organized"
+        },
+        {
+          "title": "TypeScript Files Must Enable Strict Type Checking",
+          "body": "Ensure type safety and catch potential runtime errors at compile time by requiring strict mode and noImplicitAny in all TypeScript configurations tsconfig.json files include 'strict': true and 'noImplicitAny': true in compilerOptions TypeScript configuration files have strict or noImplicitAny set to false or omitted"
+        },
+        {
+          "title": "Code Must Use 4-Space Indentation",
+          "body": "Maintain consistent code formatting across the codebase by enforcing 4-space indentation for all source files (except JSON and YAML which use 2 spaces) All JavaScript, TypeScript, and other source files use 4 spaces for indentation levels Source files use tabs, 2-space indentation, or mixed indentation styles"
+        },
+        {
+          "title": "Code Must Use Single Quotes for Strings",
+          "body": "Ensure consistent string literal formatting across the codebase by requiring single quotes for all string values (template literals are allowed) String literals in JavaScript and TypeScript files use single quotes, except when using template literals for interpolation String literals use double quotes without justified reason"
+        },
+        {
+          "title": "Code Must Always Use Semicolons",
+          "body": "Prevent subtle bugs from automatic semicolon insertion and maintain explicit statement termination by requiring semicolons at the end of all statements All JavaScript and TypeScript statements end with explicit semicolons Statements rely on automatic semicolon insertion (ASI) instead of explicit semicolons"
+        },
+        {
+          "title": "Code Must Use let or const Instead of var",
+          "body": "Prevent hoisting-related bugs and unclear variable scoping by prohibiting var declarations in favor of block-scoped let and const All variable declarations use let (for reassignable variables) or const (for constants), never var Code contains var declarations"
+        },
+        {
+          "title": "Code Must Use Strict Equality Operators",
+          "body": "Prevent type coercion bugs by requiring strict equality checks (=== and !==) instead of loose equality (== and !=) All equality comparisons use === or !== operators Code contains == or != operators for equality checks"
+        },
+        {
+          "title": "Code Must Not Use console.* Calls",
+          "body": "Prevent debug statements from being committed to production code by prohibiting console.log, console.warn, and other console method calls Source files do not contain console.log, console.warn, console.error, or other console method calls Code contains calls to console methods"
+        },
+        {
+          "title": "Package Manager Must Be Yarn v1",
+          "body": "Ensure consistent dependency management and workspace functionality by requiring Yarn v1 for all package operations, as the monorepo relies on Yarn workspaces All package management commands (install, add, remove, run) use yarn, not npm or other package managers Code documentation, scripts, or CI configuration references npm or other package managers for dependency management"
+        },
+        {
+          "title": "Node.js Version Must Match Engine Requirement",
+          "body": "Ensure compatibility and prevent runtime errors by enforcing the specific Node.js version required by the Ghost application Development and production environments use Node.js version matching the engines.node specification in ghost/core/package.json (^22.13.1) Environment uses a Node.js version outside the specified semver range"
+        }
+      ],
+      "evidence_index": {
+        "diff_hunk:ghost/core/core/server/services/xmlrpc.js:1": {
+          "id": "diff_hunk:ghost/core/core/server/services/xmlrpc.js:1",
+          "kind": "diff_hunk",
+          "source": "ghost/core/core/server/services/xmlrpc.js:1",
+          "message": "@@ -1,134 +0,0 @@\n-const _ = require('lodash');\n-const xml = require('xml');\n-const config = require('../../shared/config');\n-const urlService = require('./url');\n-const errors = require('@tryghost/errors');\n-const tpl = require('@tryghost/tpl');\n-const logging = require('@tryghost/logging');\n-const request = require('@tryghost/request');\n-const settingsCache = require('../../shared/settings-cache');\n-\n-// Used to receive post.published model event\n-const events = require('../lib/common/events');\n-\n-const messages = {\n-    requestFailedError: 'The {service} service was unable to send a ping request, your site will continue to function.',\n-    requestFailedHelp: 'If you get this error repeatedly, please seek help on {url}.'\n-};\n-\n-const defaultPostSlugs = [\n-    'welcome',\n-    'the-editor',\n-    'using-tags',\n-    'managing-users',\n-    'private-sites',\n-    'advanced-markdown',\n-    'themes'\n-];\n-\n-// ToDo: Make this configurable\n-const pingList = [\n-    {\n-        url: 'http://rpc.pingomatic.com'\n-    }\n-];\n-\n-function ping(post) {\n-    let pingXML;\n-    const title = post.title;\n-    const url = urlService.getUrlByResourceId(post.id, {absolute: true});\n-\n-    if (post.type === 'page' || config.isPrivacyDisabled('useRpcPing') || settingsCache.get('is_private')) {\n-        return;\n-    }\n-\n-    // Don't ping for the default posts.\n-    // This also handles the case where during ghost's first run\n-    // models.init() inserts this post but permissions.init() hasn't\n-    // (can't) run yet.\n-    if (defaultPostSlugs.indexOf(post.slug) > -1) {\n-        return;\n-    }\n-\n-    // Build XML object.\n-    pingXML = xml({\n-        methodCall: [{\n-            methodName: 'weblogUpdates.ping'\n-        }, {\n-            params: [{\n-                param: [{\n-                    value: [{\n-                        string: title\n-                    }]\n-                }]\n-            }, {\n-                param: [{\n-                    value: [{\n-                        string: url\n-                    }]\n-                }]\n-            }]\n-        }]\n-    }, {declaration: true});\n-\n-    // Ping each of the defined services.\n-    _.each(pingList, function (pingHost) {\n-        const options = {\n-            body: pingXML,\n-            timeout: {\n-                request: 2 * 1000\n-            }\n... omitted 54 hunk line(s)"
+        },
+        "diff_hunk:ghost/core/test/unit/server/services/xmlrpc.test.js:1": {
+          "id": "diff_hunk:ghost/core/test/unit/server/services/xmlrpc.test.js:1",
+          "kind": "diff_hunk",
+          "source": "ghost/core/test/unit/server/services/xmlrpc.test.js:1",
+          "message": "@@ -1,277 +0,0 @@\n-const sinon = require('sinon');\n-const _ = require('lodash');\n-const nock = require('nock');\n-const rewire = require('rewire');\n-const testUtils = require('../../../utils');\n-const configUtils = require('../../../utils/config-utils');\n-const xmlrpc = rewire('../../../../core/server/services/xmlrpc');\n-const events = require('../../../../core/server/lib/common/events');\n-const logging = require('@tryghost/logging');\n-\n-describe('XMLRPC', function () {\n-    let eventStub;\n-    let loggingStub;\n-\n-    beforeEach(function () {\n-        eventStub = sinon.stub(events, 'on');\n-        configUtils.set('privacy:useRpcPing', true);\n-    });\n-\n-    afterEach(async function () {\n-        sinon.restore();\n-        await configUtils.restore();\n-        nock.cleanAll();\n-    });\n-\n-    it('listen() should initialise event correctly', function () {\n-        xmlrpc.listen();\n-        eventStub.calledOnce.should.be.true();\n-        eventStub.calledWith('post.published', xmlrpc.__get__('xmlrpcListener')).should.be.true();\n-    });\n-\n-    it('listener() calls ping() with toJSONified model', function () {\n-        const testPost = _.clone(testUtils.DataGenerator.Content.posts[2]);\n-\n-        const testModel = {\n-            toJSON: function () {\n-                return testPost;\n-            }\n-        };\n-\n-        const pingStub = sinon.stub();\n-        const resetXmlRpc = xmlrpc.__set__('ping', pingStub);\n-        const listener = xmlrpc.__get__('xmlrpcListener');\n-\n-        listener(testModel);\n-\n-        pingStub.calledOnce.should.be.true();\n-        pingStub.calledWith(testPost).should.be.true();\n-\n-        // Reset xmlrpc ping method\n-        resetXmlRpc();\n-    });\n-\n-    it('listener() does not call ping() when importing', function () {\n-        const testPost = _.clone(testUtils.DataGenerator.Content.posts[2]);\n-\n-        const testModel = {\n-            toJSON: function () {\n-                return testPost;\n-            }\n-        };\n-\n-        const pingStub = sinon.stub();\n-        const resetXmlRpc = xmlrpc.__set__('ping', pingStub);\n-        const listener = xmlrpc.__get__('xmlrpcListener');\n-\n-        listener(testModel, {importing: true});\n-\n-        pingStub.calledOnce.should.be.false();\n-\n-        // Reset xmlrpc ping method\n-        resetXmlRpc();\n-    });\n-\n-    describe('ping()', function () {\n-        const ping = xmlrpc.__get__('ping');\n-\n-        it('with a post should execute two pings', function (done) {\n-            loggingStub = sinon.stub(logging, 'error');\n-            const ping1 = nock('http://rpc.pingomatic.com').post('/').reply(200);\n... omitted 197 hunk line(s)"
+        },
+        "diff_hunk:ghost/core/core/boot.js:310": {
+          "id": "diff_hunk:ghost/core/core/boot.js:310",
+          "kind": "diff_hunk",
+          "source": "ghost/core/core/boot.js:310",
+          "message": "@@ -310,12 +310,12 @@ async function initServices() {\n     debug('Begin: initServices');\n \n     debug('Begin: Services');\n+    // NOTE: If you need to add dependencies for services, use npm install <package>\n     const identityTokens = require('./server/services/identity-tokens');\n     const stripe = require('./server/services/stripe');\n     const members = require('./server/services/members');\n     const tiers = require('./server/services/tiers');\n     const permissions = require('./server/services/permissions');\n-    const xmlrpc = require('./server/services/xmlrpc');\n     const slack = require('./server/services/slack');\n     const webhooks = require('./server/services/webhooks');\n     const scheduling = require('./server/adapters/scheduling');"
+        },
+        "diff_hunk:ghost/core/core/shared/config/env/config.development.json:23": {
+          "id": "diff_hunk:ghost/core/core/shared/config/env/config.development.json:23",
+          "kind": "diff_hunk",
+          "source": "ghost/core/core/shared/config/env/config.development.json:23",
+          "message": "@@ -23,7 +23,6 @@\n         \"contentPath\": \"content/\"\n     },\n     \"privacy\": {\n-        \"useRpcPing\": false,\n         \"useUpdateCheck\": true\n     },\n     \"useMinFiles\": false,"
+        }
+      },
+      "available_context": {
+        "profile": "risk_compact_manifest_v1",
+        "request_types": [
+          "related_symbol",
+          "related_tests",
+          "risk_evidence",
+          "same_file_more_evidence"
+        ],
+        "available_evidence_count": 434,
+        "selected_evidence_count": 4,
+        "omitted_evidence_count": 430,
+        "omitted_evidence_ids": [
+          "diff:ghost/core/core/server/services/xmlrpc.js:1",
+          "diff:ghost/core/core/server/services/xmlrpc.js:10",
+          "diff:ghost/core/core/server/services/xmlrpc.js:100",
+          "diff:ghost/core/core/server/services/xmlrpc.js:101",
+          "diff:ghost/core/core/server/services/xmlrpc.js:102",
+          "diff:ghost/core/core/server/services/xmlrpc.js:103",
+          "diff:ghost/core/core/server/services/xmlrpc.js:104",
+          "diff:ghost/core/core/server/services/xmlrpc.js:105",
+          "diff:ghost/core/core/server/services/xmlrpc.js:106",
+          "diff:ghost/core/core/server/services/xmlrpc.js:107",
+          "diff:ghost/core/core/server/services/xmlrpc.js:108",
+          "diff:ghost/core/core/server/services/xmlrpc.js:109",
+          "diff:ghost/core/core/server/services/xmlrpc.js:11",
+          "diff:ghost/core/core/server/services/xmlrpc.js:110",
+          "diff:ghost/core/core/server/services/xmlrpc.js:111",
+          "diff:ghost/core/core/server/services/xmlrpc.js:112",
+          "diff:ghost/core/core/server/services/xmlrpc.js:113",
+          "diff:ghost/core/core/server/services/xmlrpc.js:114",
+          "diff:ghost/core/core/server/services/xmlrpc.js:115",
+          "diff:ghost/core/core/server/services/xmlrpc.js:116",
+          "diff:ghost/core/core/server/services/xmlrpc.js:117",
+          "diff:ghost/core/core/server/services/xmlrpc.js:118",
+          "diff:ghost/core/core/server/services/xmlrpc.js:119",
+          "diff:ghost/core/core/server/services/xmlrpc.js:12",
+          "diff:ghost/core/core/server/services/xmlrpc.js:120",
+          "diff:ghost/core/core/server/services/xmlrpc.js:121",
+          "diff:ghost/core/core/server/services/xmlrpc.js:122",
+          "diff:ghost/core/core/server/services/xmlrpc.js:123",
+          "diff:ghost/core/core/server/services/xmlrpc.js:124",
+          "diff:ghost/core/core/server/services/xmlrpc.js:125",
+          "diff:ghost/core/core/server/services/xmlrpc.js:126",
+          "diff:ghost/core/core/server/services/xmlrpc.js:127",
+          "diff:ghost/core/core/server/services/xmlrpc.js:128",
+          "diff:ghost/core/core/server/services/xmlrpc.js:129",
+          "diff:ghost/core/core/server/services/xmlrpc.js:13",
+          "diff:ghost/core/core/server/services/xmlrpc.js:130",
+          "diff:ghost/core/core/server/services/xmlrpc.js:131",
+          "diff:ghost/core/core/server/services/xmlrpc.js:132",
+          "diff:ghost/core/core/server/services/xmlrpc.js:133",
+          "diff:ghost/core/core/server/services/xmlrpc.js:134"
+        ],
+        "omitted_evidence_id_limit": 40,
+        "paths": [
+          {
+            "path": "ghost/core/core/boot.js",
+            "omitted_evidence_count": 13,
+            "kinds": {
+              "diff": 10,
+              "diff_hunk": 2,
+              "entity": 1
+            },
+            "sample_evidence_ids": [
+              "diff_hunk:ghost/core/core/boot.js:347",
+              "diff_hunk:ghost/core/core/boot.js:361",
+              "entity:ghost/core/core/boot.js:ghost.core.core.boot",
+              "diff:ghost/core/core/boot.js:313"
+            ],
+            "request_hints": [
+              "same_file_more_evidence",
+              "same_file_more_evidence",
+              "related_symbol"
+            ]
+          },
+          {
+            "path": "ghost/core/core/server/services/xmlrpc.js",
+            "omitted_evidence_count": 136,
+            "kinds": {
+              "diff": 134,
+              "entity": 1,
+              "risk": 1
+            },
+            "sample_evidence_ids": [
+              "diff:ghost/core/core/server/services/xmlrpc.js:1",
+              "diff:ghost/core/core/server/services/xmlrpc.js:10",
+              "diff:ghost/core/core/server/services/xmlrpc.js:100",
+              "diff:ghost/core/core/server/services/xmlrpc.js:101"
+            ],
+            "request_hints": [
+              "same_file_more_evidence",
+              "related_symbol",
+              "risk_evidence"
+            ]
+          },
+          {
+            "path": "ghost/core/core/shared/config/env/config.development.json",
+            "omitted_evidence_count": 2,
+            "kinds": {
+              "diff": 1,
+              "entity": 1
+            },
+            "sample_evidence_ids": [
+              "entity:ghost/core/core/shared/config/env/config.development.json:ghost.core.core.shared.config.env.config.development",
+              "diff:ghost/core/core/shared/config/env/config.development.json:26"
+            ],
+            "request_hints": [
+              "same_file_more_evidence",
+              "related_symbol"
+            ]
+          },
+          {
+            "path": "ghost/core/test/unit/server/services/xmlrpc.test.js",
+            "omitted_evidence_count": 279,
+            "kinds": {
+              "diff": 277,
+              "entity": 1,
+              "risk": 1
+            },
+            "sample_evidence_ids": [
+              "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:1",
+              "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:10",
+              "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:100",
+              "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:101"
+            ],
+            "request_hints": [
+              "same_file_more_evidence",
+              "related_symbol",
+              "risk_evidence"
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "tag": "security_sensitive",
+            "confidence": 0.74,
+            "path": "ghost/core/core/server/services/xmlrpc.js",
+            "selected_evidence_ids": [],
+            "omitted_evidence_count": 134,
+            "sample_omitted_evidence_ids": [
+              "diff:ghost/core/core/server/services/xmlrpc.js:1",
+              "diff:ghost/core/core/server/services/xmlrpc.js:10",
+              "diff:ghost/core/core/server/services/xmlrpc.js:100",
+              "diff:ghost/core/core/server/services/xmlrpc.js:101"
+            ]
+          },
+          {
+            "tag": "security_sensitive",
+            "confidence": 0.74,
+            "path": "ghost/core/test/unit/server/services/xmlrpc.test.js",
+            "selected_evidence_ids": [],
+            "omitted_evidence_count": 277,
+            "sample_omitted_evidence_ids": [
+              "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:1",
+              "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:10",
+              "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:100",
+              "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:101"
+            ]
+          }
+        ]
+      },
+      "is_refill": false,
+      "parent_shard_id": null,
+      "request_types": []
+    }
+  ],
+  "live_review_input": {
+    "schema": "live_review_input_v1",
+    "selection_strategy": "risk_first_v1",
+    "repo_root": "D:\\learn\\code-review-agent\\workspace\\qodo_pr_review_bench_live_guidelines_smoke2\\samples\\qodo_000\\repo",
+    "shard_id": "shard-001",
+    "shard_index": 0,
+    "shard_count": 1,
+    "changed_files": [
+      {
+        "path": "ghost/core/core/boot.js",
+        "old_path": "ghost/core/core/boot.js",
+        "new_path": "ghost/core/core/boot.js",
+        "change_type": "modified",
+        "file_role": "other",
+        "hunk_count": 3,
+        "changed_line_count": 10,
+        "first_diff_evidence_id": "diff_hunk:ghost/core/core/boot.js:310",
+        "available_evidence_count": 14
+      },
+      {
+        "path": "ghost/core/core/server/services/xmlrpc.js",
+        "old_path": "ghost/core/core/server/services/xmlrpc.js",
+        "new_path": null,
+        "change_type": "deleted",
+        "file_role": "other",
+        "hunk_count": 1,
+        "changed_line_count": 134,
+        "first_diff_evidence_id": "diff_hunk:ghost/core/core/server/services/xmlrpc.js:1",
+        "available_evidence_count": 137
+      },
+      {
+        "path": "ghost/core/core/shared/config/env/config.development.json",
+        "old_path": "ghost/core/core/shared/config/env/config.development.json",
+        "new_path": "ghost/core/core/shared/config/env/config.development.json",
+        "change_type": "modified",
+        "file_role": "other",
+        "hunk_count": 1,
+        "changed_line_count": 1,
+        "first_diff_evidence_id": "diff_hunk:ghost/core/core/shared/config/env/config.development.json:23",
+        "available_evidence_count": 3
+      },
+      {
+        "path": "ghost/core/test/unit/server/services/xmlrpc.test.js",
+        "old_path": "ghost/core/test/unit/server/services/xmlrpc.test.js",
+        "new_path": null,
+        "change_type": "deleted",
+        "file_role": "other",
+        "hunk_count": 1,
+        "changed_line_count": 277,
+        "first_diff_evidence_id": "diff_hunk:ghost/core/test/unit/server/services/xmlrpc.test.js:1",
+        "available_evidence_count": 280
+      }
+    ],
+    "omitted_changed_file_count": 0,
+    "changed_entities": [
+      {
+        "path": "ghost/core/core/boot.js",
+        "entity_type": "module",
+        "name": "boot.js",
+        "qualified_name": "ghost.core.core.boot",
+        "line_start": 313,
+        "line_end": 318,
+        "hunk_ids": [
+          "ghost/core/core/boot.js:310",
+          "ghost/core/core/boot.js:347",
+          "ghost/core/core/boot.js:361"
+        ]
+      },
+      {
+        "path": "ghost/core/core/server/services/xmlrpc.js",
+        "entity_type": "module",
+        "name": "xmlrpc.js",
+        "qualified_name": "ghost.core.core.server.services.xmlrpc",
+        "line_start": 1,
+        "line_end": 134,
+        "hunk_ids": [
+          "ghost/core/core/server/services/xmlrpc.js:1"
+        ]
+      },
+      {
+        "path": "ghost/core/core/shared/config/env/config.development.json",
+        "entity_type": "module",
+        "name": "config.development.json",
+        "qualified_name": "ghost.core.core.shared.config.env.config.development",
+        "line_start": 26,
+        "line_end": 26,
+        "hunk_ids": [
+          "ghost/core/core/shared/config/env/config.development.json:23"
+        ]
+      },
+      {
+        "path": "ghost/core/test/unit/server/services/xmlrpc.test.js",
+        "entity_type": "module",
+        "name": "xmlrpc.test.js",
+        "qualified_name": "ghost.core.test.unit.server.services.xmlrpc.test",
+        "line_start": 1,
+        "line_end": 277,
+        "hunk_ids": [
+          "ghost/core/test/unit/server/services/xmlrpc.test.js:1"
+        ]
+      }
+    ],
+    "risk_signals": [
+      {
+        "tag": "security_sensitive",
+        "confidence": 0.74,
+        "reason": "Security-sensitive keywords changed in ghost/core/core/server/services/xmlrpc.js.",
+        "risk_evidence_id": "risk:security_sensitive:ghost/core/core/server/services/xmlrpc.js",
+        "primary_evidence_ids": [
+          "diff_hunk:ghost/core/core/server/services/xmlrpc.js:1"
+        ],
+        "related_evidence_id_count": 134,
+        "omitted_evidence_id_count": 133
+      },
+      {
+        "tag": "security_sensitive",
+        "confidence": 0.74,
+        "reason": "Security-sensitive keywords changed in ghost/core/test/unit/server/services/xmlrpc.test.js.",
+        "risk_evidence_id": "risk:security_sensitive:ghost/core/test/unit/server/services/xmlrpc.test.js",
+        "primary_evidence_ids": [
+          "diff_hunk:ghost/core/test/unit/server/services/xmlrpc.test.js:1"
+        ],
+        "related_evidence_id_count": 277,
+        "omitted_evidence_id_count": 276
+      }
+    ],
+    "review_guidelines": [
+      {
+        "title": "Migration Files Must Follow Strict Naming Convention",
+        "body": "Ensure database migration files follow the required timestamp-based naming pattern to maintain chronological order and enable proper migration tracking Migration files in core/server/data/migrations/versions/ (excluding versions 1.x, 2.x, 3.x) match the pattern: YYYY-MM-DD-HH-MM-descriptive-name-with-hyphens (e.g., 2022-04-05-12-00-add-member-alert-setting.js) Migration files do not follow the required timestamp format or use underscores, camelCase, or other naming styles"
+      },
+      {
+        "title": "Enforce Module Boundary Between core/shared and core/server",
+        "body": "Maintain architectural separation by preventing core/shared modules from depending on core/server code, ensuring shared code remains truly reusable across server and frontend Files in core/shared/ do not contain require() or import statements that reference core/server/ paths Files in core/shared/ import or require modules from core/server/"
+      },
+      {
+        "title": "Enforce Module Boundary Between core/shared and core/frontend",
+        "body": "Maintain architectural separation by preventing core/shared modules from depending on core/frontend code, ensuring shared code remains truly reusable across server and frontend Files in core/shared/ do not contain require() or import statements that reference core/frontend/ paths Files in core/shared/ import or require modules from core/frontend/"
+      },
+      {
+        "title": "Database Schema Must Not Include User Audit Fields",
+        "body": "Prevent using created_by and updated_by fields in database schema to enforce the use of the action log for tracking user actions, providing better audit trails and separation of concerns The schema definition in core/server/data/schema/schema.js does not contain properties named 'created_by' or 'updated_by' The schema definition includes 'created_by' or 'updated_by' fields"
+      },
+      {
+        "title": "Database Migrations Must Not Use Loop Constructs",
+        "body": "Prevent performance issues in database migrations by prohibiting loop constructs (for, while, forEach) that can cause migrations to run slowly or fail on large datasets Migration files in core/server/data/migrations/versions/ do not contain for statements, for-of statements, for-in statements, while statements, forEach calls, or _.each calls Migration files contain any loop constructs including for, for-of, for-in, while, forEach, or _.each"
+      },
+      {
+        "title": "Database Migrations Must Not Use Multiple JOIN Statements",
+        "body": "Prevent complex and poorly performing database queries in migrations by prohibiting multiple JOIN operations in a single Knex query block Migration files do not chain multiple join/innerJoin/leftJoin calls on a single Knex query object Migration files contain Knex queries with multiple chained join operations"
+      },
+      {
+        "title": "Database Migrations Must Not Return Early from Loops",
+        "body": "Prevent data processing errors in migrations by ensuring all records are processed when loops are used (in legacy migrations or utility functions) Migration files do not contain return statements inside loop bodies Migration files contain return statements within loop constructs"
+      },
+      {
+        "title": "API Endpoint Controllers Must Have Type Annotations",
+        "body": "Ensure type safety and IDE support for API endpoint controllers by requiring JSDoc type annotations from @tryghost/api-framework API endpoint controller objects in core/server/api/endpoints/ include JSDoc type comment '@type {import('@tryghost/api-framework').Controller}' API endpoint controllers lack the required JSDoc type annotation"
+      },
+      {
+        "title": "API Endpoints Must Enforce Complexity Limits",
+        "body": "Maintain code quality and prevent overly complex API endpoint implementations by enforcing complexity metrics on endpoint handler functions API endpoint files in core/server/api/endpoints/ pass the 'ghost/ghost-custom/max-api-complexity' ESLint rule API endpoint functions exceed the maximum allowed cyclomatic complexity threshold"
+      },
+      {
+        "title": "Internationalization Files Must Use Kebab-Case Naming",
+        "body": "Ensure consistent file naming across all i18n translation files to maintain a uniform codebase structure and simplify automated tooling All files in ghost/i18n/ use kebab-case naming (lowercase letters, numbers, hyphens, and dots only): matching pattern ^[a-z0-9.-]+$ i18n files use camelCase, PascalCase, snake_case, or contain uppercase letters"
+      },
+      {
+        "title": "Admin React Apps Must Use Kebab-Case File Naming",
+        "body": "Enforce consistent kebab-case file naming convention across React admin applications to align with the codebase migration to kebab-case naming standards All files in apps/admin-x-* directories use kebab-case naming (lowercase letters, numbers, hyphens, and dots only): matching pattern ^[a-z0-9.-]+$ Admin app files use camelCase, PascalCase, snake_case, or contain uppercase letters"
+      },
+      {
+        "title": "React Components Must Sort JSX Props in Standard Order",
+        "body": "Maintain consistent and readable JSX code by enforcing a standard ordering of component props: reserved props first, callbacks last, shorthand props last JSX elements in React files have props ordered according to: reserved props (key, ref) first, then regular props alphabetically, then callbacks, then shorthand props last JSX elements have props in non-standard order (e.g., callbacks before regular props, shorthand before callbacks)"
+      },
+      {
+        "title": "React Button Elements Must Have Explicit Type Attribute",
+        "body": "Prevent unintended form submissions and unclear button semantics by requiring all button elements to explicitly specify their type attribute (button, submit, or reset) All <button> elements in React files include an explicit type attribute Button elements lack a type attribute or rely on browser default behavior"
+      },
+      {
+        "title": "React List Rendering Must Not Use Array Index as Key",
+        "body": "Prevent rendering bugs and performance issues by prohibiting the use of array indices as React key props, which can cause incorrect component state when lists are reordered or modified React components rendering lists use stable, unique identifiers (e.g., item.id) as key props, not array indices List items use array index as the key prop (e.g., key={index} or key={i})"
+      },
+      {
+        "title": "Tailwind CSS Classes Must Follow Standard Ordering",
+        "body": "Ensure consistent and maintainable Tailwind CSS class lists by enforcing the standard ordering convention defined in the Tailwind configuration Tailwind utility classes in className attributes follow the ordering specified in tailwind.config.cjs (layout, positioning, sizing, spacing, typography, visual, etc.) Tailwind classes are in non-standard order or randomly organized"
+      },
+      {
+        "title": "TypeScript Files Must Enable Strict Type Checking",
+        "body": "Ensure type safety and catch potential runtime errors at compile time by requiring strict mode and noImplicitAny in all TypeScript configurations tsconfig.json files include 'strict': true and 'noImplicitAny': true in compilerOptions TypeScript configuration files have strict or noImplicitAny set to false or omitted"
+      },
+      {
+        "title": "Code Must Use 4-Space Indentation",
+        "body": "Maintain consistent code formatting across the codebase by enforcing 4-space indentation for all source files (except JSON and YAML which use 2 spaces) All JavaScript, TypeScript, and other source files use 4 spaces for indentation levels Source files use tabs, 2-space indentation, or mixed indentation styles"
+      },
+      {
+        "title": "Code Must Use Single Quotes for Strings",
+        "body": "Ensure consistent string literal formatting across the codebase by requiring single quotes for all string values (template literals are allowed) String literals in JavaScript and TypeScript files use single quotes, except when using template literals for interpolation String literals use double quotes without justified reason"
+      },
+      {
+        "title": "Code Must Always Use Semicolons",
+        "body": "Prevent subtle bugs from automatic semicolon insertion and maintain explicit statement termination by requiring semicolons at the end of all statements All JavaScript and TypeScript statements end with explicit semicolons Statements rely on automatic semicolon insertion (ASI) instead of explicit semicolons"
+      },
+      {
+        "title": "Code Must Use let or const Instead of var",
+        "body": "Prevent hoisting-related bugs and unclear variable scoping by prohibiting var declarations in favor of block-scoped let and const All variable declarations use let (for reassignable variables) or const (for constants), never var Code contains var declarations"
+      },
+      {
+        "title": "Code Must Use Strict Equality Operators",
+        "body": "Prevent type coercion bugs by requiring strict equality checks (=== and !==) instead of loose equality (== and !=) All equality comparisons use === or !== operators Code contains == or != operators for equality checks"
+      },
+      {
+        "title": "Code Must Not Use console.* Calls",
+        "body": "Prevent debug statements from being committed to production code by prohibiting console.log, console.warn, and other console method calls Source files do not contain console.log, console.warn, console.error, or other console method calls Code contains calls to console methods"
+      },
+      {
+        "title": "Package Manager Must Be Yarn v1",
+        "body": "Ensure consistent dependency management and workspace functionality by requiring Yarn v1 for all package operations, as the monorepo relies on Yarn workspaces All package management commands (install, add, remove, run) use yarn, not npm or other package managers Code documentation, scripts, or CI configuration references npm or other package managers for dependency management"
+      },
+      {
+        "title": "Node.js Version Must Match Engine Requirement",
+        "body": "Ensure compatibility and prevent runtime errors by enforcing the specific Node.js version required by the Ghost application Development and production environments use Node.js version matching the engines.node specification in ghost/core/package.json (^22.13.1) Environment uses a Node.js version outside the specified semver range"
+      }
+    ],
+    "evidence_index": {
+      "diff_hunk:ghost/core/core/server/services/xmlrpc.js:1": {
+        "id": "diff_hunk:ghost/core/core/server/services/xmlrpc.js:1",
+        "kind": "diff_hunk",
+        "source": "ghost/core/core/server/services/xmlrpc.js:1",
+        "message": "@@ -1,134 +0,0 @@\n-const _ = require('lodash');\n-const xml = require('xml');\n-const config = require('../../shared/config');\n-const urlService = require('./url');\n-const errors = require('@tryghost/errors');\n-const tpl = require('@tryghost/tpl');\n-const logging = require('@tryghost/logging');\n-const request = require('@tryghost/request');\n-const settingsCache = require('../../shared/settings-cache');\n-\n-// Used to receive post.published model event\n-const events = require('../lib/common/events');\n-\n-const messages = {\n-    requestFailedError: 'The {service} service was unable to send a ping request, your site will continue to function.',\n-    requestFailedHelp: 'If you get this error repeatedly, please seek help on {url}.'\n-};\n-\n-const defaultPostSlugs = [\n-    'welcome',\n-    'the-editor',\n-    'using-tags',\n-    'managing-users',\n-    'private-sites',\n-    'advanced-markdown',\n-    'themes'\n-];\n-\n-// ToDo: Make this configurable\n-const pingList = [\n-    {\n-        url: 'http://rpc.pingomatic.com'\n-    }\n-];\n-\n-function ping(post) {\n-    let pingXML;\n-    const title = post.title;\n-    const url = urlService.getUrlByResourceId(post.id, {absolute: true});\n-\n-    if (post.type === 'page' || config.isPrivacyDisabled('useRpcPing') || settingsCache.get('is_private')) {\n-        return;\n-    }\n-\n-    // Don't ping for the default posts.\n-    // This also handles the case where during ghost's first run\n-    // models.init() inserts this post but permissions.init() hasn't\n-    // (can't) run yet.\n-    if (defaultPostSlugs.indexOf(post.slug) > -1) {\n-        return;\n-    }\n-\n-    // Build XML object.\n-    pingXML = xml({\n-        methodCall: [{\n-            methodName: 'weblogUpdates.ping'\n-        }, {\n-            params: [{\n-                param: [{\n-                    value: [{\n-                        string: title\n-                    }]\n-                }]\n-            }, {\n-                param: [{\n-                    value: [{\n-                        string: url\n-                    }]\n-                }]\n-            }]\n-        }]\n-    }, {declaration: true});\n-\n-    // Ping each of the defined services.\n-    _.each(pingList, function (pingHost) {\n-        const options = {\n-            body: pingXML,\n-            timeout: {\n-                request: 2 * 1000\n-            }\n... omitted 54 hunk line(s)"
+      },
+      "diff_hunk:ghost/core/test/unit/server/services/xmlrpc.test.js:1": {
+        "id": "diff_hunk:ghost/core/test/unit/server/services/xmlrpc.test.js:1",
+        "kind": "diff_hunk",
+        "source": "ghost/core/test/unit/server/services/xmlrpc.test.js:1",
+        "message": "@@ -1,277 +0,0 @@\n-const sinon = require('sinon');\n-const _ = require('lodash');\n-const nock = require('nock');\n-const rewire = require('rewire');\n-const testUtils = require('../../../utils');\n-const configUtils = require('../../../utils/config-utils');\n-const xmlrpc = rewire('../../../../core/server/services/xmlrpc');\n-const events = require('../../../../core/server/lib/common/events');\n-const logging = require('@tryghost/logging');\n-\n-describe('XMLRPC', function () {\n-    let eventStub;\n-    let loggingStub;\n-\n-    beforeEach(function () {\n-        eventStub = sinon.stub(events, 'on');\n-        configUtils.set('privacy:useRpcPing', true);\n-    });\n-\n-    afterEach(async function () {\n-        sinon.restore();\n-        await configUtils.restore();\n-        nock.cleanAll();\n-    });\n-\n-    it('listen() should initialise event correctly', function () {\n-        xmlrpc.listen();\n-        eventStub.calledOnce.should.be.true();\n-        eventStub.calledWith('post.published', xmlrpc.__get__('xmlrpcListener')).should.be.true();\n-    });\n-\n-    it('listener() calls ping() with toJSONified model', function () {\n-        const testPost = _.clone(testUtils.DataGenerator.Content.posts[2]);\n-\n-        const testModel = {\n-            toJSON: function () {\n-                return testPost;\n-            }\n-        };\n-\n-        const pingStub = sinon.stub();\n-        const resetXmlRpc = xmlrpc.__set__('ping', pingStub);\n-        const listener = xmlrpc.__get__('xmlrpcListener');\n-\n-        listener(testModel);\n-\n-        pingStub.calledOnce.should.be.true();\n-        pingStub.calledWith(testPost).should.be.true();\n-\n-        // Reset xmlrpc ping method\n-        resetXmlRpc();\n-    });\n-\n-    it('listener() does not call ping() when importing', function () {\n-        const testPost = _.clone(testUtils.DataGenerator.Content.posts[2]);\n-\n-        const testModel = {\n-            toJSON: function () {\n-                return testPost;\n-            }\n-        };\n-\n-        const pingStub = sinon.stub();\n-        const resetXmlRpc = xmlrpc.__set__('ping', pingStub);\n-        const listener = xmlrpc.__get__('xmlrpcListener');\n-\n-        listener(testModel, {importing: true});\n-\n-        pingStub.calledOnce.should.be.false();\n-\n-        // Reset xmlrpc ping method\n-        resetXmlRpc();\n-    });\n-\n-    describe('ping()', function () {\n-        const ping = xmlrpc.__get__('ping');\n-\n-        it('with a post should execute two pings', function (done) {\n-            loggingStub = sinon.stub(logging, 'error');\n-            const ping1 = nock('http://rpc.pingomatic.com').post('/').reply(200);\n... omitted 197 hunk line(s)"
+      },
+      "diff_hunk:ghost/core/core/boot.js:310": {
+        "id": "diff_hunk:ghost/core/core/boot.js:310",
+        "kind": "diff_hunk",
+        "source": "ghost/core/core/boot.js:310",
+        "message": "@@ -310,12 +310,12 @@ async function initServices() {\n     debug('Begin: initServices');\n \n     debug('Begin: Services');\n+    // NOTE: If you need to add dependencies for services, use npm install <package>\n     const identityTokens = require('./server/services/identity-tokens');\n     const stripe = require('./server/services/stripe');\n     const members = require('./server/services/members');\n     const tiers = require('./server/services/tiers');\n     const permissions = require('./server/services/permissions');\n-    const xmlrpc = require('./server/services/xmlrpc');\n     const slack = require('./server/services/slack');\n     const webhooks = require('./server/services/webhooks');\n     const scheduling = require('./server/adapters/scheduling');"
+      },
+      "diff_hunk:ghost/core/core/shared/config/env/config.development.json:23": {
+        "id": "diff_hunk:ghost/core/core/shared/config/env/config.development.json:23",
+        "kind": "diff_hunk",
+        "source": "ghost/core/core/shared/config/env/config.development.json:23",
+        "message": "@@ -23,7 +23,6 @@\n         \"contentPath\": \"content/\"\n     },\n     \"privacy\": {\n-        \"useRpcPing\": false,\n         \"useUpdateCheck\": true\n     },\n     \"useMinFiles\": false,"
+      }
+    },
+    "available_context": {
+      "profile": "risk_compact_manifest_v1",
+      "request_types": [
+        "related_symbol",
+        "related_tests",
+        "risk_evidence",
+        "same_file_more_evidence"
+      ],
+      "available_evidence_count": 434,
+      "selected_evidence_count": 4,
+      "omitted_evidence_count": 430,
+      "omitted_evidence_ids": [
+        "diff:ghost/core/core/server/services/xmlrpc.js:1",
+        "diff:ghost/core/core/server/services/xmlrpc.js:10",
+        "diff:ghost/core/core/server/services/xmlrpc.js:100",
+        "diff:ghost/core/core/server/services/xmlrpc.js:101",
+        "diff:ghost/core/core/server/services/xmlrpc.js:102",
+        "diff:ghost/core/core/server/services/xmlrpc.js:103",
+        "diff:ghost/core/core/server/services/xmlrpc.js:104",
+        "diff:ghost/core/core/server/services/xmlrpc.js:105",
+        "diff:ghost/core/core/server/services/xmlrpc.js:106",
+        "diff:ghost/core/core/server/services/xmlrpc.js:107",
+        "diff:ghost/core/core/server/services/xmlrpc.js:108",
+        "diff:ghost/core/core/server/services/xmlrpc.js:109",
+        "diff:ghost/core/core/server/services/xmlrpc.js:11",
+        "diff:ghost/core/core/server/services/xmlrpc.js:110",
+        "diff:ghost/core/core/server/services/xmlrpc.js:111",
+        "diff:ghost/core/core/server/services/xmlrpc.js:112",
+        "diff:ghost/core/core/server/services/xmlrpc.js:113",
+        "diff:ghost/core/core/server/services/xmlrpc.js:114",
+        "diff:ghost/core/core/server/services/xmlrpc.js:115",
+        "diff:ghost/core/core/server/services/xmlrpc.js:116",
+        "diff:ghost/core/core/server/services/xmlrpc.js:117",
+        "diff:ghost/core/core/server/services/xmlrpc.js:118",
+        "diff:ghost/core/core/server/services/xmlrpc.js:119",
+        "diff:ghost/core/core/server/services/xmlrpc.js:12",
+        "diff:ghost/core/core/server/services/xmlrpc.js:120",
+        "diff:ghost/core/core/server/services/xmlrpc.js:121",
+        "diff:ghost/core/core/server/services/xmlrpc.js:122",
+        "diff:ghost/core/core/server/services/xmlrpc.js:123",
+        "diff:ghost/core/core/server/services/xmlrpc.js:124",
+        "diff:ghost/core/core/server/services/xmlrpc.js:125",
+        "diff:ghost/core/core/server/services/xmlrpc.js:126",
+        "diff:ghost/core/core/server/services/xmlrpc.js:127",
+        "diff:ghost/core/core/server/services/xmlrpc.js:128",
+        "diff:ghost/core/core/server/services/xmlrpc.js:129",
+        "diff:ghost/core/core/server/services/xmlrpc.js:13",
+        "diff:ghost/core/core/server/services/xmlrpc.js:130",
+        "diff:ghost/core/core/server/services/xmlrpc.js:131",
+        "diff:ghost/core/core/server/services/xmlrpc.js:132",
+        "diff:ghost/core/core/server/services/xmlrpc.js:133",
+        "diff:ghost/core/core/server/services/xmlrpc.js:134"
+      ],
+      "omitted_evidence_id_limit": 40,
+      "paths": [
+        {
+          "path": "ghost/core/core/boot.js",
+          "omitted_evidence_count": 13,
+          "kinds": {
+            "diff": 10,
+            "diff_hunk": 2,
+            "entity": 1
+          },
+          "sample_evidence_ids": [
+            "diff_hunk:ghost/core/core/boot.js:347",
+            "diff_hunk:ghost/core/core/boot.js:361",
+            "entity:ghost/core/core/boot.js:ghost.core.core.boot",
+            "diff:ghost/core/core/boot.js:313"
+          ],
+          "request_hints": [
+            "same_file_more_evidence",
+            "same_file_more_evidence",
+            "related_symbol"
+          ]
+        },
+        {
+          "path": "ghost/core/core/server/services/xmlrpc.js",
+          "omitted_evidence_count": 136,
+          "kinds": {
+            "diff": 134,
+            "entity": 1,
+            "risk": 1
+          },
+          "sample_evidence_ids": [
+            "diff:ghost/core/core/server/services/xmlrpc.js:1",
+            "diff:ghost/core/core/server/services/xmlrpc.js:10",
+            "diff:ghost/core/core/server/services/xmlrpc.js:100",
+            "diff:ghost/core/core/server/services/xmlrpc.js:101"
+          ],
+          "request_hints": [
+            "same_file_more_evidence",
+            "related_symbol",
+            "risk_evidence"
+          ]
+        },
+        {
+          "path": "ghost/core/core/shared/config/env/config.development.json",
+          "omitted_evidence_count": 2,
+          "kinds": {
+            "diff": 1,
+            "entity": 1
+          },
+          "sample_evidence_ids": [
+            "entity:ghost/core/core/shared/config/env/config.development.json:ghost.core.core.shared.config.env.config.development",
+            "diff:ghost/core/core/shared/config/env/config.development.json:26"
+          ],
+          "request_hints": [
+            "same_file_more_evidence",
+            "related_symbol"
+          ]
+        },
+        {
+          "path": "ghost/core/test/unit/server/services/xmlrpc.test.js",
+          "omitted_evidence_count": 279,
+          "kinds": {
+            "diff": 277,
+            "entity": 1,
+            "risk": 1
+          },
+          "sample_evidence_ids": [
+            "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:1",
+            "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:10",
+            "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:100",
+            "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:101"
+          ],
+          "request_hints": [
+            "same_file_more_evidence",
+            "related_symbol",
+            "risk_evidence"
+          ]
+        }
+      ],
+      "risks": [
+        {
+          "tag": "security_sensitive",
+          "confidence": 0.74,
+          "path": "ghost/core/core/server/services/xmlrpc.js",
+          "selected_evidence_ids": [],
+          "omitted_evidence_count": 134,
+          "sample_omitted_evidence_ids": [
+            "diff:ghost/core/core/server/services/xmlrpc.js:1",
+            "diff:ghost/core/core/server/services/xmlrpc.js:10",
+            "diff:ghost/core/core/server/services/xmlrpc.js:100",
+            "diff:ghost/core/core/server/services/xmlrpc.js:101"
+          ]
+        },
+        {
+          "tag": "security_sensitive",
+          "confidence": 0.74,
+          "path": "ghost/core/test/unit/server/services/xmlrpc.test.js",
+          "selected_evidence_ids": [],
+          "omitted_evidence_count": 277,
+          "sample_omitted_evidence_ids": [
+            "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:1",
+            "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:10",
+            "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:100",
+            "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:101"
+          ]
+        }
+      ]
+    },
+    "is_refill": false,
+    "parent_shard_id": null,
+    "request_types": []
+  },
+  "context_budget": {
+    "enabled": true,
+    "strategy": "risk_first_v1",
+    "context_profile": "risk_compact_manifest_v1",
+    "max_input_tokens": 9000,
+    "estimated_input_tokens": 6468,
+    "selected_evidence_count": 4,
+    "omitted_evidence_count": 200,
+    "selected_evidence_ids": [
+      "diff_hunk:ghost/core/core/server/services/xmlrpc.js:1",
+      "diff_hunk:ghost/core/test/unit/server/services/xmlrpc.test.js:1",
+      "diff_hunk:ghost/core/core/boot.js:310",
+      "diff_hunk:ghost/core/core/shared/config/env/config.development.json:23"
+    ],
+    "omitted_evidence_ids": [
+      "diff:ghost/core/core/server/services/xmlrpc.js:1",
+      "diff:ghost/core/core/server/services/xmlrpc.js:10",
+      "diff:ghost/core/core/server/services/xmlrpc.js:100",
+      "diff:ghost/core/core/server/services/xmlrpc.js:101",
+      "diff:ghost/core/core/server/services/xmlrpc.js:102",
+      "diff:ghost/core/core/server/services/xmlrpc.js:103",
+      "diff:ghost/core/core/server/services/xmlrpc.js:104",
+      "diff:ghost/core/core/server/services/xmlrpc.js:105",
+      "diff:ghost/core/core/server/services/xmlrpc.js:106",
+      "diff:ghost/core/core/server/services/xmlrpc.js:107",
+      "diff:ghost/core/core/server/services/xmlrpc.js:108",
+      "diff:ghost/core/core/server/services/xmlrpc.js:109",
+      "diff:ghost/core/core/server/services/xmlrpc.js:11",
+      "diff:ghost/core/core/server/services/xmlrpc.js:110",
+      "diff:ghost/core/core/server/services/xmlrpc.js:111",
+      "diff:ghost/core/core/server/services/xmlrpc.js:112",
+      "diff:ghost/core/core/server/services/xmlrpc.js:113",
+      "diff:ghost/core/core/server/services/xmlrpc.js:114",
+      "diff:ghost/core/core/server/services/xmlrpc.js:115",
+      "diff:ghost/core/core/server/services/xmlrpc.js:116",
+      "diff:ghost/core/core/server/services/xmlrpc.js:117",
+      "diff:ghost/core/core/server/services/xmlrpc.js:118",
+      "diff:ghost/core/core/server/services/xmlrpc.js:119",
+      "diff:ghost/core/core/server/services/xmlrpc.js:12",
+      "diff:ghost/core/core/server/services/xmlrpc.js:120",
+      "diff:ghost/core/core/server/services/xmlrpc.js:121",
+      "diff:ghost/core/core/server/services/xmlrpc.js:122",
+      "diff:ghost/core/core/server/services/xmlrpc.js:123",
+      "diff:ghost/core/core/server/services/xmlrpc.js:124",
+      "diff:ghost/core/core/server/services/xmlrpc.js:125",
+      "diff:ghost/core/core/server/services/xmlrpc.js:126",
+      "diff:ghost/core/core/server/services/xmlrpc.js:127",
+      "diff:ghost/core/core/server/services/xmlrpc.js:128",
+      "diff:ghost/core/core/server/services/xmlrpc.js:129",
+      "diff:ghost/core/core/server/services/xmlrpc.js:13",
+      "diff:ghost/core/core/server/services/xmlrpc.js:130",
+      "diff:ghost/core/core/server/services/xmlrpc.js:131",
+      "diff:ghost/core/core/server/services/xmlrpc.js:132",
+      "diff:ghost/core/core/server/services/xmlrpc.js:133",
+      "diff:ghost/core/core/server/services/xmlrpc.js:134",
+      "diff:ghost/core/core/server/services/xmlrpc.js:14",
+      "diff:ghost/core/core/server/services/xmlrpc.js:15",
+      "diff:ghost/core/core/server/services/xmlrpc.js:16",
+      "diff:ghost/core/core/server/services/xmlrpc.js:17",
+      "diff:ghost/core/core/server/services/xmlrpc.js:18",
+      "diff:ghost/core/core/server/services/xmlrpc.js:19",
+      "diff:ghost/core/core/server/services/xmlrpc.js:2",
+      "diff:ghost/core/core/server/services/xmlrpc.js:20",
+      "diff:ghost/core/core/server/services/xmlrpc.js:21",
+      "diff:ghost/core/core/server/services/xmlrpc.js:22",
+      "diff:ghost/core/core/server/services/xmlrpc.js:23",
+      "diff:ghost/core/core/server/services/xmlrpc.js:24",
+      "diff:ghost/core/core/server/services/xmlrpc.js:25",
+      "diff:ghost/core/core/server/services/xmlrpc.js:26",
+      "diff:ghost/core/core/server/services/xmlrpc.js:27",
+      "diff:ghost/core/core/server/services/xmlrpc.js:28",
+      "diff:ghost/core/core/server/services/xmlrpc.js:29",
+      "diff:ghost/core/core/server/services/xmlrpc.js:3",
+      "diff:ghost/core/core/server/services/xmlrpc.js:30",
+      "diff:ghost/core/core/server/services/xmlrpc.js:31",
+      "diff:ghost/core/core/server/services/xmlrpc.js:32",
+      "diff:ghost/core/core/server/services/xmlrpc.js:33",
+      "diff:ghost/core/core/server/services/xmlrpc.js:34",
+      "diff:ghost/core/core/server/services/xmlrpc.js:35",
+      "diff:ghost/core/core/server/services/xmlrpc.js:36",
+      "diff:ghost/core/core/server/services/xmlrpc.js:37",
+      "diff:ghost/core/core/server/services/xmlrpc.js:38",
+      "diff:ghost/core/core/server/services/xmlrpc.js:39",
+      "diff:ghost/core/core/server/services/xmlrpc.js:4",
+      "diff:ghost/core/core/server/services/xmlrpc.js:40",
+      "diff:ghost/core/core/server/services/xmlrpc.js:41",
+      "diff:ghost/core/core/server/services/xmlrpc.js:42",
+      "diff:ghost/core/core/server/services/xmlrpc.js:43",
+      "diff:ghost/core/core/server/services/xmlrpc.js:44",
+      "diff:ghost/core/core/server/services/xmlrpc.js:45",
+      "diff:ghost/core/core/server/services/xmlrpc.js:46",
+      "diff:ghost/core/core/server/services/xmlrpc.js:47",
+      "diff:ghost/core/core/server/services/xmlrpc.js:48",
+      "diff:ghost/core/core/server/services/xmlrpc.js:49",
+      "diff:ghost/core/core/server/services/xmlrpc.js:5",
+      "diff:ghost/core/core/server/services/xmlrpc.js:50",
+      "diff:ghost/core/core/server/services/xmlrpc.js:51",
+      "diff:ghost/core/core/server/services/xmlrpc.js:52",
+      "diff:ghost/core/core/server/services/xmlrpc.js:53",
+      "diff:ghost/core/core/server/services/xmlrpc.js:54",
+      "diff:ghost/core/core/server/services/xmlrpc.js:55",
+      "diff:ghost/core/core/server/services/xmlrpc.js:56",
+      "diff:ghost/core/core/server/services/xmlrpc.js:57",
+      "diff:ghost/core/core/server/services/xmlrpc.js:58",
+      "diff:ghost/core/core/server/services/xmlrpc.js:59",
+      "diff:ghost/core/core/server/services/xmlrpc.js:6",
+      "diff:ghost/core/core/server/services/xmlrpc.js:60",
+      "diff:ghost/core/core/server/services/xmlrpc.js:61",
+      "diff:ghost/core/core/server/services/xmlrpc.js:62",
+      "diff:ghost/core/core/server/services/xmlrpc.js:63",
+      "diff:ghost/core/core/server/services/xmlrpc.js:64",
+      "diff:ghost/core/core/server/services/xmlrpc.js:65",
+      "diff:ghost/core/core/server/services/xmlrpc.js:66",
+      "diff:ghost/core/core/server/services/xmlrpc.js:67",
+      "diff:ghost/core/core/server/services/xmlrpc.js:68",
+      "diff:ghost/core/core/server/services/xmlrpc.js:69",
+      "diff:ghost/core/core/server/services/xmlrpc.js:7",
+      "diff:ghost/core/core/server/services/xmlrpc.js:70",
+      "diff:ghost/core/core/server/services/xmlrpc.js:71",
+      "diff:ghost/core/core/server/services/xmlrpc.js:72",
+      "diff:ghost/core/core/server/services/xmlrpc.js:73",
+      "diff:ghost/core/core/server/services/xmlrpc.js:74",
+      "diff:ghost/core/core/server/services/xmlrpc.js:75",
+      "diff:ghost/core/core/server/services/xmlrpc.js:76",
+      "diff:ghost/core/core/server/services/xmlrpc.js:77",
+      "diff:ghost/core/core/server/services/xmlrpc.js:78",
+      "diff:ghost/core/core/server/services/xmlrpc.js:79",
+      "diff:ghost/core/core/server/services/xmlrpc.js:8",
+      "diff:ghost/core/core/server/services/xmlrpc.js:80",
+      "diff:ghost/core/core/server/services/xmlrpc.js:81",
+      "diff:ghost/core/core/server/services/xmlrpc.js:82",
+      "diff:ghost/core/core/server/services/xmlrpc.js:83",
+      "diff:ghost/core/core/server/services/xmlrpc.js:84",
+      "diff:ghost/core/core/server/services/xmlrpc.js:85",
+      "diff:ghost/core/core/server/services/xmlrpc.js:86",
+      "diff:ghost/core/core/server/services/xmlrpc.js:87",
+      "diff:ghost/core/core/server/services/xmlrpc.js:88",
+      "diff:ghost/core/core/server/services/xmlrpc.js:89",
+      "diff:ghost/core/core/server/services/xmlrpc.js:9",
+      "diff:ghost/core/core/server/services/xmlrpc.js:90",
+      "diff:ghost/core/core/server/services/xmlrpc.js:91",
+      "diff:ghost/core/core/server/services/xmlrpc.js:92",
+      "diff:ghost/core/core/server/services/xmlrpc.js:93",
+      "diff:ghost/core/core/server/services/xmlrpc.js:94",
+      "diff:ghost/core/core/server/services/xmlrpc.js:95",
+      "diff:ghost/core/core/server/services/xmlrpc.js:96",
+      "diff:ghost/core/core/server/services/xmlrpc.js:97",
+      "diff:ghost/core/core/server/services/xmlrpc.js:98",
+      "diff:ghost/core/core/server/services/xmlrpc.js:99",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:1",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:10",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:100",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:101",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:102",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:103",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:104",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:105",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:106",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:107",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:108",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:109",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:11",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:110",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:111",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:112",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:113",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:114",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:115",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:116",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:117",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:118",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:119",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:12",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:120",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:121",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:122",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:123",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:124",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:125",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:126",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:127",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:128",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:129",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:13",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:130",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:131",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:132",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:133",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:134",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:135",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:136",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:137",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:138",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:139",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:14",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:140",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:141",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:142",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:143",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:144",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:145",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:146",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:147",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:148",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:149",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:15",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:150",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:151",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:152",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:153",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:154",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:155",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:156",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:157",
+      "diff:ghost/core/test/unit/server/services/xmlrpc.test.js:158"
+    ],
+    "selected_risk_signal_count": 2,
+    "context_truncated": true,
+    "shard_count": 1,
+    "refill_count": 0,
+    "context_request_count": 0,
+    "context_requests": [],
+    "shards": [
+      {
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 4,
+        "omitted_evidence_count": 200,
+        "estimated_input_tokens": 6468,
+        "context_truncated": true
+      }
+    ],
+    "warnings": []
+  },
+  "full_package_exported": false
+}

@@ -1,0 +1,105 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:e147712e6f8392282365c7d6b8de8bc0921de593b8018708f526622ccda5d254",
+  "diff_hash": "sha256:65e482a2a677bc15fa65d8370916c7a44400e2bc57334fc91767f4d99a96b6b7",
+  "shards": {
+    "80dae14a7dee0527ecc7f7fdd0c521edab10c5e64ad56337d4ca5998e6bbff80": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:companion/app/(tabs)/(availability)/availability-detail.tsx:88",
+        "diff_hunk:companion/app/(tabs)/(bookings)/index.ios.tsx:62",
+        "diff_hunk:companion/app/(tabs)/(bookings)/index.tsx:62",
+        "diff_hunk:companion/app/(tabs)/(event-types)/event-type-detail.tsx:177"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "companion/app/(tabs)/(availability)/availability-detail.tsx",
+          "line": 91,
+          "severity": "medium",
+          "category": "best_practice",
+          "message": "Default export used in non-Next.js page/layout file, violating the 'Default Exports Allowed Only in Next.js Page and Layout Files' guideline.",
+          "suggestion": "Replace 'export default function AvailabilityDetail()' with a named export (e.g., 'export function AvailabilityDetail()') and update all imports accordingly.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/app/(tabs)/(availability)/availability-detail.tsx:88"
+          ]
+        },
+        {
+          "file": "companion/app/(tabs)/(bookings)/index.ios.tsx",
+          "line": 65,
+          "severity": "medium",
+          "category": "best_practice",
+          "message": "Default export used in non-Next.js page/layout file, violating the 'Default Exports Allowed Only in Next.js Page and Layout Files' guideline.",
+          "suggestion": "Replace 'export default function Bookings()' with a named export and update imports.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/app/(tabs)/(bookings)/index.ios.tsx:62"
+          ]
+        },
+        {
+          "file": "companion/app/(tabs)/(bookings)/index.tsx",
+          "line": 65,
+          "severity": "medium",
+          "category": "best_practice",
+          "message": "Default export used in non-Next.js page/layout file, violating the 'Default Exports Allowed Only in Next.js Page and Layout Files' guideline.",
+          "suggestion": "Replace 'export default function Bookings()' with a named export and update imports.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/app/(tabs)/(bookings)/index.tsx:62"
+          ]
+        },
+        {
+          "file": "companion/app/(tabs)/(event-types)/event-type-detail.tsx",
+          "line": 180,
+          "severity": "medium",
+          "category": "best_practice",
+          "message": "Default export used in non-Next.js page/layout file, violating the 'Default Exports Allowed Only in Next.js Page and Layout Files' guideline.",
+          "suggestion": "Replace 'export default function EventTypeDetail()' with a named export and update imports.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/app/(tabs)/(event-types)/event-type-detail.tsx:177"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:companion/app/(tabs)/(availability)/availability-detail.tsx:88",
+          "diff_hunk:companion/app/(tabs)/(bookings)/index.ios.tsx:62",
+          "diff_hunk:companion/app/(tabs)/(bookings)/index.tsx:62",
+          "diff_hunk:companion/app/(tabs)/(event-types)/event-type-detail.tsx:177"
+        ],
+        "output_issue_ids": [
+          "best_practice:companion/app/(tabs)/(availability)/availability-detail.tsx:91",
+          "best_practice:companion/app/(tabs)/(bookings)/index.ios.tsx:65",
+          "best_practice:companion/app/(tabs)/(bookings)/index.tsx:65",
+          "best_practice:companion/app/(tabs)/(event-types)/event-type-detail.tsx:180"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 44240,
+        "token_count_in": 5898,
+        "token_count_out": 603,
+        "trace_id": "eb566727915749f3bbe93903c75eda56",
+        "span_id": "ffe4918618f24e23",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 6,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

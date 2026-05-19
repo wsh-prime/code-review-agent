@@ -1,0 +1,1899 @@
+{
+  "schema_version": "1.3",
+  "summary": {
+    "mode": "hybrid-live",
+    "changed_file_count": 3,
+    "changed_entity_count": 3,
+    "risk_signal_count": 1,
+    "finding_count": 0,
+    "needs_human_review_count": 3,
+    "discarded_count": 0,
+    "evidence_count": 90,
+    "missing_evidence_id_count": 0,
+    "agent_run_count": 2,
+    "prompt_exported": false,
+    "loop_enabled": true,
+    "loop_iterations_completed": 1,
+    "loop_converged": false,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "total_latency_ms": 27015,
+    "total_token_count_in": 6215,
+    "total_token_count_out": 517,
+    "context_budget_enabled": true,
+    "context_truncated": true,
+    "selected_evidence_count": 3,
+    "omitted_evidence_count": 87,
+    "review_shard_count": 1,
+    "context_refill_count": 0,
+    "context_request_count": 0,
+    "target_repo_modified": false
+  },
+  "findings": [],
+  "needs_human_review": [
+    {
+      "file": "src/Shared/CertificateGeneration/CertificateManager.cs",
+      "line": 969,
+      "severity": "minor",
+      "category": "style",
+      "message": "Review guideline violation: 'All C# Source Files Must Include MIT License Header' - The file is missing the required MIT license header at the top.",
+      "suggestion": "Add the standard .NET Foundation MIT license header at the beginning of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:966"
+      ]
+    },
+    {
+      "file": "src/Shared/CertificateGeneration/UnixCertificateManager.cs",
+      "line": 358,
+      "severity": "minor",
+      "category": "style",
+      "message": "Review guideline violation: 'All C# Source Files Must Include MIT License Header' - The file is missing the required MIT license header at the top.",
+      "suggestion": "Add the standard .NET Foundation MIT license header at the beginning of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355"
+      ]
+    },
+    {
+      "file": "src/Tools/dotnet-dev-certs/src/Program.cs",
+      "line": 127,
+      "severity": "minor",
+      "category": "style",
+      "message": "Review guideline violation: 'All C# Source Files Must Include MIT License Header' - The file is missing the required MIT license header at the top.",
+      "suggestion": "Add the standard .NET Foundation MIT license header at the beginning of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124"
+      ]
+    }
+  ],
+  "discarded": [],
+  "changed_files": [
+    {
+      "old_path": "src/Shared/CertificateGeneration/CertificateManager.cs",
+      "new_path": "src/Shared/CertificateGeneration/CertificateManager.cs",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 966,
+          "old_count": 9,
+          "new_start": 966,
+          "new_count": 6,
+          "section_header": "internal static bool TryFindCertificateInStore(X509Store store, X509Certificate2",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 966,
+              "new_lineno": 966,
+              "content": "        return foundCertificate is not null;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 967,
+              "new_lineno": 967,
+              "content": "    }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 968,
+              "new_lineno": 968,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 969,
+              "new_lineno": null,
+              "content": "    /// <remarks>"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 970,
+              "new_lineno": null,
+              "content": "    /// Note that dotnet-dev-certs won't display any of these, regardless of level, unless --verbose is passed."
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 971,
+              "new_lineno": null,
+              "content": "    /// </remarks>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 972,
+              "new_lineno": 969,
+              "content": "    [EventSource(Name = \"Dotnet-dev-certs\")]"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 973,
+              "new_lineno": 970,
+              "content": "    public sealed class CertificateManagerEventSource : EventSource"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 974,
+              "new_lineno": 971,
+              "content": "    {"
+            }
+          ]
+        },
+        {
+          "old_start": 1303,
+          "old_count": 7,
+          "new_start": 1300,
+          "new_count": 7,
+          "section_header": "public sealed class CertificateManagerEventSource : EventSource",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 1303,
+              "new_lineno": 1300,
+              "content": "        internal void UnixNotOverwritingCertificate(string certPath) => WriteEvent(109, certPath);"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1304,
+              "new_lineno": 1301,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1305,
+              "new_lineno": 1302,
+              "content": "        [Event(110, Level = EventLevel.LogAlways, Message = \"For OpenSSL trust to take effect, '{0}' must be listed in the {2} environment variable. \" +"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 1306,
+              "new_lineno": null,
+              "content": "            \"For example, `export SSL_CERT_DIR={0}:{1}`. \" +"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1303,
+              "content": "            \"For example, `export {2}=\\\"{0}:{1}\\\"`. \" +"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1307,
+              "new_lineno": 1304,
+              "content": "            \"See https://aka.ms/dev-certs-trust for more information.\")]"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1308,
+              "new_lineno": 1305,
+              "content": "        internal void UnixSuggestSettingEnvironmentVariable(string certDir, string openSslDir, string envVarName) => WriteEvent(110, certDir, openSslDir, envVarName);"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1309,
+              "new_lineno": 1306,
+              "content": ""
+            }
+          ]
+        },
+        {
+          "old_start": 1313,
+          "old_count": 6,
+          "new_start": 1310,
+          "new_count": 14,
+          "section_header": "public sealed class CertificateManagerEventSource : EventSource",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 1313,
+              "new_lineno": 1310,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1314,
+              "new_lineno": 1311,
+              "content": "        [Event(112, Level = EventLevel.Warning, Message = \"Directory '{0}' may be readable by other users.\")]"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1315,
+              "new_lineno": 1312,
+              "content": "        internal void DirectoryPermissionsNotSecure(string directoryPath) => WriteEvent(112, directoryPath);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1313,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1314,
+              "content": "        [Event(113, Level = EventLevel.Verbose, Message = \"The certificate directory '{0}' is already included in the {1} environment variable.\")]"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1315,
+              "content": "        internal void UnixOpenSslCertificateDirectoryAlreadyConfigured(string certDir, string envVarName) => WriteEvent(113, certDir, envVarName);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1316,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1317,
+              "content": "        [Event(114, Level = EventLevel.LogAlways, Message = \"For OpenSSL trust to take effect, '{0}' must be listed in the {1} environment variable. \" +"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1318,
+              "content": "            \"For example, `export {1}=\\\"{0}:${1}\\\"`. \" +"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1319,
+              "content": "            \"See https://aka.ms/dev-certs-trust for more information.\")]"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1320,
+              "content": "        internal void UnixSuggestAppendingToEnvironmentVariable(string certDir, string envVarName) => WriteEvent(114, certDir, envVarName);"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1316,
+              "new_lineno": 1321,
+              "content": "    }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1317,
+              "new_lineno": 1322,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1318,
+              "new_lineno": 1323,
+              "content": "    internal sealed class UserCancelledTrustException : Exception"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "src/Shared/CertificateGeneration/UnixCertificateManager.cs",
+      "new_path": "src/Shared/CertificateGeneration/UnixCertificateManager.cs",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 355,
+          "old_count": 14,
+          "new_start": 355,
+          "new_count": 57,
+          "section_header": "protected override TrustLevel TrustCertificateCore(X509Certificate2 certificate)",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 355,
+              "new_lineno": 355,
+              "content": "                ? Path.Combine(\"$HOME\", certDir[homeDirectoryWithSlash.Length..])"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 356,
+              "new_lineno": 356,
+              "content": "                : certDir;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 357,
+              "new_lineno": 357,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 358,
+              "new_lineno": null,
+              "content": "            if (TryGetOpenSslDirectory(out var openSslDir))"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 358,
+              "content": "            var hasValidSslCertDir = false;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 359,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 360,
+              "content": "            // Check if SSL_CERT_DIR is already set and if certDir is already included"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 361,
+              "content": "            var existingSslCertDir = Environment.GetEnvironmentVariable(OpenSslCertificateDirectoryVariableName);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 362,
+              "content": "            if (!string.IsNullOrEmpty(existingSslCertDir))"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 363,
+              "content": "            {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 364,
+              "content": "                var existingDirs = existingSslCertDir.Split(Path.PathSeparator);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 365,
+              "content": "                var certDirFullPath = Path.GetFullPath(prettyCertDir);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 366,
+              "content": "                var isCertDirIncluded = existingDirs.Any(dir =>"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 367,
+              "content": "                {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 368,
+              "content": "                    if (string.IsNullOrWhiteSpace(dir))"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 369,
+              "content": "                    {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 370,
+              "content": "                        return false;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 371,
+              "content": "                    }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 372,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 373,
+              "content": "                    try"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 374,
+              "content": "                    {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 375,
+              "content": "                        return string.Equals(Path.GetFullPath(dir), certDirFullPath, StringComparison.OrdinalIgnoreCase);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 376,
+              "content": "                    }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 377,
+              "content": "                    catch"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 378,
+              "content": "                    {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 379,
+              "content": "                        // Ignore invalid directory entries in SSL_CERT_DIR"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 380,
+              "content": "                        return false;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 381,
+              "content": "                    }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 382,
+              "content": "                });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 383,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 384,
+              "content": "                if (isCertDirIncluded)"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 385,
+              "content": "                {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 386,
+              "content": "                    // The certificate directory is already in SSL_CERT_DIR, no action needed"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 387,
+              "content": "                    Log.UnixOpenSslCertificateDirectoryAlreadyConfigured(prettyCertDir, OpenSslCertificateDirectoryVariableName);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 388,
+              "content": "                    hasValidSslCertDir = true;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 389,
+              "content": "                }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 390,
+              "content": "                else"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 391,
+              "content": "                {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 392,
+              "content": "                    // SSL_CERT_DIR is set but doesn't include our directory - suggest appending"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 393,
+              "content": "                    Log.UnixSuggestAppendingToEnvironmentVariable(prettyCertDir, OpenSslCertificateDirectoryVariableName);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 394,
+              "content": "                    hasValidSslCertDir = false;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 395,
+              "content": "                }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 396,
+              "content": "            }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 397,
+              "content": "            else if (TryGetOpenSslDirectory(out var openSslDir))"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 359,
+              "new_lineno": 398,
+              "content": "            {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 360,
+              "new_lineno": 399,
+              "content": "                Log.UnixSuggestSettingEnvironmentVariable(prettyCertDir, Path.Combine(openSslDir, \"certs\"), OpenSslCertificateDirectoryVariableName);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 400,
+              "content": "                hasValidSslCertDir = false;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 361,
+              "new_lineno": 401,
+              "content": "            }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 362,
+              "new_lineno": 402,
+              "content": "            else"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 363,
+              "new_lineno": 403,
+              "content": "            {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 364,
+              "new_lineno": 404,
+              "content": "                Log.UnixSuggestSettingEnvironmentVariableWithoutExample(prettyCertDir, OpenSslCertificateDirectoryVariableName);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 405,
+              "content": "                hasValidSslCertDir = false;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 365,
+              "new_lineno": 406,
+              "content": "            }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 407,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 408,
+              "content": "            sawTrustFailure = !hasValidSslCertDir;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 366,
+              "new_lineno": 409,
+              "content": "        }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 367,
+              "new_lineno": 410,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 368,
+              "new_lineno": 411,
+              "content": "        return sawTrustFailure"
+            }
+          ]
+        },
+        {
+          "old_start": 948,
+          "old_count": 9,
+          "new_start": 991,
+          "new_count": 18,
+          "section_header": "private static bool TryRehashOpenSslCertificates(string certificateDirectory)",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 948,
+              "new_lineno": 991,
+              "content": "        return true;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 949,
+              "new_lineno": 992,
+              "content": "    }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 950,
+              "new_lineno": 993,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 951,
+              "new_lineno": null,
+              "content": "    private sealed class NssDb(string path, bool isFirefox)"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 994,
+              "content": "    private sealed class NssDb"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 952,
+              "new_lineno": 995,
+              "content": "    {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 953,
+              "new_lineno": null,
+              "content": "        public string Path => path;"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 954,
+              "new_lineno": null,
+              "content": "        public bool IsFirefox => isFirefox;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 996,
+              "content": "        private readonly string _path;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 997,
+              "content": "        private readonly bool _isFirefox;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 998,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 999,
+              "content": "        public NssDb(string path, bool isFirefox)"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1000,
+              "content": "        {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1001,
+              "content": "            _path = path;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1002,
+              "content": "            _isFirefox = isFirefox;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1003,
+              "content": "        }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1004,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1005,
+              "content": "        public string Path => _path;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1006,
+              "content": "        public bool IsFirefox => _isFirefox;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 955,
+              "new_lineno": 1007,
+              "content": "    }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 956,
+              "new_lineno": 1008,
+              "content": "}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "src/Tools/dotnet-dev-certs/src/Program.cs",
+      "new_path": "src/Tools/dotnet-dev-certs/src/Program.cs",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 124,
+          "old_count": 16,
+          "new_start": 124,
+          "new_count": 20,
+          "section_header": "public static int Main(string[] args)",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 124,
+              "new_lineno": 124,
+              "content": "                {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 125,
+              "new_lineno": 125,
+              "content": "                    var reporter = new ConsoleReporter(PhysicalConsole.Singleton, verbose.HasValue(), quiet.HasValue());"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 126,
+              "new_lineno": 126,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 127,
+              "content": "                    var listener = new ReporterEventListener(reporter);"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 127,
+              "new_lineno": 128,
+              "content": "                    if (verbose.HasValue())"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 128,
+              "new_lineno": 129,
+              "content": "                    {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 129,
+              "new_lineno": null,
+              "content": "                        var listener = new ReporterEventListener(reporter);"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 130,
+              "new_lineno": 130,
+              "content": "                        listener.EnableEvents(CertificateManager.Log, System.Diagnostics.Tracing.EventLevel.Verbose);"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 131,
+              "new_lineno": 131,
+              "content": "                    }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 132,
+              "content": "                    else"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 133,
+              "content": "                    {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 134,
+              "content": "                        listener.EnableEvents(CertificateManager.Log, System.Diagnostics.Tracing.EventLevel.LogAlways);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 135,
+              "content": "                    }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 132,
+              "new_lineno": 136,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 133,
+              "new_lineno": 137,
+              "content": "                    if (checkJsonOutput.HasValue())"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 134,
+              "new_lineno": 138,
+              "content": "                    {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 135,
+              "new_lineno": 139,
+              "content": "                        if (exportPath.HasValue() || trust?.HasValue() == true || format.HasValue() || noPassword.HasValue() || check.HasValue() || clean.HasValue() ||"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 136,
+              "new_lineno": null,
+              "content": "                           (!import.HasValue() && password.HasValue()) || "
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 140,
+              "content": "                           (!import.HasValue() && password.HasValue()) ||"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 137,
+              "new_lineno": 141,
+              "content": "                           (import.HasValue() && !password.HasValue()))"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 138,
+              "new_lineno": 142,
+              "content": "                        {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 139,
+              "new_lineno": 143,
+              "content": "                            reporter.Error(InvalidUsageErrorMessage);"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "changed_entities": [
+    {
+      "path": "src/Shared/CertificateGeneration/CertificateManager.cs",
+      "entity_type": "module",
+      "name": "CertificateManager.cs",
+      "qualified_name": "src.Shared.CertificateGeneration.CertificateManager",
+      "line_start": 969,
+      "line_end": 971,
+      "hunk_ids": [
+        "src/Shared/CertificateGeneration/CertificateManager.cs:966",
+        "src/Shared/CertificateGeneration/CertificateManager.cs:1300",
+        "src/Shared/CertificateGeneration/CertificateManager.cs:1310"
+      ]
+    },
+    {
+      "path": "src/Shared/CertificateGeneration/UnixCertificateManager.cs",
+      "entity_type": "module",
+      "name": "UnixCertificateManager.cs",
+      "qualified_name": "src.Shared.CertificateGeneration.UnixCertificateManager",
+      "line_start": 358,
+      "line_end": 408,
+      "hunk_ids": [
+        "src/Shared/CertificateGeneration/UnixCertificateManager.cs:355",
+        "src/Shared/CertificateGeneration/UnixCertificateManager.cs:991"
+      ]
+    },
+    {
+      "path": "src/Tools/dotnet-dev-certs/src/Program.cs",
+      "entity_type": "module",
+      "name": "Program.cs",
+      "qualified_name": "src.Tools.dotnet-dev-certs.src.Program",
+      "line_start": 127,
+      "line_end": 140,
+      "hunk_ids": [
+        "src/Tools/dotnet-dev-certs/src/Program.cs:124"
+      ]
+    }
+  ],
+  "risk_signals": [
+    {
+      "tag": "security_sensitive",
+      "confidence": 0.74,
+      "reason": "Security-sensitive keywords changed in src/Tools/dotnet-dev-certs/src/Program.cs.",
+      "evidence_ids": [
+        "diff:src/Tools/dotnet-dev-certs/src/Program.cs:127",
+        "diff:src/Tools/dotnet-dev-certs/src/Program.cs:129",
+        "diff:src/Tools/dotnet-dev-certs/src/Program.cs:132",
+        "diff:src/Tools/dotnet-dev-certs/src/Program.cs:133",
+        "diff:src/Tools/dotnet-dev-certs/src/Program.cs:134",
+        "diff:src/Tools/dotnet-dev-certs/src/Program.cs:135",
+        "diff:src/Tools/dotnet-dev-certs/src/Program.cs:136",
+        "diff:src/Tools/dotnet-dev-certs/src/Program.cs:140"
+      ]
+    }
+  ],
+  "evidence_index": {
+    "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:966": {
+      "id": "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:966",
+      "kind": "diff_hunk",
+      "source": "src/Shared/CertificateGeneration/CertificateManager.cs:966",
+      "message": "@@ -966,9 +966,6 @@ internal static bool TryFindCertificateInStore(X509Store store, X509Certificate2\n         return foundCertificate is not null;\n     }\n \n-    /// <remarks>\n-    /// Note that dotnet-dev-certs won't display any of these, regardless of level, unless --verbose is passed.\n-    /// </remarks>\n     [EventSource(Name = \"Dotnet-dev-certs\")]\n     public sealed class CertificateManagerEventSource : EventSource\n     {"
+    },
+    "diff:src/Shared/CertificateGeneration/CertificateManager.cs:969": {
+      "id": "diff:src/Shared/CertificateGeneration/CertificateManager.cs:969",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/CertificateManager.cs:969",
+      "message": "Removed line: /// <remarks>"
+    },
+    "diff:src/Shared/CertificateGeneration/CertificateManager.cs:970": {
+      "id": "diff:src/Shared/CertificateGeneration/CertificateManager.cs:970",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/CertificateManager.cs:970",
+      "message": "Removed line: /// Note that dotnet-dev-certs won't display any of these, regardless of level, unless --verbose is passed."
+    },
+    "diff:src/Shared/CertificateGeneration/CertificateManager.cs:971": {
+      "id": "diff:src/Shared/CertificateGeneration/CertificateManager.cs:971",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/CertificateManager.cs:971",
+      "message": "Removed line: /// </remarks>"
+    },
+    "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:1300": {
+      "id": "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:1300",
+      "kind": "diff_hunk",
+      "source": "src/Shared/CertificateGeneration/CertificateManager.cs:1300",
+      "message": "@@ -1303,7 +1300,7 @@ public sealed class CertificateManagerEventSource : EventSource\n         internal void UnixNotOverwritingCertificate(string certPath) => WriteEvent(109, certPath);\n \n         [Event(110, Level = EventLevel.LogAlways, Message = \"For OpenSSL trust to take effect, '{0}' must be listed in the {2} environment variable. \" +\n-            \"For example, `export SSL_CERT_DIR={0}:{1}`. \" +\n+            \"For example, `export {2}=\\\"{0}:{1}\\\"`. \" +\n             \"See https://aka.ms/dev-certs-trust for more information.\")]\n         internal void UnixSuggestSettingEnvironmentVariable(string certDir, string openSslDir, string envVarName) => WriteEvent(110, certDir, openSslDir, envVarName);\n "
+    },
+    "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1306": {
+      "id": "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1306",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/CertificateManager.cs:1306",
+      "message": "Removed line: \"For example, `export SSL_CERT_DIR={0}:{1}`. \" +"
+    },
+    "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1303": {
+      "id": "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1303",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/CertificateManager.cs:1303",
+      "message": "Added line: \"For example, `export {2}=\\\"{0}:{1}\\\"`. \" +"
+    },
+    "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:1310": {
+      "id": "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:1310",
+      "kind": "diff_hunk",
+      "source": "src/Shared/CertificateGeneration/CertificateManager.cs:1310",
+      "message": "@@ -1313,6 +1310,14 @@ public sealed class CertificateManagerEventSource : EventSource\n \n         [Event(112, Level = EventLevel.Warning, Message = \"Directory '{0}' may be readable by other users.\")]\n         internal void DirectoryPermissionsNotSecure(string directoryPath) => WriteEvent(112, directoryPath);\n+\n+        [Event(113, Level = EventLevel.Verbose, Message = \"The certificate directory '{0}' is already included in the {1} environment variable.\")]\n+        internal void UnixOpenSslCertificateDirectoryAlreadyConfigured(string certDir, string envVarName) => WriteEvent(113, certDir, envVarName);\n+\n+        [Event(114, Level = EventLevel.LogAlways, Message = \"For OpenSSL trust to take effect, '{0}' must be listed in the {1} environment variable. \" +\n+            \"For example, `export {1}=\\\"{0}:${1}\\\"`. \" +\n+            \"See https://aka.ms/dev-certs-trust for more information.\")]\n+        internal void UnixSuggestAppendingToEnvironmentVariable(string certDir, string envVarName) => WriteEvent(114, certDir, envVarName);\n     }\n \n     internal sealed class UserCancelledTrustException : Exception"
+    },
+    "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1313": {
+      "id": "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1313",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/CertificateManager.cs:1313",
+      "message": "Added line: "
+    },
+    "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1314": {
+      "id": "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1314",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/CertificateManager.cs:1314",
+      "message": "Added line: [Event(113, Level = EventLevel.Verbose, Message = \"The certificate directory '{0}' is already included in the {1} env..."
+    },
+    "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1315": {
+      "id": "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1315",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/CertificateManager.cs:1315",
+      "message": "Added line: internal void UnixOpenSslCertificateDirectoryAlreadyConfigured(string certDir, string envVarName) => WriteEvent(113, ..."
+    },
+    "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1316": {
+      "id": "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1316",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/CertificateManager.cs:1316",
+      "message": "Added line: "
+    },
+    "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1317": {
+      "id": "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1317",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/CertificateManager.cs:1317",
+      "message": "Added line: [Event(114, Level = EventLevel.LogAlways, Message = \"For OpenSSL trust to take effect, '{0}' must be listed in the {1..."
+    },
+    "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1318": {
+      "id": "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1318",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/CertificateManager.cs:1318",
+      "message": "Added line: \"For example, `export {1}=\\\"{0}:${1}\\\"`. \" +"
+    },
+    "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1319": {
+      "id": "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1319",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/CertificateManager.cs:1319",
+      "message": "Added line: \"See https://aka.ms/dev-certs-trust for more information.\")]"
+    },
+    "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1320": {
+      "id": "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1320",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/CertificateManager.cs:1320",
+      "message": "Added line: internal void UnixSuggestAppendingToEnvironmentVariable(string certDir, string envVarName) => WriteEvent(114, certDir..."
+    },
+    "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355": {
+      "id": "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355",
+      "kind": "diff_hunk",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:355",
+      "message": "@@ -355,14 +355,57 @@ protected override TrustLevel TrustCertificateCore(X509Certificate2 certificate)\n                 ? Path.Combine(\"$HOME\", certDir[homeDirectoryWithSlash.Length..])\n                 : certDir;\n \n-            if (TryGetOpenSslDirectory(out var openSslDir))\n+            var hasValidSslCertDir = false;\n+\n+            // Check if SSL_CERT_DIR is already set and if certDir is already included\n+            var existingSslCertDir = Environment.GetEnvironmentVariable(OpenSslCertificateDirectoryVariableName);\n+            if (!string.IsNullOrEmpty(existingSslCertDir))\n+            {\n+                var existingDirs = existingSslCertDir.Split(Path.PathSeparator);\n+                var certDirFullPath = Path.GetFullPath(prettyCertDir);\n+                var isCertDirIncluded = existingDirs.Any(dir =>\n+                {\n+                    if (string.IsNullOrWhiteSpace(dir))\n+                    {\n+                        return false;\n+                    }\n+\n+                    try\n+                    {\n+                        return string.Equals(Path.GetFullPath(dir), certDirFullPath, StringComparison.OrdinalIgnoreCase);\n+                    }\n+                    catch\n+                    {\n+                        // Ignore invalid directory entries in SSL_CERT_DIR\n+                        return false;\n+                    }\n+                });\n+\n+                if (isCertDirIncluded)\n+                {\n+                    // The certificate directory is already in SSL_CERT_DIR, no action needed\n+                    Log.UnixOpenSslCertificateDirectoryAlreadyConfigured(prettyCertDir, OpenSslCertificateDirectoryVariableName);\n+                    hasValidSslCertDir = true;\n+                }\n+                else\n+                {\n+                    // SSL_CERT_DIR is set but doesn't include our directory - suggest appending\n+                    Log.UnixSuggestAppendingToEnvironmentVariable(prettyCertDir, OpenSslCertificateDirectoryVariableName);\n+                    hasValidSslCertDir = false;\n+                }\n+            }\n+            else if (TryGetOpenSslDirectory(out var openSslDir))\n             {\n                 Log.UnixSuggestSettingEnvironmentVariable(prettyCertDir, Path.Combine(openSslDir, \"certs\"), OpenSslCertificateDirectoryVariableName);\n+                hasValidSslCertDir = false;\n             }\n             else\n             {\n                 Log.UnixSuggestSettingEnvironmentVariableWithoutExample(prettyCertDir, OpenSslCertificateDirectoryVariableName);\n+                hasValidSslCertDir = false;\n             }\n+\n+            sawTrustFailure = !hasValidSslCertDir;\n         }\n \n         return sawTrustFailure"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:358",
+      "message": "Added line: var hasValidSslCertDir = false;"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:359": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:359",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:359",
+      "message": "Added line: "
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:360": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:360",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:360",
+      "message": "Added line: // Check if SSL_CERT_DIR is already set and if certDir is already included"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:361": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:361",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:361",
+      "message": "Added line: var existingSslCertDir = Environment.GetEnvironmentVariable(OpenSslCertificateDirectoryVariableName);"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:362": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:362",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:362",
+      "message": "Added line: if (!string.IsNullOrEmpty(existingSslCertDir))"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:363": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:363",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:363",
+      "message": "Added line: {"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:364": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:364",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:364",
+      "message": "Added line: var existingDirs = existingSslCertDir.Split(Path.PathSeparator);"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:365": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:365",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:365",
+      "message": "Added line: var certDirFullPath = Path.GetFullPath(prettyCertDir);"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:366": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:366",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:366",
+      "message": "Added line: var isCertDirIncluded = existingDirs.Any(dir =>"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:367": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:367",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:367",
+      "message": "Added line: {"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:368": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:368",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:368",
+      "message": "Added line: if (string.IsNullOrWhiteSpace(dir))"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:369": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:369",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:369",
+      "message": "Added line: {"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:370": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:370",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:370",
+      "message": "Added line: return false;"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:371": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:371",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:371",
+      "message": "Added line: }"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:372": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:372",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:372",
+      "message": "Added line: "
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:373": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:373",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:373",
+      "message": "Added line: try"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:374": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:374",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:374",
+      "message": "Added line: {"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:375": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:375",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:375",
+      "message": "Added line: return string.Equals(Path.GetFullPath(dir), certDirFullPath, StringComparison.OrdinalIgnoreCase);"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:376": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:376",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:376",
+      "message": "Added line: }"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:377": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:377",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:377",
+      "message": "Added line: catch"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:378": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:378",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:378",
+      "message": "Added line: {"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:379": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:379",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:379",
+      "message": "Added line: // Ignore invalid directory entries in SSL_CERT_DIR"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:380": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:380",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:380",
+      "message": "Added line: return false;"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:381": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:381",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:381",
+      "message": "Added line: }"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:382": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:382",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:382",
+      "message": "Added line: });"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:383": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:383",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:383",
+      "message": "Added line: "
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:384": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:384",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:384",
+      "message": "Added line: if (isCertDirIncluded)"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:385": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:385",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:385",
+      "message": "Added line: {"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:386": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:386",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:386",
+      "message": "Added line: // The certificate directory is already in SSL_CERT_DIR, no action needed"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:387": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:387",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:387",
+      "message": "Added line: Log.UnixOpenSslCertificateDirectoryAlreadyConfigured(prettyCertDir, OpenSslCertificateDirectoryVariableName);"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:388": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:388",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:388",
+      "message": "Added line: hasValidSslCertDir = true;"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:389": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:389",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:389",
+      "message": "Added line: }"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:390": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:390",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:390",
+      "message": "Added line: else"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:391": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:391",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:391",
+      "message": "Added line: {"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:392": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:392",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:392",
+      "message": "Added line: // SSL_CERT_DIR is set but doesn't include our directory - suggest appending"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:393": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:393",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:393",
+      "message": "Added line: Log.UnixSuggestAppendingToEnvironmentVariable(prettyCertDir, OpenSslCertificateDirectoryVariableName);"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:394": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:394",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:394",
+      "message": "Added line: hasValidSslCertDir = false;"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:395": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:395",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:395",
+      "message": "Added line: }"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:396": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:396",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:396",
+      "message": "Added line: }"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:397": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:397",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:397",
+      "message": "Added line: else if (TryGetOpenSslDirectory(out var openSslDir))"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:400": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:400",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:400",
+      "message": "Added line: hasValidSslCertDir = false;"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:405": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:405",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:405",
+      "message": "Added line: hasValidSslCertDir = false;"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:407": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:407",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:407",
+      "message": "Added line: "
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:408": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:408",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:408",
+      "message": "Added line: sawTrustFailure = !hasValidSslCertDir;"
+    },
+    "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:991": {
+      "id": "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:991",
+      "kind": "diff_hunk",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:991",
+      "message": "@@ -948,9 +991,18 @@ private static bool TryRehashOpenSslCertificates(string certificateDirectory)\n         return true;\n     }\n \n-    private sealed class NssDb(string path, bool isFirefox)\n+    private sealed class NssDb\n     {\n-        public string Path => path;\n-        public bool IsFirefox => isFirefox;\n+        private readonly string _path;\n+        private readonly bool _isFirefox;\n+\n+        public NssDb(string path, bool isFirefox)\n+        {\n+            _path = path;\n+            _isFirefox = isFirefox;\n+        }\n+\n+        public string Path => _path;\n+        public bool IsFirefox => _isFirefox;\n     }\n }"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:951": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:951",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:951",
+      "message": "Removed line: private sealed class NssDb(string path, bool isFirefox)"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:994": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:994",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:994",
+      "message": "Added line: private sealed class NssDb"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:953": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:953",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:953",
+      "message": "Removed line: public string Path => path;"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:954": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:954",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:954",
+      "message": "Removed line: public bool IsFirefox => isFirefox;"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:996": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:996",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:996",
+      "message": "Added line: private readonly string _path;"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:997": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:997",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:997",
+      "message": "Added line: private readonly bool _isFirefox;"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:998": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:998",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:998",
+      "message": "Added line: "
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:999": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:999",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:999",
+      "message": "Added line: public NssDb(string path, bool isFirefox)"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:1000": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:1000",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:1000",
+      "message": "Added line: {"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:1001": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:1001",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:1001",
+      "message": "Added line: _path = path;"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:1002": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:1002",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:1002",
+      "message": "Added line: _isFirefox = isFirefox;"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:1003": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:1003",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:1003",
+      "message": "Added line: }"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:1004": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:1004",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:1004",
+      "message": "Added line: "
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:1005": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:1005",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:1005",
+      "message": "Added line: public string Path => _path;"
+    },
+    "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:1006": {
+      "id": "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:1006",
+      "kind": "diff",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:1006",
+      "message": "Added line: public bool IsFirefox => _isFirefox;"
+    },
+    "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124": {
+      "id": "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124",
+      "kind": "diff_hunk",
+      "source": "src/Tools/dotnet-dev-certs/src/Program.cs:124",
+      "message": "@@ -124,16 +124,20 @@ public static int Main(string[] args)\n                 {\n                     var reporter = new ConsoleReporter(PhysicalConsole.Singleton, verbose.HasValue(), quiet.HasValue());\n \n+                    var listener = new ReporterEventListener(reporter);\n                     if (verbose.HasValue())\n                     {\n-                        var listener = new ReporterEventListener(reporter);\n                         listener.EnableEvents(CertificateManager.Log, System.Diagnostics.Tracing.EventLevel.Verbose);\n                     }\n+                    else\n+                    {\n+                        listener.EnableEvents(CertificateManager.Log, System.Diagnostics.Tracing.EventLevel.LogAlways);\n+                    }\n \n                     if (checkJsonOutput.HasValue())\n                     {\n                         if (exportPath.HasValue() || trust?.HasValue() == true || format.HasValue() || noPassword.HasValue() || check.HasValue() || clean.HasValue() ||\n-                           (!import.HasValue() && password.HasValue()) || \n+                           (!import.HasValue() && password.HasValue()) ||\n                            (import.HasValue() && !password.HasValue()))\n                         {\n                             reporter.Error(InvalidUsageErrorMessage);"
+    },
+    "diff:src/Tools/dotnet-dev-certs/src/Program.cs:127": {
+      "id": "diff:src/Tools/dotnet-dev-certs/src/Program.cs:127",
+      "kind": "diff",
+      "source": "src/Tools/dotnet-dev-certs/src/Program.cs:127",
+      "message": "Added line: var listener = new ReporterEventListener(reporter);"
+    },
+    "diff:src/Tools/dotnet-dev-certs/src/Program.cs:129": {
+      "id": "diff:src/Tools/dotnet-dev-certs/src/Program.cs:129",
+      "kind": "diff",
+      "source": "src/Tools/dotnet-dev-certs/src/Program.cs:129",
+      "message": "Removed line: var listener = new ReporterEventListener(reporter);"
+    },
+    "diff:src/Tools/dotnet-dev-certs/src/Program.cs:132": {
+      "id": "diff:src/Tools/dotnet-dev-certs/src/Program.cs:132",
+      "kind": "diff",
+      "source": "src/Tools/dotnet-dev-certs/src/Program.cs:132",
+      "message": "Added line: else"
+    },
+    "diff:src/Tools/dotnet-dev-certs/src/Program.cs:133": {
+      "id": "diff:src/Tools/dotnet-dev-certs/src/Program.cs:133",
+      "kind": "diff",
+      "source": "src/Tools/dotnet-dev-certs/src/Program.cs:133",
+      "message": "Added line: {"
+    },
+    "diff:src/Tools/dotnet-dev-certs/src/Program.cs:134": {
+      "id": "diff:src/Tools/dotnet-dev-certs/src/Program.cs:134",
+      "kind": "diff",
+      "source": "src/Tools/dotnet-dev-certs/src/Program.cs:134",
+      "message": "Added line: listener.EnableEvents(CertificateManager.Log, System.Diagnostics.Tracing.EventLevel.LogAlways);"
+    },
+    "diff:src/Tools/dotnet-dev-certs/src/Program.cs:135": {
+      "id": "diff:src/Tools/dotnet-dev-certs/src/Program.cs:135",
+      "kind": "diff",
+      "source": "src/Tools/dotnet-dev-certs/src/Program.cs:135",
+      "message": "Added line: }"
+    },
+    "diff:src/Tools/dotnet-dev-certs/src/Program.cs:136": {
+      "id": "diff:src/Tools/dotnet-dev-certs/src/Program.cs:136",
+      "kind": "diff",
+      "source": "src/Tools/dotnet-dev-certs/src/Program.cs:136",
+      "message": "Removed line: (!import.HasValue() && password.HasValue()) ||"
+    },
+    "diff:src/Tools/dotnet-dev-certs/src/Program.cs:140": {
+      "id": "diff:src/Tools/dotnet-dev-certs/src/Program.cs:140",
+      "kind": "diff",
+      "source": "src/Tools/dotnet-dev-certs/src/Program.cs:140",
+      "message": "Added line: (!import.HasValue() && password.HasValue()) ||"
+    },
+    "entity:src/Shared/CertificateGeneration/CertificateManager.cs:src.Shared.CertificateGeneration.CertificateManager": {
+      "id": "entity:src/Shared/CertificateGeneration/CertificateManager.cs:src.Shared.CertificateGeneration.CertificateManager",
+      "kind": "entity",
+      "source": "src/Shared/CertificateGeneration/CertificateManager.cs:969-971",
+      "message": "Changed module src.Shared.CertificateGeneration.CertificateManager touched by 3 hunk(s)."
+    },
+    "entity:src/Shared/CertificateGeneration/UnixCertificateManager.cs:src.Shared.CertificateGeneration.UnixCertificateManager": {
+      "id": "entity:src/Shared/CertificateGeneration/UnixCertificateManager.cs:src.Shared.CertificateGeneration.UnixCertificateManager",
+      "kind": "entity",
+      "source": "src/Shared/CertificateGeneration/UnixCertificateManager.cs:358-408",
+      "message": "Changed module src.Shared.CertificateGeneration.UnixCertificateManager touched by 2 hunk(s)."
+    },
+    "entity:src/Tools/dotnet-dev-certs/src/Program.cs:src.Tools.dotnet-dev-certs.src.Program": {
+      "id": "entity:src/Tools/dotnet-dev-certs/src/Program.cs:src.Tools.dotnet-dev-certs.src.Program",
+      "kind": "entity",
+      "source": "src/Tools/dotnet-dev-certs/src/Program.cs:127-140",
+      "message": "Changed module src.Tools.dotnet-dev-certs.src.Program touched by 1 hunk(s)."
+    },
+    "risk:security_sensitive:src/Tools/dotnet-dev-certs/src/Program.cs": {
+      "id": "risk:security_sensitive:src/Tools/dotnet-dev-certs/src/Program.cs",
+      "kind": "risk",
+      "source": "security_sensitive",
+      "message": "Security-sensitive keywords changed in src/Tools/dotnet-dev-certs/src/Program.cs."
+    }
+  },
+  "missing_evidence_ids": [],
+  "agent_runs": [
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+      "input_evidence_ids": [
+        "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:966",
+        "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355",
+        "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124"
+      ],
+      "output_issue_ids": [
+        "style:src/Shared/CertificateGeneration/CertificateManager.cs:969",
+        "style:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358",
+        "style:src/Tools/dotnet-dev-certs/src/Program.cs:127"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 27015,
+      "token_count_in": 6215,
+      "token_count_out": 517,
+      "trace_id": "931c9f9e8ab844b98e45624901aff07d",
+      "span_id": "a755f5dbe15541bb",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001",
+      "shard_index": 0,
+      "shard_count": 1,
+      "context_request_count": 0,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+      "model": null,
+      "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+      "input_evidence_ids": [
+        "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:966",
+        "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355",
+        "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124"
+      ],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 0,
+      "token_count_in": 0,
+      "token_count_out": 0,
+      "trace_id": "",
+      "span_id": "",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "",
+      "shard_index": 0,
+      "shard_count": 0,
+      "context_request_count": 0,
+      "context_refill_used": false
+    }
+  ],
+  "prompt_exports": {},
+  "context_budget": {
+    "enabled": true,
+    "strategy": "risk_first_v1",
+    "context_profile": "risk_compact_manifest_v1",
+    "max_input_tokens": 9000,
+    "estimated_input_tokens": 5989,
+    "selected_evidence_count": 3,
+    "omitted_evidence_count": 87,
+    "selected_evidence_ids": [
+      "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124",
+      "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:966",
+      "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355"
+    ],
+    "omitted_evidence_ids": [
+      "diff:src/Tools/dotnet-dev-certs/src/Program.cs:127",
+      "diff:src/Tools/dotnet-dev-certs/src/Program.cs:129",
+      "diff:src/Tools/dotnet-dev-certs/src/Program.cs:132",
+      "diff:src/Tools/dotnet-dev-certs/src/Program.cs:133",
+      "diff:src/Tools/dotnet-dev-certs/src/Program.cs:134",
+      "diff:src/Tools/dotnet-dev-certs/src/Program.cs:135",
+      "diff:src/Tools/dotnet-dev-certs/src/Program.cs:136",
+      "diff:src/Tools/dotnet-dev-certs/src/Program.cs:140",
+      "risk:security_sensitive:src/Tools/dotnet-dev-certs/src/Program.cs",
+      "entity:src/Tools/dotnet-dev-certs/src/Program.cs:src.Tools.dotnet-dev-certs.src.Program",
+      "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:1300",
+      "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:1310",
+      "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:991",
+      "entity:src/Shared/CertificateGeneration/CertificateManager.cs:src.Shared.CertificateGeneration.CertificateManager",
+      "entity:src/Shared/CertificateGeneration/UnixCertificateManager.cs:src.Shared.CertificateGeneration.UnixCertificateManager",
+      "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1303",
+      "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1306",
+      "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1313",
+      "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1314",
+      "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1315",
+      "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1316",
+      "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1317",
+      "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1318",
+      "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1319",
+      "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1320",
+      "diff:src/Shared/CertificateGeneration/CertificateManager.cs:969",
+      "diff:src/Shared/CertificateGeneration/CertificateManager.cs:970",
+      "diff:src/Shared/CertificateGeneration/CertificateManager.cs:971",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:1000",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:1001",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:1002",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:1003",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:1004",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:1005",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:1006",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:359",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:360",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:361",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:362",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:363",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:364",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:365",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:366",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:367",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:368",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:369",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:370",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:371",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:372",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:373",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:374",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:375",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:376",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:377",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:378",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:379",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:380",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:381",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:382",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:383",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:384",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:385",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:386",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:387",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:388",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:389",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:390",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:391",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:392",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:393",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:394",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:395",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:396",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:397",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:400",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:405",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:407",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:408",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:951",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:953",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:954",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:994",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:996",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:997",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:998",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:999"
+    ],
+    "selected_risk_signal_count": 1,
+    "context_truncated": true,
+    "shard_count": 1,
+    "refill_count": 0,
+    "context_request_count": 0,
+    "context_requests": [],
+    "shards": [
+      {
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 3,
+        "omitted_evidence_count": 87,
+        "estimated_input_tokens": 5989,
+        "context_truncated": true
+      }
+    ],
+    "warnings": []
+  },
+  "loop": {
+    "enabled": true,
+    "max_iter": 1,
+    "iterations_completed": 1,
+    "converged": false,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "checkpoint_path": "D:\\learn\\code-review-agent\\workspace\\qodo_pr_review_bench_live_guidelines\\samples\\qodo_015\\review\\loop_checkpoint.json",
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "iterations": [
+      {
+        "i": 0,
+        "candidate_issue_count": 3,
+        "verified_count": 3,
+        "needs_human_review_count": 0,
+        "discarded_count": 0,
+        "keep_count": 0,
+        "uncertain_count": 3,
+        "reject_count": 0,
+        "feedback_sent": [
+          {
+            "issue_id": "style:src/Shared/CertificateGeneration/CertificateManager.cs:969",
+            "category": "style",
+            "critic_reason": "low confidence",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:966"
+            ]
+          },
+          {
+            "issue_id": "style:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358",
+            "category": "style",
+            "critic_reason": "low confidence",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355"
+            ]
+          },
+          {
+            "issue_id": "style:src/Tools/dotnet-dev-certs/src/Program.cs:127",
+            "category": "style",
+            "critic_reason": "low confidence",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124"
+            ]
+          }
+        ],
+        "agent_runs": [
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+            "input_evidence_ids": [
+              "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:966",
+              "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355",
+              "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124"
+            ],
+            "output_issue_ids": [
+              "style:src/Shared/CertificateGeneration/CertificateManager.cs:969",
+              "style:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358",
+              "style:src/Tools/dotnet-dev-certs/src/Program.cs:127"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 27015,
+            "token_count_in": 6215,
+            "token_count_out": 517,
+            "trace_id": "931c9f9e8ab844b98e45624901aff07d",
+            "span_id": "a755f5dbe15541bb",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001",
+            "shard_index": 0,
+            "shard_count": 1,
+            "context_request_count": 0,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+            "model": null,
+            "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+            "input_evidence_ids": [
+              "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:966",
+              "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355",
+              "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124"
+            ],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 0,
+            "token_count_in": 0,
+            "token_count_out": 0,
+            "trace_id": "",
+            "span_id": "",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "",
+            "shard_index": 0,
+            "shard_count": 0,
+            "context_request_count": 0,
+            "context_refill_used": false
+          }
+        ],
+        "issue_set": [
+          "style:src/Shared/CertificateGeneration/CertificateManager.cs:969",
+          "style:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358",
+          "style:src/Tools/dotnet-dev-certs/src/Program.cs:127"
+        ],
+        "keep": [],
+        "needs_human_review": [
+          {
+            "file": "src/Shared/CertificateGeneration/CertificateManager.cs",
+            "line": 969,
+            "severity": "minor",
+            "category": "style",
+            "message": "Review guideline violation: 'All C# Source Files Must Include MIT License Header' - The file is missing the required MIT license header at the top.",
+            "suggestion": "Add the standard .NET Foundation MIT license header at the beginning of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:966"
+            ]
+          },
+          {
+            "file": "src/Shared/CertificateGeneration/UnixCertificateManager.cs",
+            "line": 358,
+            "severity": "minor",
+            "category": "style",
+            "message": "Review guideline violation: 'All C# Source Files Must Include MIT License Header' - The file is missing the required MIT license header at the top.",
+            "suggestion": "Add the standard .NET Foundation MIT license header at the beginning of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355"
+            ]
+          },
+          {
+            "file": "src/Tools/dotnet-dev-certs/src/Program.cs",
+            "line": 127,
+            "severity": "minor",
+            "category": "style",
+            "message": "Review guideline violation: 'All C# Source Files Must Include MIT License Header' - The file is missing the required MIT license header at the top.",
+            "suggestion": "Add the standard .NET Foundation MIT license header at the beginning of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124"
+            ]
+          }
+        ],
+        "discarded": []
+      }
+    ]
+  },
+  "tracing": {
+    "total_latency_ms": 27015,
+    "total_token_count_in": 6215,
+    "total_token_count_out": 517,
+    "total_retry_count": 0,
+    "run_count": 2,
+    "status_counts": {
+      "ok": 2
+    }
+  }
+}

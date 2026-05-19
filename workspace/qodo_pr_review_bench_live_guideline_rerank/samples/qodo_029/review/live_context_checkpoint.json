@@ -1,0 +1,108 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:78058ebae2e0ce43f8bf100537abdf966bb48d7e079044079edd8942e1a86fba",
+  "diff_hash": "sha256:085d9c709ea02d89f19cbf99baad3855f454e465533cccb52f801c120a542a58",
+  "shards": {
+    "859af141eed8e4f153365669e0d814fb1a1f67d1451eddcf85210897da6ce309": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:4",
+        "diff_hunk:packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts:392",
+        "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:112",
+        "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:21"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:4",
+          "diff_hunk:packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts:392",
+          "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:112",
+          "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:21"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 61562,
+        "token_count_in": 6167,
+        "token_count_out": 12,
+        "trace_id": "fe5123811560450f9d5f7bfbebf5bb90",
+        "span_id": "2b4e9cdb2c9d4216",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 2,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "4551b3976d48f849437870ed79c035fea81765e75542f5297a18c5ff4f788f77": {
+      "status": "completed",
+      "shard_id": "shard-002",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:131",
+        "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:2"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts",
+          "line": 5,
+          "severity": "high",
+          "category": "naming_convention",
+          "message": "Repository class renamed to PrismaSelectedCalendarRepository but file name does not match the naming convention 'Prisma<Entity>Repository.ts' as required by review guidelines.",
+          "suggestion": "Rename the file to PrismaSelectedCalendarRepository.ts to match the exported class name.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:2"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:131",
+          "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:2"
+        ],
+        "output_issue_ids": [
+          "naming_convention:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:5"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 17007,
+        "token_count_in": 4492,
+        "token_count_out": 166,
+        "trace_id": "9f923e84334549f79232caad545ce6dc",
+        "span_id": "0b493914b40a4ba8",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "shard_count": 2,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

@@ -1,0 +1,267 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:d50092c5810c923013b3217089994794fee245ad459c78e73d6fa44008ef7513",
+  "diff_hash": "sha256:6ef8c06ed41f820a55954656e1e59b3388d819243a937fcd30b10a6885b4b694",
+  "shards": {
+    "2922faf3b20f4993c2bbaa0d33cc05cdb48ecbfd3f8664f5e9f5dbdf454a4626": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/Components/Web/src/Forms/DisplayName.cs:1",
+        "diff_hunk:src/Components/Web/src/Forms/ExpressionMemberAccessor.cs:1",
+        "diff_hunk:src/Components/Web/src/PublicAPI.Unshipped.txt:40",
+        "diff_hunk:src/Components/Web/test/Forms/DisplayNameTest.cs:1"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:src/Components/Web/src/Forms/DisplayName.cs:1",
+          "diff_hunk:src/Components/Web/src/Forms/ExpressionMemberAccessor.cs:1",
+          "diff_hunk:src/Components/Web/src/PublicAPI.Unshipped.txt:40",
+          "diff_hunk:src/Components/Web/test/Forms/DisplayNameTest.cs:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 495,
+        "token_count_in": 5424,
+        "token_count_out": 15,
+        "trace_id": "6d5fce8c12694d9da362839c31723596",
+        "span_id": "3b59540c29a246f1",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 4,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "c524c00727e5fd4b047a1bec689a03187ff74b19406b259830a623e627d8d622": {
+      "status": "completed",
+      "shard_id": "shard-002",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/Components/test/E2ETest/Tests/FormsTest.cs:555",
+        "diff_hunk:src/Components/test/testassets/BasicTestApp/FormsTest/DisplayNameComponent.razor:1",
+        "diff_hunk:src/Components/test/testassets/BasicTestApp/Index.razor:27",
+        "diff_hunk:src/Components/test/testassets/BasicTestApp/Resources.fr.resx:120"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:src/Components/test/E2ETest/Tests/FormsTest.cs:555",
+          "diff_hunk:src/Components/test/testassets/BasicTestApp/FormsTest/DisplayNameComponent.razor:1",
+          "diff_hunk:src/Components/test/testassets/BasicTestApp/Index.razor:27",
+          "diff_hunk:src/Components/test/testassets/BasicTestApp/Resources.fr.resx:120"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 440,
+        "token_count_in": 4637,
+        "token_count_out": 15,
+        "trace_id": "291e35c18a76470394e4324fc0194087",
+        "span_id": "ab6c345872404117",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "shard_count": 4,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "3e10fa0c81f207eba451ceda2f94dea8661867857fc76a29438f8991dd0412d3": {
+      "status": "completed",
+      "shard_id": "shard-003",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/Components/test/testassets/BasicTestApp/Resources.resx:120",
+        "diff_hunk:src/Components/test/testassets/BasicTestApp/TestResources.cs:1",
+        "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/ForgotPassword.razor:25",
+        "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/Login.razor:154",
+        "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/Login.razor:25"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/Login.razor"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The security_sensitive risk signal has high confidence but the primary evidence only shows DisplayName attribute additions. Need to verify if there is any actual security boundary change or exposure introduced.",
+          "source_shard_id": "shard-003",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:src/Components/test/testassets/BasicTestApp/Resources.resx:120",
+          "diff_hunk:src/Components/test/testassets/BasicTestApp/TestResources.cs:1",
+          "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/ForgotPassword.razor:25",
+          "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/Login.razor:154",
+          "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/Login.razor:25"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 22110,
+        "token_count_in": 6245,
+        "token_count_out": 124,
+        "trace_id": "77f2ab363a2a469f81045cfab8f3b5b2",
+        "span_id": "3451c88688f54ec9",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-003",
+        "shard_index": 2,
+        "shard_count": 4,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "b6e28d7669d89855708f663e3b3b4a38c1ace4c08b3adb58a323474f8b07095f": {
+      "status": "completed",
+      "shard_id": "shard-003-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-003",
+      "selected_evidence_ids": [
+        "risk:security_sensitive:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/Login.razor"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/Login.razor:25",
+            "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/Login.razor:154"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The security_sensitive risk signal has no expanded evidence. Need to see the actual diff hunks to determine if a concrete security issue was introduced.",
+          "source_shard_id": "shard-003-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "risk:security_sensitive:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/Login.razor"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 1165,
+        "token_count_in": 1669,
+        "token_count_out": 164,
+        "trace_id": "4091ac3f7e9b4825a871310d7d2c7840",
+        "span_id": "639ae1538c934f0d",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-003-refill",
+        "shard_index": 2,
+        "shard_count": 4,
+        "context_request_count": 1,
+        "context_refill_used": true
+      }
+    },
+    "86b64028a867573d0eb5403190558343dea17edd67ce6fc6cd04b9c53b101abb": {
+      "status": "completed",
+      "shard_id": "shard-004",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/Manage/ChangePassword.razor:20",
+        "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/Manage/Email.razor:45",
+        "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/Register.razor:29",
+        "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/ResetPassword.razor:24",
+        "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/ResetPassword.razor:96"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/ResetPassword.razor",
+          "line": 99,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "The ResetPassword InputModel class adds [Display(Name = \"Email\")] and [Display(Name = \"Password\")] attributes, but the ConfirmPassword property does not get a [Display] attribute. This inconsistency may cause the label for ConfirmPassword to be missing or incorrectly rendered when using DisplayName in the Razor view.",
+          "suggestion": "Add a [Display(Name = \"Confirm password\")] attribute to the ConfirmPassword property in the InputModel class to match the pattern used for Email and Password.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/ResetPassword.razor:96"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/Manage/ChangePassword.razor:20",
+          "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/Manage/Email.razor:45",
+          "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/Register.razor:29",
+          "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/ResetPassword.razor:24",
+          "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/ResetPassword.razor:96"
+        ],
+        "output_issue_ids": [
+          "correctness:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/ResetPassword.razor:99"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 7707,
+        "token_count_in": 9390,
+        "token_count_out": 261,
+        "trace_id": "72dc0364d8de4091a5b03885db55cd95",
+        "span_id": "0cc73066a54c4fb3",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-004",
+        "shard_index": 3,
+        "shard_count": 4,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

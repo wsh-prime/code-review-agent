@@ -1,0 +1,119 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:3a312fb581ef224de3e3d97471446662ba5e85486206ace2964a7a455ef5adab",
+  "diff_hash": "sha256:4debe6b73ff1d99a04683477cb0eb386879f47780adb724fc596179886fb7e5f",
+  "shards": {
+    "c4b4a0802c931b3fa2b024f6bff5570d4539921abf1965471615446f065ead9d": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:apps/admin-x-framework/src/api/comments.ts:25",
+        "diff_hunk:apps/posts/src/views/comments/components/comments-list.tsx:59",
+        "diff_hunk:apps/posts/src/views/comments/components/comments-list.tsx:7",
+        "diff_hunk:ghost/core/core/server/api/endpoints/utils/serializers/output/mappers/comments.js:35",
+        "diff_hunk:ghost/core/test/e2e-api/admin/__snapshots__/activity-feed.test.js.snap:22699"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "apps/posts/src/views/comments/components/comments-list.tsx",
+          "line": 59,
+          "severity": "high",
+          "category": "security",
+          "message": "The new CommentContent component uses dangerouslySetInnerHTML to render comment HTML content without sanitization, introducing a stored XSS vulnerability. User-generated comment HTML is rendered directly into the DOM, allowing arbitrary script execution.",
+          "suggestion": "Sanitize the HTML content before passing it to dangerouslySetInnerHTML using a library like DOMPurify, or render the content as plain text if HTML is not required.",
+          "confidence": 0.95,
+          "evidence_ids": [
+            "diff_hunk:apps/posts/src/views/comments/components/comments-list.tsx:59"
+          ]
+        },
+        {
+          "file": "apps/posts/src/views/comments/components/comments-list.tsx",
+          "line": 59,
+          "severity": "medium",
+          "category": "best_practice",
+          "message": "The new <Button> element in ExpandButton lacks an explicit type attribute. Without type=\"button\", the button defaults to type=\"submit\" inside a form, which can cause unintended form submissions.",
+          "suggestion": "Add type=\"button\" to the <Button> component to prevent accidental form submission behavior.",
+          "confidence": 0.9,
+          "evidence_ids": [
+            "diff_hunk:apps/posts/src/views/comments/components/comments-list.tsx:59"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:apps/admin-x-framework/src/api/comments.ts:25",
+          "diff_hunk:apps/posts/src/views/comments/components/comments-list.tsx:59",
+          "diff_hunk:apps/posts/src/views/comments/components/comments-list.tsx:7",
+          "diff_hunk:ghost/core/core/server/api/endpoints/utils/serializers/output/mappers/comments.js:35",
+          "diff_hunk:ghost/core/test/e2e-api/admin/__snapshots__/activity-feed.test.js.snap:22699"
+        ],
+        "output_issue_ids": [
+          "security:apps/posts/src/views/comments/components/comments-list.tsx:59",
+          "best_practice:apps/posts/src/views/comments/components/comments-list.tsx:59"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 6761,
+        "token_count_in": 7427,
+        "token_count_out": 340,
+        "trace_id": "106e0f827ea7450991b0d484d1245abc",
+        "span_id": "73a5807b660242d9",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 2,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "73a9e58b4c125826a006bc493c0377baef6598437e5aaa50f6f54595e9db5fed": {
+      "status": "completed",
+      "shard_id": "shard-002",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/test/e2e-api/admin/__snapshots__/comments.test.js.snap:25"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/test/e2e-api/admin/__snapshots__/comments.test.js.snap:25"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 2936,
+        "token_count_in": 4943,
+        "token_count_out": 12,
+        "trace_id": "e452aa7465f64644bc31e980e3edc56c",
+        "span_id": "baf8630f6f4b4da8",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "shard_count": 2,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

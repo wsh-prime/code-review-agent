@@ -1,0 +1,343 @@
+{
+  "schema_version": "1.3",
+  "summary": {
+    "mode": "hybrid-live",
+    "changed_file_count": 1,
+    "changed_entity_count": 1,
+    "risk_signal_count": 0,
+    "finding_count": 0,
+    "needs_human_review_count": 0,
+    "discarded_count": 0,
+    "evidence_count": 2,
+    "missing_evidence_id_count": 0,
+    "agent_run_count": 3,
+    "prompt_exported": false,
+    "loop_enabled": true,
+    "loop_iterations_completed": 1,
+    "loop_converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "total_latency_ms": 11216,
+    "total_token_count_in": 2019,
+    "total_token_count_out": 103,
+    "context_budget_enabled": true,
+    "context_truncated": true,
+    "selected_evidence_count": 2,
+    "omitted_evidence_count": 0,
+    "review_shard_count": 1,
+    "context_refill_count": 1,
+    "context_request_count": 2,
+    "target_repo_modified": false
+  },
+  "findings": [],
+  "needs_human_review": [],
+  "discarded": [],
+  "changed_files": [
+    {
+      "old_path": "tests/test_db.py",
+      "new_path": "tests/test_db.py",
+      "change_type": "modified",
+      "hunks": []
+    }
+  ],
+  "changed_entities": [
+    {
+      "path": "tests/test_db.py",
+      "entity_type": "module",
+      "name": "test_db.py",
+      "qualified_name": "tests.test_db",
+      "line_start": 1,
+      "line_end": 1,
+      "hunk_ids": [
+        "tests/test_db.py:1"
+      ]
+    }
+  ],
+  "risk_signals": [],
+  "evidence_index": {
+    "diff:tests/test_db.py:1": {
+      "id": "diff:tests/test_db.py:1",
+      "kind": "diff",
+      "source": "tests/test_db.py:1",
+      "message": "modified file change without text hunks."
+    },
+    "entity:tests/test_db.py:tests.test_db": {
+      "id": "entity:tests/test_db.py:tests.test_db",
+      "kind": "entity",
+      "source": "tests/test_db.py:1-1",
+      "message": "Changed module tests.test_db touched by 1 hunk(s)."
+    }
+  },
+  "missing_evidence_ids": [],
+  "agent_runs": [
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+      "input_evidence_ids": [
+        "diff:tests/test_db.py:1"
+      ],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 487,
+      "token_count_in": 1030,
+      "token_count_out": 37,
+      "trace_id": "ebf2c92a7f734a7ab331350d6fe12fca",
+      "span_id": "f72b14529f9f4e79",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001",
+      "shard_index": 0,
+      "shard_count": 1,
+      "context_request_count": 1,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+      "input_evidence_ids": [
+        "entity:tests/test_db.py:tests.test_db"
+      ],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 10729,
+      "token_count_in": 989,
+      "token_count_out": 66,
+      "trace_id": "5e4f51e397c64bdc9ba4ee0a2f8f251f",
+      "span_id": "75a1d2684ab2422a",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001-refill",
+      "shard_index": 0,
+      "shard_count": 1,
+      "context_request_count": 1,
+      "context_refill_used": true
+    },
+    {
+      "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+      "model": null,
+      "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+      "input_evidence_ids": [],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 0,
+      "token_count_in": 0,
+      "token_count_out": 0,
+      "trace_id": "",
+      "span_id": "",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "",
+      "shard_index": 0,
+      "shard_count": 0,
+      "context_request_count": 0,
+      "context_refill_used": false
+    }
+  ],
+  "prompt_exports": {},
+  "context_budget": {
+    "enabled": true,
+    "strategy": "file_risk_shards_v1",
+    "context_profile": "risk_compact_manifest_v1",
+    "max_input_tokens": 9000,
+    "estimated_input_tokens": 709,
+    "selected_evidence_count": 2,
+    "omitted_evidence_count": 0,
+    "selected_evidence_ids": [
+      "diff:tests/test_db.py:1",
+      "entity:tests/test_db.py:tests.test_db"
+    ],
+    "omitted_evidence_ids": [],
+    "selected_risk_signal_count": 0,
+    "context_truncated": true,
+    "shard_count": 1,
+    "refill_count": 1,
+    "context_request_count": 2,
+    "context_requests": [
+      {
+        "request_type": "same_file_more_evidence",
+        "path": null,
+        "evidence_ids": [
+          "entity:tests/test_db.py:tests.test_db"
+        ],
+        "risk_tag": null,
+        "symbol": null,
+        "reason": "",
+        "source_shard_id": "shard-001",
+        "fulfilled_evidence_ids": [
+          "entity:tests/test_db.py:tests.test_db"
+        ]
+      },
+      {
+        "request_type": "same_file_more_evidence",
+        "path": "tests/test_db.py",
+        "evidence_ids": [],
+        "risk_tag": null,
+        "symbol": null,
+        "reason": "The primary evidence only shows the module entity; no diff hunks or line changes are available to assess the patch.",
+        "source_shard_id": "shard-001-refill",
+        "fulfilled_evidence_ids": []
+      }
+    ],
+    "shards": [
+      {
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 1,
+        "omitted_evidence_count": 1,
+        "estimated_input_tokens": 377,
+        "context_truncated": true
+      },
+      {
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "is_refill": true,
+        "parent_shard_id": "shard-001",
+        "selected_evidence_count": 1,
+        "omitted_evidence_count": 0,
+        "estimated_input_tokens": 332,
+        "context_truncated": false
+      }
+    ],
+    "warnings": []
+  },
+  "loop": {
+    "enabled": true,
+    "max_iter": 1,
+    "iterations_completed": 1,
+    "converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "checkpoint_path": "D:\\learn\\code-review-agent\\workspace\\hf_codereview_live\\samples\\sample_019\\review\\loop_checkpoint.json",
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "iterations": [
+      {
+        "i": 0,
+        "candidate_issue_count": 0,
+        "verified_count": 0,
+        "needs_human_review_count": 0,
+        "discarded_count": 0,
+        "keep_count": 0,
+        "uncertain_count": 0,
+        "reject_count": 0,
+        "feedback_sent": [],
+        "agent_runs": [
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+            "input_evidence_ids": [
+              "diff:tests/test_db.py:1"
+            ],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 487,
+            "token_count_in": 1030,
+            "token_count_out": 37,
+            "trace_id": "ebf2c92a7f734a7ab331350d6fe12fca",
+            "span_id": "f72b14529f9f4e79",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001",
+            "shard_index": 0,
+            "shard_count": 1,
+            "context_request_count": 1,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+            "input_evidence_ids": [
+              "entity:tests/test_db.py:tests.test_db"
+            ],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 10729,
+            "token_count_in": 989,
+            "token_count_out": 66,
+            "trace_id": "5e4f51e397c64bdc9ba4ee0a2f8f251f",
+            "span_id": "75a1d2684ab2422a",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001-refill",
+            "shard_index": 0,
+            "shard_count": 1,
+            "context_request_count": 1,
+            "context_refill_used": true
+          },
+          {
+            "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+            "model": null,
+            "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+            "input_evidence_ids": [],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 0,
+            "token_count_in": 0,
+            "token_count_out": 0,
+            "trace_id": "",
+            "span_id": "",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "",
+            "shard_index": 0,
+            "shard_count": 0,
+            "context_request_count": 0,
+            "context_refill_used": false
+          }
+        ],
+        "issue_set": [],
+        "keep": [],
+        "needs_human_review": [],
+        "discarded": []
+      }
+    ]
+  },
+  "tracing": {
+    "total_latency_ms": 11216,
+    "total_token_count_in": 2019,
+    "total_token_count_out": 103,
+    "total_retry_count": 0,
+    "run_count": 3,
+    "status_counts": {
+      "ok": 3
+    }
+  }
+}

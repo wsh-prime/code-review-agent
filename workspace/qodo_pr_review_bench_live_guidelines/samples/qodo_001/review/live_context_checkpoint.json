@@ -1,0 +1,49 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:0067c5e7673729db39920549a75b8ad3ac0aaa400b3bb1d096e5e02ba592e07e",
+  "diff_hash": "sha256:e5b82b74cf451ae97a02bedefdc4fd9f909b6eda24e2101d391cce3587759445",
+  "shards": {
+    "7c2e8d28cbd92822cab2fdd9445266c4978f3c20aa588d43e1d4f24a3186bce2": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:241",
+        "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:27",
+        "diff_hunk:apps/comments-ui/test/e2e/actions.test.ts:611"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:241",
+          "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:27",
+          "diff_hunk:apps/comments-ui/test/e2e/actions.test.ts:611"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 523,
+        "token_count_in": 6455,
+        "token_count_out": 12,
+        "trace_id": "2a6e5f040853466dbf4bcb8e2a22740a",
+        "span_id": "3e24ed1350ff49ec",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:8e3f539df4a97d3455ad17957aaf7eb0544ed78ef70ccb30bd5167420f2b1356",
+  "diff_hash": "sha256:3d16a05a3c1ce1150dbf0f5d466675aabcf5301c323281d63185d96a9775e36b",
+  "shards": {
+    "84f30c41beda6053bb5fbf75aaf46f9210ab29b28ea3385372cb6de71192c7fa": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:gpt_engineer/steps.py:18"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "gpt_engineer/steps.py",
+          "line": 26,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Changed from fsystem to fuser for the main prompt and specification messages in pre_unit_tests and run_clarified. fuser likely sets a different role (user vs system), which may alter the AI's interpretation of these instructions and could cause the generated unit tests or clarified code to be less reliable.",
+          "suggestion": "Verify that fuser is the intended role for these messages. If the instructions and specification should be treated as system-level context, revert to fsystem.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:gpt_engineer/steps.py:18"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:gpt_engineer/steps.py:18"
+        ],
+        "output_issue_ids": [
+          "correctness:gpt_engineer/steps.py:26"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 120158,
+        "token_count_in": 1726,
+        "token_count_out": 189,
+        "trace_id": "4c3dde4c1a6c45a58485ec955775510e",
+        "span_id": "1b2707a0a085409b",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

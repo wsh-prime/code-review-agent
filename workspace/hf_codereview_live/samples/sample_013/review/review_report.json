@@ -1,0 +1,519 @@
+{
+  "schema_version": "1.3",
+  "summary": {
+    "mode": "hybrid-live",
+    "changed_file_count": 1,
+    "changed_entity_count": 1,
+    "risk_signal_count": 0,
+    "finding_count": 0,
+    "needs_human_review_count": 0,
+    "discarded_count": 0,
+    "evidence_count": 7,
+    "missing_evidence_id_count": 0,
+    "agent_run_count": 3,
+    "prompt_exported": false,
+    "loop_enabled": true,
+    "loop_iterations_completed": 1,
+    "loop_converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "total_latency_ms": 5193,
+    "total_token_count_in": 2450,
+    "total_token_count_out": 161,
+    "context_budget_enabled": true,
+    "context_truncated": true,
+    "selected_evidence_count": 2,
+    "omitted_evidence_count": 5,
+    "review_shard_count": 1,
+    "context_refill_count": 1,
+    "context_request_count": 2,
+    "target_repo_modified": false
+  },
+  "findings": [],
+  "needs_human_review": [],
+  "discarded": [],
+  "changed_files": [
+    {
+      "old_path": "gpt_engineer/steps.py",
+      "new_path": "gpt_engineer/steps.py",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 1,
+          "old_count": 10,
+          "new_start": 1,
+          "new_count": 8,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "removed",
+              "old_lineno": 1,
+              "new_lineno": null,
+              "content": "        dbs.workspace.path, dbs.archive.path / timestamp / dbs.workspace.path.name"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 2,
+              "new_lineno": null,
+              "content": "    )"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 3,
+              "new_lineno": 1,
+              "content": "    return []"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 4,
+              "new_lineno": 2,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 5,
+              "new_lineno": 3,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 6,
+              "new_lineno": 4,
+              "content": "def human_review(ai: AI, dbs: DBs):"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 7,
+              "new_lineno": 5,
+              "content": "    review = human_input()"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 8,
+              "new_lineno": 6,
+              "content": "    dbs.memory[\"review\"] = review.to_json()  # type: ignore"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 9,
+              "new_lineno": 7,
+              "content": "    return []"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 10,
+              "new_lineno": 8,
+              "content": ""
+            }
+          ]
+        },
+        {
+          "old_start": 44,
+          "old_count": 8,
+          "new_start": 42,
+          "new_count": 10,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 44,
+              "new_lineno": 42,
+              "content": "        human_review,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 45,
+              "new_lineno": 43,
+              "content": "    ],"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 46,
+              "new_lineno": 44,
+              "content": "    Config.TDD_PLUS: ["
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 47,
+              "new_lineno": 45,
+              "content": "        archive,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 48,
+              "new_lineno": 46,
+              "content": "        gen_spec,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 49,
+              "new_lineno": 47,
+              "content": "        gen_unit_tests,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 50,
+              "new_lineno": 48,
+              "content": "        gen_code,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 51,
+              "new_lineno": 49,
+              "content": "        fix_code,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 50,
+              "content": "        gen_entrypoint,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 51,
+              "content": "        execute_entrypoint,"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "changed_entities": [
+    {
+      "path": "gpt_engineer/steps.py",
+      "entity_type": "module",
+      "name": "steps.py",
+      "qualified_name": "gpt_engineer.steps",
+      "line_start": 1,
+      "line_end": 2,
+      "hunk_ids": [
+        "gpt_engineer/steps.py:1",
+        "gpt_engineer/steps.py:42"
+      ]
+    }
+  ],
+  "risk_signals": [],
+  "evidence_index": {
+    "diff_hunk:gpt_engineer/steps.py:1": {
+      "id": "diff_hunk:gpt_engineer/steps.py:1",
+      "kind": "diff_hunk",
+      "source": "gpt_engineer/steps.py:1",
+      "message": "@@ -1,10 +1,8 @@\n-        dbs.workspace.path, dbs.archive.path / timestamp / dbs.workspace.path.name\n-    )\n     return []\n \n \n def human_review(ai: AI, dbs: DBs):\n     review = human_input()\n     dbs.memory[\"review\"] = review.to_json()  # type: ignore\n     return []\n "
+    },
+    "diff:gpt_engineer/steps.py:1": {
+      "id": "diff:gpt_engineer/steps.py:1",
+      "kind": "diff",
+      "source": "gpt_engineer/steps.py:1",
+      "message": "Removed line: dbs.workspace.path, dbs.archive.path / timestamp / dbs.workspace.path.name"
+    },
+    "diff:gpt_engineer/steps.py:2": {
+      "id": "diff:gpt_engineer/steps.py:2",
+      "kind": "diff",
+      "source": "gpt_engineer/steps.py:2",
+      "message": "Removed line: )"
+    },
+    "diff_hunk:gpt_engineer/steps.py:42": {
+      "id": "diff_hunk:gpt_engineer/steps.py:42",
+      "kind": "diff_hunk",
+      "source": "gpt_engineer/steps.py:42",
+      "message": "@@ -44,8 +42,10 @@\n         human_review,\n     ],\n     Config.TDD_PLUS: [\n         archive,\n         gen_spec,\n         gen_unit_tests,\n         gen_code,\n         fix_code,\n+        gen_entrypoint,\n+        execute_entrypoint,"
+    },
+    "diff:gpt_engineer/steps.py:50": {
+      "id": "diff:gpt_engineer/steps.py:50",
+      "kind": "diff",
+      "source": "gpt_engineer/steps.py:50",
+      "message": "Added line: gen_entrypoint,"
+    },
+    "diff:gpt_engineer/steps.py:51": {
+      "id": "diff:gpt_engineer/steps.py:51",
+      "kind": "diff",
+      "source": "gpt_engineer/steps.py:51",
+      "message": "Added line: execute_entrypoint,"
+    },
+    "entity:gpt_engineer/steps.py:gpt_engineer.steps": {
+      "id": "entity:gpt_engineer/steps.py:gpt_engineer.steps",
+      "kind": "entity",
+      "source": "gpt_engineer/steps.py:1-2",
+      "message": "Changed module gpt_engineer.steps touched by 2 hunk(s)."
+    }
+  },
+  "missing_evidence_ids": [],
+  "agent_runs": [
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+      "input_evidence_ids": [
+        "diff_hunk:gpt_engineer/steps.py:1"
+      ],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 2205,
+      "token_count_in": 1349,
+      "token_count_out": 68,
+      "trace_id": "11c6e5976a514b7e96f5cced406f0bd2",
+      "span_id": "9fba388116284e6b",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001",
+      "shard_index": 0,
+      "shard_count": 1,
+      "context_request_count": 1,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+      "input_evidence_ids": [
+        "diff_hunk:gpt_engineer/steps.py:42"
+      ],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 2988,
+      "token_count_in": 1101,
+      "token_count_out": 93,
+      "trace_id": "4bfac90a02084c4fb624572936a5c503",
+      "span_id": "20db6dfce8fd4939",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001-refill",
+      "shard_index": 0,
+      "shard_count": 1,
+      "context_request_count": 1,
+      "context_refill_used": true
+    },
+    {
+      "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+      "model": null,
+      "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+      "input_evidence_ids": [],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 0,
+      "token_count_in": 0,
+      "token_count_out": 0,
+      "trace_id": "",
+      "span_id": "",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "",
+      "shard_index": 0,
+      "shard_count": 0,
+      "context_request_count": 0,
+      "context_refill_used": false
+    }
+  ],
+  "prompt_exports": {},
+  "context_budget": {
+    "enabled": true,
+    "strategy": "file_risk_shards_v1",
+    "context_profile": "risk_compact_manifest_v1",
+    "max_input_tokens": 9000,
+    "estimated_input_tokens": 952,
+    "selected_evidence_count": 2,
+    "omitted_evidence_count": 5,
+    "selected_evidence_ids": [
+      "diff_hunk:gpt_engineer/steps.py:1",
+      "diff_hunk:gpt_engineer/steps.py:42"
+    ],
+    "omitted_evidence_ids": [
+      "entity:gpt_engineer/steps.py:gpt_engineer.steps",
+      "diff:gpt_engineer/steps.py:1",
+      "diff:gpt_engineer/steps.py:2",
+      "diff:gpt_engineer/steps.py:50",
+      "diff:gpt_engineer/steps.py:51"
+    ],
+    "selected_risk_signal_count": 0,
+    "context_truncated": true,
+    "shard_count": 1,
+    "refill_count": 1,
+    "context_request_count": 2,
+    "context_requests": [
+      {
+        "request_type": "same_file_more_evidence",
+        "path": "gpt_engineer/steps.py",
+        "evidence_ids": [
+          "diff_hunk:gpt_engineer/steps.py:42"
+        ],
+        "risk_tag": null,
+        "symbol": null,
+        "reason": "",
+        "source_shard_id": "shard-001",
+        "fulfilled_evidence_ids": [
+          "diff_hunk:gpt_engineer/steps.py:42"
+        ]
+      },
+      {
+        "request_type": "same_file_more_evidence",
+        "path": null,
+        "evidence_ids": [],
+        "risk_tag": null,
+        "symbol": null,
+        "reason": "The diff hunk shows two new steps added to the TDD_PLUS pipeline, but the evidence is insufficient to determine if these steps introduce any concrete failure scenario. Requesting more evidence from the same file to understand the implementation of gen_entrypoint and execute_entrypoint.",
+        "source_shard_id": "shard-001-refill",
+        "fulfilled_evidence_ids": []
+      }
+    ],
+    "shards": [
+      {
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 1,
+        "omitted_evidence_count": 6,
+        "estimated_input_tokens": 556,
+        "context_truncated": true
+      },
+      {
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "is_refill": true,
+        "parent_shard_id": "shard-001",
+        "selected_evidence_count": 1,
+        "omitted_evidence_count": 0,
+        "estimated_input_tokens": 396,
+        "context_truncated": false
+      }
+    ],
+    "warnings": []
+  },
+  "loop": {
+    "enabled": true,
+    "max_iter": 1,
+    "iterations_completed": 1,
+    "converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "checkpoint_path": "D:\\learn\\code-review-agent\\workspace\\hf_codereview_live\\samples\\sample_013\\review\\loop_checkpoint.json",
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "iterations": [
+      {
+        "i": 0,
+        "candidate_issue_count": 0,
+        "verified_count": 0,
+        "needs_human_review_count": 0,
+        "discarded_count": 0,
+        "keep_count": 0,
+        "uncertain_count": 0,
+        "reject_count": 0,
+        "feedback_sent": [],
+        "agent_runs": [
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+            "input_evidence_ids": [
+              "diff_hunk:gpt_engineer/steps.py:1"
+            ],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 2205,
+            "token_count_in": 1349,
+            "token_count_out": 68,
+            "trace_id": "11c6e5976a514b7e96f5cced406f0bd2",
+            "span_id": "9fba388116284e6b",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001",
+            "shard_index": 0,
+            "shard_count": 1,
+            "context_request_count": 1,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+            "input_evidence_ids": [
+              "diff_hunk:gpt_engineer/steps.py:42"
+            ],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 2988,
+            "token_count_in": 1101,
+            "token_count_out": 93,
+            "trace_id": "4bfac90a02084c4fb624572936a5c503",
+            "span_id": "20db6dfce8fd4939",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001-refill",
+            "shard_index": 0,
+            "shard_count": 1,
+            "context_request_count": 1,
+            "context_refill_used": true
+          },
+          {
+            "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+            "model": null,
+            "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+            "input_evidence_ids": [],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 0,
+            "token_count_in": 0,
+            "token_count_out": 0,
+            "trace_id": "",
+            "span_id": "",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "",
+            "shard_index": 0,
+            "shard_count": 0,
+            "context_request_count": 0,
+            "context_refill_used": false
+          }
+        ],
+        "issue_set": [],
+        "keep": [],
+        "needs_human_review": [],
+        "discarded": []
+      }
+    ]
+  },
+  "tracing": {
+    "total_latency_ms": 5193,
+    "total_token_count_in": 2450,
+    "total_token_count_out": 161,
+    "total_retry_count": 0,
+    "run_count": 3,
+    "status_counts": {
+      "ok": 3
+    }
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "schema_version": "1.0",
+  "run_id": "263852095b0347c092820a10689f2f7d",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": false,
+  "package_hash": "sha256:1847ed17a272a048d69f34cb4c72846cb00f0964a928cb01cc8fc2e25aaaabb6",
+  "diff_hash": "sha256:f27a0b0b168de508349601d3394073e4ed7c3eaa36d75462d205d275ab5d635f",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 2,
+      "verified_count": 1,
+      "needs_human_review_count": 0,
+      "discarded_count": 1,
+      "keep_count": 0,
+      "uncertain_count": 1,
+      "reject_count": 0,
+      "feedback_sent": [
+        {
+          "issue_id": "correctness:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:113",
+          "category": "correctness",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:110"
+          ]
+        }
+      ],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff_hunk:NuGet.config:4",
+            "diff_hunk:eng/Version.Details.props:9",
+            "diff_hunk:eng/Version.Details.xml:8",
+            "diff_hunk:global.json:27"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 19280,
+          "token_count_in": 5454,
+          "token_count_out": 15,
+          "trace_id": "8f7bccb366474916a525b0856e50f009",
+          "span_id": "f96acc2442e74a0d",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 2,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:5"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 2054,
+          "token_count_in": 1830,
+          "token_count_out": 158,
+          "trace_id": "054eedcdb5d343db9b2f04818d7f4837",
+          "span_id": "4fb13af6483c4460",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-002",
+          "shard_index": 1,
+          "shard_count": 2,
+          "context_request_count": 1,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:110",
+            "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:28",
+            "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:284"
+          ],
+          "output_issue_ids": [
+            "correctness:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:113",
+            "correctness:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:287"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 48450,
+          "token_count_in": 1832,
+          "token_count_out": 340,
+          "trace_id": "6b3282213e244ade900872d74e78c9e4",
+          "span_id": "d27d3c0b600f4298",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-002-refill",
+          "shard_index": 1,
+          "shard_count": 2,
+          "context_request_count": 0,
+          "context_refill_used": true
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:110"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [
+        "correctness:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:113"
+      ],
+      "keep": [],
+      "needs_human_review": [
+        {
+          "file": "src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs",
+          "line": 113,
+          "severity": "high",
+          "category": "correctness",
+          "message": "Changed Browser.Navigate().Back() to Forward() in a test that verifies 'back' navigation behavior, which contradicts the test's intent and may cause the assertion to fail or pass incorrectly.",
+          "suggestion": "Revert to Browser.Navigate().Back() to correctly test the back navigation scenario, or update the test name and assertions to reflect forward navigation.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:110"
+          ]
+        }
+      ],
+      "discarded": [
+        {
+          "file": "src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs",
+          "line": 287,
+          "severity": "high",
+          "category": "correctness",
+          "message": "Changed AppContext switch 'DisableThrowNavigationException' from false to true, which may alter the test's ability to reproduce the unobserved task exception scenario it is designed to test.",
+          "suggestion": "Revert to false to preserve the original test behavior, or update the test logic to match the new switch value.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:284"
+          ],
+          "filter_reason": "low_signal_suggestion"
+        }
+      ]
+    }
+  ],
+  "last_feedback": {
+    "iteration": 0,
+    "uncertain_items": [
+      {
+        "issue_id": "correctness:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:113",
+        "category": "correctness",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:110"
+        ]
+      }
+    ]
+  }
+}

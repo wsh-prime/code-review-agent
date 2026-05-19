@@ -1,0 +1,213 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:76c7c7881c24f33628cf6d1d3fe3de415b6a5c6d30878b0296100beef47e2f6d",
+  "diff_hash": "sha256:fb38e9647a0e846438d1314c48b3a0bdc42c28d23ed16cb509e7654d263c283a",
+  "shards": {
+    "8003f5ef9155db63a2d5b2b1bbe8aa066d981a1cc198457b4ed2bd24461ddc16": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:10",
+        "diff_hunk:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:31",
+        "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+        "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts",
+          "evidence_ids": [
+            "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The diff hunk shows new module-level variables but not how they are used. Need to see the full enableJSRootComponents function to verify correct initialization and state handling.",
+          "source_shard_id": "shard-001",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [
+        {
+          "file": "src/Components/test/E2ETest/Tests/StatePersistenceTest.cs",
+          "line": 279,
+          "severity": "medium",
+          "category": "style",
+          "message": "Test method 'PersistentStateIsSupportedInDynamicJSRoots' lacks explicit '// Arrange', '// Act', and '// Assert' comments, violating the Arrange-Act-Assert pattern requirement.",
+          "suggestion": "Add '// Arrange', '// Act', and '// Assert' comments to delineate the test phases.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276"
+          ]
+        },
+        {
+          "file": "src/Components/test/E2ETest/Tests/StatePersistenceTest.cs",
+          "line": 279,
+          "severity": "medium",
+          "category": "style",
+          "message": "Test method 'PersistentStateIsSupportedInDynamicJSRoots' is missing XML documentation comments, violating the public API documentation requirement.",
+          "suggestion": "Add a <summary> XML documentation comment to the test method.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:10",
+          "diff_hunk:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:31",
+          "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+          "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276"
+        ],
+        "output_issue_ids": [
+          "style:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:279",
+          "style:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:279"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 51166,
+        "token_count_in": 6804,
+        "token_count_out": 417,
+        "trace_id": "2ba8a4a0d2aa4dd98c1a021a019139d2",
+        "span_id": "5de606ded2084902",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 2,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "ff73e31d9bc4113ff83db4b6745b30f25d5a7375c599fc6c71342a13295bb0cf": {
+      "status": "completed",
+      "shard_id": "shard-001-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-001",
+      "selected_evidence_ids": [
+        "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts",
+          "line": 143,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Missing curly braces around for loop body may lead to maintenance bugs.",
+          "suggestion": "Add curly braces around the inner for loop body to prevent future errors when adding statements.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118"
+        ],
+        "output_issue_ids": [
+          "correctness:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:143"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 1370,
+        "token_count_in": 3812,
+        "token_count_out": 141,
+        "trace_id": "0df294d1b55f48a1b9ef8ad8f17ecf72",
+        "span_id": "f8d0e02a385d44cc",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "shard_count": 2,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    },
+    "157f4a10763829a73b02e81e4b7069b514dcefc62fc234d0854b4b87822457cb": {
+      "status": "completed",
+      "shard_id": "shard-002",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24",
+        "diff_hunk:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs",
+          "line": 54,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Removed conditional guard around RootComponents registration; the dynamic JS root component is now always registered regardless of configuration, which may break scenarios that relied on the 'RegisterDynamicJSRootComponent' flag to control registration.",
+          "suggestion": "If the conditional registration was intentionally removed, ensure all callers are updated. Otherwise, restore the conditional check or add a new configuration mechanism.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51"
+          ]
+        },
+        {
+          "file": "src/Components/test/testassets/Components.TestServer/Program.cs",
+          "line": 27,
+          "severity": "low",
+          "category": "maintainability",
+          "message": "Removed the test scenario entry for 'Razor Component Endpoints with JS Root Component' without adding a replacement. This reduces test coverage for the dynamic JS root component registration path.",
+          "suggestion": "If the scenario is no longer needed, confirm that the removed test case is covered elsewhere. Otherwise, restore the entry or add a new test scenario.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24",
+          "diff_hunk:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51"
+        ],
+        "output_issue_ids": [
+          "correctness:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:54",
+          "maintainability:src/Components/test/testassets/Components.TestServer/Program.cs:27"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 3757,
+        "token_count_in": 4376,
+        "token_count_out": 353,
+        "trace_id": "c8036684f4e94591926f28a03b557281",
+        "span_id": "50433e626c9a4e43",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "shard_count": 2,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

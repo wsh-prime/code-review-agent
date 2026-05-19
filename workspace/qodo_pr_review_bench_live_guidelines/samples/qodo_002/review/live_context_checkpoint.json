@@ -1,0 +1,150 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:360a608ac36f151115600676e3bfee5defe8890da085bf302c5f55d5470efb4b",
+  "diff_hash": "sha256:70b2c723ed704c0fdb04d312355389dc3a802c6fafa858ffcdc33726778e0e12",
+  "shards": {
+    "ac720564292e83e287d2232073a7630fd4b1dec150bc8dc0ff7553a3cb6d6383": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:3",
+        "diff_hunk:ghost/core/test/integration/services/email-service/domain-warming.test.js:50",
+        "diff_hunk:ghost/core/test/unit/server/services/email-service/domain-warming-service.test.ts:8"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/core/server/services/email-service/DomainWarmingService.ts",
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:20",
+            "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:98",
+            "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:121"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-001",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [
+        {
+          "file": "ghost/core/core/server/services/email-service/DomainWarmingService.ts",
+          "line": 3,
+          "severity": "high",
+          "category": "api_breaking_change",
+          "message": "The EmailModel type changed from `findOne` to `findPage`, altering the return type from a single record to a paginated result set. This breaks all existing callers that depend on the old interface.",
+          "suggestion": "Ensure all callers of EmailModel are updated to handle the new paginated response (e.g., accessing `result.data` instead of a single record).",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:3"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:3",
+          "diff_hunk:ghost/core/test/integration/services/email-service/domain-warming.test.js:50",
+          "diff_hunk:ghost/core/test/unit/server/services/email-service/domain-warming-service.test.ts:8"
+        ],
+        "output_issue_ids": [
+          "api_breaking_change:ghost/core/core/server/services/email-service/DomainWarmingService.ts:3"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 40502,
+        "token_count_in": 6165,
+        "token_count_out": 301,
+        "trace_id": "830df0171d6840979c58e89800e7fa26",
+        "span_id": "b1f11ef57583491c",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "6e41302165eaa643c59d792255975e3e95d552347ba25b743f9e61cddff022be": {
+      "status": "completed",
+      "shard_id": "shard-001-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-001",
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:121",
+        "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:20",
+        "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:98"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "ghost/core/core/server/services/email-service/DomainWarmingService.ts",
+          "line": 121,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "The new high-volume cap logic uses `lastCount >= WARMUP_SCALING_TABLE.highVolume.threshold` (>= 400k) but the thresholds loop uses `lastCount < threshold.limit` (strict less than). This creates a gap: when `lastCount` is exactly 400,000, the high-volume block returns a value, but the thresholds array also has a limit of 400,000 with scale 2. The thresholds loop will never match 400,000 because of the strict `<`, so the high-volume block is the only handler. However, the comment says 'thresholds cover all cases up to highVolume.threshold', but the thresholds array includes 400,000 as a limit, which is now unreachable. This is confusing and could lead to unexpected scaling if the high-volume block is ever removed or modified.",
+          "suggestion": "Either remove the 400,000 entry from the thresholds array (since it is now handled by the high-volume block) or change the high-volume condition to `lastCount > WARMUP_SCALING_TABLE.highVolume.threshold` to avoid overlap and make the intent clear.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:121",
+            "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:20"
+          ]
+        },
+        {
+          "file": "ghost/core/core/server/services/email-service/DomainWarmingService.ts",
+          "line": 98,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "The `#getHighestCount` method now uses `findPage` with `created_at:<=` (including today) instead of the previous `created_at:<` (excluding today). This changes the semantics: the method is documented to return 'the highest number of messages sent from the CSD in a single email (excluding today)', but the new filter includes today's emails. This could cause the domain warming service to consider today's partially sent email count when calculating the next batch, potentially leading to incorrect scaling decisions.",
+          "suggestion": "Revert the filter to `created_at:<` to exclude today's emails, or update the documentation to reflect the new behavior if including today is intentional.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:98"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:121",
+          "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:20",
+          "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:98"
+        ],
+        "output_issue_ids": [
+          "correctness:ghost/core/core/server/services/email-service/DomainWarmingService.ts:121",
+          "correctness:ghost/core/core/server/services/email-service/DomainWarmingService.ts:98"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 8926,
+        "token_count_in": 4508,
+        "token_count_out": 607,
+        "trace_id": "696b9ad3f36b4c0ab4ef3cc1cc93922d",
+        "span_id": "899de2112f9c4449",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    }
+  }
+}

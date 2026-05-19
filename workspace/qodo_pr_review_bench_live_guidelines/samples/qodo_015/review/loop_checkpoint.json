@@ -1,0 +1,192 @@
+{
+  "schema_version": "1.0",
+  "run_id": "c5e0a6fe9003474bb23e79d0e021013b",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": false,
+  "package_hash": "sha256:1d76e16ad7df89d093350590ee667375b80c448506b25405a2cb8bcaadb7f99b",
+  "diff_hash": "sha256:c7c6b261a00ece640c507cfd51d8f3ade67911ac4cfcf27356652bb4ae086e5c",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 3,
+      "verified_count": 3,
+      "needs_human_review_count": 0,
+      "discarded_count": 0,
+      "keep_count": 0,
+      "uncertain_count": 3,
+      "reject_count": 0,
+      "feedback_sent": [
+        {
+          "issue_id": "style:src/Shared/CertificateGeneration/CertificateManager.cs:969",
+          "category": "style",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:966"
+          ]
+        },
+        {
+          "issue_id": "style:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358",
+          "category": "style",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355"
+          ]
+        },
+        {
+          "issue_id": "style:src/Tools/dotnet-dev-certs/src/Program.cs:127",
+          "category": "style",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124"
+          ]
+        }
+      ],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:966",
+            "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355",
+            "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124"
+          ],
+          "output_issue_ids": [
+            "style:src/Shared/CertificateGeneration/CertificateManager.cs:969",
+            "style:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358",
+            "style:src/Tools/dotnet-dev-certs/src/Program.cs:127"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 27015,
+          "token_count_in": 6215,
+          "token_count_out": 517,
+          "trace_id": "931c9f9e8ab844b98e45624901aff07d",
+          "span_id": "a755f5dbe15541bb",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 1,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [
+            "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:966",
+            "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355",
+            "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [
+        "style:src/Shared/CertificateGeneration/CertificateManager.cs:969",
+        "style:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358",
+        "style:src/Tools/dotnet-dev-certs/src/Program.cs:127"
+      ],
+      "keep": [],
+      "needs_human_review": [
+        {
+          "file": "src/Shared/CertificateGeneration/CertificateManager.cs",
+          "line": 969,
+          "severity": "minor",
+          "category": "style",
+          "message": "Review guideline violation: 'All C# Source Files Must Include MIT License Header' - The file is missing the required MIT license header at the top.",
+          "suggestion": "Add the standard .NET Foundation MIT license header at the beginning of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:966"
+          ]
+        },
+        {
+          "file": "src/Shared/CertificateGeneration/UnixCertificateManager.cs",
+          "line": 358,
+          "severity": "minor",
+          "category": "style",
+          "message": "Review guideline violation: 'All C# Source Files Must Include MIT License Header' - The file is missing the required MIT license header at the top.",
+          "suggestion": "Add the standard .NET Foundation MIT license header at the beginning of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355"
+          ]
+        },
+        {
+          "file": "src/Tools/dotnet-dev-certs/src/Program.cs",
+          "line": 127,
+          "severity": "minor",
+          "category": "style",
+          "message": "Review guideline violation: 'All C# Source Files Must Include MIT License Header' - The file is missing the required MIT license header at the top.",
+          "suggestion": "Add the standard .NET Foundation MIT license header at the beginning of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124"
+          ]
+        }
+      ],
+      "discarded": []
+    }
+  ],
+  "last_feedback": {
+    "iteration": 0,
+    "uncertain_items": [
+      {
+        "issue_id": "style:src/Shared/CertificateGeneration/CertificateManager.cs:969",
+        "category": "style",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:966"
+        ]
+      },
+      {
+        "issue_id": "style:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358",
+        "category": "style",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355"
+        ]
+      },
+      {
+        "issue_id": "style:src/Tools/dotnet-dev-certs/src/Program.cs:127",
+        "category": "style",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124"
+        ]
+      }
+    ]
+  }
+}

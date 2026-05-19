@@ -1,0 +1,90 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:e608ca04897cb25e0024b25e1a7f3b4d6b3afdf0be4cdc9e8c4cdca407c78d98",
+  "diff_hash": "sha256:c01da051757911780fe41fa48ea2af7b86fa18bcd8b4724f3539e569ec416623",
+  "shards": {
+    "94847b1c176ad20b1d51157dfc9bf0de098c0322984a58ed8da358a85708090d": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:718",
+        "diff_hunk:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1",
+        "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:1"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "src/Components/Endpoints/test/TestComponents/GenericComponent.razor",
+          "line": 1,
+          "severity": "error",
+          "category": "style",
+          "message": "ReviewGuideline violation: 'Use Curly Braces for All Control Flow Statements' - The Razor file uses an inline expression `@(Value?.ToString() ?? \"(null)\")` which is not a control flow statement, but the file does not contain any control flow statements. No violation.",
+          "suggestion": "",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1"
+          ]
+        },
+        {
+          "file": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs",
+          "line": 1,
+          "severity": "error",
+          "category": "style",
+          "message": "ReviewGuideline violation: 'Use File-Scoped Namespace Declarations' - The file changed from file-scoped namespace (`namespace Microsoft.AspNetCore.Components.Server.Circuits;`) to block-scoped namespace (`namespace Microsoft.AspNetCore.Components.Server.Circuits { ... }`), violating the guideline that requires file-scoped namespace declarations.",
+          "suggestion": "Revert to file-scoped namespace: `namespace Microsoft.AspNetCore.Components.Server.Circuits;` and remove the opening/closing braces.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:1"
+          ]
+        },
+        {
+          "file": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs",
+          "line": 1,
+          "severity": "error",
+          "category": "style",
+          "message": "ReviewGuideline violation: 'Opening Braces Must Be on New Line (Allman Style)' - The class declaration `public class ServerComponentDeserializerTest` has its opening brace on the same line as the declaration, violating the Allman brace style requirement.",
+          "suggestion": "Move the opening brace to a new line after the class declaration.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:1"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:718",
+          "diff_hunk:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1",
+          "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:1"
+        ],
+        "output_issue_ids": [
+          "style:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1",
+          "style:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:1",
+          "style:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:1"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 10421,
+        "token_count_in": 6451,
+        "token_count_out": 535,
+        "trace_id": "a2b225bda81245dca08edfc232f77f8e",
+        "span_id": "6175f523c91243cc",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

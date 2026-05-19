@@ -1,0 +1,220 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:c5210858eb0b01134bea9569cb2d31932ca8f96c156a9c0fedba8b986fc39292",
+  "diff_hash": "sha256:fb38e9647a0e846438d1314c48b3a0bdc42c28d23ed16cb509e7654d263c283a",
+  "shards": {
+    "8003f5ef9155db63a2d5b2b1bbe8aa066d981a1cc198457b4ed2bd24461ddc16": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:10",
+        "diff_hunk:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:31",
+        "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+        "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts",
+          "evidence_ids": [
+            "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "To verify usage of 'currentRendererId' and 'hasInitializedJsComponents' and understand the full changes in the second hunk.",
+          "source_shard_id": "shard-001",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts",
+          "evidence_ids": [
+            "diff:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:34"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "To see the full context of the 'enableJSRootComponents' call signature change.",
+          "source_shard_id": "shard-001",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [
+        {
+          "file": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs",
+          "line": 1,
+          "severity": "high",
+          "category": "correctness",
+          "message": "Test class 'StatePersistanceJSRootTest' is deleted but its test logic is moved to 'StatePersistenceTest' without verifying that the new test method covers the same scenarios. The deleted test used a server fixture with '--RegisterDynamicJSRootComponent' argument, which is not present in the new test.",
+          "suggestion": "Ensure the new test method 'PersistentStateIsSupportedInDynamicJSRoots' in 'StatePersistenceTest.cs' includes the necessary server fixture configuration (e.g., '--RegisterDynamicJSRootComponent') to replicate the original test's setup.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+            "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276"
+          ]
+        },
+        {
+          "file": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts",
+          "line": 13,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "New module-level variable 'currentRendererId' is introduced but not used in the provided diff hunk. It may be unused or require additional initialization logic.",
+          "suggestion": "Verify that 'currentRendererId' is used elsewhere in the file or remove it if unnecessary.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:10"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:10",
+          "diff_hunk:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:31",
+          "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+          "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276"
+        ],
+        "output_issue_ids": [
+          "correctness:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+          "correctness:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:13"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 34245,
+        "token_count_in": 6473,
+        "token_count_out": 612,
+        "trace_id": "92c936f028604d68840eb520375065e2",
+        "span_id": "640054408aa64dd1",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 2,
+        "context_request_count": 2,
+        "context_refill_used": false
+      }
+    },
+    "872748c5a7c38156c377dc1bfeb32ee1b48a970693549cbf02ad9442c616df9e": {
+      "status": "completed",
+      "shard_id": "shard-001-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-001",
+      "selected_evidence_ids": [
+        "diff:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:34",
+        "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118",
+        "diff_hunk:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:31"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts",
+          "line": 118,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Missing curly braces around for-loop body may cause maintenance errors.",
+          "suggestion": "Add curly braces around the inner for-loop body to prevent future bugs when adding statements.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:34",
+          "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118",
+          "diff_hunk:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:31"
+        ],
+        "output_issue_ids": [
+          "correctness:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 89602,
+        "token_count_in": 3967,
+        "token_count_out": 140,
+        "trace_id": "fbe386590f844e47932d9cdd3a241140",
+        "span_id": "ca60e28cfbdf4445",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "shard_count": 2,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    },
+    "157f4a10763829a73b02e81e4b7069b514dcefc62fc234d0854b4b87822457cb": {
+      "status": "completed",
+      "shard_id": "shard-002",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24",
+        "diff_hunk:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs",
+          "line": 57,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Removing the conditional guard around RootComponents.RegisterForJavaScript changes behavior: the component is now always registered, even when the 'RegisterDynamicJSRootComponent' configuration flag is false. This may cause unintended registration in test scenarios that rely on the flag to control behavior.",
+          "suggestion": "Restore the conditional check or ensure the test scenarios that depend on the flag are updated to expect the unconditional registration.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51",
+            "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24",
+          "diff_hunk:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51"
+        ],
+        "output_issue_ids": [
+          "correctness:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:57"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 6518,
+        "token_count_in": 3886,
+        "token_count_out": 220,
+        "trace_id": "e8fa2e4d895b499e98543e9fafb05111",
+        "span_id": "b2f1576a03fa49cc",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "shard_count": 2,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

@@ -1,0 +1,204 @@
+{
+  "schema_version": "1.0",
+  "run_id": "0288847e76fb40f59534b53e2e3b346a",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": false,
+  "package_hash": "sha256:87870c252aba6614c4a4bfcb195ce77a0d47b7ad9c698269a8af3652b9ed6ea6",
+  "diff_hash": "sha256:4d6d3eca20b8c3086a5b6ec325b9abded9f7059720b3d6ab34d06b03f8402d07",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 4,
+      "verified_count": 2,
+      "needs_human_review_count": 0,
+      "discarded_count": 2,
+      "keep_count": 1,
+      "uncertain_count": 1,
+      "reject_count": 0,
+      "feedback_sent": [
+        {
+          "issue_id": "correctness:apps/activitypub/tsconfig.json:18",
+          "category": "correctness",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/activitypub/tsconfig.json:15"
+          ]
+        }
+      ],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:apps/activitypub/package.json:1",
+            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1607",
+            "diff_hunk:apps/activitypub/src/api/activitypub.ts:26",
+            "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2722"
+          ],
+          "output_issue_ids": [
+            "correctness:apps/activitypub/src/api/activitypub.test.ts:1610",
+            "correctness:apps/activitypub/src/api/activitypub.ts:29",
+            "correctness:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2725"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 20415,
+          "token_count_in": 5920,
+          "token_count_out": 477,
+          "trace_id": "994b7375021d4f0f9c4ae26ac9f84306",
+          "span_id": "db63c395038c4a42",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 2,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:apps/activitypub/src/views/Preferences/components/BlueskySharing.tsx:1",
+            "diff_hunk:apps/activitypub/src/views/Preferences/components/BlueskySharing.tsx:65",
+            "diff_hunk:apps/activitypub/tsconfig.json:15"
+          ],
+          "output_issue_ids": [
+            "correctness:apps/activitypub/tsconfig.json:18"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 3556,
+          "token_count_in": 5343,
+          "token_count_out": 140,
+          "trace_id": "cb418cc9011c49109141ee27af8b54df",
+          "span_id": "fa1ab1b3fa274e1c",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-002",
+          "shard_index": 1,
+          "shard_count": 2,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [
+            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1607",
+            "diff_hunk:apps/activitypub/tsconfig.json:15"
+          ],
+          "output_issue_ids": [
+            "correctness:apps/activitypub/src/api/activitypub.test.ts:1610"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [
+        "correctness:apps/activitypub/src/api/activitypub.test.ts:1610",
+        "correctness:apps/activitypub/tsconfig.json:18"
+      ],
+      "keep": [
+        {
+          "file": "apps/activitypub/src/api/activitypub.test.ts",
+          "line": 1610,
+          "severity": "high",
+          "category": "correctness",
+          "message": "The test mock for the bluesky enable endpoint now returns null response and no longer validates the handle in the response, which may mask regressions in the API response contract.",
+          "suggestion": "Add a response body that matches the expected API response shape, e.g., { handle: '@foo@bar.baz' } or the new shape if changed.",
+          "confidence": 0.85,
+          "evidence_ids": [
+            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1607"
+          ]
+        }
+      ],
+      "needs_human_review": [
+        {
+          "file": "apps/activitypub/tsconfig.json",
+          "line": 18,
+          "severity": "error",
+          "category": "correctness",
+          "message": "TypeScript Files Must Enable Strict Type Checking: 'strict' is set to false, which disables strict type checking and can allow potential runtime errors.",
+          "suggestion": "Set 'strict' back to true to enable full type checking.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/activitypub/tsconfig.json:15"
+          ]
+        }
+      ],
+      "discarded": [
+        {
+          "file": "apps/activitypub/src/api/activitypub.ts",
+          "line": 29,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "The blueskyHandle field type changed from string | undefined to string | null, which may cause existing consumers that check for undefined to break.",
+          "suggestion": "Update all consumers of blueskyHandle to handle null instead of undefined, or keep the old signature and add a new field.",
+          "confidence": 0.8,
+          "evidence_ids": [
+            "diff_hunk:apps/activitypub/src/api/activitypub.ts:26"
+          ],
+          "filter_reason": "low_signal_suggestion"
+        },
+        {
+          "file": "apps/activitypub/src/hooks/use-activity-pub-queries.ts",
+          "line": 2725,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "The updateAccountBlueskyCache function now spreads the entire blueskyDetails object, which may overwrite existing profile fields unexpectedly if blueskyDetails contains extra properties.",
+          "suggestion": "Explicitly destructure only the intended fields (blueskyEnabled, blueskyHandleConfirmed, blueskyHandle) instead of spreading the whole object.",
+          "confidence": 0.75,
+          "evidence_ids": [
+            "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2722"
+          ],
+          "filter_reason": "low_signal_suggestion"
+        }
+      ]
+    }
+  ],
+  "last_feedback": {
+    "iteration": 0,
+    "uncertain_items": [
+      {
+        "issue_id": "correctness:apps/activitypub/tsconfig.json:18",
+        "category": "correctness",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:apps/activitypub/tsconfig.json:15"
+        ]
+      }
+    ]
+  }
+}

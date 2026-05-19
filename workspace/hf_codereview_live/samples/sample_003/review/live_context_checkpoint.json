@@ -1,0 +1,115 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:bd364b4de17fe43e2c4de3bf39803631d9daab4cb41a97610573ac00c18eed69",
+  "diff_hash": "sha256:f584e2d3e48850b50e7e4af81de1f94109705c77d35fa66599867acd7c88ea39",
+  "shards": {
+    "c32df284bc9de34cd59771a4716d6f05eccc6c5fc9ab3d3e87bce594468649d9": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:gpt_engineer/main.py:1"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "gpt_engineer/main.py",
+          "evidence_ids": [
+            "diff:gpt_engineer/main.py:1",
+            "diff:gpt_engineer/main.py:2",
+            "entity:gpt_engineer/main.py:gpt_engineer.main"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The diff hunk shows removal of two lines (input_path and memory_path) but the remaining context is insufficient to determine if this removal introduces a concrete failure scenario (e.g., missing variable used later, broken DBs initialization).",
+          "source_shard_id": "shard-001",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:gpt_engineer/main.py:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 10619,
+        "token_count_in": 1237,
+        "token_count_out": 147,
+        "trace_id": "65a57aea8bc24b71aa0f27a7f1227ab2",
+        "span_id": "b2c0d3de62f449ea",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "21bf4db2f328998e6f1abfc1bcc9f57922f970532b439cbe217c3c0c9ba81715": {
+      "status": "completed",
+      "shard_id": "shard-001-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-001",
+      "selected_evidence_ids": [
+        "diff:gpt_engineer/main.py:1",
+        "diff:gpt_engineer/main.py:2",
+        "diff_hunk:gpt_engineer/main.py:1",
+        "entity:gpt_engineer/main.py:gpt_engineer.main"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": null,
+          "evidence_ids": [],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The diff hunk shows removal of input_path and memory_path assignments, but the surrounding context is truncated. Need to see the full function to understand if these variables are still used elsewhere or if the removal is safe.",
+          "source_shard_id": "shard-001-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:gpt_engineer/main.py:1",
+          "diff:gpt_engineer/main.py:2",
+          "diff_hunk:gpt_engineer/main.py:1",
+          "entity:gpt_engineer/main.py:gpt_engineer.main"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 727,
+        "token_count_in": 1326,
+        "token_count_out": 81,
+        "trace_id": "9d9587fa0f5e43788845525dc4b0007a",
+        "span_id": "c32c3ef7e1ee4d17",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 1,
+        "context_refill_used": true
+      }
+    }
+  }
+}

@@ -1,0 +1,199 @@
+{
+  "schema_version": "1.0",
+  "run_id": "e48befb175dd489f8f6fe611e9edb37b",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": true,
+  "package_hash": "sha256:6434b7c62a1b77cd76e57292065f06ba9b97769cacd143853c91244b61dc26ec",
+  "diff_hash": "sha256:085d9c709ea02d89f19cbf99baad3855f454e465533cccb52f801c120a542a58",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 3,
+      "verified_count": 0,
+      "needs_human_review_count": 0,
+      "discarded_count": 3,
+      "keep_count": 0,
+      "uncertain_count": 0,
+      "reject_count": 0,
+      "feedback_sent": [],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:4",
+            "diff_hunk:packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts:392",
+            "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:112",
+            "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:21"
+          ],
+          "output_issue_ids": [
+            "naming_convention:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:7",
+            "naming_convention:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:7"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 1,
+          "retry_log": [
+            "attempt=1 error=timeout delay=1.00s"
+          ],
+          "latency_ms": 64119,
+          "token_count_in": 5893,
+          "token_count_out": 470,
+          "trace_id": "2c201da008784a34bc522391f63c88b8",
+          "span_id": "9d987acd84b046b7",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 2,
+          "context_request_count": 1,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:10",
+            "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:11",
+            "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:12",
+            "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:13",
+            "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:14",
+            "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:15",
+            "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:57",
+            "entity:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:packages.features.calendar-subscription.adapters.AdaptersFactory"
+          ],
+          "output_issue_ids": [
+            "maintainability:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:12"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 14747,
+          "token_count_in": 3369,
+          "token_count_out": 294,
+          "trace_id": "cfd1079cf5924d2b9c93d95b95c81216",
+          "span_id": "535396b47ac54f4a",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001-refill",
+          "shard_index": 0,
+          "shard_count": 2,
+          "context_request_count": 0,
+          "context_refill_used": true
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:131",
+            "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:2"
+          ],
+          "output_issue_ids": [
+            "naming_convention:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:5"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 1926,
+          "token_count_in": 4231,
+          "token_count_out": 219,
+          "trace_id": "81767a486b134fc69ab52a46fd61317f",
+          "span_id": "6cb3b85a1cb740e1",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-002",
+          "shard_index": 1,
+          "shard_count": 2,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [],
+      "keep": [],
+      "needs_human_review": [],
+      "discarded": [
+        {
+          "file": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts",
+          "line": 7,
+          "severity": "medium",
+          "category": "naming_convention",
+          "message": "File AdaptersFactory.ts does not follow the required naming convention for service or repository classes. The review guidelines require service files to be named '<Entity>Service.ts' with matching class names. This file exports a type 'AdapterFactory' and a constant 'GENERIC_CALENDAR_SUFFIXES', but the filename and class name do not match the expected pattern.",
+          "suggestion": "Rename the file to match the exported class/interface name, e.g., 'AdapterFactory.ts', or restructure to follow the '<Entity>Service.ts' pattern if this is a service.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:4"
+          ],
+          "filter_reason": "style_preference"
+        },
+        {
+          "file": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts",
+          "line": 12,
+          "severity": "minor",
+          "category": "maintainability",
+          "message": "The exported constant GENERIC_CALENDAR_SUFFIXES is defined in a file named AdaptersFactory.ts, which does not follow the naming conventions for repository or service classes as per review guidelines. The file exports a constant and a class, but the file name does not match a PascalCase class name for a repository or service.",
+          "suggestion": "Consider moving the constant to a separate file with a descriptive name (e.g., genericCalendarSuffixes.ts) or rename the file to match the class name if it is intended to be a service.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:12",
+            "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:13",
+            "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:14",
+            "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:15"
+          ],
+          "filter_reason": "style_preference"
+        },
+        {
+          "file": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts",
+          "line": 5,
+          "severity": "high",
+          "category": "naming_convention",
+          "message": "Class name 'PrismaSelectedCalendarRepository' does not follow the required 'Prisma<Entity>Repository' pattern; the entity name should match the filename's entity (SelectedCalendar) but the class name includes 'PrismaSelectedCalendarRepository' which is acceptable per the guideline, however the filename 'SelectedCalendarRepository.ts' does not match the class name exactly as required by the naming convention rule.",
+          "suggestion": "Rename the file to 'PrismaSelectedCalendarRepository.ts' to match the exported class name exactly, or rename the class to 'SelectedCalendarRepository' if the file name is kept, but the guideline requires 'Prisma<Entity>Repository' pattern with matching filenames.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:2"
+          ],
+          "filter_reason": "style_preference"
+        }
+      ]
+    }
+  ],
+  "last_feedback": null
+}

@@ -1,0 +1,236 @@
+{
+  "schema_version": "1.0",
+  "run_id": "12c22fd6371d4112bfb7973efddfbd3b",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": false,
+  "package_hash": "sha256:c5210858eb0b01134bea9569cb2d31932ca8f96c156a9c0fedba8b986fc39292",
+  "diff_hash": "sha256:fb38e9647a0e846438d1314c48b3a0bdc42c28d23ed16cb509e7654d263c283a",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 4,
+      "verified_count": 1,
+      "needs_human_review_count": 0,
+      "discarded_count": 3,
+      "keep_count": 0,
+      "uncertain_count": 1,
+      "reject_count": 0,
+      "feedback_sent": [
+        {
+          "issue_id": "correctness:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+          "category": "correctness",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+            "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276"
+          ]
+        }
+      ],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:10",
+            "diff_hunk:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:31",
+            "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+            "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276"
+          ],
+          "output_issue_ids": [
+            "correctness:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+            "correctness:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:13"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 34245,
+          "token_count_in": 6473,
+          "token_count_out": 612,
+          "trace_id": "92c936f028604d68840eb520375065e2",
+          "span_id": "640054408aa64dd1",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 2,
+          "context_request_count": 2,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:34",
+            "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118",
+            "diff_hunk:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:31"
+          ],
+          "output_issue_ids": [
+            "correctness:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 1,
+          "retry_log": [
+            "attempt=1 error=timeout delay=1.00s"
+          ],
+          "latency_ms": 89602,
+          "token_count_in": 3967,
+          "token_count_out": 140,
+          "trace_id": "fbe386590f844e47932d9cdd3a241140",
+          "span_id": "ca60e28cfbdf4445",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001-refill",
+          "shard_index": 0,
+          "shard_count": 2,
+          "context_request_count": 0,
+          "context_refill_used": true
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24",
+            "diff_hunk:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51"
+          ],
+          "output_issue_ids": [
+            "correctness:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:57"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 6518,
+          "token_count_in": 3886,
+          "token_count_out": 220,
+          "trace_id": "e8fa2e4d895b499e98543e9fafb05111",
+          "span_id": "b2f1576a03fa49cc",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-002",
+          "shard_index": 1,
+          "shard_count": 2,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+            "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [
+        "correctness:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1"
+      ],
+      "keep": [],
+      "needs_human_review": [
+        {
+          "file": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs",
+          "line": 1,
+          "severity": "high",
+          "category": "correctness",
+          "message": "Test class 'StatePersistanceJSRootTest' is deleted but its test logic is moved to 'StatePersistenceTest' without verifying that the new test method covers the same scenarios. The deleted test used a server fixture with '--RegisterDynamicJSRootComponent' argument, which is not present in the new test.",
+          "suggestion": "Ensure the new test method 'PersistentStateIsSupportedInDynamicJSRoots' in 'StatePersistenceTest.cs' includes the necessary server fixture configuration (e.g., '--RegisterDynamicJSRootComponent') to replicate the original test's setup.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+            "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276"
+          ]
+        }
+      ],
+      "discarded": [
+        {
+          "file": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts",
+          "line": 13,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "New module-level variable 'currentRendererId' is introduced but not used in the provided diff hunk. It may be unused or require additional initialization logic.",
+          "suggestion": "Verify that 'currentRendererId' is used elsewhere in the file or remove it if unnecessary.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:10"
+          ],
+          "filter_reason": "low_signal_suggestion"
+        },
+        {
+          "file": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts",
+          "line": 118,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Missing curly braces around for-loop body may cause maintenance errors.",
+          "suggestion": "Add curly braces around the inner for-loop body to prevent future bugs when adding statements.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118"
+          ],
+          "filter_reason": "low_signal_suggestion"
+        },
+        {
+          "file": "src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs",
+          "line": 57,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Removing the conditional guard around RootComponents.RegisterForJavaScript changes behavior: the component is now always registered, even when the 'RegisterDynamicJSRootComponent' configuration flag is false. This may cause unintended registration in test scenarios that rely on the flag to control behavior.",
+          "suggestion": "Restore the conditional check or ensure the test scenarios that depend on the flag are updated to expect the unconditional registration.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51",
+            "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24"
+          ],
+          "filter_reason": "low_signal_suggestion"
+        }
+      ]
+    }
+  ],
+  "last_feedback": {
+    "iteration": 0,
+    "uncertain_items": [
+      {
+        "issue_id": "correctness:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+        "category": "correctness",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+          "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276"
+        ]
+      }
+    ]
+  }
+}

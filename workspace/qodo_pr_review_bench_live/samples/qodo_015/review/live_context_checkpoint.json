@@ -1,0 +1,77 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:48a861036dcb0fd2888b439149f6bdb344e8e2fdd69c86fc7aa9b38fa07d82c9",
+  "diff_hash": "sha256:c7c6b261a00ece640c507cfd51d8f3ade67911ac4cfcf27356652bb4ae086e5c",
+  "shards": {
+    "25b946ea8b3c50b8bf53a78b7b1ce8b87d1e25e5e7b85baf961e26ca8f18ef4f": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:966",
+        "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355",
+        "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "src/Tools/dotnet-dev-certs/src/Program.cs",
+          "line": 134,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "ReporterEventListener is created unconditionally but only enabled for Verbose or LogAlways. When verbose is false, listener is enabled with LogAlways, which may cause unexpected event output to the reporter even without --verbose.",
+          "suggestion": "Move the listener creation inside the if-else blocks or guard the LogAlways enablement with a condition that matches the intended behavior (e.g., only enable when verbose or when some other flag is set).",
+          "confidence": 0.8,
+          "evidence_ids": [
+            "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124"
+          ]
+        },
+        {
+          "file": "src/Shared/CertificateGeneration/CertificateManager.cs",
+          "line": 969,
+          "severity": "low",
+          "category": "maintainability",
+          "message": "Removed the XML doc comment that explained the event source behavior (events not displayed without --verbose). This removes important context for future maintainers.",
+          "suggestion": "Consider keeping the remark or updating it to reflect the new behavior where events may be logged at LogAlways level.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:966"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:966",
+          "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355",
+          "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124"
+        ],
+        "output_issue_ids": [
+          "correctness:src/Tools/dotnet-dev-certs/src/Program.cs:134",
+          "maintainability:src/Shared/CertificateGeneration/CertificateManager.cs:969"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 43562,
+        "token_count_in": 4186,
+        "token_count_out": 336,
+        "trace_id": "1f6df9ff59eb42afad913b67a17c82d1",
+        "span_id": "ae1d1e2b7641457a",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

@@ -1,0 +1,253 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:32cc258e4bbfa86f2303607860aace7c2f648a964b2fd4eb2617136445ba6a7a",
+  "diff_hash": "sha256:e6475f12836478a4fa297a518584547445dc650a534ddc17a426117ce0898644",
+  "shards": {
+    "b9c64d021019a72cff2cfb7b796727902a13dc125be23d4621e5545733c26bcf": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_kpis.pipe:140",
+        "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_top_locations.pipe:39",
+        "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_top_pages.pipe:40",
+        "diff_hunk:ghost/core/core/server/data/tinybird/pipes/filtered_sessions.pipe:20"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_kpis.pipe:140",
+          "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_top_locations.pipe:39",
+          "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_top_pages.pipe:40",
+          "diff_hunk:ghost/core/core/server/data/tinybird/pipes/filtered_sessions.pipe:20"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 528,
+        "token_count_in": 6478,
+        "token_count_out": 12,
+        "trace_id": "54586e41c3164991a1190f4864abb093",
+        "span_id": "67108817d6d24e96",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 4,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "4e699740440a235fd6895ce8b614b20f64e724d7213640107a413f4a0f17dbda": {
+      "status": "completed",
+      "shard_id": "shard-002",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_kpis.yaml:11",
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_locations.yaml:70",
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_locations.yaml:9",
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_pages.yaml:8",
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_sources.yaml:13",
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_sources.yaml:83"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_kpis.yaml:11",
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_locations.yaml:70",
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_locations.yaml:9",
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_pages.yaml:8",
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_sources.yaml:13",
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_sources.yaml:83"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 63127,
+        "token_count_in": 10292,
+        "token_count_out": 12,
+        "trace_id": "81d88b9b18314d40aa745ecdb8d29516",
+        "span_id": "938bb8d310784afa",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "shard_count": 4,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "bd70cfad18f9ab7e2e7ce0d16c5f0d8130efec30d01c94fb234c5c7482985c6d": {
+      "status": "completed",
+      "shard_id": "shard-003",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_campaigns.yaml:10",
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_campaigns.yaml:73",
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_contents.yaml:12",
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_contents.yaml:75",
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_mediums.yaml:10",
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_mediums.yaml:73",
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_sources.yaml:13",
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_sources.yaml:82"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_campaigns.yaml:10",
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_campaigns.yaml:73",
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_contents.yaml:12",
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_contents.yaml:75",
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_mediums.yaml:10",
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_mediums.yaml:73",
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_sources.yaml:13",
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_sources.yaml:82"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 894,
+        "token_count_in": 10713,
+        "token_count_out": 12,
+        "trace_id": "a3d61280ad524062a0d04a67b59290b8",
+        "span_id": "d25f7edf169340da",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-003",
+        "shard_index": 2,
+        "shard_count": 4,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "29237bd379cc3cd5b7896c06607415efa8e2a8a20a2fa98c898010dfda43061a": {
+      "status": "completed",
+      "shard_id": "shard-004",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_terms.yaml:11",
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_terms.yaml:76",
+        "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:127",
+        "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:144",
+        "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:48"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "ghost/core/core/server/services/tinybird/TinybirdService.js",
+          "line": 146,
+          "severity": "medium",
+          "category": "security",
+          "message": "Removing `noTimestamp: true` from JWT sign options causes the token to include an `iat` (issued at) claim, which may break token validation if the consuming service does not expect or rejects tokens with an `iat` claim.",
+          "suggestion": "If the downstream Tinybird service does not require `iat`, consider keeping `noTimestamp: true` to preserve backward compatibility. Otherwise, ensure the consuming service is updated to accept the `iat` claim.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:144"
+          ]
+        },
+        {
+          "file": "ghost/core/core/server/services/tinybird/TinybirdService.js",
+          "line": 51,
+          "severity": "low",
+          "category": "correctness",
+          "message": "Removing `api_top_browsers`, `api_top_devices`, and `api_top_os` from the TINYBIRD_PIPES array may cause runtime errors if other parts of the codebase still reference these pipe names.",
+          "suggestion": "Verify that no other code references the removed pipe names, or add a deprecation period before removal.",
+          "confidence": 0.6,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:48"
+          ]
+        },
+        {
+          "file": "ghost/core/core/server/data/tinybird/tests/api_top_utm_terms.yaml",
+          "line": 14,
+          "severity": "low",
+          "category": "correctness",
+          "message": "Removing test cases for browser and device filters reduces test coverage for the `api_top_utm_terms` endpoint, potentially allowing regressions in filter logic.",
+          "suggestion": "If the endpoint no longer supports browser/device filters, ensure the removal is intentional and documented. Otherwise, keep the test cases or add equivalent coverage.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_terms.yaml:11"
+          ]
+        },
+        {
+          "file": "ghost/core/core/server/data/tinybird/tests/api_top_utm_terms.yaml",
+          "line": 79,
+          "severity": "low",
+          "category": "correctness",
+          "message": "The 'Test with multiple filters combined' test case changed from filtering by device and browser to filtering by source and pathname, but the test name still says 'multiple filters combined'. This mismatch may cause confusion about what the test actually validates.",
+          "suggestion": "Update the test name to reflect the new filter parameters, e.g., 'Test with source and pathname filters combined'.",
+          "confidence": 0.8,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_terms.yaml:76"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_terms.yaml:11",
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_terms.yaml:76",
+          "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:127",
+          "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:144",
+          "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:48"
+        ],
+        "output_issue_ids": [
+          "security:ghost/core/core/server/services/tinybird/TinybirdService.js:146",
+          "correctness:ghost/core/core/server/services/tinybird/TinybirdService.js:51",
+          "correctness:ghost/core/core/server/data/tinybird/tests/api_top_utm_terms.yaml:14",
+          "correctness:ghost/core/core/server/data/tinybird/tests/api_top_utm_terms.yaml:79"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 4398,
+        "token_count_in": 6816,
+        "token_count_out": 704,
+        "trace_id": "ac253639b3284b6b98dd47140e0d3643",
+        "span_id": "46f27bf2d46a4da2",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-004",
+        "shard_index": 3,
+        "shard_count": 4,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

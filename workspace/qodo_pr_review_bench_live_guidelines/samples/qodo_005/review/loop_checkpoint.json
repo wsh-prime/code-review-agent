@@ -1,0 +1,129 @@
+{
+  "schema_version": "1.0",
+  "run_id": "7001d77806fb4a6394e4f00ad262ac6c",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": true,
+  "package_hash": "sha256:0474d4b35bfea0195f8963c66ba963d0f15c505b3aafe27ef7144541f35bf95c",
+  "diff_hash": "sha256:b49af190505c77847b7bb2201ca91cf354ef82d669990364966b92b0df198fc1",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 2,
+      "verified_count": 2,
+      "needs_human_review_count": 0,
+      "discarded_count": 0,
+      "keep_count": 2,
+      "uncertain_count": 0,
+      "reject_count": 0,
+      "feedback_sent": [],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:1",
+            "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8",
+            "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337",
+            "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:8",
+            "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:21",
+            "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:3",
+            "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:4",
+            "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:467",
+            "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:527"
+          ],
+          "output_issue_ids": [
+            "logic_error:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:15",
+            "code_style:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 1,
+          "retry_log": [
+            "attempt=1 error=timeout delay=1.00s"
+          ],
+          "latency_ms": 64386,
+          "token_count_in": 9044,
+          "token_count_out": 326,
+          "trace_id": "84b3b077b0bc40cb9c4db689f980163b",
+          "span_id": "6d7f326397e64b9f",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 1,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8",
+            "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337"
+          ],
+          "output_issue_ids": [
+            "logic_error:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:15",
+            "code_style:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [
+        "code_style:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340",
+        "logic_error:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:15"
+      ],
+      "keep": [
+        {
+          "file": "ghost/core/core/server/services/member-welcome-emails/jobs/index.js",
+          "line": 15,
+          "severity": "high",
+          "category": "logic_error",
+          "message": "Negated condition on hasScheduled.processOutbox was removed, causing the job to be scheduled only when already true, which prevents the job from ever being added.",
+          "suggestion": "Restore the negation: change `if (hasScheduled.processOutbox && ...)` back to `if (!hasScheduled.processOutbox && ...)`.",
+          "confidence": 0.95,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8"
+          ]
+        },
+        {
+          "file": "ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js",
+          "line": 340,
+          "severity": "medium",
+          "category": "code_style",
+          "message": "Variable declaration changed from `let` to `var` for `member`, violating the guideline 'Code Must Use let or const Instead of var'.",
+          "suggestion": "Use `let member;` instead of `var member;`.",
+          "confidence": 1.0,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337"
+          ]
+        }
+      ],
+      "needs_human_review": [],
+      "discarded": []
+    }
+  ],
+  "last_feedback": null
+}

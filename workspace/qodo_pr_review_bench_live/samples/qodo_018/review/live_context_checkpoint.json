@@ -1,0 +1,583 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:9ca93c3a37fba9a9028cde295737e191d405b9cb2e9e907a85eb35afa86c5e28",
+  "diff_hash": "sha256:bfff7bd60f2225e649113ebfba98f8c81835a7fde5648728126b438f8a4d92c2",
+  "shards": {
+    "de16d0cb497099021f658234e569a3645fa10dafc4da5721324d20dbfd961e17": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/Components/Components/src/PublicAPI.Unshipped.txt:1",
+        "diff_hunk:src/Components/Components/src/Routing/Router.cs:98",
+        "diff_hunk:src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs:20",
+        "diff_hunk:src/Components/Forms/src/PublicAPI.Unshipped.txt:1"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:src/Components/Components/src/PublicAPI.Unshipped.txt:1",
+          "diff_hunk:src/Components/Components/src/Routing/Router.cs:98",
+          "diff_hunk:src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs:20",
+          "diff_hunk:src/Components/Forms/src/PublicAPI.Unshipped.txt:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 13994,
+        "token_count_in": 3970,
+        "token_count_out": 12,
+        "trace_id": "99d2ec7d98b0407a98077ccc8f23aef4",
+        "span_id": "39aa17c7c67c47dd",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 5,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "8f7b958ce743919c3bcf684abc0b16d8e7235cd39d19218863ce38ac7be42ee4": {
+      "status": "completed",
+      "shard_id": "shard-002",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/Components/Forms/test/EditContextDataAnnotationsExtensionsTest.cs:18",
+        "diff_hunk:src/Components/Web/src/Forms/InputFile/RemoteBrowserFileStreamOptions.cs:1",
+        "diff_hunk:src/Components/Web/src/PublicAPI.Unshipped.txt:1",
+        "diff_hunk:src/Components/Web/src/Web/WebEventCallbackFactoryEventArgsExtensions.cs:1"
+      ],
+      "context_requests": [
+        {
+          "request_type": "related_symbol",
+          "path": "src/Components/Web/src/Forms/InputFile/RemoteBrowserFileStreamOptions.cs",
+          "evidence_ids": [],
+          "risk_tag": null,
+          "symbol": "RemoteBrowserFileStreamOptions",
+          "reason": "",
+          "source_shard_id": "shard-002",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "related_symbol",
+          "path": "src/Components/Web/src/Web/WebEventCallbackFactoryEventArgsExtensions.cs",
+          "evidence_ids": [],
+          "risk_tag": null,
+          "symbol": "WebEventCallbackFactoryEventArgsExtensions",
+          "reason": "",
+          "source_shard_id": "shard-002",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:src/Components/Forms/test/EditContextDataAnnotationsExtensionsTest.cs:18",
+          "diff_hunk:src/Components/Web/src/Forms/InputFile/RemoteBrowserFileStreamOptions.cs:1",
+          "diff_hunk:src/Components/Web/src/PublicAPI.Unshipped.txt:1",
+          "diff_hunk:src/Components/Web/src/Web/WebEventCallbackFactoryEventArgsExtensions.cs:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 6132,
+        "token_count_in": 6453,
+        "token_count_out": 110,
+        "trace_id": "d8ca85464f2b48b0919b7286c6cd9e20",
+        "span_id": "ded250cbba074c6d",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "shard_count": 5,
+        "context_request_count": 2,
+        "context_refill_used": false
+      }
+    },
+    "c2537d7d7ae2912df56ece150be1ea6a3c206ad8e73485e7a611b8cffcb4521c": {
+      "status": "completed",
+      "shard_id": "shard-002-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-002",
+      "selected_evidence_ids": [
+        "entity:src/Components/Web/src/Forms/InputFile/RemoteBrowserFileStreamOptions.cs:src.Components.Web.src.Forms.InputFile.RemoteBrowserFileStreamOptions",
+        "entity:src/Components/Web/src/Web/WebEventCallbackFactoryEventArgsExtensions.cs:src.Components.Web.src.Web.WebEventCallbackFactoryEventArgsExtensions"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "src/Components/Web/src/Forms/InputFile/RemoteBrowserFileStreamOptions.cs",
+          "evidence_ids": [],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The diff hunk for this deleted file is not present in the evidence index. Need to see the full diff to assess if the deletion removes any security guards or introduces a regression.",
+          "source_shard_id": "shard-002-refill",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "src/Components/Web/src/Web/WebEventCallbackFactoryEventArgsExtensions.cs",
+          "evidence_ids": [],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The diff hunk for this deleted file is not present in the evidence index. Need to see the full diff to assess if the deletion removes any security guards or introduces a regression.",
+          "source_shard_id": "shard-002-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "entity:src/Components/Web/src/Forms/InputFile/RemoteBrowserFileStreamOptions.cs:src.Components.Web.src.Forms.InputFile.RemoteBrowserFileStreamOptions",
+          "entity:src/Components/Web/src/Web/WebEventCallbackFactoryEventArgsExtensions.cs:src.Components.Web.src.Web.WebEventCallbackFactoryEventArgsExtensions"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 2428,
+        "token_count_in": 1491,
+        "token_count_out": 177,
+        "trace_id": "65fd541b8cd347728fa880ecdfde703f",
+        "span_id": "5603aa8555004b5b",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002-refill",
+        "shard_index": 1,
+        "shard_count": 5,
+        "context_request_count": 2,
+        "context_refill_used": true
+      }
+    },
+    "6209cb496598a8d7b9e8a31b1c6379e6ea71c45a1f55dd68c3981e3a8d20f5ee": {
+      "status": "completed",
+      "shard_id": "shard-003",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/Components/Web/src/WebRenderer.cs:52",
+        "diff_hunk:src/Components/WebAssembly/JSInterop/src/InternalCalls.cs:1",
+        "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/PublicAPI.Unshipped.txt:1",
+        "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:106"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-003",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": null,
+          "evidence_ids": [
+            "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:109",
+            "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:110",
+            "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:111",
+            "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:112"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-003",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [
+        {
+          "file": "src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs",
+          "line": 109,
+          "severity": "high",
+          "category": "correctness",
+          "message": "Removal of the obsolete SignOutSessionStateManager injection without adding a replacement for sign-out state management may break sign-out flow for existing users.",
+          "suggestion": "Ensure that the sign-out state management is handled via the new AuthenticationStateProvider or another mechanism before removing the obsolete SignOutManager.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:106"
+          ]
+        },
+        {
+          "file": "src/Components/WebAssembly/WebAssembly.Authentication/src/PublicAPI.Unshipped.txt",
+          "line": 2,
+          "severity": "medium",
+          "category": "api_breaking_change",
+          "message": "Removal of public API entries for AccessTokenResult, RemoteAuthenticationService, and SignOutSessionStateManager indicates breaking changes that may affect consumers.",
+          "suggestion": "Verify that these removals are intentional and documented as breaking changes; consider deprecation warnings if not already done.",
+          "confidence": 0.8,
+          "evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/PublicAPI.Unshipped.txt:1"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:src/Components/Web/src/WebRenderer.cs:52",
+          "diff_hunk:src/Components/WebAssembly/JSInterop/src/InternalCalls.cs:1",
+          "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/PublicAPI.Unshipped.txt:1",
+          "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:106"
+        ],
+        "output_issue_ids": [
+          "correctness:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:109",
+          "api_breaking_change:src/Components/WebAssembly/WebAssembly.Authentication/src/PublicAPI.Unshipped.txt:2"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 8787,
+        "token_count_in": 5187,
+        "token_count_out": 502,
+        "trace_id": "6b6c9b77ca174402aaf848b329950480",
+        "span_id": "ccd0837adb6844cc",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-003",
+        "shard_index": 2,
+        "shard_count": 5,
+        "context_request_count": 2,
+        "context_refill_used": false
+      }
+    },
+    "c8fcfacdca65248ddad5a384c5258c6bc2ebc60e59a487a21d7177a66e87b801": {
+      "status": "completed",
+      "shard_id": "shard-003-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-003",
+      "selected_evidence_ids": [
+        "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:109",
+        "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:110",
+        "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:111",
+        "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:112",
+        "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:106",
+        "risk:security_sensitive:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs",
+          "evidence_ids": [],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "To verify that sign-out logic is still supported after removal of SignOutSessionStateManager.",
+          "source_shard_id": "shard-003-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [
+        {
+          "file": "src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs",
+          "line": 110,
+          "severity": "high",
+          "category": "correctness",
+          "message": "Removal of SignOutSessionStateManager injection without replacement may break sign-out functionality.",
+          "suggestion": "Ensure sign-out logic is handled elsewhere (e.g., via NavigationManager or a new service) before removing this dependency.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:106",
+            "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:110"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:109",
+          "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:110",
+          "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:111",
+          "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:112",
+          "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:106",
+          "risk:security_sensitive:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs"
+        ],
+        "output_issue_ids": [
+          "correctness:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:110"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 1753,
+        "token_count_in": 2209,
+        "token_count_out": 258,
+        "trace_id": "2499980fdc0041e8a04834c10e01673a",
+        "span_id": "fe4a32c4c7094d06",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-003-refill",
+        "shard_index": 2,
+        "shard_count": 5,
+        "context_request_count": 1,
+        "context_refill_used": true
+      }
+    },
+    "fa78a23cd5bad3b10231c48def673e632432e512a64def90b0ac7c9f4dfc2eb3": {
+      "status": "completed",
+      "shard_id": "shard-004",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:35",
+        "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenResult.cs:12",
+        "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/RemoteAuthenticationService.cs:57",
+        "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/SignOutSessionStateManager.cs:1"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs",
+          "line": 44,
+          "severity": "high",
+          "category": "potential_bug",
+          "message": "Removed null check for _tokenResult.InteractiveRequestUrl before passing it to NavigateToLogin and NavigateTo. If InteractiveRequestUrl is null, NavigateToLogin may receive null and NavigateTo will throw ArgumentNullException.",
+          "suggestion": "Restore the null check for _tokenResult.InteractiveRequestUrl or add a guard before calling NavigateToLogin and NavigateTo.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:35"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:35",
+          "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenResult.cs:12",
+          "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/RemoteAuthenticationService.cs:57",
+          "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/SignOutSessionStateManager.cs:1"
+        ],
+        "output_issue_ids": [
+          "potential_bug:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:44"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 6036,
+        "token_count_in": 6963,
+        "token_count_out": 205,
+        "trace_id": "31f457a88d9a496bab0293329e77b731",
+        "span_id": "2f550664405f4e43",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-004",
+        "shard_index": 3,
+        "shard_count": 5,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "856bf6b47a91e9de6220a07d06ba6146ebe59a3a343d75a51622e53348107be6": {
+      "status": "completed",
+      "shard_id": "shard-005",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:71",
+        "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/test/RemoteAuthenticatorCoreTests.cs:370",
+        "diff_hunk:src/Components/WebAssembly/WebAssembly/src/Infrastructure/JSInteropMethods.cs:14",
+        "diff_hunk:src/Components/WebAssembly/WebAssembly/src/PublicAPI.Unshipped.txt:1"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs",
+          "evidence_ids": [
+            "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:74",
+            "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:75",
+            "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:76"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-005",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "related_symbol",
+          "path": "src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs",
+          "evidence_ids": [],
+          "risk_tag": null,
+          "symbol": "SignOutSessionStateManager",
+          "reason": "",
+          "source_shard_id": "shard-005",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [
+        {
+          "file": "src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs",
+          "line": 74,
+          "severity": "high",
+          "category": "correctness",
+          "message": "Removing the registration of SignOutSessionStateManager without adding a replacement may break components that depend on this service via DI.",
+          "suggestion": "Ensure that any consumers of SignOutSessionStateManager are updated to use the new sign-out mechanism, or keep the registration if backward compatibility is required.",
+          "confidence": 0.85,
+          "evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:71"
+          ]
+        },
+        {
+          "file": "src/Components/WebAssembly/WebAssembly.Authentication/test/RemoteAuthenticatorCoreTests.cs",
+          "line": 370,
+          "severity": "medium",
+          "category": "test_coverage",
+          "message": "Removing the test 'AuthenticationManager_Logout_RedirectsToFailureOnInvalidSignOutState' reduces coverage for the invalid sign-out state scenario, which may hide regressions.",
+          "suggestion": "If the sign-out state validation logic is still present, add a new test that covers the same scenario using the updated implementation.",
+          "confidence": 0.8,
+          "evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/test/RemoteAuthenticatorCoreTests.cs:370"
+          ]
+        },
+        {
+          "file": "src/Components/WebAssembly/WebAssembly/src/Infrastructure/JSInteropMethods.cs",
+          "line": 17,
+          "severity": "medium",
+          "category": "api_removal",
+          "message": "Removing the public method NotifyLocationChanged may break external callers that rely on this API, even if it was marked obsolete.",
+          "suggestion": "If the method is no longer needed, ensure all internal callers have been migrated and consider a longer deprecation period for external consumers.",
+          "confidence": 0.75,
+          "evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly/src/Infrastructure/JSInteropMethods.cs:14"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:71",
+          "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/test/RemoteAuthenticatorCoreTests.cs:370",
+          "diff_hunk:src/Components/WebAssembly/WebAssembly/src/Infrastructure/JSInteropMethods.cs:14",
+          "diff_hunk:src/Components/WebAssembly/WebAssembly/src/PublicAPI.Unshipped.txt:1"
+        ],
+        "output_issue_ids": [
+          "correctness:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:74",
+          "test_coverage:src/Components/WebAssembly/WebAssembly.Authentication/test/RemoteAuthenticatorCoreTests.cs:370",
+          "api_removal:src/Components/WebAssembly/WebAssembly/src/Infrastructure/JSInteropMethods.cs:17"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 13166,
+        "token_count_in": 5033,
+        "token_count_out": 682,
+        "trace_id": "a4a0dbce63644761bb19bf04b345eb6a",
+        "span_id": "7578aa1e0af843ab",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-005",
+        "shard_index": 4,
+        "shard_count": 5,
+        "context_request_count": 2,
+        "context_refill_used": false
+      }
+    },
+    "763ac88c38b099fb263b3cfb4ed4373314122d2f89f109bd6d4719ada3b6f46d": {
+      "status": "completed",
+      "shard_id": "shard-005-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-005",
+      "selected_evidence_ids": [
+        "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:74",
+        "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:75",
+        "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:76",
+        "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:71",
+        "entity:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:src.Components.WebAssembly.WebAssembly.Authentication.src.WebAssemblyAuthenticationServiceCollectionExtensions"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs",
+          "line": 75,
+          "severity": "high",
+          "category": "breaking_change",
+          "message": "Removal of SignOutSessionStateManager registration without replacement may break existing consumers that depend on this service via DI.",
+          "suggestion": "If SignOutSessionStateManager is still needed by consumers, keep the registration but suppress the obsolete warning. If it is fully replaced, ensure a migration guide or alternative registration is provided.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:71",
+            "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:75"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:74",
+          "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:75",
+          "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:76",
+          "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:71",
+          "entity:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:src.Components.WebAssembly.WebAssembly.Authentication.src.WebAssemblyAuthenticationServiceCollectionExtensions"
+        ],
+        "output_issue_ids": [
+          "breaking_change:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:75"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 14182,
+        "token_count_in": 1806,
+        "token_count_out": 212,
+        "trace_id": "88d2ef07f13c4b669d9bf6897d7a23eb",
+        "span_id": "051beb71cc924572",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-005-refill",
+        "shard_index": 4,
+        "shard_count": 5,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    }
+  }
+}

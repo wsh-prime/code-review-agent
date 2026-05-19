@@ -85,6 +85,7 @@ def run_review_pipeline(
     max_evidence_per_file: int = DEFAULT_MAX_EVIDENCE_PER_FILE,
     max_context_refill_rounds: int = 1,
     max_context_requests: int = 8,
+    review_guidelines: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     """Run the MVP review pipeline and write JSON/Markdown reports."""
 
@@ -126,6 +127,8 @@ def run_review_pipeline(
         repo_map,
         hygiene_classifications=hygiene_classifications,
     )
+    if review_guidelines:
+        package.metadata["review_guidelines"] = review_guidelines
     rules_result = run_rules(package)
     agent_runs = []
     agent_findings: list[ReviewIssue] = []

@@ -1,0 +1,33 @@
+--- a/gpt_engineer/ai.py
++++ b/gpt_engineer/ai.py
+@@ -18,28 +18,28 @@
+     def fuser(self, msg):
+         return {"role": "user", "content": msg}
+ 
+     def fassistant(self, msg):
+         return {"role": "assistant", "content": msg}
+ 
+     def next(self, messages: list[dict[str, str]], prompt=None):
+         if prompt:
+-            messages = messages + [{"role": "user", "content": prompt}]
++            messages += [{"role": "user", "content": prompt}]
+ 
+         logger.debug(f"Creating a new chat completion: {messages}")
+         response = openai.ChatCompletion.create(
+             messages=messages,
+             stream=True,
+             model=self.model,
+             temperature=self.temperature,
+         )
+ 
+         chat = []
+         for chunk in response:
+             delta = chunk["choices"][0]["delta"]
+             msg = delta.get("content", "")
+             print(msg, end="")
+             chat.append(msg)
+         print()
+-        messages = messages + [{"role": "assistant", "content": "".join(chat)}]
++        messages += [{"role": "assistant", "content": "".join(chat)}]
+         logger.debug(f"Chat completion finished: {messages}")
+         return messages

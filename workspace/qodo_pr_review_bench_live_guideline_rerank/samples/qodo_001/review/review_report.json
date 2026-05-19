@@ -1,0 +1,2241 @@
+{
+  "schema_version": "1.3",
+  "summary": {
+    "mode": "hybrid-live",
+    "changed_file_count": 3,
+    "changed_entity_count": 3,
+    "risk_signal_count": 1,
+    "finding_count": 0,
+    "needs_human_review_count": 1,
+    "discarded_count": 4,
+    "evidence_count": 95,
+    "missing_evidence_id_count": 0,
+    "agent_run_count": 3,
+    "prompt_exported": false,
+    "loop_enabled": true,
+    "loop_iterations_completed": 1,
+    "loop_converged": false,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "total_latency_ms": 153961,
+    "total_token_count_in": 9613,
+    "total_token_count_out": 903,
+    "context_budget_enabled": true,
+    "context_truncated": true,
+    "selected_evidence_count": 8,
+    "omitted_evidence_count": 87,
+    "review_shard_count": 1,
+    "context_refill_count": 1,
+    "context_request_count": 2,
+    "target_repo_modified": false
+  },
+  "findings": [],
+  "needs_human_review": [
+    {
+      "file": "apps/comments-ui/src/components/content/forms/form.tsx",
+      "line": 261,
+      "severity": "medium",
+      "category": "correctness",
+      "message": "Changed editor editable condition from memberName to member.expertise; if member is null or undefined, this will throw a TypeError.",
+      "suggestion": "Add optional chaining: member?.expertise to safely access the property.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:261"
+      ]
+    }
+  ],
+  "discarded": [
+    {
+      "file": "apps/comments-ui/src/components/content/forms/form.tsx",
+      "line": 244,
+      "severity": "high",
+      "category": "correctness",
+      "message": "Removing fallback to comment author's name may break reply form display when logged-in member has no name.",
+      "suggestion": "Keep the fallback to comment?.member?.name when member?.name is null/undefined to preserve the parent comment author's name in the reply form.",
+      "confidence": 0.85,
+      "evidence_ids": [
+        "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:241"
+      ],
+      "filter_reason": "low_signal_suggestion"
+    },
+    {
+      "file": "apps/comments-ui/src/components/content/forms/reply-form.tsx",
+      "line": 30,
+      "severity": "medium",
+      "category": "correctness",
+      "message": "Changed in_reply_to_id from openForm.in_reply_to_id to parent.id may alter reply threading behavior.",
+      "suggestion": "Verify that parent.id is the correct identifier for the reply target, as openForm.in_reply_to_id may have been more specific.",
+      "confidence": 0.6,
+      "evidence_ids": [
+        "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:27"
+      ],
+      "filter_reason": "low_signal_suggestion"
+    },
+    {
+      "file": "apps/comments-ui/src/components/content/forms/form.tsx",
+      "line": 305,
+      "severity": "medium",
+      "category": "correctness",
+      "message": "Removing fallback to comment member data may cause null/undefined access when member is null and openForm is used without optional chaining.",
+      "suggestion": "Restore the fallback or add optional chaining to openForm.in_reply_to_snippet to avoid potential runtime error when openForm is null.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:305"
+      ],
+      "filter_reason": "low_signal_suggestion"
+    },
+    {
+      "file": "apps/comments-ui/src/components/content/forms/form.tsx",
+      "line": 308,
+      "severity": "low",
+      "category": "best-practice",
+      "message": "Review guideline violation: 'React Button Elements Must Have Explicit Type Attribute' - the <form> element does not have an explicit type attribute, but the guideline applies to <button> elements. No button type issue found.",
+      "suggestion": "",
+      "confidence": 0.5,
+      "evidence_ids": [],
+      "filter_reason": "missing_evidence"
+    }
+  ],
+  "changed_files": [
+    {
+      "old_path": "apps/comments-ui/src/components/content/forms/form.tsx",
+      "new_path": "apps/comments-ui/src/components/content/forms/form.tsx",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 241,
+          "old_count": 7,
+          "new_start": 241,
+          "new_count": 7,
+          "section_header": "const Form: React.FC<FormProps> = ({",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 241,
+              "new_lineno": 241,
+              "content": "    const [progress, setProgress] = useState<Progress>('default');"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 242,
+              "new_lineno": 242,
+              "content": "    const formEl = useRef(null);"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 243,
+              "new_lineno": 243,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 244,
+              "new_lineno": null,
+              "content": "    const memberName = member?.name ?? comment?.member?.name;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 244,
+              "content": "    const memberName = member?.name;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 245,
+              "new_lineno": 245,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 246,
+              "new_lineno": 246,
+              "content": "    if (progress === 'sending' || (memberName && isAskingDetails)) {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 247,
+              "new_lineno": 247,
+              "content": "        // Force open"
+            }
+          ]
+        },
+        {
+          "old_start": 261,
+          "old_count": 8,
+          "new_start": 261,
+          "new_count": 8,
+          "section_header": "const Form: React.FC<FormProps> = ({",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 261,
+              "new_lineno": 261,
+              "content": "        }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 262,
+              "new_lineno": 262,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 263,
+              "new_lineno": 263,
+              "content": "        // Disable editing if the member doesn't have a name or when we are submitting the form"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 264,
+              "new_lineno": null,
+              "content": "        editor.setEditable(!!memberName && progress !== 'sending');"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 265,
+              "new_lineno": null,
+              "content": "    }, [editor, memberName, progress]);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 264,
+              "content": "        editor.setEditable(!!member?.expertise && progress !== 'sending');"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 265,
+              "content": "    }, [editor, member, progress]);"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 266,
+              "new_lineno": 266,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 267,
+              "new_lineno": 267,
+              "content": "    return ("
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 268,
+              "new_lineno": 268,
+              "content": "        <form"
+            }
+          ]
+        },
+        {
+          "old_start": 289,
+          "old_count": 7,
+          "new_start": 289,
+          "new_count": 6,
+          "section_header": "const Form: React.FC<FormProps> = ({",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 289,
+              "new_lineno": 289,
+              "content": "};"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 290,
+              "new_lineno": 290,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 291,
+              "new_lineno": 291,
+              "content": "type FormWrapperProps = {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 292,
+              "new_lineno": null,
+              "content": "    comment?: Comment;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 293,
+              "new_lineno": 292,
+              "content": "    editor: Editor | null;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 294,
+              "new_lineno": 293,
+              "content": "    isOpen: boolean;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 295,
+              "new_lineno": 294,
+              "content": "    reduced: boolean;"
+            }
+          ]
+        },
+        {
+          "old_start": 298,
+          "old_count": 7,
+          "new_start": 297,
+          "new_count": 6,
+          "section_header": "type FormWrapperProps = {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 298,
+              "new_lineno": 297,
+              "content": "};"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 299,
+              "new_lineno": 298,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 300,
+              "new_lineno": 299,
+              "content": "const FormWrapper: React.FC<FormWrapperProps> = ({"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 301,
+              "new_lineno": null,
+              "content": "    comment,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 302,
+              "new_lineno": 300,
+              "content": "    editor,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 303,
+              "new_lineno": 301,
+              "content": "    isOpen,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 304,
+              "new_lineno": 302,
+              "content": "    reduced,"
+            }
+          ]
+        },
+        {
+          "old_start": 307,
+          "old_count": 12,
+          "new_start": 305,
+          "new_count": 12,
+          "section_header": "const FormWrapper: React.FC<FormWrapperProps> = ({",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 307,
+              "new_lineno": 305,
+              "content": "}) => {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 308,
+              "new_lineno": 306,
+              "content": "    const {member, dispatchAction} = useAppContext();"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 309,
+              "new_lineno": 307,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 310,
+              "new_lineno": null,
+              "content": "    const memberName = member?.name ?? comment?.member?.name;"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 311,
+              "new_lineno": null,
+              "content": "    const memberExpertise = member?.expertise ?? comment?.member?.expertise;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 308,
+              "content": "    const memberName = member?.name;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 309,
+              "content": "    const memberExpertise = member?.expertise;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 312,
+              "new_lineno": 310,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 313,
+              "new_lineno": 311,
+              "content": "    let openStyles = '';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 314,
+              "new_lineno": 312,
+              "content": "    if (isOpen) {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 315,
+              "new_lineno": null,
+              "content": "        const isReplyToReply = !!openForm?.in_reply_to_snippet;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 313,
+              "content": "        const isReplyToReply = !!openForm.in_reply_to_snippet;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 316,
+              "new_lineno": 314,
+              "content": "        openStyles = isReplyToReply ? 'pl-[1px] pt-[68px] sm:pl-[44px] sm:pt-[56px]' : 'pl-[1px] pt-[48px] sm:pl-[44px] sm:pt-[40px]';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 317,
+              "new_lineno": 315,
+              "content": "    }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 318,
+              "new_lineno": 316,
+              "content": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "apps/comments-ui/src/components/content/forms/reply-form.tsx",
+      "new_path": "apps/comments-ui/src/components/content/forms/reply-form.tsx",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 27,
+          "old_count": 12,
+          "new_start": 27,
+          "new_count": 12,
+          "section_header": "const ReplyForm: React.FC<Props> = ({openForm, parent}) => {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 27,
+              "new_lineno": 27,
+              "content": "            parent: parent,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 28,
+              "new_lineno": 28,
+              "content": "            reply: {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 29,
+              "new_lineno": 29,
+              "content": "                post_id: postId,"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 30,
+              "new_lineno": null,
+              "content": "                in_reply_to_id: openForm.in_reply_to_id,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 30,
+              "content": "                in_reply_to_id: parent.id,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 31,
+              "new_lineno": 31,
+              "content": "                status: 'published',"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 32,
+              "new_lineno": 32,
+              "content": "                html"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 33,
+              "new_lineno": 33,
+              "content": "            }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 34,
+              "new_lineno": 34,
+              "content": "        });"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 35,
+              "new_lineno": null,
+              "content": "    }, [parent, postId, openForm, dispatchAction]);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 35,
+              "content": "    }, [parent, postId, dispatchAction]);"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 36,
+              "new_lineno": 36,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 37,
+              "new_lineno": 37,
+              "content": "    const close = useCallback(() => {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 38,
+              "new_lineno": 38,
+              "content": "        dispatchAction('closeCommentForm', openForm.id);"
+            }
+          ]
+        },
+        {
+          "old_start": 44,
+          "old_count": 8,
+          "new_start": 44,
+          "new_count": 8,
+          "section_header": "const ReplyForm: React.FC<Props> = ({openForm, parent}) => {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 44,
+              "new_lineno": 44,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 45,
+              "new_lineno": 45,
+              "content": "    return ("
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 46,
+              "new_lineno": 46,
+              "content": "        <div ref={setForm} data-testid=\"reply-form\">"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 47,
+              "new_lineno": null,
+              "content": "            <div className='mt-[-16px] pr-2'>"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 48,
+              "new_lineno": null,
+              "content": "                <FormWrapper comment={parent} editor={editor} isOpen={true} openForm={openForm} reduced={isMobile()}>"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 47,
+              "content": "            <div className='pr-2 mt-[-16px]'>"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 48,
+              "content": "                <FormWrapper editor={editor} isOpen={true} openForm={openForm} reduced={isMobile()}>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 49,
+              "new_lineno": 49,
+              "content": "                    <Form"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 50,
+              "new_lineno": 50,
+              "content": "                        close={close}"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 51,
+              "new_lineno": 51,
+              "content": "                        editor={editor}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "apps/comments-ui/test/e2e/actions.test.ts",
+      "new_path": "apps/comments-ui/test/e2e/actions.test.ts",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 611,
+          "old_count": 6,
+          "new_start": 611,
+          "new_count": 74,
+          "section_header": "test.describe('Actions', async () => {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 611,
+              "new_lineno": 611,
+              "content": "        );"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 612,
+              "new_lineno": 612,
+              "content": "    });"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 613,
+              "new_lineno": 613,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 614,
+              "content": "    test('Reply form does not inherit expertise from parent comment author', async ({page}) => {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 615,
+              "content": "        // Set logged-in member with NO expertise"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 616,
+              "content": "        mockedApi.setMember({name: 'Jane Replier', expertise: null});"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 617,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 618,
+              "content": "        // Add a comment from a different member who HAS expertise"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 619,
+              "content": "        mockedApi.addComment({"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 620,
+              "content": "            html: '<p>This is a comment from someone with expertise</p>',"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 621,
+              "content": "            member: buildMember({name: 'Expert User', expertise: 'Head of Comments'})"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 622,
+              "content": "        });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 623,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 624,
+              "content": "        const {frame} = await initializeTest(page);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 625,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 626,
+              "content": "        // Verify the parent comment shows the author's expertise"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 627,
+              "content": "        const parentComment = frame.getByTestId('comment-component').nth(0);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 628,
+              "content": "        await expect(parentComment).toContainText('Head of Comments');"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 629,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 630,
+              "content": "        // Click reply on the parent comment"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 631,
+              "content": "        const replyButton = parentComment.getByTestId('reply-button');"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 632,
+              "content": "        await replyButton.click();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 633,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 634,
+              "content": "        // Wait for reply form to appear"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 635,
+              "content": "        const replyForm = frame.getByTestId('reply-form');"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 636,
+              "content": "        await expect(replyForm).toBeVisible();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 637,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 638,
+              "content": "        const editor = replyForm.getByTestId('form-editor');"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 639,
+              "content": "        await waitEditorFocused(editor);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 640,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 641,
+              "content": "        // The reply form should show the logged-in member's info, NOT the parent's"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 642,
+              "content": "        await expect(replyForm.getByTestId('member-name')).toHaveText('Jane Replier');"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 643,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 644,
+              "content": "        // The expertise button should show \"Add your expertise\" since the"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 645,
+              "content": "        // logged-in member has no expertise - it should NOT show \"Head of Comments\""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 646,
+              "content": "        const expertiseButton = replyForm.getByTestId('expertise-button');"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 647,
+              "content": "        await expect(expertiseButton).toBeVisible();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 648,
+              "content": "        await expect(expertiseButton).toHaveText('·Add your expertise');"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 649,
+              "content": "    });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 650,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 651,
+              "content": "    test('Reply form does not inherit name from parent comment author', async ({page}) => {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 652,
+              "content": "        // Set logged-in member with NO name (null triggers the fallback bug)"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 653,
+              "content": "        mockedApi.setMember({name: null, expertise: 'Some Expertise'});"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 654,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 655,
+              "content": "        // Add a comment from a different member who HAS a name"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 656,
+              "content": "        mockedApi.addComment({"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 657,
+              "content": "            html: '<p>This is a comment from someone with a name</p>',"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 658,
+              "content": "            member: buildMember({name: 'Named Author', expertise: null})"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 659,
+              "content": "        });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 660,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 661,
+              "content": "        const {frame} = await initializeTest(page);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 662,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 663,
+              "content": "        // Verify the parent comment shows the author's name"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 664,
+              "content": "        const parentComment = frame.getByTestId('comment-component').nth(0);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 665,
+              "content": "        await expect(parentComment).toContainText('Named Author');"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 666,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 667,
+              "content": "        // Click reply on the parent comment"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 668,
+              "content": "        const replyButton = parentComment.getByTestId('reply-button');"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 669,
+              "content": "        await replyButton.click();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 670,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 671,
+              "content": "        // Wait for reply form to appear"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 672,
+              "content": "        const replyForm = frame.getByTestId('reply-form');"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 673,
+              "content": "        await expect(replyForm).toBeVisible();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 674,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 675,
+              "content": "        // The reply form should NOT show the parent comment author's name"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 676,
+              "content": "        // It should either show nothing, \"Anonymous\", or prompt for a name"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 677,
+              "content": "        // but definitely NOT \"Named Author\""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 678,
+              "content": "        const memberName = replyForm.getByTestId('member-name');"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 679,
+              "content": "        await expect(memberName).not.toHaveText('Named Author');"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 680,
+              "content": "    });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 681,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 614,
+              "new_lineno": 682,
+              "content": "    async function deleteComment(page, frame, commentComponent) {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 615,
+              "new_lineno": 683,
+              "content": "        await commentComponent.getByTestId('more-button').first().click();"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 616,
+              "new_lineno": 684,
+              "content": "        await frame.getByTestId('delete').click();"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "changed_entities": [
+    {
+      "path": "apps/comments-ui/src/components/content/forms/form.tsx",
+      "entity_type": "module",
+      "name": "form.tsx",
+      "qualified_name": "apps.comments-ui.src.components.content.forms.form",
+      "line_start": 244,
+      "line_end": 244,
+      "hunk_ids": [
+        "apps/comments-ui/src/components/content/forms/form.tsx:241",
+        "apps/comments-ui/src/components/content/forms/form.tsx:261",
+        "apps/comments-ui/src/components/content/forms/form.tsx:289",
+        "apps/comments-ui/src/components/content/forms/form.tsx:297",
+        "apps/comments-ui/src/components/content/forms/form.tsx:305"
+      ]
+    },
+    {
+      "path": "apps/comments-ui/src/components/content/forms/reply-form.tsx",
+      "entity_type": "module",
+      "name": "reply-form.tsx",
+      "qualified_name": "apps.comments-ui.src.components.content.forms.reply-form",
+      "line_start": 30,
+      "line_end": 35,
+      "hunk_ids": [
+        "apps/comments-ui/src/components/content/forms/reply-form.tsx:27",
+        "apps/comments-ui/src/components/content/forms/reply-form.tsx:44"
+      ]
+    },
+    {
+      "path": "apps/comments-ui/test/e2e/actions.test.ts",
+      "entity_type": "module",
+      "name": "actions.test.ts",
+      "qualified_name": "apps.comments-ui.test.e2e.actions.test",
+      "line_start": 614,
+      "line_end": 681,
+      "hunk_ids": [
+        "apps/comments-ui/test/e2e/actions.test.ts:611"
+      ]
+    }
+  ],
+  "risk_signals": [
+    {
+      "tag": "security_sensitive",
+      "confidence": 0.74,
+      "reason": "Security-sensitive keywords changed in apps/comments-ui/test/e2e/actions.test.ts.",
+      "evidence_ids": [
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:614",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:615",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:616",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:617",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:618",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:619",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:620",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:621",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:622",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:623",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:624",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:625",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:626",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:627",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:628",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:629",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:630",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:631",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:632",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:633",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:634",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:635",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:636",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:637",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:638",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:639",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:640",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:641",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:642",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:643",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:644",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:645",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:646",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:647",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:648",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:649",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:650",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:651",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:652",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:653",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:654",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:655",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:656",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:657",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:658",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:659",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:660",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:661",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:662",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:663",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:664",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:665",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:666",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:667",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:668",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:669",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:670",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:671",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:672",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:673",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:674",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:675",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:676",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:677",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:678",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:679",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:680",
+        "diff:apps/comments-ui/test/e2e/actions.test.ts:681"
+      ]
+    }
+  ],
+  "evidence_index": {
+    "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:241": {
+      "id": "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:241",
+      "kind": "diff_hunk",
+      "source": "apps/comments-ui/src/components/content/forms/form.tsx:241",
+      "message": "@@ -241,7 +241,7 @@ const Form: React.FC<FormProps> = ({\n     const [progress, setProgress] = useState<Progress>('default');\n     const formEl = useRef(null);\n \n-    const memberName = member?.name ?? comment?.member?.name;\n+    const memberName = member?.name;\n \n     if (progress === 'sending' || (memberName && isAskingDetails)) {\n         // Force open"
+    },
+    "diff:apps/comments-ui/src/components/content/forms/form.tsx:244": {
+      "id": "diff:apps/comments-ui/src/components/content/forms/form.tsx:244",
+      "kind": "diff",
+      "source": "apps/comments-ui/src/components/content/forms/form.tsx:244",
+      "message": "Added line: const memberName = member?.name;"
+    },
+    "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:261": {
+      "id": "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:261",
+      "kind": "diff_hunk",
+      "source": "apps/comments-ui/src/components/content/forms/form.tsx:261",
+      "message": "@@ -261,8 +261,8 @@ const Form: React.FC<FormProps> = ({\n         }\n \n         // Disable editing if the member doesn't have a name or when we are submitting the form\n-        editor.setEditable(!!memberName && progress !== 'sending');\n-    }, [editor, memberName, progress]);\n+        editor.setEditable(!!member?.expertise && progress !== 'sending');\n+    }, [editor, member, progress]);\n \n     return (\n         <form"
+    },
+    "diff:apps/comments-ui/src/components/content/forms/form.tsx:264": {
+      "id": "diff:apps/comments-ui/src/components/content/forms/form.tsx:264",
+      "kind": "diff",
+      "source": "apps/comments-ui/src/components/content/forms/form.tsx:264",
+      "message": "Added line: editor.setEditable(!!member?.expertise && progress !== 'sending');"
+    },
+    "diff:apps/comments-ui/src/components/content/forms/form.tsx:265": {
+      "id": "diff:apps/comments-ui/src/components/content/forms/form.tsx:265",
+      "kind": "diff",
+      "source": "apps/comments-ui/src/components/content/forms/form.tsx:265",
+      "message": "Added line: }, [editor, member, progress]);"
+    },
+    "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:289": {
+      "id": "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:289",
+      "kind": "diff_hunk",
+      "source": "apps/comments-ui/src/components/content/forms/form.tsx:289",
+      "message": "@@ -289,7 +289,6 @@ const Form: React.FC<FormProps> = ({\n };\n \n type FormWrapperProps = {\n-    comment?: Comment;\n     editor: Editor | null;\n     isOpen: boolean;\n     reduced: boolean;"
+    },
+    "diff:apps/comments-ui/src/components/content/forms/form.tsx:292": {
+      "id": "diff:apps/comments-ui/src/components/content/forms/form.tsx:292",
+      "kind": "diff",
+      "source": "apps/comments-ui/src/components/content/forms/form.tsx:292",
+      "message": "Removed line: comment?: Comment;"
+    },
+    "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:297": {
+      "id": "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:297",
+      "kind": "diff_hunk",
+      "source": "apps/comments-ui/src/components/content/forms/form.tsx:297",
+      "message": "@@ -298,7 +297,6 @@ type FormWrapperProps = {\n };\n \n const FormWrapper: React.FC<FormWrapperProps> = ({\n-    comment,\n     editor,\n     isOpen,\n     reduced,"
+    },
+    "diff:apps/comments-ui/src/components/content/forms/form.tsx:301": {
+      "id": "diff:apps/comments-ui/src/components/content/forms/form.tsx:301",
+      "kind": "diff",
+      "source": "apps/comments-ui/src/components/content/forms/form.tsx:301",
+      "message": "Removed line: comment,"
+    },
+    "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:305": {
+      "id": "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:305",
+      "kind": "diff_hunk",
+      "source": "apps/comments-ui/src/components/content/forms/form.tsx:305",
+      "message": "@@ -307,12 +305,12 @@ const FormWrapper: React.FC<FormWrapperProps> = ({\n }) => {\n     const {member, dispatchAction} = useAppContext();\n \n-    const memberName = member?.name ?? comment?.member?.name;\n-    const memberExpertise = member?.expertise ?? comment?.member?.expertise;\n+    const memberName = member?.name;\n+    const memberExpertise = member?.expertise;\n \n     let openStyles = '';\n     if (isOpen) {\n-        const isReplyToReply = !!openForm?.in_reply_to_snippet;\n+        const isReplyToReply = !!openForm.in_reply_to_snippet;\n         openStyles = isReplyToReply ? 'pl-[1px] pt-[68px] sm:pl-[44px] sm:pt-[56px]' : 'pl-[1px] pt-[48px] sm:pl-[44px] sm:pt-[40px]';\n     }\n "
+    },
+    "diff:apps/comments-ui/src/components/content/forms/form.tsx:310": {
+      "id": "diff:apps/comments-ui/src/components/content/forms/form.tsx:310",
+      "kind": "diff",
+      "source": "apps/comments-ui/src/components/content/forms/form.tsx:310",
+      "message": "Removed line: const memberName = member?.name ?? comment?.member?.name;"
+    },
+    "diff:apps/comments-ui/src/components/content/forms/form.tsx:311": {
+      "id": "diff:apps/comments-ui/src/components/content/forms/form.tsx:311",
+      "kind": "diff",
+      "source": "apps/comments-ui/src/components/content/forms/form.tsx:311",
+      "message": "Removed line: const memberExpertise = member?.expertise ?? comment?.member?.expertise;"
+    },
+    "diff:apps/comments-ui/src/components/content/forms/form.tsx:308": {
+      "id": "diff:apps/comments-ui/src/components/content/forms/form.tsx:308",
+      "kind": "diff",
+      "source": "apps/comments-ui/src/components/content/forms/form.tsx:308",
+      "message": "Added line: const memberName = member?.name;"
+    },
+    "diff:apps/comments-ui/src/components/content/forms/form.tsx:309": {
+      "id": "diff:apps/comments-ui/src/components/content/forms/form.tsx:309",
+      "kind": "diff",
+      "source": "apps/comments-ui/src/components/content/forms/form.tsx:309",
+      "message": "Added line: const memberExpertise = member?.expertise;"
+    },
+    "diff:apps/comments-ui/src/components/content/forms/form.tsx:315": {
+      "id": "diff:apps/comments-ui/src/components/content/forms/form.tsx:315",
+      "kind": "diff",
+      "source": "apps/comments-ui/src/components/content/forms/form.tsx:315",
+      "message": "Removed line: const isReplyToReply = !!openForm?.in_reply_to_snippet;"
+    },
+    "diff:apps/comments-ui/src/components/content/forms/form.tsx:313": {
+      "id": "diff:apps/comments-ui/src/components/content/forms/form.tsx:313",
+      "kind": "diff",
+      "source": "apps/comments-ui/src/components/content/forms/form.tsx:313",
+      "message": "Added line: const isReplyToReply = !!openForm.in_reply_to_snippet;"
+    },
+    "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:27": {
+      "id": "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:27",
+      "kind": "diff_hunk",
+      "source": "apps/comments-ui/src/components/content/forms/reply-form.tsx:27",
+      "message": "@@ -27,12 +27,12 @@ const ReplyForm: React.FC<Props> = ({openForm, parent}) => {\n             parent: parent,\n             reply: {\n                 post_id: postId,\n-                in_reply_to_id: openForm.in_reply_to_id,\n+                in_reply_to_id: parent.id,\n                 status: 'published',\n                 html\n             }\n         });\n-    }, [parent, postId, openForm, dispatchAction]);\n+    }, [parent, postId, dispatchAction]);\n \n     const close = useCallback(() => {\n         dispatchAction('closeCommentForm', openForm.id);"
+    },
+    "diff:apps/comments-ui/src/components/content/forms/reply-form.tsx:30": {
+      "id": "diff:apps/comments-ui/src/components/content/forms/reply-form.tsx:30",
+      "kind": "diff",
+      "source": "apps/comments-ui/src/components/content/forms/reply-form.tsx:30",
+      "message": "Added line: in_reply_to_id: parent.id,"
+    },
+    "diff:apps/comments-ui/src/components/content/forms/reply-form.tsx:35": {
+      "id": "diff:apps/comments-ui/src/components/content/forms/reply-form.tsx:35",
+      "kind": "diff",
+      "source": "apps/comments-ui/src/components/content/forms/reply-form.tsx:35",
+      "message": "Added line: }, [parent, postId, dispatchAction]);"
+    },
+    "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:44": {
+      "id": "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:44",
+      "kind": "diff_hunk",
+      "source": "apps/comments-ui/src/components/content/forms/reply-form.tsx:44",
+      "message": "@@ -44,8 +44,8 @@ const ReplyForm: React.FC<Props> = ({openForm, parent}) => {\n \n     return (\n         <div ref={setForm} data-testid=\"reply-form\">\n-            <div className='mt-[-16px] pr-2'>\n-                <FormWrapper comment={parent} editor={editor} isOpen={true} openForm={openForm} reduced={isMobile()}>\n+            <div className='pr-2 mt-[-16px]'>\n+                <FormWrapper editor={editor} isOpen={true} openForm={openForm} reduced={isMobile()}>\n                     <Form\n                         close={close}\n                         editor={editor}"
+    },
+    "diff:apps/comments-ui/src/components/content/forms/reply-form.tsx:47": {
+      "id": "diff:apps/comments-ui/src/components/content/forms/reply-form.tsx:47",
+      "kind": "diff",
+      "source": "apps/comments-ui/src/components/content/forms/reply-form.tsx:47",
+      "message": "Added line: <div className='pr-2 mt-[-16px]'>"
+    },
+    "diff:apps/comments-ui/src/components/content/forms/reply-form.tsx:48": {
+      "id": "diff:apps/comments-ui/src/components/content/forms/reply-form.tsx:48",
+      "kind": "diff",
+      "source": "apps/comments-ui/src/components/content/forms/reply-form.tsx:48",
+      "message": "Added line: <FormWrapper editor={editor} isOpen={true} openForm={openForm} reduced={isMobile()}>"
+    },
+    "diff_hunk:apps/comments-ui/test/e2e/actions.test.ts:611": {
+      "id": "diff_hunk:apps/comments-ui/test/e2e/actions.test.ts:611",
+      "kind": "diff_hunk",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:611",
+      "message": "@@ -611,6 +611,74 @@ test.describe('Actions', async () => {\n         );\n     });\n \n+    test('Reply form does not inherit expertise from parent comment author', async ({page}) => {\n+        // Set logged-in member with NO expertise\n+        mockedApi.setMember({name: 'Jane Replier', expertise: null});\n+\n+        // Add a comment from a different member who HAS expertise\n+        mockedApi.addComment({\n+            html: '<p>This is a comment from someone with expertise</p>',\n+            member: buildMember({name: 'Expert User', expertise: 'Head of Comments'})\n+        });\n+\n+        const {frame} = await initializeTest(page);\n+\n+        // Verify the parent comment shows the author's expertise\n+        const parentComment = frame.getByTestId('comment-component').nth(0);\n+        await expect(parentComment).toContainText('Head of Comments');\n+\n+        // Click reply on the parent comment\n+        const replyButton = parentComment.getByTestId('reply-button');\n+        await replyButton.click();\n+\n+        // Wait for reply form to appear\n+        const replyForm = frame.getByTestId('reply-form');\n+        await expect(replyForm).toBeVisible();\n+\n+        const editor = replyForm.getByTestId('form-editor');\n+        await waitEditorFocused(editor);\n+\n+        // The reply form should show the logged-in member's info, NOT the parent's\n+        await expect(replyForm.getByTestId('member-name')).toHaveText('Jane Replier');\n+\n+        // The expertise button should show \"Add your expertise\" since the\n+        // logged-in member has no expertise - it should NOT show \"Head of Comments\"\n+        const expertiseButton = replyForm.getByTestId('expertise-button');\n+        await expect(expertiseButton).toBeVisible();\n+        await expect(expertiseButton).toHaveText('·Add your expertise');\n+    });\n+\n+    test('Reply form does not inherit name from parent comment author', async ({page}) => {\n+        // Set logged-in member with NO name (null triggers the fallback bug)\n+        mockedApi.setMember({name: null, expertise: 'Some Expertise'});\n+\n+        // Add a comment from a different member who HAS a name\n+        mockedApi.addComment({\n+            html: '<p>This is a comment from someone with a name</p>',\n+            member: buildMember({name: 'Named Author', expertise: null})\n+        });\n+\n+        const {frame} = await initializeTest(page);\n+\n+        // Verify the parent comment shows the author's name\n+        const parentComment = frame.getByTestId('comment-component').nth(0);\n+        await expect(parentComment).toContainText('Named Author');\n+\n+        // Click reply on the parent comment\n+        const replyButton = parentComment.getByTestId('reply-button');\n+        await replyButton.click();\n+\n+        // Wait for reply form to appear\n+        const replyForm = frame.getByTestId('reply-form');\n+        await expect(replyForm).toBeVisible();\n+\n+        // The reply form should NOT show the parent comment author's name\n+        // It should either show nothing, \"Anonymous\", or prompt for a name\n+        // but definitely NOT \"Named Author\"\n+        const memberName = replyForm.getByTestId('member-name');\n+        await expect(memberName).not.toHaveText('Named Author');\n+    });\n+\n     async function deleteComment(page, frame, commentComponent) {\n         await commentComponent.getByTestId('more-button').first().click();\n         await frame.getByTestId('delete').click();"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:614": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:614",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:614",
+      "message": "Added line: test('Reply form does not inherit expertise from parent comment author', async ({page}) => {"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:615": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:615",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:615",
+      "message": "Added line: // Set logged-in member with NO expertise"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:616": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:616",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:616",
+      "message": "Added line: mockedApi.setMember({name: 'Jane Replier', expertise: null});"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:617": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:617",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:617",
+      "message": "Added line: "
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:618": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:618",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:618",
+      "message": "Added line: // Add a comment from a different member who HAS expertise"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:619": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:619",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:619",
+      "message": "Added line: mockedApi.addComment({"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:620": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:620",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:620",
+      "message": "Added line: html: '<p>This is a comment from someone with expertise</p>',"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:621": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:621",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:621",
+      "message": "Added line: member: buildMember({name: 'Expert User', expertise: 'Head of Comments'})"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:622": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:622",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:622",
+      "message": "Added line: });"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:623": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:623",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:623",
+      "message": "Added line: "
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:624": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:624",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:624",
+      "message": "Added line: const {frame} = await initializeTest(page);"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:625": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:625",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:625",
+      "message": "Added line: "
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:626": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:626",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:626",
+      "message": "Added line: // Verify the parent comment shows the author's expertise"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:627": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:627",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:627",
+      "message": "Added line: const parentComment = frame.getByTestId('comment-component').nth(0);"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:628": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:628",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:628",
+      "message": "Added line: await expect(parentComment).toContainText('Head of Comments');"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:629": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:629",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:629",
+      "message": "Added line: "
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:630": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:630",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:630",
+      "message": "Added line: // Click reply on the parent comment"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:631": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:631",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:631",
+      "message": "Added line: const replyButton = parentComment.getByTestId('reply-button');"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:632": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:632",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:632",
+      "message": "Added line: await replyButton.click();"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:633": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:633",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:633",
+      "message": "Added line: "
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:634": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:634",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:634",
+      "message": "Added line: // Wait for reply form to appear"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:635": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:635",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:635",
+      "message": "Added line: const replyForm = frame.getByTestId('reply-form');"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:636": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:636",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:636",
+      "message": "Added line: await expect(replyForm).toBeVisible();"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:637": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:637",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:637",
+      "message": "Added line: "
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:638": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:638",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:638",
+      "message": "Added line: const editor = replyForm.getByTestId('form-editor');"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:639": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:639",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:639",
+      "message": "Added line: await waitEditorFocused(editor);"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:640": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:640",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:640",
+      "message": "Added line: "
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:641": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:641",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:641",
+      "message": "Added line: // The reply form should show the logged-in member's info, NOT the parent's"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:642": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:642",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:642",
+      "message": "Added line: await expect(replyForm.getByTestId('member-name')).toHaveText('Jane Replier');"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:643": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:643",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:643",
+      "message": "Added line: "
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:644": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:644",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:644",
+      "message": "Added line: // The expertise button should show \"Add your expertise\" since the"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:645": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:645",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:645",
+      "message": "Added line: // logged-in member has no expertise - it should NOT show \"Head of Comments\""
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:646": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:646",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:646",
+      "message": "Added line: const expertiseButton = replyForm.getByTestId('expertise-button');"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:647": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:647",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:647",
+      "message": "Added line: await expect(expertiseButton).toBeVisible();"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:648": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:648",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:648",
+      "message": "Added line: await expect(expertiseButton).toHaveText('·Add your expertise');"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:649": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:649",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:649",
+      "message": "Added line: });"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:650": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:650",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:650",
+      "message": "Added line: "
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:651": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:651",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:651",
+      "message": "Added line: test('Reply form does not inherit name from parent comment author', async ({page}) => {"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:652": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:652",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:652",
+      "message": "Added line: // Set logged-in member with NO name (null triggers the fallback bug)"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:653": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:653",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:653",
+      "message": "Added line: mockedApi.setMember({name: null, expertise: 'Some Expertise'});"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:654": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:654",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:654",
+      "message": "Added line: "
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:655": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:655",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:655",
+      "message": "Added line: // Add a comment from a different member who HAS a name"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:656": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:656",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:656",
+      "message": "Added line: mockedApi.addComment({"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:657": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:657",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:657",
+      "message": "Added line: html: '<p>This is a comment from someone with a name</p>',"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:658": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:658",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:658",
+      "message": "Added line: member: buildMember({name: 'Named Author', expertise: null})"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:659": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:659",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:659",
+      "message": "Added line: });"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:660": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:660",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:660",
+      "message": "Added line: "
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:661": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:661",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:661",
+      "message": "Added line: const {frame} = await initializeTest(page);"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:662": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:662",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:662",
+      "message": "Added line: "
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:663": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:663",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:663",
+      "message": "Added line: // Verify the parent comment shows the author's name"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:664": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:664",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:664",
+      "message": "Added line: const parentComment = frame.getByTestId('comment-component').nth(0);"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:665": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:665",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:665",
+      "message": "Added line: await expect(parentComment).toContainText('Named Author');"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:666": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:666",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:666",
+      "message": "Added line: "
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:667": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:667",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:667",
+      "message": "Added line: // Click reply on the parent comment"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:668": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:668",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:668",
+      "message": "Added line: const replyButton = parentComment.getByTestId('reply-button');"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:669": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:669",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:669",
+      "message": "Added line: await replyButton.click();"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:670": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:670",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:670",
+      "message": "Added line: "
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:671": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:671",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:671",
+      "message": "Added line: // Wait for reply form to appear"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:672": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:672",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:672",
+      "message": "Added line: const replyForm = frame.getByTestId('reply-form');"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:673": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:673",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:673",
+      "message": "Added line: await expect(replyForm).toBeVisible();"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:674": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:674",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:674",
+      "message": "Added line: "
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:675": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:675",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:675",
+      "message": "Added line: // The reply form should NOT show the parent comment author's name"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:676": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:676",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:676",
+      "message": "Added line: // It should either show nothing, \"Anonymous\", or prompt for a name"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:677": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:677",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:677",
+      "message": "Added line: // but definitely NOT \"Named Author\""
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:678": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:678",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:678",
+      "message": "Added line: const memberName = replyForm.getByTestId('member-name');"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:679": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:679",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:679",
+      "message": "Added line: await expect(memberName).not.toHaveText('Named Author');"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:680": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:680",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:680",
+      "message": "Added line: });"
+    },
+    "diff:apps/comments-ui/test/e2e/actions.test.ts:681": {
+      "id": "diff:apps/comments-ui/test/e2e/actions.test.ts:681",
+      "kind": "diff",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:681",
+      "message": "Added line: "
+    },
+    "entity:apps/comments-ui/src/components/content/forms/form.tsx:apps.comments-ui.src.components.content.forms.form": {
+      "id": "entity:apps/comments-ui/src/components/content/forms/form.tsx:apps.comments-ui.src.components.content.forms.form",
+      "kind": "entity",
+      "source": "apps/comments-ui/src/components/content/forms/form.tsx:244-244",
+      "message": "Changed module apps.comments-ui.src.components.content.forms.form touched by 5 hunk(s)."
+    },
+    "entity:apps/comments-ui/src/components/content/forms/reply-form.tsx:apps.comments-ui.src.components.content.forms.reply-form": {
+      "id": "entity:apps/comments-ui/src/components/content/forms/reply-form.tsx:apps.comments-ui.src.components.content.forms.reply-form",
+      "kind": "entity",
+      "source": "apps/comments-ui/src/components/content/forms/reply-form.tsx:30-35",
+      "message": "Changed module apps.comments-ui.src.components.content.forms.reply-form touched by 2 hunk(s)."
+    },
+    "entity:apps/comments-ui/test/e2e/actions.test.ts:apps.comments-ui.test.e2e.actions.test": {
+      "id": "entity:apps/comments-ui/test/e2e/actions.test.ts:apps.comments-ui.test.e2e.actions.test",
+      "kind": "entity",
+      "source": "apps/comments-ui/test/e2e/actions.test.ts:614-681",
+      "message": "Changed module apps.comments-ui.test.e2e.actions.test touched by 1 hunk(s)."
+    },
+    "risk:security_sensitive:apps/comments-ui/test/e2e/actions.test.ts": {
+      "id": "risk:security_sensitive:apps/comments-ui/test/e2e/actions.test.ts",
+      "kind": "risk",
+      "source": "security_sensitive",
+      "message": "Security-sensitive keywords changed in apps/comments-ui/test/e2e/actions.test.ts."
+    }
+  },
+  "missing_evidence_ids": [],
+  "agent_runs": [
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+      "input_evidence_ids": [
+        "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:241",
+        "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:27",
+        "diff_hunk:apps/comments-ui/test/e2e/actions.test.ts:611"
+      ],
+      "output_issue_ids": [
+        "correctness:apps/comments-ui/src/components/content/forms/form.tsx:244",
+        "correctness:apps/comments-ui/src/components/content/forms/reply-form.tsx:30"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 3708,
+      "token_count_in": 5816,
+      "token_count_out": 488,
+      "trace_id": "d11a60db07034db5aeac2356e63b3bb4",
+      "span_id": "929f3b55c6924f7d",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001",
+      "shard_index": 0,
+      "shard_count": 1,
+      "context_request_count": 2,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+      "input_evidence_ids": [
+        "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:261",
+        "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:289",
+        "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:297",
+        "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:305",
+        "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:44"
+      ],
+      "output_issue_ids": [
+        "correctness:apps/comments-ui/src/components/content/forms/form.tsx:305",
+        "correctness:apps/comments-ui/src/components/content/forms/form.tsx:261",
+        "best-practice:apps/comments-ui/src/components/content/forms/form.tsx:308"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 2,
+      "retry_log": [
+        "attempt=1 error=timeout delay=1.00s",
+        "attempt=2 error=timeout delay=2.00s"
+      ],
+      "latency_ms": 150253,
+      "token_count_in": 3797,
+      "token_count_out": 415,
+      "trace_id": "b17dee88d71440e4b84c24964f14921f",
+      "span_id": "c2bce48908384af7",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001-refill",
+      "shard_index": 0,
+      "shard_count": 1,
+      "context_request_count": 0,
+      "context_refill_used": true
+    },
+    {
+      "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+      "model": null,
+      "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+      "input_evidence_ids": [
+        "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:261"
+      ],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 0,
+      "token_count_in": 0,
+      "token_count_out": 0,
+      "trace_id": "",
+      "span_id": "",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "",
+      "shard_index": 0,
+      "shard_count": 0,
+      "context_request_count": 0,
+      "context_refill_used": false
+    }
+  ],
+  "prompt_exports": {},
+  "context_budget": {
+    "enabled": true,
+    "strategy": "file_risk_shards_v1",
+    "context_profile": "risk_compact_manifest_v1",
+    "max_input_tokens": 9000,
+    "estimated_input_tokens": 7743,
+    "selected_evidence_count": 8,
+    "omitted_evidence_count": 87,
+    "selected_evidence_ids": [
+      "diff_hunk:apps/comments-ui/test/e2e/actions.test.ts:611",
+      "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:241",
+      "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:27",
+      "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:261",
+      "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:289",
+      "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:297",
+      "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:305",
+      "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:44"
+    ],
+    "omitted_evidence_ids": [
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:614",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:615",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:616",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:617",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:618",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:619",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:620",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:621",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:622",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:623",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:624",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:625",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:626",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:627",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:628",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:629",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:630",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:631",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:632",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:633",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:634",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:635",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:636",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:637",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:638",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:639",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:640",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:641",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:642",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:643",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:644",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:645",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:646",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:647",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:648",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:649",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:650",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:651",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:652",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:653",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:654",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:655",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:656",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:657",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:658",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:659",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:660",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:661",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:662",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:663",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:664",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:665",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:666",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:667",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:668",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:669",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:670",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:671",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:672",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:673",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:674",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:675",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:676",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:677",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:678",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:679",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:680",
+      "diff:apps/comments-ui/test/e2e/actions.test.ts:681",
+      "risk:security_sensitive:apps/comments-ui/test/e2e/actions.test.ts",
+      "entity:apps/comments-ui/test/e2e/actions.test.ts:apps.comments-ui.test.e2e.actions.test",
+      "entity:apps/comments-ui/src/components/content/forms/form.tsx:apps.comments-ui.src.components.content.forms.form",
+      "entity:apps/comments-ui/src/components/content/forms/reply-form.tsx:apps.comments-ui.src.components.content.forms.reply-form",
+      "diff:apps/comments-ui/src/components/content/forms/form.tsx:244",
+      "diff:apps/comments-ui/src/components/content/forms/form.tsx:264",
+      "diff:apps/comments-ui/src/components/content/forms/form.tsx:265",
+      "diff:apps/comments-ui/src/components/content/forms/form.tsx:292",
+      "diff:apps/comments-ui/src/components/content/forms/form.tsx:301",
+      "diff:apps/comments-ui/src/components/content/forms/form.tsx:308",
+      "diff:apps/comments-ui/src/components/content/forms/form.tsx:309",
+      "diff:apps/comments-ui/src/components/content/forms/form.tsx:310",
+      "diff:apps/comments-ui/src/components/content/forms/form.tsx:311",
+      "diff:apps/comments-ui/src/components/content/forms/form.tsx:313",
+      "diff:apps/comments-ui/src/components/content/forms/form.tsx:315",
+      "diff:apps/comments-ui/src/components/content/forms/reply-form.tsx:30",
+      "diff:apps/comments-ui/src/components/content/forms/reply-form.tsx:35",
+      "diff:apps/comments-ui/src/components/content/forms/reply-form.tsx:47",
+      "diff:apps/comments-ui/src/components/content/forms/reply-form.tsx:48"
+    ],
+    "selected_risk_signal_count": 1,
+    "context_truncated": true,
+    "shard_count": 1,
+    "refill_count": 1,
+    "context_request_count": 2,
+    "context_requests": [
+      {
+        "request_type": "same_file_more_evidence",
+        "path": "apps/comments-ui/src/components/content/forms/form.tsx",
+        "evidence_ids": [
+          "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:261",
+          "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:289",
+          "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:297",
+          "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:305"
+        ],
+        "risk_tag": null,
+        "symbol": null,
+        "reason": "",
+        "source_shard_id": "shard-001",
+        "fulfilled_evidence_ids": [
+          "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:261",
+          "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:289",
+          "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:297",
+          "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:305"
+        ]
+      },
+      {
+        "request_type": "same_file_more_evidence",
+        "path": "apps/comments-ui/src/components/content/forms/reply-form.tsx",
+        "evidence_ids": [
+          "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:44"
+        ],
+        "risk_tag": null,
+        "symbol": null,
+        "reason": "",
+        "source_shard_id": "shard-001",
+        "fulfilled_evidence_ids": [
+          "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:44"
+        ]
+      }
+    ],
+    "shards": [
+      {
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 3,
+        "omitted_evidence_count": 92,
+        "estimated_input_tokens": 4741,
+        "context_truncated": true
+      },
+      {
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "is_refill": true,
+        "parent_shard_id": "shard-001",
+        "selected_evidence_count": 5,
+        "omitted_evidence_count": 0,
+        "estimated_input_tokens": 3002,
+        "context_truncated": false
+      }
+    ],
+    "warnings": []
+  },
+  "loop": {
+    "enabled": true,
+    "max_iter": 1,
+    "iterations_completed": 1,
+    "converged": false,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "checkpoint_path": "D:\\learn\\code-review-agent\\workspace\\qodo_pr_review_bench_live_guideline_rerank\\samples\\qodo_001\\review\\loop_checkpoint.json",
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "iterations": [
+      {
+        "i": 0,
+        "candidate_issue_count": 5,
+        "verified_count": 1,
+        "needs_human_review_count": 0,
+        "discarded_count": 4,
+        "keep_count": 0,
+        "uncertain_count": 1,
+        "reject_count": 0,
+        "feedback_sent": [
+          {
+            "issue_id": "correctness:apps/comments-ui/src/components/content/forms/form.tsx:261",
+            "category": "correctness",
+            "critic_reason": "low confidence",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:261"
+            ]
+          }
+        ],
+        "agent_runs": [
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+            "input_evidence_ids": [
+              "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:241",
+              "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:27",
+              "diff_hunk:apps/comments-ui/test/e2e/actions.test.ts:611"
+            ],
+            "output_issue_ids": [
+              "correctness:apps/comments-ui/src/components/content/forms/form.tsx:244",
+              "correctness:apps/comments-ui/src/components/content/forms/reply-form.tsx:30"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 3708,
+            "token_count_in": 5816,
+            "token_count_out": 488,
+            "trace_id": "d11a60db07034db5aeac2356e63b3bb4",
+            "span_id": "929f3b55c6924f7d",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001",
+            "shard_index": 0,
+            "shard_count": 1,
+            "context_request_count": 2,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+            "input_evidence_ids": [
+              "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:261",
+              "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:289",
+              "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:297",
+              "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:305",
+              "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:44"
+            ],
+            "output_issue_ids": [
+              "correctness:apps/comments-ui/src/components/content/forms/form.tsx:305",
+              "correctness:apps/comments-ui/src/components/content/forms/form.tsx:261",
+              "best-practice:apps/comments-ui/src/components/content/forms/form.tsx:308"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 2,
+            "retry_log": [
+              "attempt=1 error=timeout delay=1.00s",
+              "attempt=2 error=timeout delay=2.00s"
+            ],
+            "latency_ms": 150253,
+            "token_count_in": 3797,
+            "token_count_out": 415,
+            "trace_id": "b17dee88d71440e4b84c24964f14921f",
+            "span_id": "c2bce48908384af7",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001-refill",
+            "shard_index": 0,
+            "shard_count": 1,
+            "context_request_count": 0,
+            "context_refill_used": true
+          },
+          {
+            "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+            "model": null,
+            "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+            "input_evidence_ids": [
+              "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:261"
+            ],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 0,
+            "token_count_in": 0,
+            "token_count_out": 0,
+            "trace_id": "",
+            "span_id": "",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "",
+            "shard_index": 0,
+            "shard_count": 0,
+            "context_request_count": 0,
+            "context_refill_used": false
+          }
+        ],
+        "issue_set": [
+          "correctness:apps/comments-ui/src/components/content/forms/form.tsx:261"
+        ],
+        "keep": [],
+        "needs_human_review": [
+          {
+            "file": "apps/comments-ui/src/components/content/forms/form.tsx",
+            "line": 261,
+            "severity": "medium",
+            "category": "correctness",
+            "message": "Changed editor editable condition from memberName to member.expertise; if member is null or undefined, this will throw a TypeError.",
+            "suggestion": "Add optional chaining: member?.expertise to safely access the property.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:261"
+            ]
+          }
+        ],
+        "discarded": [
+          {
+            "file": "apps/comments-ui/src/components/content/forms/form.tsx",
+            "line": 244,
+            "severity": "high",
+            "category": "correctness",
+            "message": "Removing fallback to comment author's name may break reply form display when logged-in member has no name.",
+            "suggestion": "Keep the fallback to comment?.member?.name when member?.name is null/undefined to preserve the parent comment author's name in the reply form.",
+            "confidence": 0.85,
+            "evidence_ids": [
+              "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:241"
+            ],
+            "filter_reason": "low_signal_suggestion"
+          },
+          {
+            "file": "apps/comments-ui/src/components/content/forms/reply-form.tsx",
+            "line": 30,
+            "severity": "medium",
+            "category": "correctness",
+            "message": "Changed in_reply_to_id from openForm.in_reply_to_id to parent.id may alter reply threading behavior.",
+            "suggestion": "Verify that parent.id is the correct identifier for the reply target, as openForm.in_reply_to_id may have been more specific.",
+            "confidence": 0.6,
+            "evidence_ids": [
+              "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:27"
+            ],
+            "filter_reason": "low_signal_suggestion"
+          },
+          {
+            "file": "apps/comments-ui/src/components/content/forms/form.tsx",
+            "line": 305,
+            "severity": "medium",
+            "category": "correctness",
+            "message": "Removing fallback to comment member data may cause null/undefined access when member is null and openForm is used without optional chaining.",
+            "suggestion": "Restore the fallback or add optional chaining to openForm.in_reply_to_snippet to avoid potential runtime error when openForm is null.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:305"
+            ],
+            "filter_reason": "low_signal_suggestion"
+          },
+          {
+            "file": "apps/comments-ui/src/components/content/forms/form.tsx",
+            "line": 308,
+            "severity": "low",
+            "category": "best-practice",
+            "message": "Review guideline violation: 'React Button Elements Must Have Explicit Type Attribute' - the <form> element does not have an explicit type attribute, but the guideline applies to <button> elements. No button type issue found.",
+            "suggestion": "",
+            "confidence": 0.5,
+            "evidence_ids": [],
+            "filter_reason": "missing_evidence"
+          }
+        ]
+      }
+    ]
+  },
+  "tracing": {
+    "total_latency_ms": 153961,
+    "total_token_count_in": 9613,
+    "total_token_count_out": 903,
+    "total_retry_count": 2,
+    "run_count": 3,
+    "status_counts": {
+      "ok": 3
+    }
+  }
+}

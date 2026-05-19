@@ -1,0 +1,21 @@
+--- a/scripts/benchmark.py
++++ b/scripts/benchmark.py
+@@ -18,17 +18,17 @@
+     for i, line in enumerate(lines):
+         if line.startswith(header_prefix):
+             line_number = i
+             break
+ 
+     if line_number != -1:
+         lines.insert(line_number, new_section)
+     else:
+-        print(f"No section of level {level} found.")
++        print(f"Markdown file was of unexpected format. No section of level {level} found. Did not write results.")
+         return
+ 
+     # Write the file
+     with open(file_path, "w") as file:
+         file.writelines(lines)
+ 
+ 
+ def ask_yes_no(question: str) -> bool:

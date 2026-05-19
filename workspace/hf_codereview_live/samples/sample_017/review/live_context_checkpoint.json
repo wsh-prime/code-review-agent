@@ -1,0 +1,107 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:4b2299f7d8de1d5fc7670fe786b9973db0f441e88cb08e03ae759985d01b8e57",
+  "diff_hash": "sha256:96b51130400c92f06742180dc2dc31f399fc4ef65687bad4dfd7921ff7252168",
+  "shards": {
+    "e9aab5ea6167ed478b53756be65aacb6b8b10de533913d919c75a4aa19de5f62": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:scripts/benchmark.py:18"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "scripts/benchmark.py",
+          "evidence_ids": [],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The diff hunk shows a change to a print message, but the surrounding context (e.g., the function signature, how file_path is used, and the write logic) is needed to assess if the patch introduces any functional risk such as silent failure or incorrect file writing.",
+          "source_shard_id": "shard-001",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:scripts/benchmark.py:18"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 41419,
+        "token_count_in": 1247,
+        "token_count_out": 104,
+        "trace_id": "7206d03f4396469c8fb20bd3e5145454",
+        "span_id": "a42669a1b25d4f41",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "7e1d66dfa834cbd3e870a77cba4c8607d02698547981b1c1e801830da10a38c8": {
+      "status": "completed",
+      "shard_id": "shard-001-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-001",
+      "selected_evidence_ids": [
+        "diff:scripts/benchmark.py:26",
+        "entity:scripts/benchmark.py:scripts.benchmark"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": null,
+          "evidence_ids": [],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The primary evidence shows only a single added print statement. To assess whether this introduces a concrete failure scenario, I need to see the surrounding context: the function that contains this line, how 'level' is derived, and whether the print replaces or supplements a previous error-handling path.",
+          "source_shard_id": "shard-001-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:scripts/benchmark.py:26",
+          "entity:scripts/benchmark.py:scripts.benchmark"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 13251,
+        "token_count_in": 1081,
+        "token_count_out": 81,
+        "trace_id": "0871bca870bf47b49101d1512bd11443",
+        "span_id": "2530028072c14856",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 1,
+        "context_refill_used": true
+      }
+    }
+  }
+}

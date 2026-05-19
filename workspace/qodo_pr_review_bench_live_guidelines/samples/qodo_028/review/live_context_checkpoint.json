@@ -1,0 +1,347 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:30404e004ec339f8caaa1df254ee1896a8c73a4db15813d13d6771aebc695b5a",
+  "diff_hash": "sha256:392ae4de1a7e1b43c770dbd4468f50cb126a4ee14b14d2c4cbaf52ece6849847",
+  "shards": {
+    "c874510cd6b136ef0a750fabf0a0dd67697939fd854197e7eb0c9c2f91694463": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:apps/api/v2/src/ee/platform-endpoints-module.ts:13",
+        "diff_hunk:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.e2e-spec.ts:1",
+        "diff_hunk:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:1",
+        "diff_hunk:apps/api/v2/src/modules/teams/invite/outputs/invite.output.ts:1"
+      ],
+      "context_requests": [
+        {
+          "request_type": "related_symbol",
+          "path": null,
+          "evidence_ids": [
+            "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:1"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "To verify the TeamService.createInvite method and its security implications.",
+          "source_shard_id": "shard-001",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.e2e-spec.ts:1"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "To review the full test file for any security-related test cases that might indicate expected behavior.",
+          "source_shard_id": "shard-001",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [
+        {
+          "file": "apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts",
+          "line": 1,
+          "severity": "high",
+          "category": "security",
+          "message": "The controller uses @Roles(\"TEAM_MEMBER\") but the endpoint creates an invite link that can be shared externally. Any team member can generate an invite link, which may allow unauthorized access if the role check is insufficient.",
+          "suggestion": "Consider restricting invite creation to team admins or owners only, or add additional validation to ensure the user has appropriate permissions.",
+          "confidence": 0.6,
+          "evidence_ids": [
+            "diff_hunk:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:1"
+          ]
+        },
+        {
+          "file": "apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts",
+          "line": 1,
+          "severity": "medium",
+          "category": "maintainability",
+          "message": "The controller directly calls TeamService.createInvite(teamId) without any error handling or validation of the teamId parameter beyond ParseIntPipe. If the team does not exist or the user is not a member, the service may throw an unhandled exception.",
+          "suggestion": "Add try-catch or use NestJS exception filters to handle potential errors from the service, and consider adding a guard to verify the user is a member of the specified team.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:1"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:apps/api/v2/src/ee/platform-endpoints-module.ts:13",
+          "diff_hunk:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.e2e-spec.ts:1",
+          "diff_hunk:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:1",
+          "diff_hunk:apps/api/v2/src/modules/teams/invite/outputs/invite.output.ts:1"
+        ],
+        "output_issue_ids": [
+          "security:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:1",
+          "maintainability:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:1"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 4063,
+        "token_count_in": 9017,
+        "token_count_out": 558,
+        "trace_id": "15fa1c6d61e3471db192e70e31b60113",
+        "span_id": "1e5c114a649745e7",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 2,
+        "context_request_count": 2,
+        "context_refill_used": false
+      }
+    },
+    "49ced50415e0aa771b9fec02ee72782c25da14aeb9625e837dbd5fa4ff2d7864": {
+      "status": "completed",
+      "shard_id": "shard-001-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-001",
+      "selected_evidence_ids": [
+        "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.e2e-spec.ts:1",
+        "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:1",
+        "diff_hunk:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.e2e-spec.ts:1",
+        "diff_hunk:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:1"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts",
+          "line": 1,
+          "severity": "high",
+          "category": "security",
+          "message": "The controller uses @Roles(\"TEAM_MEMBER\") guard but the endpoint creates a team invite. The evidence shows the test creates an admin membership, but the role check is for TEAM_MEMBER, which may allow non-admin members to create invites, potentially leading to unauthorized invite generation.",
+          "suggestion": "Verify that TEAM_MEMBER role is the intended authorization level for creating invites. If only admins should create invites, change the role to \"ADMIN\" or add an additional role check.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:1",
+            "diff_hunk:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.e2e-spec.ts:1"
+          ]
+        },
+        {
+          "file": "apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts",
+          "line": 1,
+          "severity": "medium",
+          "category": "maintainability",
+          "message": "The controller directly calls TeamService.createInvite as a static method, which may indicate a violation of the naming convention guideline: service classes should follow '<Entity>Service' pattern. The class name 'TeamService' does not match the expected pattern for a service in this module context.",
+          "suggestion": "Consider renaming the service to follow the project's naming conventions, e.g., 'TeamsInviteService' or ensure the service is properly instantiated via dependency injection.",
+          "confidence": 0.6,
+          "evidence_ids": [
+            "diff_hunk:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:1"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.e2e-spec.ts:1",
+          "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:1",
+          "diff_hunk:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.e2e-spec.ts:1",
+          "diff_hunk:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:1"
+        ],
+        "output_issue_ids": [
+          "security:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:1",
+          "maintainability:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:1"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 3520,
+        "token_count_in": 5213,
+        "token_count_out": 476,
+        "trace_id": "ce2ca89557944aab9cc597ce711ff44c",
+        "span_id": "7138ba6e98194769",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "shard_count": 2,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    },
+    "4ce5e1a6b5dcc3d1273854a6547babfe066160b5fe50a984c47966cce0e178d2": {
+      "status": "completed",
+      "shard_id": "shard-002",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:apps/api/v2/src/modules/teams/invite/teams-invite.module.ts:1",
+        "diff_hunk:packages/features/ee/teams/services/teamService.ts:564",
+        "diff_hunk:packages/features/ee/teams/services/teamService.ts:85",
+        "diff_hunk:packages/features/ee/teams/services/teamService.ts:96"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "diff:packages/features/ee/teams/services/teamService.ts:88",
+            "diff:packages/features/ee/teams/services/teamService.ts:99",
+            "diff:packages/features/ee/teams/services/teamService.ts:106",
+            "diff:packages/features/ee/teams/services/teamService.ts:567"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The security_sensitive risk signal was triggered for teamService.ts. Requesting omitted diff evidence to check for additional security-relevant changes (e.g., input handling, authorization checks).",
+          "source_shard_id": "shard-002",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [
+        {
+          "file": "packages/features/ee/teams/services/teamService.ts",
+          "line": 99,
+          "severity": "high",
+          "category": "bug_risk",
+          "message": "Negated condition in buildInviteLink: the logic now returns the teamInviteLink when isOrgContext is true, which is the opposite of the original behavior. This likely inverts the invite link flow for organization contexts.",
+          "suggestion": "Verify that the condition negation is intentional. If the original behavior was correct, revert the change from `if (!isOrgContext)` to `if (isOrgContext)`.",
+          "confidence": 0.85,
+          "evidence_ids": [
+            "diff_hunk:packages/features/ee/teams/services/teamService.ts:96"
+          ]
+        },
+        {
+          "file": "packages/features/ee/teams/services/teamService.ts",
+          "line": 99,
+          "severity": "medium",
+          "category": "bug_risk",
+          "message": "Returned token value changed from the raw `token` (hex string) to `newToken.identifier`. The identifier field may not match the expected token format used by the invite link, potentially causing invite link verification failures.",
+          "suggestion": "Ensure that `newToken.identifier` is the correct value to return and that downstream consumers of the invite link expect this identifier format. If the raw token is needed, revert to returning `token`.",
+          "confidence": 0.75,
+          "evidence_ids": [
+            "diff_hunk:packages/features/ee/teams/services/teamService.ts:85",
+            "diff_hunk:packages/features/ee/teams/services/teamService.ts:96"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:apps/api/v2/src/modules/teams/invite/teams-invite.module.ts:1",
+          "diff_hunk:packages/features/ee/teams/services/teamService.ts:564",
+          "diff_hunk:packages/features/ee/teams/services/teamService.ts:85",
+          "diff_hunk:packages/features/ee/teams/services/teamService.ts:96"
+        ],
+        "output_issue_ids": [
+          "bug_risk:packages/features/ee/teams/services/teamService.ts:99",
+          "bug_risk:packages/features/ee/teams/services/teamService.ts:99"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 37253,
+        "token_count_in": 4588,
+        "token_count_out": 536,
+        "trace_id": "b2cd5bb0af85493c98f8e422f2c005d9",
+        "span_id": "6ca325df63e4462e",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "shard_count": 2,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "c80f774f2319338dc669dbc4256fd4102d8348138af0f972822a91744a1088de": {
+      "status": "completed",
+      "shard_id": "shard-002-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-002",
+      "selected_evidence_ids": [
+        "diff:packages/features/ee/teams/services/teamService.ts:106",
+        "diff:packages/features/ee/teams/services/teamService.ts:567",
+        "diff:packages/features/ee/teams/services/teamService.ts:88",
+        "diff:packages/features/ee/teams/services/teamService.ts:99",
+        "diff_hunk:packages/features/ee/teams/services/teamService.ts:564",
+        "diff_hunk:packages/features/ee/teams/services/teamService.ts:85",
+        "diff_hunk:packages/features/ee/teams/services/teamService.ts:96"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "packages/features/ee/teams/services/teamService.ts",
+          "line": 106,
+          "severity": "high",
+          "category": "logic_error",
+          "message": "Inverted condition in buildInviteLink: the patch flips the guard from `if (!isOrgContext)` to `if (isOrgContext)`, which now returns the teamInviteLink directly for org contexts instead of the getting-started path. This breaks the intended flow for organization invitations.",
+          "suggestion": "Revert the condition back to `if (!isOrgContext)` or ensure the logic correctly distinguishes org vs non-org contexts.",
+          "confidence": 0.95,
+          "evidence_ids": [
+            "diff_hunk:packages/features/ee/teams/services/teamService.ts:96",
+            "diff:packages/features/ee/teams/services/teamService.ts:106"
+          ]
+        },
+        {
+          "file": "packages/features/ee/teams/services/teamService.ts",
+          "line": 88,
+          "severity": "medium",
+          "category": "potential_bug",
+          "message": "Return value changed from `token` (the raw random hex) to `newToken.identifier` (the invite-link identifier). The identifier is a static string `invite-link-for-teamId-${teamId}`, which is not a secret and may leak internal team IDs. Callers expecting a secure token may now receive a predictable value.",
+          "suggestion": "Return the actual token (`newToken.token`) instead of the identifier, or confirm that all callers expect the identifier.",
+          "confidence": 0.8,
+          "evidence_ids": [
+            "diff_hunk:packages/features/ee/teams/services/teamService.ts:85",
+            "diff:packages/features/ee/teams/services/teamService.ts:88",
+            "diff:packages/features/ee/teams/services/teamService.ts:99"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff:packages/features/ee/teams/services/teamService.ts:106",
+          "diff:packages/features/ee/teams/services/teamService.ts:567",
+          "diff:packages/features/ee/teams/services/teamService.ts:88",
+          "diff:packages/features/ee/teams/services/teamService.ts:99",
+          "diff_hunk:packages/features/ee/teams/services/teamService.ts:564",
+          "diff_hunk:packages/features/ee/teams/services/teamService.ts:85",
+          "diff_hunk:packages/features/ee/teams/services/teamService.ts:96"
+        ],
+        "output_issue_ids": [
+          "logic_error:packages/features/ee/teams/services/teamService.ts:106",
+          "potential_bug:packages/features/ee/teams/services/teamService.ts:88"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 15269,
+        "token_count_in": 3585,
+        "token_count_out": 458,
+        "trace_id": "e5f104cf48004d5b850c4009b546a772",
+        "span_id": "d0cb5d456e184a1a",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002-refill",
+        "shard_index": 1,
+        "shard_count": 2,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    }
+  }
+}

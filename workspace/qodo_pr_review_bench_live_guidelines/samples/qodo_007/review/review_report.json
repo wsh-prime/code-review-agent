@@ -1,0 +1,2714 @@
+{
+  "schema_version": "1.3",
+  "summary": {
+    "mode": "hybrid-live",
+    "changed_file_count": 3,
+    "changed_entity_count": 3,
+    "risk_signal_count": 0,
+    "finding_count": 0,
+    "needs_human_review_count": 1,
+    "discarded_count": 0,
+    "evidence_count": 121,
+    "missing_evidence_id_count": 0,
+    "agent_run_count": 2,
+    "prompt_exported": false,
+    "loop_enabled": true,
+    "loop_iterations_completed": 1,
+    "loop_converged": false,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "total_latency_ms": 64696,
+    "total_token_count_in": 6722,
+    "total_token_count_out": 160,
+    "context_budget_enabled": true,
+    "context_truncated": true,
+    "selected_evidence_count": 3,
+    "omitted_evidence_count": 118,
+    "review_shard_count": 1,
+    "context_refill_count": 0,
+    "context_request_count": 0,
+    "target_repo_modified": false
+  },
+  "findings": [],
+  "needs_human_review": [
+    {
+      "file": "ghost/i18n/locales/zh/comments.json",
+      "line": 1,
+      "severity": "medium",
+      "category": "correctness",
+      "message": "Deleting the entire Chinese comments translation file will cause the comments feature to fall back to English or show missing translation keys for Chinese users.",
+      "suggestion": "If the file is no longer needed, ensure translations are consolidated into another file or that the feature no longer requires Chinese translations.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:ghost/i18n/locales/zh/comments.json:1"
+      ]
+    }
+  ],
+  "discarded": [],
+  "changed_files": [
+    {
+      "old_path": "ghost/i18n/locales/zh/comments.json",
+      "new_path": null,
+      "change_type": "deleted",
+      "hunks": [
+        {
+          "old_start": 1,
+          "old_count": 74,
+          "new_start": 0,
+          "new_count": 0,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "removed",
+              "old_lineno": 1,
+              "new_lineno": null,
+              "content": "{"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 2,
+              "new_lineno": null,
+              "content": "    \"{amount} characters left\": \"还剩{amount}字\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 3,
+              "new_lineno": null,
+              "content": "    \"{amount} comments\": \"{amount}条评论\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 4,
+              "new_lineno": null,
+              "content": "    \"{amount} hrs ago\": \"{amount}小时前\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 5,
+              "new_lineno": null,
+              "content": "    \"{amount} mins ago\": \"{amount}分钟前\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 6,
+              "new_lineno": null,
+              "content": "    \"{amount} more\": \"还剩{amount}则留言\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 7,
+              "new_lineno": null,
+              "content": "    \"1 comment\": \"一条评论\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 8,
+              "new_lineno": null,
+              "content": "    \"Add comment\": \"添加评论\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 9,
+              "new_lineno": null,
+              "content": "    \"Add context to your comment, share your name and expertise to foster a healthy discussion.\": \"为您的评论补充上下文信息、说明您的称呼与专业背景均有助于营造健康的讨论氛围。\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 10,
+              "new_lineno": null,
+              "content": "    \"Add reply\": \"回复\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 11,
+              "new_lineno": null,
+              "content": "    \"Add your expertise\": \"添加您的专业背景\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 12,
+              "new_lineno": null,
+              "content": "    \"Already a member?\": \"已经是会员？\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 13,
+              "new_lineno": null,
+              "content": "    \"Anonymous\": \"匿名\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 14,
+              "new_lineno": null,
+              "content": "    \"Are you sure?\": \"确认？\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 15,
+              "new_lineno": null,
+              "content": "    \"Become a member of {publication} to start commenting.\": \"成为{publication}的会员以开始评论。\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 16,
+              "new_lineno": null,
+              "content": "    \"Become a paid member of {publication} to start commenting.\": \"成为{publication}的付费会员以开始评论。\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 17,
+              "new_lineno": null,
+              "content": "    \"Best\": \"最多赞\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 18,
+              "new_lineno": null,
+              "content": "    \"Cancel\": \"取消\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 19,
+              "new_lineno": null,
+              "content": "    \"Comment\": \"评论\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 20,
+              "new_lineno": null,
+              "content": "    \"Complete your profile\": \"完善您的注册信息\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 21,
+              "new_lineno": null,
+              "content": "    \"Delete\": \"删除\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 22,
+              "new_lineno": null,
+              "content": "    \"Deleted\": \"已删除\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 23,
+              "new_lineno": null,
+              "content": "    \"Deleted member\": \"删除会员\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 24,
+              "new_lineno": null,
+              "content": "    \"Deleting\": \"删除中\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 25,
+              "new_lineno": null,
+              "content": "    \"Discussion\": \"讨论\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 26,
+              "new_lineno": null,
+              "content": "    \"Edit\": \"编辑\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 27,
+              "new_lineno": null,
+              "content": "    \"Edit this comment\": \"编辑此条评论\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 28,
+              "new_lineno": null,
+              "content": "    \"edited\": \"已编辑\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 29,
+              "new_lineno": null,
+              "content": "    \"Enter your name\": \"输入您的称呼\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 30,
+              "new_lineno": null,
+              "content": "    \"Expertise\": \"专业背景\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 31,
+              "new_lineno": null,
+              "content": "    \"Founder @ Acme Inc\": \"Acme Inc的创建者\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 32,
+              "new_lineno": null,
+              "content": "    \"Full-time parent\": \"全职父母\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 33,
+              "new_lineno": null,
+              "content": "    \"Head of Marketing at Acme, Inc\": \"Acme, Inc市场部负责人\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 34,
+              "new_lineno": null,
+              "content": "    \"Hidden for members\": \"对会员隐藏\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 35,
+              "new_lineno": null,
+              "content": "    \"Hide\": \"隐藏\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 36,
+              "new_lineno": null,
+              "content": "    \"Hide comment\": \"隐藏评论\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 37,
+              "new_lineno": null,
+              "content": "    \"Jamie Larson\": \"阿宇\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 38,
+              "new_lineno": null,
+              "content": "    \"Join the discussion\": \"加入讨论\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 39,
+              "new_lineno": null,
+              "content": "    \"Just now\": \"刚刚\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 40,
+              "new_lineno": null,
+              "content": "    \"Load more ({amount})\": \"载入更多({amount})\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 41,
+              "new_lineno": null,
+              "content": "    \"Local resident\": \"本地居民\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 42,
+              "new_lineno": null,
+              "content": "    \"Member discussion\": \"会员讨论\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 43,
+              "new_lineno": null,
+              "content": "    \"Name\": \"称呼\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 44,
+              "new_lineno": null,
+              "content": "    \"Neurosurgeon\": \"神经外科医生\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 45,
+              "new_lineno": null,
+              "content": "    \"Newest\": \"最新\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 46,
+              "new_lineno": null,
+              "content": "    \"Oldest\": \"最早\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 47,
+              "new_lineno": null,
+              "content": "    \"Once deleted, this comment can’t be recovered.\": \"此评论一经删除后将无法复原。\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 48,
+              "new_lineno": null,
+              "content": "    \"One hour ago\": \"一小时前\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 49,
+              "new_lineno": null,
+              "content": "    \"One min ago\": \"一分钟前\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 50,
+              "new_lineno": null,
+              "content": "    \"removed\": \"已移除\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 51,
+              "new_lineno": null,
+              "content": "    \"Replied to\": \"已回复\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 52,
+              "new_lineno": null,
+              "content": "    \"Reply\": \"回复\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 53,
+              "new_lineno": null,
+              "content": "    \"Reply to\": \"回复\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 54,
+              "new_lineno": null,
+              "content": "    \"Reply to comment\": \"回复评论\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 55,
+              "new_lineno": null,
+              "content": "    \"Report\": \"举报\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 56,
+              "new_lineno": null,
+              "content": "    \"Report comment\": \"举报评论\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 57,
+              "new_lineno": null,
+              "content": "    \"Report this comment?\": \"举报此评论？\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 58,
+              "new_lineno": null,
+              "content": "    \"Save\": \"保存\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 59,
+              "new_lineno": null,
+              "content": "    \"Sending\": \"正在发送\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 60,
+              "new_lineno": null,
+              "content": "    \"Sent\": \"已发送\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 61,
+              "new_lineno": null,
+              "content": "    \"Show\": \"显示\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 62,
+              "new_lineno": null,
+              "content": "    \"Show {amount} more replies\": \"显示后续{amount}条评论\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 63,
+              "new_lineno": null,
+              "content": "    \"Show 1 more reply\": \"显示下一条评论\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 64,
+              "new_lineno": null,
+              "content": "    \"Show comment\": \"显示评论\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 65,
+              "new_lineno": null,
+              "content": "    \"Sign in\": \"登录\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 66,
+              "new_lineno": null,
+              "content": "    \"Sign up now\": \"立刻注册\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 67,
+              "new_lineno": null,
+              "content": "    \"Sort by\": \"排序方式\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 68,
+              "new_lineno": null,
+              "content": "    \"Start the conversation\": \"开始对话\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 69,
+              "new_lineno": null,
+              "content": "    \"This comment has been hidden.\": \"该条评论已被隐藏。\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 70,
+              "new_lineno": null,
+              "content": "    \"This comment has been removed.\": \"该条评论已被移除。\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 71,
+              "new_lineno": null,
+              "content": "    \"Upgrade now\": \"立刻升级\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 72,
+              "new_lineno": null,
+              "content": "    \"Yesterday\": \"昨天\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 73,
+              "new_lineno": null,
+              "content": "    \"Your request will be sent to the owner of this site.\": \"您的请求将被发送给站点所有者。\""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 74,
+              "new_lineno": null,
+              "content": "}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "ghost/i18n/locales/zh/ghost.json",
+      "new_path": "ghost/i18n/locales/zh/ghost.json",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 3,
+          "old_count": 7,
+          "new_start": 3,
+          "new_count": 7,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 3,
+              "new_lineno": 3,
+              "content": "    \"All the best!\": \"一切顺利！\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 4,
+              "new_lineno": 4,
+              "content": "    \"Become a paid member of {site} to get access to all premium content.\": \"成为{site}的付费会员，即可畅享所有付费内容。\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 5,
+              "new_lineno": 5,
+              "content": "    \"By {authors}\": \"作者 {authors}\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 6,
+              "new_lineno": null,
+              "content": "    \"Comment\": \"留言\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 6,
+              "content": "    \"Comment\": \"评论\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 7,
+              "new_lineno": 7,
+              "content": "    \"Complete signup for {siteTitle}!\": \"完成在{siteTitle}的注册！\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 8,
+              "new_lineno": 8,
+              "content": "    \"Complete your sign up to {siteTitle}!\": \"完成您在 {siteTitle} 的注册！\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 9,
+              "new_lineno": 9,
+              "content": "    \"complimentary\": \"免费\","
+            }
+          ]
+        },
+        {
+          "old_start": 24,
+          "old_count": 11,
+          "new_start": 24,
+          "new_count": 11,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 24,
+              "new_lineno": 24,
+              "content": "    \"If you did not make this request, you can simply delete this message.\": \"如果您没有发出此请求，您可以直接删除此消息。\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 25,
+              "new_lineno": 25,
+              "content": "    \"If you didn't try to sign in recently, you can safely ignore this email to deny access.\": \"若您近期未尝试登录，可安全忽略此邮件以拒绝访问。\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 26,
+              "new_lineno": 26,
+              "content": "    \"Keep reading\": \"继续阅读\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 27,
+              "new_lineno": null,
+              "content": "    \"Less like this\": \"不喜欢\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 28,
+              "new_lineno": null,
+              "content": "    \"Manage subscription\": \"管理会籍\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 29,
+              "new_lineno": null,
+              "content": "    \"Member since\": \"会籍自\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 30,
+              "new_lineno": null,
+              "content": "    \"More like this\": \"喜欢\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 31,
+              "new_lineno": null,
+              "content": "    \"Name\": \"称呼\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 27,
+              "content": "    \"Less like this\": \"减少此类内容\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 28,
+              "content": "    \"Manage subscription\": \"管理订阅\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 29,
+              "content": "    \"Member since\": \"成为会员的时间\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 30,
+              "content": "    \"More like this\": \"更多类似内容\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 31,
+              "content": "    \"Name\": \"名字\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 32,
+              "new_lineno": 32,
+              "content": "    \"New comment on {postTitle}\": \"{postTitle}的新评论\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 33,
+              "new_lineno": 33,
+              "content": "    \"New reply to your comment on {siteTitle}\": \"您在{siteTitle}的评论收到新回复\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 34,
+              "new_lineno": 34,
+              "content": "    \"Or use this link to securely sign in\": \"或通过此链接安全登录\","
+            }
+          ]
+        },
+        {
+          "old_start": 36,
+          "old_count": 8,
+          "new_start": 36,
+          "new_count": 8,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 36,
+              "new_lineno": 36,
+              "content": "    \"paid\": \"付费\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 37,
+              "new_lineno": 37,
+              "content": "    \"Please confirm your email address with this link:\": \"请通过此链接确认您的电子邮件地址：\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 38,
+              "new_lineno": 38,
+              "content": "    \"Secure sign in link for {siteTitle}\": \"为 {siteTitle} 准备的安全登录链接\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 39,
+              "new_lineno": null,
+              "content": "    \"See you soon!\": \"再会！\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 40,
+              "new_lineno": null,
+              "content": "    \"Sent to {email}\": \"发送到 {email}\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 39,
+              "content": "    \"See you soon!\": \"回见！\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 40,
+              "content": "    \"Sent to {email}\": \"已发送至 {email}\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 41,
+              "new_lineno": 41,
+              "content": "    \"Sign in\": \"登录\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 42,
+              "new_lineno": 42,
+              "content": "    \"Sign in now\": \"立即登录\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 43,
+              "new_lineno": 43,
+              "content": "    \"Sign in to {siteTitle}\": \"登录到 {siteTitle}\","
+            }
+          ]
+        },
+        {
+          "old_start": 45,
+          "old_count": 7,
+          "new_start": 45,
+          "new_count": 7,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 45,
+              "new_lineno": 45,
+              "content": "    \"Sign in verification\": \"登录验证\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 46,
+              "new_lineno": 46,
+              "content": "    \"Someone just replied to your comment\": \"有人刚刚回复了你的评论\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 47,
+              "new_lineno": 47,
+              "content": "    \"Someone just replied to your comment on {postTitle}.\": \"有人刚刚在{postTitle}回复了你的评论。\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 48,
+              "new_lineno": null,
+              "content": "    \"Subscription details\": \"\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 48,
+              "content": "    \"Subscription details\": \"订阅详情\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 49,
+              "new_lineno": 49,
+              "content": "    \"Tap the link below to complete the signup process for {siteTitle}, and be automatically signed in:\": \"请点击下面的链接完成 {siteTitle} 的注册，并将自动登录：\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 50,
+              "new_lineno": 50,
+              "content": "    \"Thank you for signing up to {siteTitle}!\": \"感谢您注册 {siteTitle}！\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 51,
+              "new_lineno": 51,
+              "content": "    \"Thank you for subscribing to {siteTitle}!\": \"感谢您订阅 {siteTitle}！\","
+            }
+          ]
+        },
+        {
+          "old_start": 75,
+          "old_count": 9,
+          "new_start": 75,
+          "new_count": 9,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 75,
+              "new_lineno": 75,
+              "content": "    \"You're one tap away from subscribing to {siteTitle} — please confirm your email address with this link:\": \"您离订阅 {siteTitle} 仅需点击一下 — 请通过此链接确认您的电子邮件地址：\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 76,
+              "new_lineno": 76,
+              "content": "    \"You're one tap away from subscribing to {siteTitle}!\": \"仅需一次点击即可完成{siteTitle}的订阅！\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 77,
+              "new_lineno": 77,
+              "content": "    \"Your free trial ends on {date}, at which time you will be charged the regular price. You can always cancel before then.\": \"您的免费试用将于{date}结束，届时将按标准价格收费。您可在到期前随时取消订阅。\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 78,
+              "new_lineno": null,
+              "content": "    \"Your subscription has been canceled and will expire on {date}. You can resume your subscription via your account settings.\": \"您的会籍已取消，将于{date}到期。您可通过账户设置重新订阅。\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 79,
+              "new_lineno": null,
+              "content": "    \"Your subscription has expired.\": \"您的会籍已过期。\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 80,
+              "new_lineno": null,
+              "content": "    \"Your subscription will expire on {date}.\": \"您的会籍将于{date}过期。\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 81,
+              "new_lineno": null,
+              "content": "    \"Your subscription will renew on {date}.\": \"您的会籍将于{date}更新。\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 78,
+              "content": "    \"Your subscription has been canceled and will expire on {date}. You can resume your subscription via your account settings.\": \"您的订阅已取消，将于{date}到期。您可通过账户设置重新订阅。\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 79,
+              "content": "    \"Your subscription has expired.\": \"您的订阅已过期。\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 80,
+              "content": "    \"Your subscription will expire on {date}.\": \"您的订阅将于{date}过期。\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 81,
+              "content": "    \"Your subscription will renew on {date}.\": \"您的订阅将于{date}更新。\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 82,
+              "new_lineno": 82,
+              "content": "    \"Your verification code for {siteTitle}\": \"您在{siteTitle}的验证码\""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 83,
+              "new_lineno": 83,
+              "content": "}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "ghost/i18n/locales/zh/portal.json",
+      "new_path": "ghost/i18n/locales/zh/portal.json",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 6,
+          "old_count": 7,
+          "new_start": 6,
+          "new_count": 7,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 6,
+              "new_lineno": 6,
+              "content": "    \"{amount} off for first {period}.\": \"首{period}减免{amount}\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 7,
+              "new_lineno": 7,
+              "content": "    \"{amount} off forever.\": \"永久减免{amount}\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 8,
+              "new_lineno": 8,
+              "content": "    \"{discount}% discount\": \"{discount}% 折扣\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 9,
+              "new_lineno": null,
+              "content": "    \"{memberEmail} will no longer receive {newsletterName} newsletter.\": \"{memberEmail}将不会再收到{newsletterName}的新闻信。\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 9,
+              "content": "    \"{memberEmail} will no longer receive {newsletterName} newsletter.\": \"{memberEmail}将不会再收到新闻信。\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 10,
+              "new_lineno": 10,
+              "content": "    \"{memberEmail} will no longer receive emails when someone replies to your comments.\": \"{memberEmail}将不会再收到评论回复提醒邮件。\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 11,
+              "new_lineno": 11,
+              "content": "    \"{memberEmail} will no longer receive this newsletter.\": \"{memberEmail}将不会再收到本新闻信。\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 12,
+              "new_lineno": 12,
+              "content": "    \"{trialDays} days free\": \"{trialDays} 天免费试用\","
+            }
+          ]
+        },
+        {
+          "old_start": 55,
+          "old_count": 12,
+          "new_start": 55,
+          "new_count": 12,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 55,
+              "new_lineno": 55,
+              "content": "    \"Create a new contact\": \"创建新联系\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 56,
+              "new_lineno": 56,
+              "content": "    \"Current plan\": \"当前订阅\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 57,
+              "new_lineno": 57,
+              "content": "    \"Delete account\": \"删除账户\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 58,
+              "new_lineno": null,
+              "content": "    \"Didn't mean to do this? Manage your preferences <button>here</button>.\": \"错误操作？在<button>这里</button>变更您的偏好设定。\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 58,
+              "content": "    \"Didn't mean to do this? Manage your preferences <button>here</button>.\": \"操作有误？可以在<button>这里</button>修改您的偏好设置。\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 59,
+              "new_lineno": 59,
+              "content": "    \"Don't have an account?\": \"还没有账户吗？\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 60,
+              "new_lineno": 60,
+              "content": "    \"Edit\": \"编辑\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 61,
+              "new_lineno": 61,
+              "content": "    \"Email\": \"电子邮件\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 62,
+              "new_lineno": 62,
+              "content": "    \"Email newsletter\": \"新闻信\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 63,
+              "new_lineno": null,
+              "content": "    \"Email newsletter settings updated\": \"新闻信设定已更新\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 63,
+              "content": "    \"Email newsletter settings updated\": \"新闻信设置已更新\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 64,
+              "new_lineno": 64,
+              "content": "    \"Email preferences\": \"电子邮件偏好设置\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 65,
+              "new_lineno": 65,
+              "content": "    \"Email preferences updated.\": \"电子邮件偏好已更新\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 66,
+              "new_lineno": 66,
+              "content": "    \"Emails\": \"电子邮件列表\","
+            }
+          ]
+        },
+        {
+          "old_start": 82,
+          "old_count": 12,
+          "new_start": 82,
+          "new_count": 12,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 82,
+              "new_lineno": 82,
+              "content": "    \"Failed to update account details\": \"更新账户信息失败\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 83,
+              "new_lineno": 83,
+              "content": "    \"Failed to update billing information, please try again\": \"更新账单信息失败，请重试\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 84,
+              "new_lineno": 84,
+              "content": "    \"Failed to update newsletter settings\": \"更新新闻信设置失败\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 85,
+              "new_lineno": null,
+              "content": "    \"Failed to update subscription, please try again\": \"更新会籍失败，请重试\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 85,
+              "content": "    \"Failed to update subscription, please try again\": \"更新订阅失败，请重试\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 86,
+              "new_lineno": 86,
+              "content": "    \"Failed to verify code, please try again\": \"验证码验证失败，请重试\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 87,
+              "new_lineno": 87,
+              "content": "    \"Forever\": \"永久\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 88,
+              "new_lineno": 88,
+              "content": "    \"Free Trial – Ends {trialEnd}\": \"免费试用 - {trialEnd}结束\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 89,
+              "new_lineno": 89,
+              "content": "    \"Get help\": \"获取帮助\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 90,
+              "new_lineno": null,
+              "content": "    \"Get in touch for help\": \"联系我们，获取帮助。\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 90,
+              "content": "    \"Get in touch for help\": \"联系我们获取帮助\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 91,
+              "new_lineno": 91,
+              "content": "    \"Get notified when someone replies to your comment\": \"当有人回复您的评论时收到通知。\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 92,
+              "new_lineno": 92,
+              "content": "    \"Give feedback on this post\": \"对这篇文章提供建议\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 93,
+              "new_lineno": 93,
+              "content": "    \"Help! I'm not receiving emails\": \"求助！我没有收到电子邮件\","
+            }
+          ]
+        },
+        {
+          "old_start": 105,
+          "old_count": 7,
+          "new_start": 105,
+          "new_count": 7,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 105,
+              "new_lineno": 105,
+              "content": "    \"Invalid verification code\": \"无效的验证码\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 106,
+              "new_lineno": 106,
+              "content": "    \"Jamie Larson\": \"阿宇\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 107,
+              "new_lineno": 107,
+              "content": "    \"jamie@example.com\": \"ayu@example.com\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 108,
+              "new_lineno": null,
+              "content": "    \"Less like this\": \"不喜欢\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 108,
+              "content": "    \"Less like this\": \"减少此类内容\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 109,
+              "new_lineno": 109,
+              "content": "    \"Make sure emails aren't accidentally ending up in the Spam or Promotions folders of your inbox. If they are, click on \\\"Mark as not spam\\\" and/or \\\"Move to inbox\\\".\": \"确保邮件没有被意外标记为垃圾或者促销邮件。如果是，点击“非垃圾邮件”或者“移动到收件箱”。\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 110,
+              "new_lineno": 110,
+              "content": "    \"Manage\": \"管理\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 111,
+              "new_lineno": 111,
+              "content": "    \"Maybe later\": \"之后再说\","
+            }
+          ]
+        },
+        {
+          "old_start": 113,
+          "old_count": 15,
+          "new_start": 113,
+          "new_count": 15,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 113,
+              "new_lineno": 113,
+              "content": "    \"Memberships unavailable, contact the owner for access.\": \"会员资格不可用，请联系网站所有者获取访问权限。\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 114,
+              "new_lineno": 114,
+              "content": "    \"month\": \"月\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 115,
+              "new_lineno": 115,
+              "content": "    \"Monthly\": \"月付\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 116,
+              "new_lineno": null,
+              "content": "    \"More like this\": \"喜欢\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 117,
+              "new_lineno": null,
+              "content": "    \"Name\": \"名字\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 116,
+              "content": "    \"More like this\": \"更多类似内容\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 117,
+              "content": "    \"Name\": \"名称\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 118,
+              "new_lineno": 118,
+              "content": "    \"Need more help? Contact support\": \"需要更多帮助？联系支持服务\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 119,
+              "new_lineno": 119,
+              "content": "    \"Newsletters can be disabled on your account for two reasons: A previous email was marked as spam, or attempting to send an email resulted in a permanent failure (bounce).\": \"您账户的新闻信被禁用的可能原因有两个：先前的电子邮件被标记为垃圾邮件，或者发送邮件遇到永久错误 (bounce)\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 120,
+              "new_lineno": 120,
+              "content": "    \"No member exists with this e-mail address.\": \"没有会员使用此电子邮箱地址。\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 121,
+              "new_lineno": 121,
+              "content": "    \"No member exists with this e-mail address. Please sign up first.\": \"没有会员使用此电子邮箱地址。请先注册。\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 122,
+              "new_lineno": 122,
+              "content": "    \"Not receiving emails?\": \"没有收到电子邮件？\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 123,
+              "new_lineno": 123,
+              "content": "    \"Now check your email!\": \"现在请检查您的电子邮件！\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 124,
+              "new_lineno": null,
+              "content": "    \"Once resubscribed, if you still don't see emails in your inbox, check your spam folder. Some inbox providers keep a record of previous spam complaints and will continue to flag emails. If this happens, mark the latest newsletter as 'Not spam' to move it back to your primary inbox.\": \"重新订阅后在收件箱依旧没有看到邮件，请检查您的垃圾邮件箱。一些服务商会保留之前的垃圾邮件记录并持续标记。如果是这样，请将最新的新闻信标记为“非垃圾邮件”并将其移动到收件箱。\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 124,
+              "content": "    \"Once resubscribed, if you still don't see emails in your inbox, check your spam folder. Some inbox providers keep a record of previous spam complaints and will continue to flag emails. If this happens, mark the latest newsletter as 'Not spam' to move it back to your primary inbox.\": \"重新订阅后，如果收件箱中仍然没有看到邮件，请检查垃圾邮件文件夹。一些邮件服务商会保留以往的垃圾邮件投诉记录，并继续对邮件进行标记。如果出现这种情况，请将最新的邮件通讯标记为“非垃圾邮件”，并移回主收件箱。\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 125,
+              "new_lineno": 125,
+              "content": "    \"Permanent failure (bounce)\": \"永久错误 (bounce)\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 126,
+              "new_lineno": 126,
+              "content": "    \"Phone number\": \"电话号码\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 127,
+              "new_lineno": 127,
+              "content": "    \"Plan\": \"订阅方案\","
+            }
+          ]
+        },
+        {
+          "old_start": 173,
+          "old_count": 7,
+          "new_start": 173,
+          "new_count": 7,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 173,
+              "new_lineno": 173,
+              "content": "    \"There was an error continuing your subscription, please try again.\": \"续订过程中出现错误，请重试。\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 174,
+              "new_lineno": 174,
+              "content": "    \"There was an error processing your payment. Please try again.\": \"您的付款处理失败，请重试。\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 175,
+              "new_lineno": 175,
+              "content": "    \"There was an error sending the email, please try again\": \"发送电子邮件时出现错误，请重试。\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 176,
+              "new_lineno": null,
+              "content": "    \"This site is invite-only, contact the owner for access.\": \"此网站仅限邀请，联系网站所有者以获取访问权限\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 176,
+              "content": "    \"This site is invite-only, contact the owner for access.\": \"此网站仅限受邀访问，请联系网站所有者以获取权限。\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 177,
+              "new_lineno": 177,
+              "content": "    \"This site is not accepting donations at the moment.\": \"本网站目前不接受捐赠。\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 178,
+              "new_lineno": 178,
+              "content": "    \"This site is not accepting payments at the moment.\": \"本网站目前暂不接受付款。\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 179,
+              "new_lineno": 179,
+              "content": "    \"This site only accepts paid members.\": \"本网站仅允许付费会员。\","
+            }
+          ]
+        },
+        {
+          "old_start": 189,
+          "old_count": 14,
+          "new_start": 189,
+          "new_count": 14,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 189,
+              "new_lineno": 189,
+              "content": "    \"Try free for {amount} days, then {originalPrice}.\": \"{amount}天免费试用，之后为{originalPrice}定价。\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 190,
+              "new_lineno": 190,
+              "content": "    \"Unable to initiate checkout session\": \"无法启动结账会话\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 191,
+              "new_lineno": 191,
+              "content": "    \"Unlock access to all newsletters by becoming a paid subscriber.\": \"成为付费订阅用户以解锁全部新闻信。\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 192,
+              "new_lineno": null,
+              "content": "    \"Unsubscribe from all emails\": \"取消所有新闻信订阅\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 192,
+              "content": "    \"Unsubscribe from all emails\": \"取消接收所有邮件\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 193,
+              "new_lineno": 193,
+              "content": "    \"Unsubscribed\": \"已取消订阅\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 194,
+              "new_lineno": null,
+              "content": "    \"Unsubscribed from all emails.\": \"已取消所有新闻信订阅\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 194,
+              "content": "    \"Unsubscribed from all emails.\": \"已取消接收所有邮件。\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 195,
+              "new_lineno": 195,
+              "content": "    \"Unsubscribing from emails will not cancel your paid subscription to {title}\": \"取消新闻信订阅不会取消您对 {title} 的付费订阅。\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 196,
+              "new_lineno": 196,
+              "content": "    \"Update\": \"更新\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 197,
+              "new_lineno": 197,
+              "content": "    \"Update your preferences\": \"更新您的偏好设置\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 198,
+              "new_lineno": 198,
+              "content": "    \"Verification link sent, check your inbox\": \"验证链接已发送，请检查您的收件箱\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 199,
+              "new_lineno": null,
+              "content": "    \"Verify your email address is correct\": \"确认您的电子邮件地址是正确的\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 199,
+              "content": "    \"Verify your email address is correct\": \"请确认您的邮箱地址是否正确\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 200,
+              "new_lineno": 200,
+              "content": "    \"Verifying...\": \"正在验证...\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 201,
+              "new_lineno": 201,
+              "content": "    \"View plans\": \"查阅订阅方案\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 202,
+              "new_lineno": 202,
+              "content": "    \"We couldn't unsubscribe you as the email address was not found. Please contact the site owner.\": \"我们无法取消您的订阅，因为找不到该电子邮件地址。请联系网站所有者。\","
+            }
+          ]
+        },
+        {
+          "old_start": 209,
+          "old_count": 13,
+          "new_start": 209,
+          "new_count": 13,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 209,
+              "new_lineno": 209,
+              "content": "    \"Yearly\": \"年付\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 210,
+              "new_lineno": 210,
+              "content": "    \"You currently have a free membership, upgrade to a paid subscription for full access.\": \"您当前为免费用户，升级为付费订阅以获取全部内容。\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 211,
+              "new_lineno": 211,
+              "content": "    \"You have been successfully resubscribed\": \"您已成功重新订阅\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 212,
+              "new_lineno": null,
+              "content": "    \"You're currently not receiving emails\": \"您当前不会收到电子邮件。\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 213,
+              "new_lineno": null,
+              "content": "    \"You're not receiving emails\": \"您当前不会收到电子邮件。\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 214,
+              "new_lineno": null,
+              "content": "    \"You're not receiving emails because you either marked a recent message as spam, or because messages could not be delivered to your provided email address.\": \"您收不到电子邮件是因为您可能将最近的某个消息标记为垃圾邮件，或者无法将消息发送到您提供的电子邮件地址。\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 212,
+              "content": "    \"You're currently not receiving emails\": \"您当前不会收到邮件。\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 213,
+              "content": "    \"You're not receiving emails\": \"您将不会收到邮件。\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 214,
+              "content": "    \"You're not receiving emails because you either marked a recent message as spam, or because messages could not be delivered to your provided email address.\": \"您收不到邮件是因为您可能将最近的某个消息标记为垃圾邮件，或者无法将消息发送到您提供的邮件地址。\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 215,
+              "new_lineno": 215,
+              "content": "    \"You've successfully signed in.\": \"您已成功登录。\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 216,
+              "new_lineno": 216,
+              "content": "    \"You've successfully subscribed to\": \"您已成功订阅\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 217,
+              "new_lineno": 217,
+              "content": "    \"Your account\": \"您的账户\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 218,
+              "new_lineno": null,
+              "content": "    \"Your email has failed to resubscribe, please try again\": \"您的电子邮件未能成功重新订阅，请重试。\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 218,
+              "content": "    \"Your email has failed to resubscribe, please try again\": \"您的邮箱未能成功重新订阅，请重试。\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 219,
+              "new_lineno": 219,
+              "content": "    \"your inbox\": \"您的收件箱\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 220,
+              "new_lineno": 220,
+              "content": "    \"Your input helps shape what gets published.\": \"您的建议将使我们变得更好。\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 221,
+              "new_lineno": 221,
+              "content": "    \"Your subscription will expire on {expiryDate}\": \"您的订阅将在{expiryDate}到期\","
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "changed_entities": [
+    {
+      "path": "ghost/i18n/locales/zh/comments.json",
+      "entity_type": "module",
+      "name": "comments.json",
+      "qualified_name": "ghost.i18n.locales.zh.comments",
+      "line_start": 1,
+      "line_end": 74,
+      "hunk_ids": [
+        "ghost/i18n/locales/zh/comments.json:1"
+      ]
+    },
+    {
+      "path": "ghost/i18n/locales/zh/ghost.json",
+      "entity_type": "module",
+      "name": "ghost.json",
+      "qualified_name": "ghost.i18n.locales.zh.ghost",
+      "line_start": 6,
+      "line_end": 6,
+      "hunk_ids": [
+        "ghost/i18n/locales/zh/ghost.json:3",
+        "ghost/i18n/locales/zh/ghost.json:24",
+        "ghost/i18n/locales/zh/ghost.json:36",
+        "ghost/i18n/locales/zh/ghost.json:45",
+        "ghost/i18n/locales/zh/ghost.json:75"
+      ]
+    },
+    {
+      "path": "ghost/i18n/locales/zh/portal.json",
+      "entity_type": "module",
+      "name": "portal.json",
+      "qualified_name": "ghost.i18n.locales.zh.portal",
+      "line_start": 9,
+      "line_end": 9,
+      "hunk_ids": [
+        "ghost/i18n/locales/zh/portal.json:6",
+        "ghost/i18n/locales/zh/portal.json:55",
+        "ghost/i18n/locales/zh/portal.json:82",
+        "ghost/i18n/locales/zh/portal.json:105",
+        "ghost/i18n/locales/zh/portal.json:113",
+        "ghost/i18n/locales/zh/portal.json:173",
+        "ghost/i18n/locales/zh/portal.json:189",
+        "ghost/i18n/locales/zh/portal.json:209"
+      ]
+    }
+  ],
+  "risk_signals": [],
+  "evidence_index": {
+    "diff_hunk:ghost/i18n/locales/zh/comments.json:1": {
+      "id": "diff_hunk:ghost/i18n/locales/zh/comments.json:1",
+      "kind": "diff_hunk",
+      "source": "ghost/i18n/locales/zh/comments.json:1",
+      "message": "@@ -1,74 +0,0 @@\n-{\n-    \"{amount} characters left\": \"还剩{amount}字\",\n-    \"{amount} comments\": \"{amount}条评论\",\n-    \"{amount} hrs ago\": \"{amount}小时前\",\n-    \"{amount} mins ago\": \"{amount}分钟前\",\n-    \"{amount} more\": \"还剩{amount}则留言\",\n-    \"1 comment\": \"一条评论\",\n-    \"Add comment\": \"添加评论\",\n-    \"Add context to your comment, share your name and expertise to foster a healthy discussion.\": \"为您的评论补充上下文信息、说明您的称呼与专业背景均有助于营造健康的讨论氛围。\",\n-    \"Add reply\": \"回复\",\n-    \"Add your expertise\": \"添加您的专业背景\",\n-    \"Already a member?\": \"已经是会员？\",\n-    \"Anonymous\": \"匿名\",\n-    \"Are you sure?\": \"确认？\",\n-    \"Become a member of {publication} to start commenting.\": \"成为{publication}的会员以开始评论。\",\n-    \"Become a paid member of {publication} to start commenting.\": \"成为{publication}的付费会员以开始评论。\",\n-    \"Best\": \"最多赞\",\n-    \"Cancel\": \"取消\",\n-    \"Comment\": \"评论\",\n-    \"Complete your profile\": \"完善您的注册信息\",\n-    \"Delete\": \"删除\",\n-    \"Deleted\": \"已删除\",\n-    \"Deleted member\": \"删除会员\",\n-    \"Deleting\": \"删除中\",\n-    \"Discussion\": \"讨论\",\n-    \"Edit\": \"编辑\",\n-    \"Edit this comment\": \"编辑此条评论\",\n-    \"edited\": \"已编辑\",\n-    \"Enter your name\": \"输入您的称呼\",\n-    \"Expertise\": \"专业背景\",\n-    \"Founder @ Acme Inc\": \"Acme Inc的创建者\",\n-    \"Full-time parent\": \"全职父母\",\n-    \"Head of Marketing at Acme, Inc\": \"Acme, Inc市场部负责人\",\n-    \"Hidden for members\": \"对会员隐藏\",\n-    \"Hide\": \"隐藏\",\n-    \"Hide comment\": \"隐藏评论\",\n-    \"Jamie Larson\": \"阿宇\",\n-    \"Join the discussion\": \"加入讨论\",\n-    \"Just now\": \"刚刚\",\n-    \"Load more ({amount})\": \"载入更多({amount})\",\n-    \"Local resident\": \"本地居民\",\n-    \"Member discussion\": \"会员讨论\",\n-    \"Name\": \"称呼\",\n-    \"Neurosurgeon\": \"神经外科医生\",\n-    \"Newest\": \"最新\",\n-    \"Oldest\": \"最早\",\n-    \"Once deleted, this comment can’t be recovered.\": \"此评论一经删除后将无法复原。\",\n-    \"One hour ago\": \"一小时前\",\n-    \"One min ago\": \"一分钟前\",\n-    \"removed\": \"已移除\",\n-    \"Replied to\": \"已回复\",\n-    \"Reply\": \"回复\",\n-    \"Reply to\": \"回复\",\n-    \"Reply to comment\": \"回复评论\",\n-    \"Report\": \"举报\",\n-    \"Report comment\": \"举报评论\",\n-    \"Report this comment?\": \"举报此评论？\",\n-    \"Save\": \"保存\",\n-    \"Sending\": \"正在发送\",\n-    \"Sent\": \"已发送\",\n-    \"Show\": \"显示\",\n-    \"Show {amount} more replies\": \"显示后续{amount}条评论\",\n-    \"Show 1 more reply\": \"显示下一条评论\",\n-    \"Show comment\": \"显示评论\",\n-    \"Sign in\": \"登录\",\n-    \"Sign up now\": \"立刻注册\",\n-    \"Sort by\": \"排序方式\",\n-    \"Start the conversation\": \"开始对话\",\n-    \"This comment has been hidden.\": \"该条评论已被隐藏。\",\n-    \"This comment has been removed.\": \"该条评论已被移除。\",\n-    \"Upgrade now\": \"立刻升级\",\n-    \"Yesterday\": \"昨天\",\n-    \"Your request will be sent to the owner of this site.\": \"您的请求将被发送给站点所有者。\"\n-}"
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:1": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:1",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:1",
+      "message": "Removed line: {"
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:2": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:2",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:2",
+      "message": "Removed line: \"{amount} characters left\": \"还剩{amount}字\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:3": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:3",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:3",
+      "message": "Removed line: \"{amount} comments\": \"{amount}条评论\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:4": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:4",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:4",
+      "message": "Removed line: \"{amount} hrs ago\": \"{amount}小时前\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:5": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:5",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:5",
+      "message": "Removed line: \"{amount} mins ago\": \"{amount}分钟前\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:6": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:6",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:6",
+      "message": "Removed line: \"{amount} more\": \"还剩{amount}则留言\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:7": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:7",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:7",
+      "message": "Removed line: \"1 comment\": \"一条评论\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:8": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:8",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:8",
+      "message": "Removed line: \"Add comment\": \"添加评论\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:9": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:9",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:9",
+      "message": "Removed line: \"Add context to your comment, share your name and expertise to foster a healthy discussion.\": \"为您的评论补充上下文信息、说明您的称呼与专业..."
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:10": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:10",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:10",
+      "message": "Removed line: \"Add reply\": \"回复\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:11": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:11",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:11",
+      "message": "Removed line: \"Add your expertise\": \"添加您的专业背景\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:12": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:12",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:12",
+      "message": "Removed line: \"Already a member?\": \"已经是会员？\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:13": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:13",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:13",
+      "message": "Removed line: \"Anonymous\": \"匿名\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:14": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:14",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:14",
+      "message": "Removed line: \"Are you sure?\": \"确认？\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:15": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:15",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:15",
+      "message": "Removed line: \"Become a member of {publication} to start commenting.\": \"成为{publication}的会员以开始评论。\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:16": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:16",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:16",
+      "message": "Removed line: \"Become a paid member of {publication} to start commenting.\": \"成为{publication}的付费会员以开始评论。\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:17": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:17",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:17",
+      "message": "Removed line: \"Best\": \"最多赞\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:18": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:18",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:18",
+      "message": "Removed line: \"Cancel\": \"取消\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:19": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:19",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:19",
+      "message": "Removed line: \"Comment\": \"评论\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:20": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:20",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:20",
+      "message": "Removed line: \"Complete your profile\": \"完善您的注册信息\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:21": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:21",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:21",
+      "message": "Removed line: \"Delete\": \"删除\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:22": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:22",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:22",
+      "message": "Removed line: \"Deleted\": \"已删除\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:23": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:23",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:23",
+      "message": "Removed line: \"Deleted member\": \"删除会员\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:24": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:24",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:24",
+      "message": "Removed line: \"Deleting\": \"删除中\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:25": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:25",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:25",
+      "message": "Removed line: \"Discussion\": \"讨论\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:26": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:26",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:26",
+      "message": "Removed line: \"Edit\": \"编辑\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:27": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:27",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:27",
+      "message": "Removed line: \"Edit this comment\": \"编辑此条评论\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:28": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:28",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:28",
+      "message": "Removed line: \"edited\": \"已编辑\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:29": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:29",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:29",
+      "message": "Removed line: \"Enter your name\": \"输入您的称呼\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:30": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:30",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:30",
+      "message": "Removed line: \"Expertise\": \"专业背景\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:31": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:31",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:31",
+      "message": "Removed line: \"Founder @ Acme Inc\": \"Acme Inc的创建者\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:32": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:32",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:32",
+      "message": "Removed line: \"Full-time parent\": \"全职父母\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:33": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:33",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:33",
+      "message": "Removed line: \"Head of Marketing at Acme, Inc\": \"Acme, Inc市场部负责人\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:34": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:34",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:34",
+      "message": "Removed line: \"Hidden for members\": \"对会员隐藏\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:35": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:35",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:35",
+      "message": "Removed line: \"Hide\": \"隐藏\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:36": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:36",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:36",
+      "message": "Removed line: \"Hide comment\": \"隐藏评论\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:37": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:37",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:37",
+      "message": "Removed line: \"Jamie Larson\": \"阿宇\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:38": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:38",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:38",
+      "message": "Removed line: \"Join the discussion\": \"加入讨论\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:39": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:39",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:39",
+      "message": "Removed line: \"Just now\": \"刚刚\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:40": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:40",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:40",
+      "message": "Removed line: \"Load more ({amount})\": \"载入更多({amount})\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:41": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:41",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:41",
+      "message": "Removed line: \"Local resident\": \"本地居民\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:42": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:42",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:42",
+      "message": "Removed line: \"Member discussion\": \"会员讨论\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:43": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:43",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:43",
+      "message": "Removed line: \"Name\": \"称呼\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:44": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:44",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:44",
+      "message": "Removed line: \"Neurosurgeon\": \"神经外科医生\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:45": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:45",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:45",
+      "message": "Removed line: \"Newest\": \"最新\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:46": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:46",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:46",
+      "message": "Removed line: \"Oldest\": \"最早\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:47": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:47",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:47",
+      "message": "Removed line: \"Once deleted, this comment can’t be recovered.\": \"此评论一经删除后将无法复原。\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:48": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:48",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:48",
+      "message": "Removed line: \"One hour ago\": \"一小时前\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:49": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:49",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:49",
+      "message": "Removed line: \"One min ago\": \"一分钟前\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:50": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:50",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:50",
+      "message": "Removed line: \"removed\": \"已移除\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:51": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:51",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:51",
+      "message": "Removed line: \"Replied to\": \"已回复\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:52": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:52",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:52",
+      "message": "Removed line: \"Reply\": \"回复\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:53": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:53",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:53",
+      "message": "Removed line: \"Reply to\": \"回复\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:54": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:54",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:54",
+      "message": "Removed line: \"Reply to comment\": \"回复评论\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:55": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:55",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:55",
+      "message": "Removed line: \"Report\": \"举报\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:56": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:56",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:56",
+      "message": "Removed line: \"Report comment\": \"举报评论\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:57": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:57",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:57",
+      "message": "Removed line: \"Report this comment?\": \"举报此评论？\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:58": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:58",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:58",
+      "message": "Removed line: \"Save\": \"保存\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:59": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:59",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:59",
+      "message": "Removed line: \"Sending\": \"正在发送\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:60": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:60",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:60",
+      "message": "Removed line: \"Sent\": \"已发送\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:61": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:61",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:61",
+      "message": "Removed line: \"Show\": \"显示\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:62": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:62",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:62",
+      "message": "Removed line: \"Show {amount} more replies\": \"显示后续{amount}条评论\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:63": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:63",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:63",
+      "message": "Removed line: \"Show 1 more reply\": \"显示下一条评论\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:64": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:64",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:64",
+      "message": "Removed line: \"Show comment\": \"显示评论\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:65": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:65",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:65",
+      "message": "Removed line: \"Sign in\": \"登录\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:66": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:66",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:66",
+      "message": "Removed line: \"Sign up now\": \"立刻注册\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:67": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:67",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:67",
+      "message": "Removed line: \"Sort by\": \"排序方式\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:68": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:68",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:68",
+      "message": "Removed line: \"Start the conversation\": \"开始对话\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:69": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:69",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:69",
+      "message": "Removed line: \"This comment has been hidden.\": \"该条评论已被隐藏。\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:70": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:70",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:70",
+      "message": "Removed line: \"This comment has been removed.\": \"该条评论已被移除。\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:71": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:71",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:71",
+      "message": "Removed line: \"Upgrade now\": \"立刻升级\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:72": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:72",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:72",
+      "message": "Removed line: \"Yesterday\": \"昨天\","
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:73": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:73",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:73",
+      "message": "Removed line: \"Your request will be sent to the owner of this site.\": \"您的请求将被发送给站点所有者。\""
+    },
+    "diff:ghost/i18n/locales/zh/comments.json:74": {
+      "id": "diff:ghost/i18n/locales/zh/comments.json:74",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/comments.json:74",
+      "message": "Removed line: }"
+    },
+    "diff_hunk:ghost/i18n/locales/zh/ghost.json:3": {
+      "id": "diff_hunk:ghost/i18n/locales/zh/ghost.json:3",
+      "kind": "diff_hunk",
+      "source": "ghost/i18n/locales/zh/ghost.json:3",
+      "message": "@@ -3,7 +3,7 @@\n     \"All the best!\": \"一切顺利！\",\n     \"Become a paid member of {site} to get access to all premium content.\": \"成为{site}的付费会员，即可畅享所有付费内容。\",\n     \"By {authors}\": \"作者 {authors}\",\n-    \"Comment\": \"留言\",\n+    \"Comment\": \"评论\",\n     \"Complete signup for {siteTitle}!\": \"完成在{siteTitle}的注册！\",\n     \"Complete your sign up to {siteTitle}!\": \"完成您在 {siteTitle} 的注册！\",\n     \"complimentary\": \"免费\","
+    },
+    "diff:ghost/i18n/locales/zh/ghost.json:6": {
+      "id": "diff:ghost/i18n/locales/zh/ghost.json:6",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/ghost.json:6",
+      "message": "Added line: \"Comment\": \"评论\","
+    },
+    "diff_hunk:ghost/i18n/locales/zh/ghost.json:24": {
+      "id": "diff_hunk:ghost/i18n/locales/zh/ghost.json:24",
+      "kind": "diff_hunk",
+      "source": "ghost/i18n/locales/zh/ghost.json:24",
+      "message": "@@ -24,11 +24,11 @@\n     \"If you did not make this request, you can simply delete this message.\": \"如果您没有发出此请求，您可以直接删除此消息。\",\n     \"If you didn't try to sign in recently, you can safely ignore this email to deny access.\": \"若您近期未尝试登录，可安全忽略此邮件以拒绝访问。\",\n     \"Keep reading\": \"继续阅读\",\n-    \"Less like this\": \"不喜欢\",\n-    \"Manage subscription\": \"管理会籍\",\n-    \"Member since\": \"会籍自\",\n-    \"More like this\": \"喜欢\",\n-    \"Name\": \"称呼\",\n+    \"Less like this\": \"减少此类内容\",\n+    \"Manage subscription\": \"管理订阅\",\n+    \"Member since\": \"成为会员的时间\",\n+    \"More like this\": \"更多类似内容\",\n+    \"Name\": \"名字\",\n     \"New comment on {postTitle}\": \"{postTitle}的新评论\",\n     \"New reply to your comment on {siteTitle}\": \"您在{siteTitle}的评论收到新回复\",\n     \"Or use this link to securely sign in\": \"或通过此链接安全登录\","
+    },
+    "diff:ghost/i18n/locales/zh/ghost.json:27": {
+      "id": "diff:ghost/i18n/locales/zh/ghost.json:27",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/ghost.json:27",
+      "message": "Added line: \"Less like this\": \"减少此类内容\","
+    },
+    "diff:ghost/i18n/locales/zh/ghost.json:28": {
+      "id": "diff:ghost/i18n/locales/zh/ghost.json:28",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/ghost.json:28",
+      "message": "Added line: \"Manage subscription\": \"管理订阅\","
+    },
+    "diff:ghost/i18n/locales/zh/ghost.json:29": {
+      "id": "diff:ghost/i18n/locales/zh/ghost.json:29",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/ghost.json:29",
+      "message": "Added line: \"Member since\": \"成为会员的时间\","
+    },
+    "diff:ghost/i18n/locales/zh/ghost.json:30": {
+      "id": "diff:ghost/i18n/locales/zh/ghost.json:30",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/ghost.json:30",
+      "message": "Added line: \"More like this\": \"更多类似内容\","
+    },
+    "diff:ghost/i18n/locales/zh/ghost.json:31": {
+      "id": "diff:ghost/i18n/locales/zh/ghost.json:31",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/ghost.json:31",
+      "message": "Added line: \"Name\": \"名字\","
+    },
+    "diff_hunk:ghost/i18n/locales/zh/ghost.json:36": {
+      "id": "diff_hunk:ghost/i18n/locales/zh/ghost.json:36",
+      "kind": "diff_hunk",
+      "source": "ghost/i18n/locales/zh/ghost.json:36",
+      "message": "@@ -36,8 +36,8 @@\n     \"paid\": \"付费\",\n     \"Please confirm your email address with this link:\": \"请通过此链接确认您的电子邮件地址：\",\n     \"Secure sign in link for {siteTitle}\": \"为 {siteTitle} 准备的安全登录链接\",\n-    \"See you soon!\": \"再会！\",\n-    \"Sent to {email}\": \"发送到 {email}\",\n+    \"See you soon!\": \"回见！\",\n+    \"Sent to {email}\": \"已发送至 {email}\",\n     \"Sign in\": \"登录\",\n     \"Sign in now\": \"立即登录\",\n     \"Sign in to {siteTitle}\": \"登录到 {siteTitle}\","
+    },
+    "diff:ghost/i18n/locales/zh/ghost.json:39": {
+      "id": "diff:ghost/i18n/locales/zh/ghost.json:39",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/ghost.json:39",
+      "message": "Added line: \"See you soon!\": \"回见！\","
+    },
+    "diff:ghost/i18n/locales/zh/ghost.json:40": {
+      "id": "diff:ghost/i18n/locales/zh/ghost.json:40",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/ghost.json:40",
+      "message": "Added line: \"Sent to {email}\": \"已发送至 {email}\","
+    },
+    "diff_hunk:ghost/i18n/locales/zh/ghost.json:45": {
+      "id": "diff_hunk:ghost/i18n/locales/zh/ghost.json:45",
+      "kind": "diff_hunk",
+      "source": "ghost/i18n/locales/zh/ghost.json:45",
+      "message": "@@ -45,7 +45,7 @@\n     \"Sign in verification\": \"登录验证\",\n     \"Someone just replied to your comment\": \"有人刚刚回复了你的评论\",\n     \"Someone just replied to your comment on {postTitle}.\": \"有人刚刚在{postTitle}回复了你的评论。\",\n-    \"Subscription details\": \"\",\n+    \"Subscription details\": \"订阅详情\",\n     \"Tap the link below to complete the signup process for {siteTitle}, and be automatically signed in:\": \"请点击下面的链接完成 {siteTitle} 的注册，并将自动登录：\",\n     \"Thank you for signing up to {siteTitle}!\": \"感谢您注册 {siteTitle}！\",\n     \"Thank you for subscribing to {siteTitle}!\": \"感谢您订阅 {siteTitle}！\","
+    },
+    "diff:ghost/i18n/locales/zh/ghost.json:48": {
+      "id": "diff:ghost/i18n/locales/zh/ghost.json:48",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/ghost.json:48",
+      "message": "Added line: \"Subscription details\": \"订阅详情\","
+    },
+    "diff_hunk:ghost/i18n/locales/zh/ghost.json:75": {
+      "id": "diff_hunk:ghost/i18n/locales/zh/ghost.json:75",
+      "kind": "diff_hunk",
+      "source": "ghost/i18n/locales/zh/ghost.json:75",
+      "message": "@@ -75,9 +75,9 @@\n     \"You're one tap away from subscribing to {siteTitle} — please confirm your email address with this link:\": \"您离订阅 {siteTitle} 仅需点击一下 — 请通过此链接确认您的电子邮件地址：\",\n     \"You're one tap away from subscribing to {siteTitle}!\": \"仅需一次点击即可完成{siteTitle}的订阅！\",\n     \"Your free trial ends on {date}, at which time you will be charged the regular price. You can always cancel before then.\": \"您的免费试用将于{date}结束，届时将按标准价格收费。您可在到期前随时取消订阅。\",\n-    \"Your subscription has been canceled and will expire on {date}. You can resume your subscription via your account settings.\": \"您的会籍已取消，将于{date}到期。您可通过账户设置重新订阅。\",\n-    \"Your subscription has expired.\": \"您的会籍已过期。\",\n-    \"Your subscription will expire on {date}.\": \"您的会籍将于{date}过期。\",\n-    \"Your subscription will renew on {date}.\": \"您的会籍将于{date}更新。\",\n+    \"Your subscription has been canceled and will expire on {date}. You can resume your subscription via your account settings.\": \"您的订阅已取消，将于{date}到期。您可通过账户设置重新订阅。\",\n+    \"Your subscription has expired.\": \"您的订阅已过期。\",\n+    \"Your subscription will expire on {date}.\": \"您的订阅将于{date}过期。\",\n+    \"Your subscription will renew on {date}.\": \"您的订阅将于{date}更新。\",\n     \"Your verification code for {siteTitle}\": \"您在{siteTitle}的验证码\"\n }"
+    },
+    "diff:ghost/i18n/locales/zh/ghost.json:78": {
+      "id": "diff:ghost/i18n/locales/zh/ghost.json:78",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/ghost.json:78",
+      "message": "Added line: \"Your subscription has been canceled and will expire on {date}. You can resume your subscription via your account set..."
+    },
+    "diff:ghost/i18n/locales/zh/ghost.json:79": {
+      "id": "diff:ghost/i18n/locales/zh/ghost.json:79",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/ghost.json:79",
+      "message": "Added line: \"Your subscription has expired.\": \"您的订阅已过期。\","
+    },
+    "diff:ghost/i18n/locales/zh/ghost.json:80": {
+      "id": "diff:ghost/i18n/locales/zh/ghost.json:80",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/ghost.json:80",
+      "message": "Added line: \"Your subscription will expire on {date}.\": \"您的订阅将于{date}过期。\","
+    },
+    "diff:ghost/i18n/locales/zh/ghost.json:81": {
+      "id": "diff:ghost/i18n/locales/zh/ghost.json:81",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/ghost.json:81",
+      "message": "Added line: \"Your subscription will renew on {date}.\": \"您的订阅将于{date}更新。\","
+    },
+    "diff_hunk:ghost/i18n/locales/zh/portal.json:6": {
+      "id": "diff_hunk:ghost/i18n/locales/zh/portal.json:6",
+      "kind": "diff_hunk",
+      "source": "ghost/i18n/locales/zh/portal.json:6",
+      "message": "@@ -6,7 +6,7 @@\n     \"{amount} off for first {period}.\": \"首{period}减免{amount}\",\n     \"{amount} off forever.\": \"永久减免{amount}\",\n     \"{discount}% discount\": \"{discount}% 折扣\",\n-    \"{memberEmail} will no longer receive {newsletterName} newsletter.\": \"{memberEmail}将不会再收到{newsletterName}的新闻信。\",\n+    \"{memberEmail} will no longer receive {newsletterName} newsletter.\": \"{memberEmail}将不会再收到新闻信。\",\n     \"{memberEmail} will no longer receive emails when someone replies to your comments.\": \"{memberEmail}将不会再收到评论回复提醒邮件。\",\n     \"{memberEmail} will no longer receive this newsletter.\": \"{memberEmail}将不会再收到本新闻信。\",\n     \"{trialDays} days free\": \"{trialDays} 天免费试用\","
+    },
+    "diff:ghost/i18n/locales/zh/portal.json:9": {
+      "id": "diff:ghost/i18n/locales/zh/portal.json:9",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/portal.json:9",
+      "message": "Added line: \"{memberEmail} will no longer receive {newsletterName} newsletter.\": \"{memberEmail}将不会再收到新闻信。\","
+    },
+    "diff_hunk:ghost/i18n/locales/zh/portal.json:55": {
+      "id": "diff_hunk:ghost/i18n/locales/zh/portal.json:55",
+      "kind": "diff_hunk",
+      "source": "ghost/i18n/locales/zh/portal.json:55",
+      "message": "@@ -55,12 +55,12 @@\n     \"Create a new contact\": \"创建新联系\",\n     \"Current plan\": \"当前订阅\",\n     \"Delete account\": \"删除账户\",\n-    \"Didn't mean to do this? Manage your preferences <button>here</button>.\": \"错误操作？在<button>这里</button>变更您的偏好设定。\",\n+    \"Didn't mean to do this? Manage your preferences <button>here</button>.\": \"操作有误？可以在<button>这里</button>修改您的偏好设置。\",\n     \"Don't have an account?\": \"还没有账户吗？\",\n     \"Edit\": \"编辑\",\n     \"Email\": \"电子邮件\",\n     \"Email newsletter\": \"新闻信\",\n-    \"Email newsletter settings updated\": \"新闻信设定已更新\",\n+    \"Email newsletter settings updated\": \"新闻信设置已更新\",\n     \"Email preferences\": \"电子邮件偏好设置\",\n     \"Email preferences updated.\": \"电子邮件偏好已更新\",\n     \"Emails\": \"电子邮件列表\","
+    },
+    "diff:ghost/i18n/locales/zh/portal.json:58": {
+      "id": "diff:ghost/i18n/locales/zh/portal.json:58",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/portal.json:58",
+      "message": "Added line: \"Didn't mean to do this? Manage your preferences <button>here</button>.\": \"操作有误？可以在<button>这里</button>修改您的偏好设置。\","
+    },
+    "diff:ghost/i18n/locales/zh/portal.json:63": {
+      "id": "diff:ghost/i18n/locales/zh/portal.json:63",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/portal.json:63",
+      "message": "Added line: \"Email newsletter settings updated\": \"新闻信设置已更新\","
+    },
+    "diff_hunk:ghost/i18n/locales/zh/portal.json:82": {
+      "id": "diff_hunk:ghost/i18n/locales/zh/portal.json:82",
+      "kind": "diff_hunk",
+      "source": "ghost/i18n/locales/zh/portal.json:82",
+      "message": "@@ -82,12 +82,12 @@\n     \"Failed to update account details\": \"更新账户信息失败\",\n     \"Failed to update billing information, please try again\": \"更新账单信息失败，请重试\",\n     \"Failed to update newsletter settings\": \"更新新闻信设置失败\",\n-    \"Failed to update subscription, please try again\": \"更新会籍失败，请重试\",\n+    \"Failed to update subscription, please try again\": \"更新订阅失败，请重试\",\n     \"Failed to verify code, please try again\": \"验证码验证失败，请重试\",\n     \"Forever\": \"永久\",\n     \"Free Trial – Ends {trialEnd}\": \"免费试用 - {trialEnd}结束\",\n     \"Get help\": \"获取帮助\",\n-    \"Get in touch for help\": \"联系我们，获取帮助。\",\n+    \"Get in touch for help\": \"联系我们获取帮助\",\n     \"Get notified when someone replies to your comment\": \"当有人回复您的评论时收到通知。\",\n     \"Give feedback on this post\": \"对这篇文章提供建议\",\n     \"Help! I'm not receiving emails\": \"求助！我没有收到电子邮件\","
+    },
+    "diff:ghost/i18n/locales/zh/portal.json:85": {
+      "id": "diff:ghost/i18n/locales/zh/portal.json:85",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/portal.json:85",
+      "message": "Added line: \"Failed to update subscription, please try again\": \"更新订阅失败，请重试\","
+    },
+    "diff:ghost/i18n/locales/zh/portal.json:90": {
+      "id": "diff:ghost/i18n/locales/zh/portal.json:90",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/portal.json:90",
+      "message": "Added line: \"Get in touch for help\": \"联系我们获取帮助\","
+    },
+    "diff_hunk:ghost/i18n/locales/zh/portal.json:105": {
+      "id": "diff_hunk:ghost/i18n/locales/zh/portal.json:105",
+      "kind": "diff_hunk",
+      "source": "ghost/i18n/locales/zh/portal.json:105",
+      "message": "@@ -105,7 +105,7 @@\n     \"Invalid verification code\": \"无效的验证码\",\n     \"Jamie Larson\": \"阿宇\",\n     \"jamie@example.com\": \"ayu@example.com\",\n-    \"Less like this\": \"不喜欢\",\n+    \"Less like this\": \"减少此类内容\",\n     \"Make sure emails aren't accidentally ending up in the Spam or Promotions folders of your inbox. If they are, click on \\\"Mark as not spam\\\" and/or \\\"Move to inbox\\\".\": \"确保邮件没有被意外标记为垃圾或者促销邮件。如果是...\n     \"Manage\": \"管理\",\n     \"Maybe later\": \"之后再说\","
+    },
+    "diff:ghost/i18n/locales/zh/portal.json:108": {
+      "id": "diff:ghost/i18n/locales/zh/portal.json:108",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/portal.json:108",
+      "message": "Added line: \"Less like this\": \"减少此类内容\","
+    },
+    "diff_hunk:ghost/i18n/locales/zh/portal.json:113": {
+      "id": "diff_hunk:ghost/i18n/locales/zh/portal.json:113",
+      "kind": "diff_hunk",
+      "source": "ghost/i18n/locales/zh/portal.json:113",
+      "message": "@@ -113,15 +113,15 @@\n     \"Memberships unavailable, contact the owner for access.\": \"会员资格不可用，请联系网站所有者获取访问权限。\",\n     \"month\": \"月\",\n     \"Monthly\": \"月付\",\n-    \"More like this\": \"喜欢\",\n-    \"Name\": \"名字\",\n+    \"More like this\": \"更多类似内容\",\n+    \"Name\": \"名称\",\n     \"Need more help? Contact support\": \"需要更多帮助？联系支持服务\",\n     \"Newsletters can be disabled on your account for two reasons: A previous email was marked as spam, or attempting to send an email resulted in a permanent failure (bounce).\": \"您账户的新闻信被禁用的可能原因有两个...\n     \"No member exists with this e-mail address.\": \"没有会员使用此电子邮箱地址。\",\n     \"No member exists with this e-mail address. Please sign up first.\": \"没有会员使用此电子邮箱地址。请先注册。\",\n     \"Not receiving emails?\": \"没有收到电子邮件？\",\n     \"Now check your email!\": \"现在请检查您的电子邮件！\",\n-    \"Once resubscribed, if you still don't see emails in your inbox, check your spam folder. Some inbox providers keep a record of previous spam complaints and will continue to flag emails. If this...\n+    \"Once resubscribed, if you still don't see emails in your inbox, check your spam folder. Some inbox providers keep a record of previous spam complaints and will continue to flag emails. If this...\n     \"Permanent failure (bounce)\": \"永久错误 (bounce)\",\n     \"Phone number\": \"电话号码\",\n     \"Plan\": \"订阅方案\","
+    },
+    "diff:ghost/i18n/locales/zh/portal.json:116": {
+      "id": "diff:ghost/i18n/locales/zh/portal.json:116",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/portal.json:116",
+      "message": "Added line: \"More like this\": \"更多类似内容\","
+    },
+    "diff:ghost/i18n/locales/zh/portal.json:117": {
+      "id": "diff:ghost/i18n/locales/zh/portal.json:117",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/portal.json:117",
+      "message": "Added line: \"Name\": \"名称\","
+    },
+    "diff:ghost/i18n/locales/zh/portal.json:124": {
+      "id": "diff:ghost/i18n/locales/zh/portal.json:124",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/portal.json:124",
+      "message": "Added line: \"Once resubscribed, if you still don't see emails in your inbox, check your spam folder. Some inbox providers keep a ..."
+    },
+    "diff_hunk:ghost/i18n/locales/zh/portal.json:173": {
+      "id": "diff_hunk:ghost/i18n/locales/zh/portal.json:173",
+      "kind": "diff_hunk",
+      "source": "ghost/i18n/locales/zh/portal.json:173",
+      "message": "@@ -173,7 +173,7 @@\n     \"There was an error continuing your subscription, please try again.\": \"续订过程中出现错误，请重试。\",\n     \"There was an error processing your payment. Please try again.\": \"您的付款处理失败，请重试。\",\n     \"There was an error sending the email, please try again\": \"发送电子邮件时出现错误，请重试。\",\n-    \"This site is invite-only, contact the owner for access.\": \"此网站仅限邀请，联系网站所有者以获取访问权限\",\n+    \"This site is invite-only, contact the owner for access.\": \"此网站仅限受邀访问，请联系网站所有者以获取权限。\",\n     \"This site is not accepting donations at the moment.\": \"本网站目前不接受捐赠。\",\n     \"This site is not accepting payments at the moment.\": \"本网站目前暂不接受付款。\",\n     \"This site only accepts paid members.\": \"本网站仅允许付费会员。\","
+    },
+    "diff:ghost/i18n/locales/zh/portal.json:176": {
+      "id": "diff:ghost/i18n/locales/zh/portal.json:176",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/portal.json:176",
+      "message": "Added line: \"This site is invite-only, contact the owner for access.\": \"此网站仅限受邀访问，请联系网站所有者以获取权限。\","
+    },
+    "diff_hunk:ghost/i18n/locales/zh/portal.json:189": {
+      "id": "diff_hunk:ghost/i18n/locales/zh/portal.json:189",
+      "kind": "diff_hunk",
+      "source": "ghost/i18n/locales/zh/portal.json:189",
+      "message": "@@ -189,14 +189,14 @@\n     \"Try free for {amount} days, then {originalPrice}.\": \"{amount}天免费试用，之后为{originalPrice}定价。\",\n     \"Unable to initiate checkout session\": \"无法启动结账会话\",\n     \"Unlock access to all newsletters by becoming a paid subscriber.\": \"成为付费订阅用户以解锁全部新闻信。\",\n-    \"Unsubscribe from all emails\": \"取消所有新闻信订阅\",\n+    \"Unsubscribe from all emails\": \"取消接收所有邮件\",\n     \"Unsubscribed\": \"已取消订阅\",\n-    \"Unsubscribed from all emails.\": \"已取消所有新闻信订阅\",\n+    \"Unsubscribed from all emails.\": \"已取消接收所有邮件。\",\n     \"Unsubscribing from emails will not cancel your paid subscription to {title}\": \"取消新闻信订阅不会取消您对 {title} 的付费订阅。\",\n     \"Update\": \"更新\",\n     \"Update your preferences\": \"更新您的偏好设置\",\n     \"Verification link sent, check your inbox\": \"验证链接已发送，请检查您的收件箱\",\n-    \"Verify your email address is correct\": \"确认您的电子邮件地址是正确的\",\n+    \"Verify your email address is correct\": \"请确认您的邮箱地址是否正确\",\n     \"Verifying...\": \"正在验证...\",\n     \"View plans\": \"查阅订阅方案\",\n     \"We couldn't unsubscribe you as the email address was not found. Please contact the site owner.\": \"我们无法取消您的订阅，因为找不到该电子邮件地址。请联系网站所有者。\","
+    },
+    "diff:ghost/i18n/locales/zh/portal.json:192": {
+      "id": "diff:ghost/i18n/locales/zh/portal.json:192",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/portal.json:192",
+      "message": "Added line: \"Unsubscribe from all emails\": \"取消接收所有邮件\","
+    },
+    "diff:ghost/i18n/locales/zh/portal.json:194": {
+      "id": "diff:ghost/i18n/locales/zh/portal.json:194",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/portal.json:194",
+      "message": "Added line: \"Unsubscribed from all emails.\": \"已取消接收所有邮件。\","
+    },
+    "diff:ghost/i18n/locales/zh/portal.json:199": {
+      "id": "diff:ghost/i18n/locales/zh/portal.json:199",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/portal.json:199",
+      "message": "Added line: \"Verify your email address is correct\": \"请确认您的邮箱地址是否正确\","
+    },
+    "diff_hunk:ghost/i18n/locales/zh/portal.json:209": {
+      "id": "diff_hunk:ghost/i18n/locales/zh/portal.json:209",
+      "kind": "diff_hunk",
+      "source": "ghost/i18n/locales/zh/portal.json:209",
+      "message": "@@ -209,13 +209,13 @@\n     \"Yearly\": \"年付\",\n     \"You currently have a free membership, upgrade to a paid subscription for full access.\": \"您当前为免费用户，升级为付费订阅以获取全部内容。\",\n     \"You have been successfully resubscribed\": \"您已成功重新订阅\",\n-    \"You're currently not receiving emails\": \"您当前不会收到电子邮件。\",\n-    \"You're not receiving emails\": \"您当前不会收到电子邮件。\",\n-    \"You're not receiving emails because you either marked a recent message as spam, or because messages could not be delivered to your provided email address.\": \"您收不到电子邮件是因为您可能将最近的某个消息标记为垃圾邮件，或者无法...\n+    \"You're currently not receiving emails\": \"您当前不会收到邮件。\",\n+    \"You're not receiving emails\": \"您将不会收到邮件。\",\n+    \"You're not receiving emails because you either marked a recent message as spam, or because messages could not be delivered to your provided email address.\": \"您收不到邮件是因为您可能将最近的某个消息标记为垃圾邮件，或者无法将消...\n     \"You've successfully signed in.\": \"您已成功登录。\",\n     \"You've successfully subscribed to\": \"您已成功订阅\",\n     \"Your account\": \"您的账户\",\n-    \"Your email has failed to resubscribe, please try again\": \"您的电子邮件未能成功重新订阅，请重试。\",\n+    \"Your email has failed to resubscribe, please try again\": \"您的邮箱未能成功重新订阅，请重试。\",\n     \"your inbox\": \"您的收件箱\",\n     \"Your input helps shape what gets published.\": \"您的建议将使我们变得更好。\",\n     \"Your subscription will expire on {expiryDate}\": \"您的订阅将在{expiryDate}到期\","
+    },
+    "diff:ghost/i18n/locales/zh/portal.json:212": {
+      "id": "diff:ghost/i18n/locales/zh/portal.json:212",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/portal.json:212",
+      "message": "Added line: \"You're currently not receiving emails\": \"您当前不会收到邮件。\","
+    },
+    "diff:ghost/i18n/locales/zh/portal.json:213": {
+      "id": "diff:ghost/i18n/locales/zh/portal.json:213",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/portal.json:213",
+      "message": "Added line: \"You're not receiving emails\": \"您将不会收到邮件。\","
+    },
+    "diff:ghost/i18n/locales/zh/portal.json:214": {
+      "id": "diff:ghost/i18n/locales/zh/portal.json:214",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/portal.json:214",
+      "message": "Added line: \"You're not receiving emails because you either marked a recent message as spam, or because messages could not be del..."
+    },
+    "diff:ghost/i18n/locales/zh/portal.json:218": {
+      "id": "diff:ghost/i18n/locales/zh/portal.json:218",
+      "kind": "diff",
+      "source": "ghost/i18n/locales/zh/portal.json:218",
+      "message": "Added line: \"Your email has failed to resubscribe, please try again\": \"您的邮箱未能成功重新订阅，请重试。\","
+    },
+    "entity:ghost/i18n/locales/zh/comments.json:ghost.i18n.locales.zh.comments": {
+      "id": "entity:ghost/i18n/locales/zh/comments.json:ghost.i18n.locales.zh.comments",
+      "kind": "entity",
+      "source": "ghost/i18n/locales/zh/comments.json:1-74",
+      "message": "Changed module ghost.i18n.locales.zh.comments touched by 1 hunk(s)."
+    },
+    "entity:ghost/i18n/locales/zh/ghost.json:ghost.i18n.locales.zh.ghost": {
+      "id": "entity:ghost/i18n/locales/zh/ghost.json:ghost.i18n.locales.zh.ghost",
+      "kind": "entity",
+      "source": "ghost/i18n/locales/zh/ghost.json:6-6",
+      "message": "Changed module ghost.i18n.locales.zh.ghost touched by 5 hunk(s)."
+    },
+    "entity:ghost/i18n/locales/zh/portal.json:ghost.i18n.locales.zh.portal": {
+      "id": "entity:ghost/i18n/locales/zh/portal.json:ghost.i18n.locales.zh.portal",
+      "kind": "entity",
+      "source": "ghost/i18n/locales/zh/portal.json:9-9",
+      "message": "Changed module ghost.i18n.locales.zh.portal touched by 8 hunk(s)."
+    }
+  },
+  "missing_evidence_ids": [],
+  "agent_runs": [
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+      "input_evidence_ids": [
+        "diff_hunk:ghost/i18n/locales/zh/comments.json:1",
+        "diff_hunk:ghost/i18n/locales/zh/ghost.json:3",
+        "diff_hunk:ghost/i18n/locales/zh/portal.json:6"
+      ],
+      "output_issue_ids": [
+        "correctness:ghost/i18n/locales/zh/comments.json:1"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 1,
+      "retry_log": [
+        "attempt=1 error=timeout delay=1.00s"
+      ],
+      "latency_ms": 64696,
+      "token_count_in": 6722,
+      "token_count_out": 160,
+      "trace_id": "60b36cd436ab4d3cb6b7aa13357ee7a4",
+      "span_id": "089942df70734398",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001",
+      "shard_index": 0,
+      "shard_count": 1,
+      "context_request_count": 0,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+      "model": null,
+      "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+      "input_evidence_ids": [
+        "diff_hunk:ghost/i18n/locales/zh/comments.json:1"
+      ],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 0,
+      "token_count_in": 0,
+      "token_count_out": 0,
+      "trace_id": "",
+      "span_id": "",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "",
+      "shard_index": 0,
+      "shard_count": 0,
+      "context_request_count": 0,
+      "context_refill_used": false
+    }
+  ],
+  "prompt_exports": {},
+  "context_budget": {
+    "enabled": true,
+    "strategy": "risk_first_v1",
+    "context_profile": "risk_compact_manifest_v1",
+    "max_input_tokens": 9000,
+    "estimated_input_tokens": 5179,
+    "selected_evidence_count": 3,
+    "omitted_evidence_count": 118,
+    "selected_evidence_ids": [
+      "diff_hunk:ghost/i18n/locales/zh/comments.json:1",
+      "diff_hunk:ghost/i18n/locales/zh/ghost.json:3",
+      "diff_hunk:ghost/i18n/locales/zh/portal.json:6"
+    ],
+    "omitted_evidence_ids": [
+      "diff_hunk:ghost/i18n/locales/zh/ghost.json:24",
+      "diff_hunk:ghost/i18n/locales/zh/ghost.json:36",
+      "diff_hunk:ghost/i18n/locales/zh/ghost.json:45",
+      "diff_hunk:ghost/i18n/locales/zh/ghost.json:75",
+      "diff_hunk:ghost/i18n/locales/zh/portal.json:105",
+      "diff_hunk:ghost/i18n/locales/zh/portal.json:113",
+      "diff_hunk:ghost/i18n/locales/zh/portal.json:173",
+      "diff_hunk:ghost/i18n/locales/zh/portal.json:189",
+      "diff_hunk:ghost/i18n/locales/zh/portal.json:209",
+      "diff_hunk:ghost/i18n/locales/zh/portal.json:55",
+      "diff_hunk:ghost/i18n/locales/zh/portal.json:82",
+      "entity:ghost/i18n/locales/zh/comments.json:ghost.i18n.locales.zh.comments",
+      "entity:ghost/i18n/locales/zh/ghost.json:ghost.i18n.locales.zh.ghost",
+      "entity:ghost/i18n/locales/zh/portal.json:ghost.i18n.locales.zh.portal",
+      "diff:ghost/i18n/locales/zh/comments.json:1",
+      "diff:ghost/i18n/locales/zh/comments.json:10",
+      "diff:ghost/i18n/locales/zh/comments.json:11",
+      "diff:ghost/i18n/locales/zh/comments.json:12",
+      "diff:ghost/i18n/locales/zh/comments.json:13",
+      "diff:ghost/i18n/locales/zh/comments.json:14",
+      "diff:ghost/i18n/locales/zh/comments.json:15",
+      "diff:ghost/i18n/locales/zh/comments.json:16",
+      "diff:ghost/i18n/locales/zh/comments.json:17",
+      "diff:ghost/i18n/locales/zh/comments.json:18",
+      "diff:ghost/i18n/locales/zh/comments.json:19",
+      "diff:ghost/i18n/locales/zh/comments.json:2",
+      "diff:ghost/i18n/locales/zh/comments.json:20",
+      "diff:ghost/i18n/locales/zh/comments.json:21",
+      "diff:ghost/i18n/locales/zh/comments.json:22",
+      "diff:ghost/i18n/locales/zh/comments.json:23",
+      "diff:ghost/i18n/locales/zh/comments.json:24",
+      "diff:ghost/i18n/locales/zh/comments.json:25",
+      "diff:ghost/i18n/locales/zh/comments.json:26",
+      "diff:ghost/i18n/locales/zh/comments.json:27",
+      "diff:ghost/i18n/locales/zh/comments.json:28",
+      "diff:ghost/i18n/locales/zh/comments.json:29",
+      "diff:ghost/i18n/locales/zh/comments.json:3",
+      "diff:ghost/i18n/locales/zh/comments.json:30",
+      "diff:ghost/i18n/locales/zh/comments.json:31",
+      "diff:ghost/i18n/locales/zh/comments.json:32",
+      "diff:ghost/i18n/locales/zh/comments.json:33",
+      "diff:ghost/i18n/locales/zh/comments.json:34",
+      "diff:ghost/i18n/locales/zh/comments.json:35",
+      "diff:ghost/i18n/locales/zh/comments.json:36",
+      "diff:ghost/i18n/locales/zh/comments.json:37",
+      "diff:ghost/i18n/locales/zh/comments.json:38",
+      "diff:ghost/i18n/locales/zh/comments.json:39",
+      "diff:ghost/i18n/locales/zh/comments.json:4",
+      "diff:ghost/i18n/locales/zh/comments.json:40",
+      "diff:ghost/i18n/locales/zh/comments.json:41",
+      "diff:ghost/i18n/locales/zh/comments.json:42",
+      "diff:ghost/i18n/locales/zh/comments.json:43",
+      "diff:ghost/i18n/locales/zh/comments.json:44",
+      "diff:ghost/i18n/locales/zh/comments.json:45",
+      "diff:ghost/i18n/locales/zh/comments.json:46",
+      "diff:ghost/i18n/locales/zh/comments.json:47",
+      "diff:ghost/i18n/locales/zh/comments.json:48",
+      "diff:ghost/i18n/locales/zh/comments.json:49",
+      "diff:ghost/i18n/locales/zh/comments.json:5",
+      "diff:ghost/i18n/locales/zh/comments.json:50",
+      "diff:ghost/i18n/locales/zh/comments.json:51",
+      "diff:ghost/i18n/locales/zh/comments.json:52",
+      "diff:ghost/i18n/locales/zh/comments.json:53",
+      "diff:ghost/i18n/locales/zh/comments.json:54",
+      "diff:ghost/i18n/locales/zh/comments.json:55",
+      "diff:ghost/i18n/locales/zh/comments.json:56",
+      "diff:ghost/i18n/locales/zh/comments.json:57",
+      "diff:ghost/i18n/locales/zh/comments.json:58",
+      "diff:ghost/i18n/locales/zh/comments.json:59",
+      "diff:ghost/i18n/locales/zh/comments.json:6",
+      "diff:ghost/i18n/locales/zh/comments.json:60",
+      "diff:ghost/i18n/locales/zh/comments.json:61",
+      "diff:ghost/i18n/locales/zh/comments.json:62",
+      "diff:ghost/i18n/locales/zh/comments.json:63",
+      "diff:ghost/i18n/locales/zh/comments.json:64",
+      "diff:ghost/i18n/locales/zh/comments.json:65",
+      "diff:ghost/i18n/locales/zh/comments.json:66",
+      "diff:ghost/i18n/locales/zh/comments.json:67",
+      "diff:ghost/i18n/locales/zh/comments.json:68",
+      "diff:ghost/i18n/locales/zh/comments.json:69",
+      "diff:ghost/i18n/locales/zh/comments.json:7",
+      "diff:ghost/i18n/locales/zh/comments.json:70",
+      "diff:ghost/i18n/locales/zh/comments.json:71",
+      "diff:ghost/i18n/locales/zh/comments.json:72",
+      "diff:ghost/i18n/locales/zh/comments.json:73",
+      "diff:ghost/i18n/locales/zh/comments.json:74",
+      "diff:ghost/i18n/locales/zh/comments.json:8",
+      "diff:ghost/i18n/locales/zh/comments.json:9",
+      "diff:ghost/i18n/locales/zh/ghost.json:27",
+      "diff:ghost/i18n/locales/zh/ghost.json:28",
+      "diff:ghost/i18n/locales/zh/ghost.json:29",
+      "diff:ghost/i18n/locales/zh/ghost.json:30",
+      "diff:ghost/i18n/locales/zh/ghost.json:31",
+      "diff:ghost/i18n/locales/zh/ghost.json:39",
+      "diff:ghost/i18n/locales/zh/ghost.json:40",
+      "diff:ghost/i18n/locales/zh/ghost.json:48",
+      "diff:ghost/i18n/locales/zh/ghost.json:6",
+      "diff:ghost/i18n/locales/zh/ghost.json:78",
+      "diff:ghost/i18n/locales/zh/ghost.json:79",
+      "diff:ghost/i18n/locales/zh/ghost.json:80",
+      "diff:ghost/i18n/locales/zh/ghost.json:81",
+      "diff:ghost/i18n/locales/zh/portal.json:108",
+      "diff:ghost/i18n/locales/zh/portal.json:116",
+      "diff:ghost/i18n/locales/zh/portal.json:117",
+      "diff:ghost/i18n/locales/zh/portal.json:124",
+      "diff:ghost/i18n/locales/zh/portal.json:176",
+      "diff:ghost/i18n/locales/zh/portal.json:192",
+      "diff:ghost/i18n/locales/zh/portal.json:194",
+      "diff:ghost/i18n/locales/zh/portal.json:199",
+      "diff:ghost/i18n/locales/zh/portal.json:212",
+      "diff:ghost/i18n/locales/zh/portal.json:213",
+      "diff:ghost/i18n/locales/zh/portal.json:214",
+      "diff:ghost/i18n/locales/zh/portal.json:218",
+      "diff:ghost/i18n/locales/zh/portal.json:58",
+      "diff:ghost/i18n/locales/zh/portal.json:63",
+      "diff:ghost/i18n/locales/zh/portal.json:85",
+      "diff:ghost/i18n/locales/zh/portal.json:9",
+      "diff:ghost/i18n/locales/zh/portal.json:90"
+    ],
+    "selected_risk_signal_count": 0,
+    "context_truncated": true,
+    "shard_count": 1,
+    "refill_count": 0,
+    "context_request_count": 0,
+    "context_requests": [],
+    "shards": [
+      {
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 3,
+        "omitted_evidence_count": 118,
+        "estimated_input_tokens": 5179,
+        "context_truncated": true
+      }
+    ],
+    "warnings": []
+  },
+  "loop": {
+    "enabled": true,
+    "max_iter": 1,
+    "iterations_completed": 1,
+    "converged": false,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "checkpoint_path": "D:\\learn\\code-review-agent\\workspace\\qodo_pr_review_bench_live_guidelines\\samples\\qodo_007\\review\\loop_checkpoint.json",
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "iterations": [
+      {
+        "i": 0,
+        "candidate_issue_count": 1,
+        "verified_count": 1,
+        "needs_human_review_count": 0,
+        "discarded_count": 0,
+        "keep_count": 0,
+        "uncertain_count": 1,
+        "reject_count": 0,
+        "feedback_sent": [
+          {
+            "issue_id": "correctness:ghost/i18n/locales/zh/comments.json:1",
+            "category": "correctness",
+            "critic_reason": "low confidence",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:ghost/i18n/locales/zh/comments.json:1"
+            ]
+          }
+        ],
+        "agent_runs": [
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+            "input_evidence_ids": [
+              "diff_hunk:ghost/i18n/locales/zh/comments.json:1",
+              "diff_hunk:ghost/i18n/locales/zh/ghost.json:3",
+              "diff_hunk:ghost/i18n/locales/zh/portal.json:6"
+            ],
+            "output_issue_ids": [
+              "correctness:ghost/i18n/locales/zh/comments.json:1"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 1,
+            "retry_log": [
+              "attempt=1 error=timeout delay=1.00s"
+            ],
+            "latency_ms": 64696,
+            "token_count_in": 6722,
+            "token_count_out": 160,
+            "trace_id": "60b36cd436ab4d3cb6b7aa13357ee7a4",
+            "span_id": "089942df70734398",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001",
+            "shard_index": 0,
+            "shard_count": 1,
+            "context_request_count": 0,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+            "model": null,
+            "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+            "input_evidence_ids": [
+              "diff_hunk:ghost/i18n/locales/zh/comments.json:1"
+            ],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 0,
+            "token_count_in": 0,
+            "token_count_out": 0,
+            "trace_id": "",
+            "span_id": "",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "",
+            "shard_index": 0,
+            "shard_count": 0,
+            "context_request_count": 0,
+            "context_refill_used": false
+          }
+        ],
+        "issue_set": [
+          "correctness:ghost/i18n/locales/zh/comments.json:1"
+        ],
+        "keep": [],
+        "needs_human_review": [
+          {
+            "file": "ghost/i18n/locales/zh/comments.json",
+            "line": 1,
+            "severity": "medium",
+            "category": "correctness",
+            "message": "Deleting the entire Chinese comments translation file will cause the comments feature to fall back to English or show missing translation keys for Chinese users.",
+            "suggestion": "If the file is no longer needed, ensure translations are consolidated into another file or that the feature no longer requires Chinese translations.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:ghost/i18n/locales/zh/comments.json:1"
+            ]
+          }
+        ],
+        "discarded": []
+      }
+    ]
+  },
+  "tracing": {
+    "total_latency_ms": 64696,
+    "total_token_count_in": 6722,
+    "total_token_count_out": 160,
+    "total_retry_count": 1,
+    "run_count": 2,
+    "status_counts": {
+      "ok": 2
+    }
+  }
+}

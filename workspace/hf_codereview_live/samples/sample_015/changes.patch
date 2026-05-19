@@ -1,0 +1,49 @@
+--- a/gpt_engineer/main.py
++++ b/gpt_engineer/main.py
+@@ -1,34 +1,30 @@
+-    memory_path = input_path / f"{run_prefix}memory"
+-    workspace_path = input_path / f"{run_prefix}workspace"
+-
+-    if delete_existing:
+-        # Delete files and subdirectories in paths
+-        shutil.rmtree(memory_path, ignore_errors=True)
+-        shutil.rmtree(workspace_path, ignore_errors=True)
+-
+-    model = fallback_model(model)
+-
+-    ai = AI(
+-        model=model,
+-        temperature=temperature,
+-    )
+ 
+     dbs = DBs(
+         memory=DB(memory_path),
+         logs=DB(memory_path / "logs"),
+         input=DB(input_path),
+         workspace=DB(workspace_path),
+         preprompts=DB(Path(__file__).parent / "preprompts"),
++        archive=DB(archive_path),
+     )
++
++    if steps_config not in [
++        StepsConfig.EXECUTE_ONLY,
++        StepsConfig.USE_FEEDBACK,
++        StepsConfig.EVALUATE,
++    ]:
++        archive(dbs)
+ 
+     steps = STEPS[steps_config]
+     for step in steps:
+-        messages = step(ai, dbs, step_name=step.__name__)
++        messages = step(ai, dbs)
+         dbs.logs[step.__name__] = json.dumps(messages)
+ 
+-    collect_learnings(model, temperature, steps, dbs)
++    if collect_consent():
++        collect_learnings(model, temperature, steps, dbs)
+ 
+     dbs.logs["token_usage"] = ai.format_token_usage_log()
+ 
++
+ if __name__ == "__main__":
+     app()

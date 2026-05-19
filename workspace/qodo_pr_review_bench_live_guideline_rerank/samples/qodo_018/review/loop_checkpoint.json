@@ -1,0 +1,391 @@
+{
+  "schema_version": "1.0",
+  "run_id": "32096f7775214d599fb977f5dcdb32a2",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": false,
+  "package_hash": "sha256:61a4ee0862e09c3b94d7a1746c1e1e8f39fe797f00020c7df3806f319cbe0e30",
+  "diff_hash": "sha256:bfff7bd60f2225e649113ebfba98f8c81835a7fde5648728126b438f8a4d92c2",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 6,
+      "verified_count": 6,
+      "needs_human_review_count": 0,
+      "discarded_count": 0,
+      "keep_count": 2,
+      "uncertain_count": 4,
+      "reject_count": 0,
+      "feedback_sent": [
+        {
+          "issue_id": "maintainability:src/Components/Forms/test/EditContextDataAnnotationsExtensionsTest.cs:18",
+          "category": "maintainability",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/Forms/test/EditContextDataAnnotationsExtensionsTest.cs:18"
+          ]
+        },
+        {
+          "issue_id": "test_quality:src/Components/WebAssembly/WebAssembly.Authentication/test/RemoteAuthenticatorCoreTests.cs:370",
+          "category": "test_quality",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/test/RemoteAuthenticatorCoreTests.cs:370",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:71"
+          ]
+        },
+        {
+          "issue_id": "backward_compatibility:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:74",
+          "category": "backward_compatibility",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:71"
+          ]
+        },
+        {
+          "issue_id": "backward_compatibility:src/Components/WebAssembly/WebAssembly/src/Infrastructure/JSInteropMethods.cs:17",
+          "category": "backward_compatibility",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly/src/Infrastructure/JSInteropMethods.cs:14",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly/src/PublicAPI.Unshipped.txt:1"
+          ]
+        }
+      ],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/Components/src/PublicAPI.Unshipped.txt:1",
+            "diff_hunk:src/Components/Components/src/Routing/Router.cs:98",
+            "diff_hunk:src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs:20",
+            "diff_hunk:src/Components/Forms/src/PublicAPI.Unshipped.txt:1"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 3911,
+          "token_count_in": 5536,
+          "token_count_out": 12,
+          "trace_id": "11f49e4323dd467b8e1994c044f75452",
+          "span_id": "44e18c3f20374961",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 5,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/Forms/test/EditContextDataAnnotationsExtensionsTest.cs:18",
+            "diff_hunk:src/Components/Web/src/Forms/InputFile/RemoteBrowserFileStreamOptions.cs:1",
+            "diff_hunk:src/Components/Web/src/PublicAPI.Unshipped.txt:1",
+            "diff_hunk:src/Components/Web/src/Web/WebEventCallbackFactoryEventArgsExtensions.cs:1"
+          ],
+          "output_issue_ids": [
+            "maintainability:src/Components/Forms/test/EditContextDataAnnotationsExtensionsTest.cs:18"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 4235,
+          "token_count_in": 8089,
+          "token_count_out": 175,
+          "trace_id": "0e3c698ed431420f8c1c6e1a4bed63cf",
+          "span_id": "721e852d5f4a4120",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-002",
+          "shard_index": 1,
+          "shard_count": 5,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/Web/src/WebRenderer.cs:52",
+            "diff_hunk:src/Components/WebAssembly/JSInterop/src/InternalCalls.cs:1",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/PublicAPI.Unshipped.txt:1",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:106"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 2,
+          "retry_log": [
+            "attempt=1 error=timeout delay=1.00s",
+            "attempt=2 error=timeout delay=2.00s"
+          ],
+          "latency_ms": 183180,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "69e299f629824ec494917898809bf3f9",
+          "span_id": "da1f189c6bc94a74",
+          "parent_span_id": "",
+          "status": "error",
+          "error_type": "_AgentTransientError",
+          "shard_id": "shard-003",
+          "shard_index": 2,
+          "shard_count": 5,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:35",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenResult.cs:12",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/RemoteAuthenticationService.cs:57",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/SignOutSessionStateManager.cs:1"
+          ],
+          "output_issue_ids": [
+            "correctness:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:38",
+            "maintainability:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:38"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 25371,
+          "token_count_in": 8593,
+          "token_count_out": 341,
+          "trace_id": "382954d658734e1e8ab52cef11467b20",
+          "span_id": "97d7851f45564806",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-004",
+          "shard_index": 3,
+          "shard_count": 5,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:71",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/test/RemoteAuthenticatorCoreTests.cs:370",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly/src/Infrastructure/JSInteropMethods.cs:14",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly/src/PublicAPI.Unshipped.txt:1"
+          ],
+          "output_issue_ids": [
+            "test_quality:src/Components/WebAssembly/WebAssembly.Authentication/test/RemoteAuthenticatorCoreTests.cs:370",
+            "backward_compatibility:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:74",
+            "backward_compatibility:src/Components/WebAssembly/WebAssembly/src/Infrastructure/JSInteropMethods.cs:17"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 48908,
+          "token_count_in": 6644,
+          "token_count_out": 610,
+          "trace_id": "f10e35afceb84df88c8a25b941bbf1da",
+          "span_id": "31901a1a50304432",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-005",
+          "shard_index": 4,
+          "shard_count": 5,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/Forms/test/EditContextDataAnnotationsExtensionsTest.cs:18",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:35",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:71",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/test/RemoteAuthenticatorCoreTests.cs:370",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly/src/Infrastructure/JSInteropMethods.cs:14",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly/src/PublicAPI.Unshipped.txt:1"
+          ],
+          "output_issue_ids": [
+            "correctness:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:38",
+            "maintainability:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:38"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [
+        "backward_compatibility:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:74",
+        "backward_compatibility:src/Components/WebAssembly/WebAssembly/src/Infrastructure/JSInteropMethods.cs:17",
+        "correctness:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:38",
+        "maintainability:src/Components/Forms/test/EditContextDataAnnotationsExtensionsTest.cs:18",
+        "maintainability:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:38",
+        "test_quality:src/Components/WebAssembly/WebAssembly.Authentication/test/RemoteAuthenticatorCoreTests.cs:370"
+      ],
+      "keep": [
+        {
+          "file": "src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs",
+          "line": 38,
+          "severity": "high",
+          "category": "correctness",
+          "message": "Removing the null check for _tokenResult.InteractiveRequestUrl can cause a NullReferenceException when InteractiveRequestUrl is null.",
+          "suggestion": "Restore the null check for _tokenResult.InteractiveRequestUrl before calling NavigateToLogin or NavigateTo.",
+          "confidence": 0.95,
+          "evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:35"
+          ]
+        },
+        {
+          "file": "src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs",
+          "line": 38,
+          "severity": "medium",
+          "category": "maintainability",
+          "message": "The patch removes the obsolete RedirectUrl fallback path but replaces it with InteractiveRequestUrl without a null guard, which may break existing callers relying on the fallback.",
+          "suggestion": "Ensure InteractiveRequestUrl is non-null before using it, or provide a fallback to RedirectUrl if available.",
+          "confidence": 0.8,
+          "evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:35"
+          ]
+        }
+      ],
+      "needs_human_review": [
+        {
+          "file": "src/Components/Forms/test/EditContextDataAnnotationsExtensionsTest.cs",
+          "line": 18,
+          "severity": "medium",
+          "category": "maintainability",
+          "message": "Removed test 'ObsoleteApiReturnsEditContextForChaining' without adding a replacement test for the new API behavior, reducing test coverage for the chaining functionality.",
+          "suggestion": "Add a new test that validates the current (non-obsolete) API returns EditContext for chaining, or ensure the removal is intentional and covered elsewhere.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/Forms/test/EditContextDataAnnotationsExtensionsTest.cs:18"
+          ]
+        },
+        {
+          "file": "src/Components/WebAssembly/WebAssembly.Authentication/test/RemoteAuthenticatorCoreTests.cs",
+          "line": 370,
+          "severity": "medium",
+          "category": "test_quality",
+          "message": "Removed test 'AuthenticationManager_Logout_RedirectsToFailureOnInvalidSignOutState' without replacement. This test validated behavior when SignOutSessionStateManager returns false, which is now untested.",
+          "suggestion": "Add a new test that covers the scenario where sign-out state is invalid, using the updated service registration (without SignOutSessionStateManager).",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/test/RemoteAuthenticatorCoreTests.cs:370",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:71"
+          ]
+        },
+        {
+          "file": "src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs",
+          "line": 74,
+          "severity": "medium",
+          "category": "backward_compatibility",
+          "message": "Removal of SignOutSessionStateManager registration from DI is a breaking change for any consumer that depends on this service being available. The class is marked obsolete but was previously registered for backward compatibility.",
+          "suggestion": "If the service is still needed by external consumers, keep the registration with an updated obsoletion message. If removal is intentional, document the breaking change in release notes.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:71"
+          ]
+        },
+        {
+          "file": "src/Components/WebAssembly/WebAssembly/src/Infrastructure/JSInteropMethods.cs",
+          "line": 17,
+          "severity": "medium",
+          "category": "backward_compatibility",
+          "message": "Removal of public API 'JSInteropMethods.NotifyLocationChanged' is a breaking change. The method was marked obsolete but was still part of the public surface. Consumers using this method will fail to compile.",
+          "suggestion": "If removal is intentional, ensure consumers are migrated. Consider keeping the method with [Obsolete] and a removal date if needed.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly/src/Infrastructure/JSInteropMethods.cs:14",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly/src/PublicAPI.Unshipped.txt:1"
+          ]
+        }
+      ],
+      "discarded": []
+    }
+  ],
+  "last_feedback": {
+    "iteration": 0,
+    "uncertain_items": [
+      {
+        "issue_id": "maintainability:src/Components/Forms/test/EditContextDataAnnotationsExtensionsTest.cs:18",
+        "category": "maintainability",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:src/Components/Forms/test/EditContextDataAnnotationsExtensionsTest.cs:18"
+        ]
+      },
+      {
+        "issue_id": "test_quality:src/Components/WebAssembly/WebAssembly.Authentication/test/RemoteAuthenticatorCoreTests.cs:370",
+        "category": "test_quality",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/test/RemoteAuthenticatorCoreTests.cs:370",
+          "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:71"
+        ]
+      },
+      {
+        "issue_id": "backward_compatibility:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:74",
+        "category": "backward_compatibility",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:71"
+        ]
+      },
+      {
+        "issue_id": "backward_compatibility:src/Components/WebAssembly/WebAssembly/src/Infrastructure/JSInteropMethods.cs:17",
+        "category": "backward_compatibility",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:src/Components/WebAssembly/WebAssembly/src/Infrastructure/JSInteropMethods.cs:14",
+          "diff_hunk:src/Components/WebAssembly/WebAssembly/src/PublicAPI.Unshipped.txt:1"
+        ]
+      }
+    ]
+  }
+}

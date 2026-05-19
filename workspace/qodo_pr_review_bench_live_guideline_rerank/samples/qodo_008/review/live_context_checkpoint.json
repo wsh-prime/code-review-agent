@@ -1,0 +1,52 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:27fd15e42fca76cf3c486110ee1ead83242730a5ffdfb9e69451f8b511927ebb",
+  "diff_hash": "sha256:4593214b95c7fe1acce0aaa85fbd6b651ca43e3efdcf98792e877bda40bc175d",
+  "shards": {
+    "f838193ba005de6124f560219d0bfc27c74e14217f83be631efef083f78c6197": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:15",
+        "diff_hunk:ghost/core/test/integration/services/email-service/domain-warming.test.js:195",
+        "diff_hunk:ghost/core/test/unit/server/services/email-service/domain-warming-service.test.ts:13"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:15",
+          "diff_hunk:ghost/core/test/integration/services/email-service/domain-warming.test.js:195",
+          "diff_hunk:ghost/core/test/unit/server/services/email-service/domain-warming-service.test.ts:13"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 2,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s",
+          "attempt=2 error=timeout delay=2.00s"
+        ],
+        "latency_ms": 125021,
+        "token_count_in": 6314,
+        "token_count_out": 12,
+        "trace_id": "4a2a0fb28b9c4fc49d10e608552a507d",
+        "span_id": "f7e755869b60422d",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

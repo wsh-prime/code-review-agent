@@ -1,0 +1,438 @@
+{
+  "schema_version": "1.3",
+  "summary": {
+    "mode": "hybrid-live",
+    "changed_file_count": 1,
+    "changed_entity_count": 1,
+    "risk_signal_count": 0,
+    "finding_count": 0,
+    "needs_human_review_count": 0,
+    "discarded_count": 0,
+    "evidence_count": 4,
+    "missing_evidence_id_count": 0,
+    "agent_run_count": 3,
+    "prompt_exported": false,
+    "loop_enabled": true,
+    "loop_iterations_completed": 1,
+    "loop_converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "total_latency_ms": 11346,
+    "total_token_count_in": 2563,
+    "total_token_count_out": 228,
+    "context_budget_enabled": true,
+    "context_truncated": true,
+    "selected_evidence_count": 4,
+    "omitted_evidence_count": 0,
+    "review_shard_count": 1,
+    "context_refill_count": 1,
+    "context_request_count": 2,
+    "target_repo_modified": false
+  },
+  "findings": [],
+  "needs_human_review": [],
+  "discarded": [],
+  "changed_files": [
+    {
+      "old_path": "gpt_engineer/main.py",
+      "new_path": "gpt_engineer/main.py",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 1,
+          "old_count": 10,
+          "new_start": 1,
+          "new_count": 8,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "removed",
+              "old_lineno": 1,
+              "new_lineno": null,
+              "content": "    input_path = project_path"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 2,
+              "new_lineno": null,
+              "content": "    memory_path = pathlib.Path(project_path) / (run_prefix + \"memory\")"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 3,
+              "new_lineno": 1,
+              "content": "    workspace_path = pathlib.Path(project_path) / (run_prefix + \"workspace\")"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 4,
+              "new_lineno": 2,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 5,
+              "new_lineno": 3,
+              "content": "    ai = AI("
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 6,
+              "new_lineno": 4,
+              "content": "        model=model,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 7,
+              "new_lineno": 5,
+              "content": "        temperature=temperature,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 8,
+              "new_lineno": 6,
+              "content": "    )"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 9,
+              "new_lineno": 7,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 10,
+              "new_lineno": 8,
+              "content": "    dbs = DBs("
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "changed_entities": [
+    {
+      "path": "gpt_engineer/main.py",
+      "entity_type": "module",
+      "name": "main.py",
+      "qualified_name": "gpt_engineer.main",
+      "line_start": 1,
+      "line_end": 2,
+      "hunk_ids": [
+        "gpt_engineer/main.py:1"
+      ]
+    }
+  ],
+  "risk_signals": [],
+  "evidence_index": {
+    "diff_hunk:gpt_engineer/main.py:1": {
+      "id": "diff_hunk:gpt_engineer/main.py:1",
+      "kind": "diff_hunk",
+      "source": "gpt_engineer/main.py:1",
+      "message": "@@ -1,10 +1,8 @@\n-    input_path = project_path\n-    memory_path = pathlib.Path(project_path) / (run_prefix + \"memory\")\n     workspace_path = pathlib.Path(project_path) / (run_prefix + \"workspace\")\n \n     ai = AI(\n         model=model,\n         temperature=temperature,\n     )\n \n     dbs = DBs("
+    },
+    "diff:gpt_engineer/main.py:1": {
+      "id": "diff:gpt_engineer/main.py:1",
+      "kind": "diff",
+      "source": "gpt_engineer/main.py:1",
+      "message": "Removed line: input_path = project_path"
+    },
+    "diff:gpt_engineer/main.py:2": {
+      "id": "diff:gpt_engineer/main.py:2",
+      "kind": "diff",
+      "source": "gpt_engineer/main.py:2",
+      "message": "Removed line: memory_path = pathlib.Path(project_path) / (run_prefix + \"memory\")"
+    },
+    "entity:gpt_engineer/main.py:gpt_engineer.main": {
+      "id": "entity:gpt_engineer/main.py:gpt_engineer.main",
+      "kind": "entity",
+      "source": "gpt_engineer/main.py:1-2",
+      "message": "Changed module gpt_engineer.main touched by 1 hunk(s)."
+    }
+  },
+  "missing_evidence_ids": [],
+  "agent_runs": [
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+      "input_evidence_ids": [
+        "diff_hunk:gpt_engineer/main.py:1"
+      ],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 10619,
+      "token_count_in": 1237,
+      "token_count_out": 147,
+      "trace_id": "65a57aea8bc24b71aa0f27a7f1227ab2",
+      "span_id": "b2c0d3de62f449ea",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001",
+      "shard_index": 0,
+      "shard_count": 1,
+      "context_request_count": 1,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+      "input_evidence_ids": [
+        "diff:gpt_engineer/main.py:1",
+        "diff:gpt_engineer/main.py:2",
+        "diff_hunk:gpt_engineer/main.py:1",
+        "entity:gpt_engineer/main.py:gpt_engineer.main"
+      ],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 727,
+      "token_count_in": 1326,
+      "token_count_out": 81,
+      "trace_id": "9d9587fa0f5e43788845525dc4b0007a",
+      "span_id": "c32c3ef7e1ee4d17",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001-refill",
+      "shard_index": 0,
+      "shard_count": 1,
+      "context_request_count": 1,
+      "context_refill_used": true
+    },
+    {
+      "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+      "model": null,
+      "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+      "input_evidence_ids": [],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 0,
+      "token_count_in": 0,
+      "token_count_out": 0,
+      "trace_id": "",
+      "span_id": "",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "",
+      "shard_index": 0,
+      "shard_count": 0,
+      "context_request_count": 0,
+      "context_refill_used": false
+    }
+  ],
+  "prompt_exports": {},
+  "context_budget": {
+    "enabled": true,
+    "strategy": "file_risk_shards_v1",
+    "context_profile": "risk_compact_manifest_v1",
+    "max_input_tokens": 9000,
+    "estimated_input_tokens": 1063,
+    "selected_evidence_count": 4,
+    "omitted_evidence_count": 0,
+    "selected_evidence_ids": [
+      "diff_hunk:gpt_engineer/main.py:1",
+      "entity:gpt_engineer/main.py:gpt_engineer.main",
+      "diff:gpt_engineer/main.py:1",
+      "diff:gpt_engineer/main.py:2"
+    ],
+    "omitted_evidence_ids": [],
+    "selected_risk_signal_count": 0,
+    "context_truncated": true,
+    "shard_count": 1,
+    "refill_count": 1,
+    "context_request_count": 2,
+    "context_requests": [
+      {
+        "request_type": "same_file_more_evidence",
+        "path": "gpt_engineer/main.py",
+        "evidence_ids": [
+          "diff:gpt_engineer/main.py:1",
+          "diff:gpt_engineer/main.py:2",
+          "entity:gpt_engineer/main.py:gpt_engineer.main"
+        ],
+        "risk_tag": null,
+        "symbol": null,
+        "reason": "The diff hunk shows removal of two lines (input_path and memory_path) but the remaining context is insufficient to determine if this removal introduces a concrete failure scenario (e.g., missing variable used later, broken DBs initialization).",
+        "source_shard_id": "shard-001",
+        "fulfilled_evidence_ids": [
+          "diff:gpt_engineer/main.py:1",
+          "diff:gpt_engineer/main.py:2",
+          "diff_hunk:gpt_engineer/main.py:1",
+          "entity:gpt_engineer/main.py:gpt_engineer.main"
+        ]
+      },
+      {
+        "request_type": "same_file_more_evidence",
+        "path": null,
+        "evidence_ids": [],
+        "risk_tag": null,
+        "symbol": null,
+        "reason": "The diff hunk shows removal of input_path and memory_path assignments, but the surrounding context is truncated. Need to see the full function to understand if these variables are still used elsewhere or if the removal is safe.",
+        "source_shard_id": "shard-001-refill",
+        "fulfilled_evidence_ids": []
+      }
+    ],
+    "shards": [
+      {
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 1,
+        "omitted_evidence_count": 3,
+        "estimated_input_tokens": 504,
+        "context_truncated": true
+      },
+      {
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "is_refill": true,
+        "parent_shard_id": "shard-001",
+        "selected_evidence_count": 4,
+        "omitted_evidence_count": 0,
+        "estimated_input_tokens": 559,
+        "context_truncated": false
+      }
+    ],
+    "warnings": []
+  },
+  "loop": {
+    "enabled": true,
+    "max_iter": 1,
+    "iterations_completed": 1,
+    "converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "checkpoint_path": "D:\\learn\\code-review-agent\\workspace\\hf_codereview_live\\samples\\sample_003\\review\\loop_checkpoint.json",
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "iterations": [
+      {
+        "i": 0,
+        "candidate_issue_count": 0,
+        "verified_count": 0,
+        "needs_human_review_count": 0,
+        "discarded_count": 0,
+        "keep_count": 0,
+        "uncertain_count": 0,
+        "reject_count": 0,
+        "feedback_sent": [],
+        "agent_runs": [
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+            "input_evidence_ids": [
+              "diff_hunk:gpt_engineer/main.py:1"
+            ],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 10619,
+            "token_count_in": 1237,
+            "token_count_out": 147,
+            "trace_id": "65a57aea8bc24b71aa0f27a7f1227ab2",
+            "span_id": "b2c0d3de62f449ea",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001",
+            "shard_index": 0,
+            "shard_count": 1,
+            "context_request_count": 1,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+            "input_evidence_ids": [
+              "diff:gpt_engineer/main.py:1",
+              "diff:gpt_engineer/main.py:2",
+              "diff_hunk:gpt_engineer/main.py:1",
+              "entity:gpt_engineer/main.py:gpt_engineer.main"
+            ],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 727,
+            "token_count_in": 1326,
+            "token_count_out": 81,
+            "trace_id": "9d9587fa0f5e43788845525dc4b0007a",
+            "span_id": "c32c3ef7e1ee4d17",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001-refill",
+            "shard_index": 0,
+            "shard_count": 1,
+            "context_request_count": 1,
+            "context_refill_used": true
+          },
+          {
+            "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+            "model": null,
+            "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+            "input_evidence_ids": [],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 0,
+            "token_count_in": 0,
+            "token_count_out": 0,
+            "trace_id": "",
+            "span_id": "",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "",
+            "shard_index": 0,
+            "shard_count": 0,
+            "context_request_count": 0,
+            "context_refill_used": false
+          }
+        ],
+        "issue_set": [],
+        "keep": [],
+        "needs_human_review": [],
+        "discarded": []
+      }
+    ]
+  },
+  "tracing": {
+    "total_latency_ms": 11346,
+    "total_token_count_in": 2563,
+    "total_token_count_out": 228,
+    "total_retry_count": 0,
+    "run_count": 3,
+    "status_counts": {
+      "ok": 3
+    }
+  }
+}

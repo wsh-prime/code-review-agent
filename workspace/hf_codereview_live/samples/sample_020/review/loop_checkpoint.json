@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0",
+  "run_id": "212acf60c9ab4139a8ecb961984c8427",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": true,
+  "package_hash": "sha256:5edcf18755e06bc2b8256f3b2ba97ba49819aab2cf7ac7a1afbc24ae8a34c6de",
+  "diff_hash": "sha256:0365469c0b53b5a154dd4fd1630f245ff493450c83c9f00cc453d4dcbb7174df",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 1,
+      "verified_count": 1,
+      "needs_human_review_count": 0,
+      "discarded_count": 0,
+      "keep_count": 1,
+      "uncertain_count": 0,
+      "reject_count": 0,
+      "feedback_sent": [],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff_hunk:gpt_engineer/db.py:14"
+          ],
+          "output_issue_ids": [
+            "correctness:gpt_engineer/db.py:14"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 5081,
+          "token_count_in": 1587,
+          "token_count_out": 261,
+          "trace_id": "e28ca401f98f48de8dc9b3e10e6f424f",
+          "span_id": "1910746b873143d6",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 1,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [
+            "diff_hunk:gpt_engineer/db.py:14"
+          ],
+          "output_issue_ids": [
+            "correctness:gpt_engineer/db.py:14"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [
+        "correctness:gpt_engineer/db.py:14"
+      ],
+      "keep": [
+        {
+          "file": "gpt_engineer/db.py",
+          "line": 14,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "The refactored __getitem__ changes the exception type for a non-file path from KeyError to FileNotFoundError when full_path.is_file() is False, but the else branch is removed. The original code raised KeyError for non-file paths; the new code raises KeyError only if the path does not exist, but if the path exists and is not a file (e.g., a directory), the open() call will fail with IsADirectoryError or PermissionError, not KeyError. This breaks the contract for callers expecting KeyError for any non-file key.",
+          "suggestion": "Restore the original logic: check if full_path.is_file() first, and raise KeyError if it is not a file. Alternatively, catch the specific OS error and re-raise as KeyError to maintain backward compatibility.",
+          "confidence": 0.85,
+          "evidence_ids": [
+            "diff_hunk:gpt_engineer/db.py:14"
+          ]
+        }
+      ],
+      "needs_human_review": [],
+      "discarded": []
+    }
+  ],
+  "last_feedback": null
+}

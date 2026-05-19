@@ -1,0 +1,20 @@
+--- a/gpt_engineer/db.py
++++ b/gpt_engineer/db.py
+@@ -11,6 +11,9 @@ def __init__(self, path):
+ 
+         self.path.mkdir(parents=True, exist_ok=True)
+ 
++    def __contains__(self, key):
++        return (self.path / key).is_file()
++
+     def __getitem__(self, key):
+         full_path = self.path / key
+ 
+@@ -35,6 +38,6 @@ def __setitem__(self, key, val):
+ class DBs:
+     memory: DB
+     logs: DB
+-    identity: DB
++    preprompts: DB
+     input: DB
+     workspace: DB

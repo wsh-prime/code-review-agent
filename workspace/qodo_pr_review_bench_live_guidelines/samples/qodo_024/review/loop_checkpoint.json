@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.0",
+  "run_id": "3add3a60dafd4a7dab100af6cf6d7485",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": true,
+  "package_hash": "sha256:7572c0394fee8cbd887e514a354a18a1cdb928fb9bba8db6378d650d3116a1a2",
+  "diff_hash": "sha256:6191a2ae484d12801dbb86293f991907a2bf40dcd4870ef58c989a523b6a375a",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 1,
+      "verified_count": 0,
+      "needs_human_review_count": 0,
+      "discarded_count": 1,
+      "keep_count": 0,
+      "uncertain_count": 0,
+      "reject_count": 0,
+      "feedback_sent": [],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:1",
+            "diff_hunk:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:25",
+            "diff_hunk:packages/features/auth/lib/onboardingUtils.ts:1",
+            "diff_hunk:packages/features/membership/repositories/MembershipRepository.integration-test.ts:1",
+            "diff_hunk:packages/features/membership/repositories/MembershipRepository.ts:3"
+          ],
+          "output_issue_ids": [
+            "naming_convention:packages/features/membership/repositories/MembershipRepository.ts:3"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 12196,
+          "token_count_in": 7021,
+          "token_count_out": 164,
+          "trace_id": "8e8afe30df6a4a6a91f51f58ee1d077f",
+          "span_id": "99953e1550b14248",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 1,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [],
+      "keep": [],
+      "needs_human_review": [],
+      "discarded": [
+        {
+          "file": "packages/features/membership/repositories/MembershipRepository.ts",
+          "line": 3,
+          "severity": "high",
+          "category": "naming_convention",
+          "message": "Repository class does not follow naming convention: expected 'Prisma<Entity>Repository' pattern, found 'MembershipRepository'.",
+          "suggestion": "Rename the class and file to 'PrismaMembershipRepository' to match the required naming convention.",
+          "confidence": 0.95,
+          "evidence_ids": [
+            "diff_hunk:packages/features/membership/repositories/MembershipRepository.ts:3"
+          ],
+          "filter_reason": "style_preference"
+        }
+      ]
+    }
+  ],
+  "last_feedback": null
+}

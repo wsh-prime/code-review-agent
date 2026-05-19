@@ -1,0 +1,24 @@
+--- a/gpt_engineer/steps.py
++++ b/gpt_engineer/steps.py
+@@ -1,10 +1,8 @@
+-        dbs.workspace.path, dbs.archive.path / timestamp / dbs.workspace.path.name
+-    )
+     return []
+ 
+ 
+ def human_review(ai: AI, dbs: DBs):
+     review = human_input()
+     dbs.memory["review"] = review.to_json()  # type: ignore
+     return []
+ 
+@@ -44,8 +42,10 @@
+         human_review,
+     ],
+     Config.TDD_PLUS: [
+         archive,
+         gen_spec,
+         gen_unit_tests,
+         gen_code,
+         fix_code,
++        gen_entrypoint,
++        execute_entrypoint,

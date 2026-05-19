@@ -1,0 +1,2944 @@
+{
+  "schema_version": "1.3",
+  "summary": {
+    "mode": "hybrid-live",
+    "changed_file_count": 6,
+    "changed_entity_count": 6,
+    "risk_signal_count": 0,
+    "finding_count": 0,
+    "needs_human_review_count": 0,
+    "discarded_count": 3,
+    "evidence_count": 130,
+    "missing_evidence_id_count": 0,
+    "agent_run_count": 4,
+    "prompt_exported": false,
+    "loop_enabled": true,
+    "loop_iterations_completed": 1,
+    "loop_converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "total_latency_ms": 80792,
+    "total_token_count_in": 13493,
+    "total_token_count_out": 983,
+    "context_budget_enabled": true,
+    "context_truncated": true,
+    "selected_evidence_count": 14,
+    "omitted_evidence_count": 116,
+    "review_shard_count": 2,
+    "context_refill_count": 1,
+    "context_request_count": 1,
+    "target_repo_modified": false
+  },
+  "findings": [],
+  "needs_human_review": [],
+  "discarded": [
+    {
+      "file": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts",
+      "line": 7,
+      "severity": "medium",
+      "category": "naming_convention",
+      "message": "File AdaptersFactory.ts does not follow the required naming convention for service or repository classes. The review guidelines require service files to be named '<Entity>Service.ts' with matching class names. This file exports a type 'AdapterFactory' and a constant 'GENERIC_CALENDAR_SUFFIXES', but the filename and class name do not match the expected pattern.",
+      "suggestion": "Rename the file to match the exported class/interface name, e.g., 'AdapterFactory.ts', or restructure to follow the '<Entity>Service.ts' pattern if this is a service.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:4"
+      ],
+      "filter_reason": "style_preference"
+    },
+    {
+      "file": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts",
+      "line": 12,
+      "severity": "minor",
+      "category": "maintainability",
+      "message": "The exported constant GENERIC_CALENDAR_SUFFIXES is defined in a file named AdaptersFactory.ts, which does not follow the naming conventions for repository or service classes as per review guidelines. The file exports a constant and a class, but the file name does not match a PascalCase class name for a repository or service.",
+      "suggestion": "Consider moving the constant to a separate file with a descriptive name (e.g., genericCalendarSuffixes.ts) or rename the file to match the class name if it is intended to be a service.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:12",
+        "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:13",
+        "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:14",
+        "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:15"
+      ],
+      "filter_reason": "style_preference"
+    },
+    {
+      "file": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts",
+      "line": 5,
+      "severity": "high",
+      "category": "naming_convention",
+      "message": "Class name 'PrismaSelectedCalendarRepository' does not follow the required 'Prisma<Entity>Repository' pattern; the entity name should match the filename's entity (SelectedCalendar) but the class name includes 'PrismaSelectedCalendarRepository' which is acceptable per the guideline, however the filename 'SelectedCalendarRepository.ts' does not match the class name exactly as required by the naming convention rule.",
+      "suggestion": "Rename the file to 'PrismaSelectedCalendarRepository.ts' to match the exported class name exactly, or rename the class to 'SelectedCalendarRepository' if the file name is kept, but the guideline requires 'Prisma<Entity>Repository' pattern with matching filenames.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:2"
+      ],
+      "filter_reason": "style_preference"
+    }
+  ],
+  "changed_files": [
+    {
+      "old_path": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts",
+      "new_path": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 4,
+          "old_count": 9,
+          "new_start": 4,
+          "new_count": 25,
+          "section_header": "import type { ICalendarSubscriptionPort } from \"@calcom/features/calendar-subscr",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 4,
+              "new_lineno": 4,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 5,
+              "new_lineno": 5,
+              "content": "export type CalendarSubscriptionProvider = \"google_calendar\" | \"office365_calendar\";"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 6,
+              "new_lineno": 6,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 7,
+              "content": "/**"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 8,
+              "content": " * Generic calendar suffixes that should be excluded from subscription."
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 9,
+              "content": " * These are special calendars (holidays, contacts, shared, imported, resources)"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 10,
+              "content": " * that are not user's personal calendars and shouldn't be subscribed to for sync."
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 11,
+              "content": " */"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 12,
+              "content": "export const GENERIC_CALENDAR_SUFFIXES: Record<CalendarSubscriptionProvider, string[]> = {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 13,
+              "content": "  google_calendar: ["
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 14,
+              "content": "    \"@group.v.calendar.google.com\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 15,
+              "content": "    \"@group.calendar.google.com\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 16,
+              "content": "    \"@import.calendar.google.com\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 17,
+              "content": "    \"@resource.calendar.google.com\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 18,
+              "content": "  ],"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 19,
+              "content": "  office365_calendar: [],"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 20,
+              "content": "};"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 21,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 7,
+              "new_lineno": 22,
+              "content": "export interface AdapterFactory {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 8,
+              "new_lineno": 23,
+              "content": "  get(provider: CalendarSubscriptionProvider): ICalendarSubscriptionPort;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 9,
+              "new_lineno": 24,
+              "content": "  getProviders(): CalendarSubscriptionProvider[];"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 25,
+              "content": "  getGenericCalendarSuffixes(): string[];"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 10,
+              "new_lineno": 26,
+              "content": "}"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 11,
+              "new_lineno": 27,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 12,
+              "new_lineno": 28,
+              "content": "/**"
+            }
+          ]
+        },
+        {
+          "old_start": 41,
+          "old_count": 4,
+          "new_start": 57,
+          "new_count": 16,
+          "section_header": "export class DefaultAdapterFactory implements AdapterFactory {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 41,
+              "new_lineno": 57,
+              "content": "    const providers: CalendarSubscriptionProvider[] = [\"google_calendar\"];"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 42,
+              "new_lineno": 58,
+              "content": "    return providers;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 43,
+              "new_lineno": 59,
+              "content": "  }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 60,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 61,
+              "content": "  /**"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 62,
+              "content": "   * Returns all generic calendar suffixes that should be excluded from subscription"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 63,
+              "content": "   * across all supported providers."
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 64,
+              "content": "   *"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 65,
+              "content": "   * @returns"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 66,
+              "content": "   */"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 67,
+              "content": "  getGenericCalendarSuffixes(): string[] {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 68,
+              "content": "    return Object.keys(GENERIC_CALENDAR_SUFFIXES).flatMap("
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 69,
+              "content": "      (provider) => GENERIC_CALENDAR_SUFFIXES[provider as CalendarSubscriptionProvider]"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 70,
+              "content": "    );"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 71,
+              "content": "  }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 44,
+              "new_lineno": 72,
+              "content": "}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts",
+      "new_path": "packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 392,
+          "old_count": 6,
+          "new_start": 392,
+          "new_count": 7,
+          "section_header": "export class CalendarSubscriptionService {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 392,
+              "new_lineno": 392,
+              "content": "      take: 100,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 393,
+              "new_lineno": 393,
+              "content": "      integrations: this.deps.adapterFactory.getProviders(),"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 394,
+              "new_lineno": 394,
+              "content": "      teamIds,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 395,
+              "content": "      genericCalendarSuffixes: this.deps.adapterFactory.getGenericCalendarSuffixes(),"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 395,
+              "new_lineno": 396,
+              "content": "    });"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 396,
+              "new_lineno": 397,
+              "content": "    log.debug(\"checkForNewSubscriptions\", { count: rows.length });"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 397,
+              "new_lineno": 398,
+              "content": "    await Promise.allSettled(rows.map(({ id }) => this.subscribe(id)));"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts",
+      "new_path": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 112,
+          "old_count": 6,
+          "new_start": 112,
+          "new_count": 12,
+          "section_header": "describe(\"CalendarSubscriptionService\", () => {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 112,
+              "new_lineno": 112,
+              "content": "    mockAdapterFactory = {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 113,
+              "new_lineno": 113,
+              "content": "      get: vi.fn().mockReturnValue(mockAdapter),"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 114,
+              "new_lineno": 114,
+              "content": "      getProviders: vi.fn().mockReturnValue([\"google_calendar\", \"office365_calendar\"]),"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 115,
+              "content": "      getGenericCalendarSuffixes: vi.fn().mockReturnValue(["
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 116,
+              "content": "        \"@group.v.calendar.google.com\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 117,
+              "content": "        \"@group.calendar.google.com\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 118,
+              "content": "        \"@import.calendar.google.com\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 119,
+              "content": "        \"@resource.calendar.google.com\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 120,
+              "content": "      ]),"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 115,
+              "new_lineno": 121,
+              "content": "    };"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 116,
+              "new_lineno": 122,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 117,
+              "new_lineno": 123,
+              "content": "    mockSelectedCalendarRepository = {"
+            }
+          ]
+        },
+        {
+          "old_start": 385,
+          "old_count": 6,
+          "new_start": 391,
+          "new_count": 12,
+          "section_header": "describe(\"CalendarSubscriptionService\", () => {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 385,
+              "new_lineno": 391,
+              "content": "        take: 100,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 386,
+              "new_lineno": 392,
+              "content": "        integrations: [\"google_calendar\", \"office365_calendar\"],"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 387,
+              "new_lineno": 393,
+              "content": "        teamIds: [1, 2, 3],"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 394,
+              "content": "        genericCalendarSuffixes: ["
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 395,
+              "content": "          \"@group.v.calendar.google.com\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 396,
+              "content": "          \"@group.calendar.google.com\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 397,
+              "content": "          \"@import.calendar.google.com\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 398,
+              "content": "          \"@resource.calendar.google.com\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 399,
+              "content": "        ],"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 388,
+              "new_lineno": 400,
+              "content": "      });"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 389,
+              "new_lineno": 401,
+              "content": "      expect(subscribeSpy).toHaveBeenCalledWith(mockSelectedCalendar.id);"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 390,
+              "new_lineno": 402,
+              "content": "    });"
+            }
+          ]
+        },
+        {
+          "old_start": 411,
+          "old_count": 6,
+          "new_start": 423,
+          "new_count": 12,
+          "section_header": "describe(\"CalendarSubscriptionService\", () => {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 411,
+              "new_lineno": 423,
+              "content": "        take: 100,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 412,
+              "new_lineno": 424,
+              "content": "        integrations: [\"google_calendar\", \"office365_calendar\"],"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 413,
+              "new_lineno": 425,
+              "content": "        teamIds: [10, 20],"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 426,
+              "content": "        genericCalendarSuffixes: ["
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 427,
+              "content": "          \"@group.v.calendar.google.com\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 428,
+              "content": "          \"@group.calendar.google.com\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 429,
+              "content": "          \"@import.calendar.google.com\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 430,
+              "content": "          \"@resource.calendar.google.com\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 431,
+              "content": "        ],"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 414,
+              "new_lineno": 432,
+              "content": "      });"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 415,
+              "new_lineno": 433,
+              "content": "      expect(subscribeSpy).toHaveBeenCalledTimes(2);"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 416,
+              "new_lineno": 434,
+              "content": "      expect(subscribeSpy).toHaveBeenCalledWith(\"calendar-with-cache\");"
+            }
+          ]
+        },
+        {
+          "old_start": 437,
+          "old_count": 6,
+          "new_start": 455,
+          "new_count": 12,
+          "section_header": "describe(\"CalendarSubscriptionService\", () => {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 437,
+              "new_lineno": 455,
+              "content": "        take: 100,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 438,
+              "new_lineno": 456,
+              "content": "        integrations: [\"google_calendar\", \"office365_calendar\"],"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 439,
+              "new_lineno": 457,
+              "content": "        teamIds: [teamId],"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 458,
+              "content": "        genericCalendarSuffixes: ["
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 459,
+              "content": "          \"@group.v.calendar.google.com\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 460,
+              "content": "          \"@group.calendar.google.com\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 461,
+              "content": "          \"@import.calendar.google.com\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 462,
+              "content": "          \"@resource.calendar.google.com\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 463,
+              "content": "        ],"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 440,
+              "new_lineno": 464,
+              "content": "      });"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 441,
+              "new_lineno": 465,
+              "content": "      expect(mockSelectedCalendarRepository.findNextSubscriptionBatch).not.toHaveBeenCalledWith("
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 442,
+              "new_lineno": 466,
+              "content": "        expect.objectContaining({"
+            }
+          ]
+        },
+        {
+          "old_start": 463,
+          "old_count": 6,
+          "new_start": 487,
+          "new_count": 12,
+          "section_header": "describe(\"CalendarSubscriptionService\", () => {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 463,
+              "new_lineno": 487,
+              "content": "        take: 100,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 464,
+              "new_lineno": 488,
+              "content": "        integrations: [\"google_calendar\", \"office365_calendar\"],"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 465,
+              "new_lineno": 489,
+              "content": "        teamIds: [],"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 490,
+              "content": "        genericCalendarSuffixes: ["
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 491,
+              "content": "          \"@group.v.calendar.google.com\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 492,
+              "content": "          \"@group.calendar.google.com\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 493,
+              "content": "          \"@import.calendar.google.com\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 494,
+              "content": "          \"@resource.calendar.google.com\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 495,
+              "content": "        ],"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 466,
+              "new_lineno": 496,
+              "content": "      });"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 467,
+              "new_lineno": 497,
+              "content": "      expect(subscribeSpy).not.toHaveBeenCalled();"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 468,
+              "new_lineno": 498,
+              "content": "    });"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts",
+      "new_path": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 21,
+          "old_count": 15,
+          "new_start": 21,
+          "new_count": 18,
+          "section_header": "export interface ISelectedCalendarRepository {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 21,
+              "new_lineno": 21,
+              "content": "   *"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 22,
+              "new_lineno": 22,
+              "content": "   * @param take the number of calendars to take"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 23,
+              "new_lineno": 23,
+              "content": "   * @param integrations the list of integrations"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 24,
+              "content": "   * @param genericCalendarSuffixes the list of generic calendar suffixes to exclude"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 24,
+              "new_lineno": 25,
+              "content": "   */"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 25,
+              "new_lineno": 26,
+              "content": "  findNextSubscriptionBatch({"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 26,
+              "new_lineno": 27,
+              "content": "    take,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 27,
+              "new_lineno": 28,
+              "content": "    teamIds,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 28,
+              "new_lineno": 29,
+              "content": "    integrations,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 30,
+              "content": "    genericCalendarSuffixes,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 29,
+              "new_lineno": 31,
+              "content": "  }: {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 30,
+              "new_lineno": 32,
+              "content": "    take: number;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 31,
+              "new_lineno": 33,
+              "content": "    teamIds: number[];"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 32,
+              "new_lineno": 34,
+              "content": "    integrations?: string[];"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 35,
+              "content": "    genericCalendarSuffixes?: string[];"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 33,
+              "new_lineno": 36,
+              "content": "  }): Promise<SelectedCalendar[]>;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 34,
+              "new_lineno": 37,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 35,
+              "new_lineno": 38,
+              "content": "  /**"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts",
+      "new_path": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 131,
+          "old_count": 6,
+          "new_start": 131,
+          "new_count": 7,
+          "section_header": "describe(\"SelectedCalendarRepository\", () => {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 131,
+              "new_lineno": 131,
+              "content": "              },"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 132,
+              "new_lineno": 132,
+              "content": "            },"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 133,
+              "new_lineno": 133,
+              "content": "          },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 134,
+              "content": "          AND: undefined,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 134,
+              "new_lineno": 135,
+              "content": "        },"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 135,
+              "new_lineno": 136,
+              "content": "        take: 10,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 136,
+              "new_lineno": 137,
+              "content": "      });"
+            }
+          ]
+        },
+        {
+          "old_start": 160,
+          "old_count": 6,
+          "new_start": 161,
+          "new_count": 7,
+          "section_header": "describe(\"SelectedCalendarRepository\", () => {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 160,
+              "new_lineno": 161,
+              "content": "              },"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 161,
+              "new_lineno": 162,
+              "content": "            },"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 162,
+              "new_lineno": 163,
+              "content": "          },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 164,
+              "content": "          AND: undefined,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 163,
+              "new_lineno": 165,
+              "content": "        },"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 164,
+              "new_lineno": 166,
+              "content": "        take: 5,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 165,
+              "new_lineno": 167,
+              "content": "      });"
+            }
+          ]
+        },
+        {
+          "old_start": 189,
+          "old_count": 6,
+          "new_start": 191,
+          "new_count": 43,
+          "section_header": "describe(\"SelectedCalendarRepository\", () => {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 189,
+              "new_lineno": 191,
+              "content": "              },"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 190,
+              "new_lineno": 192,
+              "content": "            },"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 191,
+              "new_lineno": 193,
+              "content": "          },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 194,
+              "content": "          AND: undefined,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 195,
+              "content": "        },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 196,
+              "content": "        take: 10,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 197,
+              "content": "      });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 198,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 199,
+              "content": "      expect(result).toEqual(mockCalendars);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 200,
+              "content": "    });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 201,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 202,
+              "content": "    test(\"should filter out generic calendars when genericCalendarSuffixes is provided\", async () => {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 203,
+              "content": "      const mockCalendars = [mockSelectedCalendar];"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 204,
+              "content": "      vi.mocked(mockPrismaClient.selectedCalendar.findMany).mockResolvedValue(mockCalendars);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 205,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 206,
+              "content": "      const genericSuffixes = [\"@group.v.calendar.google.com\", \"@group.calendar.google.com\"];"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 207,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 208,
+              "content": "      const result = await repository.findNextSubscriptionBatch({"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 209,
+              "content": "        take: 10,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 210,
+              "content": "        teamIds: [1, 2],"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 211,
+              "content": "        integrations: [\"google_calendar\"],"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 212,
+              "content": "        genericCalendarSuffixes: genericSuffixes,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 213,
+              "content": "      });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 214,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 215,
+              "content": "      expect(mockPrismaClient.selectedCalendar.findMany).toHaveBeenCalledWith({"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 216,
+              "content": "        where: {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 217,
+              "content": "          integration: { in: [\"google_calendar\"] },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 218,
+              "content": "          OR: [{ syncSubscribedAt: null }, { channelExpiration: { lte: expect.any(Date) } }],"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 219,
+              "content": "          user: {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 220,
+              "content": "            teams: {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 221,
+              "content": "              some: {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 222,
+              "content": "                teamId: { in: [1, 2] },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 223,
+              "content": "                accepted: true,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 224,
+              "content": "              },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 225,
+              "content": "            },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 226,
+              "content": "          },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 227,
+              "content": "          AND: ["
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 228,
+              "content": "            { NOT: { externalId: { endsWith: \"@group.v.calendar.google.com\" } } },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 229,
+              "content": "            { NOT: { externalId: { endsWith: \"@group.calendar.google.com\" } } },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 230,
+              "content": "          ],"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 192,
+              "new_lineno": 231,
+              "content": "        },"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 193,
+              "new_lineno": 232,
+              "content": "        take: 10,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 194,
+              "new_lineno": 233,
+              "content": "      });"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts",
+      "new_path": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 2,
+          "old_count": 7,
+          "new_start": 2,
+          "new_count": 7,
+          "section_header": "import type { ISelectedCalendarRepository } from \"@calcom/features/selectedCalen",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 2,
+              "new_lineno": 2,
+              "content": "import type { PrismaClient } from \"@calcom/prisma\";"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 3,
+              "new_lineno": 3,
+              "content": "import type { Prisma } from \"@calcom/prisma/client\";"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 4,
+              "new_lineno": 4,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 5,
+              "new_lineno": null,
+              "content": "export class SelectedCalendarRepository implements ISelectedCalendarRepository {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 5,
+              "content": "export class PrismaSelectedCalendarRepository implements ISelectedCalendarRepository {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 6,
+              "new_lineno": 6,
+              "content": "  constructor(private prismaClient: PrismaClient) {}"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 7,
+              "new_lineno": 7,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 8,
+              "new_lineno": 8,
+              "content": "  async findById(id: string) {"
+            }
+          ]
+        },
+        {
+          "old_start": 19,
+          "old_count": 10,
+          "new_start": 19,
+          "new_count": 12,
+          "section_header": "export class SelectedCalendarRepository implements ISelectedCalendarRepository {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 19,
+              "new_lineno": 19,
+              "content": "    take,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 20,
+              "new_lineno": 20,
+              "content": "    teamIds,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 21,
+              "new_lineno": 21,
+              "content": "    integrations,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 22,
+              "content": "    genericCalendarSuffixes,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 22,
+              "new_lineno": 23,
+              "content": "  }: {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 23,
+              "new_lineno": 24,
+              "content": "    take: number;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 24,
+              "new_lineno": 25,
+              "content": "    teamIds: number[];"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 25,
+              "new_lineno": 26,
+              "content": "    integrations: string[];"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 27,
+              "content": "    genericCalendarSuffixes?: string[];"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 26,
+              "new_lineno": 28,
+              "content": "  }) {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 27,
+              "new_lineno": 29,
+              "content": "    return this.prismaClient.selectedCalendar.findMany({"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 28,
+              "new_lineno": 30,
+              "content": "      where: {"
+            }
+          ]
+        },
+        {
+          "old_start": 36,
+          "old_count": 6,
+          "new_start": 38,
+          "new_count": 11,
+          "section_header": "export class SelectedCalendarRepository implements ISelectedCalendarRepository {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 36,
+              "new_lineno": 38,
+              "content": "            },"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 37,
+              "new_lineno": 39,
+              "content": "          },"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 38,
+              "new_lineno": 40,
+              "content": "        },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 41,
+              "content": "        AND: genericCalendarSuffixes?.length"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 42,
+              "content": "          ? genericCalendarSuffixes?.map((suffix) => ({"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 43,
+              "content": "              NOT: { externalId: { endsWith: suffix } },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 44,
+              "content": "            }))"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 45,
+              "content": "          : undefined,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 39,
+              "new_lineno": 46,
+              "content": "      },"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 40,
+              "new_lineno": 47,
+              "content": "      take,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 41,
+              "new_lineno": 48,
+              "content": "    });"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "changed_entities": [
+    {
+      "path": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts",
+      "entity_type": "module",
+      "name": "AdaptersFactory.ts",
+      "qualified_name": "packages.features.calendar-subscription.adapters.AdaptersFactory",
+      "line_start": 7,
+      "line_end": 25,
+      "hunk_ids": [
+        "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:4",
+        "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:57"
+      ]
+    },
+    {
+      "path": "packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts",
+      "entity_type": "module",
+      "name": "CalendarSubscriptionService.ts",
+      "qualified_name": "packages.features.calendar-subscription.lib.CalendarSubscriptionService",
+      "line_start": 395,
+      "line_end": 395,
+      "hunk_ids": [
+        "packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts:392"
+      ]
+    },
+    {
+      "path": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts",
+      "entity_type": "module",
+      "name": "CalendarSubscriptionService.test.ts",
+      "qualified_name": "packages.features.calendar-subscription.lib.__tests__.CalendarSubscriptionService.test",
+      "line_start": 115,
+      "line_end": 120,
+      "hunk_ids": [
+        "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:112",
+        "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:391",
+        "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:423",
+        "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:455",
+        "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:487"
+      ]
+    },
+    {
+      "path": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts",
+      "entity_type": "module",
+      "name": "SelectedCalendarRepository.interface.ts",
+      "qualified_name": "packages.features.selectedCalendar.repositories.SelectedCalendarRepository.interface",
+      "line_start": 24,
+      "line_end": 35,
+      "hunk_ids": [
+        "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:21"
+      ]
+    },
+    {
+      "path": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts",
+      "entity_type": "module",
+      "name": "SelectedCalendarRepository.test.ts",
+      "qualified_name": "packages.features.selectedCalendar.repositories.SelectedCalendarRepository.test",
+      "line_start": 134,
+      "line_end": 134,
+      "hunk_ids": [
+        "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:131",
+        "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:161",
+        "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:191"
+      ]
+    },
+    {
+      "path": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts",
+      "entity_type": "module",
+      "name": "SelectedCalendarRepository.ts",
+      "qualified_name": "packages.features.selectedCalendar.repositories.SelectedCalendarRepository",
+      "line_start": 5,
+      "line_end": 5,
+      "hunk_ids": [
+        "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:2",
+        "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:19",
+        "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:38"
+      ]
+    }
+  ],
+  "risk_signals": [],
+  "evidence_index": {
+    "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:4": {
+      "id": "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:4",
+      "kind": "diff_hunk",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:4",
+      "message": "@@ -4,9 +4,25 @@ import type { ICalendarSubscriptionPort } from \"@calcom/features/calendar-subscr\n \n export type CalendarSubscriptionProvider = \"google_calendar\" | \"office365_calendar\";\n \n+/**\n+ * Generic calendar suffixes that should be excluded from subscription.\n+ * These are special calendars (holidays, contacts, shared, imported, resources)\n+ * that are not user's personal calendars and shouldn't be subscribed to for sync.\n+ */\n+export const GENERIC_CALENDAR_SUFFIXES: Record<CalendarSubscriptionProvider, string[]> = {\n+  google_calendar: [\n+    \"@group.v.calendar.google.com\",\n+    \"@group.calendar.google.com\",\n+    \"@import.calendar.google.com\",\n+    \"@resource.calendar.google.com\",\n+  ],\n+  office365_calendar: [],\n+};\n+\n export interface AdapterFactory {\n   get(provider: CalendarSubscriptionProvider): ICalendarSubscriptionPort;\n   getProviders(): CalendarSubscriptionProvider[];\n+  getGenericCalendarSuffixes(): string[];\n }\n \n /**"
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:7": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:7",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:7",
+      "message": "Added line: /**"
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:8": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:8",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:8",
+      "message": "Added line: * Generic calendar suffixes that should be excluded from subscription."
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:9": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:9",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:9",
+      "message": "Added line: * These are special calendars (holidays, contacts, shared, imported, resources)"
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:10": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:10",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:10",
+      "message": "Added line: * that are not user's personal calendars and shouldn't be subscribed to for sync."
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:11": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:11",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:11",
+      "message": "Added line: */"
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:12": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:12",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:12",
+      "message": "Added line: export const GENERIC_CALENDAR_SUFFIXES: Record<CalendarSubscriptionProvider, string[]> = {"
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:13": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:13",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:13",
+      "message": "Added line: google_calendar: ["
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:14": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:14",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:14",
+      "message": "Added line: \"@group.v.calendar.google.com\","
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:15": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:15",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:15",
+      "message": "Added line: \"@group.calendar.google.com\","
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:16": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:16",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:16",
+      "message": "Added line: \"@import.calendar.google.com\","
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:17": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:17",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:17",
+      "message": "Added line: \"@resource.calendar.google.com\","
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:18": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:18",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:18",
+      "message": "Added line: ],"
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:19": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:19",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:19",
+      "message": "Added line: office365_calendar: [],"
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:20": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:20",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:20",
+      "message": "Added line: };"
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:21": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:21",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:21",
+      "message": "Added line: "
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:25": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:25",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:25",
+      "message": "Added line: getGenericCalendarSuffixes(): string[];"
+    },
+    "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:57": {
+      "id": "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:57",
+      "kind": "diff_hunk",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:57",
+      "message": "@@ -41,4 +57,16 @@ export class DefaultAdapterFactory implements AdapterFactory {\n     const providers: CalendarSubscriptionProvider[] = [\"google_calendar\"];\n     return providers;\n   }\n+\n+  /**\n+   * Returns all generic calendar suffixes that should be excluded from subscription\n+   * across all supported providers.\n+   *\n+   * @returns\n+   */\n+  getGenericCalendarSuffixes(): string[] {\n+    return Object.keys(GENERIC_CALENDAR_SUFFIXES).flatMap(\n+      (provider) => GENERIC_CALENDAR_SUFFIXES[provider as CalendarSubscriptionProvider]\n+    );\n+  }\n }"
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:60": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:60",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:60",
+      "message": "Added line: "
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:61": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:61",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:61",
+      "message": "Added line: /**"
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:62": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:62",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:62",
+      "message": "Added line: * Returns all generic calendar suffixes that should be excluded from subscription"
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:63": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:63",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:63",
+      "message": "Added line: * across all supported providers."
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:64": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:64",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:64",
+      "message": "Added line: *"
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:65": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:65",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:65",
+      "message": "Added line: * @returns"
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:66": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:66",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:66",
+      "message": "Added line: */"
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:67": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:67",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:67",
+      "message": "Added line: getGenericCalendarSuffixes(): string[] {"
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:68": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:68",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:68",
+      "message": "Added line: return Object.keys(GENERIC_CALENDAR_SUFFIXES).flatMap("
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:69": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:69",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:69",
+      "message": "Added line: (provider) => GENERIC_CALENDAR_SUFFIXES[provider as CalendarSubscriptionProvider]"
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:70": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:70",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:70",
+      "message": "Added line: );"
+    },
+    "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:71": {
+      "id": "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:71",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:71",
+      "message": "Added line: }"
+    },
+    "diff_hunk:packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts:392": {
+      "id": "diff_hunk:packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts:392",
+      "kind": "diff_hunk",
+      "source": "packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts:392",
+      "message": "@@ -392,6 +392,7 @@ export class CalendarSubscriptionService {\n       take: 100,\n       integrations: this.deps.adapterFactory.getProviders(),\n       teamIds,\n+      genericCalendarSuffixes: this.deps.adapterFactory.getGenericCalendarSuffixes(),\n     });\n     log.debug(\"checkForNewSubscriptions\", { count: rows.length });\n     await Promise.allSettled(rows.map(({ id }) => this.subscribe(id)));"
+    },
+    "diff:packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts:395": {
+      "id": "diff:packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts:395",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts:395",
+      "message": "Added line: genericCalendarSuffixes: this.deps.adapterFactory.getGenericCalendarSuffixes(),"
+    },
+    "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:112": {
+      "id": "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:112",
+      "kind": "diff_hunk",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:112",
+      "message": "@@ -112,6 +112,12 @@ describe(\"CalendarSubscriptionService\", () => {\n     mockAdapterFactory = {\n       get: vi.fn().mockReturnValue(mockAdapter),\n       getProviders: vi.fn().mockReturnValue([\"google_calendar\", \"office365_calendar\"]),\n+      getGenericCalendarSuffixes: vi.fn().mockReturnValue([\n+        \"@group.v.calendar.google.com\",\n+        \"@group.calendar.google.com\",\n+        \"@import.calendar.google.com\",\n+        \"@resource.calendar.google.com\",\n+      ]),\n     };\n \n     mockSelectedCalendarRepository = {"
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:115": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:115",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:115",
+      "message": "Added line: getGenericCalendarSuffixes: vi.fn().mockReturnValue(["
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:116": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:116",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:116",
+      "message": "Added line: \"@group.v.calendar.google.com\","
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:117": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:117",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:117",
+      "message": "Added line: \"@group.calendar.google.com\","
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:118": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:118",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:118",
+      "message": "Added line: \"@import.calendar.google.com\","
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:119": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:119",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:119",
+      "message": "Added line: \"@resource.calendar.google.com\","
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:120": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:120",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:120",
+      "message": "Added line: ]),"
+    },
+    "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:391": {
+      "id": "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:391",
+      "kind": "diff_hunk",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:391",
+      "message": "@@ -385,6 +391,12 @@ describe(\"CalendarSubscriptionService\", () => {\n         take: 100,\n         integrations: [\"google_calendar\", \"office365_calendar\"],\n         teamIds: [1, 2, 3],\n+        genericCalendarSuffixes: [\n+          \"@group.v.calendar.google.com\",\n+          \"@group.calendar.google.com\",\n+          \"@import.calendar.google.com\",\n+          \"@resource.calendar.google.com\",\n+        ],\n       });\n       expect(subscribeSpy).toHaveBeenCalledWith(mockSelectedCalendar.id);\n     });"
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:394": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:394",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:394",
+      "message": "Added line: genericCalendarSuffixes: ["
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:395": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:395",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:395",
+      "message": "Added line: \"@group.v.calendar.google.com\","
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:396": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:396",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:396",
+      "message": "Added line: \"@group.calendar.google.com\","
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:397": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:397",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:397",
+      "message": "Added line: \"@import.calendar.google.com\","
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:398": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:398",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:398",
+      "message": "Added line: \"@resource.calendar.google.com\","
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:399": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:399",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:399",
+      "message": "Added line: ],"
+    },
+    "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:423": {
+      "id": "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:423",
+      "kind": "diff_hunk",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:423",
+      "message": "@@ -411,6 +423,12 @@ describe(\"CalendarSubscriptionService\", () => {\n         take: 100,\n         integrations: [\"google_calendar\", \"office365_calendar\"],\n         teamIds: [10, 20],\n+        genericCalendarSuffixes: [\n+          \"@group.v.calendar.google.com\",\n+          \"@group.calendar.google.com\",\n+          \"@import.calendar.google.com\",\n+          \"@resource.calendar.google.com\",\n+        ],\n       });\n       expect(subscribeSpy).toHaveBeenCalledTimes(2);\n       expect(subscribeSpy).toHaveBeenCalledWith(\"calendar-with-cache\");"
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:426": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:426",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:426",
+      "message": "Added line: genericCalendarSuffixes: ["
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:427": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:427",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:427",
+      "message": "Added line: \"@group.v.calendar.google.com\","
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:428": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:428",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:428",
+      "message": "Added line: \"@group.calendar.google.com\","
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:429": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:429",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:429",
+      "message": "Added line: \"@import.calendar.google.com\","
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:430": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:430",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:430",
+      "message": "Added line: \"@resource.calendar.google.com\","
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:431": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:431",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:431",
+      "message": "Added line: ],"
+    },
+    "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:455": {
+      "id": "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:455",
+      "kind": "diff_hunk",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:455",
+      "message": "@@ -437,6 +455,12 @@ describe(\"CalendarSubscriptionService\", () => {\n         take: 100,\n         integrations: [\"google_calendar\", \"office365_calendar\"],\n         teamIds: [teamId],\n+        genericCalendarSuffixes: [\n+          \"@group.v.calendar.google.com\",\n+          \"@group.calendar.google.com\",\n+          \"@import.calendar.google.com\",\n+          \"@resource.calendar.google.com\",\n+        ],\n       });\n       expect(mockSelectedCalendarRepository.findNextSubscriptionBatch).not.toHaveBeenCalledWith(\n         expect.objectContaining({"
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:458": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:458",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:458",
+      "message": "Added line: genericCalendarSuffixes: ["
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:459": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:459",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:459",
+      "message": "Added line: \"@group.v.calendar.google.com\","
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:460": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:460",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:460",
+      "message": "Added line: \"@group.calendar.google.com\","
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:461": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:461",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:461",
+      "message": "Added line: \"@import.calendar.google.com\","
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:462": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:462",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:462",
+      "message": "Added line: \"@resource.calendar.google.com\","
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:463": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:463",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:463",
+      "message": "Added line: ],"
+    },
+    "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:487": {
+      "id": "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:487",
+      "kind": "diff_hunk",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:487",
+      "message": "@@ -463,6 +487,12 @@ describe(\"CalendarSubscriptionService\", () => {\n         take: 100,\n         integrations: [\"google_calendar\", \"office365_calendar\"],\n         teamIds: [],\n+        genericCalendarSuffixes: [\n+          \"@group.v.calendar.google.com\",\n+          \"@group.calendar.google.com\",\n+          \"@import.calendar.google.com\",\n+          \"@resource.calendar.google.com\",\n+        ],\n       });\n       expect(subscribeSpy).not.toHaveBeenCalled();\n     });"
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:490": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:490",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:490",
+      "message": "Added line: genericCalendarSuffixes: ["
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:491": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:491",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:491",
+      "message": "Added line: \"@group.v.calendar.google.com\","
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:492": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:492",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:492",
+      "message": "Added line: \"@group.calendar.google.com\","
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:493": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:493",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:493",
+      "message": "Added line: \"@import.calendar.google.com\","
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:494": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:494",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:494",
+      "message": "Added line: \"@resource.calendar.google.com\","
+    },
+    "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:495": {
+      "id": "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:495",
+      "kind": "diff",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:495",
+      "message": "Added line: ],"
+    },
+    "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:21": {
+      "id": "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:21",
+      "kind": "diff_hunk",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:21",
+      "message": "@@ -21,15 +21,18 @@ export interface ISelectedCalendarRepository {\n    *\n    * @param take the number of calendars to take\n    * @param integrations the list of integrations\n+   * @param genericCalendarSuffixes the list of generic calendar suffixes to exclude\n    */\n   findNextSubscriptionBatch({\n     take,\n     teamIds,\n     integrations,\n+    genericCalendarSuffixes,\n   }: {\n     take: number;\n     teamIds: number[];\n     integrations?: string[];\n+    genericCalendarSuffixes?: string[];\n   }): Promise<SelectedCalendar[]>;\n \n   /**"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:24": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:24",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:24",
+      "message": "Added line: * @param genericCalendarSuffixes the list of generic calendar suffixes to exclude"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:30": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:30",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:30",
+      "message": "Added line: genericCalendarSuffixes,"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:35": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:35",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:35",
+      "message": "Added line: genericCalendarSuffixes?: string[];"
+    },
+    "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:131": {
+      "id": "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:131",
+      "kind": "diff_hunk",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:131",
+      "message": "@@ -131,6 +131,7 @@ describe(\"SelectedCalendarRepository\", () => {\n               },\n             },\n           },\n+          AND: undefined,\n         },\n         take: 10,\n       });"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:134": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:134",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:134",
+      "message": "Added line: AND: undefined,"
+    },
+    "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:161": {
+      "id": "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:161",
+      "kind": "diff_hunk",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:161",
+      "message": "@@ -160,6 +161,7 @@ describe(\"SelectedCalendarRepository\", () => {\n               },\n             },\n           },\n+          AND: undefined,\n         },\n         take: 5,\n       });"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:164": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:164",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:164",
+      "message": "Added line: AND: undefined,"
+    },
+    "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:191": {
+      "id": "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:191",
+      "kind": "diff_hunk",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:191",
+      "message": "@@ -189,6 +191,43 @@ describe(\"SelectedCalendarRepository\", () => {\n               },\n             },\n           },\n+          AND: undefined,\n+        },\n+        take: 10,\n+      });\n+\n+      expect(result).toEqual(mockCalendars);\n+    });\n+\n+    test(\"should filter out generic calendars when genericCalendarSuffixes is provided\", async () => {\n+      const mockCalendars = [mockSelectedCalendar];\n+      vi.mocked(mockPrismaClient.selectedCalendar.findMany).mockResolvedValue(mockCalendars);\n+\n+      const genericSuffixes = [\"@group.v.calendar.google.com\", \"@group.calendar.google.com\"];\n+\n+      const result = await repository.findNextSubscriptionBatch({\n+        take: 10,\n+        teamIds: [1, 2],\n+        integrations: [\"google_calendar\"],\n+        genericCalendarSuffixes: genericSuffixes,\n+      });\n+\n+      expect(mockPrismaClient.selectedCalendar.findMany).toHaveBeenCalledWith({\n+        where: {\n+          integration: { in: [\"google_calendar\"] },\n+          OR: [{ syncSubscribedAt: null }, { channelExpiration: { lte: expect.any(Date) } }],\n+          user: {\n+            teams: {\n+              some: {\n+                teamId: { in: [1, 2] },\n+                accepted: true,\n+              },\n+            },\n+          },\n+          AND: [\n+            { NOT: { externalId: { endsWith: \"@group.v.calendar.google.com\" } } },\n+            { NOT: { externalId: { endsWith: \"@group.calendar.google.com\" } } },\n+          ],\n         },\n         take: 10,\n       });"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:194": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:194",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:194",
+      "message": "Added line: AND: undefined,"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:195": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:195",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:195",
+      "message": "Added line: },"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:196": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:196",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:196",
+      "message": "Added line: take: 10,"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:197": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:197",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:197",
+      "message": "Added line: });"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:198": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:198",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:198",
+      "message": "Added line: "
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:199": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:199",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:199",
+      "message": "Added line: expect(result).toEqual(mockCalendars);"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:200": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:200",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:200",
+      "message": "Added line: });"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:201": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:201",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:201",
+      "message": "Added line: "
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:202": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:202",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:202",
+      "message": "Added line: test(\"should filter out generic calendars when genericCalendarSuffixes is provided\", async () => {"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:203": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:203",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:203",
+      "message": "Added line: const mockCalendars = [mockSelectedCalendar];"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:204": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:204",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:204",
+      "message": "Added line: vi.mocked(mockPrismaClient.selectedCalendar.findMany).mockResolvedValue(mockCalendars);"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:205": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:205",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:205",
+      "message": "Added line: "
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:206": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:206",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:206",
+      "message": "Added line: const genericSuffixes = [\"@group.v.calendar.google.com\", \"@group.calendar.google.com\"];"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:207": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:207",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:207",
+      "message": "Added line: "
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:208": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:208",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:208",
+      "message": "Added line: const result = await repository.findNextSubscriptionBatch({"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:209": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:209",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:209",
+      "message": "Added line: take: 10,"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:210": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:210",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:210",
+      "message": "Added line: teamIds: [1, 2],"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:211": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:211",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:211",
+      "message": "Added line: integrations: [\"google_calendar\"],"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:212": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:212",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:212",
+      "message": "Added line: genericCalendarSuffixes: genericSuffixes,"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:213": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:213",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:213",
+      "message": "Added line: });"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:214": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:214",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:214",
+      "message": "Added line: "
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:215": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:215",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:215",
+      "message": "Added line: expect(mockPrismaClient.selectedCalendar.findMany).toHaveBeenCalledWith({"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:216": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:216",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:216",
+      "message": "Added line: where: {"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:217": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:217",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:217",
+      "message": "Added line: integration: { in: [\"google_calendar\"] },"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:218": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:218",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:218",
+      "message": "Added line: OR: [{ syncSubscribedAt: null }, { channelExpiration: { lte: expect.any(Date) } }],"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:219": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:219",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:219",
+      "message": "Added line: user: {"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:220": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:220",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:220",
+      "message": "Added line: teams: {"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:221": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:221",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:221",
+      "message": "Added line: some: {"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:222": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:222",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:222",
+      "message": "Added line: teamId: { in: [1, 2] },"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:223": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:223",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:223",
+      "message": "Added line: accepted: true,"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:224": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:224",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:224",
+      "message": "Added line: },"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:225": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:225",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:225",
+      "message": "Added line: },"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:226": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:226",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:226",
+      "message": "Added line: },"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:227": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:227",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:227",
+      "message": "Added line: AND: ["
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:228": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:228",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:228",
+      "message": "Added line: { NOT: { externalId: { endsWith: \"@group.v.calendar.google.com\" } } },"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:229": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:229",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:229",
+      "message": "Added line: { NOT: { externalId: { endsWith: \"@group.calendar.google.com\" } } },"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:230": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:230",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:230",
+      "message": "Added line: ],"
+    },
+    "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:2": {
+      "id": "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:2",
+      "kind": "diff_hunk",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:2",
+      "message": "@@ -2,7 +2,7 @@ import type { ISelectedCalendarRepository } from \"@calcom/features/selectedCalen\n import type { PrismaClient } from \"@calcom/prisma\";\n import type { Prisma } from \"@calcom/prisma/client\";\n \n-export class SelectedCalendarRepository implements ISelectedCalendarRepository {\n+export class PrismaSelectedCalendarRepository implements ISelectedCalendarRepository {\n   constructor(private prismaClient: PrismaClient) {}\n \n   async findById(id: string) {"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:5": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:5",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:5",
+      "message": "Added line: export class PrismaSelectedCalendarRepository implements ISelectedCalendarRepository {"
+    },
+    "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:19": {
+      "id": "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:19",
+      "kind": "diff_hunk",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:19",
+      "message": "@@ -19,10 +19,12 @@ export class SelectedCalendarRepository implements ISelectedCalendarRepository {\n     take,\n     teamIds,\n     integrations,\n+    genericCalendarSuffixes,\n   }: {\n     take: number;\n     teamIds: number[];\n     integrations: string[];\n+    genericCalendarSuffixes?: string[];\n   }) {\n     return this.prismaClient.selectedCalendar.findMany({\n       where: {"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:22": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:22",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:22",
+      "message": "Added line: genericCalendarSuffixes,"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:27": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:27",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:27",
+      "message": "Added line: genericCalendarSuffixes?: string[];"
+    },
+    "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:38": {
+      "id": "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:38",
+      "kind": "diff_hunk",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:38",
+      "message": "@@ -36,6 +38,11 @@ export class SelectedCalendarRepository implements ISelectedCalendarRepository {\n             },\n           },\n         },\n+        AND: genericCalendarSuffixes?.length\n+          ? genericCalendarSuffixes?.map((suffix) => ({\n+              NOT: { externalId: { endsWith: suffix } },\n+            }))\n+          : undefined,\n       },\n       take,\n     });"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:41": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:41",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:41",
+      "message": "Added line: AND: genericCalendarSuffixes?.length"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:42": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:42",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:42",
+      "message": "Added line: ? genericCalendarSuffixes?.map((suffix) => ({"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:43": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:43",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:43",
+      "message": "Added line: NOT: { externalId: { endsWith: suffix } },"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:44": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:44",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:44",
+      "message": "Added line: }))"
+    },
+    "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:45": {
+      "id": "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:45",
+      "kind": "diff",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:45",
+      "message": "Added line: : undefined,"
+    },
+    "entity:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:packages.features.calendar-subscription.adapters.AdaptersFactory": {
+      "id": "entity:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:packages.features.calendar-subscription.adapters.AdaptersFactory",
+      "kind": "entity",
+      "source": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts:7-25",
+      "message": "Changed module packages.features.calendar-subscription.adapters.AdaptersFactory touched by 2 hunk(s)."
+    },
+    "entity:packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts:packages.features.calendar-subscription.lib.CalendarSubscriptionService": {
+      "id": "entity:packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts:packages.features.calendar-subscription.lib.CalendarSubscriptionService",
+      "kind": "entity",
+      "source": "packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts:395-395",
+      "message": "Changed module packages.features.calendar-subscription.lib.CalendarSubscriptionService touched by 1 hunk(s)."
+    },
+    "entity:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:packages.features.calendar-subscription.lib.__tests__.CalendarSubscriptionService.test": {
+      "id": "entity:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:packages.features.calendar-subscription.lib.__tests__.CalendarSubscriptionService.test",
+      "kind": "entity",
+      "source": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:115-120",
+      "message": "Changed module packages.features.calendar-subscription.lib.__tests__.CalendarSubscriptionService.test touched by 5 hunk(s)."
+    },
+    "entity:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:packages.features.selectedCalendar.repositories.SelectedCalendarRepository.interface": {
+      "id": "entity:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:packages.features.selectedCalendar.repositories.SelectedCalendarRepository.interface",
+      "kind": "entity",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:24-35",
+      "message": "Changed module packages.features.selectedCalendar.repositories.SelectedCalendarRepository.interface touched by 1 hunk(s)."
+    },
+    "entity:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:packages.features.selectedCalendar.repositories.SelectedCalendarRepository.test": {
+      "id": "entity:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:packages.features.selectedCalendar.repositories.SelectedCalendarRepository.test",
+      "kind": "entity",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:134-134",
+      "message": "Changed module packages.features.selectedCalendar.repositories.SelectedCalendarRepository.test touched by 3 hunk(s)."
+    },
+    "entity:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:packages.features.selectedCalendar.repositories.SelectedCalendarRepository": {
+      "id": "entity:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:packages.features.selectedCalendar.repositories.SelectedCalendarRepository",
+      "kind": "entity",
+      "source": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:5-5",
+      "message": "Changed module packages.features.selectedCalendar.repositories.SelectedCalendarRepository touched by 3 hunk(s)."
+    }
+  },
+  "missing_evidence_ids": [],
+  "agent_runs": [
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+      "input_evidence_ids": [
+        "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:4",
+        "diff_hunk:packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts:392",
+        "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:112",
+        "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:21"
+      ],
+      "output_issue_ids": [
+        "naming_convention:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:7",
+        "naming_convention:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:7"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 1,
+      "retry_log": [
+        "attempt=1 error=timeout delay=1.00s"
+      ],
+      "latency_ms": 64119,
+      "token_count_in": 5893,
+      "token_count_out": 470,
+      "trace_id": "2c201da008784a34bc522391f63c88b8",
+      "span_id": "9d987acd84b046b7",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001",
+      "shard_index": 0,
+      "shard_count": 2,
+      "context_request_count": 1,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+      "input_evidence_ids": [
+        "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:10",
+        "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:11",
+        "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:12",
+        "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:13",
+        "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:14",
+        "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:15",
+        "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:57",
+        "entity:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:packages.features.calendar-subscription.adapters.AdaptersFactory"
+      ],
+      "output_issue_ids": [
+        "maintainability:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:12"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 14747,
+      "token_count_in": 3369,
+      "token_count_out": 294,
+      "trace_id": "cfd1079cf5924d2b9c93d95b95c81216",
+      "span_id": "535396b47ac54f4a",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001-refill",
+      "shard_index": 0,
+      "shard_count": 2,
+      "context_request_count": 0,
+      "context_refill_used": true
+    },
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+      "input_evidence_ids": [
+        "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:131",
+        "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:2"
+      ],
+      "output_issue_ids": [
+        "naming_convention:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:5"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 1926,
+      "token_count_in": 4231,
+      "token_count_out": 219,
+      "trace_id": "81767a486b134fc69ab52a46fd61317f",
+      "span_id": "6cb3b85a1cb740e1",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-002",
+      "shard_index": 1,
+      "shard_count": 2,
+      "context_request_count": 0,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+      "model": null,
+      "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+      "input_evidence_ids": [],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 0,
+      "token_count_in": 0,
+      "token_count_out": 0,
+      "trace_id": "",
+      "span_id": "",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "",
+      "shard_index": 0,
+      "shard_count": 0,
+      "context_request_count": 0,
+      "context_refill_used": false
+    }
+  ],
+  "prompt_exports": {},
+  "context_budget": {
+    "enabled": true,
+    "strategy": "file_risk_shards_v1",
+    "context_profile": "risk_compact_manifest_v1",
+    "max_input_tokens": 9000,
+    "estimated_input_tokens": 12204,
+    "selected_evidence_count": 14,
+    "omitted_evidence_count": 116,
+    "selected_evidence_ids": [
+      "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:4",
+      "diff_hunk:packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts:392",
+      "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:112",
+      "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:21",
+      "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:131",
+      "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:2",
+      "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:57",
+      "entity:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:packages.features.calendar-subscription.adapters.AdaptersFactory",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:10",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:11",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:12",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:13",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:14",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:15"
+    ],
+    "omitted_evidence_ids": [
+      "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:391",
+      "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:423",
+      "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:455",
+      "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:487",
+      "entity:packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts:packages.features.calendar-subscription.lib.CalendarSubscriptionService",
+      "entity:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:packages.features.calendar-subscription.lib.__tests__.CalendarSubscriptionService.test",
+      "entity:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:packages.features.selectedCalendar.repositories.SelectedCalendarRepository.interface",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:16",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:17",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:18",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:19",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:20",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:21",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:25",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:60",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:61",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:62",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:63",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:64",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:65",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:66",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:67",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:68",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:69",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:7",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:70",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:71",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:8",
+      "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:9",
+      "diff:packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts:395",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:115",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:116",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:117",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:118",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:119",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:120",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:394",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:395",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:396",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:397",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:398",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:399",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:426",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:427",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:428",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:429",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:430",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:431",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:458",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:459",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:460",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:461",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:462",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:463",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:490",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:491",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:492",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:493",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:494",
+      "diff:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:495",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:24",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:30",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:35",
+      "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:161",
+      "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:191",
+      "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:19",
+      "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:38",
+      "entity:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:packages.features.selectedCalendar.repositories.SelectedCalendarRepository.test",
+      "entity:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:packages.features.selectedCalendar.repositories.SelectedCalendarRepository",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:134",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:164",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:194",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:195",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:196",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:197",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:198",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:199",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:200",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:201",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:202",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:203",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:204",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:205",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:206",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:207",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:208",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:209",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:210",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:211",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:212",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:213",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:214",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:215",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:216",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:217",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:218",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:219",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:220",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:221",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:222",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:223",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:224",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:225",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:226",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:227",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:228",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:229",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:230",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:22",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:27",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:41",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:42",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:43",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:44",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:45",
+      "diff:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:5"
+    ],
+    "selected_risk_signal_count": 0,
+    "context_truncated": true,
+    "shard_count": 2,
+    "refill_count": 1,
+    "context_request_count": 1,
+    "context_requests": [
+      {
+        "request_type": "same_file_more_evidence",
+        "path": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts",
+        "evidence_ids": [],
+        "risk_tag": null,
+        "symbol": null,
+        "reason": "To verify the full export patterns and class definitions in the file to confirm naming convention violations.",
+        "source_shard_id": "shard-001",
+        "fulfilled_evidence_ids": [
+          "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:10",
+          "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:11",
+          "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:12",
+          "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:13",
+          "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:14",
+          "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:15",
+          "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:57",
+          "entity:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:packages.features.calendar-subscription.adapters.AdaptersFactory"
+        ]
+      }
+    ],
+    "shards": [
+      {
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 4,
+        "omitted_evidence_count": 71,
+        "estimated_input_tokens": 5341,
+        "context_truncated": true
+      },
+      {
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 2,
+        "omitted_evidence_count": 53,
+        "estimated_input_tokens": 4017,
+        "context_truncated": true
+      },
+      {
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "is_refill": true,
+        "parent_shard_id": "shard-001",
+        "selected_evidence_count": 8,
+        "omitted_evidence_count": 0,
+        "estimated_input_tokens": 2846,
+        "context_truncated": false
+      }
+    ],
+    "warnings": []
+  },
+  "loop": {
+    "enabled": true,
+    "max_iter": 1,
+    "iterations_completed": 1,
+    "converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "checkpoint_path": "D:\\learn\\code-review-agent\\workspace\\qodo_pr_review_bench_live_guidelines\\samples\\qodo_029\\review\\loop_checkpoint.json",
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "iterations": [
+      {
+        "i": 0,
+        "candidate_issue_count": 3,
+        "verified_count": 0,
+        "needs_human_review_count": 0,
+        "discarded_count": 3,
+        "keep_count": 0,
+        "uncertain_count": 0,
+        "reject_count": 0,
+        "feedback_sent": [],
+        "agent_runs": [
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+            "input_evidence_ids": [
+              "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:4",
+              "diff_hunk:packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts:392",
+              "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:112",
+              "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:21"
+            ],
+            "output_issue_ids": [
+              "naming_convention:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:7",
+              "naming_convention:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:7"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 1,
+            "retry_log": [
+              "attempt=1 error=timeout delay=1.00s"
+            ],
+            "latency_ms": 64119,
+            "token_count_in": 5893,
+            "token_count_out": 470,
+            "trace_id": "2c201da008784a34bc522391f63c88b8",
+            "span_id": "9d987acd84b046b7",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001",
+            "shard_index": 0,
+            "shard_count": 2,
+            "context_request_count": 1,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+            "input_evidence_ids": [
+              "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:10",
+              "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:11",
+              "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:12",
+              "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:13",
+              "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:14",
+              "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:15",
+              "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:57",
+              "entity:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:packages.features.calendar-subscription.adapters.AdaptersFactory"
+            ],
+            "output_issue_ids": [
+              "maintainability:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:12"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 14747,
+            "token_count_in": 3369,
+            "token_count_out": 294,
+            "trace_id": "cfd1079cf5924d2b9c93d95b95c81216",
+            "span_id": "535396b47ac54f4a",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001-refill",
+            "shard_index": 0,
+            "shard_count": 2,
+            "context_request_count": 0,
+            "context_refill_used": true
+          },
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+            "input_evidence_ids": [
+              "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:131",
+              "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:2"
+            ],
+            "output_issue_ids": [
+              "naming_convention:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:5"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 1926,
+            "token_count_in": 4231,
+            "token_count_out": 219,
+            "trace_id": "81767a486b134fc69ab52a46fd61317f",
+            "span_id": "6cb3b85a1cb740e1",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-002",
+            "shard_index": 1,
+            "shard_count": 2,
+            "context_request_count": 0,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+            "model": null,
+            "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+            "input_evidence_ids": [],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 0,
+            "token_count_in": 0,
+            "token_count_out": 0,
+            "trace_id": "",
+            "span_id": "",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "",
+            "shard_index": 0,
+            "shard_count": 0,
+            "context_request_count": 0,
+            "context_refill_used": false
+          }
+        ],
+        "issue_set": [],
+        "keep": [],
+        "needs_human_review": [],
+        "discarded": [
+          {
+            "file": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts",
+            "line": 7,
+            "severity": "medium",
+            "category": "naming_convention",
+            "message": "File AdaptersFactory.ts does not follow the required naming convention for service or repository classes. The review guidelines require service files to be named '<Entity>Service.ts' with matching class names. This file exports a type 'AdapterFactory' and a constant 'GENERIC_CALENDAR_SUFFIXES', but the filename and class name do not match the expected pattern.",
+            "suggestion": "Rename the file to match the exported class/interface name, e.g., 'AdapterFactory.ts', or restructure to follow the '<Entity>Service.ts' pattern if this is a service.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:4"
+            ],
+            "filter_reason": "style_preference"
+          },
+          {
+            "file": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts",
+            "line": 12,
+            "severity": "minor",
+            "category": "maintainability",
+            "message": "The exported constant GENERIC_CALENDAR_SUFFIXES is defined in a file named AdaptersFactory.ts, which does not follow the naming conventions for repository or service classes as per review guidelines. The file exports a constant and a class, but the file name does not match a PascalCase class name for a repository or service.",
+            "suggestion": "Consider moving the constant to a separate file with a descriptive name (e.g., genericCalendarSuffixes.ts) or rename the file to match the class name if it is intended to be a service.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:12",
+              "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:13",
+              "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:14",
+              "diff:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:15"
+            ],
+            "filter_reason": "style_preference"
+          },
+          {
+            "file": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts",
+            "line": 5,
+            "severity": "high",
+            "category": "naming_convention",
+            "message": "Class name 'PrismaSelectedCalendarRepository' does not follow the required 'Prisma<Entity>Repository' pattern; the entity name should match the filename's entity (SelectedCalendar) but the class name includes 'PrismaSelectedCalendarRepository' which is acceptable per the guideline, however the filename 'SelectedCalendarRepository.ts' does not match the class name exactly as required by the naming convention rule.",
+            "suggestion": "Rename the file to 'PrismaSelectedCalendarRepository.ts' to match the exported class name exactly, or rename the class to 'SelectedCalendarRepository' if the file name is kept, but the guideline requires 'Prisma<Entity>Repository' pattern with matching filenames.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:2"
+            ],
+            "filter_reason": "style_preference"
+          }
+        ]
+      }
+    ]
+  },
+  "tracing": {
+    "total_latency_ms": 80792,
+    "total_token_count_in": 13493,
+    "total_token_count_out": 983,
+    "total_retry_count": 1,
+    "run_count": 4,
+    "status_counts": {
+      "ok": 4
+    }
+  }
+}

@@ -1,0 +1,13 @@
+--- a/gpt_engineer/main.py
++++ b/gpt_engineer/main.py
+@@ -1,10 +1,8 @@
+-    input_path = project_path
+-    memory_path = pathlib.Path(project_path) / (run_prefix + "memory")
+     workspace_path = pathlib.Path(project_path) / (run_prefix + "workspace")
+ 
+     ai = AI(
+         model=model,
+         temperature=temperature,
+     )
+ 
+     dbs = DBs(

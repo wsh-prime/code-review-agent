@@ -226,6 +226,38 @@ extra text that should not break parsing
     assert requests[0].request_type == "risk_evidence"
 
 
+def test_live_response_parser_accepts_python_literal_jsonish_output() -> None:
+    content = """Here is the result:
+{
+  'issues': [
+    {
+      'file': 'src/foo.py',
+      'line': 9,
+      'severity': 'medium',
+      'category': 'test_gap',
+      'message': 'Uses a literal with braces {ok}.',
+      'suggestion': 'Update tests.',
+      'confidence': 0.7,
+      'extra': null,
+      'enabled': true,
+      'evidence_ids': ['diff:src/foo.py:9'],
+    }
+  ],
+  'context_requests': [],
+}
+"""
+
+    issues, requests = _review_response_from_llm_json(
+        content,
+        source_shard_id="shard-001",
+        max_context_requests=4,
+    )
+
+    assert len(issues) == 1
+    assert issues[0].category == TEST_GAP
+    assert requests == []
+
+
 def test_openai_compatible_agent_accepts_context_request_and_refills(monkeypatch) -> None:
     captured: list[dict] = []
 

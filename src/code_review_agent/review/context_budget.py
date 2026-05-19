@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -29,6 +30,9 @@ DEFAULT_MANIFEST_PATH_LIMIT = 30
 DEFAULT_MANIFEST_PATH_SAMPLE_LIMIT = 4
 DEFAULT_MANIFEST_RISK_LIMIT = 24
 DEFAULT_MAX_REFILL_EVIDENCE_PER_REQUEST = 8
+DEFAULT_MAX_REVIEW_GUIDELINES = 12
+DEFAULT_MAX_REVIEW_GUIDELINE_CHARS = 700
+DEFAULT_GUIDELINE_MATCHED_TERM_LIMIT = 10
 LIVE_REVIEW_INPUT_SCHEMA = "live_review_input_v1"
 SELECTION_STRATEGY = "risk_first_v1"
 SHARDING_STRATEGY = "file_risk_shards_v1"
@@ -276,6 +280,7 @@ def build_live_review_input(
         omitted_changed_file_count=int(base_payload["omitted_changed_file_count"]),
         changed_entities=list(base_payload["changed_entities"]),
         risk_signals=list(base_payload["risk_signals"]),
+        review_guidelines=list(base_payload.get("review_guidelines", [])),
         evidence_index=evidence_payload,
         available_context=available_context,
         context_budget=context_budget,
@@ -674,7 +679,189 @@ def _base_payload(
                 key=_risk_sort_key,
             )[:DEFAULT_MAX_RISK_CARDS]
         ],
+        "review_guidelines": _review_guidelines(package, allowed_paths=allowed_paths),
     }
+
+
+def _review_guidelines(
+    package: EvidencePackage,
+    *,
+    allowed_paths: set[str] | None,
+) -> list[dict[str, Any]]:
+    raw_guidelines = package.metadata.get("review_guidelines", [])
+    if not isinstance(raw_guidelines, list):
+        return []
+    cards: list[dict[str, Any]] = []
+    for index, item in enumerate(raw_guidelines):
+        if isinstance(item, str):
+            guideline = {"title": f"Guideline {index + 1}", "body": item}
+        elif isinstance(item, dict):
+            guideline = dict(item)
+        else:
+            continue
+        title = str(guideline.get("title") or guideline.get("name") or f"Guideline {index + 1}")
+        body_parts = [
+            str(guideline.get("objective") or ""),
+            str(guideline.get("success_criteria") or ""),
+            str(guideline.get("failure_criteria") or ""),
+            str(guideline.get("description") or ""),
+            str(guideline.get("body") or ""),
+        ]
+        body = " ".join(part.strip() for part in body_parts if part.strip())
+        if len(body) > DEFAULT_MAX_REVIEW_GUIDELINE_CHARS:
+            body = f"{body[:DEFAULT_MAX_REVIEW_GUIDELINE_CHARS - 3]}..."
+        cards.append({"title": title[:180], "body": body})
+    return _rank_review_guidelines(package, cards, allowed_paths=allowed_paths)
+
+
+def _rank_review_guidelines(
+    package: EvidencePackage,
+    guidelines: list[dict[str, Any]],
+    *,
+    allowed_paths: set[str] | None,
+) -> list[dict[str, Any]]:
+    if not guidelines:
+        return []
+
+    shard_text = _guideline_retrieval_text(package, allowed_paths=allowed_paths)
+    changed_paths = set(allowed_paths or _changed_paths(package))
+    scored: list[tuple[float, int, dict[str, Any]]] = []
+    for index, guideline in enumerate(guidelines):
+        score, matched_terms = _score_review_guideline(
+            guideline,
+            changed_paths=changed_paths,
+            shard_text=shard_text,
+        )
+        if score <= 0:
+            continue
+        ranked = dict(guideline)
+        ranked["selection_score"] = round(score, 3)
+        ranked["matched_terms"] = matched_terms[:DEFAULT_GUIDELINE_MATCHED_TERM_LIMIT]
+        scored.append((score, index, ranked))
+
+    if not scored:
+        return []
+    scored.sort(key=lambda item: (-item[0], item[1]))
+    return [item[2] for item in scored[:DEFAULT_MAX_REVIEW_GUIDELINES]]
+
+
+def _score_review_guideline(
+    guideline: dict[str, Any],
+    *,
+    changed_paths: set[str],
+    shard_text: str,
+) -> tuple[float, list[str]]:
+    guideline_text = f"{guideline.get('title', '')} {guideline.get('body', '')}"
+    guideline_tokens = _keyword_tokens(guideline_text)
+    shard_tokens = _keyword_tokens(shard_text)
+    matched_terms = sorted(guideline_tokens & shard_tokens)
+    score = float(len(matched_terms))
+
+    lower_guideline = guideline_text.lower()
+    lower_shard = shard_text.lower()
+    for path in changed_paths:
+        normalized = path.replace("\\", "/").lower()
+        path_parts = [part for part in re.split(r"[/_.-]+", normalized) if part]
+        file_name = path_parts[-1] if path_parts else normalized
+        suffix = normalized.rsplit(".", 1)[-1] if "." in normalized else ""
+        if normalized and normalized in lower_guideline:
+            score += 30.0
+            matched_terms.append(path)
+        if file_name and file_name in lower_guideline:
+            score += 8.0
+            matched_terms.append(file_name)
+        if suffix and suffix in _extension_terms(lower_guideline):
+            score += 4.0
+            matched_terms.append(f".{suffix}")
+        for part in path_parts[:-1]:
+            if len(part) >= 4 and part in lower_guideline:
+                score += 3.0
+                matched_terms.append(part)
+
+    for phrase in _quoted_or_code_phrases(lower_guideline):
+        if len(phrase) >= 3 and phrase in lower_shard:
+            score += 12.0
+            matched_terms.append(phrase)
+
+    return score, list(dict.fromkeys(matched_terms))
+
+
+def _guideline_retrieval_text(
+    package: EvidencePackage,
+    *,
+    allowed_paths: set[str] | None,
+) -> str:
+    parts: list[str] = []
+    for change in package.changed_files:
+        path = change.new_path or change.old_path
+        if path is None or (allowed_paths is not None and path not in allowed_paths):
+            continue
+        parts.extend([path, change.change_type, _file_role(path)])
+        for hunk in change.hunks:
+            parts.append(hunk.section_header)
+            parts.extend(line.content for line in hunk.lines)
+    for entity in _changed_entities(package, allowed_paths=allowed_paths):
+        parts.extend([entity.path, entity.name, entity.entity_type])
+    for signal in _risk_signals(package, allowed_paths=allowed_paths):
+        parts.extend([signal.tag, signal.reason])
+    return "\n".join(part for part in parts if part)
+
+
+def _keyword_tokens(text: str) -> set[str]:
+    tokens = {
+        token.lower()
+        for token in re.findall(r"[A-Za-z_][A-Za-z0-9_@.-]{2,}", text)
+    }
+    stop_words = {
+        "all",
+        "and",
+        "are",
+        "code",
+        "contain",
+        "contains",
+        "criteria",
+        "ensure",
+        "file",
+        "files",
+        "for",
+        "from",
+        "must",
+        "not",
+        "the",
+        "this",
+        "use",
+        "uses",
+        "using",
+        "with",
+    }
+    return {token for token in tokens if token not in stop_words}
+
+
+def _extension_terms(text: str) -> set[str]:
+    terms: set[str] = set(re.findall(r"\.([a-z0-9]{1,6})\b", text))
+    language_extensions = {
+        "javascript": "js",
+        "typescript": "ts",
+        "python": "py",
+        "csharp": "cs",
+        "react": "tsx",
+        "markdown": "md",
+        "yaml": "yml",
+    }
+    for language, suffix in language_extensions.items():
+        if language in text:
+            terms.add(suffix)
+    return terms
+
+
+def _quoted_or_code_phrases(text: str) -> list[str]:
+    phrases = re.findall(r"`([^`]+)`|'([^']+)'|\"([^\"]+)\"", text)
+    flattened = [part for match in phrases for part in match if part]
+    return [
+        phrase.strip().lower()
+        for phrase in flattened
+        if phrase.strip() and len(phrase.strip()) <= 80
+    ]
 
 
 def _changed_file_summaries(

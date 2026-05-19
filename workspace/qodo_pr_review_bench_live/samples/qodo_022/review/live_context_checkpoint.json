@@ -1,0 +1,462 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:730e35226c884d6f8f10e3456aecfbbb606bffddff4453e341efaeefdebf9264",
+  "diff_hash": "sha256:ac7d7c63de3cf5dc779a43c5545ec0a29078004fe5c29d809ca25420166da406",
+  "shards": {
+    "06b8412a21c55de042527c413e0a9fac96684920162770e962b52286070faf25": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/Caching/SqlServer/src/SqlServerCacheOptions.cs:8",
+        "diff_hunk:src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs:11",
+        "diff_hunk:src/Logging.AzureAppServices/src/AzureAppServicesLoggerFactoryExtensions.cs:13",
+        "diff_hunk:src/Logging.AzureAppServices/src/AzureBlobLoggerContext.cs:6"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs",
+          "evidence_ids": [
+            "diff_hunk:src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs:112",
+            "diff_hunk:src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs:149",
+            "diff_hunk:src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs:185",
+            "diff_hunk:src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs:207",
+            "diff_hunk:src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs:236",
+            "diff_hunk:src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs:45",
+            "diff_hunk:src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs:77"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-001",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "src/Logging.AzureAppServices/src/AzureBlobLoggerContext.cs",
+          "evidence_ids": [
+            "diff_hunk:src/Logging.AzureAppServices/src/AzureBlobLoggerContext.cs:24"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-001",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:src/Caching/SqlServer/src/SqlServerCacheOptions.cs:8",
+          "diff_hunk:src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs:11",
+          "diff_hunk:src/Logging.AzureAppServices/src/AzureAppServicesLoggerFactoryExtensions.cs:13",
+          "diff_hunk:src/Logging.AzureAppServices/src/AzureBlobLoggerContext.cs:6"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 63350,
+        "token_count_in": 5079,
+        "token_count_out": 349,
+        "trace_id": "78c3357aa1bb41559acc4f21407a3221",
+        "span_id": "94058160c6c946ab",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 4,
+        "context_request_count": 2,
+        "context_refill_used": false
+      }
+    },
+    "864ed419073778218e1eb53c626dcd02028391ecdb43cb60b8a98a078a8644d9": {
+      "status": "completed",
+      "shard_id": "shard-001-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-001",
+      "selected_evidence_ids": [
+        "diff_hunk:src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs:112",
+        "diff_hunk:src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs:149",
+        "diff_hunk:src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs:185",
+        "diff_hunk:src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs:207",
+        "diff_hunk:src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs:236",
+        "diff_hunk:src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs:45",
+        "diff_hunk:src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs:77",
+        "diff_hunk:src/Logging.AzureAppServices/src/AzureBlobLoggerContext.cs:24"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs:112",
+          "diff_hunk:src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs:149",
+          "diff_hunk:src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs:185",
+          "diff_hunk:src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs:207",
+          "diff_hunk:src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs:236",
+          "diff_hunk:src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs:45",
+          "diff_hunk:src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs:77",
+          "diff_hunk:src/Logging.AzureAppServices/src/AzureBlobLoggerContext.cs:24"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 14484,
+        "token_count_in": 3596,
+        "token_count_out": 15,
+        "trace_id": "c6c3d404b2ea4abfad173741754431d5",
+        "span_id": "3069937e066945e2",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "shard_count": 4,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    },
+    "699e9952b32ce6a39fa686f88b4449b3d3c7ab6a2819ae358fa46c9a031502fa": {
+      "status": "completed",
+      "shard_id": "shard-002",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/Logging.AzureAppServices/src/AzureBlobLoggerOptions.cs:7",
+        "diff_hunk:src/Logging.AzureAppServices/src/AzureFileLoggerOptions.cs:7",
+        "diff_hunk:src/Logging.AzureAppServices/src/BatchingLoggerOptions.cs:6",
+        "diff_hunk:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:11",
+        "diff_hunk:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:124",
+        "diff_hunk:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:59"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "diff:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:127",
+            "diff:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:131",
+            "diff:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:14",
+            "diff:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:62"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The security_sensitive risk signal has moderate confidence (0.74) but the primary diff_hunk evidence only shows documentation/comment changes. Need to inspect the omitted diff evidence to determine if there is a real security concern.",
+          "source_shard_id": "shard-002",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:src/Logging.AzureAppServices/src/AzureBlobLoggerOptions.cs:7",
+          "diff_hunk:src/Logging.AzureAppServices/src/AzureFileLoggerOptions.cs:7",
+          "diff_hunk:src/Logging.AzureAppServices/src/BatchingLoggerOptions.cs:6",
+          "diff_hunk:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:11",
+          "diff_hunk:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:124",
+          "diff_hunk:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:59"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 4713,
+        "token_count_in": 4908,
+        "token_count_out": 172,
+        "trace_id": "0fe594b6354246cc97f79d86a3dba2b3",
+        "span_id": "3abf60b62d3747c6",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "shard_count": 4,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "10a1d4fe75b90bba5878da736a4061bf72c74e8225208790c3dac4ab53abcd41": {
+      "status": "completed",
+      "shard_id": "shard-002-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-002",
+      "selected_evidence_ids": [
+        "diff:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:127",
+        "diff:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:131",
+        "diff:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:14",
+        "diff:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:62",
+        "diff_hunk:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:11",
+        "diff_hunk:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:124",
+        "diff_hunk:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:59"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:127",
+          "diff:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:131",
+          "diff:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:14",
+          "diff:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:62",
+          "diff_hunk:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:11",
+          "diff_hunk:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:124",
+          "diff_hunk:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:59"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 370,
+        "token_count_in": 2387,
+        "token_count_out": 15,
+        "trace_id": "74a57a59c9a84fe7bc452e343aa329dc",
+        "span_id": "831b05d299d84a23",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002-refill",
+        "shard_index": 1,
+        "shard_count": 4,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    },
+    "44a9ef20e6f5ad96d22d494dd40dd8b71f8af40fe74f10d81c5a4ec2f835642c": {
+      "status": "completed",
+      "shard_id": "shard-003",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/Logging.AzureAppServices/src/FileLoggerProvider.cs:12",
+        "diff_hunk:src/Validation/src/IValidatableInfoResolver.cs:18",
+        "diff_hunk:src/Validation/src/SkipValidationAttribute.cs:6",
+        "diff_hunk:src/Validation/src/ValidateContext.cs:23"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "src/Validation/src/ValidateContext.cs",
+          "evidence_ids": [
+            "diff_hunk:src/Validation/src/ValidateContext.cs:37",
+            "diff_hunk:src/Validation/src/ValidateContext.cs:51"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The primary evidence for ValidateContext.cs only shows a documentation change. The omitted hunks may contain behavioral changes that introduce risks.",
+          "source_shard_id": "shard-003",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:src/Logging.AzureAppServices/src/FileLoggerProvider.cs:12",
+          "diff_hunk:src/Validation/src/IValidatableInfoResolver.cs:18",
+          "diff_hunk:src/Validation/src/SkipValidationAttribute.cs:6",
+          "diff_hunk:src/Validation/src/ValidateContext.cs:23"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 1153,
+        "token_count_in": 3766,
+        "token_count_out": 119,
+        "trace_id": "06504f7378ad49d3af5f097e10371b54",
+        "span_id": "6561eb55d8fa4ea8",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-003",
+        "shard_index": 2,
+        "shard_count": 4,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "0be7dc81a8c37ef195b5409c84b4bb1dafe5e5330ae93fc994921cf4c74804ac": {
+      "status": "completed",
+      "shard_id": "shard-003-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-003",
+      "selected_evidence_ids": [
+        "diff_hunk:src/Validation/src/ValidateContext.cs:37",
+        "diff_hunk:src/Validation/src/ValidateContext.cs:51"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:src/Validation/src/ValidateContext.cs:37",
+          "diff_hunk:src/Validation/src/ValidateContext.cs:51"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 29313,
+        "token_count_in": 1469,
+        "token_count_out": 15,
+        "trace_id": "010bd1fb677648b28db3c3fce7de5b00",
+        "span_id": "ee6816c30ca74cee",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-003-refill",
+        "shard_index": 2,
+        "shard_count": 4,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    },
+    "4e20e831942d37d5a8026df3076ac278b7dfa3dd5718ac70f20500bcae3c166e": {
+      "status": "completed",
+      "shard_id": "shard-004",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/Validation/src/ValidationOptions.cs:7"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": null,
+          "evidence_ids": [
+            "diff_hunk:src/Validation/src/ValidationOptions.cs:24",
+            "diff_hunk:src/Validation/src/ValidationOptions.cs:38",
+            "diff_hunk:src/Validation/src/ValidationOptions.cs:52",
+            "diff_hunk:src/Validation/src/ValidationOptions.cs:60"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The primary evidence only shows a minor documentation change. To assess whether the patch introduces any functional risk, the remaining diff hunks are needed.",
+          "source_shard_id": "shard-004",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:src/Validation/src/ValidationOptions.cs:7"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 3057,
+        "token_count_in": 1737,
+        "token_count_out": 125,
+        "trace_id": "12088c3b926f4789858b797ab3c21c7b",
+        "span_id": "38b63bc1af754e31",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-004",
+        "shard_index": 3,
+        "shard_count": 4,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "1eec260a93b8412b681608e85c46e8370b106edef57e04bc6ee1e037a28d2b71": {
+      "status": "completed",
+      "shard_id": "shard-004-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-004",
+      "selected_evidence_ids": [
+        "diff_hunk:src/Validation/src/ValidationOptions.cs:24",
+        "diff_hunk:src/Validation/src/ValidationOptions.cs:38",
+        "diff_hunk:src/Validation/src/ValidationOptions.cs:52",
+        "diff_hunk:src/Validation/src/ValidationOptions.cs:60"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "src/Validation/src/ValidationOptions.cs",
+          "line": 42,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "In TryGetValidatableTypeInfo, the out parameter validatableTypeInfo is now assigned null before the loop, but the loop may assign a non-null value via resolver.TryGetValidatableTypeInfo. If the loop completes without finding a match, the out parameter will be null (as before). However, the assignment at line 42 is redundant and could mask a bug if a resolver incorrectly returns true without setting the out parameter, because the out parameter would already be null from the initial assignment, making the [NotNullWhen(true)] contract unreliable.",
+          "suggestion": "Remove the redundant 'validatableTypeInfo = null;' assignment at line 42, as the out parameter is already assigned by the resolver or defaults to null at the end of the method. Alternatively, ensure that each resolver correctly sets the out parameter when returning true.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Validation/src/ValidationOptions.cs:38",
+            "diff_hunk:src/Validation/src/ValidationOptions.cs:52"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:src/Validation/src/ValidationOptions.cs:24",
+          "diff_hunk:src/Validation/src/ValidationOptions.cs:38",
+          "diff_hunk:src/Validation/src/ValidationOptions.cs:52",
+          "diff_hunk:src/Validation/src/ValidationOptions.cs:60"
+        ],
+        "output_issue_ids": [
+          "correctness:src/Validation/src/ValidationOptions.cs:42"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 36758,
+        "token_count_in": 2057,
+        "token_count_out": 278,
+        "trace_id": "baab0f2b786144698dd779fa096c9beb",
+        "span_id": "8bbdabc40bd44f2f",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-004-refill",
+        "shard_index": 3,
+        "shard_count": 4,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    }
+  }
+}

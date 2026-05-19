@@ -1,0 +1,251 @@
+{
+  "schema_version": "1.0",
+  "run_id": "53aa08a8ebbd43ae9ec123ae06188766",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": false,
+  "package_hash": "sha256:ffedb18418731566529ff5d5388e3a21a998f341062356126e05770e24025064",
+  "diff_hash": "sha256:b5be31dc4f40d06ffd6b677d566f90643e669389feb99f09c72ebe1d7e7495e2",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 4,
+      "verified_count": 2,
+      "needs_human_review_count": 0,
+      "discarded_count": 2,
+      "keep_count": 0,
+      "uncertain_count": 2,
+      "reject_count": 0,
+      "feedback_sent": [
+        {
+          "issue_id": "maintainability:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:107",
+          "category": "maintainability",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:104"
+          ]
+        },
+        {
+          "issue_id": "maintainability:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:92",
+          "category": "maintainability",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:89"
+          ]
+        }
+      ],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:eng/Version.Details.xml:388",
+            "diff_hunk:eng/Versions.props:166",
+            "diff_hunk:eng/common/core-templates/job/source-build.yml:65",
+            "diff_hunk:eng/common/core-templates/job/source-index-stage1.yml:6"
+          ],
+          "output_issue_ids": [
+            "correctness:eng/common/core-templates/job/source-index-stage1.yml:9"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 1,
+          "retry_log": [
+            "attempt=1 error=timeout delay=1.00s"
+          ],
+          "latency_ms": 97767,
+          "token_count_in": 6788,
+          "token_count_out": 210,
+          "trace_id": "1f581c47d09d48c5b947bbe21cda1f5b",
+          "span_id": "874f834f391148dd",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 3,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:eng/common/core-templates/steps/source-build.yml:41",
+            "diff_hunk:eng/common/internal-feed-operations.ps1:26",
+            "diff_hunk:eng/common/post-build/nuget-verification.ps1:65",
+            "diff_hunk:eng/common/tools.ps1:266"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 6987,
+          "token_count_in": 5680,
+          "token_count_out": 12,
+          "trace_id": "a2705dfeb2bf44d79b7a647c141679a2",
+          "span_id": "77ebdc3fae7142db",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-002",
+          "shard_index": 1,
+          "shard_count": 3,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:global.json:27",
+            "diff_hunk:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:104",
+            "diff_hunk:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:89"
+          ],
+          "output_issue_ids": [
+            "maintainability:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:107",
+            "maintainability:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:114",
+            "maintainability:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:92"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 58679,
+          "token_count_in": 5391,
+          "token_count_out": 555,
+          "trace_id": "f287963183da4713aca6d437fb8cc536",
+          "span_id": "738464734da04964",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-003",
+          "shard_index": 2,
+          "shard_count": 3,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:104",
+            "diff_hunk:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:89"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [
+        "maintainability:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:107",
+        "maintainability:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:92"
+      ],
+      "keep": [],
+      "needs_human_review": [
+        {
+          "file": "src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs",
+          "line": 107,
+          "severity": "medium",
+          "category": "maintainability",
+          "message": "Test method EmbeddingServerAppInsideIframe_WithCompressionEnabled_Fails lacks explicit // Arrange, // Act, and // Assert comments as required by the 'Test Methods Must Use Arrange-Act-Assert Pattern with Comments' guideline.",
+          "suggestion": "Add // Arrange, // Act, and // Assert comments to clearly delineate the three phases of the test.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:104"
+          ]
+        },
+        {
+          "file": "src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs",
+          "line": 92,
+          "severity": "medium",
+          "category": "maintainability",
+          "message": "Test method CanSendAndReceiveUserMessagesFromMultipleConnectionsWithSameUser lacks explicit // Arrange, // Act, and // Assert comments as required by the 'Test Methods Must Use Arrange-Act-Assert Pattern with Comments' guideline.",
+          "suggestion": "Add // Arrange, // Act, and // Assert comments to clearly delineate the three phases of the test.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:89"
+          ]
+        }
+      ],
+      "discarded": [
+        {
+          "file": "eng/common/core-templates/job/source-index-stage1.yml",
+          "line": 9,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "The condition parameter was changed from an empty string to a branch filter that restricts source indexing to only the main branch. This may cause source indexing to be skipped for release branches or other non-main branches that previously had it enabled.",
+          "suggestion": "If source indexing is needed for release branches, update the condition to include them, e.g., eq(variables['Build.SourceBranch'], 'refs/heads/main') or startsWith(variables['Build.SourceBranch'], 'refs/heads/release/').",
+          "confidence": 0.75,
+          "evidence_ids": [
+            "diff_hunk:eng/common/core-templates/job/source-index-stage1.yml:6"
+          ],
+          "filter_reason": "low_signal_suggestion"
+        },
+        {
+          "file": "src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs",
+          "line": 114,
+          "severity": "medium",
+          "category": "maintainability",
+          "message": "The new partial property ParseErrorMessageRegexOld and ParseErrorMessageRegexNew are not named with the 'Test' or 'Tests' suffix, but the containing class is a test class. The guideline 'Test Classes Must Follow Naming Convention' applies to class names, not members; no violation. However, the new generated regex properties are not used in a test method that follows the AAA pattern with comments.",
+          "suggestion": "Ensure that any test method using these new regex properties includes the required AAA comments.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:104"
+          ],
+          "filter_reason": "style_preference"
+        }
+      ]
+    }
+  ],
+  "last_feedback": {
+    "iteration": 0,
+    "uncertain_items": [
+      {
+        "issue_id": "maintainability:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:107",
+        "category": "maintainability",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:104"
+        ]
+      },
+      {
+        "issue_id": "maintainability:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:92",
+        "category": "maintainability",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:89"
+        ]
+      }
+    ]
+  }
+}

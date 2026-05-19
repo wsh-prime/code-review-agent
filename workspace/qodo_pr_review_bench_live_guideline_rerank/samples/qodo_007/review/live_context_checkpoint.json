@@ -1,0 +1,77 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:a564d297ac48c6978e771e0ed9df711a61528eed9e26d17c73b6f680d760804a",
+  "diff_hash": "sha256:c547fa4c29e15ff96389a4eecdf0ae71146851fdb7bd6f7bd0887b7b7f12472b",
+  "shards": {
+    "7040e6d7037cd913622d7994817feca03fe827149b23dae476f65eec37029e56": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/i18n/locales/zh/comments.json:1",
+        "diff_hunk:ghost/i18n/locales/zh/ghost.json:3",
+        "diff_hunk:ghost/i18n/locales/zh/portal.json:6"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "ghost/i18n/locales/zh/comments.json",
+          "line": 1,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Deleting the entire Chinese comments.json translation file removes all comment-related UI translations for zh locale, causing fallback to English or missing strings.",
+          "suggestion": "Ensure the deletion is intentional and that a replacement or fallback mechanism exists for the zh locale comment translations.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:ghost/i18n/locales/zh/comments.json:1"
+          ]
+        },
+        {
+          "file": "ghost/i18n/locales/zh/portal.json",
+          "line": 9,
+          "severity": "low",
+          "category": "correctness",
+          "message": "Translation string for '{memberEmail} will no longer receive {newsletterName} newsletter.' was changed to remove the newsletter name placeholder, losing dynamic content.",
+          "suggestion": "Verify that the removal of the {newsletterName} placeholder is intentional and that the UI does not require the newsletter name in this message.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:ghost/i18n/locales/zh/portal.json:6"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/i18n/locales/zh/comments.json:1",
+          "diff_hunk:ghost/i18n/locales/zh/ghost.json:3",
+          "diff_hunk:ghost/i18n/locales/zh/portal.json:6"
+        ],
+        "output_issue_ids": [
+          "correctness:ghost/i18n/locales/zh/comments.json:1",
+          "correctness:ghost/i18n/locales/zh/portal.json:9"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 5693,
+        "token_count_in": 6042,
+        "token_count_out": 306,
+        "trace_id": "065bd9f0a124416883a7c46597497907",
+        "span_id": "3ce7c3733d2f4949",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

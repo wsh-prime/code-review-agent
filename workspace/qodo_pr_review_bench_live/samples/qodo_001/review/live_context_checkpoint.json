@@ -1,0 +1,77 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:87f158f8641cf28f020399c98fc182cb7b70518ec36e382010fbf5738715574c",
+  "diff_hash": "sha256:e5b82b74cf451ae97a02bedefdc4fd9f909b6eda24e2101d391cce3587759445",
+  "shards": {
+    "7c2e8d28cbd92822cab2fdd9445266c4978f3c20aa588d43e1d4f24a3186bce2": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:241",
+        "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:27",
+        "diff_hunk:apps/comments-ui/test/e2e/actions.test.ts:611"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "apps/comments-ui/src/components/content/forms/form.tsx",
+          "line": 244,
+          "severity": "high",
+          "category": "bug_risk",
+          "message": "Removing the fallback to `comment?.member?.name` means that when `member` is null or has no name, `memberName` will be undefined instead of falling back to the parent comment author's name. This could cause the form to display no name or break UI logic that expects a string.",
+          "suggestion": "If the intent is to never inherit the parent's name, ensure the UI handles an undefined `memberName` gracefully (e.g., show a placeholder like 'Anonymous'). If the fallback is still needed for some cases, consider a conditional fallback based on context.",
+          "confidence": 0.85,
+          "evidence_ids": [
+            "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:241"
+          ]
+        },
+        {
+          "file": "apps/comments-ui/src/components/content/forms/reply-form.tsx",
+          "line": 30,
+          "severity": "medium",
+          "category": "bug_risk",
+          "message": "Changing `in_reply_to_id` from `openForm.in_reply_to_id` to `parent.id` may alter the reply threading logic. If `openForm.in_reply_to_id` could differ from `parent.id` (e.g., when replying to a nested reply), this change could break the intended reply chain.",
+          "suggestion": "Verify that `parent.id` is always the correct target for the reply. If the form can be opened for a nested reply, `openForm.in_reply_to_id` might be more accurate.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:27"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:241",
+          "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:27",
+          "diff_hunk:apps/comments-ui/test/e2e/actions.test.ts:611"
+        ],
+        "output_issue_ids": [
+          "bug_risk:apps/comments-ui/src/components/content/forms/form.tsx:244",
+          "bug_risk:apps/comments-ui/src/components/content/forms/reply-form.tsx:30"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 53512,
+        "token_count_in": 4331,
+        "token_count_out": 428,
+        "trace_id": "b01843dc6c574b74ae3d5466f48f4234",
+        "span_id": "fcc589c5e3924152",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

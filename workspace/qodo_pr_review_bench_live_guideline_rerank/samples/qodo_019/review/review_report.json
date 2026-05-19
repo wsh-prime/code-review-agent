@@ -1,0 +1,2304 @@
+{
+  "schema_version": "1.3",
+  "summary": {
+    "mode": "hybrid-live",
+    "changed_file_count": 6,
+    "changed_entity_count": 6,
+    "risk_signal_count": 0,
+    "finding_count": 0,
+    "needs_human_review_count": 1,
+    "discarded_count": 3,
+    "evidence_count": 103,
+    "missing_evidence_id_count": 0,
+    "agent_run_count": 4,
+    "prompt_exported": false,
+    "loop_enabled": true,
+    "loop_iterations_completed": 1,
+    "loop_converged": false,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "total_latency_ms": 130365,
+    "total_token_count_in": 14326,
+    "total_token_count_out": 972,
+    "context_budget_enabled": true,
+    "context_truncated": true,
+    "selected_evidence_count": 8,
+    "omitted_evidence_count": 95,
+    "review_shard_count": 2,
+    "context_refill_count": 1,
+    "context_request_count": 2,
+    "target_repo_modified": false
+  },
+  "findings": [],
+  "needs_human_review": [
+    {
+      "file": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs",
+      "line": 1,
+      "severity": "high",
+      "category": "correctness",
+      "message": "Test class 'StatePersistanceJSRootTest' is deleted but its test logic is moved to 'StatePersistenceTest' without verifying that the new test method covers the same scenarios. The deleted test used a server fixture with '--RegisterDynamicJSRootComponent' argument, which is not present in the new test.",
+      "suggestion": "Ensure the new test method 'PersistentStateIsSupportedInDynamicJSRoots' in 'StatePersistenceTest.cs' includes the necessary server fixture configuration (e.g., '--RegisterDynamicJSRootComponent') to replicate the original test's setup.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+        "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276"
+      ]
+    }
+  ],
+  "discarded": [
+    {
+      "file": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts",
+      "line": 13,
+      "severity": "medium",
+      "category": "correctness",
+      "message": "New module-level variable 'currentRendererId' is introduced but not used in the provided diff hunk. It may be unused or require additional initialization logic.",
+      "suggestion": "Verify that 'currentRendererId' is used elsewhere in the file or remove it if unnecessary.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:10"
+      ],
+      "filter_reason": "low_signal_suggestion"
+    },
+    {
+      "file": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts",
+      "line": 118,
+      "severity": "medium",
+      "category": "correctness",
+      "message": "Missing curly braces around for-loop body may cause maintenance errors.",
+      "suggestion": "Add curly braces around the inner for-loop body to prevent future bugs when adding statements.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118"
+      ],
+      "filter_reason": "low_signal_suggestion"
+    },
+    {
+      "file": "src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs",
+      "line": 57,
+      "severity": "medium",
+      "category": "correctness",
+      "message": "Removing the conditional guard around RootComponents.RegisterForJavaScript changes behavior: the component is now always registered, even when the 'RegisterDynamicJSRootComponent' configuration flag is false. This may cause unintended registration in test scenarios that rely on the flag to control behavior.",
+      "suggestion": "Restore the conditional check or ensure the test scenarios that depend on the flag are updated to expect the unconditional registration.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51",
+        "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24"
+      ],
+      "filter_reason": "low_signal_suggestion"
+    }
+  ],
+  "changed_files": [
+    {
+      "old_path": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts",
+      "new_path": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 10,
+          "old_count": 7,
+          "new_start": 10,
+          "new_count": 9,
+          "section_header": "let nextPendingDynamicRootComponentIdentifier = 0;",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 10,
+              "new_lineno": 10,
+              "content": "type ComponentParameters = object | null | undefined;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 11,
+              "new_lineno": 11,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 12,
+              "new_lineno": 12,
+              "content": "let manager: DotNet.DotNetObject | undefined;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 13,
+              "content": "let currentRendererId: number | undefined;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 13,
+              "new_lineno": 14,
+              "content": "let jsComponentParametersByIdentifier: JSComponentParametersByIdentifier;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 15,
+              "content": "let hasInitializedJsComponents = false;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 14,
+              "new_lineno": 16,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 15,
+              "new_lineno": 17,
+              "content": "// These are the public APIs at Blazor.rootComponents.*"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 16,
+              "new_lineno": 18,
+              "content": "export const RootComponentsFunctions = {"
+            }
+          ]
+        },
+        {
+          "old_start": 116,
+          "old_count": 28,
+          "new_start": 118,
+          "new_count": 35,
+          "section_header": "class DynamicRootComponent {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 116,
+              "new_lineno": 118,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 117,
+              "new_lineno": 119,
+              "content": "// Called by the framework"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 118,
+              "new_lineno": 120,
+              "content": "export function enableJSRootComponents("
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 121,
+              "content": "  rendererId: number,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 119,
+              "new_lineno": 122,
+              "content": "  managerInstance: DotNet.DotNetObject,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 120,
+              "new_lineno": 123,
+              "content": "  jsComponentParameters: JSComponentParametersByIdentifier,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 121,
+              "new_lineno": 124,
+              "content": "  jsComponentInitializers: JSComponentIdentifiersByInitializer"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 122,
+              "new_lineno": 125,
+              "content": "): void {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 123,
+              "new_lineno": null,
+              "content": "  if (manager) {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 124,
+              "new_lineno": null,
+              "content": "    // This will only happen in very nonstandard cases where someone has multiple hosts."
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 125,
+              "new_lineno": null,
+              "content": "    // It's up to the developer to ensure that only one of them enables dynamic root components."
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 126,
+              "content": "  if (manager && currentRendererId === rendererId) {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 127,
+              "content": "    // A different renderer type (e.g., Server vs WebAssembly) is trying to enable JS root components."
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 128,
+              "content": "    // This is a multi-host scenario which is not supported for dynamic root components."
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 126,
+              "new_lineno": 129,
+              "content": "    throw new Error('Dynamic root components have already been enabled.');"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 127,
+              "new_lineno": 130,
+              "content": "  }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 128,
+              "new_lineno": 131,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 132,
+              "content": "  // When the same renderer type re-enables (e.g., circuit restart or new circuit on same page),"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 133,
+              "content": "  // accept the new manager. The old manager's DotNetObjectReference is no longer valid anyway"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 134,
+              "content": "  // because the old circuit is gone. We don't dispose the old manager - doing so would cause"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 135,
+              "content": "  // JSDisconnectedException because the circuit that created it no longer exists."
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 136,
+              "content": "  currentRendererId = rendererId;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 129,
+              "new_lineno": 137,
+              "content": "  manager = managerInstance;"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 130,
+              "new_lineno": null,
+              "content": "  jsComponentParametersByIdentifier = jsComponentParameters;"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 131,
+              "new_lineno": null,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 132,
+              "new_lineno": null,
+              "content": "  // Call the registered initializers. This is an arbitrary subset of the JS component types that are registered"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 133,
+              "new_lineno": null,
+              "content": "  // on the .NET side - just those of them that require some JS-side initialization (e.g., to register them"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 134,
+              "new_lineno": null,
+              "content": "  // as custom elements)."
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 135,
+              "new_lineno": null,
+              "content": "  for (const [initializerIdentifier, componentIdentifiers] of Object.entries(jsComponentInitializers)) {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 136,
+              "new_lineno": null,
+              "content": "    const initializerFunc = DotNet.findJSFunction(initializerIdentifier, 0) as JSComponentInitializerCallback;"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 137,
+              "new_lineno": null,
+              "content": "    for (const componentIdentifier of componentIdentifiers) {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 138,
+              "new_lineno": null,
+              "content": "      const parameters = jsComponentParameters[componentIdentifier];"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 139,
+              "new_lineno": null,
+              "content": "      initializerFunc(componentIdentifier, parameters);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 138,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 139,
+              "content": "  if (!hasInitializedJsComponents) {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 140,
+              "content": "    // Call the registered initializers. This is an arbitrary subset of the JS component types that are registered"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 141,
+              "content": "    // on the .NET side - just those of them that require some JS-side initialization (e.g., to register them"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 142,
+              "content": "    // as custom elements)."
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 143,
+              "content": "    for (const [initializerIdentifier, componentIdentifiers] of Object.entries(jsComponentInitializers)) {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 144,
+              "content": "      const initializerFunc = DotNet.findJSFunction(initializerIdentifier, 0) as JSComponentInitializerCallback;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 145,
+              "content": "      for (const componentIdentifier of componentIdentifiers)"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 146,
+              "content": "        initializerFunc(componentIdentifier, jsComponentParameters[componentIdentifier]);"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 140,
+              "new_lineno": 147,
+              "content": "    }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 148,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 149,
+              "content": "    hasInitializedJsComponents = true;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 141,
+              "new_lineno": 150,
+              "content": "  }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 142,
+              "new_lineno": 151,
+              "content": "}"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 143,
+              "new_lineno": 152,
+              "content": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts",
+      "new_path": "src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 31,
+          "old_count": 7,
+          "new_start": 31,
+          "new_count": 7,
+          "section_header": "export function attachWebRendererInterop(",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 31,
+              "new_lineno": 31,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 32,
+              "new_lineno": 32,
+              "content": "  if (jsComponentParameters && jsComponentInitializers && Object.keys(jsComponentParameters).length > 0) {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 33,
+              "new_lineno": 33,
+              "content": "    const manager = getInteropMethods(rendererId);"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 34,
+              "new_lineno": null,
+              "content": "    enableJSRootComponents(manager, jsComponentParameters, jsComponentInitializers);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 34,
+              "content": "    enableJSRootComponents(rendererId, manager, jsComponentParameters, jsComponentInitializers);"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 35,
+              "new_lineno": 35,
+              "content": "  }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 36,
+              "new_lineno": 36,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 37,
+              "new_lineno": 37,
+              "content": "  rendererByIdResolverMap.get(rendererId)?.[0]?.();"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs",
+      "new_path": null,
+      "change_type": "deleted",
+      "hunks": [
+        {
+          "old_start": 1,
+          "old_count": 42,
+          "new_start": 0,
+          "new_count": 0,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "removed",
+              "old_lineno": 1,
+              "new_lineno": null,
+              "content": "// Licensed to the .NET Foundation under one or more agreements."
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 2,
+              "new_lineno": null,
+              "content": "// The .NET Foundation licenses this file to you under the MIT license."
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 3,
+              "new_lineno": null,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 4,
+              "new_lineno": null,
+              "content": "using Components.TestServer.RazorComponents;"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 5,
+              "new_lineno": null,
+              "content": "using Microsoft.AspNetCore.Components.E2ETest.Infrastructure;"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 6,
+              "new_lineno": null,
+              "content": "using Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures;"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 7,
+              "new_lineno": null,
+              "content": "using Microsoft.AspNetCore.Components.E2ETests.ServerRenderingTests;"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 8,
+              "new_lineno": null,
+              "content": "using Microsoft.AspNetCore.Components.Web;"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 9,
+              "new_lineno": null,
+              "content": "using Microsoft.AspNetCore.E2ETesting;"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 10,
+              "new_lineno": null,
+              "content": "using OpenQA.Selenium;"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 11,
+              "new_lineno": null,
+              "content": "using TestServer;"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 12,
+              "new_lineno": null,
+              "content": "using Xunit.Abstractions;"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 13,
+              "new_lineno": null,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 14,
+              "new_lineno": null,
+              "content": "namespace Microsoft.AspNetCore.Components.E2ETests.Tests;"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 15,
+              "new_lineno": null,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 16,
+              "new_lineno": null,
+              "content": "// These tests are for Blazor Web implementation"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 17,
+              "new_lineno": null,
+              "content": "// For Blazor Server and Webassembly, check SaveStateTest.cs"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 18,
+              "new_lineno": null,
+              "content": "public class StatePersistanceJSRootTest : ServerTestBase<BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>>>"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 19,
+              "new_lineno": null,
+              "content": "{"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 20,
+              "new_lineno": null,
+              "content": "    public StatePersistanceJSRootTest("
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 21,
+              "new_lineno": null,
+              "content": "        BrowserFixture browserFixture,"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 22,
+              "new_lineno": null,
+              "content": "        BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>> serverFixture,"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 23,
+              "new_lineno": null,
+              "content": "        ITestOutputHelper output)"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 24,
+              "new_lineno": null,
+              "content": "        : base(browserFixture, serverFixture, output)"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 25,
+              "new_lineno": null,
+              "content": "    {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 26,
+              "new_lineno": null,
+              "content": "        serverFixture.AdditionalArguments.AddRange(\"--RegisterDynamicJSRootComponent\", \"true\");"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 27,
+              "new_lineno": null,
+              "content": "    }"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 28,
+              "new_lineno": null,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 29,
+              "new_lineno": null,
+              "content": "    [Theory]"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 30,
+              "new_lineno": null,
+              "content": "    [InlineData(\"ServerNonPrerendered\")]"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 31,
+              "new_lineno": null,
+              "content": "    [InlineData(\"WebAssemblyNonPrerendered\")]"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 32,
+              "new_lineno": null,
+              "content": "    public void PersistentStateIsSupportedInDynamicJSRoots(string renderMode)"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 33,
+              "new_lineno": null,
+              "content": "    {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 34,
+              "new_lineno": null,
+              "content": "        Navigate($\"subdir/WasmMinimal/dynamic-js-root.html?renderMode={renderMode}\");"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 35,
+              "new_lineno": null,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 36,
+              "new_lineno": null,
+              "content": "        Browser.Equal(\"Counter\", () => Browser.Exists(By.TagName(\"h1\")).Text);"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 37,
+              "new_lineno": null,
+              "content": "        Browser.Equal(\"Current count: 0\", () => Browser.Exists(By.CssSelector(\"p[role='status']\")).Text);"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 38,
+              "new_lineno": null,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 39,
+              "new_lineno": null,
+              "content": "        Browser.Click(By.CssSelector(\"button.btn-primary\"));"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 40,
+              "new_lineno": null,
+              "content": "        Browser.Equal(\"Current count: 1\", () => Browser.Exists(By.CssSelector(\"p[role='status']\")).Text);"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 41,
+              "new_lineno": null,
+              "content": "    }"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 42,
+              "new_lineno": null,
+              "content": "}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "src/Components/test/E2ETest/Tests/StatePersistenceTest.cs",
+      "new_path": "src/Components/test/E2ETest/Tests/StatePersistenceTest.cs",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 276,
+          "old_count": 6,
+          "new_start": 276,
+          "new_count": 20,
+          "section_header": "public async Task StateIsProvidedEveryTimeACircuitGetsCreated(string streaming)",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 276,
+              "new_lineno": 276,
+              "content": "        RenderComponentsWithPersistentStateAndValidate(suppressEnhancedNavigation: false, mode, typeof(InteractiveServerRenderMode), streaming, stateValue: \"other\");"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 277,
+              "new_lineno": 277,
+              "content": "    }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 278,
+              "new_lineno": 278,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 279,
+              "content": "    [Theory]"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 280,
+              "content": "    [InlineData(\"ServerNonPrerendered\")]"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 281,
+              "content": "    [InlineData(\"WebAssemblyNonPrerendered\")]"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 282,
+              "content": "    public void PersistentStateIsSupportedInDynamicJSRoots(string renderMode)"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 283,
+              "content": "    {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 284,
+              "content": "        Navigate($\"subdir/WasmMinimal/dynamic-js-root.html?renderMode={renderMode}\");"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 285,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 286,
+              "content": "        Browser.Equal(\"Counter\", () => Browser.Exists(By.TagName(\"h1\")).Text);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 287,
+              "content": "        Browser.Equal(\"Current count: 0\", () => Browser.Exists(By.CssSelector(\"p[role='status']\")).Text);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 288,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 289,
+              "content": "        Browser.Click(By.CssSelector(\"button.btn-primary\"));"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 290,
+              "content": "        Browser.Equal(\"Current count: 1\", () => Browser.Exists(By.CssSelector(\"p[role='status']\")).Text);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 291,
+              "content": "    }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 292,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 279,
+              "new_lineno": 293,
+              "content": "    private void BlockWebAssemblyResourceLoad()"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 280,
+              "new_lineno": 294,
+              "content": "    {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 281,
+              "new_lineno": 295,
+              "content": "        // Clear local storage so that the resource hash is not found"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "src/Components/test/testassets/Components.TestServer/Program.cs",
+      "new_path": "src/Components/test/testassets/Components.TestServer/Program.cs",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 24,
+          "old_count": 7,
+          "new_start": 24,
+          "new_count": 6,
+          "section_header": "public static async Task Main(string[] args)",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 24,
+              "new_lineno": 24,
+              "content": "            [\"CORS (WASM)\"] = (BuildWebHost<CorsStartup>(CreateAdditionalArgs(args)), \"/subdir\"),"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 25,
+              "new_lineno": 25,
+              "content": "            [\"Prerendering (Server-side)\"] = (BuildWebHost<PrerenderedStartup>(CreateAdditionalArgs(args)), \"/prerendered\"),"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 26,
+              "new_lineno": 26,
+              "content": "            [\"Razor Component Endpoints\"] = (BuildWebHost<RazorComponentEndpointsStartup<App>>(CreateAdditionalArgs(args)), \"/subdir\"),"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 27,
+              "new_lineno": null,
+              "content": "            [\"Razor Component Endpoints with JS Root Component\"] = (BuildWebHost<RazorComponentEndpointsStartup<App>>(CreateAdditionalArgs([.. args, \"--RegisterDynamicJSRootComponent\", \"true\"])), \"/subdir\"),"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 28,
+              "new_lineno": 27,
+              "content": "            [\"Deferred component content (Server-side)\"] = (BuildWebHost<DeferredComponentContentStartup>(CreateAdditionalArgs(args)), \"/deferred-component-content\"),"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 29,
+              "new_lineno": 28,
+              "content": "            [\"Locked navigation (Server-side)\"] = (BuildWebHost<LockedNavigationStartup>(CreateAdditionalArgs(args)), \"/locked-navigation\"),"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 30,
+              "new_lineno": 29,
+              "content": "            [\"Client-side with fallback\"] = (BuildWebHost<StartupWithMapFallbackToClientSideBlazor>(CreateAdditionalArgs(args)), \"/fallback\"),"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs",
+      "new_path": "src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 51,
+          "old_count": 10,
+          "new_start": 51,
+          "new_count": 7,
+          "section_header": "public void ConfigureServices(IServiceCollection services)",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 51,
+              "new_lineno": 51,
+              "content": "                    options.DisconnectedCircuitMaxRetained = 0;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 52,
+              "new_lineno": 52,
+              "content": "                    options.DetailedErrors = true;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 53,
+              "new_lineno": 53,
+              "content": "                }"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 54,
+              "new_lineno": null,
+              "content": "                if (Configuration.GetValue<bool>(\"RegisterDynamicJSRootComponent\"))"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 55,
+              "new_lineno": null,
+              "content": "                {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 56,
+              "new_lineno": null,
+              "content": "                    options.RootComponents.RegisterForJavaScript<TestContentPackage.PersistentComponents.ComponentWithPersistentState>(\"dynamic-js-root-counter\");"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 57,
+              "new_lineno": null,
+              "content": "                }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 54,
+              "content": "                options.RootComponents.RegisterForJavaScript<TestContentPackage.PersistentComponents.ComponentWithPersistentState>(\"dynamic-js-root-counter\");"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 58,
+              "new_lineno": 55,
+              "content": "            })"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 59,
+              "new_lineno": 56,
+              "content": "            .AddAuthenticationStateSerialization(options =>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 60,
+              "new_lineno": 57,
+              "content": "            {"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "changed_entities": [
+    {
+      "path": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts",
+      "entity_type": "module",
+      "name": "JSRootComponents.ts",
+      "qualified_name": "src.Components.Web.JS.src.Rendering.JSRootComponents",
+      "line_start": 13,
+      "line_end": 15,
+      "hunk_ids": [
+        "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:10",
+        "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118"
+      ]
+    },
+    {
+      "path": "src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts",
+      "entity_type": "module",
+      "name": "WebRendererInteropMethods.ts",
+      "qualified_name": "src.Components.Web.JS.src.Rendering.WebRendererInteropMethods",
+      "line_start": 34,
+      "line_end": 34,
+      "hunk_ids": [
+        "src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:31"
+      ]
+    },
+    {
+      "path": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs",
+      "entity_type": "module",
+      "name": "StatePersistanceJSRootTest.cs",
+      "qualified_name": "src.Components.test.E2ETest.Tests.StatePersistanceJSRootTest",
+      "line_start": 1,
+      "line_end": 42,
+      "hunk_ids": [
+        "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1"
+      ]
+    },
+    {
+      "path": "src/Components/test/E2ETest/Tests/StatePersistenceTest.cs",
+      "entity_type": "module",
+      "name": "StatePersistenceTest.cs",
+      "qualified_name": "src.Components.test.E2ETest.Tests.StatePersistenceTest",
+      "line_start": 279,
+      "line_end": 292,
+      "hunk_ids": [
+        "src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276"
+      ]
+    },
+    {
+      "path": "src/Components/test/testassets/Components.TestServer/Program.cs",
+      "entity_type": "module",
+      "name": "Program.cs",
+      "qualified_name": "src.Components.test.testassets.Components.TestServer.Program",
+      "line_start": 27,
+      "line_end": 27,
+      "hunk_ids": [
+        "src/Components/test/testassets/Components.TestServer/Program.cs:24"
+      ]
+    },
+    {
+      "path": "src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs",
+      "entity_type": "module",
+      "name": "RazorComponentEndpointsStartup.cs",
+      "qualified_name": "src.Components.test.testassets.Components.TestServer.RazorComponentEndpointsStartup",
+      "line_start": 54,
+      "line_end": 57,
+      "hunk_ids": [
+        "src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51"
+      ]
+    }
+  ],
+  "risk_signals": [],
+  "evidence_index": {
+    "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:10": {
+      "id": "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:10",
+      "kind": "diff_hunk",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:10",
+      "message": "@@ -10,7 +10,9 @@ let nextPendingDynamicRootComponentIdentifier = 0;\n type ComponentParameters = object | null | undefined;\n \n let manager: DotNet.DotNetObject | undefined;\n+let currentRendererId: number | undefined;\n let jsComponentParametersByIdentifier: JSComponentParametersByIdentifier;\n+let hasInitializedJsComponents = false;\n \n // These are the public APIs at Blazor.rootComponents.*\n export const RootComponentsFunctions = {"
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:13": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:13",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:13",
+      "message": "Added line: let currentRendererId: number | undefined;"
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:15": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:15",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:15",
+      "message": "Added line: let hasInitializedJsComponents = false;"
+    },
+    "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118": {
+      "id": "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118",
+      "kind": "diff_hunk",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118",
+      "message": "@@ -116,28 +118,35 @@ class DynamicRootComponent {\n \n // Called by the framework\n export function enableJSRootComponents(\n+  rendererId: number,\n   managerInstance: DotNet.DotNetObject,\n   jsComponentParameters: JSComponentParametersByIdentifier,\n   jsComponentInitializers: JSComponentIdentifiersByInitializer\n ): void {\n-  if (manager) {\n-    // This will only happen in very nonstandard cases where someone has multiple hosts.\n-    // It's up to the developer to ensure that only one of them enables dynamic root components.\n+  if (manager && currentRendererId === rendererId) {\n+    // A different renderer type (e.g., Server vs WebAssembly) is trying to enable JS root components.\n+    // This is a multi-host scenario which is not supported for dynamic root components.\n     throw new Error('Dynamic root components have already been enabled.');\n   }\n \n+  // When the same renderer type re-enables (e.g., circuit restart or new circuit on same page),\n+  // accept the new manager. The old manager's DotNetObjectReference is no longer valid anyway\n+  // because the old circuit is gone. We don't dispose the old manager - doing so would cause\n+  // JSDisconnectedException because the circuit that created it no longer exists.\n+  currentRendererId = rendererId;\n   manager = managerInstance;\n-  jsComponentParametersByIdentifier = jsComponentParameters;\n-\n-  // Call the registered initializers. This is an arbitrary subset of the JS component types that are registered\n-  // on the .NET side - just those of them that require some JS-side initialization (e.g., to register them\n-  // as custom elements).\n-  for (const [initializerIdentifier, componentIdentifiers] of Object.entries(jsComponentInitializers)) {\n-    const initializerFunc = DotNet.findJSFunction(initializerIdentifier, 0) as JSComponentInitializerCallback;\n-    for (const componentIdentifier of componentIdentifiers) {\n-      const parameters = jsComponentParameters[componentIdentifier];\n-      initializerFunc(componentIdentifier, parameters);\n+\n+  if (!hasInitializedJsComponents) {\n+    // Call the registered initializers. This is an arbitrary subset of the JS component types that are registered\n+    // on the .NET side - just those of them that require some JS-side initialization (e.g., to register them\n+    // as custom elements).\n+    for (const [initializerIdentifier, componentIdentifiers] of Object.entries(jsComponentInitializers)) {\n+      const initializerFunc = DotNet.findJSFunction(initializerIdentifier, 0) as JSComponentInitializerCallback;\n+      for (const componentIdentifier of componentIdentifiers)\n+        initializerFunc(componentIdentifier, jsComponentParameters[componentIdentifier]);\n     }\n+\n+    hasInitializedJsComponents = true;\n   }\n }\n "
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:121": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:121",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:121",
+      "message": "Added line: rendererId: number,"
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:123": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:123",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:123",
+      "message": "Removed line: if (manager) {"
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:124": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:124",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:124",
+      "message": "Removed line: // This will only happen in very nonstandard cases where someone has multiple hosts."
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:125": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:125",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:125",
+      "message": "Removed line: // It's up to the developer to ensure that only one of them enables dynamic root components."
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:126": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:126",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:126",
+      "message": "Added line: if (manager && currentRendererId === rendererId) {"
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:127": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:127",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:127",
+      "message": "Added line: // A different renderer type (e.g., Server vs WebAssembly) is trying to enable JS root components."
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:128": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:128",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:128",
+      "message": "Added line: // This is a multi-host scenario which is not supported for dynamic root components."
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:132": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:132",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:132",
+      "message": "Removed line: // Call the registered initializers. This is an arbitrary subset of the JS component types that are registered"
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:133": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:133",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:133",
+      "message": "Removed line: // on the .NET side - just those of them that require some JS-side initialization (e.g., to register them"
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:134": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:134",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:134",
+      "message": "Removed line: // as custom elements)."
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:135": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:135",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:135",
+      "message": "Removed line: for (const [initializerIdentifier, componentIdentifiers] of Object.entries(jsComponentInitializers)) {"
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:136": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:136",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:136",
+      "message": "Removed line: const initializerFunc = DotNet.findJSFunction(initializerIdentifier, 0) as JSComponentInitializerCallback;"
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:130": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:130",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:130",
+      "message": "Removed line: jsComponentParametersByIdentifier = jsComponentParameters;"
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:131": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:131",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:131",
+      "message": "Removed line: "
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:137": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:137",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:137",
+      "message": "Removed line: for (const componentIdentifier of componentIdentifiers) {"
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:138": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:138",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:138",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:139": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:139",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:139",
+      "message": "Added line: if (!hasInitializedJsComponents) {"
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:140": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:140",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:140",
+      "message": "Added line: // Call the registered initializers. This is an arbitrary subset of the JS component types that are registered"
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:141": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:141",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:141",
+      "message": "Added line: // on the .NET side - just those of them that require some JS-side initialization (e.g., to register them"
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:142": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:142",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:142",
+      "message": "Added line: // as custom elements)."
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:143": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:143",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:143",
+      "message": "Added line: for (const [initializerIdentifier, componentIdentifiers] of Object.entries(jsComponentInitializers)) {"
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:144": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:144",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:144",
+      "message": "Added line: const initializerFunc = DotNet.findJSFunction(initializerIdentifier, 0) as JSComponentInitializerCallback;"
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:145": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:145",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:145",
+      "message": "Added line: for (const componentIdentifier of componentIdentifiers)"
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:146": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:146",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:146",
+      "message": "Added line: initializerFunc(componentIdentifier, jsComponentParameters[componentIdentifier]);"
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:148": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:148",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:148",
+      "message": "Added line: "
+    },
+    "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:149": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:149",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:149",
+      "message": "Added line: hasInitializedJsComponents = true;"
+    },
+    "diff_hunk:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:31": {
+      "id": "diff_hunk:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:31",
+      "kind": "diff_hunk",
+      "source": "src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:31",
+      "message": "@@ -31,7 +31,7 @@ export function attachWebRendererInterop(\n \n   if (jsComponentParameters && jsComponentInitializers && Object.keys(jsComponentParameters).length > 0) {\n     const manager = getInteropMethods(rendererId);\n-    enableJSRootComponents(manager, jsComponentParameters, jsComponentInitializers);\n+    enableJSRootComponents(rendererId, manager, jsComponentParameters, jsComponentInitializers);\n   }\n \n   rendererByIdResolverMap.get(rendererId)?.[0]?.();"
+    },
+    "diff:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:34": {
+      "id": "diff:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:34",
+      "kind": "diff",
+      "source": "src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:34",
+      "message": "Added line: enableJSRootComponents(rendererId, manager, jsComponentParameters, jsComponentInitializers);"
+    },
+    "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1": {
+      "id": "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+      "kind": "diff_hunk",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+      "message": "@@ -1,42 +0,0 @@\n-// Licensed to the .NET Foundation under one or more agreements.\n-// The .NET Foundation licenses this file to you under the MIT license.\n-\n-using Components.TestServer.RazorComponents;\n-using Microsoft.AspNetCore.Components.E2ETest.Infrastructure;\n-using Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures;\n-using Microsoft.AspNetCore.Components.E2ETests.ServerRenderingTests;\n-using Microsoft.AspNetCore.Components.Web;\n-using Microsoft.AspNetCore.E2ETesting;\n-using OpenQA.Selenium;\n-using TestServer;\n-using Xunit.Abstractions;\n-\n-namespace Microsoft.AspNetCore.Components.E2ETests.Tests;\n-\n-// These tests are for Blazor Web implementation\n-// For Blazor Server and Webassembly, check SaveStateTest.cs\n-public class StatePersistanceJSRootTest : ServerTestBase<BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>>>\n-{\n-    public StatePersistanceJSRootTest(\n-        BrowserFixture browserFixture,\n-        BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>> serverFixture,\n-        ITestOutputHelper output)\n-        : base(browserFixture, serverFixture, output)\n-    {\n-        serverFixture.AdditionalArguments.AddRange(\"--RegisterDynamicJSRootComponent\", \"true\");\n-    }\n-\n-    [Theory]\n-    [InlineData(\"ServerNonPrerendered\")]\n-    [InlineData(\"WebAssemblyNonPrerendered\")]\n-    public void PersistentStateIsSupportedInDynamicJSRoots(string renderMode)\n-    {\n-        Navigate($\"subdir/WasmMinimal/dynamic-js-root.html?renderMode={renderMode}\");\n-\n-        Browser.Equal(\"Counter\", () => Browser.Exists(By.TagName(\"h1\")).Text);\n-        Browser.Equal(\"Current count: 0\", () => Browser.Exists(By.CssSelector(\"p[role='status']\")).Text);\n-\n-        Browser.Click(By.CssSelector(\"button.btn-primary\"));\n-        Browser.Equal(\"Current count: 1\", () => Browser.Exists(By.CssSelector(\"p[role='status']\")).Text);\n-    }\n-}"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+      "message": "Removed line: // Licensed to the .NET Foundation under one or more agreements."
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:2": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:2",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:2",
+      "message": "Removed line: // The .NET Foundation licenses this file to you under the MIT license."
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:3": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:3",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:3",
+      "message": "Removed line: "
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:4": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:4",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:4",
+      "message": "Removed line: using Components.TestServer.RazorComponents;"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:5": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:5",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:5",
+      "message": "Removed line: using Microsoft.AspNetCore.Components.E2ETest.Infrastructure;"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:6": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:6",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:6",
+      "message": "Removed line: using Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures;"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:7": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:7",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:7",
+      "message": "Removed line: using Microsoft.AspNetCore.Components.E2ETests.ServerRenderingTests;"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:8": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:8",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:8",
+      "message": "Removed line: using Microsoft.AspNetCore.Components.Web;"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:9": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:9",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:9",
+      "message": "Removed line: using Microsoft.AspNetCore.E2ETesting;"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:10": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:10",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:10",
+      "message": "Removed line: using OpenQA.Selenium;"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:11": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:11",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:11",
+      "message": "Removed line: using TestServer;"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:12": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:12",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:12",
+      "message": "Removed line: using Xunit.Abstractions;"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:13": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:13",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:13",
+      "message": "Removed line: "
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:14": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:14",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:14",
+      "message": "Removed line: namespace Microsoft.AspNetCore.Components.E2ETests.Tests;"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:15": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:15",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:15",
+      "message": "Removed line: "
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:16": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:16",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:16",
+      "message": "Removed line: // These tests are for Blazor Web implementation"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:17": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:17",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:17",
+      "message": "Removed line: // For Blazor Server and Webassembly, check SaveStateTest.cs"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:18": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:18",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:18",
+      "message": "Removed line: public class StatePersistanceJSRootTest : ServerTestBase<BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup..."
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:19": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:19",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:19",
+      "message": "Removed line: {"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:20": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:20",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:20",
+      "message": "Removed line: public StatePersistanceJSRootTest("
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:21": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:21",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:21",
+      "message": "Removed line: BrowserFixture browserFixture,"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:22": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:22",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:22",
+      "message": "Removed line: BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>> serverFixture,"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:23": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:23",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:23",
+      "message": "Removed line: ITestOutputHelper output)"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:24": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:24",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:24",
+      "message": "Removed line: : base(browserFixture, serverFixture, output)"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:25": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:25",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:25",
+      "message": "Removed line: {"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:26": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:26",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:26",
+      "message": "Removed line: serverFixture.AdditionalArguments.AddRange(\"--RegisterDynamicJSRootComponent\", \"true\");"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:27": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:27",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:27",
+      "message": "Removed line: }"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:28": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:28",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:28",
+      "message": "Removed line: "
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:29": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:29",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:29",
+      "message": "Removed line: [Theory]"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:30": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:30",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:30",
+      "message": "Removed line: [InlineData(\"ServerNonPrerendered\")]"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:31": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:31",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:31",
+      "message": "Removed line: [InlineData(\"WebAssemblyNonPrerendered\")]"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:32": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:32",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:32",
+      "message": "Removed line: public void PersistentStateIsSupportedInDynamicJSRoots(string renderMode)"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:33": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:33",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:33",
+      "message": "Removed line: {"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:34": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:34",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:34",
+      "message": "Removed line: Navigate($\"subdir/WasmMinimal/dynamic-js-root.html?renderMode={renderMode}\");"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:35": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:35",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:35",
+      "message": "Removed line: "
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:36": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:36",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:36",
+      "message": "Removed line: Browser.Equal(\"Counter\", () => Browser.Exists(By.TagName(\"h1\")).Text);"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:37": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:37",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:37",
+      "message": "Removed line: Browser.Equal(\"Current count: 0\", () => Browser.Exists(By.CssSelector(\"p[role='status']\")).Text);"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:38": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:38",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:38",
+      "message": "Removed line: "
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:39": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:39",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:39",
+      "message": "Removed line: Browser.Click(By.CssSelector(\"button.btn-primary\"));"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:40": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:40",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:40",
+      "message": "Removed line: Browser.Equal(\"Current count: 1\", () => Browser.Exists(By.CssSelector(\"p[role='status']\")).Text);"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:41": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:41",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:41",
+      "message": "Removed line: }"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:42": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:42",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:42",
+      "message": "Removed line: }"
+    },
+    "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276": {
+      "id": "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276",
+      "kind": "diff_hunk",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276",
+      "message": "@@ -276,6 +276,20 @@ public async Task StateIsProvidedEveryTimeACircuitGetsCreated(string streaming)\n         RenderComponentsWithPersistentStateAndValidate(suppressEnhancedNavigation: false, mode, typeof(InteractiveServerRenderMode), streaming, stateValue: \"other\");\n     }\n \n+    [Theory]\n+    [InlineData(\"ServerNonPrerendered\")]\n+    [InlineData(\"WebAssemblyNonPrerendered\")]\n+    public void PersistentStateIsSupportedInDynamicJSRoots(string renderMode)\n+    {\n+        Navigate($\"subdir/WasmMinimal/dynamic-js-root.html?renderMode={renderMode}\");\n+\n+        Browser.Equal(\"Counter\", () => Browser.Exists(By.TagName(\"h1\")).Text);\n+        Browser.Equal(\"Current count: 0\", () => Browser.Exists(By.CssSelector(\"p[role='status']\")).Text);\n+\n+        Browser.Click(By.CssSelector(\"button.btn-primary\"));\n+        Browser.Equal(\"Current count: 1\", () => Browser.Exists(By.CssSelector(\"p[role='status']\")).Text);\n+    }\n+\n     private void BlockWebAssemblyResourceLoad()\n     {\n         // Clear local storage so that the resource hash is not found"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:279": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:279",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:279",
+      "message": "Added line: [Theory]"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:280": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:280",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:280",
+      "message": "Added line: [InlineData(\"ServerNonPrerendered\")]"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:281": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:281",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:281",
+      "message": "Added line: [InlineData(\"WebAssemblyNonPrerendered\")]"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:282": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:282",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:282",
+      "message": "Added line: public void PersistentStateIsSupportedInDynamicJSRoots(string renderMode)"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:283": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:283",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:283",
+      "message": "Added line: {"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:284": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:284",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:284",
+      "message": "Added line: Navigate($\"subdir/WasmMinimal/dynamic-js-root.html?renderMode={renderMode}\");"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:285": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:285",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:285",
+      "message": "Added line: "
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:286": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:286",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:286",
+      "message": "Added line: Browser.Equal(\"Counter\", () => Browser.Exists(By.TagName(\"h1\")).Text);"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:287": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:287",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:287",
+      "message": "Added line: Browser.Equal(\"Current count: 0\", () => Browser.Exists(By.CssSelector(\"p[role='status']\")).Text);"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:288": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:288",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:288",
+      "message": "Added line: "
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:289": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:289",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:289",
+      "message": "Added line: Browser.Click(By.CssSelector(\"button.btn-primary\"));"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:290": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:290",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:290",
+      "message": "Added line: Browser.Equal(\"Current count: 1\", () => Browser.Exists(By.CssSelector(\"p[role='status']\")).Text);"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:291": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:291",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:291",
+      "message": "Added line: }"
+    },
+    "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:292": {
+      "id": "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:292",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:292",
+      "message": "Added line: "
+    },
+    "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24": {
+      "id": "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24",
+      "kind": "diff_hunk",
+      "source": "src/Components/test/testassets/Components.TestServer/Program.cs:24",
+      "message": "@@ -24,7 +24,6 @@ public static async Task Main(string[] args)\n             [\"CORS (WASM)\"] = (BuildWebHost<CorsStartup>(CreateAdditionalArgs(args)), \"/subdir\"),\n             [\"Prerendering (Server-side)\"] = (BuildWebHost<PrerenderedStartup>(CreateAdditionalArgs(args)), \"/prerendered\"),\n             [\"Razor Component Endpoints\"] = (BuildWebHost<RazorComponentEndpointsStartup<App>>(CreateAdditionalArgs(args)), \"/subdir\"),\n-            [\"Razor Component Endpoints with JS Root Component\"] = (BuildWebHost<RazorComponentEndpointsStartup<App>>(CreateAdditionalArgs([.. args, \"--RegisterDynamicJSRootComponent\", \"true\"])), \"...\n             [\"Deferred component content (Server-side)\"] = (BuildWebHost<DeferredComponentContentStartup>(CreateAdditionalArgs(args)), \"/deferred-component-content\"),\n             [\"Locked navigation (Server-side)\"] = (BuildWebHost<LockedNavigationStartup>(CreateAdditionalArgs(args)), \"/locked-navigation\"),\n             [\"Client-side with fallback\"] = (BuildWebHost<StartupWithMapFallbackToClientSideBlazor>(CreateAdditionalArgs(args)), \"/fallback\"),"
+    },
+    "diff:src/Components/test/testassets/Components.TestServer/Program.cs:27": {
+      "id": "diff:src/Components/test/testassets/Components.TestServer/Program.cs:27",
+      "kind": "diff",
+      "source": "src/Components/test/testassets/Components.TestServer/Program.cs:27",
+      "message": "Removed line: [\"Razor Component Endpoints with JS Root Component\"] = (BuildWebHost<RazorComponentEndpointsStartup<App>>(CreateAddit..."
+    },
+    "diff_hunk:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51": {
+      "id": "diff_hunk:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51",
+      "kind": "diff_hunk",
+      "source": "src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51",
+      "message": "@@ -51,10 +51,7 @@ public void ConfigureServices(IServiceCollection services)\n                     options.DisconnectedCircuitMaxRetained = 0;\n                     options.DetailedErrors = true;\n                 }\n-                if (Configuration.GetValue<bool>(\"RegisterDynamicJSRootComponent\"))\n-                {\n-                    options.RootComponents.RegisterForJavaScript<TestContentPackage.PersistentComponents.ComponentWithPersistentState>(\"dynamic-js-root-counter\");\n-                }\n+                options.RootComponents.RegisterForJavaScript<TestContentPackage.PersistentComponents.ComponentWithPersistentState>(\"dynamic-js-root-counter\");\n             })\n             .AddAuthenticationStateSerialization(options =>\n             {"
+    },
+    "diff:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:54": {
+      "id": "diff:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:54",
+      "kind": "diff",
+      "source": "src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:54",
+      "message": "Added line: options.RootComponents.RegisterForJavaScript<TestContentPackage.PersistentComponents.ComponentWithPersistentState>(\"d..."
+    },
+    "diff:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:55": {
+      "id": "diff:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:55",
+      "kind": "diff",
+      "source": "src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:55",
+      "message": "Removed line: {"
+    },
+    "diff:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:56": {
+      "id": "diff:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:56",
+      "kind": "diff",
+      "source": "src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:56",
+      "message": "Removed line: options.RootComponents.RegisterForJavaScript<TestContentPackage.PersistentComponents.ComponentWithPersistentState>(\"d..."
+    },
+    "diff:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:57": {
+      "id": "diff:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:57",
+      "kind": "diff",
+      "source": "src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:57",
+      "message": "Removed line: }"
+    },
+    "entity:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:src.Components.Web.JS.src.Rendering.JSRootComponents": {
+      "id": "entity:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:src.Components.Web.JS.src.Rendering.JSRootComponents",
+      "kind": "entity",
+      "source": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts:13-15",
+      "message": "Changed module src.Components.Web.JS.src.Rendering.JSRootComponents touched by 2 hunk(s)."
+    },
+    "entity:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:src.Components.Web.JS.src.Rendering.WebRendererInteropMethods": {
+      "id": "entity:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:src.Components.Web.JS.src.Rendering.WebRendererInteropMethods",
+      "kind": "entity",
+      "source": "src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:34-34",
+      "message": "Changed module src.Components.Web.JS.src.Rendering.WebRendererInteropMethods touched by 1 hunk(s)."
+    },
+    "entity:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:src.Components.test.E2ETest.Tests.StatePersistanceJSRootTest": {
+      "id": "entity:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:src.Components.test.E2ETest.Tests.StatePersistanceJSRootTest",
+      "kind": "entity",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1-42",
+      "message": "Changed module src.Components.test.E2ETest.Tests.StatePersistanceJSRootTest touched by 1 hunk(s)."
+    },
+    "entity:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:src.Components.test.E2ETest.Tests.StatePersistenceTest": {
+      "id": "entity:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:src.Components.test.E2ETest.Tests.StatePersistenceTest",
+      "kind": "entity",
+      "source": "src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:279-292",
+      "message": "Changed module src.Components.test.E2ETest.Tests.StatePersistenceTest touched by 1 hunk(s)."
+    },
+    "entity:src/Components/test/testassets/Components.TestServer/Program.cs:src.Components.test.testassets.Components.TestServer.Program": {
+      "id": "entity:src/Components/test/testassets/Components.TestServer/Program.cs:src.Components.test.testassets.Components.TestServer.Program",
+      "kind": "entity",
+      "source": "src/Components/test/testassets/Components.TestServer/Program.cs:27-27",
+      "message": "Changed module src.Components.test.testassets.Components.TestServer.Program touched by 1 hunk(s)."
+    },
+    "entity:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:src.Components.test.testassets.Components.TestServer.RazorComponentEndpointsStartup": {
+      "id": "entity:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:src.Components.test.testassets.Components.TestServer.RazorComponentEndpointsStartup",
+      "kind": "entity",
+      "source": "src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:54-57",
+      "message": "Changed module src.Components.test.testassets.Components.TestServer.RazorComponentEndpointsStartup touched by 1 hunk(s)."
+    }
+  },
+  "missing_evidence_ids": [],
+  "agent_runs": [
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+      "input_evidence_ids": [
+        "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:10",
+        "diff_hunk:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:31",
+        "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+        "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276"
+      ],
+      "output_issue_ids": [
+        "correctness:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+        "correctness:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:13"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 34245,
+      "token_count_in": 6473,
+      "token_count_out": 612,
+      "trace_id": "92c936f028604d68840eb520375065e2",
+      "span_id": "640054408aa64dd1",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001",
+      "shard_index": 0,
+      "shard_count": 2,
+      "context_request_count": 2,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+      "input_evidence_ids": [
+        "diff:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:34",
+        "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118",
+        "diff_hunk:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:31"
+      ],
+      "output_issue_ids": [
+        "correctness:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 1,
+      "retry_log": [
+        "attempt=1 error=timeout delay=1.00s"
+      ],
+      "latency_ms": 89602,
+      "token_count_in": 3967,
+      "token_count_out": 140,
+      "trace_id": "fbe386590f844e47932d9cdd3a241140",
+      "span_id": "ca60e28cfbdf4445",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001-refill",
+      "shard_index": 0,
+      "shard_count": 2,
+      "context_request_count": 0,
+      "context_refill_used": true
+    },
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+      "input_evidence_ids": [
+        "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24",
+        "diff_hunk:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51"
+      ],
+      "output_issue_ids": [
+        "correctness:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:57"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 6518,
+      "token_count_in": 3886,
+      "token_count_out": 220,
+      "trace_id": "e8fa2e4d895b499e98543e9fafb05111",
+      "span_id": "b2f1576a03fa49cc",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-002",
+      "shard_index": 1,
+      "shard_count": 2,
+      "context_request_count": 0,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+      "model": null,
+      "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+      "input_evidence_ids": [
+        "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+        "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276"
+      ],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 0,
+      "token_count_in": 0,
+      "token_count_out": 0,
+      "trace_id": "",
+      "span_id": "",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "",
+      "shard_index": 0,
+      "shard_count": 0,
+      "context_request_count": 0,
+      "context_refill_used": false
+    }
+  ],
+  "prompt_exports": {},
+  "context_budget": {
+    "enabled": true,
+    "strategy": "file_risk_shards_v1",
+    "context_profile": "risk_compact_manifest_v1",
+    "max_input_tokens": 9000,
+    "estimated_input_tokens": 12283,
+    "selected_evidence_count": 8,
+    "omitted_evidence_count": 95,
+    "selected_evidence_ids": [
+      "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:10",
+      "diff_hunk:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:31",
+      "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+      "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276",
+      "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24",
+      "diff_hunk:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51",
+      "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118",
+      "diff:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:34"
+    ],
+    "omitted_evidence_ids": [
+      "entity:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:src.Components.Web.JS.src.Rendering.JSRootComponents",
+      "entity:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:src.Components.Web.JS.src.Rendering.WebRendererInteropMethods",
+      "entity:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:src.Components.test.E2ETest.Tests.StatePersistanceJSRootTest",
+      "entity:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:src.Components.test.E2ETest.Tests.StatePersistenceTest",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:121",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:123",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:124",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:125",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:126",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:127",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:128",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:13",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:130",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:131",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:132",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:133",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:134",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:135",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:136",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:137",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:138",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:139",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:140",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:141",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:142",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:143",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:144",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:145",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:146",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:148",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:149",
+      "diff:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:15",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:10",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:11",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:12",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:13",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:14",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:15",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:16",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:17",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:18",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:19",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:2",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:20",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:21",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:22",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:23",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:24",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:25",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:26",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:27",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:28",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:29",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:3",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:30",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:31",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:32",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:33",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:34",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:35",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:36",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:37",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:38",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:39",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:4",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:40",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:41",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:42",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:5",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:6",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:7",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:8",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:9",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:279",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:280",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:281",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:282",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:283",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:284",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:285",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:286",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:287",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:288",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:289",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:290",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:291",
+      "diff:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:292",
+      "entity:src/Components/test/testassets/Components.TestServer/Program.cs:src.Components.test.testassets.Components.TestServer.Program",
+      "entity:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:src.Components.test.testassets.Components.TestServer.RazorComponentEndpointsStartup",
+      "diff:src/Components/test/testassets/Components.TestServer/Program.cs:27",
+      "diff:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:54",
+      "diff:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:55",
+      "diff:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:56",
+      "diff:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:57"
+    ],
+    "selected_risk_signal_count": 0,
+    "context_truncated": true,
+    "shard_count": 2,
+    "refill_count": 1,
+    "context_request_count": 2,
+    "context_requests": [
+      {
+        "request_type": "same_file_more_evidence",
+        "path": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts",
+        "evidence_ids": [
+          "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118"
+        ],
+        "risk_tag": null,
+        "symbol": null,
+        "reason": "To verify usage of 'currentRendererId' and 'hasInitializedJsComponents' and understand the full changes in the second hunk.",
+        "source_shard_id": "shard-001",
+        "fulfilled_evidence_ids": [
+          "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118"
+        ]
+      },
+      {
+        "request_type": "same_file_more_evidence",
+        "path": "src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts",
+        "evidence_ids": [
+          "diff:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:34"
+        ],
+        "risk_tag": null,
+        "symbol": null,
+        "reason": "To see the full context of the 'enableJSRootComponents' call signature change.",
+        "source_shard_id": "shard-001",
+        "fulfilled_evidence_ids": [
+          "diff:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:34",
+          "diff_hunk:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:31"
+        ]
+      }
+    ],
+    "shards": [
+      {
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 4,
+        "omitted_evidence_count": 90,
+        "estimated_input_tokens": 5370,
+        "context_truncated": true
+      },
+      {
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 2,
+        "omitted_evidence_count": 7,
+        "estimated_input_tokens": 3493,
+        "context_truncated": true
+      },
+      {
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "is_refill": true,
+        "parent_shard_id": "shard-001",
+        "selected_evidence_count": 3,
+        "omitted_evidence_count": 0,
+        "estimated_input_tokens": 3420,
+        "context_truncated": false
+      }
+    ],
+    "warnings": []
+  },
+  "loop": {
+    "enabled": true,
+    "max_iter": 1,
+    "iterations_completed": 1,
+    "converged": false,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "checkpoint_path": "D:\\learn\\code-review-agent\\workspace\\qodo_pr_review_bench_live_guideline_rerank\\samples\\qodo_019\\review\\loop_checkpoint.json",
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "iterations": [
+      {
+        "i": 0,
+        "candidate_issue_count": 4,
+        "verified_count": 1,
+        "needs_human_review_count": 0,
+        "discarded_count": 3,
+        "keep_count": 0,
+        "uncertain_count": 1,
+        "reject_count": 0,
+        "feedback_sent": [
+          {
+            "issue_id": "correctness:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+            "category": "correctness",
+            "critic_reason": "low confidence",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+              "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276"
+            ]
+          }
+        ],
+        "agent_runs": [
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+            "input_evidence_ids": [
+              "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:10",
+              "diff_hunk:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:31",
+              "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+              "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276"
+            ],
+            "output_issue_ids": [
+              "correctness:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+              "correctness:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:13"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 34245,
+            "token_count_in": 6473,
+            "token_count_out": 612,
+            "trace_id": "92c936f028604d68840eb520375065e2",
+            "span_id": "640054408aa64dd1",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001",
+            "shard_index": 0,
+            "shard_count": 2,
+            "context_request_count": 2,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+            "input_evidence_ids": [
+              "diff:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:34",
+              "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118",
+              "diff_hunk:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:31"
+            ],
+            "output_issue_ids": [
+              "correctness:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 1,
+            "retry_log": [
+              "attempt=1 error=timeout delay=1.00s"
+            ],
+            "latency_ms": 89602,
+            "token_count_in": 3967,
+            "token_count_out": 140,
+            "trace_id": "fbe386590f844e47932d9cdd3a241140",
+            "span_id": "ca60e28cfbdf4445",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001-refill",
+            "shard_index": 0,
+            "shard_count": 2,
+            "context_request_count": 0,
+            "context_refill_used": true
+          },
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+            "input_evidence_ids": [
+              "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24",
+              "diff_hunk:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51"
+            ],
+            "output_issue_ids": [
+              "correctness:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:57"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 6518,
+            "token_count_in": 3886,
+            "token_count_out": 220,
+            "trace_id": "e8fa2e4d895b499e98543e9fafb05111",
+            "span_id": "b2f1576a03fa49cc",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-002",
+            "shard_index": 1,
+            "shard_count": 2,
+            "context_request_count": 0,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+            "model": null,
+            "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+            "input_evidence_ids": [
+              "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+              "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276"
+            ],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 0,
+            "token_count_in": 0,
+            "token_count_out": 0,
+            "trace_id": "",
+            "span_id": "",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "",
+            "shard_index": 0,
+            "shard_count": 0,
+            "context_request_count": 0,
+            "context_refill_used": false
+          }
+        ],
+        "issue_set": [
+          "correctness:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1"
+        ],
+        "keep": [],
+        "needs_human_review": [
+          {
+            "file": "src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs",
+            "line": 1,
+            "severity": "high",
+            "category": "correctness",
+            "message": "Test class 'StatePersistanceJSRootTest' is deleted but its test logic is moved to 'StatePersistenceTest' without verifying that the new test method covers the same scenarios. The deleted test used a server fixture with '--RegisterDynamicJSRootComponent' argument, which is not present in the new test.",
+            "suggestion": "Ensure the new test method 'PersistentStateIsSupportedInDynamicJSRoots' in 'StatePersistenceTest.cs' includes the necessary server fixture configuration (e.g., '--RegisterDynamicJSRootComponent') to replicate the original test's setup.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+              "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276"
+            ]
+          }
+        ],
+        "discarded": [
+          {
+            "file": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts",
+            "line": 13,
+            "severity": "medium",
+            "category": "correctness",
+            "message": "New module-level variable 'currentRendererId' is introduced but not used in the provided diff hunk. It may be unused or require additional initialization logic.",
+            "suggestion": "Verify that 'currentRendererId' is used elsewhere in the file or remove it if unnecessary.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:10"
+            ],
+            "filter_reason": "low_signal_suggestion"
+          },
+          {
+            "file": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts",
+            "line": 118,
+            "severity": "medium",
+            "category": "correctness",
+            "message": "Missing curly braces around for-loop body may cause maintenance errors.",
+            "suggestion": "Add curly braces around the inner for-loop body to prevent future bugs when adding statements.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118"
+            ],
+            "filter_reason": "low_signal_suggestion"
+          },
+          {
+            "file": "src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs",
+            "line": 57,
+            "severity": "medium",
+            "category": "correctness",
+            "message": "Removing the conditional guard around RootComponents.RegisterForJavaScript changes behavior: the component is now always registered, even when the 'RegisterDynamicJSRootComponent' configuration flag is false. This may cause unintended registration in test scenarios that rely on the flag to control behavior.",
+            "suggestion": "Restore the conditional check or ensure the test scenarios that depend on the flag are updated to expect the unconditional registration.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51",
+              "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24"
+            ],
+            "filter_reason": "low_signal_suggestion"
+          }
+        ]
+      }
+    ]
+  },
+  "tracing": {
+    "total_latency_ms": 130365,
+    "total_token_count_in": 14326,
+    "total_token_count_out": 972,
+    "total_retry_count": 1,
+    "run_count": 4,
+    "status_counts": {
+      "ok": 4
+    }
+  }
+}

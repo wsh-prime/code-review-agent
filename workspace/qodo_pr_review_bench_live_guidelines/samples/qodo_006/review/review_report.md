@@ -1,0 +1,640 @@
+# Review Report
+
+## Summary
+
+- Mode: `hybrid-live`
+- Changed files: 198
+- Changed entities: 198
+- Risk signals: 95
+- Findings: 7
+- Needs human review: 5
+- Discarded: 5
+- Agent runs: 63
+- Loop enabled: True
+- Target repo modified: False
+
+## Loop Summary
+
+| Metric | Value |
+|---|---:|
+| Iterations | 1 / 1 |
+| Converged | False |
+| Fallback | False |
+| Retry count | 10 |
+| Total latency | 1093328 ms |
+| Token in | 333617 |
+| Token out | 7470 |
+
+- Iteration 0: 20 candidates, 15 verified, 5 uncertain, 10 kept, 0 rejected
+
+## Context Budget Summary
+
+| Metric | Value |
+|---|---:|
+| Strategy | `file_risk_shards_v1` |
+| Max input tokens | 9000 |
+| Estimated input tokens | 313350 |
+| Selected evidence | 240 |
+| Omitted evidence | 681 |
+| Context truncated | True |
+| Review shards | 50 |
+| Context requests | 33 |
+| Refills | 12 |
+
+## Findings
+
+- `style` info at `ghost/core/core/server/services/members/service.js:19` (0.95)
+  - Module path changed to kebab-case: require('../verification-trigger')
+  - Suggestion: No action needed; this change aligns with the kebab-case naming convention.
+  - Evidence: `diff:ghost/core/core/server/services/members/service.js:19`, `diff:ghost/core/core/server/services/members/service.js:22`, `diff:ghost/core/core/server/services/members/service.js:6`, `diff:ghost/core/core/server/services/members/service.js:8`, `diff_hunk:ghost/core/core/server/services/members/service.js:16`, `diff_hunk:ghost/core/core/server/services/members/service.js:3`
+
+- `correctness` medium at `ghost/core/core/server/services/outbox/jobs/outbox-job.js:3` (0.85)
+  - The require path for StartOutboxProcessingEvent was changed from '../events/StartOutboxProcessingEvent' to '../events/start-outbox-processing-event'. If the file was renamed to kebab-case, this is correct; otherwise, this will cause a module resolution failure at runtime.
+  - Suggestion: Verify that the file '../events/start-outbox-processing-event.js' exists and that the rename is intentional.
+  - Evidence: `diff_hunk:ghost/core/core/server/services/outbox/jobs/outbox-job.js:1`
+
+- `correctness` medium at `ghost/core/core/server/services/recommendations/recommendation-enabler-service.js:3` (0.85)
+  - The JSDoc import path for SettingsBREADService was changed from '../settings/SettingsBREADService' to '../settings/settings-bread-service'. If the file was renamed to kebab-case, this is correct; otherwise, this will cause a module resolution failure at runtime.
+  - Suggestion: Verify that the file '../settings/settings-bread-service.js' exists and that the rename is intentional.
+  - Evidence: `diff_hunk:ghost/core/core/server/services/recommendations/recommendation-enabler-service.js:1`
+
+- `correctness` medium at `ghost/core/core/server/services/recommendations/service/in-memory-recommendation-repository.ts:3` (0.85)
+  - The import path for InMemoryRepository was changed from '../../lib/InMemoryRepository' to '../../lib/in-memory-repository'. If the file was renamed to kebab-case, this is correct; otherwise, this will cause a module resolution failure at runtime.
+  - Suggestion: Verify that the file '../../lib/in-memory-repository.ts' exists and that the rename is intentional.
+  - Evidence: `diff:ghost/core/core/server/services/recommendations/service/in-memory-recommendation-repository.ts:3`, `diff_hunk:ghost/core/core/server/services/recommendations/service/in-memory-recommendation-repository.ts:1`
+
+- `correctness` medium at `ghost/core/core/server/services/recommendations/service/recommendation-service.ts:2` (0.85)
+  - The import path for InMemoryRepository was changed from '../../lib/InMemoryRepository' to '../../lib/in-memory-repository'. If the file was renamed to kebab-case, this is correct; otherwise, this will cause a module resolution failure at runtime.
+  - Suggestion: Verify that the file '../../lib/in-memory-repository.ts' exists and that the rename is intentional.
+  - Evidence: `diff:ghost/core/core/server/services/recommendations/service/recommendation-service.ts:2`, `diff_hunk:ghost/core/core/server/services/recommendations/service/recommendation-service.ts:1`
+
+- `correctness` medium at `ghost/core/test/e2e-api/admin/settings.test.js:4` (0.70)
+  - Require path changed from 'SingleUseTokenProvider' to 'single-use-token-provider' but no evidence confirms the target module exists at the new path or exports the same symbol. This could cause a runtime module resolution failure.
+  - Suggestion: Confirm that the file 'single-use-token-provider.js' exists in the members directory and exports the same SingleUseTokenProvider class.
+  - Evidence: `diff_hunk:ghost/core/test/e2e-api/admin/settings.test.js:1`
+
+- `correctness` medium at `ghost/core/test/e2e-api/members/send-magic-link.test.js:879` (0.70)
+  - Require path changed from 'SingleUseTokenProvider' to 'single-use-token-provider' but no evidence confirms the target module exists at the new path or exports the same symbol. This could cause a runtime module resolution failure.
+  - Suggestion: Confirm that the file 'single-use-token-provider.js' exists in the members directory and exports the same SingleUseTokenProvider class.
+  - Evidence: `diff_hunk:ghost/core/test/e2e-api/members/send-magic-link.test.js:876`
+
+## Needs Human Review
+
+- `correctness` medium at `ghost/core/core/server/services/announcement-bar-service/index.js:2` (0.50)
+  - Renamed require path './AnnouncementBarSettings' to './announcement-bar-settings' but no evidence confirms the target file exists at the new path. If the file was not also renamed, this will cause a runtime module resolution failure.
+  - Suggestion: Verify that the file 'announcement-bar-settings.js' exists in the same directory, or rename the file to match the new require path.
+  - Evidence: `diff_hunk:ghost/core/core/server/services/announcement-bar-service/index.js:1`
+
+- `correctness` medium at `ghost/core/core/server/services/audience-feedback/audience-feedback-controller.js:1` (0.50)
+  - Renamed require path './Feedback' to './feedback' but no evidence confirms the target file exists at the new path. If the file was not also renamed, this will cause a runtime module resolution failure.
+  - Suggestion: Verify that the file 'feedback.js' exists in the same directory, or rename the file to match the new require path.
+  - Evidence: `diff_hunk:ghost/core/core/server/services/audience-feedback/audience-feedback-controller.js:1`
+
+- `style` minor at `ghost/core/core/server/services/members/members-api/members-api.js:1` (0.50)
+  - Code must use semicolons: removed semicolons from require() statements.
+  - Suggestion: Add semicolons at the end of each require() statement.
+  - Evidence: `diff_hunk:ghost/core/core/server/services/members/members-api/members-api.js:1`
+
+- `correctness` medium at `ghost/core/core/server/services/outbox/jobs/outbox-job.js:2` (0.50)
+  - The require path for StartOutboxProcessingEvent was changed from '../events/StartOutboxProcessingEvent' to '../events/start-outbox-processing-event'. If the actual file is still named 'StartOutboxProcessingEvent.js' (PascalCase), this will cause a runtime module resolution failure.
+  - Suggestion: Verify that the file '../events/start-outbox-processing-event.js' exists at the new path. If the file was not renamed, revert the require path or rename the file accordingly.
+  - Evidence: `diff_hunk:ghost/core/core/server/services/outbox/jobs/outbox-job.js:1`, `diff:ghost/core/core/server/services/outbox/jobs/outbox-job.js:2`
+
+- `correctness` medium at `ghost/core/core/server/services/recommendations/recommendation-enabler-service.js:2` (0.50)
+  - The JSDoc type import path was changed from '../settings/SettingsBREADService' to '../settings/settings-bread-service'. If the actual file is still named 'SettingsBREADService.js' (PascalCase), this will cause a runtime module resolution failure.
+  - Suggestion: Verify that the file '../settings/settings-bread-service.js' exists at the new path. If the file was not renamed, revert the import path or rename the file accordingly.
+  - Evidence: `diff_hunk:ghost/core/core/server/services/recommendations/recommendation-enabler-service.js:1`, `diff:ghost/core/core/server/services/recommendations/recommendation-enabler-service.js:2`
+
+## Changed Files
+
+- `ghost/core/core/server/api/endpoints/authentication.js` (modified)
+- `ghost/core/core/server/api/endpoints/users.js` (modified)
+- `ghost/core/core/server/api/endpoints/utils/validators/input/settings.js` (modified)
+- `ghost/core/core/server/services/activitypub/activity-pub-service.ts` (modified)
+- `ghost/core/core/server/services/adapter-manager/adapter-manager.js` (renamed)
+- `ghost/core/core/server/services/adapter-manager/index.js` (modified)
+- `ghost/core/core/server/services/announcement-bar-service/announcement-bar-settings.js` (renamed)
+- `ghost/core/core/server/services/announcement-bar-service/announcement-visibility-values.js` (renamed)
+- `ghost/core/core/server/services/announcement-bar-service/index.js` (modified)
+- `ghost/core/core/server/services/audience-feedback/audience-feedback-controller.js` (renamed)
+- `ghost/core/core/server/services/audience-feedback/audience-feedback-service.js` (renamed)
+- `ghost/core/core/server/services/audience-feedback/feedback-repository.js` (renamed)
+- `ghost/core/core/server/services/audience-feedback/feedback.js` (renamed)
+- `ghost/core/core/server/services/audience-feedback/index.js` (modified)
+- `ghost/core/core/server/services/auth/session/express-session.js` (modified)
+- `ghost/core/core/server/services/auth/session/session-store.js` (renamed)
+- `ghost/core/core/server/services/comments/comments-controller.js` (renamed)
+- `ghost/core/core/server/services/comments/comments-service-email-renderer.js` (renamed)
+- `ghost/core/core/server/services/comments/comments-service-emails.js` (renamed)
+- `ghost/core/core/server/services/comments/comments-service.js` (renamed)
+- `ghost/core/core/server/services/comments/comments-stats-service.js` (renamed)
+- `ghost/core/core/server/services/comments/index.js` (modified)
+- `ghost/core/core/server/services/custom-redirects/custom-redirects-api.js` (renamed)
+- `ghost/core/core/server/services/custom-redirects/index.js` (modified)
+- `ghost/core/core/server/services/donations/donation-bookshelf-repository.ts` (renamed)
+- `ghost/core/core/server/services/donations/donation-payment-event.ts` (renamed)
+- `ghost/core/core/server/services/donations/donation-service-wrapper.js` (renamed)
+- `ghost/core/core/server/services/donations/index.js` (modified)
+- `ghost/core/core/server/services/email-analytics/email-analytics-provider-mailgun.js` (renamed)
+- `ghost/core/core/server/services/email-analytics/email-analytics-service-wrapper.js` (renamed)
+- `ghost/core/core/server/services/email-analytics/email-analytics-service.js` (renamed)
+- `ghost/core/core/server/services/email-analytics/event-processing-result.js` (renamed)
+- `ghost/core/core/server/services/email-analytics/events/start-email-analytics-job-event.js` (renamed)
+- `ghost/core/core/server/services/email-analytics/index.js` (modified)
+- `ghost/core/core/server/services/email-analytics/jobs/fetch-latest/index.js` (modified)
+- `ghost/core/core/server/services/email-service/EmailServiceWrapper.js` (modified)
+- `ghost/core/core/server/services/email-suppression-list/email-suppression-list.js` (renamed)
+- `ghost/core/core/server/services/email-suppression-list/in-memory-email-suppression-list.js` (renamed)
+- `ghost/core/core/server/services/email-suppression-list/mailgun-email-suppression-list.js` (renamed)
+- `ghost/core/core/server/services/email-suppression-list/service.js` (modified)
+- `ghost/core/core/server/services/explore-ping/explore-ping-service.js` (renamed)
+- `ghost/core/core/server/services/explore-ping/index.js` (modified)
+- `ghost/core/core/server/services/explore/explore-service.js` (renamed)
+- `ghost/core/core/server/services/explore/index.js` (modified)
+- `ghost/core/core/server/services/frontend-data-service/front-end-data-service.js` (renamed)
+- `ghost/core/core/server/services/frontend-data-service/index.js` (modified)
+- `ghost/core/core/server/services/identity-tokens/identity-token-service-wrapper.js` (renamed)
+- `ghost/core/core/server/services/identity-tokens/identity-token-service.ts` (renamed)
+- `ghost/core/core/server/services/identity-tokens/index.js` (modified)
+- `ghost/core/core/server/services/invites/index.js` (modified)
+- `ghost/core/core/server/services/invites/invites.js` (renamed)
+- `ghost/core/core/server/services/lib/dynamic-redirect-manager.js` (renamed)
+- `ghost/core/core/server/services/lib/email-content-generator.js` (renamed)
+- `ghost/core/core/server/services/lib/in-memory-repository.ts` (renamed)
+- `ghost/core/core/server/services/lib/mailgun-client.js` (renamed)
+- `ghost/core/core/server/services/mail/ghost-mailer.js` (renamed)
+- `ghost/core/core/server/services/mail/index.js` (modified)
+- `ghost/core/core/server/services/media-inliner/external-media-inliner.js` (renamed)
+- `ghost/core/core/server/services/media-inliner/service.js` (modified)
+- `ghost/core/core/server/services/member-attribution/README.md` (modified)
+- `ghost/core/core/server/services/member-attribution/attribution-builder.js` (renamed)
+- `ghost/core/core/server/services/member-attribution/index.js` (modified)
+- `ghost/core/core/server/services/member-attribution/member-attribution-service.js` (renamed)
+- `ghost/core/core/server/services/member-attribution/outbound-link-tagger.js` (renamed)
+- `ghost/core/core/server/services/member-attribution/referrer-translator.js` (renamed)
+- `ghost/core/core/server/services/member-attribution/url-history.js` (renamed)
+- `ghost/core/core/server/services/member-attribution/url-translator.js` (renamed)
+- `ghost/core/core/server/services/member-welcome-emails/member-welcome-email-renderer.js` (renamed)
+- `ghost/core/core/server/services/member-welcome-emails/service.js` (modified)
+- `ghost/core/core/server/services/members-events/event-storage.js` (renamed)
+- `ghost/core/core/server/services/members-events/index.js` (modified)
+- `ghost/core/core/server/services/members-events/last-seen-at-cache.js` (renamed)
+- `ghost/core/core/server/services/members-events/last-seen-at-updater.js` (renamed)
+- `ghost/core/core/server/services/members/api.js` (modified)
+- `ghost/core/core/server/services/members/importer/index.js` (modified)
+- `ghost/core/core/server/services/members/importer/members-csv-importer-stripe-utils.js` (renamed)
+- `ghost/core/core/server/services/members/importer/members-csv-importer.js` (renamed)
+- `ghost/core/core/server/services/members/members-api/controllers/member-controller.js` (renamed)
+- `ghost/core/core/server/services/members/members-api/controllers/router-controller.js` (renamed)
+- `ghost/core/core/server/services/members/members-api/controllers/well-known-controller.js` (renamed)
+- `ghost/core/core/server/services/members/members-api/members-api.js` (modified)
+- `ghost/core/core/server/services/members/members-api/repositories/event-repository.js` (renamed)
+- `ghost/core/core/server/services/members/members-api/repositories/member-repository.js` (renamed)
+- `ghost/core/core/server/services/members/members-api/repositories/product-repository.js` (renamed)
+- `ghost/core/core/server/services/members/members-api/services/geolocation-service.js` (renamed)
+- `ghost/core/core/server/services/members/members-api/services/member-bread-service.js` (renamed)
+- `ghost/core/core/server/services/members/members-api/services/payments-service.js` (renamed)
+- `ghost/core/core/server/services/members/members-api/services/token-service.js` (renamed)
+- `ghost/core/core/server/services/members/members-config-provider.js` (renamed)
+- `ghost/core/core/server/services/members/request-integrity-token-provider.js` (renamed)
+- `ghost/core/core/server/services/members/service.js` (modified)
+- `ghost/core/core/server/services/members/single-use-token-provider.js` (renamed)
+- `ghost/core/core/server/services/members/stats/members-stats.js` (renamed)
+- `ghost/core/core/server/services/mentions-email-report/job.js` (modified)
+- `ghost/core/core/server/services/mentions-email-report/mention-email-report-job.js` (renamed)
+- `ghost/core/core/server/services/mentions-email-report/service.js` (modified)
+- `ghost/core/core/server/services/mentions-email-report/start-mention-email-report-job.js` (renamed)
+- `ghost/core/core/server/services/newsletters/index.js` (modified)
+- `ghost/core/core/server/services/newsletters/newsletters-service.js` (renamed)
+- `ghost/core/core/server/services/notifications/index.js` (modified)
+- `ghost/core/core/server/services/notifications/notifications.js` (renamed)
+- `ghost/core/core/server/services/offers/service.js` (modified)
+- `ghost/core/core/server/services/outbox/events/start-outbox-processing-event.js` (renamed)
+- `ghost/core/core/server/services/outbox/index.js` (modified)
+- `ghost/core/core/server/services/outbox/jobs/outbox-job.js` (modified)
+- `ghost/core/core/server/services/recommendations/recommendation-enabler-service.js` (modified)
+- `ghost/core/core/server/services/recommendations/service/in-memory-recommendation-repository.ts` (modified)
+- `ghost/core/core/server/services/recommendations/service/recommendation-service.ts` (modified)
+- `ghost/core/core/server/services/settings-helpers/index.js` (modified)
+- `ghost/core/core/server/services/settings-helpers/settings-helpers.js` (renamed)
+- `ghost/core/core/server/services/settings/settings-bread-service.js` (renamed)
+- `ghost/core/core/server/services/settings/settings-service.js` (modified)
+- `ghost/core/core/server/services/staff/staff-service-emails.js` (modified)
+- `ghost/core/core/server/services/stats/content-stats-service.js` (renamed)
+- `ghost/core/core/server/services/stats/members-stats-service.js` (renamed)
+- `ghost/core/core/server/services/stats/mrr-stats-service.js` (renamed)
+- `ghost/core/core/server/services/stats/posts-stats-service.js` (renamed)
+- `ghost/core/core/server/services/stats/referrers-stats-service.js` (renamed)
+- `ghost/core/core/server/services/stats/service.js` (modified)
+- `ghost/core/core/server/services/stats/stats-service.js` (renamed)
+- `ghost/core/core/server/services/stats/subscription-stats-service.js` (renamed)
+- `ghost/core/core/server/services/stripe/services/webhook/CheckoutSessionEventService.js` (modified)
+- `ghost/core/core/server/services/themes/storage.js` (modified)
+- `ghost/core/core/server/services/themes/theme-storage.js` (renamed)
+- `ghost/core/core/server/services/update-check/index.js` (modified)
+- `ghost/core/core/server/services/update-check/update-check-service.js` (renamed)
+- `ghost/core/core/server/services/users.js` (renamed)
+- `ghost/core/core/server/services/verification-trigger.js` (renamed)
+- `ghost/core/core/server/services/webhooks/listen.js` (modified)
+- `ghost/core/core/server/services/webhooks/webhook-trigger.js` (renamed)
+- `ghost/core/test/e2e-api/admin/settings.test.js` (modified)
+- `ghost/core/test/e2e-api/members/send-magic-link.test.js` (modified)
+- `ghost/core/test/e2e-browser/fixtures/ghost-test.js` (modified)
+- `ghost/core/test/integration/services/email-service/email-event-storage.test.js` (modified)
+- `ghost/core/test/integration/services/mailgun-email-suppression-list.test.js` (modified)
+- `ghost/core/test/unit/server/services/activitypub/activity-pub-service.test.ts` (modified)
+- `ghost/core/test/unit/server/services/adapter-manager/adapter-manager.test.js` (modified)
+- `ghost/core/test/unit/server/services/announcement-bar/announcement-bar-settings.test.js` (modified)
+- `ghost/core/test/unit/server/services/audience-feedback/audience-feedback-service.test.js` (modified)
+- `ghost/core/test/unit/server/services/auth/session/store.test.js` (modified)
+- `ghost/core/test/unit/server/services/comments/comments-service-emails-renderer.test.js` (modified)
+- `ghost/core/test/unit/server/services/custom-redirects/api.test.js` (modified)
+- `ghost/core/test/unit/server/services/email-analytics/email-analytics-provider-mailgun.test.js` (modified)
+- `ghost/core/test/unit/server/services/email-analytics/email-analytics-service.test.js` (modified)
+- `ghost/core/test/unit/server/services/email-analytics/event-processing-result.test.js` (modified)
+- `ghost/core/test/unit/server/services/email-suppression-list/email-suppression-list.test.js` (modified)
+- `ghost/core/test/unit/server/services/explore-ping/explore-ping-service.test.js` (modified)
+- `ghost/core/test/unit/server/services/frontend-data-service/frontend-data-service.test.js` (modified)
+- `ghost/core/test/unit/server/services/identity-tokens/identity-token-service.test.ts` (modified)
+- `ghost/core/test/unit/server/services/lib/dynamic-redirect-manager.test.js` (modified)
+- `ghost/core/test/unit/server/services/lib/email-content-generator.test.js` (modified)
+- `ghost/core/test/unit/server/services/lib/in-memory-repository.test.ts` (modified)
+- `ghost/core/test/unit/server/services/lib/mailgun-client.test.js` (modified)
+- `ghost/core/test/unit/server/services/media-inliner/test/external-media-inliner.test.js` (modified)
+- `ghost/core/test/unit/server/services/member-attribution/attribution.test.js` (modified)
+- `ghost/core/test/unit/server/services/member-attribution/history.test.js` (modified)
+- `ghost/core/test/unit/server/services/member-attribution/outbound-link-tagger.test.js` (modified)
+- `ghost/core/test/unit/server/services/member-attribution/referrer-translator.test.js` (modified)
+- `ghost/core/test/unit/server/services/member-attribution/service.test.js` (modified)
+- `ghost/core/test/unit/server/services/member-attribution/url-translator.test.js` (modified)
+- `ghost/core/test/unit/server/services/member-welcome-emails/member-welcome-email-renderer.test.js` (modified)
+- `ghost/core/test/unit/server/services/members-events/event-storage.test.js` (modified)
+- `ghost/core/test/unit/server/services/members-events/last-seen-at-cache.test.js` (modified)
+- `ghost/core/test/unit/server/services/members-events/last-seen-at-updater.test.js` (modified)
+- `ghost/core/test/unit/server/services/members/config.test.js` (modified)
+- `ghost/core/test/unit/server/services/members/importer/index.test.js` (modified)
+- `ghost/core/test/unit/server/services/members/importer/members-csv-importer-stripe-utils.test.js` (modified)
+- `ghost/core/test/unit/server/services/members/importer/members-csv-importer.test.js` (modified)
+- `ghost/core/test/unit/server/services/members/members-api/controllers/member-controller.test.js` (modified)
+- `ghost/core/test/unit/server/services/members/members-api/controllers/router-controller.test.js` (modified)
+- `ghost/core/test/unit/server/services/members/members-api/repositories/event-repository.test.js` (modified)
+- `ghost/core/test/unit/server/services/members/members-api/repositories/member-repository.test.js` (modified)
+- `ghost/core/test/unit/server/services/members/members-api/repositories/product-repository.test.js` (modified)
+- `ghost/core/test/unit/server/services/members/members-api/services/geolocation-service.test.js` (modified)
+- `ghost/core/test/unit/server/services/members/members-api/services/members-bread-service.test.js` (modified)
+- `ghost/core/test/unit/server/services/members/members-api/services/payments-service.test.js` (modified)
+- `ghost/core/test/unit/server/services/members/members-api/services/token-service.test.js` (modified)
+- `ghost/core/test/unit/server/services/members/request-integrity-token-provider.test.js` (modified)
+- `ghost/core/test/unit/server/services/members/single-use-token-provider.test.js` (modified)
+- `ghost/core/test/unit/server/services/mentions-email-report/mention-email-report-job.test.js` (modified)
+- `ghost/core/test/unit/server/services/newsletters/service.test.js` (modified)
+- `ghost/core/test/unit/server/services/notifications/notifications.test.js` (modified)
+- `ghost/core/test/unit/server/services/outbox/index.test.js` (modified)
+- `ghost/core/test/unit/server/services/recommendations/service/recommendation-service.test.ts` (modified)
+- `ghost/core/test/unit/server/services/settings-helpers/settings-helpers.test.js` (modified)
+- `ghost/core/test/unit/server/services/settings/settings-bread-service.test.js` (modified)
+- `ghost/core/test/unit/server/services/stats/content.test.js` (modified)
+- `ghost/core/test/unit/server/services/stats/members.test.js` (modified)
+- `ghost/core/test/unit/server/services/stats/mrr.test.js` (modified)
+- `ghost/core/test/unit/server/services/stats/posts.test.js` (modified)
+- `ghost/core/test/unit/server/services/stats/referrers.test.js` (modified)
+- `ghost/core/test/unit/server/services/stats/stats.test.js` (modified)
+- `ghost/core/test/unit/server/services/stats/subscriptions.test.js` (modified)
+- `ghost/core/test/unit/server/services/update-check.test.js` (modified)
+- `ghost/core/test/unit/server/services/users/users-service.test.js` (modified)
+- `ghost/core/test/unit/server/services/verification-trigger.test.js` (modified)
+- `ghost/core/test/unit/server/services/webhooks/trigger.test.js` (modified)
+- `ghost/core/test/utils/e2e-framework-mock-manager.js` (modified)
+
+## Changed Entities
+
+- `ghost/core/core/server/api/endpoints/authentication.js:13-13` module `ghost.core.core.server.api.endpoints.authentication`
+- `ghost/core/core/server/api/endpoints/users.js:9-9` module `ghost.core.core.server.api.endpoints.users`
+- `ghost/core/core/server/api/endpoints/utils/validators/input/settings.js:5-5` module `ghost.core.core.server.api.endpoints.utils.validators.input.settings`
+- `ghost/core/core/server/services/activitypub/activity-pub-service.ts:3-3` module `ghost.core.core.server.services.activitypub.activity-pub-service`
+- `ghost/core/core/server/services/adapter-manager/adapter-manager.js:1-1` module `ghost.core.core.server.services.adapter-manager.adapter-manager`
+- `ghost/core/core/server/services/adapter-manager/index.js:1-1` module `ghost.core.core.server.services.adapter-manager.index`
+- `ghost/core/core/server/services/announcement-bar-service/announcement-bar-settings.js:1-1` module `ghost.core.core.server.services.announcement-bar-service.announcement-bar-settings`
+- `ghost/core/core/server/services/announcement-bar-service/announcement-visibility-values.js:1-1` module `ghost.core.core.server.services.announcement-bar-service.announcement-visibility-values`
+- `ghost/core/core/server/services/announcement-bar-service/index.js:2-2` module `ghost.core.core.server.services.announcement-bar-service.index`
+- `ghost/core/core/server/services/audience-feedback/audience-feedback-controller.js:1-1` module `ghost.core.core.server.services.audience-feedback.audience-feedback-controller`
+- `ghost/core/core/server/services/audience-feedback/audience-feedback-service.js:1-1` module `ghost.core.core.server.services.audience-feedback.audience-feedback-service`
+- `ghost/core/core/server/services/audience-feedback/feedback-repository.js:1-1` module `ghost.core.core.server.services.audience-feedback.feedback-repository`
+- `ghost/core/core/server/services/audience-feedback/feedback.js:1-1` module `ghost.core.core.server.services.audience-feedback.feedback`
+- `ghost/core/core/server/services/audience-feedback/index.js:4-7` module `ghost.core.core.server.services.audience-feedback.index`
+- `ghost/core/core/server/services/auth/session/express-session.js:8-8` module `ghost.core.core.server.services.auth.session.express-session`
+- `ghost/core/core/server/services/auth/session/session-store.js:1-1` module `ghost.core.core.server.services.auth.session.session-store`
+- `ghost/core/core/server/services/comments/comments-controller.js:20-21` module `ghost.core.core.server.services.comments.comments-controller`
+- `ghost/core/core/server/services/comments/comments-service-email-renderer.js:1-1` module `ghost.core.core.server.services.comments.comments-service-email-renderer`
+- `ghost/core/core/server/services/comments/comments-service-emails.js:4-4` module `ghost.core.core.server.services.comments.comments-service-emails`
+- `ghost/core/core/server/services/comments/comments-service.js:28-28` module `ghost.core.core.server.services.comments.comments-service`
+- `ghost/core/core/server/services/comments/comments-stats-service.js:1-1` module `ghost.core.core.server.services.comments.comments-stats-service`
+- `ghost/core/core/server/services/comments/index.js:3-5` module `ghost.core.core.server.services.comments.index`
+- `ghost/core/core/server/services/custom-redirects/custom-redirects-api.js:1-1` module `ghost.core.core.server.services.custom-redirects.custom-redirects-api`
+- `ghost/core/core/server/services/custom-redirects/index.js:4-5` module `ghost.core.core.server.services.custom-redirects.index`
+- `ghost/core/core/server/services/donations/donation-bookshelf-repository.ts:1-1` module `ghost.core.core.server.services.donations.donation-bookshelf-repository`
+- `ghost/core/core/server/services/donations/donation-payment-event.ts:1-1` module `ghost.core.core.server.services.donations.donation-payment-event`
+- `ghost/core/core/server/services/donations/donation-service-wrapper.js:1-1` module `ghost.core.core.server.services.donations.donation-service-wrapper`
+- `ghost/core/core/server/services/donations/index.js:1-1` module `ghost.core.core.server.services.donations.index`
+- `ghost/core/core/server/services/email-analytics/email-analytics-provider-mailgun.js:1-1` module `ghost.core.core.server.services.email-analytics.email-analytics-provider-mailgun`
+- `ghost/core/core/server/services/email-analytics/email-analytics-service-wrapper.js:11-16` module `ghost.core.core.server.services.email-analytics.email-analytics-service-wrapper`
+- `ghost/core/core/server/services/email-analytics/email-analytics-service.js:1-1` module `ghost.core.core.server.services.email-analytics.email-analytics-service`
+- `ghost/core/core/server/services/email-analytics/event-processing-result.js:1-1` module `ghost.core.core.server.services.email-analytics.event-processing-result`
+- `ghost/core/core/server/services/email-analytics/events/start-email-analytics-job-event.js:1-1` module `ghost.core.core.server.services.email-analytics.events.start-email-analytics-job-event`
+- `ghost/core/core/server/services/email-analytics/index.js:1-1` module `ghost.core.core.server.services.email-analytics.index`
+- `ghost/core/core/server/services/email-analytics/jobs/fetch-latest/index.js:2-2` module `ghost.core.core.server.services.email-analytics.jobs.fetch-latest.index`
+- `ghost/core/core/server/services/email-service/EmailServiceWrapper.js:28-28` module `ghost.core.core.server.services.email-service.EmailServiceWrapper`
+- `ghost/core/core/server/services/email-suppression-list/email-suppression-list.js:1-1` module `ghost.core.core.server.services.email-suppression-list.email-suppression-list`
+- `ghost/core/core/server/services/email-suppression-list/in-memory-email-suppression-list.js:1-1` module `ghost.core.core.server.services.email-suppression-list.in-memory-email-suppression-list`
+- `ghost/core/core/server/services/email-suppression-list/mailgun-email-suppression-list.js:1-1` module `ghost.core.core.server.services.email-suppression-list.mailgun-email-suppression-list`
+- `ghost/core/core/server/services/email-suppression-list/service.js:5-6` module `ghost.core.core.server.services.email-suppression-list.service`
+- `ghost/core/core/server/services/explore-ping/explore-ping-service.js:1-1` module `ghost.core.core.server.services.explore-ping.explore-ping-service`
+- `ghost/core/core/server/services/explore-ping/index.js:1-1` module `ghost.core.core.server.services.explore-ping.index`
+- `ghost/core/core/server/services/explore/explore-service.js:1-1` module `ghost.core.core.server.services.explore.explore-service`
+- `ghost/core/core/server/services/explore/index.js:1-1` module `ghost.core.core.server.services.explore.index`
+- `ghost/core/core/server/services/frontend-data-service/front-end-data-service.js:1-1` module `ghost.core.core.server.services.frontend-data-service.front-end-data-service`
+- `ghost/core/core/server/services/frontend-data-service/index.js:2-2` module `ghost.core.core.server.services.frontend-data-service.index`
+- `ghost/core/core/server/services/identity-tokens/identity-token-service-wrapper.js:1-1` module `ghost.core.core.server.services.identity-tokens.identity-token-service-wrapper`
+- `ghost/core/core/server/services/identity-tokens/identity-token-service.ts:1-1` module `ghost.core.core.server.services.identity-tokens.identity-token-service`
+- `ghost/core/core/server/services/identity-tokens/index.js:1-1` module `ghost.core.core.server.services.identity-tokens.index`
+- `ghost/core/core/server/services/invites/index.js:5-5` module `ghost.core.core.server.services.invites.index`
+- `ghost/core/core/server/services/invites/invites.js:1-1` module `ghost.core.core.server.services.invites.invites`
+- `ghost/core/core/server/services/lib/dynamic-redirect-manager.js:1-1` module `ghost.core.core.server.services.lib.dynamic-redirect-manager`
+- `ghost/core/core/server/services/lib/email-content-generator.js:1-1` module `ghost.core.core.server.services.lib.email-content-generator`
+- `ghost/core/core/server/services/lib/in-memory-repository.ts:1-1` module `ghost.core.core.server.services.lib.in-memory-repository`
+- `ghost/core/core/server/services/lib/mailgun-client.js:1-1` module `ghost.core.core.server.services.lib.mailgun-client`
+- `ghost/core/core/server/services/mail/ghost-mailer.js:1-1` module `ghost.core.core.server.services.mail.ghost-mailer`
+- `ghost/core/core/server/services/mail/index.js:4-4` module `ghost.core.core.server.services.mail.index`
+- `ghost/core/core/server/services/media-inliner/external-media-inliner.js:1-1` module `ghost.core.core.server.services.media-inliner.external-media-inliner`
+- `ghost/core/core/server/services/media-inliner/service.js:4-4` module `ghost.core.core.server.services.media-inliner.service`
+- `ghost/core/core/server/services/member-attribution/README.md:43-62` module `ghost.core.core.server.services.member-attribution.README`
+- `ghost/core/core/server/services/member-attribution/attribution-builder.js:18-18` module `ghost.core.core.server.services.member-attribution.attribution-builder`
+- `ghost/core/core/server/services/member-attribution/index.js:14-18` module `ghost.core.core.server.services.member-attribution.index`
+- `ghost/core/core/server/services/member-attribution/member-attribution-service.js:1-1` module `ghost.core.core.server.services.member-attribution.member-attribution-service`
+- `ghost/core/core/server/services/member-attribution/outbound-link-tagger.js:1-1` module `ghost.core.core.server.services.member-attribution.outbound-link-tagger`
+- `ghost/core/core/server/services/member-attribution/referrer-translator.js:35-35` module `ghost.core.core.server.services.member-attribution.referrer-translator`
+- `ghost/core/core/server/services/member-attribution/url-history.js:1-1` module `ghost.core.core.server.services.member-attribution.url-history`
+- `ghost/core/core/server/services/member-attribution/url-translator.js:57-57` module `ghost.core.core.server.services.member-attribution.url-translator`
+- `ghost/core/core/server/services/member-welcome-emails/member-welcome-email-renderer.js:1-1` module `ghost.core.core.server.services.member-welcome-emails.member-welcome-email-renderer`
+- `ghost/core/core/server/services/member-welcome-emails/service.js:10-10` module `ghost.core.core.server.services.member-welcome-emails.service`
+- `ghost/core/core/server/services/members-events/event-storage.js:1-1` module `ghost.core.core.server.services.members-events.event-storage`
+- `ghost/core/core/server/services/members-events/index.js:16-18` module `ghost.core.core.server.services.members-events.index`
+- `ghost/core/core/server/services/members-events/last-seen-at-cache.js:1-1` module `ghost.core.core.server.services.members-events.last-seen-at-cache`
+- `ghost/core/core/server/services/members-events/last-seen-at-updater.js:6-6` module `ghost.core.core.server.services.members-events.last-seen-at-updater`
+- `ghost/core/core/server/services/members/api.js:13-13` module `ghost.core.core.server.services.members.api`
+- `ghost/core/core/server/services/members/importer/index.js:1-5` module `ghost.core.core.server.services.members.importer.index`
+- `ghost/core/core/server/services/members/importer/members-csv-importer-stripe-utils.js:1-1` module `ghost.core.core.server.services.members.importer.members-csv-importer-stripe-utils`
+- `ghost/core/core/server/services/members/importer/members-csv-importer.js:1-1` module `ghost.core.core.server.services.members.importer.members-csv-importer`
+- `ghost/core/core/server/services/members/members-api/controllers/member-controller.js:1-1` module `ghost.core.core.server.services.members.members-api.controllers.member-controller`
+- `ghost/core/core/server/services/members/members-api/controllers/router-controller.js:1-1` module `ghost.core.core.server.services.members.members-api.controllers.router-controller`
+- `ghost/core/core/server/services/members/members-api/controllers/well-known-controller.js:1-1` module `ghost.core.core.server.services.members.members-api.controllers.well-known-controller`
+- `ghost/core/core/server/services/members/members-api/members-api.js:1-19` module `ghost.core.core.server.services.members.members-api.members-api`
+- `ghost/core/core/server/services/members/members-api/repositories/event-repository.js:1-1` module `ghost.core.core.server.services.members.members-api.repositories.event-repository`
+- `ghost/core/core/server/services/members/members-api/repositories/member-repository.js:12-12` module `ghost.core.core.server.services.members.members-api.repositories.member-repository`
+- `ghost/core/core/server/services/members/members-api/repositories/product-repository.js:1-1` module `ghost.core.core.server.services.members.members-api.repositories.product-repository`
+- `ghost/core/core/server/services/members/members-api/services/geolocation-service.js:1-1` module `ghost.core.core.server.services.members.members-api.services.geolocation-service`
+- `ghost/core/core/server/services/members/members-api/services/member-bread-service.js:33-33` module `ghost.core.core.server.services.members.members-api.services.member-bread-service`
+- `ghost/core/core/server/services/members/members-api/services/payments-service.js:1-1` module `ghost.core.core.server.services.members.members-api.services.payments-service`
+- `ghost/core/core/server/services/members/members-api/services/token-service.js:1-1` module `ghost.core.core.server.services.members.members-api.services.token-service`
+- `ghost/core/core/server/services/members/members-config-provider.js:1-1` module `ghost.core.core.server.services.members.members-config-provider`
+- `ghost/core/core/server/services/members/request-integrity-token-provider.js:1-1` module `ghost.core.core.server.services.members.request-integrity-token-provider`
+- `ghost/core/core/server/services/members/service.js:6-8` module `ghost.core.core.server.services.members.service`
+- `ghost/core/core/server/services/members/single-use-token-provider.js:1-1` module `ghost.core.core.server.services.members.single-use-token-provider`
+- `ghost/core/core/server/services/members/stats/members-stats.js:1-1` module `ghost.core.core.server.services.members.stats.members-stats`
+- `ghost/core/core/server/services/mentions-email-report/job.js:2-2` module `ghost.core.core.server.services.mentions-email-report.job`
+- `ghost/core/core/server/services/mentions-email-report/mention-email-report-job.js:1-1` module `ghost.core.core.server.services.mentions-email-report.mention-email-report-job`
+- `ghost/core/core/server/services/mentions-email-report/service.js:1-1` module `ghost.core.core.server.services.mentions-email-report.service`
+- `ghost/core/core/server/services/mentions-email-report/start-mention-email-report-job.js:1-1` module `ghost.core.core.server.services.mentions-email-report.start-mention-email-report-job`
+- `ghost/core/core/server/services/newsletters/index.js:1-2` module `ghost.core.core.server.services.newsletters.index`
+- `ghost/core/core/server/services/newsletters/newsletters-service.js:1-1` module `ghost.core.core.server.services.newsletters.newsletters-service`
+- `ghost/core/core/server/services/notifications/index.js:2-2` module `ghost.core.core.server.services.notifications.index`
+- `ghost/core/core/server/services/notifications/notifications.js:1-1` module `ghost.core.core.server.services.notifications.notifications`
+- `ghost/core/core/server/services/offers/service.js:1-1` module `ghost.core.core.server.services.offers.service`
+- `ghost/core/core/server/services/outbox/events/start-outbox-processing-event.js:1-1` module `ghost.core.core.server.services.outbox.events.start-outbox-processing-event`
+- `ghost/core/core/server/services/outbox/index.js:3-3` module `ghost.core.core.server.services.outbox.index`
+- `ghost/core/core/server/services/outbox/jobs/outbox-job.js:2-2` module `ghost.core.core.server.services.outbox.jobs.outbox-job`
+- `ghost/core/core/server/services/recommendations/recommendation-enabler-service.js:2-7` module `ghost.core.core.server.services.recommendations.recommendation-enabler-service`
+- `ghost/core/core/server/services/recommendations/service/in-memory-recommendation-repository.ts:3-3` module `ghost.core.core.server.services.recommendations.service.in-memory-recommendation-repository`
+- `ghost/core/core/server/services/recommendations/service/recommendation-service.ts:2-2` module `ghost.core.core.server.services.recommendations.service.recommendation-service`
+- `ghost/core/core/server/services/settings-helpers/index.js:4-4` module `ghost.core.core.server.services.settings-helpers.index`
+- `ghost/core/core/server/services/settings-helpers/settings-helpers.js:1-1` module `ghost.core.core.server.services.settings-helpers.settings-helpers`
+- `ghost/core/core/server/services/settings/settings-bread-service.js:1-1` module `ghost.core.core.server.services.settings.settings-bread-service`
+- `ghost/core/core/server/services/settings/settings-service.js:12-15` module `ghost.core.core.server.services.settings.settings-service`
+- `ghost/core/core/server/services/staff/staff-service-emails.js:266-266` module `ghost.core.core.server.services.staff.staff-service-emails`
+- `ghost/core/core/server/services/stats/content-stats-service.js:1-1` module `ghost.core.core.server.services.stats.content-stats-service`
+- `ghost/core/core/server/services/stats/members-stats-service.js:1-1` module `ghost.core.core.server.services.stats.members-stats-service`
+- `ghost/core/core/server/services/stats/mrr-stats-service.js:1-1` module `ghost.core.core.server.services.stats.mrr-stats-service`
+- `ghost/core/core/server/services/stats/posts-stats-service.js:6-6` module `ghost.core.core.server.services.stats.posts-stats-service`
+- `ghost/core/core/server/services/stats/referrers-stats-service.js:1-1` module `ghost.core.core.server.services.stats.referrers-stats-service`
+- `ghost/core/core/server/services/stats/service.js:13-13` module `ghost.core.core.server.services.stats.service`
+- `ghost/core/core/server/services/stats/stats-service.js:1-6` module `ghost.core.core.server.services.stats.stats-service`
+- `ghost/core/core/server/services/stats/subscription-stats-service.js:1-1` module `ghost.core.core.server.services.stats.subscription-stats-service`
+- `ghost/core/core/server/services/stripe/services/webhook/CheckoutSessionEventService.js:65-65` module `ghost.core.core.server.services.stripe.services.webhook.CheckoutSessionEventService`
+- `ghost/core/core/server/services/themes/storage.js:11-11` module `ghost.core.core.server.services.themes.storage`
+- `ghost/core/core/server/services/themes/theme-storage.js:1-1` module `ghost.core.core.server.services.themes.theme-storage`
+- `ghost/core/core/server/services/update-check/index.js:13-13` module `ghost.core.core.server.services.update-check.index`
+- `ghost/core/core/server/services/update-check/update-check-service.js:1-1` module `ghost.core.core.server.services.update-check.update-check-service`
+- `ghost/core/core/server/services/users.js:1-1` module `ghost.core.core.server.services.users`
+- `ghost/core/core/server/services/verification-trigger.js:1-1` module `ghost.core.core.server.services.verification-trigger`
+- `ghost/core/core/server/services/webhooks/listen.js:3-3` module `ghost.core.core.server.services.webhooks.listen`
+- `ghost/core/core/server/services/webhooks/webhook-trigger.js:1-1` module `ghost.core.core.server.services.webhooks.webhook-trigger`
+- `ghost/core/test/e2e-api/admin/settings.test.js:4-4` module `ghost.core.test.e2e-api.admin.settings.test`
+- `ghost/core/test/e2e-api/members/send-magic-link.test.js:879-879` module `ghost.core.test.e2e-api.members.send-magic-link.test`
+- `ghost/core/test/e2e-browser/fixtures/ghost-test.js:11-11` module `ghost.core.test.e2e-browser.fixtures.ghost-test`
+- `ghost/core/test/integration/services/email-service/email-event-storage.test.js:4-4` module `ghost.core.test.integration.services.email-service.email-event-storage.test`
+- `ghost/core/test/integration/services/mailgun-email-suppression-list.test.js:6-6` module `ghost.core.test.integration.services.mailgun-email-suppression-list.test`
+- `ghost/core/test/unit/server/services/activitypub/activity-pub-service.test.ts:4-4` module `ghost.core.test.unit.server.services.activitypub.activity-pub-service.test`
+- `ghost/core/test/unit/server/services/adapter-manager/adapter-manager.test.js:3-3` module `ghost.core.test.unit.server.services.adapter-manager.adapter-manager.test`
+- `ghost/core/test/unit/server/services/announcement-bar/announcement-bar-settings.test.js:2-2` module `ghost.core.test.unit.server.services.announcement-bar.announcement-bar-settings.test`
+- `ghost/core/test/unit/server/services/audience-feedback/audience-feedback-service.test.js:2-2` module `ghost.core.test.unit.server.services.audience-feedback.audience-feedback-service.test`
+- `ghost/core/test/unit/server/services/auth/session/store.test.js:1-1` module `ghost.core.test.unit.server.services.auth.session.store.test`
+- `ghost/core/test/unit/server/services/comments/comments-service-emails-renderer.test.js:3-3` module `ghost.core.test.unit.server.services.comments.comments-service-emails-renderer.test`
+- `ghost/core/test/unit/server/services/custom-redirects/api.test.js:7-7` module `ghost.core.test.unit.server.services.custom-redirects.api.test`
+- `ghost/core/test/unit/server/services/email-analytics/email-analytics-provider-mailgun.test.js:3-4` module `ghost.core.test.unit.server.services.email-analytics.email-analytics-provider-mailgun.test`
+- `ghost/core/test/unit/server/services/email-analytics/email-analytics-service.test.js:6-7` module `ghost.core.test.unit.server.services.email-analytics.email-analytics-service.test`
+- `ghost/core/test/unit/server/services/email-analytics/event-processing-result.test.js:3-3` module `ghost.core.test.unit.server.services.email-analytics.event-processing-result.test`
+- `ghost/core/test/unit/server/services/email-suppression-list/email-suppression-list.test.js:2-2` module `ghost.core.test.unit.server.services.email-suppression-list.email-suppression-list.test`
+- `ghost/core/test/unit/server/services/explore-ping/explore-ping-service.test.js:3-3` module `ghost.core.test.unit.server.services.explore-ping.explore-ping-service.test`
+- `ghost/core/test/unit/server/services/frontend-data-service/frontend-data-service.test.js:6-6` module `ghost.core.test.unit.server.services.frontend-data-service.frontend-data-service.test`
+- `ghost/core/test/unit/server/services/identity-tokens/identity-token-service.test.ts:2-2` module `ghost.core.test.unit.server.services.identity-tokens.identity-token-service.test`
+- `ghost/core/test/unit/server/services/lib/dynamic-redirect-manager.test.js:2-2` module `ghost.core.test.unit.server.services.lib.dynamic-redirect-manager.test`
+- `ghost/core/test/unit/server/services/lib/email-content-generator.test.js:4-4` module `ghost.core.test.unit.server.services.lib.email-content-generator.test`
+- `ghost/core/test/unit/server/services/lib/in-memory-repository.test.ts:2-2` module `ghost.core.test.unit.server.services.lib.in-memory-repository.test`
+- `ghost/core/test/unit/server/services/lib/mailgun-client.test.js:6-6` module `ghost.core.test.unit.server.services.lib.mailgun-client.test`
+- `ghost/core/test/unit/server/services/media-inliner/test/external-media-inliner.test.js:8-8` module `ghost.core.test.unit.server.services.media-inliner.test.external-media-inliner.test`
+- `ghost/core/test/unit/server/services/member-attribution/attribution.test.js:3-4` module `ghost.core.test.unit.server.services.member-attribution.attribution.test`
+- `ghost/core/test/unit/server/services/member-attribution/history.test.js:3-3` module `ghost.core.test.unit.server.services.member-attribution.history.test`
+- `ghost/core/test/unit/server/services/member-attribution/outbound-link-tagger.test.js:4-4` module `ghost.core.test.unit.server.services.member-attribution.outbound-link-tagger.test`
+- `ghost/core/test/unit/server/services/member-attribution/referrer-translator.test.js:3-3` module `ghost.core.test.unit.server.services.member-attribution.referrer-translator.test`
+- `ghost/core/test/unit/server/services/member-attribution/service.test.js:3-3` module `ghost.core.test.unit.server.services.member-attribution.service.test`
+- `ghost/core/test/unit/server/services/member-attribution/url-translator.test.js:3-3` module `ghost.core.test.unit.server.services.member-attribution.url-translator.test`
+- `ghost/core/test/unit/server/services/member-welcome-emails/member-welcome-email-renderer.test.js:19-19` module `ghost.core.test.unit.server.services.member-welcome-emails.member-welcome-email-renderer.test`
+- `ghost/core/test/unit/server/services/members-events/event-storage.test.js:5-5` module `ghost.core.test.unit.server.services.members-events.event-storage.test`
+- `ghost/core/test/unit/server/services/members-events/last-seen-at-cache.test.js:1-1` module `ghost.core.test.unit.server.services.members-events.last-seen-at-cache.test`
+- `ghost/core/test/unit/server/services/members-events/last-seen-at-updater.test.js:4-4` module `ghost.core.test.unit.server.services.members-events.last-seen-at-updater.test`
+- `ghost/core/test/unit/server/services/members/config.test.js:4-4` module `ghost.core.test.unit.server.services.members.config.test`
+- `ghost/core/test/unit/server/services/members/importer/index.test.js:2-2` module `ghost.core.test.unit.server.services.members.importer.index.test`
+- `ghost/core/test/unit/server/services/members/importer/members-csv-importer-stripe-utils.test.js:4-4` module `ghost.core.test.unit.server.services.members.importer.members-csv-importer-stripe-utils.test`
+- `ghost/core/test/unit/server/services/members/importer/members-csv-importer.test.js:9-9` module `ghost.core.test.unit.server.services.members.importer.members-csv-importer.test`
+- `ghost/core/test/unit/server/services/members/members-api/controllers/member-controller.test.js:2-2` module `ghost.core.test.unit.server.services.members.members-api.controllers.member-controller.test`
+- `ghost/core/test/unit/server/services/members/members-api/controllers/router-controller.test.js:7-7` module `ghost.core.test.unit.server.services.members.members-api.controllers.router-controller.test`
+- `ghost/core/test/unit/server/services/members/members-api/repositories/event-repository.test.js:3-3` module `ghost.core.test.unit.server.services.members.members-api.repositories.event-repository.test`
+- `ghost/core/test/unit/server/services/members/members-api/repositories/member-repository.test.js:5-5` module `ghost.core.test.unit.server.services.members.members-api.repositories.member-repository.test`
+- `ghost/core/test/unit/server/services/members/members-api/repositories/product-repository.test.js:3-3` module `ghost.core.test.unit.server.services.members.members-api.repositories.product-repository.test`
+- `ghost/core/test/unit/server/services/members/members-api/services/geolocation-service.test.js:3-3` module `ghost.core.test.unit.server.services.members.members-api.services.geolocation-service.test`
+- `ghost/core/test/unit/server/services/members/members-api/services/members-bread-service.test.js:3-3` module `ghost.core.test.unit.server.services.members.members-api.services.members-bread-service.test`
+- `ghost/core/test/unit/server/services/members/members-api/services/payments-service.test.js:7-7` module `ghost.core.test.unit.server.services.members.members-api.services.payments-service.test`
+- `ghost/core/test/unit/server/services/members/members-api/services/token-service.test.js:4-4` module `ghost.core.test.unit.server.services.members.members-api.services.token-service.test`
+- `ghost/core/test/unit/server/services/members/request-integrity-token-provider.test.js:4-4` module `ghost.core.test.unit.server.services.members.request-integrity-token-provider.test`
+- `ghost/core/test/unit/server/services/members/single-use-token-provider.test.js:4-4` module `ghost.core.test.unit.server.services.members.single-use-token-provider.test`
+- `ghost/core/test/unit/server/services/mentions-email-report/mention-email-report-job.test.js:2-2` module `ghost.core.test.unit.server.services.mentions-email-report.mention-email-report-job.test`
+- `ghost/core/test/unit/server/services/newsletters/service.test.js:12-12` module `ghost.core.test.unit.server.services.newsletters.service.test`
+- `ghost/core/test/unit/server/services/notifications/notifications.test.js:6-6` module `ghost.core.test.unit.server.services.notifications.notifications.test`
+- `ghost/core/test/unit/server/services/outbox/index.test.js:4-4` module `ghost.core.test.unit.server.services.outbox.index.test`
+- `ghost/core/test/unit/server/services/recommendations/service/recommendation-service.test.ts:3-3` module `ghost.core.test.unit.server.services.recommendations.service.recommendation-service.test`
+- `ghost/core/test/unit/server/services/settings-helpers/settings-helpers.test.js:4-4` module `ghost.core.test.unit.server.services.settings-helpers.settings-helpers.test`
+- `ghost/core/test/unit/server/services/settings/settings-bread-service.test.js:4-4` module `ghost.core.test.unit.server.services.settings.settings-bread-service.test`
+- `ghost/core/test/unit/server/services/stats/content.test.js:3-3` module `ghost.core.test.unit.server.services.stats.content.test`
+- `ghost/core/test/unit/server/services/stats/members.test.js:1-1` module `ghost.core.test.unit.server.services.stats.members.test`
+- `ghost/core/test/unit/server/services/stats/mrr.test.js:1-1` module `ghost.core.test.unit.server.services.stats.mrr.test`
+- `ghost/core/test/unit/server/services/stats/posts.test.js:4-4` module `ghost.core.test.unit.server.services.stats.posts.test`
+- `ghost/core/test/unit/server/services/stats/referrers.test.js:4-4` module `ghost.core.test.unit.server.services.stats.referrers.test`
+- `ghost/core/test/unit/server/services/stats/stats.test.js:1-1` module `ghost.core.test.unit.server.services.stats.stats.test`
+- `ghost/core/test/unit/server/services/stats/subscriptions.test.js:3-3` module `ghost.core.test.unit.server.services.stats.subscriptions.test`
+- `ghost/core/test/unit/server/services/update-check.test.js:10-10` module `ghost.core.test.unit.server.services.update-check.test`
+- `ghost/core/test/unit/server/services/users/users-service.test.js:4-4` module `ghost.core.test.unit.server.services.users.users-service.test`
+- `ghost/core/test/unit/server/services/verification-trigger.test.js:6-6` module `ghost.core.test.unit.server.services.verification-trigger.test`
+- `ghost/core/test/unit/server/services/webhooks/trigger.test.js:6-6` module `ghost.core.test.unit.server.services.webhooks.trigger.test`
+- `ghost/core/test/utils/e2e-framework-mock-manager.js:16-16` module `ghost.core.test.utils.e2e-framework-mock-manager`
+
+## Risk Signals
+
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/core/server/api/endpoints/authentication.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/core/server/api/endpoints/users.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/core/server/api/endpoints/utils/validators/input/settings.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/core/server/services/activitypub/activity-pub-service.ts.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/core/server/services/custom-redirects/index.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/core/server/services/email-analytics/email-analytics-provider-mailgun.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/core/server/services/email-analytics/email-analytics-service-wrapper.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/core/server/services/email-analytics/jobs/fetch-latest/index.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/core/server/services/email-service/EmailServiceWrapper.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/core/server/services/email-suppression-list/service.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/core/server/services/identity-tokens/identity-token-service-wrapper.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/core/server/services/identity-tokens/index.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/core/server/services/mail/index.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/core/server/services/members/api.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/core/server/services/members/members-api/members-api.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/core/server/services/members/members-api/repositories/member-repository.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/core/server/services/members/members-api/services/member-bread-service.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/core/server/services/members/service.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/core/server/services/newsletters/index.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/core/server/services/offers/service.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/core/server/services/outbox/jobs/outbox-job.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/core/server/services/recommendations/recommendation-enabler-service.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/core/server/services/recommendations/service/in-memory-recommendation-repository.ts.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/core/server/services/recommendations/service/recommendation-service.ts.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/core/server/services/settings/settings-service.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/core/server/services/staff/staff-service-emails.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/core/server/services/stripe/services/webhook/CheckoutSessionEventService.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/e2e-api/admin/settings.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/e2e-api/members/send-magic-link.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/e2e-browser/fixtures/ghost-test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/integration/services/email-service/email-event-storage.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/integration/services/mailgun-email-suppression-list.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/activitypub/activity-pub-service.test.ts.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/adapter-manager/adapter-manager.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/announcement-bar/announcement-bar-settings.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/audience-feedback/audience-feedback-service.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/auth/session/store.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/comments/comments-service-emails-renderer.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/custom-redirects/api.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/email-analytics/email-analytics-provider-mailgun.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/email-analytics/email-analytics-service.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/email-analytics/event-processing-result.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/email-suppression-list/email-suppression-list.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/explore-ping/explore-ping-service.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/frontend-data-service/frontend-data-service.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/identity-tokens/identity-token-service.test.ts.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/lib/dynamic-redirect-manager.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/lib/email-content-generator.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/lib/in-memory-repository.test.ts.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/lib/mailgun-client.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/media-inliner/test/external-media-inliner.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/member-attribution/attribution.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/member-attribution/history.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/member-attribution/outbound-link-tagger.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/member-attribution/referrer-translator.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/member-attribution/service.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/member-attribution/url-translator.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/member-welcome-emails/member-welcome-email-renderer.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/members-events/event-storage.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/members-events/last-seen-at-cache.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/members-events/last-seen-at-updater.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/members/config.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/members/importer/index.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/members/importer/members-csv-importer-stripe-utils.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/members/importer/members-csv-importer.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/members/members-api/controllers/member-controller.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/members/members-api/controllers/router-controller.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/members/members-api/repositories/event-repository.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/members/members-api/repositories/member-repository.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/members/members-api/repositories/product-repository.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/members/members-api/services/geolocation-service.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/members/members-api/services/members-bread-service.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/members/members-api/services/payments-service.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/members/members-api/services/token-service.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/members/request-integrity-token-provider.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/members/single-use-token-provider.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/mentions-email-report/mention-email-report-job.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/newsletters/service.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/notifications/notifications.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/outbox/index.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/recommendations/service/recommendation-service.test.ts.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/settings-helpers/settings-helpers.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/settings/settings-bread-service.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/stats/content.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/stats/members.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/stats/mrr.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/stats/posts.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/stats/referrers.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/stats/stats.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/stats/subscriptions.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/update-check.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/users/users-service.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/verification-trigger.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/unit/server/services/webhooks/trigger.test.js.
+- `security_sensitive` (0.74): Security-sensitive keywords changed in ghost/core/test/utils/e2e-framework-mock-manager.js.
+
+## Evidence Index
+
+- `diff:ghost/core/core/server/api/endpoints/authentication.js:13` [diff]: ghost/core/core/server/api/endpoints/authentication.js:13
+- `diff:ghost/core/core/server/api/endpoints/users.js:9` [diff]: ghost/core/core/server/api/endpoints/users.js:9
+- `diff:ghost/core/core/server/api/endpoints/utils/validators/input/settings.js:5` [diff]: ghost/core/core/server/api/endpoints/utils/validators/input/settings.js:5
+- `diff:ghost/core/core/server/services/activitypub/activity-pub-service.ts:3` [diff]: ghost/core/core/server/services/activitypub/activity-pub-service.ts:3
+- `diff:ghost/core/core/server/services/adapter-manager/adapter-manager.js:1` [diff]: ghost/core/core/server/services/adapter-manager/adapter-manager.js:1
+- `diff:ghost/core/core/server/services/adapter-manager/index.js:1` [diff]: ghost/core/core/server/services/adapter-manager/index.js:1
+- `diff:ghost/core/core/server/services/announcement-bar-service/announcement-bar-settings.js:1` [diff]: ghost/core/core/server/services/announcement-bar-service/announcement-bar-settings.js:1
+- `diff:ghost/core/core/server/services/announcement-bar-service/announcement-visibility-values.js:1` [diff]: ghost/core/core/server/services/announcement-bar-service/announcement-visibility-values.js:1
+- `diff:ghost/core/core/server/services/announcement-bar-service/index.js:2` [diff]: ghost/core/core/server/services/announcement-bar-service/index.js:2
+- `diff:ghost/core/core/server/services/audience-feedback/audience-feedback-controller.js:1` [diff]: ghost/core/core/server/services/audience-feedback/audience-feedback-controller.js:1
+- `diff:ghost/core/core/server/services/audience-feedback/audience-feedback-controller.js:77` [diff]: ghost/core/core/server/services/audience-feedback/audience-feedback-controller.js:77
+- `diff:ghost/core/core/server/services/audience-feedback/audience-feedback-controller.js:78` [diff]: ghost/core/core/server/services/audience-feedback/audience-feedback-controller.js:78
+- `diff:ghost/core/core/server/services/audience-feedback/audience-feedback-service.js:1` [diff]: ghost/core/core/server/services/audience-feedback/audience-feedback-service.js:1
+- `diff:ghost/core/core/server/services/audience-feedback/feedback-repository.js:1` [diff]: ghost/core/core/server/services/audience-feedback/feedback-repository.js:1
+- `diff:ghost/core/core/server/services/audience-feedback/feedback.js:1` [diff]: ghost/core/core/server/services/audience-feedback/feedback.js:1
+- `diff:ghost/core/core/server/services/audience-feedback/index.js:4` [diff]: ghost/core/core/server/services/audience-feedback/index.js:4
+- `diff:ghost/core/core/server/services/audience-feedback/index.js:5` [diff]: ghost/core/core/server/services/audience-feedback/index.js:5
+- `diff:ghost/core/core/server/services/audience-feedback/index.js:6` [diff]: ghost/core/core/server/services/audience-feedback/index.js:6
+- `diff:ghost/core/core/server/services/audience-feedback/index.js:7` [diff]: ghost/core/core/server/services/audience-feedback/index.js:7
+- `diff:ghost/core/core/server/services/auth/session/express-session.js:8` [diff]: ghost/core/core/server/services/auth/session/express-session.js:8
+- `diff:ghost/core/core/server/services/auth/session/session-store.js:1` [diff]: ghost/core/core/server/services/auth/session/session-store.js:1
+- `diff:ghost/core/core/server/services/comments/comments-controller.js:20` [diff]: ghost/core/core/server/services/comments/comments-controller.js:20
+- `diff:ghost/core/core/server/services/comments/comments-controller.js:21` [diff]: ghost/core/core/server/services/comments/comments-controller.js:21
+- `diff:ghost/core/core/server/services/comments/comments-service-email-renderer.js:1` [diff]: ghost/core/core/server/services/comments/comments-service-email-renderer.js:1
+- `diff:ghost/core/core/server/services/comments/comments-service-emails.js:4` [diff]: ghost/core/core/server/services/comments/comments-service-emails.js:4
+- `diff:ghost/core/core/server/services/comments/comments-service.js:28` [diff]: ghost/core/core/server/services/comments/comments-service.js:28
+- `diff:ghost/core/core/server/services/comments/comments-stats-service.js:1` [diff]: ghost/core/core/server/services/comments/comments-stats-service.js:1
+- `diff:ghost/core/core/server/services/comments/index.js:3` [diff]: ghost/core/core/server/services/comments/index.js:3
+- `diff:ghost/core/core/server/services/comments/index.js:4` [diff]: ghost/core/core/server/services/comments/index.js:4
+- `diff:ghost/core/core/server/services/comments/index.js:5` [diff]: ghost/core/core/server/services/comments/index.js:5
+- ... 891 more evidence items omitted.

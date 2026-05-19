@@ -57,7 +57,11 @@ SECURITY_TOKENS = (
     "subprocess",
     "eval(",
     "exec(",
-    "path",
+    "shell=True",
+    "os.system",
+    "pickle.loads",
+    "yaml.load",
+    "../",
 )
 EXPERIMENT_MARKERS = (
     "experiment",

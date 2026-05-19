@@ -1,0 +1,125 @@
+{
+  "schema_version": "1.0",
+  "run_id": "b89bf3c768234123a87437b1d14b6ebb",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": true,
+  "package_hash": "sha256:50b49ec07ef1fe33b7f37157348332c9930dd2cc28c5e2d4f443a6b5180ef8c6",
+  "diff_hash": "sha256:1e42ec5fa86d872f6a48744267bff6073a878380bde16f21e473cf1b9bdb7f8b",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 1,
+      "verified_count": 0,
+      "needs_human_review_count": 0,
+      "discarded_count": 1,
+      "keep_count": 0,
+      "uncertain_count": 0,
+      "reject_count": 0,
+      "feedback_sent": [],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff_hunk:gpt_engineer/ai.py:1"
+          ],
+          "output_issue_ids": [
+            "api_change:gpt_engineer/ai.py:1"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 21475,
+          "token_count_in": 3060,
+          "token_count_out": 219,
+          "trace_id": "6d4e4e5326cf4e639c58a405395eda98",
+          "span_id": "adf24063a94043ca",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 1,
+          "context_request_count": 1,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "entity:gpt_engineer/ai.py:gpt_engineer.ai"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 3412,
+          "token_count_in": 1346,
+          "token_count_out": 81,
+          "trace_id": "64773d360d384dd6ad1f73cb0db0eaa0",
+          "span_id": "c52672c4a66141b2",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001-refill",
+          "shard_index": 0,
+          "shard_count": 1,
+          "context_request_count": 1,
+          "context_refill_used": true
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [],
+      "keep": [],
+      "needs_human_review": [],
+      "discarded": [
+        {
+          "file": "gpt_engineer/ai.py",
+          "line": 1,
+          "severity": "high",
+          "category": "api_change",
+          "message": "The `format_token_usage_log` method has been removed, breaking any external callers that depend on it.",
+          "suggestion": "If the method is no longer needed, ensure all callers are updated or add a deprecation path. If it should remain, restore the method.",
+          "confidence": 0.82,
+          "evidence_ids": [
+            "diff_hunk:gpt_engineer/ai.py:1"
+          ],
+          "filter_reason": "style_preference"
+        }
+      ]
+    }
+  ],
+  "last_feedback": null
+}

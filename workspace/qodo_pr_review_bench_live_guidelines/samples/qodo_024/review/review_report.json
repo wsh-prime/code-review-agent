@@ -1,0 +1,3650 @@
+{
+  "schema_version": "1.3",
+  "summary": {
+    "mode": "hybrid-live",
+    "changed_file_count": 4,
+    "changed_entity_count": 4,
+    "risk_signal_count": 1,
+    "finding_count": 0,
+    "needs_human_review_count": 0,
+    "discarded_count": 1,
+    "evidence_count": 229,
+    "missing_evidence_id_count": 0,
+    "agent_run_count": 2,
+    "prompt_exported": false,
+    "loop_enabled": true,
+    "loop_iterations_completed": 1,
+    "loop_converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "total_latency_ms": 12196,
+    "total_token_count_in": 7021,
+    "total_token_count_out": 164,
+    "context_budget_enabled": true,
+    "context_truncated": true,
+    "selected_evidence_count": 5,
+    "omitted_evidence_count": 200,
+    "review_shard_count": 1,
+    "context_refill_count": 0,
+    "context_request_count": 0,
+    "target_repo_modified": false
+  },
+  "findings": [],
+  "needs_human_review": [],
+  "discarded": [
+    {
+      "file": "packages/features/membership/repositories/MembershipRepository.ts",
+      "line": 3,
+      "severity": "high",
+      "category": "naming_convention",
+      "message": "Repository class does not follow naming convention: expected 'Prisma<Entity>Repository' pattern, found 'MembershipRepository'.",
+      "suggestion": "Rename the class and file to 'PrismaMembershipRepository' to match the required naming convention.",
+      "confidence": 0.95,
+      "evidence_ids": [
+        "diff_hunk:packages/features/membership/repositories/MembershipRepository.ts:3"
+      ],
+      "filter_reason": "style_preference"
+    }
+  ],
+  "changed_files": [
+    {
+      "old_path": "apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx",
+      "new_path": "apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 1,
+          "old_count": 11,
+          "new_start": 1,
+          "new_count": 10,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "removed",
+              "old_lineno": 1,
+              "new_lineno": null,
+              "content": "import { _generateMetadata } from \"app/_utils\";"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 2,
+              "new_lineno": null,
+              "content": "import { cookies, headers } from \"next/headers\";"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 3,
+              "new_lineno": null,
+              "content": "import { redirect } from \"next/navigation\";"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 4,
+              "new_lineno": null,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 5,
+              "new_lineno": 1,
+              "content": "import { getServerSession } from \"@calcom/features/auth/lib/getServerSession\";"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 2,
+              "content": "import { MembershipRepository } from \"@calcom/features/membership/repositories/MembershipRepository\";"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 6,
+              "new_lineno": 3,
+              "content": "import { APP_NAME } from \"@calcom/lib/constants\";"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 7,
+              "new_lineno": null,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 8,
+              "new_lineno": 4,
+              "content": "import { buildLegacyRequest } from \"@lib/buildLegacyCtx\";"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 5,
+              "content": "import { _generateMetadata } from \"app/_utils\";"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 6,
+              "content": "import { cookies, headers } from \"next/headers\";"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 7,
+              "content": "import { redirect } from \"next/navigation\";"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 9,
+              "new_lineno": 8,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 10,
+              "new_lineno": 9,
+              "content": "import { OnboardingView } from \"~/onboarding/getting-started/onboarding-view\";"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 11,
+              "new_lineno": 10,
+              "content": ""
+            }
+          ]
+        },
+        {
+          "old_start": 26,
+          "old_count": 7,
+          "new_start": 25,
+          "new_count": 14,
+          "section_header": "const ServerPage = async () => {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 26,
+              "new_lineno": 25,
+              "content": "    return redirect(\"/auth/login\");"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 27,
+              "new_lineno": 26,
+              "content": "  }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 28,
+              "new_lineno": 27,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 29,
+              "new_lineno": null,
+              "content": "  const userEmail = session.user.email || \"\";"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 28,
+              "content": "  // If user has pending team invites, redirect them directly to personal onboarding"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 29,
+              "content": "  // This handles the case where users sign up with an invite token and are redirected here"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 30,
+              "content": "  const hasPendingInvite = await MembershipRepository.hasPendingInviteByUserId({ userId: session.user.id });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 31,
+              "content": "  if (hasPendingInvite) {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 32,
+              "content": "    return redirect(\"/onboarding/personal/settings\");"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 33,
+              "content": "  }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 34,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 35,
+              "content": "  const userEmail = session.user.email || '';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 30,
+              "new_lineno": 36,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 31,
+              "new_lineno": 37,
+              "content": "  return <OnboardingView userEmail={userEmail} />;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 32,
+              "new_lineno": 38,
+              "content": "};"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "packages/features/auth/lib/onboardingUtils.ts",
+      "new_path": "packages/features/auth/lib/onboardingUtils.ts",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 1,
+          "old_count": 5,
+          "new_start": 1,
+          "new_count": 6,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 1,
+              "new_lineno": 1,
+              "content": "import dayjs from \"@calcom/dayjs\";"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 2,
+              "new_lineno": 2,
+              "content": "import { FeaturesRepository } from \"@calcom/features/flags/features.repository\";"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 3,
+              "content": "import { MembershipRepository } from \"@calcom/features/membership/repositories/MembershipRepository\";"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 3,
+              "new_lineno": 4,
+              "content": "import { ProfileRepository } from \"@calcom/features/profile/repositories/ProfileRepository\";"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 4,
+              "new_lineno": 5,
+              "content": "import { UserRepository } from \"@calcom/features/users/repositories/UserRepository\";"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 5,
+              "new_lineno": 6,
+              "content": "import { prisma } from \"@calcom/prisma\";"
+            }
+          ]
+        },
+        {
+          "old_start": 51,
+          "old_count": 9,
+          "new_start": 52,
+          "new_count": 8,
+          "section_header": "export async function checkOnboardingRedirect(",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 51,
+              "new_lineno": 52,
+              "content": "  const featuresRepository = new FeaturesRepository(prisma);"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 52,
+              "new_lineno": 53,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 53,
+              "new_lineno": 54,
+              "content": "  if (options?.checkEmailVerification) {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 54,
+              "new_lineno": null,
+              "content": "    const emailVerificationEnabled = await featuresRepository.checkIfFeatureIsEnabledGlobally("
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 55,
+              "new_lineno": null,
+              "content": "      \"email-verification\""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 56,
+              "new_lineno": null,
+              "content": "    );"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 55,
+              "content": "    const emailVerificationEnabled ="
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 56,
+              "content": "      await featuresRepository.checkIfFeatureIsEnabledGlobally(\"email-verification\");"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 57,
+              "new_lineno": 57,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 58,
+              "new_lineno": 58,
+              "content": "    if (!user.emailVerified && user.identityProvider === \"CAL\" && emailVerificationEnabled) {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 59,
+              "new_lineno": 59,
+              "content": "      // User needs email verification, redirect to verification page"
+            }
+          ]
+        },
+        {
+          "old_start": 64,
+          "old_count": 17,
+          "new_start": 64,
+          "new_count": 9,
+          "section_header": "export async function checkOnboardingRedirect(",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 64,
+              "new_lineno": 64,
+              "content": "  // Determine which onboarding path to use"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 65,
+              "new_lineno": 65,
+              "content": "  const onboardingV3Enabled = await featuresRepository.checkIfFeatureIsEnabledGlobally(\"onboarding-v3\");"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 66,
+              "new_lineno": 66,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 67,
+              "new_lineno": null,
+              "content": "  const pendingInvite = await prisma.membership.findFirst({"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 68,
+              "new_lineno": null,
+              "content": "    where: {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 69,
+              "new_lineno": null,
+              "content": "      userId: userId,"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 70,
+              "new_lineno": null,
+              "content": "      accepted: false,"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 71,
+              "new_lineno": null,
+              "content": "    },"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 72,
+              "new_lineno": null,
+              "content": "    select: {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 73,
+              "new_lineno": null,
+              "content": "      id: true,"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 74,
+              "new_lineno": null,
+              "content": "    },"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 75,
+              "new_lineno": null,
+              "content": "  });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 67,
+              "content": "  const hasPendingInvite = await MembershipRepository.hasPendingInviteByUserId({ userId });"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 76,
+              "new_lineno": 68,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 77,
+              "new_lineno": null,
+              "content": "  if (pendingInvite && onboardingV3Enabled) {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 69,
+              "content": "  if (hasPendingInvite || onboardingV3Enabled) {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 78,
+              "new_lineno": 70,
+              "content": "    return \"/onboarding/personal/settings\";"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 79,
+              "new_lineno": 71,
+              "content": "  }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 80,
+              "new_lineno": 72,
+              "content": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": null,
+      "new_path": "packages/features/membership/repositories/MembershipRepository.integration-test.ts",
+      "change_type": "added",
+      "hunks": [
+        {
+          "old_start": 0,
+          "old_count": 0,
+          "new_start": 1,
+          "new_count": 164,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1,
+              "content": "import { describe, it, expect, beforeAll, afterAll, afterEach } from \"vitest\";"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 2,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 3,
+              "content": "import { prisma } from \"@calcom/prisma\";"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 4,
+              "content": "import { MembershipRole } from \"@calcom/prisma/enums\";"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 5,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 6,
+              "content": "import { MembershipRepository } from \"./MembershipRepository\";"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 7,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 8,
+              "content": "const createdMembershipIds: number[] = [];"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 9,
+              "content": "let testTeamId: number;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 10,
+              "content": "let createdTeamId: number | null = null;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 11,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 12,
+              "content": "async function clearTestMemberships() {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 13,
+              "content": "  if (createdMembershipIds.length > 0) {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 14,
+              "content": "    await prisma.membership.deleteMany({"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 15,
+              "content": "      where: { id: { in: createdMembershipIds } },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 16,
+              "content": "    });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 17,
+              "content": "    createdMembershipIds.length = 0;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 18,
+              "content": "  }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 19,
+              "content": "}"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 20,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 21,
+              "content": "describe(\"MembershipRepository (Integration Tests)\", () => {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 22,
+              "content": "  beforeAll(async () => {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 23,
+              "content": "    let testTeam = await prisma.team.findFirst({"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 24,
+              "content": "      where: { slug: { not: null } },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 25,
+              "content": "    });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 26,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 27,
+              "content": "    if (!testTeam) {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 28,
+              "content": "      testTeam = await prisma.team.create({"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 29,
+              "content": "        data: {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 30,
+              "content": "          name: \"Test Team for MembershipRepository\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 31,
+              "content": "          slug: `test-team-membership-repo-${Date.now()}`,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 32,
+              "content": "        },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 33,
+              "content": "      });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 34,
+              "content": "      createdTeamId = testTeam.id;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 35,
+              "content": "    }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 36,
+              "content": "    testTeamId = testTeam.id;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 37,
+              "content": "  });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 38,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 39,
+              "content": "  afterAll(async () => {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 40,
+              "content": "    if (createdTeamId) {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 41,
+              "content": "      await prisma.team.delete({ where: { id: createdTeamId } });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 42,
+              "content": "    }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 43,
+              "content": "  });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 44,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 45,
+              "content": "  afterEach(async () => {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 46,
+              "content": "    await clearTestMemberships();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 47,
+              "content": "  });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 48,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 49,
+              "content": "  describe(\"hasPendingInviteByUserId\", () => {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 50,
+              "content": "    it(\"should return true when user has a pending invite (accepted: false)\", async () => {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 51,
+              "content": "      const newUser = await prisma.user.create({"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 52,
+              "content": "        data: {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 53,
+              "content": "          email: `test-pending-invite-${Date.now()}@example.com`,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 54,
+              "content": "          username: `test-pending-${Date.now()}`,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 55,
+              "content": "        },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 56,
+              "content": "      });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 57,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 58,
+              "content": "      const membership = await prisma.membership.create({"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 59,
+              "content": "        data: {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 60,
+              "content": "          userId: newUser.id,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 61,
+              "content": "          teamId: testTeamId,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 62,
+              "content": "          role: MembershipRole.MEMBER,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 63,
+              "content": "          accepted: false,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 64,
+              "content": "        },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 65,
+              "content": "      });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 66,
+              "content": "      createdMembershipIds.push(membership.id);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 67,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 68,
+              "content": "      const result = await MembershipRepository.hasPendingInviteByUserId({ userId: newUser.id });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 69,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 70,
+              "content": "      expect(result).toBe(true);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 71,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 72,
+              "content": "      await prisma.membership.delete({ where: { id: membership.id } });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 73,
+              "content": "      createdMembershipIds.length = 0;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 74,
+              "content": "      await prisma.user.delete({ where: { id: newUser.id } });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 75,
+              "content": "    });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 76,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 77,
+              "content": "    it(\"should return false when user has no pending invites (all accepted)\", async () => {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 78,
+              "content": "      const newUser = await prisma.user.create({"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 79,
+              "content": "        data: {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 80,
+              "content": "          email: `test-accepted-invite-${Date.now()}@example.com`,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 81,
+              "content": "          username: `test-accepted-${Date.now()}`,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 82,
+              "content": "        },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 83,
+              "content": "      });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 84,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 85,
+              "content": "      const membership = await prisma.membership.create({"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 86,
+              "content": "        data: {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 87,
+              "content": "          userId: newUser.id,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 88,
+              "content": "          teamId: testTeamId,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 89,
+              "content": "          role: MembershipRole.MEMBER,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 90,
+              "content": "          accepted: true,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 91,
+              "content": "        },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 92,
+              "content": "      });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 93,
+              "content": "      createdMembershipIds.push(membership.id);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 94,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 95,
+              "content": "      const result = await MembershipRepository.hasPendingInviteByUserId({ userId: newUser.id });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 96,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 97,
+              "content": "      expect(result).toBe(false);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 98,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 99,
+              "content": "      await prisma.membership.delete({ where: { id: membership.id } });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 100,
+              "content": "      createdMembershipIds.length = 0;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 101,
+              "content": "      await prisma.user.delete({ where: { id: newUser.id } });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 102,
+              "content": "    });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 103,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 104,
+              "content": "    it(\"should return false when user has no memberships at all\", async () => {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 105,
+              "content": "      const newUser = await prisma.user.create({"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 106,
+              "content": "        data: {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 107,
+              "content": "          email: `test-no-membership-${Date.now()}@example.com`,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 108,
+              "content": "          username: `test-no-membership-${Date.now()}`,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 109,
+              "content": "        },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 110,
+              "content": "      });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 111,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 112,
+              "content": "      const result = await MembershipRepository.hasPendingInviteByUserId({ userId: newUser.id });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 113,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 114,
+              "content": "      expect(result).toBe(false);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 115,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 116,
+              "content": "      await prisma.user.delete({ where: { id: newUser.id } });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 117,
+              "content": "    });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 118,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 119,
+              "content": "    it(\"should return true when user has both accepted and pending invites\", async () => {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 120,
+              "content": "      const newUser = await prisma.user.create({"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 121,
+              "content": "        data: {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 122,
+              "content": "          email: `test-mixed-invites-${Date.now()}@example.com`,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 123,
+              "content": "          username: `test-mixed-${Date.now()}`,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 124,
+              "content": "        },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 125,
+              "content": "      });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 126,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 127,
+              "content": "      const team2 = await prisma.team.findFirst({"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 128,
+              "content": "        where: {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 129,
+              "content": "          slug: { not: null },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 130,
+              "content": "          id: { not: testTeamId },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 131,
+              "content": "        },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 132,
+              "content": "      });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 133,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 134,
+              "content": "      const acceptedMembership = await prisma.membership.create({"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 135,
+              "content": "        data: {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 136,
+              "content": "          userId: newUser.id,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 137,
+              "content": "          teamId: testTeamId,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 138,
+              "content": "          role: MembershipRole.MEMBER,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 139,
+              "content": "          accepted: true,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 140,
+              "content": "        },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 141,
+              "content": "      });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 142,
+              "content": "      createdMembershipIds.push(acceptedMembership.id);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 143,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 144,
+              "content": "      if (team2) {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 145,
+              "content": "        const pendingMembership = await prisma.membership.create({"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 146,
+              "content": "          data: {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 147,
+              "content": "            userId: newUser.id,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 148,
+              "content": "            teamId: team2.id,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 149,
+              "content": "            role: MembershipRole.MEMBER,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 150,
+              "content": "            accepted: false,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 151,
+              "content": "          },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 152,
+              "content": "        });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 153,
+              "content": "        createdMembershipIds.push(pendingMembership.id);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 154,
+              "content": "      }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 155,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 156,
+              "content": "      const result = await MembershipRepository.hasPendingInviteByUserId({ userId: newUser.id });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 157,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 158,
+              "content": "      expect(result).toBe(team2 ? true : false);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 159,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 160,
+              "content": "      await clearTestMemberships();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 161,
+              "content": "      await prisma.user.delete({ where: { id: newUser.id } });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 162,
+              "content": "    });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 163,
+              "content": "  });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 164,
+              "content": "});"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "packages/features/membership/repositories/MembershipRepository.ts",
+      "new_path": "packages/features/membership/repositories/MembershipRepository.ts",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 3,
+          "old_count": 8,
+          "new_start": 3,
+          "new_count": 8,
+          "section_header": "import { withSelectedCalendars } from \"@calcom/features/users/repositories/UserR",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 3,
+              "new_lineno": 3,
+              "content": "import logger from \"@calcom/lib/logger\";"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 4,
+              "new_lineno": 4,
+              "content": "import { safeStringify } from \"@calcom/lib/safeStringify\";"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 5,
+              "new_lineno": 5,
+              "content": "import { eventTypeSelect } from \"@calcom/lib/server/eventTypeSelect\";"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 6,
+              "new_lineno": null,
+              "content": "import { availabilityUserSelect, prisma, type PrismaTransaction } from \"@calcom/prisma\";"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 7,
+              "new_lineno": null,
+              "content": "import type { Prisma, Membership, PrismaClient } from \"@calcom/prisma/client\";"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 6,
+              "content": "import { availabilityUserSelect, type PrismaTransaction, prisma } from \"@calcom/prisma\";"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 7,
+              "content": "import type { Membership, Prisma, PrismaClient } from \"@calcom/prisma/client\";"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 8,
+              "new_lineno": 8,
+              "content": "import { MembershipRole } from \"@calcom/prisma/enums\";"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 9,
+              "new_lineno": 9,
+              "content": "import { credentialForCalendarServiceSelect } from \"@calcom/prisma/selects/credential\";"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 10,
+              "new_lineno": 10,
+              "content": ""
+            }
+          ]
+        },
+        {
+          "old_start": 563,
+          "old_count": 13,
+          "new_start": 563,
+          "new_count": 7,
+          "section_header": "export class MembershipRepository {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 563,
+              "new_lineno": 563,
+              "content": "  }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 564,
+              "new_lineno": 564,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 565,
+              "new_lineno": 565,
+              "content": "  // Two indexed lookups instead of JOIN with ILIKE (which bypasses index)"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 566,
+              "new_lineno": null,
+              "content": "  async hasAcceptedMembershipByEmail({"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 567,
+              "new_lineno": null,
+              "content": "    email,"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 568,
+              "new_lineno": null,
+              "content": "    teamId,"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 569,
+              "new_lineno": null,
+              "content": "  }: {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 570,
+              "new_lineno": null,
+              "content": "    email: string;"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 571,
+              "new_lineno": null,
+              "content": "    teamId: number;"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 572,
+              "new_lineno": null,
+              "content": "  }): Promise<boolean> {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 566,
+              "content": "  async hasAcceptedMembershipByEmail({ email, teamId }: { email: string; teamId: number }): Promise<boolean> {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 573,
+              "new_lineno": 567,
+              "content": "    const user = await this.prismaClient.user.findUnique({"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 574,
+              "new_lineno": 568,
+              "content": "      where: { email: email.toLowerCase() },"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 575,
+              "new_lineno": 569,
+              "content": "      select: { id: true },"
+            }
+          ]
+        },
+        {
+          "old_start": 586,
+          "old_count": 4,
+          "new_start": 580,
+          "new_count": 17,
+          "section_header": "export class MembershipRepository {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 586,
+              "new_lineno": 580,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 587,
+              "new_lineno": 581,
+              "content": "    return membership?.accepted ?? false;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 588,
+              "new_lineno": 582,
+              "content": "  }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 583,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 584,
+              "content": "  static async hasPendingInviteByUserId({ userId }: { userId: number }): Promise<boolean> {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 585,
+              "content": "    const pendingInvite = await prisma.membership.findFirst({"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 586,
+              "content": "      where: {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 587,
+              "content": "        userId,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 588,
+              "content": "        accepted: true,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 589,
+              "content": "      },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 590,
+              "content": "      select: {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 591,
+              "content": "        id: true,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 592,
+              "content": "      },"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 593,
+              "content": "    });"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 594,
+              "content": "    return !!pendingInvite;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 595,
+              "content": "  }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 589,
+              "new_lineno": 596,
+              "content": "}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "changed_entities": [
+    {
+      "path": "apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx",
+      "entity_type": "module",
+      "name": "page.tsx",
+      "qualified_name": "apps.web.app.(use-page-wrapper).onboarding.getting-started.page",
+      "line_start": 1,
+      "line_end": 7,
+      "hunk_ids": [
+        "apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:1",
+        "apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:25"
+      ]
+    },
+    {
+      "path": "packages/features/auth/lib/onboardingUtils.ts",
+      "entity_type": "module",
+      "name": "onboardingUtils.ts",
+      "qualified_name": "packages.features.auth.lib.onboardingUtils",
+      "line_start": 3,
+      "line_end": 3,
+      "hunk_ids": [
+        "packages/features/auth/lib/onboardingUtils.ts:1",
+        "packages/features/auth/lib/onboardingUtils.ts:52",
+        "packages/features/auth/lib/onboardingUtils.ts:64"
+      ]
+    },
+    {
+      "path": "packages/features/membership/repositories/MembershipRepository.integration-test.ts",
+      "entity_type": "module",
+      "name": "MembershipRepository.integration-test.ts",
+      "qualified_name": "packages.features.membership.repositories.MembershipRepository.integration-test",
+      "line_start": 1,
+      "line_end": 164,
+      "hunk_ids": [
+        "packages/features/membership/repositories/MembershipRepository.integration-test.ts:1"
+      ]
+    },
+    {
+      "path": "packages/features/membership/repositories/MembershipRepository.ts",
+      "entity_type": "module",
+      "name": "MembershipRepository.ts",
+      "qualified_name": "packages.features.membership.repositories.MembershipRepository",
+      "line_start": 6,
+      "line_end": 7,
+      "hunk_ids": [
+        "packages/features/membership/repositories/MembershipRepository.ts:3",
+        "packages/features/membership/repositories/MembershipRepository.ts:563",
+        "packages/features/membership/repositories/MembershipRepository.ts:580"
+      ]
+    }
+  ],
+  "risk_signals": [
+    {
+      "tag": "security_sensitive",
+      "confidence": 0.74,
+      "reason": "Security-sensitive keywords changed in apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx.",
+      "evidence_ids": [
+        "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:1",
+        "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:2",
+        "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:28",
+        "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:29",
+        "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:3",
+        "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:30",
+        "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:31",
+        "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:32",
+        "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:33",
+        "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:34",
+        "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:35",
+        "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:4",
+        "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:5",
+        "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:6",
+        "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:7"
+      ]
+    }
+  ],
+  "evidence_index": {
+    "diff_hunk:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:1": {
+      "id": "diff_hunk:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:1",
+      "kind": "diff_hunk",
+      "source": "apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:1",
+      "message": "@@ -1,11 +1,10 @@\n-import { _generateMetadata } from \"app/_utils\";\n-import { cookies, headers } from \"next/headers\";\n-import { redirect } from \"next/navigation\";\n-\n import { getServerSession } from \"@calcom/features/auth/lib/getServerSession\";\n+import { MembershipRepository } from \"@calcom/features/membership/repositories/MembershipRepository\";\n import { APP_NAME } from \"@calcom/lib/constants\";\n-\n import { buildLegacyRequest } from \"@lib/buildLegacyCtx\";\n+import { _generateMetadata } from \"app/_utils\";\n+import { cookies, headers } from \"next/headers\";\n+import { redirect } from \"next/navigation\";\n \n import { OnboardingView } from \"~/onboarding/getting-started/onboarding-view\";\n "
+    },
+    "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:1": {
+      "id": "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:1",
+      "kind": "diff",
+      "source": "apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:1",
+      "message": "Removed line: import { _generateMetadata } from \"app/_utils\";"
+    },
+    "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:2": {
+      "id": "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:2",
+      "kind": "diff",
+      "source": "apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:2",
+      "message": "Added line: import { MembershipRepository } from \"@calcom/features/membership/repositories/MembershipRepository\";"
+    },
+    "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:3": {
+      "id": "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:3",
+      "kind": "diff",
+      "source": "apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:3",
+      "message": "Removed line: import { redirect } from \"next/navigation\";"
+    },
+    "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:4": {
+      "id": "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:4",
+      "kind": "diff",
+      "source": "apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:4",
+      "message": "Removed line: "
+    },
+    "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:7": {
+      "id": "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:7",
+      "kind": "diff",
+      "source": "apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:7",
+      "message": "Added line: import { redirect } from \"next/navigation\";"
+    },
+    "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:5": {
+      "id": "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:5",
+      "kind": "diff",
+      "source": "apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:5",
+      "message": "Added line: import { _generateMetadata } from \"app/_utils\";"
+    },
+    "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:6": {
+      "id": "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:6",
+      "kind": "diff",
+      "source": "apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:6",
+      "message": "Added line: import { cookies, headers } from \"next/headers\";"
+    },
+    "diff_hunk:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:25": {
+      "id": "diff_hunk:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:25",
+      "kind": "diff_hunk",
+      "source": "apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:25",
+      "message": "@@ -26,7 +25,14 @@ const ServerPage = async () => {\n     return redirect(\"/auth/login\");\n   }\n \n-  const userEmail = session.user.email || \"\";\n+  // If user has pending team invites, redirect them directly to personal onboarding\n+  // This handles the case where users sign up with an invite token and are redirected here\n+  const hasPendingInvite = await MembershipRepository.hasPendingInviteByUserId({ userId: session.user.id });\n+  if (hasPendingInvite) {\n+    return redirect(\"/onboarding/personal/settings\");\n+  }\n+\n+  const userEmail = session.user.email || '';\n \n   return <OnboardingView userEmail={userEmail} />;\n };"
+    },
+    "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:29": {
+      "id": "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:29",
+      "kind": "diff",
+      "source": "apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:29",
+      "message": "Added line: // This handles the case where users sign up with an invite token and are redirected here"
+    },
+    "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:28": {
+      "id": "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:28",
+      "kind": "diff",
+      "source": "apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:28",
+      "message": "Added line: // If user has pending team invites, redirect them directly to personal onboarding"
+    },
+    "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:30": {
+      "id": "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:30",
+      "kind": "diff",
+      "source": "apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:30",
+      "message": "Added line: const hasPendingInvite = await MembershipRepository.hasPendingInviteByUserId({ userId: session.user.id });"
+    },
+    "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:31": {
+      "id": "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:31",
+      "kind": "diff",
+      "source": "apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:31",
+      "message": "Added line: if (hasPendingInvite) {"
+    },
+    "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:32": {
+      "id": "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:32",
+      "kind": "diff",
+      "source": "apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:32",
+      "message": "Added line: return redirect(\"/onboarding/personal/settings\");"
+    },
+    "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:33": {
+      "id": "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:33",
+      "kind": "diff",
+      "source": "apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:33",
+      "message": "Added line: }"
+    },
+    "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:34": {
+      "id": "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:34",
+      "kind": "diff",
+      "source": "apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:34",
+      "message": "Added line: "
+    },
+    "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:35": {
+      "id": "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:35",
+      "kind": "diff",
+      "source": "apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:35",
+      "message": "Added line: const userEmail = session.user.email || '';"
+    },
+    "diff_hunk:packages/features/auth/lib/onboardingUtils.ts:1": {
+      "id": "diff_hunk:packages/features/auth/lib/onboardingUtils.ts:1",
+      "kind": "diff_hunk",
+      "source": "packages/features/auth/lib/onboardingUtils.ts:1",
+      "message": "@@ -1,5 +1,6 @@\n import dayjs from \"@calcom/dayjs\";\n import { FeaturesRepository } from \"@calcom/features/flags/features.repository\";\n+import { MembershipRepository } from \"@calcom/features/membership/repositories/MembershipRepository\";\n import { ProfileRepository } from \"@calcom/features/profile/repositories/ProfileRepository\";\n import { UserRepository } from \"@calcom/features/users/repositories/UserRepository\";\n import { prisma } from \"@calcom/prisma\";"
+    },
+    "diff:packages/features/auth/lib/onboardingUtils.ts:3": {
+      "id": "diff:packages/features/auth/lib/onboardingUtils.ts:3",
+      "kind": "diff",
+      "source": "packages/features/auth/lib/onboardingUtils.ts:3",
+      "message": "Added line: import { MembershipRepository } from \"@calcom/features/membership/repositories/MembershipRepository\";"
+    },
+    "diff_hunk:packages/features/auth/lib/onboardingUtils.ts:52": {
+      "id": "diff_hunk:packages/features/auth/lib/onboardingUtils.ts:52",
+      "kind": "diff_hunk",
+      "source": "packages/features/auth/lib/onboardingUtils.ts:52",
+      "message": "@@ -51,9 +52,8 @@ export async function checkOnboardingRedirect(\n   const featuresRepository = new FeaturesRepository(prisma);\n \n   if (options?.checkEmailVerification) {\n-    const emailVerificationEnabled = await featuresRepository.checkIfFeatureIsEnabledGlobally(\n-      \"email-verification\"\n-    );\n+    const emailVerificationEnabled =\n+      await featuresRepository.checkIfFeatureIsEnabledGlobally(\"email-verification\");\n \n     if (!user.emailVerified && user.identityProvider === \"CAL\" && emailVerificationEnabled) {\n       // User needs email verification, redirect to verification page"
+    },
+    "diff:packages/features/auth/lib/onboardingUtils.ts:54": {
+      "id": "diff:packages/features/auth/lib/onboardingUtils.ts:54",
+      "kind": "diff",
+      "source": "packages/features/auth/lib/onboardingUtils.ts:54",
+      "message": "Removed line: const emailVerificationEnabled = await featuresRepository.checkIfFeatureIsEnabledGlobally("
+    },
+    "diff:packages/features/auth/lib/onboardingUtils.ts:55": {
+      "id": "diff:packages/features/auth/lib/onboardingUtils.ts:55",
+      "kind": "diff",
+      "source": "packages/features/auth/lib/onboardingUtils.ts:55",
+      "message": "Added line: const emailVerificationEnabled ="
+    },
+    "diff:packages/features/auth/lib/onboardingUtils.ts:56": {
+      "id": "diff:packages/features/auth/lib/onboardingUtils.ts:56",
+      "kind": "diff",
+      "source": "packages/features/auth/lib/onboardingUtils.ts:56",
+      "message": "Added line: await featuresRepository.checkIfFeatureIsEnabledGlobally(\"email-verification\");"
+    },
+    "diff_hunk:packages/features/auth/lib/onboardingUtils.ts:64": {
+      "id": "diff_hunk:packages/features/auth/lib/onboardingUtils.ts:64",
+      "kind": "diff_hunk",
+      "source": "packages/features/auth/lib/onboardingUtils.ts:64",
+      "message": "@@ -64,17 +64,9 @@ export async function checkOnboardingRedirect(\n   // Determine which onboarding path to use\n   const onboardingV3Enabled = await featuresRepository.checkIfFeatureIsEnabledGlobally(\"onboarding-v3\");\n \n-  const pendingInvite = await prisma.membership.findFirst({\n-    where: {\n-      userId: userId,\n-      accepted: false,\n-    },\n-    select: {\n-      id: true,\n-    },\n-  });\n+  const hasPendingInvite = await MembershipRepository.hasPendingInviteByUserId({ userId });\n \n-  if (pendingInvite && onboardingV3Enabled) {\n+  if (hasPendingInvite || onboardingV3Enabled) {\n     return \"/onboarding/personal/settings\";\n   }\n "
+    },
+    "diff:packages/features/auth/lib/onboardingUtils.ts:67": {
+      "id": "diff:packages/features/auth/lib/onboardingUtils.ts:67",
+      "kind": "diff",
+      "source": "packages/features/auth/lib/onboardingUtils.ts:67",
+      "message": "Added line: const hasPendingInvite = await MembershipRepository.hasPendingInviteByUserId({ userId });"
+    },
+    "diff:packages/features/auth/lib/onboardingUtils.ts:68": {
+      "id": "diff:packages/features/auth/lib/onboardingUtils.ts:68",
+      "kind": "diff",
+      "source": "packages/features/auth/lib/onboardingUtils.ts:68",
+      "message": "Removed line: where: {"
+    },
+    "diff:packages/features/auth/lib/onboardingUtils.ts:69": {
+      "id": "diff:packages/features/auth/lib/onboardingUtils.ts:69",
+      "kind": "diff",
+      "source": "packages/features/auth/lib/onboardingUtils.ts:69",
+      "message": "Added line: if (hasPendingInvite || onboardingV3Enabled) {"
+    },
+    "diff:packages/features/auth/lib/onboardingUtils.ts:70": {
+      "id": "diff:packages/features/auth/lib/onboardingUtils.ts:70",
+      "kind": "diff",
+      "source": "packages/features/auth/lib/onboardingUtils.ts:70",
+      "message": "Removed line: accepted: false,"
+    },
+    "diff:packages/features/auth/lib/onboardingUtils.ts:71": {
+      "id": "diff:packages/features/auth/lib/onboardingUtils.ts:71",
+      "kind": "diff",
+      "source": "packages/features/auth/lib/onboardingUtils.ts:71",
+      "message": "Removed line: },"
+    },
+    "diff:packages/features/auth/lib/onboardingUtils.ts:72": {
+      "id": "diff:packages/features/auth/lib/onboardingUtils.ts:72",
+      "kind": "diff",
+      "source": "packages/features/auth/lib/onboardingUtils.ts:72",
+      "message": "Removed line: select: {"
+    },
+    "diff:packages/features/auth/lib/onboardingUtils.ts:73": {
+      "id": "diff:packages/features/auth/lib/onboardingUtils.ts:73",
+      "kind": "diff",
+      "source": "packages/features/auth/lib/onboardingUtils.ts:73",
+      "message": "Removed line: id: true,"
+    },
+    "diff:packages/features/auth/lib/onboardingUtils.ts:74": {
+      "id": "diff:packages/features/auth/lib/onboardingUtils.ts:74",
+      "kind": "diff",
+      "source": "packages/features/auth/lib/onboardingUtils.ts:74",
+      "message": "Removed line: },"
+    },
+    "diff:packages/features/auth/lib/onboardingUtils.ts:75": {
+      "id": "diff:packages/features/auth/lib/onboardingUtils.ts:75",
+      "kind": "diff",
+      "source": "packages/features/auth/lib/onboardingUtils.ts:75",
+      "message": "Removed line: });"
+    },
+    "diff:packages/features/auth/lib/onboardingUtils.ts:77": {
+      "id": "diff:packages/features/auth/lib/onboardingUtils.ts:77",
+      "kind": "diff",
+      "source": "packages/features/auth/lib/onboardingUtils.ts:77",
+      "message": "Removed line: if (pendingInvite && onboardingV3Enabled) {"
+    },
+    "diff_hunk:packages/features/membership/repositories/MembershipRepository.integration-test.ts:1": {
+      "id": "diff_hunk:packages/features/membership/repositories/MembershipRepository.integration-test.ts:1",
+      "kind": "diff_hunk",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:1",
+      "message": "@@ -0,0 +1,164 @@\n+import { describe, it, expect, beforeAll, afterAll, afterEach } from \"vitest\";\n+\n+import { prisma } from \"@calcom/prisma\";\n+import { MembershipRole } from \"@calcom/prisma/enums\";\n+\n+import { MembershipRepository } from \"./MembershipRepository\";\n+\n+const createdMembershipIds: number[] = [];\n+let testTeamId: number;\n+let createdTeamId: number | null = null;\n+\n+async function clearTestMemberships() {\n+  if (createdMembershipIds.length > 0) {\n+    await prisma.membership.deleteMany({\n+      where: { id: { in: createdMembershipIds } },\n+    });\n+    createdMembershipIds.length = 0;\n+  }\n+}\n+\n+describe(\"MembershipRepository (Integration Tests)\", () => {\n+  beforeAll(async () => {\n+    let testTeam = await prisma.team.findFirst({\n+      where: { slug: { not: null } },\n+    });\n+\n+    if (!testTeam) {\n+      testTeam = await prisma.team.create({\n+        data: {\n+          name: \"Test Team for MembershipRepository\",\n+          slug: `test-team-membership-repo-${Date.now()}`,\n+        },\n+      });\n+      createdTeamId = testTeam.id;\n+    }\n+    testTeamId = testTeam.id;\n+  });\n+\n+  afterAll(async () => {\n+    if (createdTeamId) {\n+      await prisma.team.delete({ where: { id: createdTeamId } });\n+    }\n+  });\n+\n+  afterEach(async () => {\n+    await clearTestMemberships();\n+  });\n+\n+  describe(\"hasPendingInviteByUserId\", () => {\n+    it(\"should return true when user has a pending invite (accepted: false)\", async () => {\n+      const newUser = await prisma.user.create({\n+        data: {\n+          email: `test-pending-invite-${Date.now()}@example.com`,\n+          username: `test-pending-${Date.now()}`,\n+        },\n+      });\n+\n+      const membership = await prisma.membership.create({\n+        data: {\n+          userId: newUser.id,\n+          teamId: testTeamId,\n+          role: MembershipRole.MEMBER,\n+          accepted: false,\n+        },\n+      });\n+      createdMembershipIds.push(membership.id);\n+\n+      const result = await MembershipRepository.hasPendingInviteByUserId({ userId: newUser.id });\n+\n+      expect(result).toBe(true);\n+\n+      await prisma.membership.delete({ where: { id: membership.id } });\n+      createdMembershipIds.length = 0;\n+      await prisma.user.delete({ where: { id: newUser.id } });\n+    });\n+\n+    it(\"should return false when user has no pending invites (all accepted)\", async () => {\n+      const newUser = await prisma.user.create({\n+        data: {\n+          email: `test-accepted-invite-${Date.now()}@example.com`,\n... omitted 84 hunk line(s)"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:1": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:1",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:1",
+      "message": "Added line: import { describe, it, expect, beforeAll, afterAll, afterEach } from \"vitest\";"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:2": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:2",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:2",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:3": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:3",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:3",
+      "message": "Added line: import { prisma } from \"@calcom/prisma\";"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:4": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:4",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:4",
+      "message": "Added line: import { MembershipRole } from \"@calcom/prisma/enums\";"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:5": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:5",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:5",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:6": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:6",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:6",
+      "message": "Added line: import { MembershipRepository } from \"./MembershipRepository\";"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:7": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:7",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:7",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:8": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:8",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:8",
+      "message": "Added line: const createdMembershipIds: number[] = [];"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:9": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:9",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:9",
+      "message": "Added line: let testTeamId: number;"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:10": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:10",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:10",
+      "message": "Added line: let createdTeamId: number | null = null;"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:11": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:11",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:11",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:12": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:12",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:12",
+      "message": "Added line: async function clearTestMemberships() {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:13": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:13",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:13",
+      "message": "Added line: if (createdMembershipIds.length > 0) {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:14": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:14",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:14",
+      "message": "Added line: await prisma.membership.deleteMany({"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:15": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:15",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:15",
+      "message": "Added line: where: { id: { in: createdMembershipIds } },"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:16": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:16",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:16",
+      "message": "Added line: });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:17": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:17",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:17",
+      "message": "Added line: createdMembershipIds.length = 0;"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:18": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:18",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:18",
+      "message": "Added line: }"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:19": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:19",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:19",
+      "message": "Added line: }"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:20": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:20",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:20",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:21": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:21",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:21",
+      "message": "Added line: describe(\"MembershipRepository (Integration Tests)\", () => {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:22": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:22",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:22",
+      "message": "Added line: beforeAll(async () => {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:23": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:23",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:23",
+      "message": "Added line: let testTeam = await prisma.team.findFirst({"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:24": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:24",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:24",
+      "message": "Added line: where: { slug: { not: null } },"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:25": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:25",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:25",
+      "message": "Added line: });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:26": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:26",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:26",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:27": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:27",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:27",
+      "message": "Added line: if (!testTeam) {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:28": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:28",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:28",
+      "message": "Added line: testTeam = await prisma.team.create({"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:29": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:29",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:29",
+      "message": "Added line: data: {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:30": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:30",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:30",
+      "message": "Added line: name: \"Test Team for MembershipRepository\","
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:31": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:31",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:31",
+      "message": "Added line: slug: `test-team-membership-repo-${Date.now()}`,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:32": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:32",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:32",
+      "message": "Added line: },"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:33": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:33",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:33",
+      "message": "Added line: });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:34": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:34",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:34",
+      "message": "Added line: createdTeamId = testTeam.id;"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:35": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:35",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:35",
+      "message": "Added line: }"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:36": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:36",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:36",
+      "message": "Added line: testTeamId = testTeam.id;"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:37": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:37",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:37",
+      "message": "Added line: });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:38": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:38",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:38",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:39": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:39",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:39",
+      "message": "Added line: afterAll(async () => {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:40": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:40",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:40",
+      "message": "Added line: if (createdTeamId) {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:41": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:41",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:41",
+      "message": "Added line: await prisma.team.delete({ where: { id: createdTeamId } });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:42": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:42",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:42",
+      "message": "Added line: }"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:43": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:43",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:43",
+      "message": "Added line: });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:44": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:44",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:44",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:45": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:45",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:45",
+      "message": "Added line: afterEach(async () => {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:46": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:46",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:46",
+      "message": "Added line: await clearTestMemberships();"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:47": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:47",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:47",
+      "message": "Added line: });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:48": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:48",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:48",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:49": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:49",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:49",
+      "message": "Added line: describe(\"hasPendingInviteByUserId\", () => {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:50": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:50",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:50",
+      "message": "Added line: it(\"should return true when user has a pending invite (accepted: false)\", async () => {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:51": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:51",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:51",
+      "message": "Added line: const newUser = await prisma.user.create({"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:52": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:52",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:52",
+      "message": "Added line: data: {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:53": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:53",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:53",
+      "message": "Added line: email: `test-pending-invite-${Date.now()}@example.com`,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:54": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:54",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:54",
+      "message": "Added line: username: `test-pending-${Date.now()}`,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:55": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:55",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:55",
+      "message": "Added line: },"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:56": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:56",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:56",
+      "message": "Added line: });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:57": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:57",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:57",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:58": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:58",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:58",
+      "message": "Added line: const membership = await prisma.membership.create({"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:59": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:59",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:59",
+      "message": "Added line: data: {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:60": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:60",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:60",
+      "message": "Added line: userId: newUser.id,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:61": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:61",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:61",
+      "message": "Added line: teamId: testTeamId,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:62": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:62",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:62",
+      "message": "Added line: role: MembershipRole.MEMBER,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:63": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:63",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:63",
+      "message": "Added line: accepted: false,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:64": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:64",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:64",
+      "message": "Added line: },"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:65": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:65",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:65",
+      "message": "Added line: });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:66": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:66",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:66",
+      "message": "Added line: createdMembershipIds.push(membership.id);"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:67": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:67",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:67",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:68": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:68",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:68",
+      "message": "Added line: const result = await MembershipRepository.hasPendingInviteByUserId({ userId: newUser.id });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:69": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:69",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:69",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:70": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:70",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:70",
+      "message": "Added line: expect(result).toBe(true);"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:71": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:71",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:71",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:72": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:72",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:72",
+      "message": "Added line: await prisma.membership.delete({ where: { id: membership.id } });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:73": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:73",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:73",
+      "message": "Added line: createdMembershipIds.length = 0;"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:74": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:74",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:74",
+      "message": "Added line: await prisma.user.delete({ where: { id: newUser.id } });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:75": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:75",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:75",
+      "message": "Added line: });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:76": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:76",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:76",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:77": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:77",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:77",
+      "message": "Added line: it(\"should return false when user has no pending invites (all accepted)\", async () => {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:78": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:78",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:78",
+      "message": "Added line: const newUser = await prisma.user.create({"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:79": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:79",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:79",
+      "message": "Added line: data: {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:80": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:80",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:80",
+      "message": "Added line: email: `test-accepted-invite-${Date.now()}@example.com`,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:81": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:81",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:81",
+      "message": "Added line: username: `test-accepted-${Date.now()}`,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:82": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:82",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:82",
+      "message": "Added line: },"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:83": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:83",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:83",
+      "message": "Added line: });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:84": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:84",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:84",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:85": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:85",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:85",
+      "message": "Added line: const membership = await prisma.membership.create({"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:86": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:86",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:86",
+      "message": "Added line: data: {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:87": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:87",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:87",
+      "message": "Added line: userId: newUser.id,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:88": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:88",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:88",
+      "message": "Added line: teamId: testTeamId,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:89": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:89",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:89",
+      "message": "Added line: role: MembershipRole.MEMBER,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:90": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:90",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:90",
+      "message": "Added line: accepted: true,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:91": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:91",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:91",
+      "message": "Added line: },"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:92": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:92",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:92",
+      "message": "Added line: });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:93": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:93",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:93",
+      "message": "Added line: createdMembershipIds.push(membership.id);"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:94": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:94",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:94",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:95": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:95",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:95",
+      "message": "Added line: const result = await MembershipRepository.hasPendingInviteByUserId({ userId: newUser.id });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:96": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:96",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:96",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:97": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:97",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:97",
+      "message": "Added line: expect(result).toBe(false);"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:98": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:98",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:98",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:99": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:99",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:99",
+      "message": "Added line: await prisma.membership.delete({ where: { id: membership.id } });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:100": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:100",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:100",
+      "message": "Added line: createdMembershipIds.length = 0;"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:101": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:101",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:101",
+      "message": "Added line: await prisma.user.delete({ where: { id: newUser.id } });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:102": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:102",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:102",
+      "message": "Added line: });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:103": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:103",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:103",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:104": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:104",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:104",
+      "message": "Added line: it(\"should return false when user has no memberships at all\", async () => {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:105": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:105",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:105",
+      "message": "Added line: const newUser = await prisma.user.create({"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:106": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:106",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:106",
+      "message": "Added line: data: {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:107": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:107",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:107",
+      "message": "Added line: email: `test-no-membership-${Date.now()}@example.com`,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:108": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:108",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:108",
+      "message": "Added line: username: `test-no-membership-${Date.now()}`,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:109": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:109",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:109",
+      "message": "Added line: },"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:110": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:110",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:110",
+      "message": "Added line: });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:111": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:111",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:111",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:112": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:112",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:112",
+      "message": "Added line: const result = await MembershipRepository.hasPendingInviteByUserId({ userId: newUser.id });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:113": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:113",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:113",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:114": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:114",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:114",
+      "message": "Added line: expect(result).toBe(false);"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:115": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:115",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:115",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:116": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:116",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:116",
+      "message": "Added line: await prisma.user.delete({ where: { id: newUser.id } });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:117": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:117",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:117",
+      "message": "Added line: });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:118": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:118",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:118",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:119": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:119",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:119",
+      "message": "Added line: it(\"should return true when user has both accepted and pending invites\", async () => {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:120": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:120",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:120",
+      "message": "Added line: const newUser = await prisma.user.create({"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:121": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:121",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:121",
+      "message": "Added line: data: {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:122": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:122",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:122",
+      "message": "Added line: email: `test-mixed-invites-${Date.now()}@example.com`,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:123": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:123",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:123",
+      "message": "Added line: username: `test-mixed-${Date.now()}`,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:124": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:124",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:124",
+      "message": "Added line: },"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:125": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:125",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:125",
+      "message": "Added line: });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:126": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:126",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:126",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:127": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:127",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:127",
+      "message": "Added line: const team2 = await prisma.team.findFirst({"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:128": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:128",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:128",
+      "message": "Added line: where: {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:129": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:129",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:129",
+      "message": "Added line: slug: { not: null },"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:130": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:130",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:130",
+      "message": "Added line: id: { not: testTeamId },"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:131": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:131",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:131",
+      "message": "Added line: },"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:132": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:132",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:132",
+      "message": "Added line: });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:133": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:133",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:133",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:134": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:134",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:134",
+      "message": "Added line: const acceptedMembership = await prisma.membership.create({"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:135": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:135",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:135",
+      "message": "Added line: data: {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:136": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:136",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:136",
+      "message": "Added line: userId: newUser.id,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:137": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:137",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:137",
+      "message": "Added line: teamId: testTeamId,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:138": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:138",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:138",
+      "message": "Added line: role: MembershipRole.MEMBER,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:139": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:139",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:139",
+      "message": "Added line: accepted: true,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:140": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:140",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:140",
+      "message": "Added line: },"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:141": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:141",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:141",
+      "message": "Added line: });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:142": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:142",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:142",
+      "message": "Added line: createdMembershipIds.push(acceptedMembership.id);"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:143": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:143",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:143",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:144": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:144",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:144",
+      "message": "Added line: if (team2) {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:145": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:145",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:145",
+      "message": "Added line: const pendingMembership = await prisma.membership.create({"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:146": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:146",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:146",
+      "message": "Added line: data: {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:147": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:147",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:147",
+      "message": "Added line: userId: newUser.id,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:148": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:148",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:148",
+      "message": "Added line: teamId: team2.id,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:149": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:149",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:149",
+      "message": "Added line: role: MembershipRole.MEMBER,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:150": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:150",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:150",
+      "message": "Added line: accepted: false,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:151": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:151",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:151",
+      "message": "Added line: },"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:152": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:152",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:152",
+      "message": "Added line: });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:153": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:153",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:153",
+      "message": "Added line: createdMembershipIds.push(pendingMembership.id);"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:154": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:154",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:154",
+      "message": "Added line: }"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:155": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:155",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:155",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:156": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:156",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:156",
+      "message": "Added line: const result = await MembershipRepository.hasPendingInviteByUserId({ userId: newUser.id });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:157": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:157",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:157",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:158": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:158",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:158",
+      "message": "Added line: expect(result).toBe(team2 ? true : false);"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:159": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:159",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:159",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:160": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:160",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:160",
+      "message": "Added line: await clearTestMemberships();"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:161": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:161",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:161",
+      "message": "Added line: await prisma.user.delete({ where: { id: newUser.id } });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:162": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:162",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:162",
+      "message": "Added line: });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:163": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:163",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:163",
+      "message": "Added line: });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:164": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:164",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:164",
+      "message": "Added line: });"
+    },
+    "diff_hunk:packages/features/membership/repositories/MembershipRepository.ts:3": {
+      "id": "diff_hunk:packages/features/membership/repositories/MembershipRepository.ts:3",
+      "kind": "diff_hunk",
+      "source": "packages/features/membership/repositories/MembershipRepository.ts:3",
+      "message": "@@ -3,8 +3,8 @@ import { withSelectedCalendars } from \"@calcom/features/users/repositories/UserR\n import logger from \"@calcom/lib/logger\";\n import { safeStringify } from \"@calcom/lib/safeStringify\";\n import { eventTypeSelect } from \"@calcom/lib/server/eventTypeSelect\";\n-import { availabilityUserSelect, prisma, type PrismaTransaction } from \"@calcom/prisma\";\n-import type { Prisma, Membership, PrismaClient } from \"@calcom/prisma/client\";\n+import { availabilityUserSelect, type PrismaTransaction, prisma } from \"@calcom/prisma\";\n+import type { Membership, Prisma, PrismaClient } from \"@calcom/prisma/client\";\n import { MembershipRole } from \"@calcom/prisma/enums\";\n import { credentialForCalendarServiceSelect } from \"@calcom/prisma/selects/credential\";\n "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.ts:6": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.ts:6",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.ts:6",
+      "message": "Added line: import { availabilityUserSelect, type PrismaTransaction, prisma } from \"@calcom/prisma\";"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.ts:7": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.ts:7",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.ts:7",
+      "message": "Added line: import type { Membership, Prisma, PrismaClient } from \"@calcom/prisma/client\";"
+    },
+    "diff_hunk:packages/features/membership/repositories/MembershipRepository.ts:563": {
+      "id": "diff_hunk:packages/features/membership/repositories/MembershipRepository.ts:563",
+      "kind": "diff_hunk",
+      "source": "packages/features/membership/repositories/MembershipRepository.ts:563",
+      "message": "@@ -563,13 +563,7 @@ export class MembershipRepository {\n   }\n \n   // Two indexed lookups instead of JOIN with ILIKE (which bypasses index)\n-  async hasAcceptedMembershipByEmail({\n-    email,\n-    teamId,\n-  }: {\n-    email: string;\n-    teamId: number;\n-  }): Promise<boolean> {\n+  async hasAcceptedMembershipByEmail({ email, teamId }: { email: string; teamId: number }): Promise<boolean> {\n     const user = await this.prismaClient.user.findUnique({\n       where: { email: email.toLowerCase() },\n       select: { id: true },"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.ts:566": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.ts:566",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.ts:566",
+      "message": "Added line: async hasAcceptedMembershipByEmail({ email, teamId }: { email: string; teamId: number }): Promise<boolean> {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.ts:567": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.ts:567",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.ts:567",
+      "message": "Removed line: email,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.ts:568": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.ts:568",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.ts:568",
+      "message": "Removed line: teamId,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.ts:569": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.ts:569",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.ts:569",
+      "message": "Removed line: }: {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.ts:570": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.ts:570",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.ts:570",
+      "message": "Removed line: email: string;"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.ts:571": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.ts:571",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.ts:571",
+      "message": "Removed line: teamId: number;"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.ts:572": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.ts:572",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.ts:572",
+      "message": "Removed line: }): Promise<boolean> {"
+    },
+    "diff_hunk:packages/features/membership/repositories/MembershipRepository.ts:580": {
+      "id": "diff_hunk:packages/features/membership/repositories/MembershipRepository.ts:580",
+      "kind": "diff_hunk",
+      "source": "packages/features/membership/repositories/MembershipRepository.ts:580",
+      "message": "@@ -586,4 +580,17 @@ export class MembershipRepository {\n \n     return membership?.accepted ?? false;\n   }\n+\n+  static async hasPendingInviteByUserId({ userId }: { userId: number }): Promise<boolean> {\n+    const pendingInvite = await prisma.membership.findFirst({\n+      where: {\n+        userId,\n+        accepted: true,\n+      },\n+      select: {\n+        id: true,\n+      },\n+    });\n+    return !!pendingInvite;\n+  }\n }"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.ts:583": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.ts:583",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.ts:583",
+      "message": "Added line: "
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.ts:584": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.ts:584",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.ts:584",
+      "message": "Added line: static async hasPendingInviteByUserId({ userId }: { userId: number }): Promise<boolean> {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.ts:585": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.ts:585",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.ts:585",
+      "message": "Added line: const pendingInvite = await prisma.membership.findFirst({"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.ts:586": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.ts:586",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.ts:586",
+      "message": "Added line: where: {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.ts:587": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.ts:587",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.ts:587",
+      "message": "Added line: userId,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.ts:588": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.ts:588",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.ts:588",
+      "message": "Added line: accepted: true,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.ts:589": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.ts:589",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.ts:589",
+      "message": "Added line: },"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.ts:590": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.ts:590",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.ts:590",
+      "message": "Added line: select: {"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.ts:591": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.ts:591",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.ts:591",
+      "message": "Added line: id: true,"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.ts:592": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.ts:592",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.ts:592",
+      "message": "Added line: },"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.ts:593": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.ts:593",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.ts:593",
+      "message": "Added line: });"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.ts:594": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.ts:594",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.ts:594",
+      "message": "Added line: return !!pendingInvite;"
+    },
+    "diff:packages/features/membership/repositories/MembershipRepository.ts:595": {
+      "id": "diff:packages/features/membership/repositories/MembershipRepository.ts:595",
+      "kind": "diff",
+      "source": "packages/features/membership/repositories/MembershipRepository.ts:595",
+      "message": "Added line: }"
+    },
+    "entity:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:apps.web.app.(use-page-wrapper).onboarding.getting-started.page": {
+      "id": "entity:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:apps.web.app.(use-page-wrapper).onboarding.getting-started.page",
+      "kind": "entity",
+      "source": "apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:1-7",
+      "message": "Changed module apps.web.app.(use-page-wrapper).onboarding.getting-started.page touched by 2 hunk(s)."
+    },
+    "entity:packages/features/auth/lib/onboardingUtils.ts:packages.features.auth.lib.onboardingUtils": {
+      "id": "entity:packages/features/auth/lib/onboardingUtils.ts:packages.features.auth.lib.onboardingUtils",
+      "kind": "entity",
+      "source": "packages/features/auth/lib/onboardingUtils.ts:3-3",
+      "message": "Changed module packages.features.auth.lib.onboardingUtils touched by 3 hunk(s)."
+    },
+    "entity:packages/features/membership/repositories/MembershipRepository.integration-test.ts:packages.features.membership.repositories.MembershipRepository.integration-test": {
+      "id": "entity:packages/features/membership/repositories/MembershipRepository.integration-test.ts:packages.features.membership.repositories.MembershipRepository.integration-test",
+      "kind": "entity",
+      "source": "packages/features/membership/repositories/MembershipRepository.integration-test.ts:1-164",
+      "message": "Changed module packages.features.membership.repositories.MembershipRepository.integration-test touched by 1 hunk(s)."
+    },
+    "entity:packages/features/membership/repositories/MembershipRepository.ts:packages.features.membership.repositories.MembershipRepository": {
+      "id": "entity:packages/features/membership/repositories/MembershipRepository.ts:packages.features.membership.repositories.MembershipRepository",
+      "kind": "entity",
+      "source": "packages/features/membership/repositories/MembershipRepository.ts:6-7",
+      "message": "Changed module packages.features.membership.repositories.MembershipRepository touched by 3 hunk(s)."
+    },
+    "risk:security_sensitive:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx": {
+      "id": "risk:security_sensitive:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx",
+      "kind": "risk",
+      "source": "security_sensitive",
+      "message": "Security-sensitive keywords changed in apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx."
+    }
+  },
+  "missing_evidence_ids": [],
+  "agent_runs": [
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+      "input_evidence_ids": [
+        "diff_hunk:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:1",
+        "diff_hunk:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:25",
+        "diff_hunk:packages/features/auth/lib/onboardingUtils.ts:1",
+        "diff_hunk:packages/features/membership/repositories/MembershipRepository.integration-test.ts:1",
+        "diff_hunk:packages/features/membership/repositories/MembershipRepository.ts:3"
+      ],
+      "output_issue_ids": [
+        "naming_convention:packages/features/membership/repositories/MembershipRepository.ts:3"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 12196,
+      "token_count_in": 7021,
+      "token_count_out": 164,
+      "trace_id": "8e8afe30df6a4a6a91f51f58ee1d077f",
+      "span_id": "99953e1550b14248",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001",
+      "shard_index": 0,
+      "shard_count": 1,
+      "context_request_count": 0,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+      "model": null,
+      "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+      "input_evidence_ids": [],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 0,
+      "token_count_in": 0,
+      "token_count_out": 0,
+      "trace_id": "",
+      "span_id": "",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "",
+      "shard_index": 0,
+      "shard_count": 0,
+      "context_request_count": 0,
+      "context_refill_used": false
+    }
+  ],
+  "prompt_exports": {},
+  "context_budget": {
+    "enabled": true,
+    "strategy": "risk_first_v1",
+    "context_profile": "risk_compact_manifest_v1",
+    "max_input_tokens": 9000,
+    "estimated_input_tokens": 5982,
+    "selected_evidence_count": 5,
+    "omitted_evidence_count": 200,
+    "selected_evidence_ids": [
+      "diff_hunk:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:1",
+      "diff_hunk:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:25",
+      "diff_hunk:packages/features/auth/lib/onboardingUtils.ts:1",
+      "diff_hunk:packages/features/membership/repositories/MembershipRepository.integration-test.ts:1",
+      "diff_hunk:packages/features/membership/repositories/MembershipRepository.ts:3"
+    ],
+    "omitted_evidence_ids": [
+      "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:1",
+      "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:2",
+      "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:28",
+      "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:29",
+      "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:3",
+      "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:30",
+      "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:31",
+      "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:32",
+      "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:33",
+      "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:34",
+      "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:35",
+      "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:4",
+      "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:5",
+      "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:6",
+      "diff:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:7",
+      "risk:security_sensitive:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx",
+      "entity:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:apps.web.app.(use-page-wrapper).onboarding.getting-started.page",
+      "diff_hunk:packages/features/auth/lib/onboardingUtils.ts:52",
+      "diff_hunk:packages/features/auth/lib/onboardingUtils.ts:64",
+      "diff_hunk:packages/features/membership/repositories/MembershipRepository.ts:563",
+      "diff_hunk:packages/features/membership/repositories/MembershipRepository.ts:580",
+      "entity:packages/features/auth/lib/onboardingUtils.ts:packages.features.auth.lib.onboardingUtils",
+      "entity:packages/features/membership/repositories/MembershipRepository.integration-test.ts:packages.features.membership.repositories.MembershipRepository.integration-test",
+      "entity:packages/features/membership/repositories/MembershipRepository.ts:packages.features.membership.repositories.MembershipRepository",
+      "diff:packages/features/auth/lib/onboardingUtils.ts:3",
+      "diff:packages/features/auth/lib/onboardingUtils.ts:54",
+      "diff:packages/features/auth/lib/onboardingUtils.ts:55",
+      "diff:packages/features/auth/lib/onboardingUtils.ts:56",
+      "diff:packages/features/auth/lib/onboardingUtils.ts:67",
+      "diff:packages/features/auth/lib/onboardingUtils.ts:68",
+      "diff:packages/features/auth/lib/onboardingUtils.ts:69",
+      "diff:packages/features/auth/lib/onboardingUtils.ts:70",
+      "diff:packages/features/auth/lib/onboardingUtils.ts:71",
+      "diff:packages/features/auth/lib/onboardingUtils.ts:72",
+      "diff:packages/features/auth/lib/onboardingUtils.ts:73",
+      "diff:packages/features/auth/lib/onboardingUtils.ts:74",
+      "diff:packages/features/auth/lib/onboardingUtils.ts:75",
+      "diff:packages/features/auth/lib/onboardingUtils.ts:77",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:1",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:10",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:100",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:101",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:102",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:103",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:104",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:105",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:106",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:107",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:108",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:109",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:11",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:110",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:111",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:112",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:113",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:114",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:115",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:116",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:117",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:118",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:119",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:12",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:120",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:121",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:122",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:123",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:124",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:125",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:126",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:127",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:128",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:129",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:13",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:130",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:131",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:132",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:133",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:134",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:135",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:136",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:137",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:138",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:139",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:14",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:140",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:141",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:142",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:143",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:144",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:145",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:146",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:147",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:148",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:149",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:15",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:150",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:151",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:152",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:153",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:154",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:155",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:156",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:157",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:158",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:159",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:16",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:160",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:161",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:162",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:163",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:164",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:17",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:18",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:19",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:2",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:20",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:21",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:22",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:23",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:24",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:25",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:26",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:27",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:28",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:29",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:3",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:30",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:31",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:32",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:33",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:34",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:35",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:36",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:37",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:38",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:39",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:4",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:40",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:41",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:42",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:43",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:44",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:45",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:46",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:47",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:48",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:49",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:5",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:50",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:51",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:52",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:53",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:54",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:55",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:56",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:57",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:58",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:59",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:6",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:60",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:61",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:62",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:63",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:64",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:65",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:66",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:67",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:68",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:69",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:7",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:70",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:71",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:72",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:73",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:74",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:75",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:76",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:77",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:78",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:79",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:8",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:80",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:81",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:82",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:83",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:84",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:85",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:86",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:87",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:88",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:89",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:9",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:90",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:91",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:92",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:93",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:94",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:95",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:96",
+      "diff:packages/features/membership/repositories/MembershipRepository.integration-test.ts:97"
+    ],
+    "selected_risk_signal_count": 1,
+    "context_truncated": true,
+    "shard_count": 1,
+    "refill_count": 0,
+    "context_request_count": 0,
+    "context_requests": [],
+    "shards": [
+      {
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 5,
+        "omitted_evidence_count": 200,
+        "estimated_input_tokens": 5982,
+        "context_truncated": true
+      }
+    ],
+    "warnings": []
+  },
+  "loop": {
+    "enabled": true,
+    "max_iter": 1,
+    "iterations_completed": 1,
+    "converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "checkpoint_path": "D:\\learn\\code-review-agent\\workspace\\qodo_pr_review_bench_live_guidelines\\samples\\qodo_024\\review\\loop_checkpoint.json",
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "iterations": [
+      {
+        "i": 0,
+        "candidate_issue_count": 1,
+        "verified_count": 0,
+        "needs_human_review_count": 0,
+        "discarded_count": 1,
+        "keep_count": 0,
+        "uncertain_count": 0,
+        "reject_count": 0,
+        "feedback_sent": [],
+        "agent_runs": [
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+            "input_evidence_ids": [
+              "diff_hunk:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:1",
+              "diff_hunk:apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx:25",
+              "diff_hunk:packages/features/auth/lib/onboardingUtils.ts:1",
+              "diff_hunk:packages/features/membership/repositories/MembershipRepository.integration-test.ts:1",
+              "diff_hunk:packages/features/membership/repositories/MembershipRepository.ts:3"
+            ],
+            "output_issue_ids": [
+              "naming_convention:packages/features/membership/repositories/MembershipRepository.ts:3"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 12196,
+            "token_count_in": 7021,
+            "token_count_out": 164,
+            "trace_id": "8e8afe30df6a4a6a91f51f58ee1d077f",
+            "span_id": "99953e1550b14248",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001",
+            "shard_index": 0,
+            "shard_count": 1,
+            "context_request_count": 0,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+            "model": null,
+            "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+            "input_evidence_ids": [],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 0,
+            "token_count_in": 0,
+            "token_count_out": 0,
+            "trace_id": "",
+            "span_id": "",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "",
+            "shard_index": 0,
+            "shard_count": 0,
+            "context_request_count": 0,
+            "context_refill_used": false
+          }
+        ],
+        "issue_set": [],
+        "keep": [],
+        "needs_human_review": [],
+        "discarded": [
+          {
+            "file": "packages/features/membership/repositories/MembershipRepository.ts",
+            "line": 3,
+            "severity": "high",
+            "category": "naming_convention",
+            "message": "Repository class does not follow naming convention: expected 'Prisma<Entity>Repository' pattern, found 'MembershipRepository'.",
+            "suggestion": "Rename the class and file to 'PrismaMembershipRepository' to match the required naming convention.",
+            "confidence": 0.95,
+            "evidence_ids": [
+              "diff_hunk:packages/features/membership/repositories/MembershipRepository.ts:3"
+            ],
+            "filter_reason": "style_preference"
+          }
+        ]
+      }
+    ]
+  },
+  "tracing": {
+    "total_latency_ms": 12196,
+    "total_token_count_in": 7021,
+    "total_token_count_out": 164,
+    "total_retry_count": 0,
+    "run_count": 2,
+    "status_counts": {
+      "ok": 2
+    }
+  }
+}

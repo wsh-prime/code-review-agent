@@ -1,0 +1,211 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:fd7faec0ae7e458812ded3e74b62beded8e6e22da2256093a2df9bf36f67bdea",
+  "diff_hash": "sha256:f27a0b0b168de508349601d3394073e4ed7c3eaa36d75462d205d275ab5d635f",
+  "shards": {
+    "7d517b47a2d34d7880652914c5b44b0c1058162dea5b4db3b4b0f9f3614e59a3": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:NuGet.config:4",
+        "diff_hunk:eng/Version.Details.props:9",
+        "diff_hunk:eng/Version.Details.xml:8",
+        "diff_hunk:global.json:27"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:NuGet.config:4",
+          "diff_hunk:eng/Version.Details.props:9",
+          "diff_hunk:eng/Version.Details.xml:8",
+          "diff_hunk:global.json:27"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 3567,
+        "token_count_in": 7483,
+        "token_count_out": 12,
+        "trace_id": "6221f6eb253f480cbd472dfc33466299",
+        "span_id": "016aabcb0623433b",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 2,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "f6cca6c97e46d11ab8915d54c06f431c4fad21c3afd2fe5c6cba7a0d60152df5": {
+      "status": "completed",
+      "shard_id": "shard-002",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:5"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs",
+          "evidence_ids": [],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "Need to see the full test file to check if MSTest attributes are used in test methods, confirming the guideline violation.",
+          "source_shard_id": "shard-002",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [
+        {
+          "file": "src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs",
+          "line": 8,
+          "severity": "error",
+          "category": "style",
+          "message": "Review guideline violation: 'Use Curly Braces for All Control Flow Statements' - The patch adds using directives without braces, but the guideline requires braces for all control flow statements. However, using directives are not control flow statements, so this is not a violation. The actual issue is the addition of `using Microsoft.VisualStudio.TestTools.UnitTesting;` which introduces a test framework (MSTest) inconsistent with the repository standard of using xUnit (see guideline 'Test Projects Must Use xUnit Framework').",
+          "suggestion": "Remove the `using Microsoft.VisualStudio.TestTools.UnitTesting;` directive and ensure all test methods use xUnit attributes ([Fact], [Theory]) instead of MSTest attributes.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:5"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:5"
+        ],
+        "output_issue_ids": [
+          "style:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:8"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 14734,
+        "token_count_in": 3859,
+        "token_count_out": 329,
+        "trace_id": "e216f7495d4e4b90b46cebde3e9b71aa",
+        "span_id": "84a90e7205f54370",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "shard_count": 2,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "b53815aadba3f56425d269eacf9df875ab15d6dcfb07c17f57e8222cbec02aca": {
+      "status": "completed",
+      "shard_id": "shard-002-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-002",
+      "selected_evidence_ids": [
+        "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:111",
+        "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:113",
+        "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:285",
+        "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:287",
+        "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:110",
+        "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:28",
+        "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:284",
+        "entity:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:src.Components.test.E2ETest.ServerRenderingTests.RedirectionTest"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs",
+          "line": 285,
+          "severity": "error",
+          "category": "style",
+          "message": "Test method uses [TestMethod] instead of [Fact] (xUnit). Violates guideline 'Test Projects Must Use xUnit Framework'.",
+          "suggestion": "Replace [TestMethod] with [Fact] to use xUnit attributes.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:285",
+            "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:287"
+          ]
+        },
+        {
+          "file": "src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs",
+          "line": 113,
+          "severity": "warning",
+          "category": "correctness",
+          "message": "Changed Browser.Navigate().Back() to Forward() in test 'RedirectEnhancedGetToInternal'. The comment says 'See that 'back' takes you to the place from before the redirection', but now it navigates forward, contradicting the test intent.",
+          "suggestion": "Verify the intended navigation direction. If the test should verify back navigation, revert to Back(). If forward is correct, update the comment.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:110",
+            "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:111",
+            "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:113"
+          ]
+        },
+        {
+          "file": "src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs",
+          "line": 288,
+          "severity": "warning",
+          "category": "correctness",
+          "message": "Changed AppContext switch 'DisableThrowNavigationException' from false to true in test 'NavigationException_InAsyncContext_DoesNotBecomeUnobservedTaskException'. The test name expects navigation exceptions to not become unobserved, but disabling the throw may prevent the exception from being thrown at all, potentially invalidating the test.",
+          "suggestion": "Verify that setting the switch to true still exercises the intended scenario. If the test relies on the exception being thrown, keep the switch as false.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:284"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:111",
+          "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:113",
+          "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:285",
+          "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:287",
+          "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:110",
+          "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:28",
+          "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:284",
+          "entity:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:src.Components.test.E2ETest.ServerRenderingTests.RedirectionTest"
+        ],
+        "output_issue_ids": [
+          "style:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:285",
+          "correctness:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:113",
+          "correctness:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:288"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 58547,
+        "token_count_in": 4388,
+        "token_count_out": 617,
+        "trace_id": "831efd0ebc404e239778831eef5a01ae",
+        "span_id": "7b7c0f9aca6149fe",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002-refill",
+        "shard_index": 1,
+        "shard_count": 2,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    }
+  }
+}

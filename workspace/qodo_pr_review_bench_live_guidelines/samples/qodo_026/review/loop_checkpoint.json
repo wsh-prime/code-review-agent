@@ -1,0 +1,327 @@
+{
+  "schema_version": "1.0",
+  "run_id": "b0c7c98616704239b5cc6de66cf3936e",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": false,
+  "package_hash": "sha256:49384ec004ff078f370e66e9cb5672ebacc5c03e4270f668acd4644648041e1a",
+  "diff_hash": "sha256:90f7891a5371f09761f92eeeba7208413d2acc9d8f8d8c1b1634d1c86f40d341",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 4,
+      "verified_count": 1,
+      "needs_human_review_count": 0,
+      "discarded_count": 3,
+      "keep_count": 0,
+      "uncertain_count": 1,
+      "reject_count": 0,
+      "feedback_sent": [
+        {
+          "issue_id": "correctness:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:96",
+          "category": "correctness",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:93"
+          ]
+        }
+      ],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:.github/oasdiff-err-ignore.txt:2",
+            "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/controllers/e2e/api-key-bookings.e2e-spec.ts:177",
+            "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/controllers/e2e/managed-user-bookings.e2e-spec.ts:624",
+            "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/controllers/e2e/reassign-bookings.e2e-spec.ts:492"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 3518,
+          "token_count_in": 7830,
+          "token_count_out": 12,
+          "trace_id": "42911f72bc8f4717b797d08b937cf9b4",
+          "span_id": "97f1d7d638c04a0d",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 4,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/controllers/e2e/recurring-bookings.e2e-spec.ts:185",
+            "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/controllers/e2e/seated-bookings.e2e-spec.ts:201",
+            "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/controllers/e2e/team-bookings.e2e-spec.ts:519",
+            "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/controllers/e2e/user-bookings.e2e-spec.ts:483"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 1636,
+          "token_count_in": 7939,
+          "token_count_out": 12,
+          "trace_id": "f9033f56943845448196997bb48f6656",
+          "span_id": "793cb46fcbe946ed",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-002",
+          "shard_index": 1,
+          "shard_count": 4,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:93",
+            "diff_hunk:apps/api/v2/src/modules/organizations/bookings/organizations-bookings.controller.e2e-spec.ts:335",
+            "diff_hunk:apps/api/v2/src/modules/organizations/teams/bookings/organizations-teams-bookings.controller.e2e-spec.ts:250",
+            "diff_hunk:apps/api/v2/src/modules/organizations/users/bookings/controllers/organizations-users-bookings.e2e-spec.ts:233"
+          ],
+          "output_issue_ids": [
+            "correctness:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:96",
+            "correctness:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:96"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 1,
+          "retry_log": [
+            "attempt=1 error=timeout delay=1.00s"
+          ],
+          "latency_ms": 69156,
+          "token_count_in": 6745,
+          "token_count_out": 617,
+          "trace_id": "3a544333fd6a4bc194c20162c446d50e",
+          "span_id": "79cbb4bceff74c32",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-003",
+          "shard_index": 2,
+          "shard_count": 4,
+          "context_request_count": 1,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:131",
+            "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:154",
+            "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:216",
+            "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:275"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 1439,
+          "token_count_in": 3646,
+          "token_count_out": 12,
+          "trace_id": "c47d7a50f43645609e52b3a3e925026c",
+          "span_id": "fa54debef6e5454e",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-003-refill",
+          "shard_index": 2,
+          "shard_count": 4,
+          "context_request_count": 0,
+          "context_refill_used": true
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:docs/api-reference/v2/openapi.json:31712",
+            "diff_hunk:packages/platform/types/bookings/2024-08-13/outputs/booking.output.ts:29"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 46834,
+          "token_count_in": 4168,
+          "token_count_out": 386,
+          "trace_id": "f4625569863a4f61b5ebe9941df313ac",
+          "span_id": "76056d55ca0043dc",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-004",
+          "shard_index": 3,
+          "shard_count": 4,
+          "context_request_count": 2,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:docs/api-reference/v2/openapi.json:31726",
+            "diff_hunk:docs/api-reference/v2/openapi.json:31763",
+            "diff_hunk:docs/api-reference/v2/openapi.json:31830",
+            "diff_hunk:docs/api-reference/v2/openapi.json:32180",
+            "diff_hunk:docs/api-reference/v2/openapi.json:32264",
+            "diff_hunk:docs/api-reference/v2/openapi.json:33360",
+            "diff_hunk:packages/platform/types/bookings/2024-08-13/outputs/booking.output.ts:105",
+            "diff_hunk:packages/platform/types/bookings/2024-08-13/outputs/booking.output.ts:410",
+            "diff_hunk:packages/platform/types/bookings/2024-08-13/outputs/booking.output.ts:55"
+          ],
+          "output_issue_ids": [
+            "correctness:packages/platform/types/bookings/2024-08-13/outputs/booking.output.ts:58",
+            "correctness:packages/platform/types/bookings/2024-08-13/outputs/booking.output.ts:108",
+            "correctness:packages/platform/types/bookings/2024-08-13/outputs/booking.output.ts:413"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 19295,
+          "token_count_in": 4426,
+          "token_count_out": 628,
+          "trace_id": "7d6f9df305e2410197fbb751072d42c4",
+          "span_id": "e3b8f57cf6944eb6",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-004-refill",
+          "shard_index": 3,
+          "shard_count": 4,
+          "context_request_count": 0,
+          "context_refill_used": true
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [
+            "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:93"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [
+        "correctness:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:96"
+      ],
+      "keep": [],
+      "needs_human_review": [
+        {
+          "file": "apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts",
+          "line": 96,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "The regex in getDisplayEmail only strips a plus sign followed by exactly 25 alphanumeric characters, but email sub-addressing (plus addressing) can have variable-length tags. This will fail to strip tags of different lengths, causing displayEmail to still contain the sub-address suffix.",
+          "suggestion": "Use a more flexible regex like /\\+[a-zA-Z0-9]+/ to match any length of sub-addressing tag, or use email.split('@')[0].split('+')[0] + '@' + email.split('@')[1] to reliably extract the base email.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:93"
+          ]
+        }
+      ],
+      "discarded": [
+        {
+          "file": "packages/platform/types/bookings/2024-08-13/outputs/booking.output.ts",
+          "line": 58,
+          "severity": "high",
+          "category": "correctness",
+          "message": "The regex in cleanEmailForDisplay only strips a plus sign followed by exactly 25 alphanumeric characters, which is an arbitrary and fragile heuristic. It does not handle common email subaddressing patterns (e.g., `+tag` of varying length) and may silently corrupt valid email addresses that happen to match the pattern.",
+          "suggestion": "Replace the static method with a well-defined email cleaning strategy, such as stripping the plus tag portion of the local part using a standard email parsing library, or document the exact subaddressing format expected.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:packages/platform/types/bookings/2024-08-13/outputs/booking.output.ts:55"
+          ],
+          "filter_reason": "low_signal_suggestion"
+        },
+        {
+          "file": "packages/platform/types/bookings/2024-08-13/outputs/booking.output.ts",
+          "line": 108,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "The new displayEmail field in BookingHost is decorated with @IsString() but no @IsEmail() or @IsOptional() validation, unlike the existing email field which uses @IsEmail(). This inconsistency means displayEmail could accept any string, potentially breaking consumers that expect a valid email format.",
+          "suggestion": "Add @IsEmail() validation to displayEmail, or add @IsOptional() if the field is not always present, and ensure the validation matches the intended semantics.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:packages/platform/types/bookings/2024-08-13/outputs/booking.output.ts:105"
+          ],
+          "filter_reason": "style_preference"
+        },
+        {
+          "file": "packages/platform/types/bookings/2024-08-13/outputs/booking.output.ts",
+          "line": 413,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "The new displayEmail field in ReassignedToDto is decorated with @IsString() but no @IsEmail() or @IsOptional() validation, unlike the existing email field which uses @IsEmail(). This inconsistency means displayEmail could accept any string, potentially breaking consumers that expect a valid email format.",
+          "suggestion": "Add @IsEmail() validation to displayEmail, or add @IsOptional() if the field is not always present, and ensure the validation matches the intended semantics.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:packages/platform/types/bookings/2024-08-13/outputs/booking.output.ts:410"
+          ],
+          "filter_reason": "style_preference"
+        }
+      ]
+    }
+  ],
+  "last_feedback": {
+    "iteration": 0,
+    "uncertain_items": [
+      {
+        "issue_id": "correctness:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:96",
+        "category": "correctness",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:93"
+        ]
+      }
+    ]
+  }
+}

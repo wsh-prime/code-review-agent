@@ -1,0 +1,121 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:6ab867e0d0e6e05013be1cbe61afee8d6d1d49f726f3b8379cbaddab63ccaae2",
+  "diff_hash": "sha256:6d2045bd177217577d8bb35b7623015aa0a69ba7fd1e0bed95391dff93758ab6",
+  "shards": {
+    "174624abbbea13ed356041e36f56d9f581353440eca086be3f656dba2e3c65d0": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:gpt_engineer/db.py:18"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "gpt_engineer/db.py",
+          "evidence_ids": [
+            "diff:gpt_engineer/db.py:26",
+            "entity:gpt_engineer/db.py:gpt_engineer.db"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-001",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:gpt_engineer/db.py:18"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 62515,
+        "token_count_in": 1202,
+        "token_count_out": 68,
+        "trace_id": "4f26fdcc659748eaab822f29d0d7132e",
+        "span_id": "da6b8e935c0a4ce9",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "74806548a0572f13ef0811eef664d20ceea33838af23ff12180994d1d33389a9": {
+      "status": "completed",
+      "shard_id": "shard-001-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-001",
+      "selected_evidence_ids": [
+        "diff:gpt_engineer/db.py:26",
+        "diff_hunk:gpt_engineer/db.py:18",
+        "entity:gpt_engineer/db.py:gpt_engineer.db"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "gpt_engineer/db.py",
+          "line": 26,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Changing archive field type from Optional[DB] to DB removes the ability to represent a missing archive, which may cause AttributeError or TypeError if code paths that previously handled None are not updated.",
+          "suggestion": "Ensure all consumers of DBs.archive handle the non-optional type, or keep Optional[DB] if archive can be absent.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:gpt_engineer/db.py:18",
+            "diff:gpt_engineer/db.py:26"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:gpt_engineer/db.py:26",
+          "diff_hunk:gpt_engineer/db.py:18",
+          "entity:gpt_engineer/db.py:gpt_engineer.db"
+        ],
+        "output_issue_ids": [
+          "correctness:gpt_engineer/db.py:26"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 73280,
+        "token_count_in": 1237,
+        "token_count_out": 175,
+        "trace_id": "53b98f7860514ffba5293f2769e0172f",
+        "span_id": "2b34f3ac1a724394",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    }
+  }
+}

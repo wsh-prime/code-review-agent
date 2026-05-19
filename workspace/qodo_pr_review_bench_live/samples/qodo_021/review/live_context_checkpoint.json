@@ -1,0 +1,384 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:7d92419cfb3fe71370564bf4d2027866b7116c4249c26c4901085c88a3e7cb34",
+  "diff_hash": "sha256:b88e76da8dc8cf83202eeb6782ee5e970f2c338fe9c141e7fd4571ad01376e0d",
+  "shards": {
+    "5d1af7d18a904b7b6b7914c3be2596966924c8debe41b0fb72cbb58f250d73fb": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:.azure/pipelines/jobs/default-build.yml:103",
+        "diff_hunk:.azure/pipelines/jobs/default-build.yml:164",
+        "diff_hunk:.azure/pipelines/jobs/default-build.yml:319",
+        "diff_hunk:.azure/pipelines/jobs/default-build.yml:390",
+        "diff_hunk:NuGet.config:4",
+        "diff_hunk:eng/PackageOverrides.txt:1",
+        "diff_hunk:eng/PlatformManifest.txt:1"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": "eng/PackageOverrides.txt",
+          "evidence_ids": [
+            "diff:eng/PackageOverrides.txt:1",
+            "diff:eng/PackageOverrides.txt:10",
+            "diff:eng/PackageOverrides.txt:100",
+            "diff:eng/PackageOverrides.txt:101"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-001",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "risk_evidence",
+          "path": "eng/PlatformManifest.txt",
+          "evidence_ids": [
+            "diff:eng/PlatformManifest.txt:1",
+            "diff:eng/PlatformManifest.txt:10",
+            "diff:eng/PlatformManifest.txt:100",
+            "diff:eng/PlatformManifest.txt:101"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-001",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:.azure/pipelines/jobs/default-build.yml:103",
+          "diff_hunk:.azure/pipelines/jobs/default-build.yml:164",
+          "diff_hunk:.azure/pipelines/jobs/default-build.yml:319",
+          "diff_hunk:.azure/pipelines/jobs/default-build.yml:390",
+          "diff_hunk:NuGet.config:4",
+          "diff_hunk:eng/PackageOverrides.txt:1",
+          "diff_hunk:eng/PlatformManifest.txt:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 7972,
+        "token_count_in": 7833,
+        "token_count_out": 173,
+        "trace_id": "48cf560c4c5b42d3bb1f1ea26aeeab9a",
+        "span_id": "a55cbbab7d994195",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 4,
+        "context_request_count": 2,
+        "context_refill_used": false
+      }
+    },
+    "1adafb7072a3b717710cba6676cf940f16c3f9a461d42afcdda9d385f762edc3": {
+      "status": "completed",
+      "shard_id": "shard-001-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-001",
+      "selected_evidence_ids": [
+        "diff:eng/PackageOverrides.txt:1",
+        "diff:eng/PackageOverrides.txt:10",
+        "diff:eng/PackageOverrides.txt:100",
+        "diff:eng/PackageOverrides.txt:101",
+        "diff:eng/PlatformManifest.txt:1",
+        "diff:eng/PlatformManifest.txt:10",
+        "diff:eng/PlatformManifest.txt:100",
+        "diff:eng/PlatformManifest.txt:101",
+        "diff_hunk:eng/PackageOverrides.txt:1",
+        "diff_hunk:eng/PlatformManifest.txt:1"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:eng/PackageOverrides.txt:1",
+          "diff:eng/PackageOverrides.txt:10",
+          "diff:eng/PackageOverrides.txt:100",
+          "diff:eng/PackageOverrides.txt:101",
+          "diff:eng/PlatformManifest.txt:1",
+          "diff:eng/PlatformManifest.txt:10",
+          "diff:eng/PlatformManifest.txt:100",
+          "diff:eng/PlatformManifest.txt:101",
+          "diff_hunk:eng/PackageOverrides.txt:1",
+          "diff_hunk:eng/PlatformManifest.txt:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 1381,
+        "token_count_in": 5777,
+        "token_count_out": 15,
+        "trace_id": "4c7cae6509504e29b33496a0a66101c8",
+        "span_id": "23e3e02b4d474136",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "shard_count": 4,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    },
+    "3b67be3d365549fe15681a1bf722b7cdba84f69059991e384c016bcd09741618": {
+      "status": "completed",
+      "shard_id": "shard-002",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:eng/Version.Details.props:6",
+        "diff_hunk:eng/Version.Details.xml:8",
+        "diff_hunk:eng/Versions.props:9",
+        "diff_hunk:eng/common/SetupNugetSources.ps1:1",
+        "diff_hunk:eng/common/SetupNugetSources.ps1:174"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "eng/Versions.props",
+          "line": 14,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "ValidateBaseline changed from true to false, which disables baseline validation. This may allow regressions in package version consistency to go undetected.",
+          "suggestion": "Ensure that disabling ValidateBaseline is intentional and that alternative validation mechanisms are in place.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:eng/Versions.props:9"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:eng/Version.Details.props:6",
+          "diff_hunk:eng/Version.Details.xml:8",
+          "diff_hunk:eng/Versions.props:9",
+          "diff_hunk:eng/common/SetupNugetSources.ps1:1",
+          "diff_hunk:eng/common/SetupNugetSources.ps1:174"
+        ],
+        "output_issue_ids": [
+          "correctness:eng/Versions.props:14"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 4762,
+        "token_count_in": 8137,
+        "token_count_out": 138,
+        "trace_id": "e87f617e49fa467e854d4aa5671375ba",
+        "span_id": "f5f42eb2e31c4b62",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "shard_count": 4,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "0f498449076be6ba254a733bfd775a6d0bab44f5cfe1b4a7db7cc3c58f7261ab": {
+      "status": "completed",
+      "shard_id": "shard-003",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:eng/common/SetupNugetSources.sh:1",
+        "diff_hunk:eng/common/core-templates/steps/install-microbuild.yml:11",
+        "diff_hunk:eng/targets/ResolveReferences.targets:208",
+        "diff_hunk:global.json:1"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "eng/common/core-templates/steps/install-microbuild.yml",
+          "line": 28,
+          "severity": "high",
+          "category": "correctness",
+          "message": "The installation path for the .NET 8.0 SDK has been changed from a configurable parameter `microBuildOutputFolder` to a hardcoded path `$(Agent.TempDirectory)/.dotnet-microbuild`. This may break builds that relied on the previous configurable path, and the new path may not be persisted or accessible across pipeline stages.",
+          "suggestion": "Ensure that `$(Agent.TempDirectory)` is appropriate for the signing plugin's requirements and that the path is accessible in subsequent steps. Consider documenting the change or providing a fallback parameter.",
+          "confidence": 0.85,
+          "evidence_ids": [
+            "diff_hunk:eng/common/core-templates/steps/install-microbuild.yml:11"
+          ]
+        },
+        {
+          "file": "eng/targets/ResolveReferences.targets",
+          "line": 211,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "The condition for error BUILD002 now additionally requires `$(AspNetCorePatchVersion)` to equal '1'. If this property is not set or is set to a different value, the error will be suppressed even when unused baseline package references exist, potentially allowing breaking changes in servicing builds.",
+          "suggestion": "Verify that `$(AspNetCorePatchVersion)` is correctly defined and set to '1' for all servicing builds where this check should apply, or consider using a more robust condition.",
+          "confidence": 0.8,
+          "evidence_ids": [
+            "diff_hunk:eng/targets/ResolveReferences.targets:208"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:eng/common/SetupNugetSources.sh:1",
+          "diff_hunk:eng/common/core-templates/steps/install-microbuild.yml:11",
+          "diff_hunk:eng/targets/ResolveReferences.targets:208",
+          "diff_hunk:global.json:1"
+        ],
+        "output_issue_ids": [
+          "correctness:eng/common/core-templates/steps/install-microbuild.yml:28",
+          "correctness:eng/targets/ResolveReferences.targets:211"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 17397,
+        "token_count_in": 4120,
+        "token_count_out": 395,
+        "trace_id": "fd4ec51389e145e3a373da97fc533026",
+        "span_id": "15e1c68ed4ff4acc",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-003",
+        "shard_index": 2,
+        "shard_count": 4,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "58324290ab5061144a319d6cd2ef02b39462122960775a1652598b6356d30575": {
+      "status": "completed",
+      "shard_id": "shard-004",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:7"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": null,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:98",
+            "diff_hunk:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:206"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The primary evidence only shows a namespace change and a using directive addition. To assess whether the patch introduces any behavioral or risk-relevant changes, the remaining diff hunks are needed.",
+          "source_shard_id": "shard-004",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:7"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 16237,
+        "token_count_in": 1766,
+        "token_count_out": 126,
+        "trace_id": "d23a0190b32144abb2ff6ed46cc6d467",
+        "span_id": "016f684f2c50486b",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-004",
+        "shard_index": 3,
+        "shard_count": 4,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "5c5803e06f2a6d32b6fadc421f78d4fcd070185bce190f97267380cf525c4a28": {
+      "status": "completed",
+      "shard_id": "shard-004-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-004",
+      "selected_evidence_ids": [
+        "diff_hunk:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:206",
+        "diff_hunk:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:98"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs",
+          "line": 101,
+          "severity": "medium",
+          "category": "test_quality",
+          "message": "The test 'EmbeddingServerAppInsideIframe_WithCompressionEnabled_Fails' is quarantined due to a known issue, but the patch does not include any fix or workaround for the underlying problem. The test will be skipped, potentially masking regressions.",
+          "suggestion": "Either fix the underlying issue referenced in the quarantine link, or add a comment explaining why the test is quarantined and what conditions would allow it to be unquarantined.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:98"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:206",
+          "diff_hunk:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:98"
+        ],
+        "output_issue_ids": [
+          "test_quality:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:101"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 14900,
+        "token_count_in": 1441,
+        "token_count_out": 212,
+        "trace_id": "94d1adb6ac7347dab535dfcfed8f96c9",
+        "span_id": "b6b31c8e6e914df2",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-004-refill",
+        "shard_index": 3,
+        "shard_count": 4,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    }
+  }
+}

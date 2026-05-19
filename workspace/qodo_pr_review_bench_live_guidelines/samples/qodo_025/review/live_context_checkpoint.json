@@ -1,0 +1,442 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:cb36125b4c149d3b2c53d0ede013ac7cf41d4446e32afd168335a41f4e730ddc",
+  "diff_hash": "sha256:10887a816c7c623c9d19a62d5ec7b246df8ab2048e3f02783439d3cf5940f914",
+  "shards": {
+    "ae61913a0428c3003a629ac0e7014836eacf8ea3d6036d902ffc99946e70c4e8": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:apps/api/v2/src/lib/modules/booking-cancel.module.ts:1",
+        "diff_hunk:apps/api/v2/src/lib/repositories/prisma-booking-attendee.repository.ts:1",
+        "diff_hunk:apps/api/v2/src/lib/repositories/prisma-booking-reference.repository.ts:1",
+        "diff_hunk:apps/api/v2/src/lib/repositories/prisma-profile.repository.ts:1"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:apps/api/v2/src/lib/modules/booking-cancel.module.ts:1",
+          "diff_hunk:apps/api/v2/src/lib/repositories/prisma-booking-attendee.repository.ts:1",
+          "diff_hunk:apps/api/v2/src/lib/repositories/prisma-booking-reference.repository.ts:1",
+          "diff_hunk:apps/api/v2/src/lib/repositories/prisma-profile.repository.ts:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 10463,
+        "token_count_in": 5625,
+        "token_count_out": 12,
+        "trace_id": "0daadff6b2264412ab5d4af893283787",
+        "span_id": "47e60555b8134200",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 6,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "244dffbb9af58b88bd5b7a13a9bf5a6ced92067bec0165f57f1b91e5e6ebb911": {
+      "status": "completed",
+      "shard_id": "shard-002",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:apps/api/v2/src/lib/services/booking-cancel.service.ts:1",
+        "diff_hunk:packages/features/bookingReference/repositories/BookingReferenceRepository.ts:1",
+        "diff_hunk:packages/features/bookings/di/BookingAttendeeRepository.module.ts:1",
+        "diff_hunk:packages/features/bookings/di/BookingCancelService.module.ts:1",
+        "diff_hunk:packages/features/bookings/di/BookingCancelService.module.ts:17"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "packages/features/bookingReference/repositories/BookingReferenceRepository.ts",
+          "evidence_ids": [
+            "diff_hunk:packages/features/bookingReference/repositories/BookingReferenceRepository.ts:15",
+            "diff_hunk:packages/features/bookingReference/repositories/BookingReferenceRepository.ts:64"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-002",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [
+        {
+          "file": "packages/features/bookings/di/BookingAttendeeRepository.module.ts",
+          "line": 1,
+          "severity": "warning",
+          "category": "naming_convention",
+          "message": "Repository file name 'BookingAttendeeRepository.module.ts' does not follow the required 'Prisma<Entity>Repository' pattern. The file should be named 'PrismaBookingAttendeeRepository.module.ts' to match the class it binds.",
+          "suggestion": "Rename the file to 'PrismaBookingAttendeeRepository.module.ts' to follow the naming convention.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:packages/features/bookings/di/BookingAttendeeRepository.module.ts:1"
+          ]
+        },
+        {
+          "file": "packages/features/bookings/di/BookingCancelService.module.ts",
+          "line": 1,
+          "severity": "warning",
+          "category": "naming_convention",
+          "message": "Service file name 'BookingCancelService.module.ts' does not follow the required '<Entity>Service' pattern. The file should be named 'BookingCancelService.module.ts' (this is correct) but the class it binds is 'BookingCancelService' which is correct. However, the file is a DI module, not a service file. The guideline requires service files to be named '<Entity>Service.ts' with matching class names. This file is a DI module, not a service, so it may be acceptable, but the naming is ambiguous.",
+          "suggestion": "Consider renaming to 'BookingCancelServiceModule.ts' or similar to clearly indicate it is a DI module.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:packages/features/bookings/di/BookingCancelService.module.ts:1"
+          ]
+        },
+        {
+          "file": "packages/features/bookings/di/BookingCancelService.module.ts",
+          "line": 1,
+          "severity": "warning",
+          "category": "naming_convention",
+          "message": "Repository file 'BookingReferenceRepository.module.ts' is imported but does not follow the 'Prisma<Entity>Repository' naming pattern. The file should be named 'PrismaBookingReferenceRepository.module.ts'.",
+          "suggestion": "Rename 'BookingReferenceRepository.module.ts' to 'PrismaBookingReferenceRepository.module.ts' to follow the naming convention.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:packages/features/bookings/di/BookingCancelService.module.ts:1"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:apps/api/v2/src/lib/services/booking-cancel.service.ts:1",
+          "diff_hunk:packages/features/bookingReference/repositories/BookingReferenceRepository.ts:1",
+          "diff_hunk:packages/features/bookings/di/BookingAttendeeRepository.module.ts:1",
+          "diff_hunk:packages/features/bookings/di/BookingCancelService.module.ts:1",
+          "diff_hunk:packages/features/bookings/di/BookingCancelService.module.ts:17"
+        ],
+        "output_issue_ids": [
+          "naming_convention:packages/features/bookings/di/BookingAttendeeRepository.module.ts:1",
+          "naming_convention:packages/features/bookings/di/BookingCancelService.module.ts:1",
+          "naming_convention:packages/features/bookings/di/BookingCancelService.module.ts:1"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 95219,
+        "token_count_in": 6774,
+        "token_count_out": 661,
+        "trace_id": "a16bb8dc772a4bf6b030dd1dd2035863",
+        "span_id": "1eb5f6e977134769",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "shard_count": 6,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "3f62619414a2a3d26d85178256d85dbbf371312db37a0074fcb39db6b38c8736": {
+      "status": "completed",
+      "shard_id": "shard-002-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-002",
+      "selected_evidence_ids": [
+        "diff_hunk:packages/features/bookingReference/repositories/BookingReferenceRepository.ts:15",
+        "diff_hunk:packages/features/bookingReference/repositories/BookingReferenceRepository.ts:64"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "packages/features/bookingReference/repositories/BookingReferenceRepository.ts",
+          "line": 17,
+          "severity": "medium",
+          "category": "naming_convention",
+          "message": "Repository class name 'BookingReferenceRepository' does not follow the required 'Prisma<Entity>Repository' pattern.",
+          "suggestion": "Rename the class to 'PrismaBookingReferenceRepository' and update the filename accordingly to 'PrismaBookingReferenceRepository.ts'.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:packages/features/bookingReference/repositories/BookingReferenceRepository.ts:15"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:packages/features/bookingReference/repositories/BookingReferenceRepository.ts:15",
+          "diff_hunk:packages/features/bookingReference/repositories/BookingReferenceRepository.ts:64"
+        ],
+        "output_issue_ids": [
+          "naming_convention:packages/features/bookingReference/repositories/BookingReferenceRepository.ts:17"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 11849,
+        "token_count_in": 2835,
+        "token_count_out": 165,
+        "trace_id": "753242bf951a4ac18c330fee93bbc94e",
+        "span_id": "a8dc8cd1a6414aea",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002-refill",
+        "shard_index": 1,
+        "shard_count": 6,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    },
+    "b5af5ce44a0193ec1c14577291b55818b998bc8d22f1b3ce5636580f656195a1": {
+      "status": "completed",
+      "shard_id": "shard-003",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:packages/features/bookings/di/BookingReferenceRepository.module.ts:1",
+        "diff_hunk:packages/features/bookings/di/tokens.ts:7",
+        "diff_hunk:packages/features/bookings/lib/dto/IBookingAttendeeRepository.ts:1",
+        "diff_hunk:packages/features/bookings/lib/handleCancelBooking.ts:136",
+        "diff_hunk:packages/features/bookings/lib/handleCancelBooking.ts:18"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "packages/features/bookings/di/BookingReferenceRepository.module.ts",
+          "line": 1,
+          "severity": "minor",
+          "category": "naming_convention",
+          "message": "Repository file uses generic naming pattern 'BookingReferenceRepository.module.ts' instead of required 'Prisma<Entity>Repository.ts' pattern.",
+          "suggestion": "Rename the file to 'PrismaBookingReferenceRepository.ts' and update the class name to 'PrismaBookingReferenceRepository' to follow the naming convention.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:packages/features/bookings/di/BookingReferenceRepository.module.ts:1"
+          ]
+        },
+        {
+          "file": "packages/features/bookings/lib/handleCancelBooking.ts",
+          "line": 136,
+          "severity": "minor",
+          "category": "naming_convention",
+          "message": "Repository class 'BookingReferenceRepository' is instantiated directly but does not follow the 'Prisma<Entity>Repository' naming pattern.",
+          "suggestion": "Ensure the imported 'BookingReferenceRepository' class is named 'PrismaBookingReferenceRepository' or rename it accordingly.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:packages/features/bookings/lib/handleCancelBooking.ts:136"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:packages/features/bookings/di/BookingReferenceRepository.module.ts:1",
+          "diff_hunk:packages/features/bookings/di/tokens.ts:7",
+          "diff_hunk:packages/features/bookings/lib/dto/IBookingAttendeeRepository.ts:1",
+          "diff_hunk:packages/features/bookings/lib/handleCancelBooking.ts:136",
+          "diff_hunk:packages/features/bookings/lib/handleCancelBooking.ts:18"
+        ],
+        "output_issue_ids": [
+          "naming_convention:packages/features/bookings/di/BookingReferenceRepository.module.ts:1",
+          "naming_convention:packages/features/bookings/lib/handleCancelBooking.ts:136"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 69468,
+        "token_count_in": 6497,
+        "token_count_out": 310,
+        "trace_id": "ed1abaad2aa8495fa8d2cef90d9d6c1e",
+        "span_id": "0e339203962a4c9f",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-003",
+        "shard_index": 2,
+        "shard_count": 6,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "9c9f8ca17c0990a15a17c3edf3826ab349299d33cd1fe82a9a18012592b71058": {
+      "status": "completed",
+      "shard_id": "shard-004",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:packages/features/bookings/lib/handleCancelBooking/test/handleCancelBooking.test.ts:1053",
+        "diff_hunk:packages/features/bookings/repositories/BookingRepository.ts:10",
+        "diff_hunk:packages/features/bookings/repositories/BookingRepository.ts:1499",
+        "diff_hunk:packages/features/bookings/repositories/PrismaBookingAttendeeRepository.ts:1",
+        "diff_hunk:packages/features/di/tokens.ts:62"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "packages/features/bookings/repositories/PrismaBookingAttendeeRepository.ts",
+          "line": 1,
+          "severity": "medium",
+          "category": "naming_convention",
+          "message": "Repository class name 'PrismaBookingAttendeeRepository' does not follow the required naming convention 'Prisma<Entity>Repository' where Entity should match the entity name (e.g., 'Attendee' -> 'PrismaAttendeeRepository').",
+          "suggestion": "Rename the class to 'PrismaAttendeeRepository' and rename the file to 'PrismaAttendeeRepository.ts'.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:packages/features/bookings/repositories/PrismaBookingAttendeeRepository.ts:1"
+          ]
+        },
+        {
+          "file": "packages/features/bookings/repositories/PrismaBookingAttendeeRepository.ts",
+          "line": 1,
+          "severity": "medium",
+          "category": "naming_convention",
+          "message": "File name 'PrismaBookingAttendeeRepository.ts' does not match the exported class name 'PrismaBookingAttendeeRepository' exactly in PascalCase (the file name uses 'BookingAttendee' instead of 'Attendee').",
+          "suggestion": "Rename the file to 'PrismaAttendeeRepository.ts' to match the class name after fixing the class name.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:packages/features/bookings/repositories/PrismaBookingAttendeeRepository.ts:1"
+          ]
+        },
+        {
+          "file": "packages/features/bookings/repositories/PrismaBookingAttendeeRepository.ts",
+          "line": 1,
+          "severity": "medium",
+          "category": "formatting",
+          "message": "File uses single quotes in imports and lacks semicolons, violating the Biome formatting rule requiring double quotes for JSX and always including semicolons.",
+          "suggestion": "Use double quotes for imports and add semicolons at the end of statements.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:packages/features/bookings/repositories/PrismaBookingAttendeeRepository.ts:1"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:packages/features/bookings/lib/handleCancelBooking/test/handleCancelBooking.test.ts:1053",
+          "diff_hunk:packages/features/bookings/repositories/BookingRepository.ts:10",
+          "diff_hunk:packages/features/bookings/repositories/BookingRepository.ts:1499",
+          "diff_hunk:packages/features/bookings/repositories/PrismaBookingAttendeeRepository.ts:1",
+          "diff_hunk:packages/features/di/tokens.ts:62"
+        ],
+        "output_issue_ids": [
+          "naming_convention:packages/features/bookings/repositories/PrismaBookingAttendeeRepository.ts:1",
+          "naming_convention:packages/features/bookings/repositories/PrismaBookingAttendeeRepository.ts:1",
+          "formatting:packages/features/bookings/repositories/PrismaBookingAttendeeRepository.ts:1"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 29348,
+        "token_count_in": 7815,
+        "token_count_out": 518,
+        "trace_id": "9cf35d15f8b340588db696fa04d64139",
+        "span_id": "29dddb194f024607",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-004",
+        "shard_index": 3,
+        "shard_count": 6,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "f3a0b8440c2de302f47cf05afc80c378d7ba203369baf5aeff6320078bea1972": {
+      "status": "completed",
+      "shard_id": "shard-006",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:packages/lib/server/repository/dto/IBookingRepository.ts:1",
+        "diff_hunk:packages/lib/server/repository/dto/IProfileRepository.ts:1",
+        "diff_hunk:packages/platform/libraries/repositories.ts:11"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "packages/lib/server/repository/dto/IBookingRepository.ts",
+          "line": 1,
+          "severity": "medium",
+          "category": "naming_convention",
+          "message": "Repository interface file IBookingRepository.ts does not follow the required 'Prisma<Entity>Repository' naming pattern.",
+          "suggestion": "Rename the file to PrismaBookingRepository.ts and update the exported interface name accordingly to match the naming convention.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:packages/lib/server/repository/dto/IBookingRepository.ts:1"
+          ]
+        },
+        {
+          "file": "packages/lib/server/repository/dto/IProfileRepository.ts",
+          "line": 1,
+          "severity": "medium",
+          "category": "naming_convention",
+          "message": "Repository interface file IProfileRepository.ts does not follow the required 'Prisma<Entity>Repository' naming pattern.",
+          "suggestion": "Rename the file to PrismaProfileRepository.ts and update the exported interface name accordingly to match the naming convention.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:packages/lib/server/repository/dto/IProfileRepository.ts:1"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:packages/lib/server/repository/dto/IBookingRepository.ts:1",
+          "diff_hunk:packages/lib/server/repository/dto/IProfileRepository.ts:1",
+          "diff_hunk:packages/platform/libraries/repositories.ts:11"
+        ],
+        "output_issue_ids": [
+          "naming_convention:packages/lib/server/repository/dto/IBookingRepository.ts:1",
+          "naming_convention:packages/lib/server/repository/dto/IProfileRepository.ts:1"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 2271,
+        "token_count_in": 5138,
+        "token_count_out": 297,
+        "trace_id": "10b53816e3c64e92b4e0397edd5e9185",
+        "span_id": "101770e816844199",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-006",
+        "shard_index": 5,
+        "shard_count": 6,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

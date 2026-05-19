@@ -1,0 +1,116 @@
+{
+  "schema_version": "1.0",
+  "run_id": "89a3023f7aa7466e8e0afd9db920662e",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": true,
+  "package_hash": "sha256:e97e6ab9bb470005835c70c3615c44f9815b2ee67f81231450d1a6c7f3fb3438",
+  "diff_hash": "sha256:2ec7d6a210215a957c2efa3e954bfd7c0f8dda928dd0bc72cee17b849c558c90",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 0,
+      "verified_count": 0,
+      "needs_human_review_count": 0,
+      "discarded_count": 0,
+      "keep_count": 0,
+      "uncertain_count": 0,
+      "reject_count": 0,
+      "feedback_sent": [],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff_hunk:mlx_audio/tts/generate.py:1"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 1,
+          "retry_log": [
+            "attempt=1 error=timeout delay=1.00s"
+          ],
+          "latency_ms": 88194,
+          "token_count_in": 3221,
+          "token_count_out": 154,
+          "trace_id": "88f05a4cd8054df7ba9d83eb33ee93d3",
+          "span_id": "7eb47a0beed243df",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 1,
+          "context_request_count": 1,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff:mlx_audio/tts/generate.py:26",
+            "diff:mlx_audio/tts/generate.py:49",
+            "diff_hunk:mlx_audio/tts/generate.py:1"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 2,
+          "retry_log": [
+            "attempt=1 error=timeout delay=1.00s",
+            "attempt=2 error=timeout delay=2.00s"
+          ],
+          "latency_ms": 183178,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "9f70127b5d9b4705be0b68e65620ebf7",
+          "span_id": "dd32e5413a894678",
+          "parent_span_id": "",
+          "status": "error",
+          "error_type": "_AgentTransientError",
+          "shard_id": "shard-001-refill",
+          "shard_index": 0,
+          "shard_count": 1,
+          "context_request_count": 0,
+          "context_refill_used": true
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [],
+      "keep": [],
+      "needs_human_review": [],
+      "discarded": []
+    }
+  ],
+  "last_feedback": null
+}

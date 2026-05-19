@@ -1,0 +1,107 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:1b614fb6456d4ae240d7dad6de97f58295ad16ae4b1159aa5f67bd4c95b26d62",
+  "diff_hash": "sha256:9bcd3afb6c4abf94df75962db63b9694c6d5fd34910bf560f52ea8dddb61826e",
+  "shards": {
+    "bcac0e1d47193732164f14b29e54fefcf6b99b0f8f7d482a89144fd1f1dac24d": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:gpt_engineer/steps.py:1"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "gpt_engineer/steps.py",
+          "evidence_ids": [
+            "diff_hunk:gpt_engineer/steps.py:42"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-001",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:gpt_engineer/steps.py:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 2205,
+        "token_count_in": 1349,
+        "token_count_out": 68,
+        "trace_id": "11c6e5976a514b7e96f5cced406f0bd2",
+        "span_id": "9fba388116284e6b",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "81b9f99f667f61c170969f006188e772a9d26824537a47287315e4044ce6f408": {
+      "status": "completed",
+      "shard_id": "shard-001-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-001",
+      "selected_evidence_ids": [
+        "diff_hunk:gpt_engineer/steps.py:42"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": null,
+          "evidence_ids": [],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The diff hunk shows two new steps added to the TDD_PLUS pipeline, but the evidence is insufficient to determine if these steps introduce any concrete failure scenario. Requesting more evidence from the same file to understand the implementation of gen_entrypoint and execute_entrypoint.",
+          "source_shard_id": "shard-001-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:gpt_engineer/steps.py:42"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 2988,
+        "token_count_in": 1101,
+        "token_count_out": 93,
+        "trace_id": "4bfac90a02084c4fb624572936a5c503",
+        "span_id": "20db6dfce8fd4939",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 1,
+        "context_refill_used": true
+      }
+    }
+  }
+}

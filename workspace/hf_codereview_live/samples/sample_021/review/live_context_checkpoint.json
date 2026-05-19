@@ -1,0 +1,78 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:c896a06425d8014bae39b62aa275576aa298c0d38eb11abec68e83e0075990cc",
+  "diff_hash": "sha256:8c1810a940b4968727f32997debbf72a33b72f9ecc61e46a5b4e9ab512499825",
+  "shards": {
+    "1a09cb022c3ee11cbb63c6c5a7c56a2d5df952760f025c04aca70a856a88f00d": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:gpt_engineer/db.py:11",
+        "diff_hunk:gpt_engineer/db.py:38"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "gpt_engineer/db.py",
+          "line": 14,
+          "severity": "medium",
+          "category": "behavior_change",
+          "message": "New __contains__ method uses (self.path / key).is_file() which may return False for directories, altering expected containment semantics for DB objects.",
+          "suggestion": "Consider using .exists() instead of .is_file() if the intent is to check for any path existence, or document that only files are considered contained.",
+          "confidence": 0.72,
+          "evidence_ids": [
+            "diff_hunk:gpt_engineer/db.py:11"
+          ]
+        },
+        {
+          "file": "gpt_engineer/db.py",
+          "line": 41,
+          "severity": "low",
+          "category": "behavior_change",
+          "message": "Renamed DBs attribute from 'identity' to 'preprompts' changes the public interface of DBs, potentially breaking external code that accesses DBs.identity.",
+          "suggestion": "If this is a breaking change, ensure all callers are updated or add a backward-compatible alias.",
+          "confidence": 0.72,
+          "evidence_ids": [
+            "diff_hunk:gpt_engineer/db.py:38"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:gpt_engineer/db.py:11",
+          "diff_hunk:gpt_engineer/db.py:38"
+        ],
+        "output_issue_ids": [
+          "behavior_change:gpt_engineer/db.py:14",
+          "behavior_change:gpt_engineer/db.py:41"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 2,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s",
+          "attempt=2 error=timeout delay=2.00s"
+        ],
+        "latency_ms": 128274,
+        "token_count_in": 1829,
+        "token_count_out": 297,
+        "trace_id": "8610358632ee4d54829686f2f85b7886",
+        "span_id": "c0135da690c444a3",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

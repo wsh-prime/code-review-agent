@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import ast
 import hashlib
 import json
 import os
@@ -408,7 +409,7 @@ class OpenAICompatibleReviewAgent:
             )
             self.last_agent_run = run
             self.last_agent_runs.append(run)
-            raise _AgentFatalError(
+            raise _AgentTransientError(
                 f"OpenAI-compatible reviewer produced invalid output: {exc}"
             ) from exc
 
@@ -935,7 +936,7 @@ def _review_response_from_llm_json(
     source_shard_id: str,
     max_context_requests: int,
 ) -> tuple[list[ReviewIssue], list[ContextRequest]]:
-    parsed = json.loads(_extract_json_value(content))
+    parsed = _loads_llm_json(_extract_json_value(content))
     if not isinstance(parsed, list):
         if not isinstance(parsed, dict):
             raise ValueError("LLM review output must be an object or array.")
@@ -1014,23 +1015,58 @@ def _extract_json_value(content: str) -> str:
     return stripped[start:end]
 
 
+def _loads_llm_json(raw: str) -> object:
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError:
+        try:
+            return _literal_eval_jsonish(raw)
+        except (SyntaxError, ValueError) as exc:
+            raise json.JSONDecodeError(str(exc), raw, 0) from exc
+
+
+def _literal_eval_jsonish(raw: str) -> object:
+    """Parse Python-literal shaped model output with JSON constants."""
+
+    expression = ast.parse(raw, mode="eval")
+    expression = _JsonishConstantTransformer().visit(expression)
+    ast.fix_missing_locations(expression)
+    return ast.literal_eval(expression)
+
+
+class _JsonishConstantTransformer(ast.NodeTransformer):
+    """Allow common JSON constants in otherwise Python-literal output."""
+
+    _CONSTANTS = {
+        "true": True,
+        "false": False,
+        "null": None,
+    }
+
+    def visit_Name(self, node: ast.Name) -> ast.AST:  # noqa: N802 - ast API name.
+        lowered = node.id.lower()
+        if lowered in self._CONSTANTS:
+            return ast.copy_location(ast.Constant(self._CONSTANTS[lowered]), node)
+        return node
+
+
 def _balanced_json_end(text: str, start: int) -> int | None:
     stack: list[str] = []
-    in_string = False
+    quote_char: str | None = None
     escaped = False
     for index in range(start, len(text)):
         char = text[index]
-        if in_string:
+        if quote_char is not None:
             if escaped:
                 escaped = False
             elif char == "\\":
                 escaped = True
-            elif char == '"':
-                in_string = False
+            elif char == quote_char:
+                quote_char = None
             continue
 
-        if char == '"':
-            in_string = True
+        if char in {"'", '"'}:
+            quote_char = char
             continue
         if char in "{[":
             stack.append("}" if char == "{" else "]")

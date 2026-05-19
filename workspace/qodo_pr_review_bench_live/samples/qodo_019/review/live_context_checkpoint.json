@@ -1,0 +1,214 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:7a4de960fab5c376ba620afc69198967b9954803fc89e3414f2eb4d97335bee9",
+  "diff_hash": "sha256:fb38e9647a0e846438d1314c48b3a0bdc42c28d23ed16cb509e7654d263c283a",
+  "shards": {
+    "8003f5ef9155db63a2d5b2b1bbe8aa066d981a1cc198457b4ed2bd24461ddc16": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:10",
+        "diff_hunk:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:31",
+        "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+        "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts",
+          "evidence_ids": [
+            "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The first hunk shows new module-level variables (currentRendererId, hasInitializedJsComponents) and the second hunk (line 118) likely contains the enableJSRootComponents function signature change and logic using these variables. Need to verify the function correctly handles the new rendererId parameter and initialization guard.",
+          "source_shard_id": "shard-001",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts",
+          "evidence_ids": [
+            "diff:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:34"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The hunk shows enableJSRootComponents now receives rendererId as first argument. Need to see the full function call site to confirm the parameter order matches the updated function signature.",
+          "source_shard_id": "shard-001",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:10",
+          "diff_hunk:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:31",
+          "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+          "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 2123,
+        "token_count_in": 4775,
+        "token_count_out": 268,
+        "trace_id": "068f01157e58425989fd6ad9c1cdadad",
+        "span_id": "9e6a4f66d994409b",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 2,
+        "context_request_count": 2,
+        "context_refill_used": false
+      }
+    },
+    "872748c5a7c38156c377dc1bfeb32ee1b48a970693549cbf02ad9442c616df9e": {
+      "status": "completed",
+      "shard_id": "shard-001-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-001",
+      "selected_evidence_ids": [
+        "diff:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:34",
+        "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118",
+        "diff_hunk:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:31"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts",
+          "line": 118,
+          "severity": "high",
+          "category": "correctness",
+          "message": "The guard `if (manager && currentRendererId === rendererId)` throws an error only when the same renderer ID re-enables, but the comment says 'A different renderer type... is trying to enable JS root components.' This is contradictory: the condition checks for equal rendererId, not different. If a different renderer type (different rendererId) calls enableJSRootComponents, the condition is false, so no error is thrown and the manager is silently overwritten. This could lead to a scenario where two different renderer types both claim to manage dynamic root components, violating the stated unsupported multi-host assumption.",
+          "suggestion": "Change the condition to `if (manager && currentRendererId !== rendererId)` to correctly detect a different renderer type attempting to enable JS root components, or update the comment to match the actual logic.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118"
+          ]
+        },
+        {
+          "file": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts",
+          "line": 118,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "The variable `hasInitializedJsComponents` is used but never declared or initialized in the provided evidence. If it is not defined elsewhere in the module, this will cause a ReferenceError at runtime when `enableJSRootComponents` is called a second time.",
+          "suggestion": "Ensure `hasInitializedJsComponents` is declared and initialized (e.g., `let hasInitializedJsComponents = false;`) at module scope before it is used.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:34",
+          "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118",
+          "diff_hunk:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:31"
+        ],
+        "output_issue_ids": [
+          "correctness:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118",
+          "correctness:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 43965,
+        "token_count_in": 2352,
+        "token_count_out": 465,
+        "trace_id": "2914486c96e542669194f89f838e49d5",
+        "span_id": "085697da179f443d",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "shard_count": 2,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    },
+    "157f4a10763829a73b02e81e4b7069b514dcefc62fc234d0854b4b87822457cb": {
+      "status": "completed",
+      "shard_id": "shard-002",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24",
+        "diff_hunk:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "src/Components/test/testassets/Components.TestServer/Program.cs",
+          "line": 27,
+          "severity": "medium",
+          "category": "test_coverage",
+          "message": "Removal of the 'Razor Component Endpoints with JS Root Component' test scenario eliminates test coverage for the dynamic JS root component registration path.",
+          "suggestion": "Consider keeping the test scenario or adding an equivalent test elsewhere to ensure the dynamic JS root component registration continues to be validated.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24"
+          ]
+        },
+        {
+          "file": "src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs",
+          "line": 54,
+          "severity": "medium",
+          "category": "behavior_change",
+          "message": "The conditional registration of the dynamic JS root component (guarded by 'RegisterDynamicJSRootComponent' config) is now unconditional. This changes behavior for all test scenarios that use this startup class, potentially causing side effects or failures in scenarios that did not previously register this component.",
+          "suggestion": "If the dynamic JS root component should always be registered, ensure all dependent tests are updated. Otherwise, keep the conditional guard or add a new configuration flag.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24",
+          "diff_hunk:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51"
+        ],
+        "output_issue_ids": [
+          "test_coverage:src/Components/test/testassets/Components.TestServer/Program.cs:27",
+          "behavior_change:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:54"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 15369,
+        "token_count_in": 2347,
+        "token_count_out": 356,
+        "trace_id": "b07176f7e757404e8bfd5b3b47a5ae24",
+        "span_id": "430eef8a91f14644",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "shard_count": 2,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

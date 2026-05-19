@@ -1,0 +1,1000 @@
+{
+  "schema_version": "1.3",
+  "summary": {
+    "mode": "hybrid-live",
+    "changed_file_count": 1,
+    "changed_entity_count": 4,
+    "risk_signal_count": 1,
+    "finding_count": 0,
+    "needs_human_review_count": 0,
+    "discarded_count": 0,
+    "evidence_count": 50,
+    "missing_evidence_id_count": 0,
+    "agent_run_count": 3,
+    "prompt_exported": false,
+    "loop_enabled": true,
+    "loop_iterations_completed": 1,
+    "loop_converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "total_latency_ms": 1648,
+    "total_token_count_in": 3915,
+    "total_token_count_out": 93,
+    "context_budget_enabled": true,
+    "context_truncated": true,
+    "selected_evidence_count": 2,
+    "omitted_evidence_count": 48,
+    "review_shard_count": 1,
+    "context_refill_count": 1,
+    "context_request_count": 2,
+    "target_repo_modified": false
+  },
+  "findings": [],
+  "needs_human_review": [],
+  "discarded": [],
+  "changed_files": [
+    {
+      "old_path": "tests/steps/test_archive.py",
+      "new_path": "tests/steps/test_archive.py",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 0,
+          "old_count": 0,
+          "new_start": 1,
+          "new_count": 44,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1,
+              "content": "import datetime"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 2,
+              "content": "import os"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 3,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 4,
+              "content": "from unittest.mock import MagicMock"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 5,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 6,
+              "content": "from gpt_engineer.db import DB, DBs"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 7,
+              "content": "from gpt_engineer.steps import archive"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 8,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 9,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 10,
+              "content": "def freeze_at(monkeypatch, time):"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 11,
+              "content": "    datetime_mock = MagicMock(wraps=datetime.datetime)"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 12,
+              "content": "    datetime_mock.now.return_value = time"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 13,
+              "content": "    monkeypatch.setattr(datetime, \"datetime\", datetime_mock)"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 14,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 15,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 16,
+              "content": "def setup_dbs(tmp_path, dir_names):"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 17,
+              "content": "    directories = [tmp_path / name for name in dir_names]"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 18,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 19,
+              "content": "    # Create DB objects"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 20,
+              "content": "    dbs = [DB(dir) for dir in directories]"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 21,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 22,
+              "content": "    # Create DBs instance"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 23,
+              "content": "    return DBs(*dbs)"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 24,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 25,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 26,
+              "content": "def test_archive(tmp_path, monkeypatch):"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 27,
+              "content": "    dbs = setup_dbs("
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 28,
+              "content": "        tmp_path, [\"memory\", \"logs\", \"preprompts\", \"input\", \"workspace\", \"archive\"]"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 29,
+              "content": "    )"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 30,
+              "content": "    freeze_at(monkeypatch, datetime.datetime(2020, 12, 25, 17, 5, 55))"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 31,
+              "content": "    archive(None, dbs)"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 32,
+              "content": "    assert not os.path.exists(tmp_path / \"memory\")"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 33,
+              "content": "    assert not os.path.exists(tmp_path / \"workspace\")"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 34,
+              "content": "    assert os.path.isdir(tmp_path / \"archive\" / \"20201225_170555\")"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 35,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 36,
+              "content": "    dbs = setup_dbs("
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 37,
+              "content": "        tmp_path, [\"memory\", \"logs\", \"preprompts\", \"input\", \"workspace\", \"archive\"]"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 38,
+              "content": "    )"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 39,
+              "content": "    freeze_at(monkeypatch, datetime.datetime(2022, 8, 14, 8, 5, 12))"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 40,
+              "content": "    archive(None, dbs)"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 41,
+              "content": "    assert not os.path.exists(tmp_path / \"memory\")"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 42,
+              "content": "    assert not os.path.exists(tmp_path / \"workspace\")"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 43,
+              "content": "    assert os.path.isdir(tmp_path / \"archive\" / \"20201225_170555\")"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 44,
+              "content": "    assert os.path.isdir(tmp_path / \"archive\" / \"20220814_080512\")"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "changed_entities": [
+    {
+      "path": "tests/steps/test_archive.py",
+      "entity_type": "module",
+      "name": "test_archive.py",
+      "qualified_name": "tests.steps.test_archive",
+      "line_start": 1,
+      "line_end": 25,
+      "hunk_ids": [
+        "tests/steps/test_archive.py:1"
+      ]
+    },
+    {
+      "path": "tests/steps/test_archive.py",
+      "entity_type": "function",
+      "name": "freeze_at",
+      "qualified_name": "freeze_at",
+      "line_start": 10,
+      "line_end": 13,
+      "hunk_ids": [
+        "tests/steps/test_archive.py:1"
+      ]
+    },
+    {
+      "path": "tests/steps/test_archive.py",
+      "entity_type": "function",
+      "name": "setup_dbs",
+      "qualified_name": "setup_dbs",
+      "line_start": 16,
+      "line_end": 23,
+      "hunk_ids": [
+        "tests/steps/test_archive.py:1"
+      ]
+    },
+    {
+      "path": "tests/steps/test_archive.py",
+      "entity_type": "function",
+      "name": "test_archive",
+      "qualified_name": "test_archive",
+      "line_start": 26,
+      "line_end": 44,
+      "hunk_ids": [
+        "tests/steps/test_archive.py:1"
+      ]
+    }
+  ],
+  "risk_signals": [
+    {
+      "tag": "api_change",
+      "confidence": 0.82,
+      "reason": "Public function or class signature changed in tests/steps/test_archive.py.",
+      "evidence_ids": [
+        "diff:tests/steps/test_archive.py:10",
+        "diff:tests/steps/test_archive.py:16",
+        "diff:tests/steps/test_archive.py:26"
+      ]
+    }
+  ],
+  "evidence_index": {
+    "diff_hunk:tests/steps/test_archive.py:1": {
+      "id": "diff_hunk:tests/steps/test_archive.py:1",
+      "kind": "diff_hunk",
+      "source": "tests/steps/test_archive.py:1",
+      "message": "@@ -0,0 +1,44 @@\n+import datetime\n+import os\n+\n+from unittest.mock import MagicMock\n+\n+from gpt_engineer.db import DB, DBs\n+from gpt_engineer.steps import archive\n+\n+\n+def freeze_at(monkeypatch, time):\n+    datetime_mock = MagicMock(wraps=datetime.datetime)\n+    datetime_mock.now.return_value = time\n+    monkeypatch.setattr(datetime, \"datetime\", datetime_mock)\n+\n+\n+def setup_dbs(tmp_path, dir_names):\n+    directories = [tmp_path / name for name in dir_names]\n+\n+    # Create DB objects\n+    dbs = [DB(dir) for dir in directories]\n+\n+    # Create DBs instance\n+    return DBs(*dbs)\n+\n+\n+def test_archive(tmp_path, monkeypatch):\n+    dbs = setup_dbs(\n+        tmp_path, [\"memory\", \"logs\", \"preprompts\", \"input\", \"workspace\", \"archive\"]\n+    )\n+    freeze_at(monkeypatch, datetime.datetime(2020, 12, 25, 17, 5, 55))\n+    archive(None, dbs)\n+    assert not os.path.exists(tmp_path / \"memory\")\n+    assert not os.path.exists(tmp_path / \"workspace\")\n+    assert os.path.isdir(tmp_path / \"archive\" / \"20201225_170555\")\n+\n+    dbs = setup_dbs(\n+        tmp_path, [\"memory\", \"logs\", \"preprompts\", \"input\", \"workspace\", \"archive\"]\n+    )\n+    freeze_at(monkeypatch, datetime.datetime(2022, 8, 14, 8, 5, 12))\n+    archive(None, dbs)\n+    assert not os.path.exists(tmp_path / \"memory\")\n+    assert not os.path.exists(tmp_path / \"workspace\")\n+    assert os.path.isdir(tmp_path / \"archive\" / \"20201225_170555\")\n+    assert os.path.isdir(tmp_path / \"archive\" / \"20220814_080512\")"
+    },
+    "diff:tests/steps/test_archive.py:1": {
+      "id": "diff:tests/steps/test_archive.py:1",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:1",
+      "message": "Added line: import datetime"
+    },
+    "diff:tests/steps/test_archive.py:2": {
+      "id": "diff:tests/steps/test_archive.py:2",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:2",
+      "message": "Added line: import os"
+    },
+    "diff:tests/steps/test_archive.py:3": {
+      "id": "diff:tests/steps/test_archive.py:3",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:3",
+      "message": "Added line: "
+    },
+    "diff:tests/steps/test_archive.py:4": {
+      "id": "diff:tests/steps/test_archive.py:4",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:4",
+      "message": "Added line: from unittest.mock import MagicMock"
+    },
+    "diff:tests/steps/test_archive.py:5": {
+      "id": "diff:tests/steps/test_archive.py:5",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:5",
+      "message": "Added line: "
+    },
+    "diff:tests/steps/test_archive.py:6": {
+      "id": "diff:tests/steps/test_archive.py:6",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:6",
+      "message": "Added line: from gpt_engineer.db import DB, DBs"
+    },
+    "diff:tests/steps/test_archive.py:7": {
+      "id": "diff:tests/steps/test_archive.py:7",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:7",
+      "message": "Added line: from gpt_engineer.steps import archive"
+    },
+    "diff:tests/steps/test_archive.py:8": {
+      "id": "diff:tests/steps/test_archive.py:8",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:8",
+      "message": "Added line: "
+    },
+    "diff:tests/steps/test_archive.py:9": {
+      "id": "diff:tests/steps/test_archive.py:9",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:9",
+      "message": "Added line: "
+    },
+    "diff:tests/steps/test_archive.py:10": {
+      "id": "diff:tests/steps/test_archive.py:10",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:10",
+      "message": "Added line: def freeze_at(monkeypatch, time):"
+    },
+    "diff:tests/steps/test_archive.py:11": {
+      "id": "diff:tests/steps/test_archive.py:11",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:11",
+      "message": "Added line: datetime_mock = MagicMock(wraps=datetime.datetime)"
+    },
+    "diff:tests/steps/test_archive.py:12": {
+      "id": "diff:tests/steps/test_archive.py:12",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:12",
+      "message": "Added line: datetime_mock.now.return_value = time"
+    },
+    "diff:tests/steps/test_archive.py:13": {
+      "id": "diff:tests/steps/test_archive.py:13",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:13",
+      "message": "Added line: monkeypatch.setattr(datetime, \"datetime\", datetime_mock)"
+    },
+    "diff:tests/steps/test_archive.py:14": {
+      "id": "diff:tests/steps/test_archive.py:14",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:14",
+      "message": "Added line: "
+    },
+    "diff:tests/steps/test_archive.py:15": {
+      "id": "diff:tests/steps/test_archive.py:15",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:15",
+      "message": "Added line: "
+    },
+    "diff:tests/steps/test_archive.py:16": {
+      "id": "diff:tests/steps/test_archive.py:16",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:16",
+      "message": "Added line: def setup_dbs(tmp_path, dir_names):"
+    },
+    "diff:tests/steps/test_archive.py:17": {
+      "id": "diff:tests/steps/test_archive.py:17",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:17",
+      "message": "Added line: directories = [tmp_path / name for name in dir_names]"
+    },
+    "diff:tests/steps/test_archive.py:18": {
+      "id": "diff:tests/steps/test_archive.py:18",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:18",
+      "message": "Added line: "
+    },
+    "diff:tests/steps/test_archive.py:19": {
+      "id": "diff:tests/steps/test_archive.py:19",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:19",
+      "message": "Added line: # Create DB objects"
+    },
+    "diff:tests/steps/test_archive.py:20": {
+      "id": "diff:tests/steps/test_archive.py:20",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:20",
+      "message": "Added line: dbs = [DB(dir) for dir in directories]"
+    },
+    "diff:tests/steps/test_archive.py:21": {
+      "id": "diff:tests/steps/test_archive.py:21",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:21",
+      "message": "Added line: "
+    },
+    "diff:tests/steps/test_archive.py:22": {
+      "id": "diff:tests/steps/test_archive.py:22",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:22",
+      "message": "Added line: # Create DBs instance"
+    },
+    "diff:tests/steps/test_archive.py:23": {
+      "id": "diff:tests/steps/test_archive.py:23",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:23",
+      "message": "Added line: return DBs(*dbs)"
+    },
+    "diff:tests/steps/test_archive.py:24": {
+      "id": "diff:tests/steps/test_archive.py:24",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:24",
+      "message": "Added line: "
+    },
+    "diff:tests/steps/test_archive.py:25": {
+      "id": "diff:tests/steps/test_archive.py:25",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:25",
+      "message": "Added line: "
+    },
+    "diff:tests/steps/test_archive.py:26": {
+      "id": "diff:tests/steps/test_archive.py:26",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:26",
+      "message": "Added line: def test_archive(tmp_path, monkeypatch):"
+    },
+    "diff:tests/steps/test_archive.py:27": {
+      "id": "diff:tests/steps/test_archive.py:27",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:27",
+      "message": "Added line: dbs = setup_dbs("
+    },
+    "diff:tests/steps/test_archive.py:28": {
+      "id": "diff:tests/steps/test_archive.py:28",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:28",
+      "message": "Added line: tmp_path, [\"memory\", \"logs\", \"preprompts\", \"input\", \"workspace\", \"archive\"]"
+    },
+    "diff:tests/steps/test_archive.py:29": {
+      "id": "diff:tests/steps/test_archive.py:29",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:29",
+      "message": "Added line: )"
+    },
+    "diff:tests/steps/test_archive.py:30": {
+      "id": "diff:tests/steps/test_archive.py:30",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:30",
+      "message": "Added line: freeze_at(monkeypatch, datetime.datetime(2020, 12, 25, 17, 5, 55))"
+    },
+    "diff:tests/steps/test_archive.py:31": {
+      "id": "diff:tests/steps/test_archive.py:31",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:31",
+      "message": "Added line: archive(None, dbs)"
+    },
+    "diff:tests/steps/test_archive.py:32": {
+      "id": "diff:tests/steps/test_archive.py:32",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:32",
+      "message": "Added line: assert not os.path.exists(tmp_path / \"memory\")"
+    },
+    "diff:tests/steps/test_archive.py:33": {
+      "id": "diff:tests/steps/test_archive.py:33",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:33",
+      "message": "Added line: assert not os.path.exists(tmp_path / \"workspace\")"
+    },
+    "diff:tests/steps/test_archive.py:34": {
+      "id": "diff:tests/steps/test_archive.py:34",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:34",
+      "message": "Added line: assert os.path.isdir(tmp_path / \"archive\" / \"20201225_170555\")"
+    },
+    "diff:tests/steps/test_archive.py:35": {
+      "id": "diff:tests/steps/test_archive.py:35",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:35",
+      "message": "Added line: "
+    },
+    "diff:tests/steps/test_archive.py:36": {
+      "id": "diff:tests/steps/test_archive.py:36",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:36",
+      "message": "Added line: dbs = setup_dbs("
+    },
+    "diff:tests/steps/test_archive.py:37": {
+      "id": "diff:tests/steps/test_archive.py:37",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:37",
+      "message": "Added line: tmp_path, [\"memory\", \"logs\", \"preprompts\", \"input\", \"workspace\", \"archive\"]"
+    },
+    "diff:tests/steps/test_archive.py:38": {
+      "id": "diff:tests/steps/test_archive.py:38",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:38",
+      "message": "Added line: )"
+    },
+    "diff:tests/steps/test_archive.py:39": {
+      "id": "diff:tests/steps/test_archive.py:39",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:39",
+      "message": "Added line: freeze_at(monkeypatch, datetime.datetime(2022, 8, 14, 8, 5, 12))"
+    },
+    "diff:tests/steps/test_archive.py:40": {
+      "id": "diff:tests/steps/test_archive.py:40",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:40",
+      "message": "Added line: archive(None, dbs)"
+    },
+    "diff:tests/steps/test_archive.py:41": {
+      "id": "diff:tests/steps/test_archive.py:41",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:41",
+      "message": "Added line: assert not os.path.exists(tmp_path / \"memory\")"
+    },
+    "diff:tests/steps/test_archive.py:42": {
+      "id": "diff:tests/steps/test_archive.py:42",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:42",
+      "message": "Added line: assert not os.path.exists(tmp_path / \"workspace\")"
+    },
+    "diff:tests/steps/test_archive.py:43": {
+      "id": "diff:tests/steps/test_archive.py:43",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:43",
+      "message": "Added line: assert os.path.isdir(tmp_path / \"archive\" / \"20201225_170555\")"
+    },
+    "diff:tests/steps/test_archive.py:44": {
+      "id": "diff:tests/steps/test_archive.py:44",
+      "kind": "diff",
+      "source": "tests/steps/test_archive.py:44",
+      "message": "Added line: assert os.path.isdir(tmp_path / \"archive\" / \"20220814_080512\")"
+    },
+    "entity:tests/steps/test_archive.py:tests.steps.test_archive": {
+      "id": "entity:tests/steps/test_archive.py:tests.steps.test_archive",
+      "kind": "entity",
+      "source": "tests/steps/test_archive.py:1-25",
+      "message": "Changed module tests.steps.test_archive touched by 1 hunk(s)."
+    },
+    "entity:tests/steps/test_archive.py:freeze_at": {
+      "id": "entity:tests/steps/test_archive.py:freeze_at",
+      "kind": "entity",
+      "source": "tests/steps/test_archive.py:10-13",
+      "message": "Changed function freeze_at touched by 1 hunk(s)."
+    },
+    "entity:tests/steps/test_archive.py:setup_dbs": {
+      "id": "entity:tests/steps/test_archive.py:setup_dbs",
+      "kind": "entity",
+      "source": "tests/steps/test_archive.py:16-23",
+      "message": "Changed function setup_dbs touched by 1 hunk(s)."
+    },
+    "entity:tests/steps/test_archive.py:test_archive": {
+      "id": "entity:tests/steps/test_archive.py:test_archive",
+      "kind": "entity",
+      "source": "tests/steps/test_archive.py:26-44",
+      "message": "Changed function test_archive touched by 1 hunk(s)."
+    },
+    "risk:api_change:tests/steps/test_archive.py": {
+      "id": "risk:api_change:tests/steps/test_archive.py",
+      "kind": "risk",
+      "source": "api_change",
+      "message": "Public function or class signature changed in tests/steps/test_archive.py."
+    }
+  },
+  "missing_evidence_ids": [],
+  "agent_runs": [
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+      "input_evidence_ids": [
+        "diff_hunk:tests/steps/test_archive.py:1"
+      ],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 524,
+      "token_count_in": 2553,
+      "token_count_out": 49,
+      "trace_id": "ceb6fb2d0765474bb17185327f7022b6",
+      "span_id": "77b61d3818b84a3a",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001",
+      "shard_index": 0,
+      "shard_count": 1,
+      "context_request_count": 1,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+      "input_evidence_ids": [
+        "risk:api_change:tests/steps/test_archive.py"
+      ],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 1124,
+      "token_count_in": 1362,
+      "token_count_out": 44,
+      "trace_id": "338254c06bca426d8fa6a73c5f5fb783",
+      "span_id": "d6026993f27448b5",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001-refill",
+      "shard_index": 0,
+      "shard_count": 1,
+      "context_request_count": 1,
+      "context_refill_used": true
+    },
+    {
+      "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+      "model": null,
+      "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+      "input_evidence_ids": [],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 0,
+      "token_count_in": 0,
+      "token_count_out": 0,
+      "trace_id": "",
+      "span_id": "",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "",
+      "shard_index": 0,
+      "shard_count": 0,
+      "context_request_count": 0,
+      "context_refill_used": false
+    }
+  ],
+  "prompt_exports": {},
+  "context_budget": {
+    "enabled": true,
+    "strategy": "file_risk_shards_v1",
+    "context_profile": "risk_compact_manifest_v1",
+    "max_input_tokens": 9000,
+    "estimated_input_tokens": 2167,
+    "selected_evidence_count": 2,
+    "omitted_evidence_count": 48,
+    "selected_evidence_ids": [
+      "diff_hunk:tests/steps/test_archive.py:1",
+      "risk:api_change:tests/steps/test_archive.py"
+    ],
+    "omitted_evidence_ids": [
+      "diff:tests/steps/test_archive.py:10",
+      "diff:tests/steps/test_archive.py:16",
+      "diff:tests/steps/test_archive.py:26",
+      "diff:tests/steps/test_archive.py:1",
+      "diff:tests/steps/test_archive.py:11",
+      "diff:tests/steps/test_archive.py:12",
+      "diff:tests/steps/test_archive.py:13",
+      "diff:tests/steps/test_archive.py:14",
+      "diff:tests/steps/test_archive.py:15",
+      "diff:tests/steps/test_archive.py:17",
+      "diff:tests/steps/test_archive.py:18",
+      "diff:tests/steps/test_archive.py:19",
+      "diff:tests/steps/test_archive.py:2",
+      "diff:tests/steps/test_archive.py:20",
+      "diff:tests/steps/test_archive.py:21",
+      "diff:tests/steps/test_archive.py:22",
+      "diff:tests/steps/test_archive.py:23",
+      "diff:tests/steps/test_archive.py:24",
+      "diff:tests/steps/test_archive.py:25",
+      "diff:tests/steps/test_archive.py:27",
+      "diff:tests/steps/test_archive.py:28",
+      "diff:tests/steps/test_archive.py:29",
+      "diff:tests/steps/test_archive.py:3",
+      "diff:tests/steps/test_archive.py:30",
+      "diff:tests/steps/test_archive.py:31",
+      "diff:tests/steps/test_archive.py:32",
+      "diff:tests/steps/test_archive.py:33",
+      "diff:tests/steps/test_archive.py:34",
+      "diff:tests/steps/test_archive.py:35",
+      "diff:tests/steps/test_archive.py:36",
+      "diff:tests/steps/test_archive.py:37",
+      "diff:tests/steps/test_archive.py:38",
+      "diff:tests/steps/test_archive.py:39",
+      "diff:tests/steps/test_archive.py:4",
+      "diff:tests/steps/test_archive.py:40",
+      "diff:tests/steps/test_archive.py:41",
+      "diff:tests/steps/test_archive.py:42",
+      "diff:tests/steps/test_archive.py:43",
+      "diff:tests/steps/test_archive.py:44",
+      "diff:tests/steps/test_archive.py:5",
+      "diff:tests/steps/test_archive.py:6",
+      "diff:tests/steps/test_archive.py:7",
+      "diff:tests/steps/test_archive.py:8",
+      "diff:tests/steps/test_archive.py:9",
+      "entity:tests/steps/test_archive.py:freeze_at",
+      "entity:tests/steps/test_archive.py:setup_dbs",
+      "entity:tests/steps/test_archive.py:test_archive",
+      "entity:tests/steps/test_archive.py:tests.steps.test_archive"
+    ],
+    "selected_risk_signal_count": 1,
+    "context_truncated": true,
+    "shard_count": 1,
+    "refill_count": 1,
+    "context_request_count": 2,
+    "context_requests": [
+      {
+        "request_type": "risk_evidence",
+        "path": null,
+        "evidence_ids": [
+          "risk:api_change:tests/steps/test_archive.py"
+        ],
+        "risk_tag": null,
+        "symbol": null,
+        "reason": "",
+        "source_shard_id": "shard-001",
+        "fulfilled_evidence_ids": [
+          "risk:api_change:tests/steps/test_archive.py"
+        ]
+      },
+      {
+        "request_type": "risk_evidence",
+        "path": null,
+        "evidence_ids": [
+          "risk:api_change:tests/steps/test_archive.py"
+        ],
+        "risk_tag": null,
+        "symbol": null,
+        "reason": "",
+        "source_shard_id": "shard-001-refill",
+        "fulfilled_evidence_ids": []
+      }
+    ],
+    "shards": [
+      {
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 1,
+        "omitted_evidence_count": 49,
+        "estimated_input_tokens": 1529,
+        "context_truncated": true
+      },
+      {
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "is_refill": true,
+        "parent_shard_id": "shard-001",
+        "selected_evidence_count": 1,
+        "omitted_evidence_count": 0,
+        "estimated_input_tokens": 638,
+        "context_truncated": false
+      }
+    ],
+    "warnings": []
+  },
+  "loop": {
+    "enabled": true,
+    "max_iter": 1,
+    "iterations_completed": 1,
+    "converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "checkpoint_path": "D:\\learn\\code-review-agent\\workspace\\hf_codereview_live\\samples\\sample_023\\review\\loop_checkpoint.json",
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "iterations": [
+      {
+        "i": 0,
+        "candidate_issue_count": 0,
+        "verified_count": 0,
+        "needs_human_review_count": 0,
+        "discarded_count": 0,
+        "keep_count": 0,
+        "uncertain_count": 0,
+        "reject_count": 0,
+        "feedback_sent": [],
+        "agent_runs": [
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+            "input_evidence_ids": [
+              "diff_hunk:tests/steps/test_archive.py:1"
+            ],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 524,
+            "token_count_in": 2553,
+            "token_count_out": 49,
+            "trace_id": "ceb6fb2d0765474bb17185327f7022b6",
+            "span_id": "77b61d3818b84a3a",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001",
+            "shard_index": 0,
+            "shard_count": 1,
+            "context_request_count": 1,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+            "input_evidence_ids": [
+              "risk:api_change:tests/steps/test_archive.py"
+            ],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 1124,
+            "token_count_in": 1362,
+            "token_count_out": 44,
+            "trace_id": "338254c06bca426d8fa6a73c5f5fb783",
+            "span_id": "d6026993f27448b5",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001-refill",
+            "shard_index": 0,
+            "shard_count": 1,
+            "context_request_count": 1,
+            "context_refill_used": true
+          },
+          {
+            "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+            "model": null,
+            "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+            "input_evidence_ids": [],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 0,
+            "token_count_in": 0,
+            "token_count_out": 0,
+            "trace_id": "",
+            "span_id": "",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "",
+            "shard_index": 0,
+            "shard_count": 0,
+            "context_request_count": 0,
+            "context_refill_used": false
+          }
+        ],
+        "issue_set": [],
+        "keep": [],
+        "needs_human_review": [],
+        "discarded": []
+      }
+    ]
+  },
+  "tracing": {
+    "total_latency_ms": 1648,
+    "total_token_count_in": 3915,
+    "total_token_count_out": 93,
+    "total_retry_count": 0,
+    "run_count": 3,
+    "status_counts": {
+      "ok": 3
+    }
+  }
+}

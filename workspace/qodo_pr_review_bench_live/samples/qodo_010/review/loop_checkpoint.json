@@ -1,0 +1,100 @@
+{
+  "schema_version": "1.0",
+  "run_id": "d2a24ab8306e4ec5993eea35cb6ff919",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": true,
+  "package_hash": "sha256:1896df70c589c33aeb43fe2d6d512a2898c7f26625814dd3f397d944e6d89237",
+  "diff_hash": "sha256:3e0f165f200aa2162d00427e16071ad754bffa748a4d6747e382891bfe8b684c",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 1,
+      "verified_count": 0,
+      "needs_human_review_count": 0,
+      "discarded_count": 1,
+      "keep_count": 0,
+      "uncertain_count": 0,
+      "reject_count": 0,
+      "feedback_sent": [],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff_hunk:apps/shade/src/components/ui/filters.tsx:102",
+            "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:90",
+            "diff_hunk:apps/stats/src/views/Stats/layout/stats-header.tsx:64"
+          ],
+          "output_issue_ids": [
+            "correctness:apps/shade/src/components/ui/filters.tsx:105"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 3424,
+          "token_count_in": 3703,
+          "token_count_out": 163,
+          "trace_id": "58ad464015224438a88ff03eb9969d06",
+          "span_id": "1599f3210e134ff4",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 1,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [],
+      "keep": [],
+      "needs_human_review": [],
+      "discarded": [
+        {
+          "file": "apps/shade/src/components/ui/filters.tsx",
+          "line": 105,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "The default label for the 'Add filter' button is set to an empty string, which may result in an inaccessible or confusing UI element with no visible text.",
+          "suggestion": "Provide a meaningful default label (e.g., 'Add filter') or ensure the component handles an empty label gracefully with an aria-label or tooltip.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/shade/src/components/ui/filters.tsx:102"
+          ],
+          "filter_reason": "low_signal_suggestion"
+        }
+      ]
+    }
+  ],
+  "last_feedback": null
+}

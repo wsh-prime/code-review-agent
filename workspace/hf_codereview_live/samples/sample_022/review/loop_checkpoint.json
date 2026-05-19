@@ -1,0 +1,105 @@
+{
+  "schema_version": "1.0",
+  "run_id": "a93dd0c1d6a94baa994d9c0e5b5fed70",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": true,
+  "package_hash": "sha256:5dac109e76f9a23a277c2a71705d8ce6f6593a4dba4a9305501127578a86b775",
+  "diff_hash": "sha256:ab1add59626ebf4f6c18e7ce63908f5cae652291ef9bc5bfe4a114e8d6aad039",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 1,
+      "verified_count": 1,
+      "needs_human_review_count": 0,
+      "discarded_count": 0,
+      "keep_count": 1,
+      "uncertain_count": 0,
+      "reject_count": 0,
+      "feedback_sent": [],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff_hunk:tests/test_collect.py:1"
+          ],
+          "output_issue_ids": [
+            "test_quality:tests/test_collect.py:13"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 1,
+          "retry_log": [
+            "attempt=1 error=timeout delay=1.00s"
+          ],
+          "latency_ms": 117842,
+          "token_count_in": 2175,
+          "token_count_out": 235,
+          "trace_id": "7e9805ca16f5469eaabd960d16a82c2e",
+          "span_id": "c86dfc980317407d",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 1,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [
+            "diff_hunk:tests/test_collect.py:1"
+          ],
+          "output_issue_ids": [
+            "test_quality:tests/test_collect.py:13"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [
+        "test_quality:tests/test_collect.py:13"
+      ],
+      "keep": [
+        {
+          "file": "tests/test_collect.py",
+          "line": 13,
+          "severity": "medium",
+          "category": "test_quality",
+          "message": "The test `test_collect_learnings` does not assert that `collect_learnings` actually calls `rudder_analytics.track` with the expected arguments; it only checks call count and event name/properties after calling `extract_learning`. If `collect_learnings` fails silently or does not call `track`, the test may still pass if `extract_learning` triggers a separate track call.",
+          "suggestion": "Add an assertion that `rudder_analytics.track` is called exactly once with the expected arguments during `collect_learnings`, or restructure the test to verify the behavior of `collect_learnings` independently of `extract_learning`.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:tests/test_collect.py:1"
+          ]
+        }
+      ],
+      "needs_human_review": [],
+      "discarded": []
+    }
+  ],
+  "last_feedback": null
+}

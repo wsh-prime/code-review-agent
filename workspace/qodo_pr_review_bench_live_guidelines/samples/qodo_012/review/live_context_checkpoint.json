@@ -1,0 +1,561 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:bf65727d61f950d7c10a6b46e7f6dae72a8b769a9a674d7e7f62579a6aefa7c7",
+  "diff_hash": "sha256:5de616f5771e9dea9b609bd8617281b2707d73a2543264204e628335359ad56c",
+  "shards": {
+    "1effe81c31aa26d6bc7d60990182f9bbe077cd641b264cf59f5c1208cf36ae3c": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:apps/admin-x-framework/src/providers/framework-provider.tsx:10",
+        "diff_hunk:apps/admin-x-framework/src/utils/stats-config.ts:13",
+        "diff_hunk:ghost/core/core/server/api/endpoints/stats.js:125",
+        "diff_hunk:ghost/core/core/server/data/tinybird/README.md:78"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "ghost/core/core/server/api/endpoints/stats.js",
+          "line": 128,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Removing 'tb_version' from the allowed query parameters may break existing clients that rely on this parameter to specify a Tinybird API version.",
+          "suggestion": "If the version is now handled via the config's 'version' field instead of a query parameter, ensure all callers have been updated to use the new mechanism. Otherwise, consider keeping 'tb_version' for backward compatibility.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/api/endpoints/stats.js:125"
+          ]
+        },
+        {
+          "file": "apps/admin-x-framework/src/utils/stats-config.ts",
+          "line": 18,
+          "severity": "low",
+          "category": "maintainability",
+          "message": "The version suffix is prepended to the endpoint name without any validation or sanitization of the 'version' field, which could lead to unexpected endpoint names if the version contains special characters or is empty.",
+          "suggestion": "Consider validating the 'version' field (e.g., ensure it matches a pattern like /^v\\d+$/) before constructing the endpoint name, or provide a default/fallback behavior.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/admin-x-framework/src/utils/stats-config.ts:13"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:apps/admin-x-framework/src/providers/framework-provider.tsx:10",
+          "diff_hunk:apps/admin-x-framework/src/utils/stats-config.ts:13",
+          "diff_hunk:ghost/core/core/server/api/endpoints/stats.js:125",
+          "diff_hunk:ghost/core/core/server/data/tinybird/README.md:78"
+        ],
+        "output_issue_ids": [
+          "correctness:ghost/core/core/server/api/endpoints/stats.js:128",
+          "maintainability:apps/admin-x-framework/src/utils/stats-config.ts:18"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 15445,
+        "token_count_in": 5392,
+        "token_count_out": 345,
+        "trace_id": "62cca5f8a997427e9c77a85924b913d0",
+        "span_id": "599fa68a4a50443c",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 10,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "69ff66c61280822bc0cf8c403b1ab5739076299f1cbaf665faadc1807ff2950d": {
+      "status": "completed",
+      "shard_id": "shard-002",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/core/server/data/tinybird/datasources/_mv_session_data_v2.datasource:1",
+        "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/README.md:7",
+        "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_active_visitors_v2.pipe:1",
+        "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_kpis_v2.pipe:1"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/core/server/data/tinybird/datasources/_mv_session_data_v2.datasource:1",
+          "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/README.md:7",
+          "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_active_visitors_v2.pipe:1",
+          "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_kpis_v2.pipe:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 3432,
+        "token_count_in": 7892,
+        "token_count_out": 12,
+        "trace_id": "ad66bb6e79ae42ccb8fb543919153cf6",
+        "span_id": "11d2f214e90546cf",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "shard_count": 10,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "3807305553322b14167fa2999f37e3f55ab6f9dd52be0a06eb53736d64fa1e6d": {
+      "status": "completed",
+      "shard_id": "shard-003",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_post_visitor_counts_v2.pipe:1",
+        "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_top_devices_v2.pipe:1",
+        "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_top_locations_v2.pipe:1",
+        "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_top_pages_v2.pipe:1"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_post_visitor_counts_v2.pipe",
+            "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_devices_v2.pipe",
+            "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_locations_v2.pipe",
+            "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_pages_v2.pipe"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The security_sensitive risk signals are triggered but the primary diff_hunk evidence does not show any newly introduced security exposure or trust boundary change. Requesting the full risk evidence to determine if there is a concrete security concern.",
+          "source_shard_id": "shard-003",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_post_visitor_counts_v2.pipe:1",
+          "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_top_devices_v2.pipe:1",
+          "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_top_locations_v2.pipe:1",
+          "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_top_pages_v2.pipe:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 45961,
+        "token_count_in": 8657,
+        "token_count_out": 205,
+        "trace_id": "fa30de74753547a5b83125c1e891aecf",
+        "span_id": "803c5dfac0c543f8",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-003",
+        "shard_index": 2,
+        "shard_count": 10,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "4d9572e69575d3926594ec5341301c7b2fa0031c98e2b1319976035b2b75c265": {
+      "status": "completed",
+      "shard_id": "shard-003-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-003",
+      "selected_evidence_ids": [
+        "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_post_visitor_counts_v2.pipe",
+        "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_devices_v2.pipe",
+        "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_locations_v2.pipe",
+        "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_pages_v2.pipe"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_post_visitor_counts_v2.pipe",
+            "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_devices_v2.pipe",
+            "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_locations_v2.pipe",
+            "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_pages_v2.pipe"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The security_sensitive risk signals lack expanded evidence (diff hunks) to evaluate whether a concrete security issue is introduced. Requesting evidence for all four .pipe files to inspect the actual Tinybird pipe definitions.",
+          "source_shard_id": "shard-003-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_post_visitor_counts_v2.pipe",
+          "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_devices_v2.pipe",
+          "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_locations_v2.pipe",
+          "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_pages_v2.pipe"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 54165,
+        "token_count_in": 5127,
+        "token_count_out": 178,
+        "trace_id": "3977730284df49809930b0256ec97f6a",
+        "span_id": "e608d5979e0a4600",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-003-refill",
+        "shard_index": 2,
+        "shard_count": 10,
+        "context_request_count": 1,
+        "context_refill_used": true
+      }
+    },
+    "a3c14aeba9acbeff901319de36750395a4ca1c39d18d84de13dd2eabecba6d66": {
+      "status": "completed",
+      "shard_id": "shard-004",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_top_sources_v2.pipe:1",
+        "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_top_utm_campaigns_v2.pipe:1",
+        "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_top_utm_contents_v2.pipe:1",
+        "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_top_utm_mediums_v2.pipe:1"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_top_sources_v2.pipe:1",
+          "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_top_utm_campaigns_v2.pipe:1",
+          "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_top_utm_contents_v2.pipe:1",
+          "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_top_utm_mediums_v2.pipe:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 9614,
+        "token_count_in": 8504,
+        "token_count_out": 12,
+        "trace_id": "4c32419534834a91b2062e42b0fccf99",
+        "span_id": "cf7639e27119470d",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-004",
+        "shard_index": 3,
+        "shard_count": 10,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "feb759ed9d0bb3ee06d627b28fe059dda8189cbd9bb66ec8d1f5ae2c73763073": {
+      "status": "completed",
+      "shard_id": "shard-005",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_top_utm_sources_v2.pipe:1",
+        "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_top_utm_terms_v2.pipe:1",
+        "diff_hunk:ghost/core/core/server/data/tinybird/pipes/filtered_sessions_v2.pipe:1",
+        "diff_hunk:ghost/core/core/server/data/tinybird/pipes/mv_session_data_v2.pipe:1"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_top_utm_sources_v2.pipe:1",
+          "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_top_utm_terms_v2.pipe:1",
+          "diff_hunk:ghost/core/core/server/data/tinybird/pipes/filtered_sessions_v2.pipe:1",
+          "diff_hunk:ghost/core/core/server/data/tinybird/pipes/mv_session_data_v2.pipe:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 3744,
+        "token_count_in": 9446,
+        "token_count_out": 12,
+        "trace_id": "7d9e845025914a198ee2160adeffaeb4",
+        "span_id": "9cefb026b98742cd",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-005",
+        "shard_index": 4,
+        "shard_count": 10,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "1c50399dd8056204e20b296932d7e1133e103c9dfa681ad12105e4312cf7ffc7": {
+      "status": "completed",
+      "shard_id": "shard-006",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_active_visitors_v2.yaml:1",
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_kpis_v2.yaml:1",
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_post_visitor_counts_v2.yaml:1",
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_devices_v2.yaml:1"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_active_visitors_v2.yaml:1",
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_kpis_v2.yaml:1",
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_post_visitor_counts_v2.yaml:1",
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_devices_v2.yaml:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 38508,
+        "token_count_in": 11318,
+        "token_count_out": 12,
+        "trace_id": "200ab50826414a579390ddb035857b82",
+        "span_id": "3590e4e308694b3f",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-006",
+        "shard_index": 5,
+        "shard_count": 10,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "28ac6ffcd04135ff5b9b9bdb5a6af3cd080dde0d47893acfeab4bb8da30e4612": {
+      "status": "completed",
+      "shard_id": "shard-007",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_locations_v2.yaml:1",
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_pages_v2.yaml:1",
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_sources_v2.yaml:1"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_locations_v2.yaml:1",
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_pages_v2.yaml:1",
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_sources_v2.yaml:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 987,
+        "token_count_in": 11335,
+        "token_count_out": 12,
+        "trace_id": "bb80266012194f0f86cc0b1b29dc231c",
+        "span_id": "c563af00a20c4f5f",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-007",
+        "shard_index": 6,
+        "shard_count": 10,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "3c4686c6d21893137f1896064f9a97e2c494a86a411bdccf1c0768bb59f79386": {
+      "status": "completed",
+      "shard_id": "shard-008",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_campaigns_v2.yaml:1",
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_contents_v2.yaml:1",
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_mediums_v2.yaml:1"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_campaigns_v2.yaml:1",
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_contents_v2.yaml:1",
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_mediums_v2.yaml:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 4017,
+        "token_count_in": 11013,
+        "token_count_out": 12,
+        "trace_id": "06c5f22f076f4fe09c360ba246905094",
+        "span_id": "fc00631dc7d645df",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-008",
+        "shard_index": 7,
+        "shard_count": 10,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "3d566eecfe44848c74220b1ac230c1545e5388a2296785c8a885694798e9e935": {
+      "status": "completed",
+      "shard_id": "shard-009",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_sources_v2.yaml:1",
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_terms_v2.yaml:1",
+        "diff_hunk:ghost/core/core/server/services/stats/ContentStatsService.js:30",
+        "diff_hunk:ghost/core/core/server/services/stats/utils/tinybird.js:19"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_sources_v2.yaml:1",
+          "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_terms_v2.yaml:1",
+          "diff_hunk:ghost/core/core/server/services/stats/ContentStatsService.js:30",
+          "diff_hunk:ghost/core/core/server/services/stats/utils/tinybird.js:19"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 2121,
+        "token_count_in": 9899,
+        "token_count_out": 12,
+        "trace_id": "6dfd7a4b1476443abe9650e1d30e90e3",
+        "span_id": "dd015536252a4761",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-009",
+        "shard_index": 8,
+        "shard_count": 10,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "955b3a6ff5306ad77f8f9796e623c85ffa8519a5b1c90cb508f58b979efb5c3d": {
+      "status": "completed",
+      "shard_id": "shard-010",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:56",
+        "diff_hunk:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:110",
+        "diff_hunk:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:70"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "ghost/core/core/server/services/tinybird/TinybirdService.js",
+          "line": 59,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "The test expects the URL to contain 'test_pipe_v2.json' but the pipe name in the config is 'api_kpis_v2'. The test uses 'test_pipe' which does not match any v2 pipe, so the version suffix logic may not be exercised correctly.",
+          "suggestion": "Update the test to use a pipe name that matches one of the v2 pipes (e.g., 'api_kpis_v2') to ensure the version suffix is applied correctly.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:70",
+            "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:56"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:56",
+          "diff_hunk:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:110",
+          "diff_hunk:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:70"
+        ],
+        "output_issue_ids": [
+          "correctness:ghost/core/core/server/services/tinybird/TinybirdService.js:59"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 17001,
+        "token_count_in": 6015,
+        "token_count_out": 234,
+        "trace_id": "bd09a35e8ca9432faee7bb65c149e6a5",
+        "span_id": "e49fb43f1dd147d9",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-010",
+        "shard_index": 9,
+        "shard_count": 10,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

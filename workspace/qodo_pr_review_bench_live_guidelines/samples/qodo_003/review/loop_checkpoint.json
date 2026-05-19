@@ -1,0 +1,149 @@
+{
+  "schema_version": "1.0",
+  "run_id": "653e1639d94e454eb4c8a95639169093",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": true,
+  "package_hash": "sha256:3a312fb581ef224de3e3d97471446662ba5e85486206ace2964a7a455ef5adab",
+  "diff_hash": "sha256:4debe6b73ff1d99a04683477cb0eb386879f47780adb724fc596179886fb7e5f",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 2,
+      "verified_count": 2,
+      "needs_human_review_count": 0,
+      "discarded_count": 0,
+      "keep_count": 2,
+      "uncertain_count": 0,
+      "reject_count": 0,
+      "feedback_sent": [],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:apps/admin-x-framework/src/api/comments.ts:25",
+            "diff_hunk:apps/posts/src/views/comments/components/comments-list.tsx:59",
+            "diff_hunk:apps/posts/src/views/comments/components/comments-list.tsx:7",
+            "diff_hunk:ghost/core/core/server/api/endpoints/utils/serializers/output/mappers/comments.js:35",
+            "diff_hunk:ghost/core/test/e2e-api/admin/__snapshots__/activity-feed.test.js.snap:22699"
+          ],
+          "output_issue_ids": [
+            "security:apps/posts/src/views/comments/components/comments-list.tsx:59",
+            "best_practice:apps/posts/src/views/comments/components/comments-list.tsx:59"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 6761,
+          "token_count_in": 7427,
+          "token_count_out": 340,
+          "trace_id": "106e0f827ea7450991b0d484d1245abc",
+          "span_id": "73a5807b660242d9",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 2,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:ghost/core/test/e2e-api/admin/__snapshots__/comments.test.js.snap:25"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 2936,
+          "token_count_in": 4943,
+          "token_count_out": 12,
+          "trace_id": "e452aa7465f64644bc31e980e3edc56c",
+          "span_id": "baf8630f6f4b4da8",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-002",
+          "shard_index": 1,
+          "shard_count": 2,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [
+            "diff_hunk:apps/posts/src/views/comments/components/comments-list.tsx:59"
+          ],
+          "output_issue_ids": [
+            "security:apps/posts/src/views/comments/components/comments-list.tsx:59",
+            "best_practice:apps/posts/src/views/comments/components/comments-list.tsx:59"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [
+        "best_practice:apps/posts/src/views/comments/components/comments-list.tsx:59",
+        "security:apps/posts/src/views/comments/components/comments-list.tsx:59"
+      ],
+      "keep": [
+        {
+          "file": "apps/posts/src/views/comments/components/comments-list.tsx",
+          "line": 59,
+          "severity": "high",
+          "category": "security",
+          "message": "The new CommentContent component uses dangerouslySetInnerHTML to render comment HTML content without sanitization, introducing a stored XSS vulnerability. User-generated comment HTML is rendered directly into the DOM, allowing arbitrary script execution.",
+          "suggestion": "Sanitize the HTML content before passing it to dangerouslySetInnerHTML using a library like DOMPurify, or render the content as plain text if HTML is not required.",
+          "confidence": 0.95,
+          "evidence_ids": [
+            "diff_hunk:apps/posts/src/views/comments/components/comments-list.tsx:59"
+          ]
+        },
+        {
+          "file": "apps/posts/src/views/comments/components/comments-list.tsx",
+          "line": 59,
+          "severity": "medium",
+          "category": "best_practice",
+          "message": "The new <Button> element in ExpandButton lacks an explicit type attribute. Without type=\"button\", the button defaults to type=\"submit\" inside a form, which can cause unintended form submissions.",
+          "suggestion": "Add type=\"button\" to the <Button> component to prevent accidental form submission behavior.",
+          "confidence": 0.9,
+          "evidence_ids": [
+            "diff_hunk:apps/posts/src/views/comments/components/comments-list.tsx:59"
+          ]
+        }
+      ],
+      "needs_human_review": [],
+      "discarded": []
+    }
+  ],
+  "last_feedback": null
+}

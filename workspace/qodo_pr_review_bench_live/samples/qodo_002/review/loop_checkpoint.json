@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0",
+  "run_id": "ac8ccf2093f74bfd89cfb3a4274e4f95",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": true,
+  "package_hash": "sha256:b301df788067c895d4bf0a14fe65ab7aa2a2e593d5235839546b908636b81f4c",
+  "diff_hash": "sha256:70b2c723ed704c0fdb04d312355389dc3a802c6fafa858ffcdc33726778e0e12",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 2,
+      "verified_count": 0,
+      "needs_human_review_count": 0,
+      "discarded_count": 2,
+      "keep_count": 0,
+      "uncertain_count": 0,
+      "reject_count": 0,
+      "feedback_sent": [],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:3",
+            "diff_hunk:ghost/core/test/integration/services/email-service/domain-warming.test.js:50",
+            "diff_hunk:ghost/core/test/unit/server/services/email-service/domain-warming-service.test.ts:8"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 3759,
+          "token_count_in": 4041,
+          "token_count_out": 180,
+          "trace_id": "6839f68f86fb46f09056b67c7258c070",
+          "span_id": "4a1d62688ce2457d",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 1,
+          "context_request_count": 1,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:121",
+            "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:20",
+            "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:98"
+          ],
+          "output_issue_ids": [
+            "correctness:ghost/core/core/server/services/email-service/DomainWarmingService.ts:121",
+            "correctness:ghost/core/core/server/services/email-service/DomainWarmingService.ts:98"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 20066,
+          "token_count_in": 2384,
+          "token_count_out": 410,
+          "trace_id": "6c9dc19fdcc741c4b0607d2679021556",
+          "span_id": "588463658e3243dd",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001-refill",
+          "shard_index": 0,
+          "shard_count": 1,
+          "context_request_count": 0,
+          "context_refill_used": true
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [],
+      "keep": [],
+      "needs_human_review": [],
+      "discarded": [
+        {
+          "file": "ghost/core/core/server/services/email-service/DomainWarmingService.ts",
+          "line": 121,
+          "severity": "high",
+          "category": "correctness",
+          "message": "The new high-volume cap logic may produce a lower value than the previous default scale for volumes just above 400k, causing an unintended drop in allowed email count.",
+          "suggestion": "Ensure the high-volume cap (min(1.2×, +75k)) is always at least as large as the value that would have been returned by the old defaultScale (1.25×) for the same lastCount. Consider adding a max with the old defaultScale result or adjusting the cap thresholds.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:121",
+            "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:20"
+          ],
+          "filter_reason": "low_signal_suggestion"
+        },
+        {
+          "file": "ghost/core/core/server/services/email-service/DomainWarmingService.ts",
+          "line": 98,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "The filter condition changed from '<' (exclusive of today) to '<=' (inclusive of today), which may include today's emails in the highest count calculation, potentially causing the warmup logic to use an incomplete day's count.",
+          "suggestion": "Verify that including today's emails is intentional. If not, revert to the exclusive filter or add a time-based exclusion for the current day.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:98"
+          ],
+          "filter_reason": "low_signal_suggestion"
+        }
+      ]
+    }
+  ],
+  "last_feedback": null
+}

@@ -154,6 +154,28 @@ diff --git a/src/shop/service.py b/src/shop/service.py
     assert SECURITY_SENSITIVE in tags
 
 
+def test_pathlib_usage_alone_is_not_security_sensitive(tmp_path: Path) -> None:
+    _write_order_repo(tmp_path)
+    repo_map = build_repo_map(tmp_path)
+    changes = parse_unified_diff(
+        """diff --git a/src/shop/service.py b/src/shop/service.py
+--- a/src/shop/service.py
++++ b/src/shop/service.py
+@@ -1,4 +1,5 @@
++from pathlib import Path
++
+ def create_order(total: int) -> bool:
+-    return total > 0
++    return Path("orders").exists() and total > 0
+"""
+    )
+    entities = extract_changed_entities(changes, repo_map)
+
+    signals = classify_risks(changes, repo_map, entities)
+
+    assert SECURITY_SENSITIVE not in {signal.tag for signal in signals}
+
+
 def test_experiment_artifact_uses_path_or_hygiene_classification(
     tmp_path: Path,
 ) -> None:

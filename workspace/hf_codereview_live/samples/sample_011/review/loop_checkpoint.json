@@ -1,0 +1,132 @@
+{
+  "schema_version": "1.0",
+  "run_id": "81042728a5e64e1a8f12e3b6376ab6f8",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": true,
+  "package_hash": "sha256:6ab867e0d0e6e05013be1cbe61afee8d6d1d49f726f3b8379cbaddab63ccaae2",
+  "diff_hash": "sha256:6d2045bd177217577d8bb35b7623015aa0a69ba7fd1e0bed95391dff93758ab6",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 1,
+      "verified_count": 0,
+      "needs_human_review_count": 0,
+      "discarded_count": 1,
+      "keep_count": 0,
+      "uncertain_count": 0,
+      "reject_count": 0,
+      "feedback_sent": [],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff_hunk:gpt_engineer/db.py:18"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 1,
+          "retry_log": [
+            "attempt=1 error=timeout delay=1.00s"
+          ],
+          "latency_ms": 62515,
+          "token_count_in": 1202,
+          "token_count_out": 68,
+          "trace_id": "4f26fdcc659748eaab822f29d0d7132e",
+          "span_id": "da6b8e935c0a4ce9",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 1,
+          "context_request_count": 1,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff:gpt_engineer/db.py:26",
+            "diff_hunk:gpt_engineer/db.py:18",
+            "entity:gpt_engineer/db.py:gpt_engineer.db"
+          ],
+          "output_issue_ids": [
+            "correctness:gpt_engineer/db.py:26"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 1,
+          "retry_log": [
+            "attempt=1 error=timeout delay=1.00s"
+          ],
+          "latency_ms": 73280,
+          "token_count_in": 1237,
+          "token_count_out": 175,
+          "trace_id": "53b98f7860514ffba5293f2769e0172f",
+          "span_id": "2b34f3ac1a724394",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001-refill",
+          "shard_index": 0,
+          "shard_count": 1,
+          "context_request_count": 0,
+          "context_refill_used": true
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [],
+      "keep": [],
+      "needs_human_review": [],
+      "discarded": [
+        {
+          "file": "gpt_engineer/db.py",
+          "line": 26,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Changing archive field type from Optional[DB] to DB removes the ability to represent a missing archive, which may cause AttributeError or TypeError if code paths that previously handled None are not updated.",
+          "suggestion": "Ensure all consumers of DBs.archive handle the non-optional type, or keep Optional[DB] if archive can be absent.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:gpt_engineer/db.py:18",
+            "diff:gpt_engineer/db.py:26"
+          ],
+          "filter_reason": "low_signal_suggestion"
+        }
+      ]
+    }
+  ],
+  "last_feedback": null
+}

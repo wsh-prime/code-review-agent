@@ -1,0 +1,100 @@
+{
+  "schema_version": "1.0",
+  "run_id": "66892745611f4080b284c692d8468885",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": true,
+  "package_hash": "sha256:5efb80c4fd6113e44c3ec9d09836ea217ca0a120c89d3415d8fd366fc5dcbdc1",
+  "diff_hash": "sha256:3e0f165f200aa2162d00427e16071ad754bffa748a4d6747e382891bfe8b684c",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 1,
+      "verified_count": 0,
+      "needs_human_review_count": 0,
+      "discarded_count": 1,
+      "keep_count": 0,
+      "uncertain_count": 0,
+      "reject_count": 0,
+      "feedback_sent": [],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:apps/shade/src/components/ui/filters.tsx:102",
+            "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:90",
+            "diff_hunk:apps/stats/src/views/Stats/layout/stats-header.tsx:64"
+          ],
+          "output_issue_ids": [
+            "correctness:apps/shade/src/components/ui/filters.tsx:105"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 5973,
+          "token_count_in": 5827,
+          "token_count_out": 146,
+          "trace_id": "5fe721a598d64b4b894a01e7bd19487d",
+          "span_id": "09f6818cddc9406e",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 1,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [],
+      "keep": [],
+      "needs_human_review": [],
+      "discarded": [
+        {
+          "file": "apps/shade/src/components/ui/filters.tsx",
+          "line": 105,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Empty string label for 'Add filter' button may render an invisible or non-functional UI element, breaking the add-filter feature.",
+          "suggestion": "Restore a non-empty label or use an accessible alternative such as an aria-label on the button.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/shade/src/components/ui/filters.tsx:102"
+          ],
+          "filter_reason": "low_signal_suggestion"
+        }
+      ]
+    }
+  ],
+  "last_feedback": null
+}

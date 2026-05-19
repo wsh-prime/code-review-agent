@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0",
+  "run_id": "faf48db4d252406c8d29f2c354000071",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": true,
+  "package_hash": "sha256:ade6250650115c24556c13f9688c551ceebc952773cb7a4861f40f9f969a7ac8",
+  "diff_hash": "sha256:3674b8c10e05c50106539db5ab2ca9f28bd63a19f787efc0730ad9ac446927d4",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 1,
+      "verified_count": 0,
+      "needs_human_review_count": 0,
+      "discarded_count": 1,
+      "keep_count": 0,
+      "uncertain_count": 0,
+      "reject_count": 0,
+      "feedback_sent": [],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff_hunk:gpt_engineer/main.py:1"
+          ],
+          "output_issue_ids": [
+            "correctness:gpt_engineer/main.py:16"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 2,
+          "retry_log": [
+            "attempt=1 error=timeout delay=1.00s",
+            "attempt=2 error=timeout delay=2.00s"
+          ],
+          "latency_ms": 124217,
+          "token_count_in": 1614,
+          "token_count_out": 164,
+          "trace_id": "70b55fe30fa54526a5d217aca4a7b1d7",
+          "span_id": "200f0c4ba05d4f05",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 1,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [],
+      "keep": [],
+      "needs_human_review": [],
+      "discarded": [
+        {
+          "file": "gpt_engineer/main.py",
+          "line": 16,
+          "severity": "high",
+          "category": "correctness",
+          "message": "The default project_path now uses os.path.curdir instead of the application directory, which changes the default behavior and may cause the example directory to be resolved relative to the current working directory instead of the package location.",
+          "suggestion": "Revert to using app_dir / 'example' as the default, or ensure the new default path is intended and documented.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:gpt_engineer/main.py:1"
+          ],
+          "filter_reason": "low_signal_suggestion"
+        }
+      ]
+    }
+  ],
+  "last_feedback": null
+}

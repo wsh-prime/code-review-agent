@@ -1,0 +1,577 @@
+{
+  "schema_version": "1.0",
+  "run_id": "3ff5f4f268d54e09b83e0c76b3c3ba06",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": false,
+  "package_hash": "sha256:a0e54f27ddd08d46d32dc843cd5763528ae5732991993148f4b0e838b19f8d9b",
+  "diff_hash": "sha256:bfff7bd60f2225e649113ebfba98f8c81835a7fde5648728126b438f8a4d92c2",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 17,
+      "verified_count": 13,
+      "needs_human_review_count": 0,
+      "discarded_count": 4,
+      "keep_count": 11,
+      "uncertain_count": 2,
+      "reject_count": 0,
+      "feedback_sent": [
+        {
+          "issue_id": "style:src/Components/Components/src/Routing/Router.cs:101",
+          "category": "style",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "entity:src/Components/Components/src/Routing/Router.cs:src.Components.Components.src.Routing.Router"
+          ]
+        },
+        {
+          "issue_id": "style:src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs:23",
+          "category": "style",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "entity:src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs:src.Components.Forms.src.EditContextDataAnnotationsExtensions"
+          ]
+        }
+      ],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/Components/src/PublicAPI.Unshipped.txt:1",
+            "diff_hunk:src/Components/Components/src/Routing/Router.cs:98",
+            "diff_hunk:src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs:20",
+            "diff_hunk:src/Components/Forms/src/PublicAPI.Unshipped.txt:1"
+          ],
+          "output_issue_ids": [
+            "correctness:src/Components/Components/src/Routing/Router.cs:98",
+            "correctness:src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs:20"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 50346,
+          "token_count_in": 5999,
+          "token_count_out": 374,
+          "trace_id": "bb7caf2a286049cb8745fc09156ea1f0",
+          "span_id": "a744311acd604fab",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 5,
+          "context_request_count": 2,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "entity:src/Components/Components/src/Routing/Router.cs:src.Components.Components.src.Routing.Router",
+            "entity:src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs:src.Components.Forms.src.EditContextDataAnnotationsExtensions"
+          ],
+          "output_issue_ids": [
+            "style:src/Components/Components/src/Routing/Router.cs:101",
+            "style:src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs:23"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 14361,
+          "token_count_in": 3437,
+          "token_count_out": 318,
+          "trace_id": "5935d79044b440aebe00f75e0aef1ac4",
+          "span_id": "f56c5408bb074014",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001-refill",
+          "shard_index": 0,
+          "shard_count": 5,
+          "context_request_count": 0,
+          "context_refill_used": true
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/Forms/test/EditContextDataAnnotationsExtensionsTest.cs:18",
+            "diff_hunk:src/Components/Web/src/Forms/InputFile/RemoteBrowserFileStreamOptions.cs:1",
+            "diff_hunk:src/Components/Web/src/PublicAPI.Unshipped.txt:1",
+            "diff_hunk:src/Components/Web/src/Web/WebEventCallbackFactoryEventArgsExtensions.cs:1"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 1393,
+          "token_count_in": 8482,
+          "token_count_out": 12,
+          "trace_id": "c1248e1950f54015831c9def2366e118",
+          "span_id": "9ae21bb2a43041df",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-002",
+          "shard_index": 1,
+          "shard_count": 5,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/Web/src/WebRenderer.cs:52",
+            "diff_hunk:src/Components/WebAssembly/JSInterop/src/InternalCalls.cs:1",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/PublicAPI.Unshipped.txt:1",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:106"
+          ],
+          "output_issue_ids": [
+            "correctness:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:106",
+            "api_compatibility:src/Components/WebAssembly/WebAssembly.Authentication/src/PublicAPI.Unshipped.txt:1",
+            "api_compatibility:src/Components/Web/src/WebRenderer.cs:55",
+            "api_compatibility:src/Components/WebAssembly/JSInterop/src/InternalCalls.cs:4"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 1,
+          "retry_log": [
+            "attempt=1 error=timeout delay=1.00s"
+          ],
+          "latency_ms": 78895,
+          "token_count_in": 7216,
+          "token_count_out": 801,
+          "trace_id": "8de5b435eabd43f6a7f8b2494bfde334",
+          "span_id": "c4dc729ccd70438a",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-003",
+          "shard_index": 2,
+          "shard_count": 5,
+          "context_request_count": 1,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:109",
+            "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:110",
+            "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:111",
+            "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:112",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:106"
+          ],
+          "output_issue_ids": [
+            "backward_compatibility:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:106"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 9745,
+          "token_count_in": 4132,
+          "token_count_out": 286,
+          "trace_id": "a6cc2d9a0739468f868a18b644240f8a",
+          "span_id": "f3ab4a5d3b304088",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-003-refill",
+          "shard_index": 2,
+          "shard_count": 5,
+          "context_request_count": 1,
+          "context_refill_used": true
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:35",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenResult.cs:12",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/RemoteAuthenticationService.cs:57",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/SignOutSessionStateManager.cs:1"
+          ],
+          "output_issue_ids": [
+            "correctness:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:38",
+            "correctness:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:45",
+            "maintainability:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenResult.cs:15",
+            "maintainability:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/RemoteAuthenticationService.cs:60",
+            "maintainability:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/SignOutSessionStateManager.cs:1"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 49335,
+          "token_count_in": 8992,
+          "token_count_out": 774,
+          "trace_id": "3292f3cee13143c697dc08e21e3ec5c0",
+          "span_id": "08b4498aae914b54",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-004",
+          "shard_index": 3,
+          "shard_count": 5,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:71",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/test/RemoteAuthenticatorCoreTests.cs:370",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly/src/Infrastructure/JSInteropMethods.cs:14",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly/src/PublicAPI.Unshipped.txt:1"
+          ],
+          "output_issue_ids": [
+            "correctness:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:74",
+            "correctness:src/Components/WebAssembly/WebAssembly.Authentication/test/RemoteAuthenticatorCoreTests.cs:370",
+            "maintainability:src/Components/WebAssembly/WebAssembly/src/Infrastructure/JSInteropMethods.cs:17"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 32783,
+          "token_count_in": 7062,
+          "token_count_out": 523,
+          "trace_id": "3007c30c87e54051a3af05ba60336e6f",
+          "span_id": "f0e45381ca3042d4",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-005",
+          "shard_index": 4,
+          "shard_count": 5,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [
+            "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:110",
+            "diff_hunk:src/Components/Web/src/WebRenderer.cs:52",
+            "diff_hunk:src/Components/WebAssembly/JSInterop/src/InternalCalls.cs:1",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/PublicAPI.Unshipped.txt:1",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:106",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:35",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/SignOutSessionStateManager.cs:1",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:71",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/test/RemoteAuthenticatorCoreTests.cs:370",
+            "diff_hunk:src/Components/WebAssembly/WebAssembly/src/Infrastructure/JSInteropMethods.cs:14",
+            "entity:src/Components/Components/src/Routing/Router.cs:src.Components.Components.src.Routing.Router",
+            "entity:src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs:src.Components.Forms.src.EditContextDataAnnotationsExtensions"
+          ],
+          "output_issue_ids": [
+            "correctness:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:106",
+            "api_compatibility:src/Components/WebAssembly/WebAssembly.Authentication/src/PublicAPI.Unshipped.txt:1",
+            "api_compatibility:src/Components/Web/src/WebRenderer.cs:55",
+            "api_compatibility:src/Components/WebAssembly/JSInterop/src/InternalCalls.cs:4",
+            "backward_compatibility:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:106",
+            "correctness:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:38",
+            "correctness:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:45",
+            "maintainability:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/SignOutSessionStateManager.cs:1",
+            "correctness:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:74",
+            "correctness:src/Components/WebAssembly/WebAssembly.Authentication/test/RemoteAuthenticatorCoreTests.cs:370",
+            "maintainability:src/Components/WebAssembly/WebAssembly/src/Infrastructure/JSInteropMethods.cs:17"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [
+        "api_compatibility:src/Components/Web/src/WebRenderer.cs:55",
+        "api_compatibility:src/Components/WebAssembly/JSInterop/src/InternalCalls.cs:4",
+        "api_compatibility:src/Components/WebAssembly/WebAssembly.Authentication/src/PublicAPI.Unshipped.txt:1",
+        "backward_compatibility:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:106",
+        "correctness:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:106",
+        "correctness:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:38",
+        "correctness:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:45",
+        "correctness:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:74",
+        "correctness:src/Components/WebAssembly/WebAssembly.Authentication/test/RemoteAuthenticatorCoreTests.cs:370",
+        "maintainability:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/SignOutSessionStateManager.cs:1",
+        "maintainability:src/Components/WebAssembly/WebAssembly/src/Infrastructure/JSInteropMethods.cs:17",
+        "style:src/Components/Components/src/Routing/Router.cs:101",
+        "style:src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs:23"
+      ],
+      "keep": [
+        {
+          "file": "src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs",
+          "line": 106,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Removal of SignOutSessionStateManager injection without verifying that all usages are removed may cause runtime failures if the component still references it.",
+          "suggestion": "Ensure all references to SignOutManager in the class are removed or replaced with the new implementation before deleting the injection.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:106"
+          ]
+        },
+        {
+          "file": "src/Components/WebAssembly/WebAssembly.Authentication/src/PublicAPI.Unshipped.txt",
+          "line": 1,
+          "severity": "medium",
+          "category": "api_compatibility",
+          "message": "Multiple public API symbols are being removed, including AccessTokenResult constructor, RemoteAuthenticationService constructor, and SignOutSessionStateManager. This is a breaking change for consumers.",
+          "suggestion": "Ensure these removals are intentional and documented as breaking changes. Consider obsoleting before removal if not already done.",
+          "confidence": 0.9,
+          "evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/PublicAPI.Unshipped.txt:1"
+          ]
+        },
+        {
+          "file": "src/Components/Web/src/WebRenderer.cs",
+          "line": 55,
+          "severity": "low",
+          "category": "api_compatibility",
+          "message": "Removal of the Obsolete init setter for RendererId may break derived classes that were setting the property via init, even though it was marked obsolete.",
+          "suggestion": "Confirm that no derived classes rely on the init setter, or keep the setter with a more targeted deprecation message.",
+          "confidence": 0.6,
+          "evidence_ids": [
+            "diff_hunk:src/Components/Web/src/WebRenderer.cs:52"
+          ]
+        },
+        {
+          "file": "src/Components/WebAssembly/JSInterop/src/InternalCalls.cs",
+          "line": 4,
+          "severity": "low",
+          "category": "api_compatibility",
+          "message": "Removal of the obsolete InvokeJS<T0,T1,T2,TRes> method may break backward compatibility for callers that still depend on it, even though it was marked obsolete.",
+          "suggestion": "Ensure that no internal or external consumers still rely on this method before removal.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/JSInterop/src/InternalCalls.cs:1"
+          ]
+        },
+        {
+          "file": "src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs",
+          "line": 106,
+          "severity": "medium",
+          "category": "backward_compatibility",
+          "message": "Removal of the obsolete SignOutSessionStateManager injection without a replacement may break consumers that depend on the SignOutManager property.",
+          "suggestion": "If SignOutManager is no longer needed, ensure all internal usage has been migrated and consider adding an [Obsolete] property stub that throws or returns null to ease migration.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:106",
+            "diff:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:110"
+          ]
+        },
+        {
+          "file": "src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs",
+          "line": 38,
+          "severity": "high",
+          "category": "correctness",
+          "message": "Removing the null check for `_tokenResult.InteractiveRequestUrl` before passing it to `_navigation.NavigateToLogin` can cause a NullReferenceException when `InteractiveRequestUrl` is null.",
+          "suggestion": "Restore the null check for `_tokenResult.InteractiveRequestUrl` or add a guard before calling `NavigateToLogin`.",
+          "confidence": 0.9,
+          "evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:35"
+          ]
+        },
+        {
+          "file": "src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs",
+          "line": 45,
+          "severity": "high",
+          "category": "correctness",
+          "message": "In the else branch, `_tokenResult.InteractiveRequestUrl` is used directly without a null check, but the condition only checks `InteractionOptions != null`. If `InteractiveRequestUrl` is null, `NavigateTo` will receive null, potentially causing a failure.",
+          "suggestion": "Add a null check for `_tokenResult.InteractiveRequestUrl` before calling `_navigation.NavigateTo`.",
+          "confidence": 0.85,
+          "evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:35"
+          ]
+        },
+        {
+          "file": "src/Components/WebAssembly/WebAssembly.Authentication/src/Services/SignOutSessionStateManager.cs",
+          "line": 1,
+          "severity": "info",
+          "category": "maintainability",
+          "message": "The entire file is deleted, which is a breaking change for any consumers still using the obsolete `SignOutSessionStateManager` class. Ensure that all references have been migrated to the recommended `NavigateToLogout` method.",
+          "suggestion": "Verify that no remaining code references `SignOutSessionStateManager` and that the migration path is documented.",
+          "confidence": 0.8,
+          "evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/SignOutSessionStateManager.cs:1"
+          ]
+        },
+        {
+          "file": "src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs",
+          "line": 74,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Removal of SignOutSessionStateManager registration without removing all dependent code may cause runtime failures for consumers relying on this service.",
+          "suggestion": "Ensure that all references to SignOutSessionStateManager are removed or replaced, and that the service is no longer required by any component.",
+          "confidence": 0.8,
+          "evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:71"
+          ]
+        },
+        {
+          "file": "src/Components/WebAssembly/WebAssembly.Authentication/test/RemoteAuthenticatorCoreTests.cs",
+          "line": 370,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Removal of test 'AuthenticationManager_Logout_RedirectsToFailureOnInvalidSignOutState' reduces test coverage for the logout failure scenario when SignOutSessionStateManager returns invalid state.",
+          "suggestion": "If the SignOutSessionStateManager is removed, consider adding a new test that validates the expected behavior when sign-out state is invalid, or update the existing test to reflect the new design.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/test/RemoteAuthenticatorCoreTests.cs:370"
+          ]
+        },
+        {
+          "file": "src/Components/WebAssembly/WebAssembly/src/Infrastructure/JSInteropMethods.cs",
+          "line": 17,
+          "severity": "low",
+          "category": "maintainability",
+          "message": "Removal of the obsolete NotifyLocationChanged method may break external consumers that still reference it, even though it is marked obsolete.",
+          "suggestion": "If the method is no longer used internally, ensure that no external consumers depend on it, or provide a migration path.",
+          "confidence": 0.6,
+          "evidence_ids": [
+            "diff_hunk:src/Components/WebAssembly/WebAssembly/src/Infrastructure/JSInteropMethods.cs:14"
+          ]
+        }
+      ],
+      "needs_human_review": [
+        {
+          "file": "src/Components/Components/src/Routing/Router.cs",
+          "line": 101,
+          "severity": "error",
+          "category": "style",
+          "message": "File is missing the required MIT license header.",
+          "suggestion": "Add the following two-line comment at the very beginning of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "entity:src/Components/Components/src/Routing/Router.cs:src.Components.Components.src.Routing.Router"
+          ]
+        },
+        {
+          "file": "src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs",
+          "line": 23,
+          "severity": "error",
+          "category": "style",
+          "message": "File is missing the required MIT license header.",
+          "suggestion": "Add the following two-line comment at the very beginning of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "entity:src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs:src.Components.Forms.src.EditContextDataAnnotationsExtensions"
+          ]
+        }
+      ],
+      "discarded": [
+        {
+          "file": "src/Components/Components/src/Routing/Router.cs",
+          "line": 98,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Removing the PreferExactMatches property without updating dependent callers may break consumers that still reference this property.",
+          "suggestion": "Ensure all references to PreferExactMatches are removed or updated before deleting the property.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/Components/src/Routing/Router.cs:98"
+          ],
+          "filter_reason": "low_signal_suggestion"
+        },
+        {
+          "file": "src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs",
+          "line": 20,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Removing the obsolete AddDataAnnotationsValidation and EnableDataAnnotationsValidation methods may break existing callers that still use these APIs.",
+          "suggestion": "Ensure all references to these methods are removed or updated before deletion.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs:20"
+          ],
+          "filter_reason": "low_signal_suggestion"
+        },
+        {
+          "file": "src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenResult.cs",
+          "line": 15,
+          "severity": "low",
+          "category": "maintainability",
+          "message": "Removing the obsolete constructor and its XML documentation violates the review guideline 'Public APIs Must Have XML Documentation Comments' if the remaining constructor lacks proper documentation. The remaining constructor's XML doc is present, but the removal of the obsolete one is fine. No violation.",
+          "suggestion": "",
+          "confidence": 0.0,
+          "evidence_ids": [],
+          "filter_reason": "missing_evidence"
+        },
+        {
+          "file": "src/Components/WebAssembly/WebAssembly.Authentication/src/Services/RemoteAuthenticationService.cs",
+          "line": 60,
+          "severity": "low",
+          "category": "maintainability",
+          "message": "Removing the obsolete constructor and its XML documentation is acceptable as it is obsolete. No guideline violation.",
+          "suggestion": "",
+          "confidence": 0.0,
+          "evidence_ids": [],
+          "filter_reason": "missing_evidence"
+        }
+      ]
+    }
+  ],
+  "last_feedback": {
+    "iteration": 0,
+    "uncertain_items": [
+      {
+        "issue_id": "style:src/Components/Components/src/Routing/Router.cs:101",
+        "category": "style",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "entity:src/Components/Components/src/Routing/Router.cs:src.Components.Components.src.Routing.Router"
+        ]
+      },
+      {
+        "issue_id": "style:src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs:23",
+        "category": "style",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "entity:src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs:src.Components.Forms.src.EditContextDataAnnotationsExtensions"
+        ]
+      }
+    ]
+  }
+}

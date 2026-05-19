@@ -1,0 +1,127 @@
+{
+  "schema_version": "1.0",
+  "run_id": "811a85493d2d4436b119e1ce43504327",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": false,
+  "package_hash": "sha256:1657e1ba08187c81c7621ef5e178b1165dee26d2673b51b22cce19e21efabb28",
+  "diff_hash": "sha256:a32453432ec4ca89797cc887b45552052bb0821953195eadbc86b57fd78d1783",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 1,
+      "verified_count": 1,
+      "needs_human_review_count": 0,
+      "discarded_count": 0,
+      "keep_count": 0,
+      "uncertain_count": 1,
+      "reject_count": 0,
+      "feedback_sent": [
+        {
+          "issue_id": "behavior_change:gpt_engineer/db.py:22",
+          "category": "behavior_change",
+          "critic_reason": "requires semantic confirmation",
+          "original_confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:gpt_engineer/db.py:18"
+          ]
+        }
+      ],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff_hunk:gpt_engineer/db.py:1",
+            "diff_hunk:gpt_engineer/db.py:18"
+          ],
+          "output_issue_ids": [
+            "behavior_change:gpt_engineer/db.py:22"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 1,
+          "retry_log": [
+            "attempt=1 error=timeout delay=1.00s"
+          ],
+          "latency_ms": 103925,
+          "token_count_in": 2081,
+          "token_count_out": 174,
+          "trace_id": "abea3ea41aa94264a918ab0c1c861287",
+          "span_id": "ef9cc08b41894696",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 1,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [
+            "diff_hunk:gpt_engineer/db.py:18"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [
+        "behavior_change:gpt_engineer/db.py:22"
+      ],
+      "keep": [],
+      "needs_human_review": [
+        {
+          "file": "gpt_engineer/db.py",
+          "line": 22,
+          "severity": "medium",
+          "category": "behavior_change",
+          "message": "New __contains__ method uses Path.exists() which follows symlinks and may return True for dangling symlinks, inconsistent with file read behavior in __getitem__ and __setitem__ that would fail on such entries.",
+          "suggestion": "Use (self.path / key).is_file() instead of .exists() to ensure only regular files are considered present, matching the read/write contract.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:gpt_engineer/db.py:18"
+          ]
+        }
+      ],
+      "discarded": []
+    }
+  ],
+  "last_feedback": {
+    "iteration": 0,
+    "uncertain_items": [
+      {
+        "issue_id": "behavior_change:gpt_engineer/db.py:22",
+        "category": "behavior_change",
+        "critic_reason": "requires semantic confirmation",
+        "original_confidence": 0.7,
+        "evidence_ids": [
+          "diff_hunk:gpt_engineer/db.py:18"
+        ]
+      }
+    ]
+  }
+}

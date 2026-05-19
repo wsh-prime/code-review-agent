@@ -1,0 +1,88 @@
+--- a/mlx_audio/tts/generate.py
++++ b/mlx_audio/tts/generate.py
+@@ -1,51 +1,51 @@
++                player.queue_audio(result.audio)
++            if join_audio:
++                audio_list.append(result.audio)
+ 
+-        if args.join_audio:
+-            print(f"Joining {len(audio_list)} audio files")
++            else:
++                file_name = f"{file_prefix}_{i:03d}.{audio_format}"
++                sf.write(file_name, result.audio, 24000)
++
++            if verbose:
++
++                print("==========")
++                print(f"Duration:              {result.audio_duration}")
++                print(
++                    f"Samples/sec:           {result.audio_samples['samples-per-sec']:.1f}"
++                )
++                print(
++                    f"Prompt:                {result.token_count} tokens, {result.prompt['tokens-per-sec']:.1f} tokens-per-sec"
++                )
++                print(
++                    f"Audio:                 {result.audio_samples['samples']} samples, {result.audio_samples['samples-per-sec']:.1f} samples-per-sec"
++                )
++                print(f"Real-time factor:      {result.real_time_factor:.2f}x")
++                print(f"Processing time:       {result.processing_time_seconds:.2f}s")
++                print(f"Peak memory usage:     {result.peak_memory_usage:.2f}GB")
++                print(f"✅ Audio successfully generated and saving as: {file_name}")
++
++        if join_audio:
++            if verbose:
++                print(f"Joining {len(audio_list)} audio files")
+             audio = mx.concatenate(audio_list, axis=0)
+-            sf.write(f"{args.file_prefix}.wav", audio, 24000)
++            sf.write(f"{file_prefix}.{audio_format}", audio, 24000)
+ 
+-        if args.play:
+-            audio = mx.concatenate(audio_list, axis=0)
+-
+-            player = AudioPlayer()
+-            player.queue_audio(audio)
++        if play:
+             player.wait_for_drain()
+             player.stop()
++
+     except ImportError as e:
+         print(f"Import error: {e}")
+         print(
+             "This might be due to incorrect Python path. Check your project structure."
+         )
+     except Exception as e:
+         print(f"Error loading model: {e}")
+         import traceback
+ 
+         traceback.print_exc()
+ 
+ 
+-def generate_audio(text: str,
+-                   model: str = "prince-canuma/Kokoro-82M",
+-                   voice: str = "af_heart",
+-                   speed: float = 1.0,
+-                   lang_code: str = "a",
+-                   file_path: str = "audio",
+-                   audio_format: str = "wav",
+-                   sample_rate: int = 24000,
+-                   verbose: bool = True) -> None:
+-    """
+-    Generates audio from text using a specified TTS model.
+-
+-    Parameters:
+-    - text (str): The input text to be converted to speech.
+-    - model (str): The TTS model to use (default: "prince-canuma/Kokoro-82M").
+-    - voice (str): The voice style to use (default: "af_heart").
+-    - speed (float): Playback speed multiplier (default: 1.0).
+-    - lang_code (str): The language code (default: "a").
+-    - file_path (str): The output file path without extension (default: "audio").
+-    - audio_format (str): Output audio format (e.g., "wav", "flac") (default: "wav").
+-    - sample_rate (int): Sampling rate in Hz (default: 24000).
+-    - verbose (bool): Whether to print status messages (default: True).
+-
+-    Returns:
+-    - None: The function writes the generated audio to a file.
+-    """
++def parse_args():
++    parser = argparse.ArgumentParser(description="Generate audio from text using TTS.")
++    parser.add_argument(

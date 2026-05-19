@@ -1,0 +1,437 @@
+{
+  "schema_version": "1.3",
+  "summary": {
+    "mode": "hybrid-live",
+    "changed_file_count": 1,
+    "changed_entity_count": 1,
+    "risk_signal_count": 1,
+    "finding_count": 1,
+    "needs_human_review_count": 0,
+    "discarded_count": 0,
+    "evidence_count": 7,
+    "missing_evidence_id_count": 0,
+    "agent_run_count": 2,
+    "prompt_exported": false,
+    "loop_enabled": true,
+    "loop_iterations_completed": 1,
+    "loop_converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "total_latency_ms": 5081,
+    "total_token_count_in": 1587,
+    "total_token_count_out": 261,
+    "context_budget_enabled": true,
+    "context_truncated": true,
+    "selected_evidence_count": 1,
+    "omitted_evidence_count": 6,
+    "review_shard_count": 1,
+    "context_refill_count": 0,
+    "context_request_count": 0,
+    "target_repo_modified": false
+  },
+  "findings": [
+    {
+      "file": "gpt_engineer/db.py",
+      "line": 14,
+      "severity": "medium",
+      "category": "correctness",
+      "message": "The refactored __getitem__ changes the exception type for a non-file path from KeyError to FileNotFoundError when full_path.is_file() is False, but the else branch is removed. The original code raised KeyError for non-file paths; the new code raises KeyError only if the path does not exist, but if the path exists and is not a file (e.g., a directory), the open() call will fail with IsADirectoryError or PermissionError, not KeyError. This breaks the contract for callers expecting KeyError for any non-file key.",
+      "suggestion": "Restore the original logic: check if full_path.is_file() first, and raise KeyError if it is not a file. Alternatively, catch the specific OS error and re-raise as KeyError to maintain backward compatibility.",
+      "confidence": 0.85,
+      "evidence_ids": [
+        "diff_hunk:gpt_engineer/db.py:14"
+      ]
+    }
+  ],
+  "needs_human_review": [],
+  "discarded": [],
+  "changed_files": [
+    {
+      "old_path": "gpt_engineer/db.py",
+      "new_path": "gpt_engineer/db.py",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 14,
+          "old_count": 11,
+          "new_start": 14,
+          "new_count": 10,
+          "section_header": "def __init__(self, path):",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 14,
+              "new_lineno": 14,
+              "content": "    def __getitem__(self, key):"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 15,
+              "new_lineno": 15,
+              "content": "        full_path = self.path / key"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 16,
+              "new_lineno": 16,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 17,
+              "new_lineno": null,
+              "content": "        if full_path.is_file():"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 18,
+              "new_lineno": null,
+              "content": "            with full_path.open(\"r\", encoding=\"utf-8\") as f:"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 19,
+              "new_lineno": null,
+              "content": "                return f.read()"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 20,
+              "new_lineno": null,
+              "content": "        else:"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 17,
+              "content": "        if not full_path.is_file():"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 21,
+              "new_lineno": 18,
+              "content": "            raise KeyError(key)"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 19,
+              "content": "        with full_path.open(\"r\", encoding=\"utf-8\") as f:"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 20,
+              "content": "            return f.read()"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 22,
+              "new_lineno": 21,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 23,
+              "new_lineno": 22,
+              "content": "    def __setitem__(self, key, val):"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 24,
+              "new_lineno": 23,
+              "content": "        full_path = self.path / key"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "changed_entities": [
+    {
+      "path": "gpt_engineer/db.py",
+      "entity_type": "method",
+      "name": "__getitem__",
+      "qualified_name": "DB.__getitem__",
+      "line_start": 14,
+      "line_end": 20,
+      "hunk_ids": [
+        "gpt_engineer/db.py:14"
+      ]
+    }
+  ],
+  "risk_signals": [
+    {
+      "tag": "behavior_change",
+      "confidence": 0.72,
+      "reason": "Executable logic changed inside DB.__getitem__.",
+      "evidence_ids": [
+        "entity:gpt_engineer/db.py:DB.__getitem__",
+        "diff:gpt_engineer/db.py:17",
+        "diff:gpt_engineer/db.py:18",
+        "diff:gpt_engineer/db.py:19",
+        "diff:gpt_engineer/db.py:20"
+      ]
+    }
+  ],
+  "evidence_index": {
+    "diff_hunk:gpt_engineer/db.py:14": {
+      "id": "diff_hunk:gpt_engineer/db.py:14",
+      "kind": "diff_hunk",
+      "source": "gpt_engineer/db.py:14",
+      "message": "@@ -14,11 +14,10 @@ def __init__(self, path):\n     def __getitem__(self, key):\n         full_path = self.path / key\n \n-        if full_path.is_file():\n-            with full_path.open(\"r\", encoding=\"utf-8\") as f:\n-                return f.read()\n-        else:\n+        if not full_path.is_file():\n             raise KeyError(key)\n+        with full_path.open(\"r\", encoding=\"utf-8\") as f:\n+            return f.read()\n \n     def __setitem__(self, key, val):\n         full_path = self.path / key"
+    },
+    "diff:gpt_engineer/db.py:17": {
+      "id": "diff:gpt_engineer/db.py:17",
+      "kind": "diff",
+      "source": "gpt_engineer/db.py:17",
+      "message": "Added line: if not full_path.is_file():"
+    },
+    "diff:gpt_engineer/db.py:18": {
+      "id": "diff:gpt_engineer/db.py:18",
+      "kind": "diff",
+      "source": "gpt_engineer/db.py:18",
+      "message": "Removed line: with full_path.open(\"r\", encoding=\"utf-8\") as f:"
+    },
+    "diff:gpt_engineer/db.py:19": {
+      "id": "diff:gpt_engineer/db.py:19",
+      "kind": "diff",
+      "source": "gpt_engineer/db.py:19",
+      "message": "Added line: with full_path.open(\"r\", encoding=\"utf-8\") as f:"
+    },
+    "diff:gpt_engineer/db.py:20": {
+      "id": "diff:gpt_engineer/db.py:20",
+      "kind": "diff",
+      "source": "gpt_engineer/db.py:20",
+      "message": "Added line: return f.read()"
+    },
+    "entity:gpt_engineer/db.py:DB.__getitem__": {
+      "id": "entity:gpt_engineer/db.py:DB.__getitem__",
+      "kind": "entity",
+      "source": "gpt_engineer/db.py:14-20",
+      "message": "Changed method DB.__getitem__ touched by 1 hunk(s)."
+    },
+    "risk:behavior_change:gpt_engineer/db.py": {
+      "id": "risk:behavior_change:gpt_engineer/db.py",
+      "kind": "risk",
+      "source": "behavior_change",
+      "message": "Executable logic changed inside DB.__getitem__."
+    }
+  },
+  "missing_evidence_ids": [],
+  "agent_runs": [
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+      "input_evidence_ids": [
+        "diff_hunk:gpt_engineer/db.py:14"
+      ],
+      "output_issue_ids": [
+        "correctness:gpt_engineer/db.py:14"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 5081,
+      "token_count_in": 1587,
+      "token_count_out": 261,
+      "trace_id": "e28ca401f98f48de8dc9b3e10e6f424f",
+      "span_id": "1910746b873143d6",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001",
+      "shard_index": 0,
+      "shard_count": 1,
+      "context_request_count": 0,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+      "model": null,
+      "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+      "input_evidence_ids": [
+        "diff_hunk:gpt_engineer/db.py:14"
+      ],
+      "output_issue_ids": [
+        "correctness:gpt_engineer/db.py:14"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 0,
+      "token_count_in": 0,
+      "token_count_out": 0,
+      "trace_id": "",
+      "span_id": "",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "",
+      "shard_index": 0,
+      "shard_count": 0,
+      "context_request_count": 0,
+      "context_refill_used": false
+    }
+  ],
+  "prompt_exports": {},
+  "context_budget": {
+    "enabled": true,
+    "strategy": "risk_first_v1",
+    "context_profile": "risk_compact_manifest_v1",
+    "max_input_tokens": 9000,
+    "estimated_input_tokens": 735,
+    "selected_evidence_count": 1,
+    "omitted_evidence_count": 6,
+    "selected_evidence_ids": [
+      "diff_hunk:gpt_engineer/db.py:14"
+    ],
+    "omitted_evidence_ids": [
+      "diff:gpt_engineer/db.py:17",
+      "diff:gpt_engineer/db.py:18",
+      "diff:gpt_engineer/db.py:19",
+      "diff:gpt_engineer/db.py:20",
+      "entity:gpt_engineer/db.py:DB.__getitem__",
+      "risk:behavior_change:gpt_engineer/db.py"
+    ],
+    "selected_risk_signal_count": 1,
+    "context_truncated": true,
+    "shard_count": 1,
+    "refill_count": 0,
+    "context_request_count": 0,
+    "context_requests": [],
+    "shards": [
+      {
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 1,
+        "omitted_evidence_count": 6,
+        "estimated_input_tokens": 735,
+        "context_truncated": true
+      }
+    ],
+    "warnings": []
+  },
+  "loop": {
+    "enabled": true,
+    "max_iter": 1,
+    "iterations_completed": 1,
+    "converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "checkpoint_path": "D:\\learn\\code-review-agent\\workspace\\hf_codereview_live\\samples\\sample_020\\review\\loop_checkpoint.json",
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "iterations": [
+      {
+        "i": 0,
+        "candidate_issue_count": 1,
+        "verified_count": 1,
+        "needs_human_review_count": 0,
+        "discarded_count": 0,
+        "keep_count": 1,
+        "uncertain_count": 0,
+        "reject_count": 0,
+        "feedback_sent": [],
+        "agent_runs": [
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+            "input_evidence_ids": [
+              "diff_hunk:gpt_engineer/db.py:14"
+            ],
+            "output_issue_ids": [
+              "correctness:gpt_engineer/db.py:14"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 5081,
+            "token_count_in": 1587,
+            "token_count_out": 261,
+            "trace_id": "e28ca401f98f48de8dc9b3e10e6f424f",
+            "span_id": "1910746b873143d6",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001",
+            "shard_index": 0,
+            "shard_count": 1,
+            "context_request_count": 0,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+            "model": null,
+            "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+            "input_evidence_ids": [
+              "diff_hunk:gpt_engineer/db.py:14"
+            ],
+            "output_issue_ids": [
+              "correctness:gpt_engineer/db.py:14"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 0,
+            "token_count_in": 0,
+            "token_count_out": 0,
+            "trace_id": "",
+            "span_id": "",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "",
+            "shard_index": 0,
+            "shard_count": 0,
+            "context_request_count": 0,
+            "context_refill_used": false
+          }
+        ],
+        "issue_set": [
+          "correctness:gpt_engineer/db.py:14"
+        ],
+        "keep": [
+          {
+            "file": "gpt_engineer/db.py",
+            "line": 14,
+            "severity": "medium",
+            "category": "correctness",
+            "message": "The refactored __getitem__ changes the exception type for a non-file path from KeyError to FileNotFoundError when full_path.is_file() is False, but the else branch is removed. The original code raised KeyError for non-file paths; the new code raises KeyError only if the path does not exist, but if the path exists and is not a file (e.g., a directory), the open() call will fail with IsADirectoryError or PermissionError, not KeyError. This breaks the contract for callers expecting KeyError for any non-file key.",
+            "suggestion": "Restore the original logic: check if full_path.is_file() first, and raise KeyError if it is not a file. Alternatively, catch the specific OS error and re-raise as KeyError to maintain backward compatibility.",
+            "confidence": 0.85,
+            "evidence_ids": [
+              "diff_hunk:gpt_engineer/db.py:14"
+            ]
+          }
+        ],
+        "needs_human_review": [],
+        "discarded": []
+      }
+    ]
+  },
+  "tracing": {
+    "total_latency_ms": 5081,
+    "total_token_count_in": 1587,
+    "total_token_count_out": 261,
+    "total_retry_count": 0,
+    "run_count": 2,
+    "status_counts": {
+      "ok": 2
+    }
+  }
+}

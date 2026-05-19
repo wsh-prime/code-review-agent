@@ -1,0 +1,302 @@
+{
+  "schema_version": "1.0",
+  "run_id": "afed98fdc97740d2abf6b6e5580adf5f",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": false,
+  "package_hash": "sha256:3933a243cce7c74b2ec4953b7445191b472099b61630430e6e74b2e95c83852a",
+  "diff_hash": "sha256:4d6d3eca20b8c3086a5b6ec325b9abded9f7059720b3d6ab34d06b03f8402d07",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 5,
+      "verified_count": 3,
+      "needs_human_review_count": 0,
+      "discarded_count": 2,
+      "keep_count": 0,
+      "uncertain_count": 3,
+      "reject_count": 0,
+      "feedback_sent": [
+        {
+          "issue_id": "api_consistency:apps/activitypub/src/api/activitypub.ts:29",
+          "category": "api_consistency",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1607",
+            "diff_hunk:apps/activitypub/src/api/activitypub.ts:26"
+          ]
+        },
+        {
+          "issue_id": "api_consistency:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2725",
+          "category": "api_consistency",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2722",
+            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1607"
+          ]
+        },
+        {
+          "issue_id": "correctness:apps/activitypub/tsconfig.json:18",
+          "category": "correctness",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/activitypub/tsconfig.json:15"
+          ]
+        }
+      ],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff_hunk:apps/activitypub/package.json:1",
+            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1607",
+            "diff_hunk:apps/activitypub/src/api/activitypub.ts:26",
+            "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2722"
+          ],
+          "output_issue_ids": [
+            "api_consistency:apps/activitypub/src/api/activitypub.ts:29",
+            "api_consistency:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2725"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 1,
+          "retry_log": [
+            "attempt=1 error=timeout delay=1.00s"
+          ],
+          "latency_ms": 66718,
+          "token_count_in": 4460,
+          "token_count_out": 942,
+          "trace_id": "6eb8926b59f64f6baf33ddfe50674487",
+          "span_id": "028bbbbb39a64ddc",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 2,
+          "context_request_count": 3,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1622",
+            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1636",
+            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1651",
+            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1665",
+            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1679",
+            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1719",
+            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1733",
+            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1747",
+            "diff_hunk:apps/activitypub/src/api/activitypub.ts:708",
+            "diff_hunk:apps/activitypub/src/api/activitypub.ts:731",
+            "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2753",
+            "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2786",
+            "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2806"
+          ],
+          "output_issue_ids": [
+            "correctness:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2830"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 1456,
+          "token_count_in": 5229,
+          "token_count_out": 157,
+          "trace_id": "4304b661182e41c5a91a760cd52c4af0",
+          "span_id": "4641d3f4e8ca455d",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001-refill",
+          "shard_index": 0,
+          "shard_count": 2,
+          "context_request_count": 0,
+          "context_refill_used": true
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff_hunk:apps/activitypub/src/views/Preferences/components/BlueskySharing.tsx:1",
+            "diff_hunk:apps/activitypub/src/views/Preferences/components/BlueskySharing.tsx:65",
+            "diff_hunk:apps/activitypub/tsconfig.json:15"
+          ],
+          "output_issue_ids": [
+            "correctness:apps/activitypub/tsconfig.json:18",
+            "correctness:apps/activitypub/src/views/Preferences/components/BlueskySharing.tsx:65",
+            "correctness:apps/activitypub/src/views/Preferences/components/BlueskySharing.tsx:65"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 10718,
+          "token_count_in": 3814,
+          "token_count_out": 478,
+          "trace_id": "27253e96c1224b6faf387f3c27b992be",
+          "span_id": "e8b3e9f73949483f",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-002",
+          "shard_index": 1,
+          "shard_count": 2,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [
+            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1607",
+            "diff_hunk:apps/activitypub/src/api/activitypub.ts:26",
+            "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2722",
+            "diff_hunk:apps/activitypub/tsconfig.json:15"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [
+        "api_consistency:apps/activitypub/src/api/activitypub.ts:29",
+        "api_consistency:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2725",
+        "correctness:apps/activitypub/tsconfig.json:18"
+      ],
+      "keep": [],
+      "needs_human_review": [
+        {
+          "file": "apps/activitypub/src/api/activitypub.ts",
+          "line": 29,
+          "severity": "medium",
+          "category": "api_consistency",
+          "message": "The Account interface replaces `blueskyHandle?: string` with `blueskyHandle?: string | null` and adds `blueskyHandleConfirmed?: boolean`. The test mock for the enable endpoint now returns `null` instead of a handle object, but the test does not verify that the new `blueskyHandleConfirmed` field is set correctly after the enable action.",
+          "suggestion": "Add an assertion in the test to verify that after calling the enable endpoint, the cached profile includes `blueskyHandleConfirmed: true` and `blueskyHandle` is set to the expected handle (not null).",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1607",
+            "diff_hunk:apps/activitypub/src/api/activitypub.ts:26"
+          ]
+        },
+        {
+          "file": "apps/activitypub/src/hooks/use-activity-pub-queries.ts",
+          "line": 2725,
+          "severity": "medium",
+          "category": "api_consistency",
+          "message": "The `updateAccountBlueskyCache` function now accepts a `BlueskyDetails` object and spreads it into the cached profile. However, the test mock for the enable endpoint returns `null` as the response body, and the test does not show that the cache is updated with the correct `blueskyHandleConfirmed` and `blueskyHandle` values after a successful enable.",
+          "suggestion": "Ensure the test for the enable endpoint verifies that the query cache is updated with `blueskyHandleConfirmed: true` and a non-null `blueskyHandle`. Consider adding a test that calls the enable endpoint and then checks the cached profile.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2722",
+            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1607"
+          ]
+        },
+        {
+          "file": "apps/activitypub/tsconfig.json",
+          "line": 18,
+          "severity": "high",
+          "category": "correctness",
+          "message": "Disabling strict mode removes TypeScript's strict null checks and other type safety guarantees, which can lead to runtime errors from null/undefined access or incorrect type assumptions.",
+          "suggestion": "Keep strict: true and fix any type errors instead of disabling strict mode.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/activitypub/tsconfig.json:15"
+          ]
+        }
+      ],
+      "discarded": [
+        {
+          "file": "apps/activitypub/src/hooks/use-activity-pub-queries.ts",
+          "line": 2830,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Missing query invalidation for accountFollows after confirming bluesky handle, which may cause stale data.",
+          "suggestion": "Add invalidation for the accountFollows query in the onSuccess handler, similar to other mutations.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2806"
+          ],
+          "filter_reason": "low_signal_suggestion"
+        },
+        {
+          "file": "apps/activitypub/src/views/Preferences/components/BlueskySharing.tsx",
+          "line": 65,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "The confirmHandle callback has an empty dependency array but uses confirmBlueskyHandleMutation.mutateAsync, which may be stale if the mutation object changes. The comment says 'mutations are stable in practice' but this is not guaranteed.",
+          "suggestion": "Include confirmBlueskyHandleMutation in the dependency array or use a ref to hold the mutation function.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/activitypub/src/views/Preferences/components/BlueskySharing.tsx:65"
+          ],
+          "filter_reason": "low_signal_suggestion"
+        }
+      ]
+    }
+  ],
+  "last_feedback": {
+    "iteration": 0,
+    "uncertain_items": [
+      {
+        "issue_id": "api_consistency:apps/activitypub/src/api/activitypub.ts:29",
+        "category": "api_consistency",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1607",
+          "diff_hunk:apps/activitypub/src/api/activitypub.ts:26"
+        ]
+      },
+      {
+        "issue_id": "api_consistency:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2725",
+        "category": "api_consistency",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2722",
+          "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1607"
+        ]
+      },
+      {
+        "issue_id": "correctness:apps/activitypub/tsconfig.json:18",
+        "category": "correctness",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:apps/activitypub/tsconfig.json:15"
+        ]
+      }
+    ]
+  }
+}

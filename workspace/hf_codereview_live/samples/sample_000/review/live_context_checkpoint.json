@@ -1,0 +1,61 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:e97e6ab9bb470005835c70c3615c44f9815b2ee67f81231450d1a6c7f3fb3438",
+  "diff_hash": "sha256:2ec7d6a210215a957c2efa3e954bfd7c0f8dda928dd0bc72cee17b849c558c90",
+  "shards": {
+    "8acf9804e5998388bac5555a2ec73bc145e2a3ece32e74f7458cae397e2a69e9": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:mlx_audio/tts/generate.py:1"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "mlx_audio/tts/generate.py",
+          "evidence_ids": [
+            "diff:mlx_audio/tts/generate.py:26",
+            "diff:mlx_audio/tts/generate.py:49"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The diff hunk is truncated and does not show the full new function signature or the new function body. The api_change risk signal indicates a public function signature change, but the evidence does not show the new signature or the new function. Requesting the omitted diff lines to assess the API change and any security implications.",
+          "source_shard_id": "shard-001",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:mlx_audio/tts/generate.py:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 88194,
+        "token_count_in": 3221,
+        "token_count_out": 154,
+        "trace_id": "88f05a4cd8054df7ba9d83eb33ee93d3",
+        "span_id": "7eb47a0beed243df",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    }
+  }
+}

@@ -1,0 +1,191 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:b7273f5b6816534b4bf81ea6820d51887aa998cd2ae4c446c5da297371508199",
+  "diff_hash": "sha256:037f106db2dc76746cdb10e90dcc2bb754aff07a4a883a7fc1dc6e8fc5c5a75e",
+  "shards": {
+    "30c32d073d135494252ecd6ba7eeb792fcded408f63ec64b5e6057174abd62fb": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:apps/signup-form/.eslintrc.cjs:15",
+        "diff_hunk:apps/signup-form/.storybook/preview.tsx:3",
+        "diff_hunk:apps/signup-form/README.md:35",
+        "diff_hunk:apps/signup-form/package.json:1"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "apps/signup-form/.eslintrc.cjs",
+          "line": 18,
+          "severity": "medium",
+          "category": "style",
+          "message": "Review guideline 'Code Must Use 4-Space Indentation' requires 4-space indentation for all source files. The added rule configuration uses 2-space indentation.",
+          "suggestion": "Use 4-space indentation for the new rule entry to match the codebase standard.",
+          "confidence": 0.9,
+          "evidence_ids": [
+            "diff_hunk:apps/signup-form/.eslintrc.cjs:15"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:apps/signup-form/.eslintrc.cjs:15",
+          "diff_hunk:apps/signup-form/.storybook/preview.tsx:3",
+          "diff_hunk:apps/signup-form/README.md:35",
+          "diff_hunk:apps/signup-form/package.json:1"
+        ],
+        "output_issue_ids": [
+          "style:apps/signup-form/.eslintrc.cjs:18"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 1338,
+        "token_count_in": 5465,
+        "token_count_out": 157,
+        "trace_id": "37a7ba06c049474d8e83791c314532f8",
+        "span_id": "841b4ca88c7d4d48",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 6,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "d6f4934804e3cf86a6137af204f0d3318c68a91cf2403f24e6ba66b908e9803f": {
+      "status": "completed",
+      "shard_id": "shard-002",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:apps/signup-form/src/app-context.ts:1",
+        "diff:apps/signup-form/src/components/content-box.tsx:1",
+        "diff_hunk:apps/signup-form/src/app.tsx:1",
+        "diff_hunk:apps/signup-form/src/components/frame.tsx:1"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "apps/signup-form/src/components/frame.tsx",
+          "evidence_ids": [
+            "diff:apps/signup-form/src/components/frame.tsx:1",
+            "diff:apps/signup-form/src/components/frame.tsx:5"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-002",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [
+        {
+          "file": "apps/signup-form/src/components/frame.tsx",
+          "line": 1,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Import path changed from './IFrame' to './iframe' but the actual file rename is not shown in the patch; this may cause a broken import if the target file does not exist or is not renamed.",
+          "suggestion": "Ensure that the file './iframe' exists (or is renamed accordingly) to match the updated import path.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:apps/signup-form/src/components/frame.tsx:1"
+          ]
+        },
+        {
+          "file": "apps/signup-form/src/components/frame.tsx",
+          "line": 5,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Import path changed from '../AppContext' to '../app-context' but the actual file rename is not shown in the patch; this may cause a broken import if the target file does not exist or is not renamed.",
+          "suggestion": "Ensure that the file '../app-context' exists (or is renamed accordingly) to match the updated import path.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:apps/signup-form/src/components/frame.tsx:1"
+          ]
+        },
+        {
+          "file": "apps/signup-form/src/app.tsx",
+          "line": 4,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Import path changed from './AppContext' to './app-context' but the actual file rename is not shown in the patch; this may cause a broken import if the target file does not exist or is not renamed.",
+          "suggestion": "Ensure that the file './app-context' exists (or is renamed accordingly) to match the updated import path.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:apps/signup-form/src/app.tsx:1"
+          ]
+        },
+        {
+          "file": "apps/signup-form/src/app.tsx",
+          "line": 5,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Import path changed from './components/ContentBox' to './components/content-box' but the actual file rename is not shown in the patch; this may cause a broken import if the target file does not exist or is not renamed.",
+          "suggestion": "Ensure that the file './components/content-box' exists (or is renamed accordingly) to match the updated import path.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:apps/signup-form/src/app.tsx:1"
+          ]
+        },
+        {
+          "file": "apps/signup-form/src/app.tsx",
+          "line": 6,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Import path changed from './components/Frame' to './components/frame' but the actual file rename is not shown in the patch; this may cause a broken import if the target file does not exist or is not renamed.",
+          "suggestion": "Ensure that the file './components/frame' exists (or is renamed accordingly) to match the updated import path.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:apps/signup-form/src/app.tsx:1"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff:apps/signup-form/src/app-context.ts:1",
+          "diff:apps/signup-form/src/components/content-box.tsx:1",
+          "diff_hunk:apps/signup-form/src/app.tsx:1",
+          "diff_hunk:apps/signup-form/src/components/frame.tsx:1"
+        ],
+        "output_issue_ids": [
+          "correctness:apps/signup-form/src/components/frame.tsx:1",
+          "correctness:apps/signup-form/src/components/frame.tsx:5",
+          "correctness:apps/signup-form/src/app.tsx:4",
+          "correctness:apps/signup-form/src/app.tsx:5",
+          "correctness:apps/signup-form/src/app.tsx:6"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 53966,
+        "token_count_in": 4462,
+        "token_count_out": 853,
+        "trace_id": "25933edc085e4edda2d0eebac4ddd538",
+        "span_id": "9e31e08142ed4cc0",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "shard_count": 6,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    }
+  }
+}

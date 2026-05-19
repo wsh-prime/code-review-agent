@@ -1,0 +1,106 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:455f335c567b2d5d708e99ccce9c26eb991e78162208541c311c45cc252a178f",
+  "diff_hash": "sha256:4debe6b73ff1d99a04683477cb0eb386879f47780adb724fc596179886fb7e5f",
+  "shards": {
+    "c4b4a0802c931b3fa2b024f6bff5570d4539921abf1965471615446f065ead9d": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:apps/admin-x-framework/src/api/comments.ts:25",
+        "diff_hunk:apps/posts/src/views/comments/components/comments-list.tsx:59",
+        "diff_hunk:apps/posts/src/views/comments/components/comments-list.tsx:7",
+        "diff_hunk:ghost/core/core/server/api/endpoints/utils/serializers/output/mappers/comments.js:35",
+        "diff_hunk:ghost/core/test/e2e-api/admin/__snapshots__/activity-feed.test.js.snap:22699"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "apps/posts/src/views/comments/components/comments-list.tsx",
+          "line": 59,
+          "severity": "high",
+          "category": "security",
+          "message": "The patch introduces `dangerouslySetInnerHTML` with `item.html` content, which can lead to Cross-Site Scripting (XSS) if `item.html` contains unsanitized user input.",
+          "suggestion": "Sanitize `item.html` before rendering, or use a safe rendering method that escapes HTML. Consider using DOMPurify or a similar library to sanitize the HTML content.",
+          "confidence": 0.85,
+          "evidence_ids": [
+            "diff_hunk:apps/posts/src/views/comments/components/comments-list.tsx:59"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:apps/admin-x-framework/src/api/comments.ts:25",
+          "diff_hunk:apps/posts/src/views/comments/components/comments-list.tsx:59",
+          "diff_hunk:apps/posts/src/views/comments/components/comments-list.tsx:7",
+          "diff_hunk:ghost/core/core/server/api/endpoints/utils/serializers/output/mappers/comments.js:35",
+          "diff_hunk:ghost/core/test/e2e-api/admin/__snapshots__/activity-feed.test.js.snap:22699"
+        ],
+        "output_issue_ids": [
+          "security:apps/posts/src/views/comments/components/comments-list.tsx:59"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 5610,
+        "token_count_in": 5303,
+        "token_count_out": 190,
+        "trace_id": "20862bc2cabe45b1b605085304953165",
+        "span_id": "706cb29aac6c46aa",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 2,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "73a9e58b4c125826a006bc493c0377baef6598437e5aaa50f6f54595e9db5fed": {
+      "status": "completed",
+      "shard_id": "shard-002",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/test/e2e-api/admin/__snapshots__/comments.test.js.snap:25"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/test/e2e-api/admin/__snapshots__/comments.test.js.snap:25"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 2569,
+        "token_count_in": 2819,
+        "token_count_out": 12,
+        "trace_id": "07ca4087e7c947198dd173245fa8c0c0",
+        "span_id": "7143e04090644570",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "shard_count": 2,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

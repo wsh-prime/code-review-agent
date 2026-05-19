@@ -1,0 +1,293 @@
+{
+  "schema_version": "1.0",
+  "run_id": "1d20929ac4b4424e83255b1675296b25",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": false,
+  "package_hash": "sha256:da8a79a10043a937734611111bfac03b00fcba09d59a4eeb8efaee4c36a06422",
+  "diff_hash": "sha256:6ef8c06ed41f820a55954656e1e59b3388d819243a937fcd30b10a6885b4b694",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 4,
+      "verified_count": 4,
+      "needs_human_review_count": 0,
+      "discarded_count": 0,
+      "keep_count": 2,
+      "uncertain_count": 1,
+      "reject_count": 1,
+      "feedback_sent": [
+        {
+          "issue_id": "style:src/Components/test/E2ETest/Tests/FormsTest.cs:558",
+          "category": "style",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/Tests/FormsTest.cs:555"
+          ]
+        }
+      ],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/Web/src/Forms/DisplayName.cs:1",
+            "diff_hunk:src/Components/Web/src/Forms/ExpressionMemberAccessor.cs:1",
+            "diff_hunk:src/Components/Web/src/PublicAPI.Unshipped.txt:40",
+            "diff_hunk:src/Components/Web/test/Forms/DisplayNameTest.cs:1"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 2,
+          "retry_log": [
+            "attempt=1 error=timeout delay=1.00s",
+            "attempt=2 error=timeout delay=2.00s"
+          ],
+          "latency_ms": 183170,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "5962d958c2824355bce2557504405bfe",
+          "span_id": "4e9a690bac244653",
+          "parent_span_id": "",
+          "status": "error",
+          "error_type": "_AgentTransientError",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 5,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/Tests/FormsTest.cs:555",
+            "diff_hunk:src/Components/test/testassets/BasicTestApp/FormsTest/DisplayNameComponent.razor:1",
+            "diff_hunk:src/Components/test/testassets/BasicTestApp/Index.razor:27",
+            "diff_hunk:src/Components/test/testassets/BasicTestApp/Resources.fr.resx:120"
+          ],
+          "output_issue_ids": [
+            "style:src/Components/test/testassets/BasicTestApp/FormsTest/DisplayNameComponent.razor:1",
+            "style:src/Components/test/E2ETest/Tests/FormsTest.cs:558",
+            "style:src/Components/test/E2ETest/Tests/FormsTest.cs:558"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 11443,
+          "token_count_in": 6666,
+          "token_count_out": 642,
+          "trace_id": "b7e1d9229f1f4c1eb19e0258192486dd",
+          "span_id": "26e94f4b182e4df2",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-002",
+          "shard_index": 1,
+          "shard_count": 5,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/test/testassets/BasicTestApp/Resources.resx:120",
+            "diff_hunk:src/Components/test/testassets/BasicTestApp/TestResources.cs:1",
+            "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/ForgotPassword.razor:25",
+            "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/Login.razor:154",
+            "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/Login.razor:25"
+          ],
+          "output_issue_ids": [
+            "style:src/Components/test/testassets/BasicTestApp/TestResources.cs:1"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 1,
+          "retry_log": [
+            "attempt=1 error=timeout delay=1.00s"
+          ],
+          "latency_ms": 86108,
+          "token_count_in": 8274,
+          "token_count_out": 146,
+          "trace_id": "3c6ba9e0594b408d8ba97ec6867d2dff",
+          "span_id": "a3c35769d1c442b8",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-003",
+          "shard_index": 2,
+          "shard_count": 5,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/Manage/ChangePassword.razor:20",
+            "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/Manage/Email.razor:45",
+            "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/Register.razor:29"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 2,
+          "retry_log": [
+            "attempt=1 error=timeout delay=1.00s",
+            "attempt=2 error=timeout delay=2.00s"
+          ],
+          "latency_ms": 183178,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "cd91bd1b14564fcdbec7717923bdc438",
+          "span_id": "d7015641af4c4044",
+          "parent_span_id": "",
+          "status": "error",
+          "error_type": "_AgentTransientError",
+          "shard_id": "shard-004",
+          "shard_index": 3,
+          "shard_count": 5,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/ResetPassword.razor:24",
+            "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/ResetPassword.razor:96"
+          ],
+          "output_issue_ids": [
+            "maintainability:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/ResetPassword.razor:96"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 25025,
+          "token_count_in": 5886,
+          "token_count_out": 232,
+          "trace_id": "72f28a4776d14fecbb26616fe79ac6b9",
+          "span_id": "7f4307ad95e04357",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-005",
+          "shard_index": 4,
+          "shard_count": 5,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/Tests/FormsTest.cs:555",
+            "diff_hunk:src/Components/test/testassets/BasicTestApp/FormsTest/DisplayNameComponent.razor:1",
+            "diff_hunk:src/Components/test/testassets/BasicTestApp/TestResources.cs:1",
+            "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/ResetPassword.razor:96"
+          ],
+          "output_issue_ids": [
+            "style:src/Components/test/testassets/BasicTestApp/TestResources.cs:1",
+            "maintainability:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/ResetPassword.razor:96"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [
+        "maintainability:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/ResetPassword.razor:96",
+        "style:src/Components/test/E2ETest/Tests/FormsTest.cs:558",
+        "style:src/Components/test/testassets/BasicTestApp/FormsTest/DisplayNameComponent.razor:1",
+        "style:src/Components/test/testassets/BasicTestApp/TestResources.cs:1"
+      ],
+      "keep": [
+        {
+          "file": "src/Components/test/testassets/BasicTestApp/TestResources.cs",
+          "line": 1,
+          "severity": "error",
+          "category": "style",
+          "message": "Review guideline violation: 'Use File-Scoped Namespace Declarations' - The file uses file-scoped namespace syntax which is correct per the guideline.",
+          "suggestion": "No change needed.",
+          "confidence": 1.0,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/testassets/BasicTestApp/TestResources.cs:1"
+          ]
+        },
+        {
+          "file": "src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/ResetPassword.razor",
+          "line": 96,
+          "severity": "medium",
+          "category": "maintainability",
+          "message": "The InputModel class is defined inside the .razor file rather than in a separate C# file, which may violate the 'All C# Source Files Must Include MIT License Header' guideline if extracted, and also makes the code less maintainable.",
+          "suggestion": "Move the InputModel class to a separate .cs file with the required MIT license header.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/ResetPassword.razor:96"
+          ]
+        }
+      ],
+      "needs_human_review": [
+        {
+          "file": "src/Components/test/E2ETest/Tests/FormsTest.cs",
+          "line": 558,
+          "severity": "medium",
+          "category": "style",
+          "message": "Review guideline violation: 'Test Methods Must Use Arrange-Act-Assert Pattern with Comments' - The test method 'DisplayNameReadsAttributesCorrectly' uses '// Check that ...' comments instead of the required '// Arrange', '// Act', and '// Assert' comments. The test has multiple assertions but lacks explicit AAA structure.",
+          "suggestion": "Restructure the test to include explicit '// Arrange', '// Act', and '// Assert' comments. For example, move the component mounting to '// Arrange', the element finding to '// Act', and the assertions to '// Assert'.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/Tests/FormsTest.cs:555"
+          ]
+        }
+      ],
+      "discarded": []
+    }
+  ],
+  "last_feedback": {
+    "iteration": 0,
+    "uncertain_items": [
+      {
+        "issue_id": "style:src/Components/test/E2ETest/Tests/FormsTest.cs:558",
+        "category": "style",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:src/Components/test/E2ETest/Tests/FormsTest.cs:555"
+        ]
+      }
+    ]
+  }
+}

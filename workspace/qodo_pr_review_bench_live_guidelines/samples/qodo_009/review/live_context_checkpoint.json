@@ -1,0 +1,232 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:68d909f01b07483dadb04cd1642b4e3fff4d5e2aec32a08849125836242c64d2",
+  "diff_hash": "sha256:4d6d3eca20b8c3086a5b6ec325b9abded9f7059720b3d6ab34d06b03f8402d07",
+  "shards": {
+    "4ce599112a43b61d3a9231ac878a54661f7998baaaf49e9ada0b573a0a7b5bc2": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:apps/activitypub/package.json:1",
+        "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1607",
+        "diff_hunk:apps/activitypub/src/api/activitypub.ts:26",
+        "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2722"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "apps/activitypub/src/api/activitypub.test.ts",
+          "evidence_ids": [
+            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1622",
+            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1636",
+            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1651",
+            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1665",
+            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1679",
+            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1719",
+            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1733",
+            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1747",
+            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1761"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-001",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "apps/activitypub/src/hooks/use-activity-pub-queries.ts",
+          "evidence_ids": [
+            "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2753",
+            "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2786",
+            "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2806"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-001",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [
+        {
+          "file": "apps/activitypub/src/api/activitypub.ts",
+          "line": 29,
+          "severity": "high",
+          "category": "correctness",
+          "message": "The `blueskyHandle` field type changed from `string | undefined` to `string | null`, but the existing `blueskyEnabled` field remains `boolean | undefined`. The `updateAccountBlueskyCache` function now spreads `blueskyDetails` which includes `blueskyEnabled`, `blueskyHandleConfirmed`, and `blueskyHandle`. If `blueskyDetails.blueskyEnabled` is `false` and `blueskyHandle` is `null`, the cache update will set `blueskyEnabled` to `false` and `blueskyHandle` to `null`. However, the old code set `blueskyEnabled` based on `blueskyHandle !== null`. This change in logic could cause a regression where a previously enabled Bluesky account becomes disabled if the cache is updated with `blueskyDetails` that has `blueskyEnabled: false` but a non-null `blueskyHandle`.",
+          "suggestion": "Ensure that the `blueskyEnabled` field is derived consistently from `blueskyHandle` or that the cache update logic matches the intended behavior. Consider keeping the derivation `blueskyEnabled: blueskyDetails.blueskyHandle !== null` if that was the intended invariant.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:apps/activitypub/src/api/activitypub.ts:26",
+            "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2722"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:apps/activitypub/package.json:1",
+          "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1607",
+          "diff_hunk:apps/activitypub/src/api/activitypub.ts:26",
+          "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2722"
+        ],
+        "output_issue_ids": [
+          "correctness:apps/activitypub/src/api/activitypub.ts:29"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 33837,
+        "token_count_in": 6584,
+        "token_count_out": 750,
+        "trace_id": "c05fbc401d5c4659a0e8693e70251565",
+        "span_id": "ed503e04f3d149a2",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 2,
+        "context_request_count": 2,
+        "context_refill_used": false
+      }
+    },
+    "3bed4a21636ce0c1558c5da04c669a1238278bf1c3642f0f59068e39f09e7aab": {
+      "status": "completed",
+      "shard_id": "shard-001-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-001",
+      "selected_evidence_ids": [
+        "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1622",
+        "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1636",
+        "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1651",
+        "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1665",
+        "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1679",
+        "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1719",
+        "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1733",
+        "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1747",
+        "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2753",
+        "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2786",
+        "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2806"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "apps/activitypub/src/hooks/use-activity-pub-queries.ts",
+          "line": 2836,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Missing query invalidation after successful handle confirmation: the comment on line 2836 explicitly notes that invalidation of the accountFollows query is missing, which can lead to stale data being displayed.",
+          "suggestion": "Add the necessary query invalidation call, e.g., queryClient.invalidateQueries({ queryKey: ['accountFollows'] }), after updating the cache.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2806"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1622",
+          "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1636",
+          "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1651",
+          "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1665",
+          "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1679",
+          "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1719",
+          "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1733",
+          "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1747",
+          "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2753",
+          "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2786",
+          "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2806"
+        ],
+        "output_issue_ids": [
+          "correctness:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2836"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 1556,
+        "token_count_in": 6654,
+        "token_count_out": 190,
+        "trace_id": "1edfe78616424ac68746048f65250e5d",
+        "span_id": "7649c54aa1b542f4",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "shard_count": 2,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    },
+    "07ed80633a29043974e61a074599ba081f55d9c7023b5a07494c546eae1c5eb9": {
+      "status": "completed",
+      "shard_id": "shard-002",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:apps/activitypub/src/views/Preferences/components/BlueskySharing.tsx:1",
+        "diff_hunk:apps/activitypub/src/views/Preferences/components/BlueskySharing.tsx:65",
+        "diff_hunk:apps/activitypub/tsconfig.json:15"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "apps/activitypub/tsconfig.json",
+          "line": 18,
+          "severity": "error",
+          "category": "correctness",
+          "message": "TypeScript strict mode disabled: 'strict' set to false violates the repository rule 'TypeScript Files Must Enable Strict Type Checking' which requires strict: true and noImplicitAny: true.",
+          "suggestion": "Set 'strict' back to true and ensure 'noImplicitAny' is also true in compilerOptions.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/activitypub/tsconfig.json:15"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:apps/activitypub/src/views/Preferences/components/BlueskySharing.tsx:1",
+          "diff_hunk:apps/activitypub/src/views/Preferences/components/BlueskySharing.tsx:65",
+          "diff_hunk:apps/activitypub/tsconfig.json:15"
+        ],
+        "output_issue_ids": [
+          "correctness:apps/activitypub/tsconfig.json:18"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 18512,
+        "token_count_in": 5938,
+        "token_count_out": 158,
+        "trace_id": "f6a55cc0d39743759a845ef15538728e",
+        "span_id": "edfdfc45ab834131",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "shard_count": 2,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

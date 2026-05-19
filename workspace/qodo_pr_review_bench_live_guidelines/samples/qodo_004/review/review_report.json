@@ -1,0 +1,3904 @@
+{
+  "schema_version": "1.3",
+  "summary": {
+    "mode": "hybrid-live",
+    "changed_file_count": 22,
+    "changed_entity_count": 22,
+    "risk_signal_count": 9,
+    "finding_count": 3,
+    "needs_human_review_count": 6,
+    "discarded_count": 2,
+    "evidence_count": 113,
+    "missing_evidence_id_count": 0,
+    "agent_run_count": 9,
+    "prompt_exported": false,
+    "loop_enabled": true,
+    "loop_iterations_completed": 1,
+    "loop_converged": false,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "total_latency_ms": 402820,
+    "total_token_count_in": 40444,
+    "total_token_count_out": 2226,
+    "context_budget_enabled": true,
+    "context_truncated": true,
+    "selected_evidence_count": 30,
+    "omitted_evidence_count": 83,
+    "review_shard_count": 6,
+    "context_refill_count": 2,
+    "context_request_count": 3,
+    "target_repo_modified": false
+  },
+  "findings": [
+    {
+      "file": "apps/signup-form/.eslintrc.cjs",
+      "line": 24,
+      "severity": "warning",
+      "category": "style",
+      "message": "New rule 'ghost/filenames/match-regex' enforces kebab-case filenames, but the import path change in apps/signup-form/.storybook/preview.tsx from '../src/AppContext' to '../src/app-context' suggests a file rename that may violate this rule if the actual file is not renamed.",
+      "suggestion": "Ensure the file 'apps/signup-form/src/AppContext' is renamed to 'apps/signup-form/src/app-context' to match the new import path and the kebab-case rule.",
+      "confidence": 0.7,
+      "evidence_ids": [
+        "diff_hunk:apps/signup-form/.eslintrc.cjs:15",
+        "diff_hunk:apps/signup-form/.storybook/preview.tsx:3"
+      ]
+    },
+    {
+      "file": "apps/signup-form/src/components/frame.tsx",
+      "line": 1,
+      "severity": "minor",
+      "category": "code_style",
+      "message": "Import path changed from './IFrame' to './iframe' but the file was not renamed in this patch, which may cause a broken import if the target file does not exist at the new path.",
+      "suggestion": "Ensure that the file './iframe' exists (or is renamed accordingly) to match the updated import path.",
+      "confidence": 0.7,
+      "evidence_ids": [
+        "diff_hunk:apps/signup-form/src/components/frame.tsx:1"
+      ]
+    },
+    {
+      "file": "apps/signup-form/src/app.tsx",
+      "line": 4,
+      "severity": "minor",
+      "category": "code_style",
+      "message": "Import paths changed to kebab-case (e.g., './app-context', './components/content-box', './components/frame') but the corresponding files were renamed without text hunks; ensure the renamed files export the same symbols.",
+      "suggestion": "Verify that the renamed files export 'AppContextProvider', 'AppContextType', 'ContentBox', and 'Frame' as expected.",
+      "confidence": 0.7,
+      "evidence_ids": [
+        "diff_hunk:apps/signup-form/src/app.tsx:1"
+      ]
+    }
+  ],
+  "needs_human_review": [
+    {
+      "file": "apps/signup-form/package.json",
+      "line": 3,
+      "severity": "low",
+      "category": "dependency_change",
+      "message": "Dependency declarations changed and should be reviewed with install/test impact in mind.",
+      "suggestion": "Confirm lock files, compatibility, and test coverage for the dependency change.",
+      "confidence": 0.75,
+      "evidence_ids": [
+        "diff:apps/signup-form/package.json:3",
+        "risk:dependency_change:apps/signup-form/package.json"
+      ]
+    },
+    {
+      "file": "apps/signup-form/src/components/pages/form-page.tsx",
+      "line": 30,
+      "severity": "medium",
+      "category": "correctness",
+      "message": "Removing `setLoading(false)` in the minimal branch leaves the loading state stuck as `true` when the form submission succeeds in minimal mode, preventing the UI from transitioning to the success state.",
+      "suggestion": "Restore `setLoading(false)` in the minimal branch to ensure the loading indicator is cleared when the success state is shown.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:apps/signup-form/src/components/pages/form-page.tsx:27"
+      ]
+    },
+    {
+      "file": "apps/signup-form/src/components/pages/form-view.tsx",
+      "line": 56,
+      "severity": "low",
+      "category": "best-practice",
+      "message": "The `email` value is trimmed before submission, but the local `email` state is not updated with the trimmed value. This can cause a mismatch between the displayed email and the submitted email.",
+      "suggestion": "Trim the email value when setting the state (e.g., `setEmail(e.target.value.trim())`) or trim consistently before both display and submission.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:53"
+      ]
+    },
+    {
+      "file": "apps/signup-form/src/components/pages/success-page.tsx",
+      "line": 3,
+      "severity": "medium",
+      "category": "correctness",
+      "message": "Import path changed from './SuccessView' to './success-view' but the file was renamed from 'SuccessView.tsx' to 'success-view.tsx'. The new import path matches the renamed file, which is correct.",
+      "suggestion": "No action needed; the import correctly references the renamed file.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1"
+      ]
+    },
+    {
+      "file": "apps/signup-form/src/components/pages/success-page.tsx",
+      "line": 2,
+      "severity": "minor",
+      "category": "best_practice",
+      "message": "Review guideline violation: 'Admin React Apps Must Use Kebab-Case File Naming' - The file was renamed from SuccessPage.tsx to success-page.tsx, which now uses kebab-case. However, the import statement on line 2 uses './success-view' which is kebab-case, but the original file was SuccessView.tsx. The rename to success-view.tsx is correct, but the import path must match the new kebab-case file name. The evidence shows the import was changed from './SuccessView' to './success-view', which is correct. No issue.",
+      "suggestion": "",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1"
+      ]
+    },
+    {
+      "file": "apps/signup-form/src/utils/helpers.tsx",
+      "line": 20,
+      "severity": "minor",
+      "category": "style",
+      "message": "String literal uses double quotes instead of single quotes, violating the 'Code Must Use Single Quotes for Strings' guideline.",
+      "suggestion": "Replace double quotes with single quotes: const STORAGE_KEY = 'ghost-history';",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:apps/signup-form/src/utils/helpers.tsx:17"
+      ]
+    }
+  ],
+  "discarded": [
+    {
+      "file": "apps/signup-form/src/components/pages/success-view.tsx",
+      "line": 3,
+      "severity": "medium",
+      "category": "correctness",
+      "message": "Import path changed from '../../AppContext' to '../../app-context'. This may break if the target file was not renamed accordingly.",
+      "suggestion": "Verify that the file at '../../app-context' exists and exports the same symbols as the original '../../AppContext'.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:apps/signup-form/src/components/pages/success-view.tsx:1"
+      ],
+      "filter_reason": "low_signal_suggestion"
+    },
+    {
+      "file": "apps/signup-form/src/index.tsx",
+      "line": 1,
+      "severity": "medium",
+      "category": "correctness",
+      "message": "Import path changed from './App.tsx' to './app.tsx'. This may break if the target file was not renamed accordingly.",
+      "suggestion": "Verify that the file at './app.tsx' exists and exports the same symbols as the original './App.tsx'.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:apps/signup-form/src/index.tsx:1"
+      ],
+      "filter_reason": "low_signal_suggestion"
+    }
+  ],
+  "changed_files": [
+    {
+      "old_path": "apps/signup-form/.eslintrc.cjs",
+      "new_path": "apps/signup-form/.eslintrc.cjs",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 15,
+          "old_count": 17,
+          "new_start": 15,
+          "new_count": 20,
+          "section_header": "module.exports = {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 15,
+              "new_lineno": 15,
+              "content": "        }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 16,
+              "new_lineno": 16,
+              "content": "    },"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 17,
+              "new_lineno": 17,
+              "content": "    rules: {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 18,
+              "new_lineno": null,
+              "content": "        // sort multiple import lines into alphabetical groups"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 18,
+              "content": "        // Sort multiple import lines into alphabetical groups"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 19,
+              "new_lineno": 19,
+              "content": "        'ghost/sort-imports-es6-autofix/sort-imports-es6': ['error', {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 20,
+              "new_lineno": 20,
+              "content": "            memberSyntaxSortOrder: ['none', 'all', 'single', 'multiple']"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 21,
+              "new_lineno": 21,
+              "content": "        }],"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 22,
+              "new_lineno": 22,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 23,
+              "new_lineno": null,
+              "content": "        // suppress errors for missing 'import React' in JSX files, as we don't need it"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 23,
+              "content": "        // Enforce kebab-case (lowercase with hyphens) for all filenames"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 24,
+              "content": "        'ghost/filenames/match-regex': ['error', '^[a-z0-9.-]+$', false],"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 25,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 26,
+              "content": "        // Suppress errors for missing 'import React' in JSX files, as we don't need it"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 24,
+              "new_lineno": 27,
+              "content": "        'react/react-in-jsx-scope': 'off',"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 25,
+              "new_lineno": null,
+              "content": "        // ignore prop-types for now"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 28,
+              "content": "        // Ignore prop-types for now"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 26,
+              "new_lineno": 29,
+              "content": "        'react/prop-types': 'off',"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 27,
+              "new_lineno": 30,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 28,
+              "new_lineno": null,
+              "content": "        // custom react rules"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 31,
+              "content": "        // Custom react rules"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 29,
+              "new_lineno": 32,
+              "content": "        'react/jsx-sort-props': ['error', {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 30,
+              "new_lineno": 33,
+              "content": "            reservedFirst: true,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 31,
+              "new_lineno": 34,
+              "content": "            callbacksLast: true,"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "apps/signup-form/.storybook/preview.tsx",
+      "new_path": "apps/signup-form/.storybook/preview.tsx",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 3,
+          "old_count": 7,
+          "new_start": 3,
+          "new_count": 7,
+          "section_header": "import i18nLib from '@tryghost/i18n';",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 3,
+              "new_lineno": 3,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 4,
+              "new_lineno": 4,
+              "content": "import type {Preview} from \"@storybook/react\";"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 5,
+              "new_lineno": 5,
+              "content": "import './storybook.css';"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 6,
+              "new_lineno": null,
+              "content": "import {AppContextProvider, AppContextType} from '../src/AppContext';"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 6,
+              "content": "import {AppContextProvider, AppContextType} from '../src/app-context';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 7,
+              "new_lineno": 7,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 8,
+              "new_lineno": 8,
+              "content": "const transparencyGrid = `url(\"data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Ctitle%3ERectangle%3C/title%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath fill='%23F2F6F8' d='M0 0h24v24H0z'/%3E%3Cpath fill='%23E5ECF0' d='M0 0h12v12H0zM12 12h12v12H12z'/%3E%3C/g%3E%3C/svg%3E\")`"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 9,
+              "new_lineno": 9,
+              "content": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "apps/signup-form/README.md",
+      "new_path": "apps/signup-form/README.md",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 35,
+          "old_count": 7,
+          "new_start": 35,
+          "new_count": 6,
+          "section_header": "Follow the instructions for the top-level repo.",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 35,
+              "new_lineno": 35,
+              "content": "1. `git clone` this repo & `cd` into it as usual"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 36,
+              "new_lineno": 36,
+              "content": "2. Run `yarn` to install top-level dependencies."
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 37,
+              "new_lineno": 37,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 38,
+              "new_lineno": null,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 39,
+              "new_lineno": 38,
+              "content": "## Test"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 40,
+              "new_lineno": 39,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 41,
+              "new_lineno": 40,
+              "content": "- `yarn lint` run just eslint"
+            }
+          ]
+        },
+        {
+          "old_start": 43,
+          "old_count": 3,
+          "new_start": 42,
+          "new_count": 21,
+          "section_header": "Follow the instructions for the top-level repo.",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 43,
+              "new_lineno": 42,
+              "content": "- `yarn test:e2e` run e2e tests on Chromium"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 44,
+              "new_lineno": 43,
+              "content": "- `yarn test:slowmo` run e2e tests visually (headed) and slower on Chromium"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 45,
+              "new_lineno": 44,
+              "content": "- `yarn test:e2e:full` run e2e tests on all browsers"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 45,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 46,
+              "content": "## Release"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 47,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 48,
+              "content": "A patch release can be rolled out instantly in production, whereas a minor/major release requires the Ghost monorepo to be updated and released."
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 49,
+              "content": "In either case, you need sufficient permissions to release `@tryghost` packages on NPM."
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 50,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 51,
+              "content": "### Patch release"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 52,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 53,
+              "content": "1. Run `yarn ship` and select a patch version when prompted"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 54,
+              "content": "2. Merge the release commit to `main`"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 55,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 56,
+              "content": "### Minor / major release"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 57,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 58,
+              "content": "1. Run `yarn ship` and select a minor or major version when prompted"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 59,
+              "content": "2. Merge the release commit to `main`"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 60,
+              "content": "3. Wait until a new version of Ghost is released"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 61,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 62,
+              "content": "To use the new version of signup form in Ghost, update the version in Ghost core's default configuration (currently at `core/shared/config/default.json`)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "apps/signup-form/package.json",
+      "new_path": "apps/signup-form/package.json",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 1,
+          "old_count": 6,
+          "new_start": 1,
+          "new_count": 6,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 1,
+              "new_lineno": 1,
+              "content": "{"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 2,
+              "new_lineno": 2,
+              "content": "  \"name\": \"@tryghost/signup-form\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 3,
+              "new_lineno": null,
+              "content": "  \"version\": \"0.3.2\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 3,
+              "content": "  \"version\": \"0.3.3\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 4,
+              "new_lineno": 4,
+              "content": "  \"license\": \"MIT\","
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 5,
+              "new_lineno": 5,
+              "content": "  \"repository\": {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 6,
+              "new_lineno": 6,
+              "content": "    \"type\": \"git\","
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "apps/signup-form/src/AppContext.ts",
+      "new_path": "apps/signup-form/src/app-context.ts",
+      "change_type": "renamed",
+      "hunks": []
+    },
+    {
+      "old_path": "apps/signup-form/src/App.tsx",
+      "new_path": "apps/signup-form/src/app.tsx",
+      "change_type": "renamed",
+      "hunks": [
+        {
+          "old_start": 1,
+          "old_count": 9,
+          "new_start": 1,
+          "new_count": 9,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 1,
+              "new_lineno": 1,
+              "content": "import React, {ComponentProps} from 'react';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 2,
+              "new_lineno": 2,
+              "content": "import i18nLib from '@tryghost/i18n';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 3,
+              "new_lineno": 3,
+              "content": "import pages, {Page, PageName} from './pages';"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 4,
+              "new_lineno": null,
+              "content": "import {AppContextProvider, AppContextType} from './AppContext';"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 5,
+              "new_lineno": null,
+              "content": "import {ContentBox} from './components/ContentBox';"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 6,
+              "new_lineno": null,
+              "content": "import {Frame} from './components/Frame';"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 4,
+              "content": "import {AppContextProvider, AppContextType} from './app-context';"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 5,
+              "content": "import {ContentBox} from './components/content-box';"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 6,
+              "content": "import {Frame} from './components/frame';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 7,
+              "new_lineno": 7,
+              "content": "import {setupGhostApi} from './utils/api';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 8,
+              "new_lineno": 8,
+              "content": "import {useOptions} from './utils/options';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 9,
+              "new_lineno": 9,
+              "content": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "apps/signup-form/src/components/ContentBox.tsx",
+      "new_path": "apps/signup-form/src/components/content-box.tsx",
+      "change_type": "renamed",
+      "hunks": []
+    },
+    {
+      "old_path": "apps/signup-form/src/components/Frame.tsx",
+      "new_path": "apps/signup-form/src/components/frame.tsx",
+      "change_type": "renamed",
+      "hunks": [
+        {
+          "old_start": 1,
+          "old_count": 8,
+          "new_start": 1,
+          "new_count": 8,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "removed",
+              "old_lineno": 1,
+              "new_lineno": null,
+              "content": "import IFrame from './IFrame';"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1,
+              "content": "import IFrame from './iframe';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 2,
+              "new_lineno": 2,
+              "content": "import React, {useCallback, useState} from 'react';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 3,
+              "new_lineno": 3,
+              "content": "import styles from '../styles/iframe.css?inline';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 4,
+              "new_lineno": 4,
+              "content": "import {isMinimal} from '../utils/helpers';"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 5,
+              "new_lineno": null,
+              "content": "import {useAppContext} from '../AppContext';"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 5,
+              "content": "import {useAppContext} from '../app-context';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 6,
+              "new_lineno": 6,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 7,
+              "new_lineno": 7,
+              "content": "type FrameProps = {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 8,
+              "new_lineno": 8,
+              "content": "    children: React.ReactNode"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "apps/signup-form/src/components/IFrame.tsx",
+      "new_path": "apps/signup-form/src/components/iframe.tsx",
+      "change_type": "renamed",
+      "hunks": []
+    },
+    {
+      "old_path": "apps/signup-form/src/components/pages/FormPage.tsx",
+      "new_path": "apps/signup-form/src/components/pages/form-page.tsx",
+      "change_type": "renamed",
+      "hunks": [
+        {
+          "old_start": 1,
+          "old_count": 8,
+          "new_start": 1,
+          "new_count": 8,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 1,
+              "new_lineno": 1,
+              "content": "import React from 'react';"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 2,
+              "new_lineno": null,
+              "content": "import {FormView} from './FormView';"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 2,
+              "content": "import {FormView} from './form-view';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 3,
+              "new_lineno": 3,
+              "content": "import {isMinimal} from '../../utils/helpers';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 4,
+              "new_lineno": 4,
+              "content": "import {isValidEmail} from '../../utils/validator';"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 5,
+              "new_lineno": null,
+              "content": "import {useAppContext} from '../../AppContext';"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 5,
+              "content": "import {useAppContext} from '../../app-context';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 6,
+              "new_lineno": 6,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 7,
+              "new_lineno": 7,
+              "content": "export const FormPage: React.FC = () => {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 8,
+              "new_lineno": 8,
+              "content": "    const [error, setError] = React.useState('');"
+            }
+          ]
+        },
+        {
+          "old_start": 27,
+          "old_count": 7,
+          "new_start": 27,
+          "new_count": 6,
+          "section_header": "export const FormPage: React.FC = () => {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 27,
+              "new_lineno": 27,
+              "content": "            if (minimal) {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 28,
+              "new_lineno": 28,
+              "content": "                // Don't go to the success page, but show the success state in the form"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 29,
+              "new_lineno": 29,
+              "content": "                setSuccess(true);"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 30,
+              "new_lineno": null,
+              "content": "                setLoading(false);"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 31,
+              "new_lineno": 30,
+              "content": "            } else {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 32,
+              "new_lineno": 31,
+              "content": "                setPage('SuccessPage', {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 33,
+              "new_lineno": 32,
+              "content": "                    email"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "apps/signup-form/src/components/pages/FormView.stories.ts",
+      "new_path": "apps/signup-form/src/components/pages/form-view.stories.ts",
+      "change_type": "renamed",
+      "hunks": [
+        {
+          "old_start": 1,
+          "old_count": 6,
+          "new_start": 1,
+          "new_count": 6,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 1,
+              "new_lineno": 1,
+              "content": "import type {Meta, StoryObj} from '@storybook/react';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 2,
+              "new_lineno": 2,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 3,
+              "new_lineno": null,
+              "content": "import {FormView} from './FormView';"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 3,
+              "content": "import {FormView} from './form-view';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 4,
+              "new_lineno": 4,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 5,
+              "new_lineno": 5,
+              "content": "const meta = {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 6,
+              "new_lineno": 6,
+              "content": "    title: 'Form View',"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "apps/signup-form/src/components/pages/FormView.tsx",
+      "new_path": "apps/signup-form/src/components/pages/form-view.tsx",
+      "change_type": "renamed",
+      "hunks": [
+        {
+          "old_start": 1,
+          "old_count": 6,
+          "new_start": 1,
+          "new_count": 6,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 1,
+              "new_lineno": 1,
+              "content": "import React, {FormEventHandler} from 'react';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 2,
+              "new_lineno": 2,
+              "content": "import {ReactComponent as LoadingIcon} from '../../../assets/icons/spinner.svg';"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 3,
+              "new_lineno": null,
+              "content": "import {useAppContext} from '../../AppContext';"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 3,
+              "content": "import {useAppContext} from '../../app-context';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 4,
+              "new_lineno": 4,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 5,
+              "new_lineno": 5,
+              "content": "export const FormView: React.FC<FormProps & {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 6,
+              "new_lineno": 6,
+              "content": "    isMinimal: boolean"
+            }
+          ]
+        },
+        {
+          "old_start": 53,
+          "old_count": 7,
+          "new_start": 53,
+          "new_count": 7,
+          "section_header": "const Form: React.FC<FormProps> = ({isMinimal, loading, success, error, buttonCo",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 53,
+              "new_lineno": 53,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 54,
+              "new_lineno": 54,
+              "content": "    const submitHandler: FormEventHandler<HTMLFormElement> = (e) => {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 55,
+              "new_lineno": 55,
+              "content": "        e.preventDefault();"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 56,
+              "new_lineno": null,
+              "content": "        onSubmit({email});"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 56,
+              "content": "        onSubmit({email: email.trim()});"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 57,
+              "new_lineno": 57,
+              "content": "    };"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 58,
+              "new_lineno": 58,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 59,
+              "new_lineno": 59,
+              "content": "    // The complicated transitions are here so that we animate visibility: hidden (step-start/step-end), which is required for screen readers to know what is visible (they ignore opacity: 0)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "apps/signup-form/src/components/pages/SuccessPage.tsx",
+      "new_path": "apps/signup-form/src/components/pages/success-page.tsx",
+      "change_type": "renamed",
+      "hunks": [
+        {
+          "old_start": 1,
+          "old_count": 6,
+          "new_start": 1,
+          "new_count": 6,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 1,
+              "new_lineno": 1,
+              "content": "import React from 'react';"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 2,
+              "new_lineno": null,
+              "content": "import {SuccessView} from './SuccessView';"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 3,
+              "new_lineno": null,
+              "content": "import {useAppContext} from '../../AppContext';"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 2,
+              "content": "import {SuccessView} from './success-view';"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 3,
+              "content": "import {useAppContext} from '../../app-context';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 4,
+              "new_lineno": 4,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 5,
+              "new_lineno": 5,
+              "content": "type SuccessPageProps = {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 6,
+              "new_lineno": 6,
+              "content": "    email: string;"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "apps/signup-form/src/components/pages/SuccessView.stories.ts",
+      "new_path": "apps/signup-form/src/components/pages/success-view.stories.ts",
+      "change_type": "renamed",
+      "hunks": [
+        {
+          "old_start": 1,
+          "old_count": 6,
+          "new_start": 1,
+          "new_count": 6,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 1,
+              "new_lineno": 1,
+              "content": "import type {Meta, StoryObj} from '@storybook/react';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 2,
+              "new_lineno": 2,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 3,
+              "new_lineno": null,
+              "content": "import {SuccessView} from './SuccessView';"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 3,
+              "content": "import {SuccessView} from './success-view';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 4,
+              "new_lineno": 4,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 5,
+              "new_lineno": 5,
+              "content": "const meta = {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 6,
+              "new_lineno": 6,
+              "content": "    title: 'Success View',"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "apps/signup-form/src/components/pages/SuccessView.tsx",
+      "new_path": "apps/signup-form/src/components/pages/success-view.tsx",
+      "change_type": "renamed",
+      "hunks": [
+        {
+          "old_start": 1,
+          "old_count": 6,
+          "new_start": 1,
+          "new_count": 6,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 1,
+              "new_lineno": 1,
+              "content": "import React from 'react';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 2,
+              "new_lineno": 2,
+              "content": "import {ReactComponent as EmailIcon} from '../../../assets/icons/email.svg';"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 3,
+              "new_lineno": null,
+              "content": "import {useAppContext} from '../../AppContext';"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 3,
+              "content": "import {useAppContext} from '../../app-context';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 4,
+              "new_lineno": 4,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 5,
+              "new_lineno": 5,
+              "content": "export const SuccessView: React.FC<{"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 6,
+              "new_lineno": 6,
+              "content": "    email: string;"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "apps/signup-form/src/index.tsx",
+      "new_path": "apps/signup-form/src/index.tsx",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 1,
+          "old_count": 4,
+          "new_start": 1,
+          "new_count": 4,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "removed",
+              "old_lineno": 1,
+              "new_lineno": null,
+              "content": "import App from './App.tsx';"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1,
+              "content": "import App from './app.tsx';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 2,
+              "new_lineno": 2,
+              "content": "import React from 'react';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 3,
+              "new_lineno": 3,
+              "content": "import ReactDOM from 'react-dom/client';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 4,
+              "new_lineno": 4,
+              "content": "import {ROOT_DIV_CLASS} from './utils/constants';"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "apps/signup-form/src/pages.tsx",
+      "new_path": "apps/signup-form/src/pages.tsx",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 1,
+          "old_count": 6,
+          "new_start": 1,
+          "new_count": 6,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 1,
+              "new_lineno": 1,
+              "content": "import React from 'react';"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 2,
+              "new_lineno": null,
+              "content": "import {FormPage} from './components/pages/FormPage';"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 3,
+              "new_lineno": null,
+              "content": "import {SuccessPage} from './components/pages/SuccessPage';"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 2,
+              "content": "import {FormPage} from './components/pages/form-page';"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 3,
+              "content": "import {SuccessPage} from './components/pages/success-page';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 4,
+              "new_lineno": 4,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 5,
+              "new_lineno": 5,
+              "content": "const Pages = {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 6,
+              "new_lineno": 6,
+              "content": "    FormPage,"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "apps/signup-form/src/Preview.stories.tsx",
+      "new_path": "apps/signup-form/src/preview.stories.tsx",
+      "change_type": "renamed",
+      "hunks": [
+        {
+          "old_start": 1,
+          "old_count": 8,
+          "new_start": 1,
+          "new_count": 8,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 1,
+              "new_lineno": 1,
+              "content": "import React, {useState} from 'react';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 2,
+              "new_lineno": 2,
+              "content": "import i18nLib from '@tryghost/i18n';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 3,
+              "new_lineno": 3,
+              "content": "import pages, {Page, PageName} from './pages';"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 4,
+              "new_lineno": null,
+              "content": "import {AppContextProvider, SignupFormOptions} from './AppContext';"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 5,
+              "new_lineno": null,
+              "content": "import {ContentBox} from './components/ContentBox';"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 4,
+              "content": "import {AppContextProvider, SignupFormOptions} from './app-context';"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 5,
+              "content": "import {ContentBox} from './components/content-box';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 6,
+              "new_lineno": 6,
+              "content": "import {userEvent, within} from '@storybook/testing-library';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 7,
+              "new_lineno": 7,
+              "content": "import type {Meta, StoryObj} from '@storybook/react';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 8,
+              "new_lineno": 8,
+              "content": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "apps/signup-form/src/utils/helpers.tsx",
+      "new_path": "apps/signup-form/src/utils/helpers.tsx",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 1,
+          "old_count": 4,
+          "new_start": 1,
+          "new_count": 4,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "removed",
+              "old_lineno": 1,
+              "new_lineno": null,
+              "content": "import {SignupFormOptions} from '../AppContext';"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1,
+              "content": "import {SignupFormOptions} from '../app-context';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 2,
+              "new_lineno": 2,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 3,
+              "new_lineno": 3,
+              "content": "export type URLHistory = {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 4,
+              "new_lineno": 4,
+              "content": "    type?: 'post',"
+            }
+          ]
+        },
+        {
+          "old_start": 17,
+          "old_count": 7,
+          "new_start": 17,
+          "new_count": 7,
+          "section_header": "export function isMinimal(options: SignupFormOptions): boolean {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 17,
+              "new_lineno": 17,
+              "content": " * Get the URL history when the form is embedded on the site itself."
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 18,
+              "new_lineno": 18,
+              "content": " */"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 19,
+              "new_lineno": 19,
+              "content": "export function getDefaultUrlHistory() {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 20,
+              "new_lineno": null,
+              "content": "    const STORAGE_KEY = 'ghost-history';"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 20,
+              "content": "    const STORAGE_KEY = \"ghost-history\";"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 21,
+              "new_lineno": 21,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 22,
+              "new_lineno": 22,
+              "content": "    try {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 23,
+              "new_lineno": 23,
+              "content": "        const historyString = sessionStorage.getItem(STORAGE_KEY);"
+            }
+          ]
+        },
+        {
+          "old_start": 42,
+          "old_count": 9,
+          "new_start": 42,
+          "new_count": 7,
+          "section_header": "export function getUrlHistory({siteUrl}: {siteUrl: string}): URLHistory {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 42,
+              "new_lineno": 42,
+              "content": "    try {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 43,
+              "new_lineno": 43,
+              "content": "        if (window.location.host === new URL(siteUrl).host) {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 44,
+              "new_lineno": 44,
+              "content": "            const history = getDefaultUrlHistory();"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 45,
+              "new_lineno": null,
+              "content": "            if (history) {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 46,
+              "new_lineno": null,
+              "content": "                return history;"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 47,
+              "new_lineno": null,
+              "content": "            }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 45,
+              "content": "            return history;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 48,
+              "new_lineno": 46,
+              "content": "        }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 49,
+              "new_lineno": 47,
+              "content": "    } catch (error) {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 50,
+              "new_lineno": 48,
+              "content": "        // Most likely an invalid siteUrl"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "apps/signup-form/src/utils/options.tsx",
+      "new_path": "apps/signup-form/src/utils/options.tsx",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 1,
+          "old_count": 5,
+          "new_start": 1,
+          "new_count": 5,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 1,
+              "new_lineno": 1,
+              "content": "import React from 'react';"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 2,
+              "new_lineno": null,
+              "content": "import {SignupFormOptions} from '../AppContext';"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 2,
+              "content": "import {SignupFormOptions} from '../app-context';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 3,
+              "new_lineno": 3,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 4,
+              "new_lineno": 4,
+              "content": "export function useOptions(scriptTag: HTMLElement) {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 5,
+              "new_lineno": 5,
+              "content": "    const buildOptions = React.useCallback(() => {"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "apps/signup-form/test/utils/isTestEnv.js",
+      "new_path": "apps/signup-form/test/utils/is-test-env.js",
+      "change_type": "renamed",
+      "hunks": []
+    },
+    {
+      "old_path": "ghost/core/core/shared/config/defaults.json",
+      "new_path": "ghost/core/core/shared/config/defaults.json",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 302,
+          "old_count": 5,
+          "new_start": 302,
+          "new_count": 5,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 302,
+              "new_lineno": 302,
+              "content": "        \"captureLinkClickBadMemberUuid\": false"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 303,
+              "new_lineno": 303,
+              "content": "    },"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 304,
+              "new_lineno": 304,
+              "content": "    \"disableJSBackups\": false,"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 305,
+              "new_lineno": null,
+              "content": "    \"memberWelcomeEmailTestInbox\" : \"\""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 305,
+              "content": "    \"memberWelcomeEmailTestInbox\": \"\""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 306,
+              "new_lineno": 306,
+              "content": "}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "changed_entities": [
+    {
+      "path": "apps/signup-form/.eslintrc.cjs",
+      "entity_type": "module",
+      "name": ".eslintrc.cjs",
+      "qualified_name": "apps.signup-form..eslintrc",
+      "line_start": 18,
+      "line_end": 31,
+      "hunk_ids": [
+        "apps/signup-form/.eslintrc.cjs:15"
+      ]
+    },
+    {
+      "path": "apps/signup-form/.storybook/preview.tsx",
+      "entity_type": "module",
+      "name": "preview.tsx",
+      "qualified_name": "apps.signup-form..storybook.preview",
+      "line_start": 6,
+      "line_end": 6,
+      "hunk_ids": [
+        "apps/signup-form/.storybook/preview.tsx:3"
+      ]
+    },
+    {
+      "path": "apps/signup-form/README.md",
+      "entity_type": "module",
+      "name": "README.md",
+      "qualified_name": "apps.signup-form.README",
+      "line_start": 38,
+      "line_end": 38,
+      "hunk_ids": [
+        "apps/signup-form/README.md:35",
+        "apps/signup-form/README.md:42"
+      ]
+    },
+    {
+      "path": "apps/signup-form/package.json",
+      "entity_type": "module",
+      "name": "package.json",
+      "qualified_name": "apps.signup-form.package",
+      "line_start": 3,
+      "line_end": 3,
+      "hunk_ids": [
+        "apps/signup-form/package.json:1"
+      ]
+    },
+    {
+      "path": "apps/signup-form/src/app-context.ts",
+      "entity_type": "module",
+      "name": "app-context.ts",
+      "qualified_name": "apps.signup-form.src.app-context",
+      "line_start": 1,
+      "line_end": 1,
+      "hunk_ids": [
+        "apps/signup-form/src/app-context.ts:1"
+      ]
+    },
+    {
+      "path": "apps/signup-form/src/app.tsx",
+      "entity_type": "module",
+      "name": "app.tsx",
+      "qualified_name": "apps.signup-form.src.app",
+      "line_start": 4,
+      "line_end": 6,
+      "hunk_ids": [
+        "apps/signup-form/src/app.tsx:1"
+      ]
+    },
+    {
+      "path": "apps/signup-form/src/components/content-box.tsx",
+      "entity_type": "module",
+      "name": "content-box.tsx",
+      "qualified_name": "apps.signup-form.src.components.content-box",
+      "line_start": 1,
+      "line_end": 1,
+      "hunk_ids": [
+        "apps/signup-form/src/components/content-box.tsx:1"
+      ]
+    },
+    {
+      "path": "apps/signup-form/src/components/frame.tsx",
+      "entity_type": "module",
+      "name": "frame.tsx",
+      "qualified_name": "apps.signup-form.src.components.frame",
+      "line_start": 1,
+      "line_end": 5,
+      "hunk_ids": [
+        "apps/signup-form/src/components/frame.tsx:1"
+      ]
+    },
+    {
+      "path": "apps/signup-form/src/components/iframe.tsx",
+      "entity_type": "module",
+      "name": "iframe.tsx",
+      "qualified_name": "apps.signup-form.src.components.iframe",
+      "line_start": 1,
+      "line_end": 1,
+      "hunk_ids": [
+        "apps/signup-form/src/components/iframe.tsx:1"
+      ]
+    },
+    {
+      "path": "apps/signup-form/src/components/pages/form-page.tsx",
+      "entity_type": "module",
+      "name": "form-page.tsx",
+      "qualified_name": "apps.signup-form.src.components.pages.form-page",
+      "line_start": 2,
+      "line_end": 5,
+      "hunk_ids": [
+        "apps/signup-form/src/components/pages/form-page.tsx:1",
+        "apps/signup-form/src/components/pages/form-page.tsx:27"
+      ]
+    },
+    {
+      "path": "apps/signup-form/src/components/pages/form-view.stories.ts",
+      "entity_type": "module",
+      "name": "form-view.stories.ts",
+      "qualified_name": "apps.signup-form.src.components.pages.form-view.stories",
+      "line_start": 3,
+      "line_end": 3,
+      "hunk_ids": [
+        "apps/signup-form/src/components/pages/form-view.stories.ts:1"
+      ]
+    },
+    {
+      "path": "apps/signup-form/src/components/pages/form-view.tsx",
+      "entity_type": "module",
+      "name": "form-view.tsx",
+      "qualified_name": "apps.signup-form.src.components.pages.form-view",
+      "line_start": 3,
+      "line_end": 3,
+      "hunk_ids": [
+        "apps/signup-form/src/components/pages/form-view.tsx:1",
+        "apps/signup-form/src/components/pages/form-view.tsx:53"
+      ]
+    },
+    {
+      "path": "apps/signup-form/src/components/pages/success-page.tsx",
+      "entity_type": "module",
+      "name": "success-page.tsx",
+      "qualified_name": "apps.signup-form.src.components.pages.success-page",
+      "line_start": 2,
+      "line_end": 3,
+      "hunk_ids": [
+        "apps/signup-form/src/components/pages/success-page.tsx:1"
+      ]
+    },
+    {
+      "path": "apps/signup-form/src/components/pages/success-view.stories.ts",
+      "entity_type": "module",
+      "name": "success-view.stories.ts",
+      "qualified_name": "apps.signup-form.src.components.pages.success-view.stories",
+      "line_start": 3,
+      "line_end": 3,
+      "hunk_ids": [
+        "apps/signup-form/src/components/pages/success-view.stories.ts:1"
+      ]
+    },
+    {
+      "path": "apps/signup-form/src/components/pages/success-view.tsx",
+      "entity_type": "module",
+      "name": "success-view.tsx",
+      "qualified_name": "apps.signup-form.src.components.pages.success-view",
+      "line_start": 3,
+      "line_end": 3,
+      "hunk_ids": [
+        "apps/signup-form/src/components/pages/success-view.tsx:1"
+      ]
+    },
+    {
+      "path": "apps/signup-form/src/index.tsx",
+      "entity_type": "module",
+      "name": "index.tsx",
+      "qualified_name": "apps.signup-form.src.index",
+      "line_start": 1,
+      "line_end": 1,
+      "hunk_ids": [
+        "apps/signup-form/src/index.tsx:1"
+      ]
+    },
+    {
+      "path": "apps/signup-form/src/pages.tsx",
+      "entity_type": "module",
+      "name": "pages.tsx",
+      "qualified_name": "apps.signup-form.src.pages",
+      "line_start": 2,
+      "line_end": 3,
+      "hunk_ids": [
+        "apps/signup-form/src/pages.tsx:1"
+      ]
+    },
+    {
+      "path": "apps/signup-form/src/preview.stories.tsx",
+      "entity_type": "module",
+      "name": "preview.stories.tsx",
+      "qualified_name": "apps.signup-form.src.preview.stories",
+      "line_start": 4,
+      "line_end": 5,
+      "hunk_ids": [
+        "apps/signup-form/src/preview.stories.tsx:1"
+      ]
+    },
+    {
+      "path": "apps/signup-form/src/utils/helpers.tsx",
+      "entity_type": "module",
+      "name": "helpers.tsx",
+      "qualified_name": "apps.signup-form.src.utils.helpers",
+      "line_start": 1,
+      "line_end": 1,
+      "hunk_ids": [
+        "apps/signup-form/src/utils/helpers.tsx:1",
+        "apps/signup-form/src/utils/helpers.tsx:17",
+        "apps/signup-form/src/utils/helpers.tsx:42"
+      ]
+    },
+    {
+      "path": "apps/signup-form/src/utils/options.tsx",
+      "entity_type": "module",
+      "name": "options.tsx",
+      "qualified_name": "apps.signup-form.src.utils.options",
+      "line_start": 2,
+      "line_end": 2,
+      "hunk_ids": [
+        "apps/signup-form/src/utils/options.tsx:1"
+      ]
+    },
+    {
+      "path": "apps/signup-form/test/utils/is-test-env.js",
+      "entity_type": "module",
+      "name": "is-test-env.js",
+      "qualified_name": "apps.signup-form.test.utils.is-test-env",
+      "line_start": 1,
+      "line_end": 1,
+      "hunk_ids": [
+        "apps/signup-form/test/utils/is-test-env.js:1"
+      ]
+    },
+    {
+      "path": "ghost/core/core/shared/config/defaults.json",
+      "entity_type": "module",
+      "name": "defaults.json",
+      "qualified_name": "ghost.core.core.shared.config.defaults",
+      "line_start": 305,
+      "line_end": 305,
+      "hunk_ids": [
+        "ghost/core/core/shared/config/defaults.json:302"
+      ]
+    }
+  ],
+  "risk_signals": [
+    {
+      "tag": "dependency_change",
+      "confidence": 0.84,
+      "reason": "Dependency declaration changed: apps/signup-form/package.json.",
+      "evidence_ids": [
+        "diff:apps/signup-form/package.json:3"
+      ]
+    },
+    {
+      "tag": "security_sensitive",
+      "confidence": 0.74,
+      "reason": "Security-sensitive keywords changed in apps/signup-form/.storybook/preview.tsx.",
+      "evidence_ids": [
+        "diff:apps/signup-form/.storybook/preview.tsx:6"
+      ]
+    },
+    {
+      "tag": "security_sensitive",
+      "confidence": 0.74,
+      "reason": "Security-sensitive keywords changed in apps/signup-form/src/components/frame.tsx.",
+      "evidence_ids": [
+        "diff:apps/signup-form/src/components/frame.tsx:1",
+        "diff:apps/signup-form/src/components/frame.tsx:5"
+      ]
+    },
+    {
+      "tag": "security_sensitive",
+      "confidence": 0.74,
+      "reason": "Security-sensitive keywords changed in apps/signup-form/src/components/pages/form-page.tsx.",
+      "evidence_ids": [
+        "diff:apps/signup-form/src/components/pages/form-page.tsx:2",
+        "diff:apps/signup-form/src/components/pages/form-page.tsx:30",
+        "diff:apps/signup-form/src/components/pages/form-page.tsx:5"
+      ]
+    },
+    {
+      "tag": "security_sensitive",
+      "confidence": 0.74,
+      "reason": "Security-sensitive keywords changed in apps/signup-form/src/components/pages/form-view.tsx.",
+      "evidence_ids": [
+        "diff:apps/signup-form/src/components/pages/form-view.tsx:3",
+        "diff:apps/signup-form/src/components/pages/form-view.tsx:56"
+      ]
+    },
+    {
+      "tag": "security_sensitive",
+      "confidence": 0.74,
+      "reason": "Security-sensitive keywords changed in apps/signup-form/src/components/pages/success-page.tsx.",
+      "evidence_ids": [
+        "diff:apps/signup-form/src/components/pages/success-page.tsx:2",
+        "diff:apps/signup-form/src/components/pages/success-page.tsx:3"
+      ]
+    },
+    {
+      "tag": "security_sensitive",
+      "confidence": 0.74,
+      "reason": "Security-sensitive keywords changed in apps/signup-form/src/components/pages/success-view.tsx.",
+      "evidence_ids": [
+        "diff:apps/signup-form/src/components/pages/success-view.tsx:3"
+      ]
+    },
+    {
+      "tag": "security_sensitive",
+      "confidence": 0.74,
+      "reason": "Security-sensitive keywords changed in apps/signup-form/src/utils/helpers.tsx.",
+      "evidence_ids": [
+        "diff:apps/signup-form/src/utils/helpers.tsx:1",
+        "diff:apps/signup-form/src/utils/helpers.tsx:20",
+        "diff:apps/signup-form/src/utils/helpers.tsx:45",
+        "diff:apps/signup-form/src/utils/helpers.tsx:46",
+        "diff:apps/signup-form/src/utils/helpers.tsx:47"
+      ]
+    },
+    {
+      "tag": "security_sensitive",
+      "confidence": 0.74,
+      "reason": "Security-sensitive keywords changed in apps/signup-form/src/utils/options.tsx.",
+      "evidence_ids": [
+        "diff:apps/signup-form/src/utils/options.tsx:2"
+      ]
+    }
+  ],
+  "evidence_index": {
+    "diff_hunk:apps/signup-form/.eslintrc.cjs:15": {
+      "id": "diff_hunk:apps/signup-form/.eslintrc.cjs:15",
+      "kind": "diff_hunk",
+      "source": "apps/signup-form/.eslintrc.cjs:15",
+      "message": "@@ -15,17 +15,20 @@ module.exports = {\n         }\n     },\n     rules: {\n-        // sort multiple import lines into alphabetical groups\n+        // Sort multiple import lines into alphabetical groups\n         'ghost/sort-imports-es6-autofix/sort-imports-es6': ['error', {\n             memberSyntaxSortOrder: ['none', 'all', 'single', 'multiple']\n         }],\n \n-        // suppress errors for missing 'import React' in JSX files, as we don't need it\n+        // Enforce kebab-case (lowercase with hyphens) for all filenames\n+        'ghost/filenames/match-regex': ['error', '^[a-z0-9.-]+$', false],\n+\n+        // Suppress errors for missing 'import React' in JSX files, as we don't need it\n         'react/react-in-jsx-scope': 'off',\n-        // ignore prop-types for now\n+        // Ignore prop-types for now\n         'react/prop-types': 'off',\n \n-        // custom react rules\n+        // Custom react rules\n         'react/jsx-sort-props': ['error', {\n             reservedFirst: true,\n             callbacksLast: true,"
+    },
+    "diff:apps/signup-form/.eslintrc.cjs:18": {
+      "id": "diff:apps/signup-form/.eslintrc.cjs:18",
+      "kind": "diff",
+      "source": "apps/signup-form/.eslintrc.cjs:18",
+      "message": "Added line: // Sort multiple import lines into alphabetical groups"
+    },
+    "diff:apps/signup-form/.eslintrc.cjs:23": {
+      "id": "diff:apps/signup-form/.eslintrc.cjs:23",
+      "kind": "diff",
+      "source": "apps/signup-form/.eslintrc.cjs:23",
+      "message": "Added line: // Enforce kebab-case (lowercase with hyphens) for all filenames"
+    },
+    "diff:apps/signup-form/.eslintrc.cjs:24": {
+      "id": "diff:apps/signup-form/.eslintrc.cjs:24",
+      "kind": "diff",
+      "source": "apps/signup-form/.eslintrc.cjs:24",
+      "message": "Added line: 'ghost/filenames/match-regex': ['error', '^[a-z0-9.-]+$', false],"
+    },
+    "diff:apps/signup-form/.eslintrc.cjs:25": {
+      "id": "diff:apps/signup-form/.eslintrc.cjs:25",
+      "kind": "diff",
+      "source": "apps/signup-form/.eslintrc.cjs:25",
+      "message": "Removed line: // ignore prop-types for now"
+    },
+    "diff:apps/signup-form/.eslintrc.cjs:26": {
+      "id": "diff:apps/signup-form/.eslintrc.cjs:26",
+      "kind": "diff",
+      "source": "apps/signup-form/.eslintrc.cjs:26",
+      "message": "Added line: // Suppress errors for missing 'import React' in JSX files, as we don't need it"
+    },
+    "diff:apps/signup-form/.eslintrc.cjs:28": {
+      "id": "diff:apps/signup-form/.eslintrc.cjs:28",
+      "kind": "diff",
+      "source": "apps/signup-form/.eslintrc.cjs:28",
+      "message": "Removed line: // custom react rules"
+    },
+    "diff:apps/signup-form/.eslintrc.cjs:31": {
+      "id": "diff:apps/signup-form/.eslintrc.cjs:31",
+      "kind": "diff",
+      "source": "apps/signup-form/.eslintrc.cjs:31",
+      "message": "Added line: // Custom react rules"
+    },
+    "diff_hunk:apps/signup-form/.storybook/preview.tsx:3": {
+      "id": "diff_hunk:apps/signup-form/.storybook/preview.tsx:3",
+      "kind": "diff_hunk",
+      "source": "apps/signup-form/.storybook/preview.tsx:3",
+      "message": "@@ -3,7 +3,7 @@ import i18nLib from '@tryghost/i18n';\n \n import type {Preview} from \"@storybook/react\";\n import './storybook.css';\n-import {AppContextProvider, AppContextType} from '../src/AppContext';\n+import {AppContextProvider, AppContextType} from '../src/app-context';\n \n const transparencyGrid = `url(\"data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Ctitle%3ERectangle%3C/title%3E%3Cg fill='none' fill-rule='...\n "
+    },
+    "diff:apps/signup-form/.storybook/preview.tsx:6": {
+      "id": "diff:apps/signup-form/.storybook/preview.tsx:6",
+      "kind": "diff",
+      "source": "apps/signup-form/.storybook/preview.tsx:6",
+      "message": "Added line: import {AppContextProvider, AppContextType} from '../src/app-context';"
+    },
+    "diff_hunk:apps/signup-form/README.md:35": {
+      "id": "diff_hunk:apps/signup-form/README.md:35",
+      "kind": "diff_hunk",
+      "source": "apps/signup-form/README.md:35",
+      "message": "@@ -35,7 +35,6 @@ Follow the instructions for the top-level repo.\n 1. `git clone` this repo & `cd` into it as usual\n 2. Run `yarn` to install top-level dependencies.\n \n-\n ## Test\n \n - `yarn lint` run just eslint"
+    },
+    "diff:apps/signup-form/README.md:38": {
+      "id": "diff:apps/signup-form/README.md:38",
+      "kind": "diff",
+      "source": "apps/signup-form/README.md:38",
+      "message": "Removed line: "
+    },
+    "diff_hunk:apps/signup-form/README.md:42": {
+      "id": "diff_hunk:apps/signup-form/README.md:42",
+      "kind": "diff_hunk",
+      "source": "apps/signup-form/README.md:42",
+      "message": "@@ -43,3 +42,21 @@ Follow the instructions for the top-level repo.\n - `yarn test:e2e` run e2e tests on Chromium\n - `yarn test:slowmo` run e2e tests visually (headed) and slower on Chromium\n - `yarn test:e2e:full` run e2e tests on all browsers\n+\n+## Release\n+\n+A patch release can be rolled out instantly in production, whereas a minor/major release requires the Ghost monorepo to be updated and released.\n+In either case, you need sufficient permissions to release `@tryghost` packages on NPM.\n+\n+### Patch release\n+\n+1. Run `yarn ship` and select a patch version when prompted\n+2. Merge the release commit to `main`\n+\n+### Minor / major release\n+\n+1. Run `yarn ship` and select a minor or major version when prompted\n+2. Merge the release commit to `main`\n+3. Wait until a new version of Ghost is released\n+\n+To use the new version of signup form in Ghost, update the version in Ghost core's default configuration (currently at `core/shared/config/default.json`)"
+    },
+    "diff:apps/signup-form/README.md:45": {
+      "id": "diff:apps/signup-form/README.md:45",
+      "kind": "diff",
+      "source": "apps/signup-form/README.md:45",
+      "message": "Added line: "
+    },
+    "diff:apps/signup-form/README.md:46": {
+      "id": "diff:apps/signup-form/README.md:46",
+      "kind": "diff",
+      "source": "apps/signup-form/README.md:46",
+      "message": "Added line: ## Release"
+    },
+    "diff:apps/signup-form/README.md:47": {
+      "id": "diff:apps/signup-form/README.md:47",
+      "kind": "diff",
+      "source": "apps/signup-form/README.md:47",
+      "message": "Added line: "
+    },
+    "diff:apps/signup-form/README.md:48": {
+      "id": "diff:apps/signup-form/README.md:48",
+      "kind": "diff",
+      "source": "apps/signup-form/README.md:48",
+      "message": "Added line: A patch release can be rolled out instantly in production, whereas a minor/major release requires the Ghost monorepo ..."
+    },
+    "diff:apps/signup-form/README.md:49": {
+      "id": "diff:apps/signup-form/README.md:49",
+      "kind": "diff",
+      "source": "apps/signup-form/README.md:49",
+      "message": "Added line: In either case, you need sufficient permissions to release `@tryghost` packages on NPM."
+    },
+    "diff:apps/signup-form/README.md:50": {
+      "id": "diff:apps/signup-form/README.md:50",
+      "kind": "diff",
+      "source": "apps/signup-form/README.md:50",
+      "message": "Added line: "
+    },
+    "diff:apps/signup-form/README.md:51": {
+      "id": "diff:apps/signup-form/README.md:51",
+      "kind": "diff",
+      "source": "apps/signup-form/README.md:51",
+      "message": "Added line: ### Patch release"
+    },
+    "diff:apps/signup-form/README.md:52": {
+      "id": "diff:apps/signup-form/README.md:52",
+      "kind": "diff",
+      "source": "apps/signup-form/README.md:52",
+      "message": "Added line: "
+    },
+    "diff:apps/signup-form/README.md:53": {
+      "id": "diff:apps/signup-form/README.md:53",
+      "kind": "diff",
+      "source": "apps/signup-form/README.md:53",
+      "message": "Added line: 1. Run `yarn ship` and select a patch version when prompted"
+    },
+    "diff:apps/signup-form/README.md:54": {
+      "id": "diff:apps/signup-form/README.md:54",
+      "kind": "diff",
+      "source": "apps/signup-form/README.md:54",
+      "message": "Added line: 2. Merge the release commit to `main`"
+    },
+    "diff:apps/signup-form/README.md:55": {
+      "id": "diff:apps/signup-form/README.md:55",
+      "kind": "diff",
+      "source": "apps/signup-form/README.md:55",
+      "message": "Added line: "
+    },
+    "diff:apps/signup-form/README.md:56": {
+      "id": "diff:apps/signup-form/README.md:56",
+      "kind": "diff",
+      "source": "apps/signup-form/README.md:56",
+      "message": "Added line: ### Minor / major release"
+    },
+    "diff:apps/signup-form/README.md:57": {
+      "id": "diff:apps/signup-form/README.md:57",
+      "kind": "diff",
+      "source": "apps/signup-form/README.md:57",
+      "message": "Added line: "
+    },
+    "diff:apps/signup-form/README.md:58": {
+      "id": "diff:apps/signup-form/README.md:58",
+      "kind": "diff",
+      "source": "apps/signup-form/README.md:58",
+      "message": "Added line: 1. Run `yarn ship` and select a minor or major version when prompted"
+    },
+    "diff:apps/signup-form/README.md:59": {
+      "id": "diff:apps/signup-form/README.md:59",
+      "kind": "diff",
+      "source": "apps/signup-form/README.md:59",
+      "message": "Added line: 2. Merge the release commit to `main`"
+    },
+    "diff:apps/signup-form/README.md:60": {
+      "id": "diff:apps/signup-form/README.md:60",
+      "kind": "diff",
+      "source": "apps/signup-form/README.md:60",
+      "message": "Added line: 3. Wait until a new version of Ghost is released"
+    },
+    "diff:apps/signup-form/README.md:61": {
+      "id": "diff:apps/signup-form/README.md:61",
+      "kind": "diff",
+      "source": "apps/signup-form/README.md:61",
+      "message": "Added line: "
+    },
+    "diff:apps/signup-form/README.md:62": {
+      "id": "diff:apps/signup-form/README.md:62",
+      "kind": "diff",
+      "source": "apps/signup-form/README.md:62",
+      "message": "Added line: To use the new version of signup form in Ghost, update the version in Ghost core's default configuration (currently a..."
+    },
+    "diff_hunk:apps/signup-form/package.json:1": {
+      "id": "diff_hunk:apps/signup-form/package.json:1",
+      "kind": "diff_hunk",
+      "source": "apps/signup-form/package.json:1",
+      "message": "@@ -1,6 +1,6 @@\n {\n   \"name\": \"@tryghost/signup-form\",\n-  \"version\": \"0.3.2\",\n+  \"version\": \"0.3.3\",\n   \"license\": \"MIT\",\n   \"repository\": {\n     \"type\": \"git\","
+    },
+    "diff:apps/signup-form/package.json:3": {
+      "id": "diff:apps/signup-form/package.json:3",
+      "kind": "diff",
+      "source": "apps/signup-form/package.json:3",
+      "message": "Added line: \"version\": \"0.3.3\","
+    },
+    "diff:apps/signup-form/src/app-context.ts:1": {
+      "id": "diff:apps/signup-form/src/app-context.ts:1",
+      "kind": "diff",
+      "source": "apps/signup-form/src/app-context.ts:1",
+      "message": "renamed file change without text hunks."
+    },
+    "diff_hunk:apps/signup-form/src/app.tsx:1": {
+      "id": "diff_hunk:apps/signup-form/src/app.tsx:1",
+      "kind": "diff_hunk",
+      "source": "apps/signup-form/src/app.tsx:1",
+      "message": "@@ -1,9 +1,9 @@\n import React, {ComponentProps} from 'react';\n import i18nLib from '@tryghost/i18n';\n import pages, {Page, PageName} from './pages';\n-import {AppContextProvider, AppContextType} from './AppContext';\n-import {ContentBox} from './components/ContentBox';\n-import {Frame} from './components/Frame';\n+import {AppContextProvider, AppContextType} from './app-context';\n+import {ContentBox} from './components/content-box';\n+import {Frame} from './components/frame';\n import {setupGhostApi} from './utils/api';\n import {useOptions} from './utils/options';\n "
+    },
+    "diff:apps/signup-form/src/app.tsx:4": {
+      "id": "diff:apps/signup-form/src/app.tsx:4",
+      "kind": "diff",
+      "source": "apps/signup-form/src/app.tsx:4",
+      "message": "Added line: import {AppContextProvider, AppContextType} from './app-context';"
+    },
+    "diff:apps/signup-form/src/app.tsx:5": {
+      "id": "diff:apps/signup-form/src/app.tsx:5",
+      "kind": "diff",
+      "source": "apps/signup-form/src/app.tsx:5",
+      "message": "Added line: import {ContentBox} from './components/content-box';"
+    },
+    "diff:apps/signup-form/src/app.tsx:6": {
+      "id": "diff:apps/signup-form/src/app.tsx:6",
+      "kind": "diff",
+      "source": "apps/signup-form/src/app.tsx:6",
+      "message": "Added line: import {Frame} from './components/frame';"
+    },
+    "diff:apps/signup-form/src/components/content-box.tsx:1": {
+      "id": "diff:apps/signup-form/src/components/content-box.tsx:1",
+      "kind": "diff",
+      "source": "apps/signup-form/src/components/content-box.tsx:1",
+      "message": "renamed file change without text hunks."
+    },
+    "diff_hunk:apps/signup-form/src/components/frame.tsx:1": {
+      "id": "diff_hunk:apps/signup-form/src/components/frame.tsx:1",
+      "kind": "diff_hunk",
+      "source": "apps/signup-form/src/components/frame.tsx:1",
+      "message": "@@ -1,8 +1,8 @@\n-import IFrame from './IFrame';\n+import IFrame from './iframe';\n import React, {useCallback, useState} from 'react';\n import styles from '../styles/iframe.css?inline';\n import {isMinimal} from '../utils/helpers';\n-import {useAppContext} from '../AppContext';\n+import {useAppContext} from '../app-context';\n \n type FrameProps = {\n     children: React.ReactNode"
+    },
+    "diff:apps/signup-form/src/components/frame.tsx:1": {
+      "id": "diff:apps/signup-form/src/components/frame.tsx:1",
+      "kind": "diff",
+      "source": "apps/signup-form/src/components/frame.tsx:1",
+      "message": "Added line: import IFrame from './iframe';"
+    },
+    "diff:apps/signup-form/src/components/frame.tsx:5": {
+      "id": "diff:apps/signup-form/src/components/frame.tsx:5",
+      "kind": "diff",
+      "source": "apps/signup-form/src/components/frame.tsx:5",
+      "message": "Added line: import {useAppContext} from '../app-context';"
+    },
+    "diff:apps/signup-form/src/components/iframe.tsx:1": {
+      "id": "diff:apps/signup-form/src/components/iframe.tsx:1",
+      "kind": "diff",
+      "source": "apps/signup-form/src/components/iframe.tsx:1",
+      "message": "renamed file change without text hunks."
+    },
+    "diff_hunk:apps/signup-form/src/components/pages/form-page.tsx:1": {
+      "id": "diff_hunk:apps/signup-form/src/components/pages/form-page.tsx:1",
+      "kind": "diff_hunk",
+      "source": "apps/signup-form/src/components/pages/form-page.tsx:1",
+      "message": "@@ -1,8 +1,8 @@\n import React from 'react';\n-import {FormView} from './FormView';\n+import {FormView} from './form-view';\n import {isMinimal} from '../../utils/helpers';\n import {isValidEmail} from '../../utils/validator';\n-import {useAppContext} from '../../AppContext';\n+import {useAppContext} from '../../app-context';\n \n export const FormPage: React.FC = () => {\n     const [error, setError] = React.useState('');"
+    },
+    "diff:apps/signup-form/src/components/pages/form-page.tsx:2": {
+      "id": "diff:apps/signup-form/src/components/pages/form-page.tsx:2",
+      "kind": "diff",
+      "source": "apps/signup-form/src/components/pages/form-page.tsx:2",
+      "message": "Added line: import {FormView} from './form-view';"
+    },
+    "diff:apps/signup-form/src/components/pages/form-page.tsx:5": {
+      "id": "diff:apps/signup-form/src/components/pages/form-page.tsx:5",
+      "kind": "diff",
+      "source": "apps/signup-form/src/components/pages/form-page.tsx:5",
+      "message": "Added line: import {useAppContext} from '../../app-context';"
+    },
+    "diff_hunk:apps/signup-form/src/components/pages/form-page.tsx:27": {
+      "id": "diff_hunk:apps/signup-form/src/components/pages/form-page.tsx:27",
+      "kind": "diff_hunk",
+      "source": "apps/signup-form/src/components/pages/form-page.tsx:27",
+      "message": "@@ -27,7 +27,6 @@ export const FormPage: React.FC = () => {\n             if (minimal) {\n                 // Don't go to the success page, but show the success state in the form\n                 setSuccess(true);\n-                setLoading(false);\n             } else {\n                 setPage('SuccessPage', {\n                     email"
+    },
+    "diff:apps/signup-form/src/components/pages/form-page.tsx:30": {
+      "id": "diff:apps/signup-form/src/components/pages/form-page.tsx:30",
+      "kind": "diff",
+      "source": "apps/signup-form/src/components/pages/form-page.tsx:30",
+      "message": "Removed line: setLoading(false);"
+    },
+    "diff_hunk:apps/signup-form/src/components/pages/form-view.stories.ts:1": {
+      "id": "diff_hunk:apps/signup-form/src/components/pages/form-view.stories.ts:1",
+      "kind": "diff_hunk",
+      "source": "apps/signup-form/src/components/pages/form-view.stories.ts:1",
+      "message": "@@ -1,6 +1,6 @@\n import type {Meta, StoryObj} from '@storybook/react';\n \n-import {FormView} from './FormView';\n+import {FormView} from './form-view';\n \n const meta = {\n     title: 'Form View',"
+    },
+    "diff:apps/signup-form/src/components/pages/form-view.stories.ts:3": {
+      "id": "diff:apps/signup-form/src/components/pages/form-view.stories.ts:3",
+      "kind": "diff",
+      "source": "apps/signup-form/src/components/pages/form-view.stories.ts:3",
+      "message": "Added line: import {FormView} from './form-view';"
+    },
+    "diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:1": {
+      "id": "diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:1",
+      "kind": "diff_hunk",
+      "source": "apps/signup-form/src/components/pages/form-view.tsx:1",
+      "message": "@@ -1,6 +1,6 @@\n import React, {FormEventHandler} from 'react';\n import {ReactComponent as LoadingIcon} from '../../../assets/icons/spinner.svg';\n-import {useAppContext} from '../../AppContext';\n+import {useAppContext} from '../../app-context';\n \n export const FormView: React.FC<FormProps & {\n     isMinimal: boolean"
+    },
+    "diff:apps/signup-form/src/components/pages/form-view.tsx:3": {
+      "id": "diff:apps/signup-form/src/components/pages/form-view.tsx:3",
+      "kind": "diff",
+      "source": "apps/signup-form/src/components/pages/form-view.tsx:3",
+      "message": "Added line: import {useAppContext} from '../../app-context';"
+    },
+    "diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:53": {
+      "id": "diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:53",
+      "kind": "diff_hunk",
+      "source": "apps/signup-form/src/components/pages/form-view.tsx:53",
+      "message": "@@ -53,7 +53,7 @@ const Form: React.FC<FormProps> = ({isMinimal, loading, success, error, buttonCo\n \n     const submitHandler: FormEventHandler<HTMLFormElement> = (e) => {\n         e.preventDefault();\n-        onSubmit({email});\n+        onSubmit({email: email.trim()});\n     };\n \n     // The complicated transitions are here so that we animate visibility: hidden (step-start/step-end), which is required for screen readers to know what is visible (they ignore opacity: 0)"
+    },
+    "diff:apps/signup-form/src/components/pages/form-view.tsx:56": {
+      "id": "diff:apps/signup-form/src/components/pages/form-view.tsx:56",
+      "kind": "diff",
+      "source": "apps/signup-form/src/components/pages/form-view.tsx:56",
+      "message": "Added line: onSubmit({email: email.trim()});"
+    },
+    "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1": {
+      "id": "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1",
+      "kind": "diff_hunk",
+      "source": "apps/signup-form/src/components/pages/success-page.tsx:1",
+      "message": "@@ -1,6 +1,6 @@\n import React from 'react';\n-import {SuccessView} from './SuccessView';\n-import {useAppContext} from '../../AppContext';\n+import {SuccessView} from './success-view';\n+import {useAppContext} from '../../app-context';\n \n type SuccessPageProps = {\n     email: string;"
+    },
+    "diff:apps/signup-form/src/components/pages/success-page.tsx:2": {
+      "id": "diff:apps/signup-form/src/components/pages/success-page.tsx:2",
+      "kind": "diff",
+      "source": "apps/signup-form/src/components/pages/success-page.tsx:2",
+      "message": "Added line: import {SuccessView} from './success-view';"
+    },
+    "diff:apps/signup-form/src/components/pages/success-page.tsx:3": {
+      "id": "diff:apps/signup-form/src/components/pages/success-page.tsx:3",
+      "kind": "diff",
+      "source": "apps/signup-form/src/components/pages/success-page.tsx:3",
+      "message": "Added line: import {useAppContext} from '../../app-context';"
+    },
+    "diff_hunk:apps/signup-form/src/components/pages/success-view.stories.ts:1": {
+      "id": "diff_hunk:apps/signup-form/src/components/pages/success-view.stories.ts:1",
+      "kind": "diff_hunk",
+      "source": "apps/signup-form/src/components/pages/success-view.stories.ts:1",
+      "message": "@@ -1,6 +1,6 @@\n import type {Meta, StoryObj} from '@storybook/react';\n \n-import {SuccessView} from './SuccessView';\n+import {SuccessView} from './success-view';\n \n const meta = {\n     title: 'Success View',"
+    },
+    "diff:apps/signup-form/src/components/pages/success-view.stories.ts:3": {
+      "id": "diff:apps/signup-form/src/components/pages/success-view.stories.ts:3",
+      "kind": "diff",
+      "source": "apps/signup-form/src/components/pages/success-view.stories.ts:3",
+      "message": "Added line: import {SuccessView} from './success-view';"
+    },
+    "diff_hunk:apps/signup-form/src/components/pages/success-view.tsx:1": {
+      "id": "diff_hunk:apps/signup-form/src/components/pages/success-view.tsx:1",
+      "kind": "diff_hunk",
+      "source": "apps/signup-form/src/components/pages/success-view.tsx:1",
+      "message": "@@ -1,6 +1,6 @@\n import React from 'react';\n import {ReactComponent as EmailIcon} from '../../../assets/icons/email.svg';\n-import {useAppContext} from '../../AppContext';\n+import {useAppContext} from '../../app-context';\n \n export const SuccessView: React.FC<{\n     email: string;"
+    },
+    "diff:apps/signup-form/src/components/pages/success-view.tsx:3": {
+      "id": "diff:apps/signup-form/src/components/pages/success-view.tsx:3",
+      "kind": "diff",
+      "source": "apps/signup-form/src/components/pages/success-view.tsx:3",
+      "message": "Added line: import {useAppContext} from '../../app-context';"
+    },
+    "diff_hunk:apps/signup-form/src/index.tsx:1": {
+      "id": "diff_hunk:apps/signup-form/src/index.tsx:1",
+      "kind": "diff_hunk",
+      "source": "apps/signup-form/src/index.tsx:1",
+      "message": "@@ -1,4 +1,4 @@\n-import App from './App.tsx';\n+import App from './app.tsx';\n import React from 'react';\n import ReactDOM from 'react-dom/client';\n import {ROOT_DIV_CLASS} from './utils/constants';"
+    },
+    "diff:apps/signup-form/src/index.tsx:1": {
+      "id": "diff:apps/signup-form/src/index.tsx:1",
+      "kind": "diff",
+      "source": "apps/signup-form/src/index.tsx:1",
+      "message": "Added line: import App from './app.tsx';"
+    },
+    "diff_hunk:apps/signup-form/src/pages.tsx:1": {
+      "id": "diff_hunk:apps/signup-form/src/pages.tsx:1",
+      "kind": "diff_hunk",
+      "source": "apps/signup-form/src/pages.tsx:1",
+      "message": "@@ -1,6 +1,6 @@\n import React from 'react';\n-import {FormPage} from './components/pages/FormPage';\n-import {SuccessPage} from './components/pages/SuccessPage';\n+import {FormPage} from './components/pages/form-page';\n+import {SuccessPage} from './components/pages/success-page';\n \n const Pages = {\n     FormPage,"
+    },
+    "diff:apps/signup-form/src/pages.tsx:2": {
+      "id": "diff:apps/signup-form/src/pages.tsx:2",
+      "kind": "diff",
+      "source": "apps/signup-form/src/pages.tsx:2",
+      "message": "Added line: import {FormPage} from './components/pages/form-page';"
+    },
+    "diff:apps/signup-form/src/pages.tsx:3": {
+      "id": "diff:apps/signup-form/src/pages.tsx:3",
+      "kind": "diff",
+      "source": "apps/signup-form/src/pages.tsx:3",
+      "message": "Added line: import {SuccessPage} from './components/pages/success-page';"
+    },
+    "diff_hunk:apps/signup-form/src/preview.stories.tsx:1": {
+      "id": "diff_hunk:apps/signup-form/src/preview.stories.tsx:1",
+      "kind": "diff_hunk",
+      "source": "apps/signup-form/src/preview.stories.tsx:1",
+      "message": "@@ -1,8 +1,8 @@\n import React, {useState} from 'react';\n import i18nLib from '@tryghost/i18n';\n import pages, {Page, PageName} from './pages';\n-import {AppContextProvider, SignupFormOptions} from './AppContext';\n-import {ContentBox} from './components/ContentBox';\n+import {AppContextProvider, SignupFormOptions} from './app-context';\n+import {ContentBox} from './components/content-box';\n import {userEvent, within} from '@storybook/testing-library';\n import type {Meta, StoryObj} from '@storybook/react';\n "
+    },
+    "diff:apps/signup-form/src/preview.stories.tsx:4": {
+      "id": "diff:apps/signup-form/src/preview.stories.tsx:4",
+      "kind": "diff",
+      "source": "apps/signup-form/src/preview.stories.tsx:4",
+      "message": "Added line: import {AppContextProvider, SignupFormOptions} from './app-context';"
+    },
+    "diff:apps/signup-form/src/preview.stories.tsx:5": {
+      "id": "diff:apps/signup-form/src/preview.stories.tsx:5",
+      "kind": "diff",
+      "source": "apps/signup-form/src/preview.stories.tsx:5",
+      "message": "Added line: import {ContentBox} from './components/content-box';"
+    },
+    "diff_hunk:apps/signup-form/src/utils/helpers.tsx:1": {
+      "id": "diff_hunk:apps/signup-form/src/utils/helpers.tsx:1",
+      "kind": "diff_hunk",
+      "source": "apps/signup-form/src/utils/helpers.tsx:1",
+      "message": "@@ -1,4 +1,4 @@\n-import {SignupFormOptions} from '../AppContext';\n+import {SignupFormOptions} from '../app-context';\n \n export type URLHistory = {\n     type?: 'post',"
+    },
+    "diff:apps/signup-form/src/utils/helpers.tsx:1": {
+      "id": "diff:apps/signup-form/src/utils/helpers.tsx:1",
+      "kind": "diff",
+      "source": "apps/signup-form/src/utils/helpers.tsx:1",
+      "message": "Added line: import {SignupFormOptions} from '../app-context';"
+    },
+    "diff_hunk:apps/signup-form/src/utils/helpers.tsx:17": {
+      "id": "diff_hunk:apps/signup-form/src/utils/helpers.tsx:17",
+      "kind": "diff_hunk",
+      "source": "apps/signup-form/src/utils/helpers.tsx:17",
+      "message": "@@ -17,7 +17,7 @@ export function isMinimal(options: SignupFormOptions): boolean {\n  * Get the URL history when the form is embedded on the site itself.\n  */\n export function getDefaultUrlHistory() {\n-    const STORAGE_KEY = 'ghost-history';\n+    const STORAGE_KEY = \"ghost-history\";\n \n     try {\n         const historyString = sessionStorage.getItem(STORAGE_KEY);"
+    },
+    "diff:apps/signup-form/src/utils/helpers.tsx:20": {
+      "id": "diff:apps/signup-form/src/utils/helpers.tsx:20",
+      "kind": "diff",
+      "source": "apps/signup-form/src/utils/helpers.tsx:20",
+      "message": "Added line: const STORAGE_KEY = \"ghost-history\";"
+    },
+    "diff_hunk:apps/signup-form/src/utils/helpers.tsx:42": {
+      "id": "diff_hunk:apps/signup-form/src/utils/helpers.tsx:42",
+      "kind": "diff_hunk",
+      "source": "apps/signup-form/src/utils/helpers.tsx:42",
+      "message": "@@ -42,9 +42,7 @@ export function getUrlHistory({siteUrl}: {siteUrl: string}): URLHistory {\n     try {\n         if (window.location.host === new URL(siteUrl).host) {\n             const history = getDefaultUrlHistory();\n-            if (history) {\n-                return history;\n-            }\n+            return history;\n         }\n     } catch (error) {\n         // Most likely an invalid siteUrl"
+    },
+    "diff:apps/signup-form/src/utils/helpers.tsx:45": {
+      "id": "diff:apps/signup-form/src/utils/helpers.tsx:45",
+      "kind": "diff",
+      "source": "apps/signup-form/src/utils/helpers.tsx:45",
+      "message": "Added line: return history;"
+    },
+    "diff:apps/signup-form/src/utils/helpers.tsx:46": {
+      "id": "diff:apps/signup-form/src/utils/helpers.tsx:46",
+      "kind": "diff",
+      "source": "apps/signup-form/src/utils/helpers.tsx:46",
+      "message": "Removed line: return history;"
+    },
+    "diff:apps/signup-form/src/utils/helpers.tsx:47": {
+      "id": "diff:apps/signup-form/src/utils/helpers.tsx:47",
+      "kind": "diff",
+      "source": "apps/signup-form/src/utils/helpers.tsx:47",
+      "message": "Removed line: }"
+    },
+    "diff_hunk:apps/signup-form/src/utils/options.tsx:1": {
+      "id": "diff_hunk:apps/signup-form/src/utils/options.tsx:1",
+      "kind": "diff_hunk",
+      "source": "apps/signup-form/src/utils/options.tsx:1",
+      "message": "@@ -1,5 +1,5 @@\n import React from 'react';\n-import {SignupFormOptions} from '../AppContext';\n+import {SignupFormOptions} from '../app-context';\n \n export function useOptions(scriptTag: HTMLElement) {\n     const buildOptions = React.useCallback(() => {"
+    },
+    "diff:apps/signup-form/src/utils/options.tsx:2": {
+      "id": "diff:apps/signup-form/src/utils/options.tsx:2",
+      "kind": "diff",
+      "source": "apps/signup-form/src/utils/options.tsx:2",
+      "message": "Added line: import {SignupFormOptions} from '../app-context';"
+    },
+    "diff:apps/signup-form/test/utils/is-test-env.js:1": {
+      "id": "diff:apps/signup-form/test/utils/is-test-env.js:1",
+      "kind": "diff",
+      "source": "apps/signup-form/test/utils/is-test-env.js:1",
+      "message": "renamed file change without text hunks."
+    },
+    "diff_hunk:ghost/core/core/shared/config/defaults.json:302": {
+      "id": "diff_hunk:ghost/core/core/shared/config/defaults.json:302",
+      "kind": "diff_hunk",
+      "source": "ghost/core/core/shared/config/defaults.json:302",
+      "message": "@@ -302,5 +302,5 @@\n         \"captureLinkClickBadMemberUuid\": false\n     },\n     \"disableJSBackups\": false,\n-    \"memberWelcomeEmailTestInbox\" : \"\"\n+    \"memberWelcomeEmailTestInbox\": \"\"\n }"
+    },
+    "diff:ghost/core/core/shared/config/defaults.json:305": {
+      "id": "diff:ghost/core/core/shared/config/defaults.json:305",
+      "kind": "diff",
+      "source": "ghost/core/core/shared/config/defaults.json:305",
+      "message": "Added line: \"memberWelcomeEmailTestInbox\": \"\""
+    },
+    "entity:apps/signup-form/.eslintrc.cjs:apps.signup-form..eslintrc": {
+      "id": "entity:apps/signup-form/.eslintrc.cjs:apps.signup-form..eslintrc",
+      "kind": "entity",
+      "source": "apps/signup-form/.eslintrc.cjs:18-31",
+      "message": "Changed module apps.signup-form..eslintrc touched by 1 hunk(s)."
+    },
+    "entity:apps/signup-form/.storybook/preview.tsx:apps.signup-form..storybook.preview": {
+      "id": "entity:apps/signup-form/.storybook/preview.tsx:apps.signup-form..storybook.preview",
+      "kind": "entity",
+      "source": "apps/signup-form/.storybook/preview.tsx:6-6",
+      "message": "Changed module apps.signup-form..storybook.preview touched by 1 hunk(s)."
+    },
+    "entity:apps/signup-form/README.md:apps.signup-form.README": {
+      "id": "entity:apps/signup-form/README.md:apps.signup-form.README",
+      "kind": "entity",
+      "source": "apps/signup-form/README.md:38-38",
+      "message": "Changed module apps.signup-form.README touched by 2 hunk(s)."
+    },
+    "entity:apps/signup-form/package.json:apps.signup-form.package": {
+      "id": "entity:apps/signup-form/package.json:apps.signup-form.package",
+      "kind": "entity",
+      "source": "apps/signup-form/package.json:3-3",
+      "message": "Changed module apps.signup-form.package touched by 1 hunk(s)."
+    },
+    "entity:apps/signup-form/src/app-context.ts:apps.signup-form.src.app-context": {
+      "id": "entity:apps/signup-form/src/app-context.ts:apps.signup-form.src.app-context",
+      "kind": "entity",
+      "source": "apps/signup-form/src/app-context.ts:1-1",
+      "message": "Changed module apps.signup-form.src.app-context touched by 1 hunk(s)."
+    },
+    "entity:apps/signup-form/src/app.tsx:apps.signup-form.src.app": {
+      "id": "entity:apps/signup-form/src/app.tsx:apps.signup-form.src.app",
+      "kind": "entity",
+      "source": "apps/signup-form/src/app.tsx:4-6",
+      "message": "Changed module apps.signup-form.src.app touched by 1 hunk(s)."
+    },
+    "entity:apps/signup-form/src/components/content-box.tsx:apps.signup-form.src.components.content-box": {
+      "id": "entity:apps/signup-form/src/components/content-box.tsx:apps.signup-form.src.components.content-box",
+      "kind": "entity",
+      "source": "apps/signup-form/src/components/content-box.tsx:1-1",
+      "message": "Changed module apps.signup-form.src.components.content-box touched by 1 hunk(s)."
+    },
+    "entity:apps/signup-form/src/components/frame.tsx:apps.signup-form.src.components.frame": {
+      "id": "entity:apps/signup-form/src/components/frame.tsx:apps.signup-form.src.components.frame",
+      "kind": "entity",
+      "source": "apps/signup-form/src/components/frame.tsx:1-5",
+      "message": "Changed module apps.signup-form.src.components.frame touched by 1 hunk(s)."
+    },
+    "entity:apps/signup-form/src/components/iframe.tsx:apps.signup-form.src.components.iframe": {
+      "id": "entity:apps/signup-form/src/components/iframe.tsx:apps.signup-form.src.components.iframe",
+      "kind": "entity",
+      "source": "apps/signup-form/src/components/iframe.tsx:1-1",
+      "message": "Changed module apps.signup-form.src.components.iframe touched by 1 hunk(s)."
+    },
+    "entity:apps/signup-form/src/components/pages/form-page.tsx:apps.signup-form.src.components.pages.form-page": {
+      "id": "entity:apps/signup-form/src/components/pages/form-page.tsx:apps.signup-form.src.components.pages.form-page",
+      "kind": "entity",
+      "source": "apps/signup-form/src/components/pages/form-page.tsx:2-5",
+      "message": "Changed module apps.signup-form.src.components.pages.form-page touched by 2 hunk(s)."
+    },
+    "entity:apps/signup-form/src/components/pages/form-view.stories.ts:apps.signup-form.src.components.pages.form-view.stories": {
+      "id": "entity:apps/signup-form/src/components/pages/form-view.stories.ts:apps.signup-form.src.components.pages.form-view.stories",
+      "kind": "entity",
+      "source": "apps/signup-form/src/components/pages/form-view.stories.ts:3-3",
+      "message": "Changed module apps.signup-form.src.components.pages.form-view.stories touched by 1 hunk(s)."
+    },
+    "entity:apps/signup-form/src/components/pages/form-view.tsx:apps.signup-form.src.components.pages.form-view": {
+      "id": "entity:apps/signup-form/src/components/pages/form-view.tsx:apps.signup-form.src.components.pages.form-view",
+      "kind": "entity",
+      "source": "apps/signup-form/src/components/pages/form-view.tsx:3-3",
+      "message": "Changed module apps.signup-form.src.components.pages.form-view touched by 2 hunk(s)."
+    },
+    "entity:apps/signup-form/src/components/pages/success-page.tsx:apps.signup-form.src.components.pages.success-page": {
+      "id": "entity:apps/signup-form/src/components/pages/success-page.tsx:apps.signup-form.src.components.pages.success-page",
+      "kind": "entity",
+      "source": "apps/signup-form/src/components/pages/success-page.tsx:2-3",
+      "message": "Changed module apps.signup-form.src.components.pages.success-page touched by 1 hunk(s)."
+    },
+    "entity:apps/signup-form/src/components/pages/success-view.stories.ts:apps.signup-form.src.components.pages.success-view.stories": {
+      "id": "entity:apps/signup-form/src/components/pages/success-view.stories.ts:apps.signup-form.src.components.pages.success-view.stories",
+      "kind": "entity",
+      "source": "apps/signup-form/src/components/pages/success-view.stories.ts:3-3",
+      "message": "Changed module apps.signup-form.src.components.pages.success-view.stories touched by 1 hunk(s)."
+    },
+    "entity:apps/signup-form/src/components/pages/success-view.tsx:apps.signup-form.src.components.pages.success-view": {
+      "id": "entity:apps/signup-form/src/components/pages/success-view.tsx:apps.signup-form.src.components.pages.success-view",
+      "kind": "entity",
+      "source": "apps/signup-form/src/components/pages/success-view.tsx:3-3",
+      "message": "Changed module apps.signup-form.src.components.pages.success-view touched by 1 hunk(s)."
+    },
+    "entity:apps/signup-form/src/index.tsx:apps.signup-form.src.index": {
+      "id": "entity:apps/signup-form/src/index.tsx:apps.signup-form.src.index",
+      "kind": "entity",
+      "source": "apps/signup-form/src/index.tsx:1-1",
+      "message": "Changed module apps.signup-form.src.index touched by 1 hunk(s)."
+    },
+    "entity:apps/signup-form/src/pages.tsx:apps.signup-form.src.pages": {
+      "id": "entity:apps/signup-form/src/pages.tsx:apps.signup-form.src.pages",
+      "kind": "entity",
+      "source": "apps/signup-form/src/pages.tsx:2-3",
+      "message": "Changed module apps.signup-form.src.pages touched by 1 hunk(s)."
+    },
+    "entity:apps/signup-form/src/preview.stories.tsx:apps.signup-form.src.preview.stories": {
+      "id": "entity:apps/signup-form/src/preview.stories.tsx:apps.signup-form.src.preview.stories",
+      "kind": "entity",
+      "source": "apps/signup-form/src/preview.stories.tsx:4-5",
+      "message": "Changed module apps.signup-form.src.preview.stories touched by 1 hunk(s)."
+    },
+    "entity:apps/signup-form/src/utils/helpers.tsx:apps.signup-form.src.utils.helpers": {
+      "id": "entity:apps/signup-form/src/utils/helpers.tsx:apps.signup-form.src.utils.helpers",
+      "kind": "entity",
+      "source": "apps/signup-form/src/utils/helpers.tsx:1-1",
+      "message": "Changed module apps.signup-form.src.utils.helpers touched by 3 hunk(s)."
+    },
+    "entity:apps/signup-form/src/utils/options.tsx:apps.signup-form.src.utils.options": {
+      "id": "entity:apps/signup-form/src/utils/options.tsx:apps.signup-form.src.utils.options",
+      "kind": "entity",
+      "source": "apps/signup-form/src/utils/options.tsx:2-2",
+      "message": "Changed module apps.signup-form.src.utils.options touched by 1 hunk(s)."
+    },
+    "entity:apps/signup-form/test/utils/is-test-env.js:apps.signup-form.test.utils.is-test-env": {
+      "id": "entity:apps/signup-form/test/utils/is-test-env.js:apps.signup-form.test.utils.is-test-env",
+      "kind": "entity",
+      "source": "apps/signup-form/test/utils/is-test-env.js:1-1",
+      "message": "Changed module apps.signup-form.test.utils.is-test-env touched by 1 hunk(s)."
+    },
+    "entity:ghost/core/core/shared/config/defaults.json:ghost.core.core.shared.config.defaults": {
+      "id": "entity:ghost/core/core/shared/config/defaults.json:ghost.core.core.shared.config.defaults",
+      "kind": "entity",
+      "source": "ghost/core/core/shared/config/defaults.json:305-305",
+      "message": "Changed module ghost.core.core.shared.config.defaults touched by 1 hunk(s)."
+    },
+    "risk:dependency_change:apps/signup-form/package.json": {
+      "id": "risk:dependency_change:apps/signup-form/package.json",
+      "kind": "risk",
+      "source": "dependency_change",
+      "message": "Dependency declaration changed: apps/signup-form/package.json."
+    },
+    "risk:security_sensitive:apps/signup-form/.storybook/preview.tsx": {
+      "id": "risk:security_sensitive:apps/signup-form/.storybook/preview.tsx",
+      "kind": "risk",
+      "source": "security_sensitive",
+      "message": "Security-sensitive keywords changed in apps/signup-form/.storybook/preview.tsx."
+    },
+    "risk:security_sensitive:apps/signup-form/src/components/frame.tsx": {
+      "id": "risk:security_sensitive:apps/signup-form/src/components/frame.tsx",
+      "kind": "risk",
+      "source": "security_sensitive",
+      "message": "Security-sensitive keywords changed in apps/signup-form/src/components/frame.tsx."
+    },
+    "risk:security_sensitive:apps/signup-form/src/components/pages/form-page.tsx": {
+      "id": "risk:security_sensitive:apps/signup-form/src/components/pages/form-page.tsx",
+      "kind": "risk",
+      "source": "security_sensitive",
+      "message": "Security-sensitive keywords changed in apps/signup-form/src/components/pages/form-page.tsx."
+    },
+    "risk:security_sensitive:apps/signup-form/src/components/pages/form-view.tsx": {
+      "id": "risk:security_sensitive:apps/signup-form/src/components/pages/form-view.tsx",
+      "kind": "risk",
+      "source": "security_sensitive",
+      "message": "Security-sensitive keywords changed in apps/signup-form/src/components/pages/form-view.tsx."
+    },
+    "risk:security_sensitive:apps/signup-form/src/components/pages/success-page.tsx": {
+      "id": "risk:security_sensitive:apps/signup-form/src/components/pages/success-page.tsx",
+      "kind": "risk",
+      "source": "security_sensitive",
+      "message": "Security-sensitive keywords changed in apps/signup-form/src/components/pages/success-page.tsx."
+    },
+    "risk:security_sensitive:apps/signup-form/src/components/pages/success-view.tsx": {
+      "id": "risk:security_sensitive:apps/signup-form/src/components/pages/success-view.tsx",
+      "kind": "risk",
+      "source": "security_sensitive",
+      "message": "Security-sensitive keywords changed in apps/signup-form/src/components/pages/success-view.tsx."
+    },
+    "risk:security_sensitive:apps/signup-form/src/utils/helpers.tsx": {
+      "id": "risk:security_sensitive:apps/signup-form/src/utils/helpers.tsx",
+      "kind": "risk",
+      "source": "security_sensitive",
+      "message": "Security-sensitive keywords changed in apps/signup-form/src/utils/helpers.tsx."
+    },
+    "risk:security_sensitive:apps/signup-form/src/utils/options.tsx": {
+      "id": "risk:security_sensitive:apps/signup-form/src/utils/options.tsx",
+      "kind": "risk",
+      "source": "security_sensitive",
+      "message": "Security-sensitive keywords changed in apps/signup-form/src/utils/options.tsx."
+    }
+  },
+  "missing_evidence_ids": [],
+  "agent_runs": [
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+      "input_evidence_ids": [
+        "diff_hunk:apps/signup-form/.eslintrc.cjs:15",
+        "diff_hunk:apps/signup-form/.storybook/preview.tsx:3",
+        "diff_hunk:apps/signup-form/README.md:35",
+        "diff_hunk:apps/signup-form/package.json:1"
+      ],
+      "output_issue_ids": [
+        "style:apps/signup-form/.eslintrc.cjs:24"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 6137,
+      "token_count_in": 6011,
+      "token_count_out": 303,
+      "trace_id": "434190b22f1a46b0bd4ffe1157883a1d",
+      "span_id": "f23165df72834188",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001",
+      "shard_index": 0,
+      "shard_count": 6,
+      "context_request_count": 1,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+      "input_evidence_ids": [
+        "diff:apps/signup-form/.storybook/preview.tsx:6",
+        "diff_hunk:apps/signup-form/.storybook/preview.tsx:3"
+      ],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 1574,
+      "token_count_in": 3643,
+      "token_count_out": 15,
+      "trace_id": "ca078191c0f8424daac5fb9eaae265b5",
+      "span_id": "976eaf5b11c048c6",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001-refill",
+      "shard_index": 0,
+      "shard_count": 6,
+      "context_request_count": 0,
+      "context_refill_used": true
+    },
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+      "input_evidence_ids": [
+        "diff:apps/signup-form/src/app-context.ts:1",
+        "diff:apps/signup-form/src/components/content-box.tsx:1",
+        "diff_hunk:apps/signup-form/src/app.tsx:1",
+        "diff_hunk:apps/signup-form/src/components/frame.tsx:1"
+      ],
+      "output_issue_ids": [
+        "code_style:apps/signup-form/src/components/frame.tsx:1",
+        "code_style:apps/signup-form/src/components/frame.tsx:5",
+        "code_style:apps/signup-form/src/app.tsx:4"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 2,
+      "retry_log": [
+        "attempt=1 error=timeout delay=1.00s",
+        "attempt=2 error=timeout delay=2.00s"
+      ],
+      "latency_ms": 140265,
+      "token_count_in": 5059,
+      "token_count_out": 464,
+      "trace_id": "006ec341f97a4543ab1c1dde2a2ebf67",
+      "span_id": "dc3088ffdd6442cc",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-002",
+      "shard_index": 1,
+      "shard_count": 6,
+      "context_request_count": 0,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+      "input_evidence_ids": [
+        "diff:apps/signup-form/src/components/iframe.tsx:1",
+        "diff_hunk:apps/signup-form/src/components/pages/form-page.tsx:1",
+        "diff_hunk:apps/signup-form/src/components/pages/form-page.tsx:27",
+        "diff_hunk:apps/signup-form/src/components/pages/form-view.stories.ts:1",
+        "diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:1",
+        "diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:53"
+      ],
+      "output_issue_ids": [
+        "correctness:apps/signup-form/src/components/pages/form-page.tsx:30",
+        "best-practice:apps/signup-form/src/components/pages/form-view.tsx:56"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 2,
+      "retry_log": [
+        "attempt=1 error=timeout delay=1.00s",
+        "attempt=2 error=timeout delay=2.00s"
+      ],
+      "latency_ms": 152103,
+      "token_count_in": 6018,
+      "token_count_out": 331,
+      "trace_id": "072245979f9647239c5a630c017df52a",
+      "span_id": "28482b5cb7684d66",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-003",
+      "shard_index": 2,
+      "shard_count": 6,
+      "context_request_count": 0,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+      "input_evidence_ids": [
+        "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1",
+        "diff_hunk:apps/signup-form/src/components/pages/success-view.stories.ts:1",
+        "diff_hunk:apps/signup-form/src/components/pages/success-view.tsx:1",
+        "diff_hunk:apps/signup-form/src/index.tsx:1"
+      ],
+      "output_issue_ids": [
+        "correctness:apps/signup-form/src/components/pages/success-page.tsx:3",
+        "correctness:apps/signup-form/src/components/pages/success-view.tsx:3",
+        "correctness:apps/signup-form/src/components/pages/success-page.tsx:3",
+        "correctness:apps/signup-form/src/index.tsx:1"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 54084,
+      "token_count_in": 5576,
+      "token_count_out": 728,
+      "trace_id": "fab2f41062964551902ee474d1fd5f3e",
+      "span_id": "d47d730883644083",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-004",
+      "shard_index": 3,
+      "shard_count": 6,
+      "context_request_count": 2,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+      "input_evidence_ids": [
+        "diff:apps/signup-form/src/components/pages/success-page.tsx:2",
+        "diff:apps/signup-form/src/components/pages/success-page.tsx:3",
+        "diff:apps/signup-form/src/components/pages/success-view.tsx:3",
+        "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1",
+        "diff_hunk:apps/signup-form/src/components/pages/success-view.tsx:1"
+      ],
+      "output_issue_ids": [
+        "best_practice:apps/signup-form/src/components/pages/success-page.tsx:2"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 40774,
+      "token_count_in": 4363,
+      "token_count_out": 229,
+      "trace_id": "d210c0480a184da98aafcea33e15efdb",
+      "span_id": "ef6c33db9ca4414d",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-004-refill",
+      "shard_index": 3,
+      "shard_count": 6,
+      "context_request_count": 0,
+      "context_refill_used": true
+    },
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+      "input_evidence_ids": [
+        "diff_hunk:apps/signup-form/src/pages.tsx:1",
+        "diff_hunk:apps/signup-form/src/preview.stories.tsx:1",
+        "diff_hunk:apps/signup-form/src/utils/helpers.tsx:1",
+        "diff_hunk:apps/signup-form/src/utils/helpers.tsx:17",
+        "diff_hunk:apps/signup-form/src/utils/helpers.tsx:42",
+        "diff_hunk:apps/signup-form/src/utils/options.tsx:1"
+      ],
+      "output_issue_ids": [
+        "style:apps/signup-form/src/utils/helpers.tsx:20"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 6196,
+      "token_count_in": 6027,
+      "token_count_out": 144,
+      "trace_id": "4956af032ebf4f89a617728c7cb4d765",
+      "span_id": "50e1ffcf90cc4d62",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-005",
+      "shard_index": 4,
+      "shard_count": 6,
+      "context_request_count": 0,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+      "input_evidence_ids": [
+        "diff:apps/signup-form/test/utils/is-test-env.js:1",
+        "diff_hunk:ghost/core/core/shared/config/defaults.json:302"
+      ],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 1687,
+      "token_count_in": 3747,
+      "token_count_out": 12,
+      "trace_id": "83eaf49a3f2e4639a06524f044ac7985",
+      "span_id": "3542889ed3124b1b",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-006",
+      "shard_index": 5,
+      "shard_count": 6,
+      "context_request_count": 0,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+      "model": null,
+      "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+      "input_evidence_ids": [
+        "diff_hunk:apps/signup-form/.eslintrc.cjs:15",
+        "diff_hunk:apps/signup-form/.storybook/preview.tsx:3",
+        "diff_hunk:apps/signup-form/src/app.tsx:1",
+        "diff_hunk:apps/signup-form/src/components/frame.tsx:1",
+        "diff_hunk:apps/signup-form/src/components/pages/form-page.tsx:27",
+        "diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:53",
+        "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1",
+        "diff_hunk:apps/signup-form/src/utils/helpers.tsx:17"
+      ],
+      "output_issue_ids": [
+        "style:apps/signup-form/.eslintrc.cjs:24",
+        "code_style:apps/signup-form/src/components/frame.tsx:1",
+        "code_style:apps/signup-form/src/components/frame.tsx:5",
+        "code_style:apps/signup-form/src/app.tsx:4"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 0,
+      "token_count_in": 0,
+      "token_count_out": 0,
+      "trace_id": "",
+      "span_id": "",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "",
+      "shard_index": 0,
+      "shard_count": 0,
+      "context_request_count": 0,
+      "context_refill_used": false
+    }
+  ],
+  "prompt_exports": {},
+  "context_budget": {
+    "enabled": true,
+    "strategy": "file_risk_shards_v1",
+    "context_profile": "risk_compact_manifest_v1",
+    "max_input_tokens": 9000,
+    "estimated_input_tokens": 35206,
+    "selected_evidence_count": 30,
+    "omitted_evidence_count": 83,
+    "selected_evidence_ids": [
+      "diff_hunk:apps/signup-form/.storybook/preview.tsx:3",
+      "diff_hunk:apps/signup-form/package.json:1",
+      "diff_hunk:apps/signup-form/.eslintrc.cjs:15",
+      "diff_hunk:apps/signup-form/README.md:35",
+      "diff_hunk:apps/signup-form/src/components/frame.tsx:1",
+      "diff_hunk:apps/signup-form/src/app.tsx:1",
+      "diff:apps/signup-form/src/app-context.ts:1",
+      "diff:apps/signup-form/src/components/content-box.tsx:1",
+      "diff_hunk:apps/signup-form/src/components/pages/form-page.tsx:1",
+      "diff_hunk:apps/signup-form/src/components/pages/form-page.tsx:27",
+      "diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:1",
+      "diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:53",
+      "diff_hunk:apps/signup-form/src/components/pages/form-view.stories.ts:1",
+      "diff:apps/signup-form/src/components/iframe.tsx:1",
+      "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1",
+      "diff_hunk:apps/signup-form/src/components/pages/success-view.tsx:1",
+      "diff_hunk:apps/signup-form/src/components/pages/success-view.stories.ts:1",
+      "diff_hunk:apps/signup-form/src/index.tsx:1",
+      "diff_hunk:apps/signup-form/src/utils/helpers.tsx:1",
+      "diff_hunk:apps/signup-form/src/utils/helpers.tsx:17",
+      "diff_hunk:apps/signup-form/src/utils/helpers.tsx:42",
+      "diff_hunk:apps/signup-form/src/utils/options.tsx:1",
+      "diff_hunk:apps/signup-form/src/pages.tsx:1",
+      "diff_hunk:apps/signup-form/src/preview.stories.tsx:1",
+      "diff_hunk:ghost/core/core/shared/config/defaults.json:302",
+      "diff:apps/signup-form/test/utils/is-test-env.js:1",
+      "diff:apps/signup-form/.storybook/preview.tsx:6",
+      "diff:apps/signup-form/src/components/pages/success-page.tsx:2",
+      "diff:apps/signup-form/src/components/pages/success-page.tsx:3",
+      "diff:apps/signup-form/src/components/pages/success-view.tsx:3"
+    ],
+    "omitted_evidence_ids": [
+      "risk:security_sensitive:apps/signup-form/.storybook/preview.tsx",
+      "entity:apps/signup-form/.storybook/preview.tsx:apps.signup-form..storybook.preview",
+      "diff:apps/signup-form/package.json:3",
+      "risk:dependency_change:apps/signup-form/package.json",
+      "entity:apps/signup-form/package.json:apps.signup-form.package",
+      "diff_hunk:apps/signup-form/README.md:42",
+      "entity:apps/signup-form/.eslintrc.cjs:apps.signup-form..eslintrc",
+      "entity:apps/signup-form/README.md:apps.signup-form.README",
+      "diff:apps/signup-form/.eslintrc.cjs:18",
+      "diff:apps/signup-form/.eslintrc.cjs:23",
+      "diff:apps/signup-form/.eslintrc.cjs:24",
+      "diff:apps/signup-form/.eslintrc.cjs:25",
+      "diff:apps/signup-form/.eslintrc.cjs:26",
+      "diff:apps/signup-form/.eslintrc.cjs:28",
+      "diff:apps/signup-form/.eslintrc.cjs:31",
+      "diff:apps/signup-form/README.md:38",
+      "diff:apps/signup-form/README.md:45",
+      "diff:apps/signup-form/README.md:46",
+      "diff:apps/signup-form/README.md:47",
+      "diff:apps/signup-form/README.md:48",
+      "diff:apps/signup-form/README.md:49",
+      "diff:apps/signup-form/README.md:50",
+      "diff:apps/signup-form/README.md:51",
+      "diff:apps/signup-form/README.md:52",
+      "diff:apps/signup-form/README.md:53",
+      "diff:apps/signup-form/README.md:54",
+      "diff:apps/signup-form/README.md:55",
+      "diff:apps/signup-form/README.md:56",
+      "diff:apps/signup-form/README.md:57",
+      "diff:apps/signup-form/README.md:58",
+      "diff:apps/signup-form/README.md:59",
+      "diff:apps/signup-form/README.md:60",
+      "diff:apps/signup-form/README.md:61",
+      "diff:apps/signup-form/README.md:62",
+      "diff:apps/signup-form/src/components/frame.tsx:1",
+      "diff:apps/signup-form/src/components/frame.tsx:5",
+      "risk:security_sensitive:apps/signup-form/src/components/frame.tsx",
+      "entity:apps/signup-form/src/components/frame.tsx:apps.signup-form.src.components.frame",
+      "entity:apps/signup-form/src/app-context.ts:apps.signup-form.src.app-context",
+      "entity:apps/signup-form/src/app.tsx:apps.signup-form.src.app",
+      "entity:apps/signup-form/src/components/content-box.tsx:apps.signup-form.src.components.content-box",
+      "diff:apps/signup-form/src/app.tsx:4",
+      "diff:apps/signup-form/src/app.tsx:5",
+      "diff:apps/signup-form/src/app.tsx:6",
+      "diff:apps/signup-form/src/components/pages/form-page.tsx:2",
+      "diff:apps/signup-form/src/components/pages/form-page.tsx:30",
+      "diff:apps/signup-form/src/components/pages/form-page.tsx:5",
+      "diff:apps/signup-form/src/components/pages/form-view.tsx:3",
+      "diff:apps/signup-form/src/components/pages/form-view.tsx:56",
+      "risk:security_sensitive:apps/signup-form/src/components/pages/form-page.tsx",
+      "risk:security_sensitive:apps/signup-form/src/components/pages/form-view.tsx",
+      "entity:apps/signup-form/src/components/pages/form-page.tsx:apps.signup-form.src.components.pages.form-page",
+      "entity:apps/signup-form/src/components/pages/form-view.tsx:apps.signup-form.src.components.pages.form-view",
+      "entity:apps/signup-form/src/components/iframe.tsx:apps.signup-form.src.components.iframe",
+      "entity:apps/signup-form/src/components/pages/form-view.stories.ts:apps.signup-form.src.components.pages.form-view.stories",
+      "diff:apps/signup-form/src/components/pages/form-view.stories.ts:3",
+      "risk:security_sensitive:apps/signup-form/src/components/pages/success-page.tsx",
+      "risk:security_sensitive:apps/signup-form/src/components/pages/success-view.tsx",
+      "entity:apps/signup-form/src/components/pages/success-page.tsx:apps.signup-form.src.components.pages.success-page",
+      "entity:apps/signup-form/src/components/pages/success-view.tsx:apps.signup-form.src.components.pages.success-view",
+      "entity:apps/signup-form/src/components/pages/success-view.stories.ts:apps.signup-form.src.components.pages.success-view.stories",
+      "entity:apps/signup-form/src/index.tsx:apps.signup-form.src.index",
+      "diff:apps/signup-form/src/components/pages/success-view.stories.ts:3",
+      "diff:apps/signup-form/src/index.tsx:1",
+      "diff:apps/signup-form/src/utils/helpers.tsx:1",
+      "diff:apps/signup-form/src/utils/helpers.tsx:20",
+      "diff:apps/signup-form/src/utils/helpers.tsx:45",
+      "diff:apps/signup-form/src/utils/helpers.tsx:46",
+      "diff:apps/signup-form/src/utils/helpers.tsx:47",
+      "diff:apps/signup-form/src/utils/options.tsx:2",
+      "risk:security_sensitive:apps/signup-form/src/utils/helpers.tsx",
+      "risk:security_sensitive:apps/signup-form/src/utils/options.tsx",
+      "entity:apps/signup-form/src/utils/helpers.tsx:apps.signup-form.src.utils.helpers",
+      "entity:apps/signup-form/src/utils/options.tsx:apps.signup-form.src.utils.options",
+      "entity:apps/signup-form/src/pages.tsx:apps.signup-form.src.pages",
+      "entity:apps/signup-form/src/preview.stories.tsx:apps.signup-form.src.preview.stories",
+      "diff:apps/signup-form/src/pages.tsx:2",
+      "diff:apps/signup-form/src/pages.tsx:3",
+      "diff:apps/signup-form/src/preview.stories.tsx:4",
+      "diff:apps/signup-form/src/preview.stories.tsx:5",
+      "entity:apps/signup-form/test/utils/is-test-env.js:apps.signup-form.test.utils.is-test-env",
+      "entity:ghost/core/core/shared/config/defaults.json:ghost.core.core.shared.config.defaults",
+      "diff:ghost/core/core/shared/config/defaults.json:305"
+    ],
+    "selected_risk_signal_count": 9,
+    "context_truncated": true,
+    "shard_count": 6,
+    "refill_count": 2,
+    "context_request_count": 3,
+    "context_requests": [
+      {
+        "request_type": "same_file_more_evidence",
+        "path": "apps/signup-form/.storybook/preview.tsx",
+        "evidence_ids": [
+          "diff:apps/signup-form/.storybook/preview.tsx:6"
+        ],
+        "risk_tag": null,
+        "symbol": null,
+        "reason": "",
+        "source_shard_id": "shard-001",
+        "fulfilled_evidence_ids": [
+          "diff:apps/signup-form/.storybook/preview.tsx:6",
+          "diff_hunk:apps/signup-form/.storybook/preview.tsx:3"
+        ]
+      },
+      {
+        "request_type": "same_file_more_evidence",
+        "path": "apps/signup-form/src/components/pages/success-page.tsx",
+        "evidence_ids": [
+          "diff:apps/signup-form/src/components/pages/success-page.tsx:2",
+          "diff:apps/signup-form/src/components/pages/success-page.tsx:3"
+        ],
+        "risk_tag": null,
+        "symbol": null,
+        "reason": "",
+        "source_shard_id": "shard-004",
+        "fulfilled_evidence_ids": [
+          "diff:apps/signup-form/src/components/pages/success-page.tsx:2",
+          "diff:apps/signup-form/src/components/pages/success-page.tsx:3",
+          "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1"
+        ]
+      },
+      {
+        "request_type": "same_file_more_evidence",
+        "path": "apps/signup-form/src/components/pages/success-view.tsx",
+        "evidence_ids": [
+          "diff:apps/signup-form/src/components/pages/success-view.tsx:3"
+        ],
+        "risk_tag": null,
+        "symbol": null,
+        "reason": "",
+        "source_shard_id": "shard-004",
+        "fulfilled_evidence_ids": [
+          "diff:apps/signup-form/src/components/pages/success-view.tsx:3",
+          "diff_hunk:apps/signup-form/src/components/pages/success-view.tsx:1"
+        ]
+      }
+    ],
+    "shards": [
+      {
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 4,
+        "omitted_evidence_count": 35,
+        "estimated_input_tokens": 5000,
+        "context_truncated": true
+      },
+      {
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 4,
+        "omitted_evidence_count": 10,
+        "estimated_input_tokens": 4403,
+        "context_truncated": true
+      },
+      {
+        "shard_id": "shard-003",
+        "shard_index": 2,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 6,
+        "omitted_evidence_count": 12,
+        "estimated_input_tokens": 5312,
+        "context_truncated": true
+      },
+      {
+        "shard_id": "shard-004",
+        "shard_index": 3,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 4,
+        "omitted_evidence_count": 11,
+        "estimated_input_tokens": 4895,
+        "context_truncated": true
+      },
+      {
+        "shard_id": "shard-005",
+        "shard_index": 4,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 6,
+        "omitted_evidence_count": 16,
+        "estimated_input_tokens": 5116,
+        "context_truncated": true
+      },
+      {
+        "shard_id": "shard-006",
+        "shard_index": 5,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 2,
+        "omitted_evidence_count": 3,
+        "estimated_input_tokens": 3374,
+        "context_truncated": true
+      },
+      {
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "is_refill": true,
+        "parent_shard_id": "shard-001",
+        "selected_evidence_count": 2,
+        "omitted_evidence_count": 0,
+        "estimated_input_tokens": 3220,
+        "context_truncated": false
+      },
+      {
+        "shard_id": "shard-004-refill",
+        "shard_index": 3,
+        "is_refill": true,
+        "parent_shard_id": "shard-004",
+        "selected_evidence_count": 5,
+        "omitted_evidence_count": 0,
+        "estimated_input_tokens": 3886,
+        "context_truncated": false
+      }
+    ],
+    "warnings": []
+  },
+  "loop": {
+    "enabled": true,
+    "max_iter": 1,
+    "iterations_completed": 1,
+    "converged": false,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "checkpoint_path": "D:\\learn\\code-review-agent\\workspace\\qodo_pr_review_bench_live_guidelines\\samples\\qodo_004\\review\\loop_checkpoint.json",
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "iterations": [
+      {
+        "i": 0,
+        "candidate_issue_count": 11,
+        "verified_count": 9,
+        "needs_human_review_count": 0,
+        "discarded_count": 2,
+        "keep_count": 4,
+        "uncertain_count": 5,
+        "reject_count": 0,
+        "feedback_sent": [
+          {
+            "issue_id": "correctness:apps/signup-form/src/components/pages/form-page.tsx:30",
+            "category": "correctness",
+            "critic_reason": "low confidence",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:apps/signup-form/src/components/pages/form-page.tsx:27"
+            ]
+          },
+          {
+            "issue_id": "best-practice:apps/signup-form/src/components/pages/form-view.tsx:56",
+            "category": "best-practice",
+            "critic_reason": "low confidence",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:53"
+            ]
+          },
+          {
+            "issue_id": "correctness:apps/signup-form/src/components/pages/success-page.tsx:3",
+            "category": "correctness",
+            "critic_reason": "low confidence",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1"
+            ]
+          },
+          {
+            "issue_id": "best_practice:apps/signup-form/src/components/pages/success-page.tsx:2",
+            "category": "best_practice",
+            "critic_reason": "low confidence",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1"
+            ]
+          },
+          {
+            "issue_id": "style:apps/signup-form/src/utils/helpers.tsx:20",
+            "category": "style",
+            "critic_reason": "low confidence",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:apps/signup-form/src/utils/helpers.tsx:17"
+            ]
+          }
+        ],
+        "agent_runs": [
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+            "input_evidence_ids": [
+              "diff_hunk:apps/signup-form/.eslintrc.cjs:15",
+              "diff_hunk:apps/signup-form/.storybook/preview.tsx:3",
+              "diff_hunk:apps/signup-form/README.md:35",
+              "diff_hunk:apps/signup-form/package.json:1"
+            ],
+            "output_issue_ids": [
+              "style:apps/signup-form/.eslintrc.cjs:24"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 6137,
+            "token_count_in": 6011,
+            "token_count_out": 303,
+            "trace_id": "434190b22f1a46b0bd4ffe1157883a1d",
+            "span_id": "f23165df72834188",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001",
+            "shard_index": 0,
+            "shard_count": 6,
+            "context_request_count": 1,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+            "input_evidence_ids": [
+              "diff:apps/signup-form/.storybook/preview.tsx:6",
+              "diff_hunk:apps/signup-form/.storybook/preview.tsx:3"
+            ],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 1574,
+            "token_count_in": 3643,
+            "token_count_out": 15,
+            "trace_id": "ca078191c0f8424daac5fb9eaae265b5",
+            "span_id": "976eaf5b11c048c6",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001-refill",
+            "shard_index": 0,
+            "shard_count": 6,
+            "context_request_count": 0,
+            "context_refill_used": true
+          },
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+            "input_evidence_ids": [
+              "diff:apps/signup-form/src/app-context.ts:1",
+              "diff:apps/signup-form/src/components/content-box.tsx:1",
+              "diff_hunk:apps/signup-form/src/app.tsx:1",
+              "diff_hunk:apps/signup-form/src/components/frame.tsx:1"
+            ],
+            "output_issue_ids": [
+              "code_style:apps/signup-form/src/components/frame.tsx:1",
+              "code_style:apps/signup-form/src/components/frame.tsx:5",
+              "code_style:apps/signup-form/src/app.tsx:4"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 2,
+            "retry_log": [
+              "attempt=1 error=timeout delay=1.00s",
+              "attempt=2 error=timeout delay=2.00s"
+            ],
+            "latency_ms": 140265,
+            "token_count_in": 5059,
+            "token_count_out": 464,
+            "trace_id": "006ec341f97a4543ab1c1dde2a2ebf67",
+            "span_id": "dc3088ffdd6442cc",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-002",
+            "shard_index": 1,
+            "shard_count": 6,
+            "context_request_count": 0,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+            "input_evidence_ids": [
+              "diff:apps/signup-form/src/components/iframe.tsx:1",
+              "diff_hunk:apps/signup-form/src/components/pages/form-page.tsx:1",
+              "diff_hunk:apps/signup-form/src/components/pages/form-page.tsx:27",
+              "diff_hunk:apps/signup-form/src/components/pages/form-view.stories.ts:1",
+              "diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:1",
+              "diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:53"
+            ],
+            "output_issue_ids": [
+              "correctness:apps/signup-form/src/components/pages/form-page.tsx:30",
+              "best-practice:apps/signup-form/src/components/pages/form-view.tsx:56"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 2,
+            "retry_log": [
+              "attempt=1 error=timeout delay=1.00s",
+              "attempt=2 error=timeout delay=2.00s"
+            ],
+            "latency_ms": 152103,
+            "token_count_in": 6018,
+            "token_count_out": 331,
+            "trace_id": "072245979f9647239c5a630c017df52a",
+            "span_id": "28482b5cb7684d66",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-003",
+            "shard_index": 2,
+            "shard_count": 6,
+            "context_request_count": 0,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+            "input_evidence_ids": [
+              "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1",
+              "diff_hunk:apps/signup-form/src/components/pages/success-view.stories.ts:1",
+              "diff_hunk:apps/signup-form/src/components/pages/success-view.tsx:1",
+              "diff_hunk:apps/signup-form/src/index.tsx:1"
+            ],
+            "output_issue_ids": [
+              "correctness:apps/signup-form/src/components/pages/success-page.tsx:3",
+              "correctness:apps/signup-form/src/components/pages/success-view.tsx:3",
+              "correctness:apps/signup-form/src/components/pages/success-page.tsx:3",
+              "correctness:apps/signup-form/src/index.tsx:1"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 54084,
+            "token_count_in": 5576,
+            "token_count_out": 728,
+            "trace_id": "fab2f41062964551902ee474d1fd5f3e",
+            "span_id": "d47d730883644083",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-004",
+            "shard_index": 3,
+            "shard_count": 6,
+            "context_request_count": 2,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+            "input_evidence_ids": [
+              "diff:apps/signup-form/src/components/pages/success-page.tsx:2",
+              "diff:apps/signup-form/src/components/pages/success-page.tsx:3",
+              "diff:apps/signup-form/src/components/pages/success-view.tsx:3",
+              "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1",
+              "diff_hunk:apps/signup-form/src/components/pages/success-view.tsx:1"
+            ],
+            "output_issue_ids": [
+              "best_practice:apps/signup-form/src/components/pages/success-page.tsx:2"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 40774,
+            "token_count_in": 4363,
+            "token_count_out": 229,
+            "trace_id": "d210c0480a184da98aafcea33e15efdb",
+            "span_id": "ef6c33db9ca4414d",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-004-refill",
+            "shard_index": 3,
+            "shard_count": 6,
+            "context_request_count": 0,
+            "context_refill_used": true
+          },
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+            "input_evidence_ids": [
+              "diff_hunk:apps/signup-form/src/pages.tsx:1",
+              "diff_hunk:apps/signup-form/src/preview.stories.tsx:1",
+              "diff_hunk:apps/signup-form/src/utils/helpers.tsx:1",
+              "diff_hunk:apps/signup-form/src/utils/helpers.tsx:17",
+              "diff_hunk:apps/signup-form/src/utils/helpers.tsx:42",
+              "diff_hunk:apps/signup-form/src/utils/options.tsx:1"
+            ],
+            "output_issue_ids": [
+              "style:apps/signup-form/src/utils/helpers.tsx:20"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 6196,
+            "token_count_in": 6027,
+            "token_count_out": 144,
+            "trace_id": "4956af032ebf4f89a617728c7cb4d765",
+            "span_id": "50e1ffcf90cc4d62",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-005",
+            "shard_index": 4,
+            "shard_count": 6,
+            "context_request_count": 0,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+            "input_evidence_ids": [
+              "diff:apps/signup-form/test/utils/is-test-env.js:1",
+              "diff_hunk:ghost/core/core/shared/config/defaults.json:302"
+            ],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 1687,
+            "token_count_in": 3747,
+            "token_count_out": 12,
+            "trace_id": "83eaf49a3f2e4639a06524f044ac7985",
+            "span_id": "3542889ed3124b1b",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-006",
+            "shard_index": 5,
+            "shard_count": 6,
+            "context_request_count": 0,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+            "model": null,
+            "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+            "input_evidence_ids": [
+              "diff_hunk:apps/signup-form/.eslintrc.cjs:15",
+              "diff_hunk:apps/signup-form/.storybook/preview.tsx:3",
+              "diff_hunk:apps/signup-form/src/app.tsx:1",
+              "diff_hunk:apps/signup-form/src/components/frame.tsx:1",
+              "diff_hunk:apps/signup-form/src/components/pages/form-page.tsx:27",
+              "diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:53",
+              "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1",
+              "diff_hunk:apps/signup-form/src/utils/helpers.tsx:17"
+            ],
+            "output_issue_ids": [
+              "style:apps/signup-form/.eslintrc.cjs:24",
+              "code_style:apps/signup-form/src/components/frame.tsx:1",
+              "code_style:apps/signup-form/src/components/frame.tsx:5",
+              "code_style:apps/signup-form/src/app.tsx:4"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 0,
+            "token_count_in": 0,
+            "token_count_out": 0,
+            "trace_id": "",
+            "span_id": "",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "",
+            "shard_index": 0,
+            "shard_count": 0,
+            "context_request_count": 0,
+            "context_refill_used": false
+          }
+        ],
+        "issue_set": [
+          "best-practice:apps/signup-form/src/components/pages/form-view.tsx:56",
+          "best_practice:apps/signup-form/src/components/pages/success-page.tsx:2",
+          "code_style:apps/signup-form/src/app.tsx:4",
+          "code_style:apps/signup-form/src/components/frame.tsx:1",
+          "code_style:apps/signup-form/src/components/frame.tsx:5",
+          "correctness:apps/signup-form/src/components/pages/form-page.tsx:30",
+          "correctness:apps/signup-form/src/components/pages/success-page.tsx:3",
+          "style:apps/signup-form/.eslintrc.cjs:24",
+          "style:apps/signup-form/src/utils/helpers.tsx:20"
+        ],
+        "keep": [
+          {
+            "file": "apps/signup-form/.eslintrc.cjs",
+            "line": 24,
+            "severity": "warning",
+            "category": "style",
+            "message": "New rule 'ghost/filenames/match-regex' enforces kebab-case filenames, but the import path change in apps/signup-form/.storybook/preview.tsx from '../src/AppContext' to '../src/app-context' suggests a file rename that may violate this rule if the actual file is not renamed.",
+            "suggestion": "Ensure the file 'apps/signup-form/src/AppContext' is renamed to 'apps/signup-form/src/app-context' to match the new import path and the kebab-case rule.",
+            "confidence": 0.7,
+            "evidence_ids": [
+              "diff_hunk:apps/signup-form/.eslintrc.cjs:15",
+              "diff_hunk:apps/signup-form/.storybook/preview.tsx:3"
+            ]
+          },
+          {
+            "file": "apps/signup-form/src/components/frame.tsx",
+            "line": 1,
+            "severity": "minor",
+            "category": "code_style",
+            "message": "Import path changed from './IFrame' to './iframe' but the file was not renamed in this patch, which may cause a broken import if the target file does not exist at the new path.",
+            "suggestion": "Ensure that the file './iframe' exists (or is renamed accordingly) to match the updated import path.",
+            "confidence": 0.7,
+            "evidence_ids": [
+              "diff_hunk:apps/signup-form/src/components/frame.tsx:1"
+            ]
+          },
+          {
+            "file": "apps/signup-form/src/components/frame.tsx",
+            "line": 5,
+            "severity": "minor",
+            "category": "code_style",
+            "message": "Import path changed from '../AppContext' to '../app-context' but the file was renamed without text hunks; verify that the renamed file exports the same symbols.",
+            "suggestion": "Confirm that '../app-context' exports 'useAppContext' as expected.",
+            "confidence": 0.7,
+            "evidence_ids": [
+              "diff_hunk:apps/signup-form/src/components/frame.tsx:1"
+            ]
+          },
+          {
+            "file": "apps/signup-form/src/app.tsx",
+            "line": 4,
+            "severity": "minor",
+            "category": "code_style",
+            "message": "Import paths changed to kebab-case (e.g., './app-context', './components/content-box', './components/frame') but the corresponding files were renamed without text hunks; ensure the renamed files export the same symbols.",
+            "suggestion": "Verify that the renamed files export 'AppContextProvider', 'AppContextType', 'ContentBox', and 'Frame' as expected.",
+            "confidence": 0.7,
+            "evidence_ids": [
+              "diff_hunk:apps/signup-form/src/app.tsx:1"
+            ]
+          }
+        ],
+        "needs_human_review": [
+          {
+            "file": "apps/signup-form/src/components/pages/form-page.tsx",
+            "line": 30,
+            "severity": "medium",
+            "category": "correctness",
+            "message": "Removing `setLoading(false)` in the minimal branch leaves the loading state stuck as `true` when the form submission succeeds in minimal mode, preventing the UI from transitioning to the success state.",
+            "suggestion": "Restore `setLoading(false)` in the minimal branch to ensure the loading indicator is cleared when the success state is shown.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:apps/signup-form/src/components/pages/form-page.tsx:27"
+            ]
+          },
+          {
+            "file": "apps/signup-form/src/components/pages/form-view.tsx",
+            "line": 56,
+            "severity": "low",
+            "category": "best-practice",
+            "message": "The `email` value is trimmed before submission, but the local `email` state is not updated with the trimmed value. This can cause a mismatch between the displayed email and the submitted email.",
+            "suggestion": "Trim the email value when setting the state (e.g., `setEmail(e.target.value.trim())`) or trim consistently before both display and submission.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:53"
+            ]
+          },
+          {
+            "file": "apps/signup-form/src/components/pages/success-page.tsx",
+            "line": 3,
+            "severity": "medium",
+            "category": "correctness",
+            "message": "Import path changed from './SuccessView' to './success-view' but the file was renamed from 'SuccessView.tsx' to 'success-view.tsx'. The new import path matches the renamed file, which is correct.",
+            "suggestion": "No action needed; the import correctly references the renamed file.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1"
+            ]
+          },
+          {
+            "file": "apps/signup-form/src/components/pages/success-page.tsx",
+            "line": 2,
+            "severity": "minor",
+            "category": "best_practice",
+            "message": "Review guideline violation: 'Admin React Apps Must Use Kebab-Case File Naming' - The file was renamed from SuccessPage.tsx to success-page.tsx, which now uses kebab-case. However, the import statement on line 2 uses './success-view' which is kebab-case, but the original file was SuccessView.tsx. The rename to success-view.tsx is correct, but the import path must match the new kebab-case file name. The evidence shows the import was changed from './SuccessView' to './success-view', which is correct. No issue.",
+            "suggestion": "",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1"
+            ]
+          },
+          {
+            "file": "apps/signup-form/src/utils/helpers.tsx",
+            "line": 20,
+            "severity": "minor",
+            "category": "style",
+            "message": "String literal uses double quotes instead of single quotes, violating the 'Code Must Use Single Quotes for Strings' guideline.",
+            "suggestion": "Replace double quotes with single quotes: const STORAGE_KEY = 'ghost-history';",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:apps/signup-form/src/utils/helpers.tsx:17"
+            ]
+          }
+        ],
+        "discarded": [
+          {
+            "file": "apps/signup-form/src/components/pages/success-view.tsx",
+            "line": 3,
+            "severity": "medium",
+            "category": "correctness",
+            "message": "Import path changed from '../../AppContext' to '../../app-context'. This may break if the target file was not renamed accordingly.",
+            "suggestion": "Verify that the file at '../../app-context' exists and exports the same symbols as the original '../../AppContext'.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:apps/signup-form/src/components/pages/success-view.tsx:1"
+            ],
+            "filter_reason": "low_signal_suggestion"
+          },
+          {
+            "file": "apps/signup-form/src/index.tsx",
+            "line": 1,
+            "severity": "medium",
+            "category": "correctness",
+            "message": "Import path changed from './App.tsx' to './app.tsx'. This may break if the target file was not renamed accordingly.",
+            "suggestion": "Verify that the file at './app.tsx' exists and exports the same symbols as the original './App.tsx'.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:apps/signup-form/src/index.tsx:1"
+            ],
+            "filter_reason": "low_signal_suggestion"
+          }
+        ]
+      }
+    ]
+  },
+  "tracing": {
+    "total_latency_ms": 402820,
+    "total_token_count_in": 40444,
+    "total_token_count_out": 2226,
+    "total_retry_count": 4,
+    "run_count": 9,
+    "status_counts": {
+      "ok": 9
+    }
+  }
+}

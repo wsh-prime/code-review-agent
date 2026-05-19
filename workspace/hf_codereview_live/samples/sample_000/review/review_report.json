@@ -1,0 +1,1303 @@
+{
+  "schema_version": "1.3",
+  "summary": {
+    "mode": "hybrid-live",
+    "changed_file_count": 1,
+    "changed_entity_count": 1,
+    "risk_signal_count": 2,
+    "finding_count": 0,
+    "needs_human_review_count": 0,
+    "discarded_count": 0,
+    "evidence_count": 54,
+    "missing_evidence_id_count": 0,
+    "agent_run_count": 3,
+    "prompt_exported": false,
+    "loop_enabled": true,
+    "loop_iterations_completed": 1,
+    "loop_converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "total_latency_ms": 271372,
+    "total_token_count_in": 3221,
+    "total_token_count_out": 154,
+    "context_budget_enabled": true,
+    "context_truncated": true,
+    "selected_evidence_count": 3,
+    "omitted_evidence_count": 51,
+    "review_shard_count": 1,
+    "context_refill_count": 1,
+    "context_request_count": 1,
+    "target_repo_modified": false
+  },
+  "findings": [],
+  "needs_human_review": [],
+  "discarded": [],
+  "changed_files": [
+    {
+      "old_path": "mlx_audio/tts/generate.py",
+      "new_path": "mlx_audio/tts/generate.py",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 1,
+          "old_count": 51,
+          "new_start": 1,
+          "new_count": 51,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1,
+              "content": "                player.queue_audio(result.audio)"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 2,
+              "content": "            if join_audio:"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 3,
+              "content": "                audio_list.append(result.audio)"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1,
+              "new_lineno": 4,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 2,
+              "new_lineno": null,
+              "content": "        if args.join_audio:"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 3,
+              "new_lineno": null,
+              "content": "            print(f\"Joining {len(audio_list)} audio files\")"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 5,
+              "content": "            else:"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 6,
+              "content": "                file_name = f\"{file_prefix}_{i:03d}.{audio_format}\""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 7,
+              "content": "                sf.write(file_name, result.audio, 24000)"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 8,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 9,
+              "content": "            if verbose:"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 10,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 11,
+              "content": "                print(\"==========\")"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 12,
+              "content": "                print(f\"Duration:              {result.audio_duration}\")"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 13,
+              "content": "                print("
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 14,
+              "content": "                    f\"Samples/sec:           {result.audio_samples['samples-per-sec']:.1f}\""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 15,
+              "content": "                )"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 16,
+              "content": "                print("
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 17,
+              "content": "                    f\"Prompt:                {result.token_count} tokens, {result.prompt['tokens-per-sec']:.1f} tokens-per-sec\""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 18,
+              "content": "                )"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 19,
+              "content": "                print("
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 20,
+              "content": "                    f\"Audio:                 {result.audio_samples['samples']} samples, {result.audio_samples['samples-per-sec']:.1f} samples-per-sec\""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 21,
+              "content": "                )"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 22,
+              "content": "                print(f\"Real-time factor:      {result.real_time_factor:.2f}x\")"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 23,
+              "content": "                print(f\"Processing time:       {result.processing_time_seconds:.2f}s\")"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 24,
+              "content": "                print(f\"Peak memory usage:     {result.peak_memory_usage:.2f}GB\")"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 25,
+              "content": "                print(f\"✅ Audio successfully generated and saving as: {file_name}\")"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 26,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 27,
+              "content": "        if join_audio:"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 28,
+              "content": "            if verbose:"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 29,
+              "content": "                print(f\"Joining {len(audio_list)} audio files\")"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 4,
+              "new_lineno": 30,
+              "content": "            audio = mx.concatenate(audio_list, axis=0)"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 5,
+              "new_lineno": null,
+              "content": "            sf.write(f\"{args.file_prefix}.wav\", audio, 24000)"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 31,
+              "content": "            sf.write(f\"{file_prefix}.{audio_format}\", audio, 24000)"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 6,
+              "new_lineno": 32,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 7,
+              "new_lineno": null,
+              "content": "        if args.play:"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 8,
+              "new_lineno": null,
+              "content": "            audio = mx.concatenate(audio_list, axis=0)"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 9,
+              "new_lineno": null,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 10,
+              "new_lineno": null,
+              "content": "            player = AudioPlayer()"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 11,
+              "new_lineno": null,
+              "content": "            player.queue_audio(audio)"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 33,
+              "content": "        if play:"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 12,
+              "new_lineno": 34,
+              "content": "            player.wait_for_drain()"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 13,
+              "new_lineno": 35,
+              "content": "            player.stop()"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 36,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 14,
+              "new_lineno": 37,
+              "content": "    except ImportError as e:"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 15,
+              "new_lineno": 38,
+              "content": "        print(f\"Import error: {e}\")"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 16,
+              "new_lineno": 39,
+              "content": "        print("
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 17,
+              "new_lineno": 40,
+              "content": "            \"This might be due to incorrect Python path. Check your project structure.\""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 18,
+              "new_lineno": 41,
+              "content": "        )"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 19,
+              "new_lineno": 42,
+              "content": "    except Exception as e:"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 20,
+              "new_lineno": 43,
+              "content": "        print(f\"Error loading model: {e}\")"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 21,
+              "new_lineno": 44,
+              "content": "        import traceback"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 22,
+              "new_lineno": 45,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 23,
+              "new_lineno": 46,
+              "content": "        traceback.print_exc()"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 24,
+              "new_lineno": 47,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 25,
+              "new_lineno": 48,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 26,
+              "new_lineno": null,
+              "content": "def generate_audio(text: str,"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 27,
+              "new_lineno": null,
+              "content": "                   model: str = \"prince-canuma/Kokoro-82M\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 28,
+              "new_lineno": null,
+              "content": "                   voice: str = \"af_heart\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 29,
+              "new_lineno": null,
+              "content": "                   speed: float = 1.0,"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 30,
+              "new_lineno": null,
+              "content": "                   lang_code: str = \"a\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 31,
+              "new_lineno": null,
+              "content": "                   file_path: str = \"audio\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 32,
+              "new_lineno": null,
+              "content": "                   audio_format: str = \"wav\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 33,
+              "new_lineno": null,
+              "content": "                   sample_rate: int = 24000,"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 34,
+              "new_lineno": null,
+              "content": "                   verbose: bool = True) -> None:"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 35,
+              "new_lineno": null,
+              "content": "    \"\"\""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 36,
+              "new_lineno": null,
+              "content": "    Generates audio from text using a specified TTS model."
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 37,
+              "new_lineno": null,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 38,
+              "new_lineno": null,
+              "content": "    Parameters:"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 39,
+              "new_lineno": null,
+              "content": "    - text (str): The input text to be converted to speech."
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 40,
+              "new_lineno": null,
+              "content": "    - model (str): The TTS model to use (default: \"prince-canuma/Kokoro-82M\")."
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 41,
+              "new_lineno": null,
+              "content": "    - voice (str): The voice style to use (default: \"af_heart\")."
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 42,
+              "new_lineno": null,
+              "content": "    - speed (float): Playback speed multiplier (default: 1.0)."
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 43,
+              "new_lineno": null,
+              "content": "    - lang_code (str): The language code (default: \"a\")."
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 44,
+              "new_lineno": null,
+              "content": "    - file_path (str): The output file path without extension (default: \"audio\")."
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 45,
+              "new_lineno": null,
+              "content": "    - audio_format (str): Output audio format (e.g., \"wav\", \"flac\") (default: \"wav\")."
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 46,
+              "new_lineno": null,
+              "content": "    - sample_rate (int): Sampling rate in Hz (default: 24000)."
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 47,
+              "new_lineno": null,
+              "content": "    - verbose (bool): Whether to print status messages (default: True)."
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 48,
+              "new_lineno": null,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 49,
+              "new_lineno": null,
+              "content": "    Returns:"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 50,
+              "new_lineno": null,
+              "content": "    - None: The function writes the generated audio to a file."
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 51,
+              "new_lineno": null,
+              "content": "    \"\"\""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 49,
+              "content": "def parse_args():"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 50,
+              "content": "    parser = argparse.ArgumentParser(description=\"Generate audio from text using TTS.\")"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 51,
+              "content": "    parser.add_argument("
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "changed_entities": [
+    {
+      "path": "mlx_audio/tts/generate.py",
+      "entity_type": "module",
+      "name": "generate.py",
+      "qualified_name": "mlx_audio.tts.generate",
+      "line_start": 1,
+      "line_end": 51,
+      "hunk_ids": [
+        "mlx_audio/tts/generate.py:1"
+      ]
+    }
+  ],
+  "risk_signals": [
+    {
+      "tag": "api_change",
+      "confidence": 0.82,
+      "reason": "Public function or class signature changed in mlx_audio/tts/generate.py.",
+      "evidence_ids": [
+        "diff:mlx_audio/tts/generate.py:26",
+        "diff:mlx_audio/tts/generate.py:49"
+      ]
+    },
+    {
+      "tag": "security_sensitive",
+      "confidence": 0.74,
+      "reason": "Security-sensitive keywords changed in mlx_audio/tts/generate.py.",
+      "evidence_ids": [
+        "diff:mlx_audio/tts/generate.py:1",
+        "diff:mlx_audio/tts/generate.py:10",
+        "diff:mlx_audio/tts/generate.py:11",
+        "diff:mlx_audio/tts/generate.py:12",
+        "diff:mlx_audio/tts/generate.py:13",
+        "diff:mlx_audio/tts/generate.py:14",
+        "diff:mlx_audio/tts/generate.py:15",
+        "diff:mlx_audio/tts/generate.py:16",
+        "diff:mlx_audio/tts/generate.py:17",
+        "diff:mlx_audio/tts/generate.py:18",
+        "diff:mlx_audio/tts/generate.py:19",
+        "diff:mlx_audio/tts/generate.py:2",
+        "diff:mlx_audio/tts/generate.py:20",
+        "diff:mlx_audio/tts/generate.py:21",
+        "diff:mlx_audio/tts/generate.py:22",
+        "diff:mlx_audio/tts/generate.py:23",
+        "diff:mlx_audio/tts/generate.py:24",
+        "diff:mlx_audio/tts/generate.py:25",
+        "diff:mlx_audio/tts/generate.py:26",
+        "diff:mlx_audio/tts/generate.py:27",
+        "diff:mlx_audio/tts/generate.py:28",
+        "diff:mlx_audio/tts/generate.py:29",
+        "diff:mlx_audio/tts/generate.py:3",
+        "diff:mlx_audio/tts/generate.py:30",
+        "diff:mlx_audio/tts/generate.py:31",
+        "diff:mlx_audio/tts/generate.py:32",
+        "diff:mlx_audio/tts/generate.py:33",
+        "diff:mlx_audio/tts/generate.py:34",
+        "diff:mlx_audio/tts/generate.py:35",
+        "diff:mlx_audio/tts/generate.py:36",
+        "diff:mlx_audio/tts/generate.py:37",
+        "diff:mlx_audio/tts/generate.py:38",
+        "diff:mlx_audio/tts/generate.py:39",
+        "diff:mlx_audio/tts/generate.py:40",
+        "diff:mlx_audio/tts/generate.py:41",
+        "diff:mlx_audio/tts/generate.py:42",
+        "diff:mlx_audio/tts/generate.py:43",
+        "diff:mlx_audio/tts/generate.py:44",
+        "diff:mlx_audio/tts/generate.py:45",
+        "diff:mlx_audio/tts/generate.py:46",
+        "diff:mlx_audio/tts/generate.py:47",
+        "diff:mlx_audio/tts/generate.py:48",
+        "diff:mlx_audio/tts/generate.py:49",
+        "diff:mlx_audio/tts/generate.py:5",
+        "diff:mlx_audio/tts/generate.py:50",
+        "diff:mlx_audio/tts/generate.py:51",
+        "diff:mlx_audio/tts/generate.py:6",
+        "diff:mlx_audio/tts/generate.py:7",
+        "diff:mlx_audio/tts/generate.py:8",
+        "diff:mlx_audio/tts/generate.py:9"
+      ]
+    }
+  ],
+  "evidence_index": {
+    "diff_hunk:mlx_audio/tts/generate.py:1": {
+      "id": "diff_hunk:mlx_audio/tts/generate.py:1",
+      "kind": "diff_hunk",
+      "source": "mlx_audio/tts/generate.py:1",
+      "message": "@@ -1,51 +1,51 @@\n+                player.queue_audio(result.audio)\n+            if join_audio:\n+                audio_list.append(result.audio)\n \n-        if args.join_audio:\n-            print(f\"Joining {len(audio_list)} audio files\")\n+            else:\n+                file_name = f\"{file_prefix}_{i:03d}.{audio_format}\"\n+                sf.write(file_name, result.audio, 24000)\n+\n+            if verbose:\n+\n+                print(\"==========\")\n+                print(f\"Duration:              {result.audio_duration}\")\n+                print(\n+                    f\"Samples/sec:           {result.audio_samples['samples-per-sec']:.1f}\"\n+                )\n+                print(\n+                    f\"Prompt:                {result.token_count} tokens, {result.prompt['tokens-per-sec']:.1f} tokens-per-sec\"\n+                )\n+                print(\n+                    f\"Audio:                 {result.audio_samples['samples']} samples, {result.audio_samples['samples-per-sec']:.1f} samples-per-sec\"\n+                )\n+                print(f\"Real-time factor:      {result.real_time_factor:.2f}x\")\n+                print(f\"Processing time:       {result.processing_time_seconds:.2f}s\")\n+                print(f\"Peak memory usage:     {result.peak_memory_usage:.2f}GB\")\n+                print(f\"✅ Audio successfully generated and saving as: {file_name}\")\n+\n+        if join_audio:\n+            if verbose:\n+                print(f\"Joining {len(audio_list)} audio files\")\n             audio = mx.concatenate(audio_list, axis=0)\n-            sf.write(f\"{args.file_prefix}.wav\", audio, 24000)\n+            sf.write(f\"{file_prefix}.{audio_format}\", audio, 24000)\n \n-        if args.play:\n-            audio = mx.concatenate(audio_list, axis=0)\n-\n-            player = AudioPlayer()\n-            player.queue_audio(audio)\n+        if play:\n             player.wait_for_drain()\n             player.stop()\n+\n     except ImportError as e:\n         print(f\"Import error: {e}\")\n         print(\n             \"This might be due to incorrect Python path. Check your project structure.\"\n         )\n     except Exception as e:\n         print(f\"Error loading model: {e}\")\n         import traceback\n \n         traceback.print_exc()\n \n \n-def generate_audio(text: str,\n-                   model: str = \"prince-canuma/Kokoro-82M\",\n-                   voice: str = \"af_heart\",\n-                   speed: float = 1.0,\n-                   lang_code: str = \"a\",\n-                   file_path: str = \"audio\",\n-                   audio_format: str = \"wav\",\n-                   sample_rate: int = 24000,\n-                   verbose: bool = True) -> None:\n-    \"\"\"\n-    Generates audio from text using a specified TTS model.\n-\n-    Parameters:\n-    - text (str): The input text to be converted to speech.\n-    - model (str): The TTS model to use (default: \"prince-canuma/Kokoro-82M\").\n-    - voice (str): The voice style to use (default: \"af_heart\").\n-    - speed (float): Playback speed multiplier (default: 1.0).\n-    - lang_code (str): The language code (default: \"a\").\n-    - file_path (str): The output file path without extension (default: \"audio\").\n-    - audio_format (str): Output audio format (e.g., \"wav\", \"flac\") (default: \"wav\").\n-    - sample_rate (int): Sampling rate in Hz (default: 24000).\n-    - verbose (bool): Whether to print status messages (default: True).\n-\n-    Returns:\n... omitted 5 hunk line(s)"
+    },
+    "diff:mlx_audio/tts/generate.py:1": {
+      "id": "diff:mlx_audio/tts/generate.py:1",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:1",
+      "message": "Added line: player.queue_audio(result.audio)"
+    },
+    "diff:mlx_audio/tts/generate.py:2": {
+      "id": "diff:mlx_audio/tts/generate.py:2",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:2",
+      "message": "Removed line: if args.join_audio:"
+    },
+    "diff:mlx_audio/tts/generate.py:3": {
+      "id": "diff:mlx_audio/tts/generate.py:3",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:3",
+      "message": "Removed line: print(f\"Joining {len(audio_list)} audio files\")"
+    },
+    "diff:mlx_audio/tts/generate.py:5": {
+      "id": "diff:mlx_audio/tts/generate.py:5",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:5",
+      "message": "Removed line: sf.write(f\"{args.file_prefix}.wav\", audio, 24000)"
+    },
+    "diff:mlx_audio/tts/generate.py:6": {
+      "id": "diff:mlx_audio/tts/generate.py:6",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:6",
+      "message": "Added line: file_name = f\"{file_prefix}_{i:03d}.{audio_format}\""
+    },
+    "diff:mlx_audio/tts/generate.py:7": {
+      "id": "diff:mlx_audio/tts/generate.py:7",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:7",
+      "message": "Removed line: if args.play:"
+    },
+    "diff:mlx_audio/tts/generate.py:8": {
+      "id": "diff:mlx_audio/tts/generate.py:8",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:8",
+      "message": "Removed line: audio = mx.concatenate(audio_list, axis=0)"
+    },
+    "diff:mlx_audio/tts/generate.py:9": {
+      "id": "diff:mlx_audio/tts/generate.py:9",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:9",
+      "message": "Removed line: "
+    },
+    "diff:mlx_audio/tts/generate.py:10": {
+      "id": "diff:mlx_audio/tts/generate.py:10",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:10",
+      "message": "Removed line: player = AudioPlayer()"
+    },
+    "diff:mlx_audio/tts/generate.py:11": {
+      "id": "diff:mlx_audio/tts/generate.py:11",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:11",
+      "message": "Removed line: player.queue_audio(audio)"
+    },
+    "diff:mlx_audio/tts/generate.py:12": {
+      "id": "diff:mlx_audio/tts/generate.py:12",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:12",
+      "message": "Added line: print(f\"Duration:              {result.audio_duration}\")"
+    },
+    "diff:mlx_audio/tts/generate.py:13": {
+      "id": "diff:mlx_audio/tts/generate.py:13",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:13",
+      "message": "Added line: print("
+    },
+    "diff:mlx_audio/tts/generate.py:14": {
+      "id": "diff:mlx_audio/tts/generate.py:14",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:14",
+      "message": "Added line: f\"Samples/sec:           {result.audio_samples['samples-per-sec']:.1f}\""
+    },
+    "diff:mlx_audio/tts/generate.py:15": {
+      "id": "diff:mlx_audio/tts/generate.py:15",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:15",
+      "message": "Added line: )"
+    },
+    "diff:mlx_audio/tts/generate.py:16": {
+      "id": "diff:mlx_audio/tts/generate.py:16",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:16",
+      "message": "Added line: print("
+    },
+    "diff:mlx_audio/tts/generate.py:17": {
+      "id": "diff:mlx_audio/tts/generate.py:17",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:17",
+      "message": "Added line: f\"Prompt:                {result.token_count} tokens, {result.prompt['tokens-per-sec']:.1f} tokens-per-sec\""
+    },
+    "diff:mlx_audio/tts/generate.py:18": {
+      "id": "diff:mlx_audio/tts/generate.py:18",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:18",
+      "message": "Added line: )"
+    },
+    "diff:mlx_audio/tts/generate.py:19": {
+      "id": "diff:mlx_audio/tts/generate.py:19",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:19",
+      "message": "Added line: print("
+    },
+    "diff:mlx_audio/tts/generate.py:20": {
+      "id": "diff:mlx_audio/tts/generate.py:20",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:20",
+      "message": "Added line: f\"Audio:                 {result.audio_samples['samples']} samples, {result.audio_samples['samples-per-sec']:.1f} sam..."
+    },
+    "diff:mlx_audio/tts/generate.py:21": {
+      "id": "diff:mlx_audio/tts/generate.py:21",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:21",
+      "message": "Added line: )"
+    },
+    "diff:mlx_audio/tts/generate.py:22": {
+      "id": "diff:mlx_audio/tts/generate.py:22",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:22",
+      "message": "Added line: print(f\"Real-time factor:      {result.real_time_factor:.2f}x\")"
+    },
+    "diff:mlx_audio/tts/generate.py:23": {
+      "id": "diff:mlx_audio/tts/generate.py:23",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:23",
+      "message": "Added line: print(f\"Processing time:       {result.processing_time_seconds:.2f}s\")"
+    },
+    "diff:mlx_audio/tts/generate.py:24": {
+      "id": "diff:mlx_audio/tts/generate.py:24",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:24",
+      "message": "Added line: print(f\"Peak memory usage:     {result.peak_memory_usage:.2f}GB\")"
+    },
+    "diff:mlx_audio/tts/generate.py:25": {
+      "id": "diff:mlx_audio/tts/generate.py:25",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:25",
+      "message": "Added line: print(f\"✅ Audio successfully generated and saving as: {file_name}\")"
+    },
+    "diff:mlx_audio/tts/generate.py:26": {
+      "id": "diff:mlx_audio/tts/generate.py:26",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:26",
+      "message": "Removed line: def generate_audio(text: str,"
+    },
+    "diff:mlx_audio/tts/generate.py:27": {
+      "id": "diff:mlx_audio/tts/generate.py:27",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:27",
+      "message": "Removed line: model: str = \"prince-canuma/Kokoro-82M\","
+    },
+    "diff:mlx_audio/tts/generate.py:28": {
+      "id": "diff:mlx_audio/tts/generate.py:28",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:28",
+      "message": "Removed line: voice: str = \"af_heart\","
+    },
+    "diff:mlx_audio/tts/generate.py:29": {
+      "id": "diff:mlx_audio/tts/generate.py:29",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:29",
+      "message": "Removed line: speed: float = 1.0,"
+    },
+    "diff:mlx_audio/tts/generate.py:31": {
+      "id": "diff:mlx_audio/tts/generate.py:31",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:31",
+      "message": "Removed line: file_path: str = \"audio\","
+    },
+    "diff:mlx_audio/tts/generate.py:33": {
+      "id": "diff:mlx_audio/tts/generate.py:33",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:33",
+      "message": "Removed line: sample_rate: int = 24000,"
+    },
+    "diff:mlx_audio/tts/generate.py:36": {
+      "id": "diff:mlx_audio/tts/generate.py:36",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:36",
+      "message": "Removed line: Generates audio from text using a specified TTS model."
+    },
+    "diff:mlx_audio/tts/generate.py:30": {
+      "id": "diff:mlx_audio/tts/generate.py:30",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:30",
+      "message": "Removed line: lang_code: str = \"a\","
+    },
+    "diff:mlx_audio/tts/generate.py:32": {
+      "id": "diff:mlx_audio/tts/generate.py:32",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:32",
+      "message": "Removed line: audio_format: str = \"wav\","
+    },
+    "diff:mlx_audio/tts/generate.py:34": {
+      "id": "diff:mlx_audio/tts/generate.py:34",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:34",
+      "message": "Removed line: verbose: bool = True) -> None:"
+    },
+    "diff:mlx_audio/tts/generate.py:35": {
+      "id": "diff:mlx_audio/tts/generate.py:35",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:35",
+      "message": "Removed line: \"\"\""
+    },
+    "diff:mlx_audio/tts/generate.py:37": {
+      "id": "diff:mlx_audio/tts/generate.py:37",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:37",
+      "message": "Removed line: "
+    },
+    "diff:mlx_audio/tts/generate.py:38": {
+      "id": "diff:mlx_audio/tts/generate.py:38",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:38",
+      "message": "Removed line: Parameters:"
+    },
+    "diff:mlx_audio/tts/generate.py:39": {
+      "id": "diff:mlx_audio/tts/generate.py:39",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:39",
+      "message": "Removed line: - text (str): The input text to be converted to speech."
+    },
+    "diff:mlx_audio/tts/generate.py:40": {
+      "id": "diff:mlx_audio/tts/generate.py:40",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:40",
+      "message": "Removed line: - model (str): The TTS model to use (default: \"prince-canuma/Kokoro-82M\")."
+    },
+    "diff:mlx_audio/tts/generate.py:41": {
+      "id": "diff:mlx_audio/tts/generate.py:41",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:41",
+      "message": "Removed line: - voice (str): The voice style to use (default: \"af_heart\")."
+    },
+    "diff:mlx_audio/tts/generate.py:42": {
+      "id": "diff:mlx_audio/tts/generate.py:42",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:42",
+      "message": "Removed line: - speed (float): Playback speed multiplier (default: 1.0)."
+    },
+    "diff:mlx_audio/tts/generate.py:43": {
+      "id": "diff:mlx_audio/tts/generate.py:43",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:43",
+      "message": "Removed line: - lang_code (str): The language code (default: \"a\")."
+    },
+    "diff:mlx_audio/tts/generate.py:44": {
+      "id": "diff:mlx_audio/tts/generate.py:44",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:44",
+      "message": "Removed line: - file_path (str): The output file path without extension (default: \"audio\")."
+    },
+    "diff:mlx_audio/tts/generate.py:45": {
+      "id": "diff:mlx_audio/tts/generate.py:45",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:45",
+      "message": "Removed line: - audio_format (str): Output audio format (e.g., \"wav\", \"flac\") (default: \"wav\")."
+    },
+    "diff:mlx_audio/tts/generate.py:46": {
+      "id": "diff:mlx_audio/tts/generate.py:46",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:46",
+      "message": "Removed line: - sample_rate (int): Sampling rate in Hz (default: 24000)."
+    },
+    "diff:mlx_audio/tts/generate.py:47": {
+      "id": "diff:mlx_audio/tts/generate.py:47",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:47",
+      "message": "Removed line: - verbose (bool): Whether to print status messages (default: True)."
+    },
+    "diff:mlx_audio/tts/generate.py:48": {
+      "id": "diff:mlx_audio/tts/generate.py:48",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:48",
+      "message": "Removed line: "
+    },
+    "diff:mlx_audio/tts/generate.py:49": {
+      "id": "diff:mlx_audio/tts/generate.py:49",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:49",
+      "message": "Added line: def parse_args():"
+    },
+    "diff:mlx_audio/tts/generate.py:50": {
+      "id": "diff:mlx_audio/tts/generate.py:50",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:50",
+      "message": "Added line: parser = argparse.ArgumentParser(description=\"Generate audio from text using TTS.\")"
+    },
+    "diff:mlx_audio/tts/generate.py:51": {
+      "id": "diff:mlx_audio/tts/generate.py:51",
+      "kind": "diff",
+      "source": "mlx_audio/tts/generate.py:51",
+      "message": "Added line: parser.add_argument("
+    },
+    "entity:mlx_audio/tts/generate.py:mlx_audio.tts.generate": {
+      "id": "entity:mlx_audio/tts/generate.py:mlx_audio.tts.generate",
+      "kind": "entity",
+      "source": "mlx_audio/tts/generate.py:1-51",
+      "message": "Changed module mlx_audio.tts.generate touched by 1 hunk(s)."
+    },
+    "risk:api_change:mlx_audio/tts/generate.py": {
+      "id": "risk:api_change:mlx_audio/tts/generate.py",
+      "kind": "risk",
+      "source": "api_change",
+      "message": "Public function or class signature changed in mlx_audio/tts/generate.py."
+    },
+    "risk:security_sensitive:mlx_audio/tts/generate.py": {
+      "id": "risk:security_sensitive:mlx_audio/tts/generate.py",
+      "kind": "risk",
+      "source": "security_sensitive",
+      "message": "Security-sensitive keywords changed in mlx_audio/tts/generate.py."
+    }
+  },
+  "missing_evidence_ids": [],
+  "agent_runs": [
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+      "input_evidence_ids": [
+        "diff_hunk:mlx_audio/tts/generate.py:1"
+      ],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 1,
+      "retry_log": [
+        "attempt=1 error=timeout delay=1.00s"
+      ],
+      "latency_ms": 88194,
+      "token_count_in": 3221,
+      "token_count_out": 154,
+      "trace_id": "88f05a4cd8054df7ba9d83eb33ee93d3",
+      "span_id": "7eb47a0beed243df",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001",
+      "shard_index": 0,
+      "shard_count": 1,
+      "context_request_count": 1,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+      "input_evidence_ids": [
+        "diff:mlx_audio/tts/generate.py:26",
+        "diff:mlx_audio/tts/generate.py:49",
+        "diff_hunk:mlx_audio/tts/generate.py:1"
+      ],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 2,
+      "retry_log": [
+        "attempt=1 error=timeout delay=1.00s",
+        "attempt=2 error=timeout delay=2.00s"
+      ],
+      "latency_ms": 183178,
+      "token_count_in": 0,
+      "token_count_out": 0,
+      "trace_id": "9f70127b5d9b4705be0b68e65620ebf7",
+      "span_id": "dd32e5413a894678",
+      "parent_span_id": "",
+      "status": "error",
+      "error_type": "_AgentTransientError",
+      "shard_id": "shard-001-refill",
+      "shard_index": 0,
+      "shard_count": 1,
+      "context_request_count": 0,
+      "context_refill_used": true
+    },
+    {
+      "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+      "model": null,
+      "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+      "input_evidence_ids": [],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 0,
+      "token_count_in": 0,
+      "token_count_out": 0,
+      "trace_id": "",
+      "span_id": "",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "",
+      "shard_index": 0,
+      "shard_count": 0,
+      "context_request_count": 0,
+      "context_refill_used": false
+    }
+  ],
+  "prompt_exports": {},
+  "context_budget": {
+    "enabled": true,
+    "strategy": "file_risk_shards_v1",
+    "context_profile": "risk_compact_manifest_v1",
+    "max_input_tokens": 9000,
+    "estimated_input_tokens": 3604,
+    "selected_evidence_count": 3,
+    "omitted_evidence_count": 51,
+    "selected_evidence_ids": [
+      "diff_hunk:mlx_audio/tts/generate.py:1",
+      "diff:mlx_audio/tts/generate.py:26",
+      "diff:mlx_audio/tts/generate.py:49"
+    ],
+    "omitted_evidence_ids": [
+      "diff:mlx_audio/tts/generate.py:1",
+      "diff:mlx_audio/tts/generate.py:10",
+      "diff:mlx_audio/tts/generate.py:11",
+      "diff:mlx_audio/tts/generate.py:12",
+      "diff:mlx_audio/tts/generate.py:13",
+      "diff:mlx_audio/tts/generate.py:14",
+      "diff:mlx_audio/tts/generate.py:15",
+      "diff:mlx_audio/tts/generate.py:16",
+      "diff:mlx_audio/tts/generate.py:17",
+      "diff:mlx_audio/tts/generate.py:18",
+      "diff:mlx_audio/tts/generate.py:19",
+      "diff:mlx_audio/tts/generate.py:2",
+      "diff:mlx_audio/tts/generate.py:20",
+      "diff:mlx_audio/tts/generate.py:21",
+      "diff:mlx_audio/tts/generate.py:22",
+      "diff:mlx_audio/tts/generate.py:23",
+      "diff:mlx_audio/tts/generate.py:24",
+      "diff:mlx_audio/tts/generate.py:25",
+      "diff:mlx_audio/tts/generate.py:27",
+      "diff:mlx_audio/tts/generate.py:28",
+      "diff:mlx_audio/tts/generate.py:29",
+      "diff:mlx_audio/tts/generate.py:3",
+      "diff:mlx_audio/tts/generate.py:30",
+      "diff:mlx_audio/tts/generate.py:31",
+      "diff:mlx_audio/tts/generate.py:32",
+      "diff:mlx_audio/tts/generate.py:33",
+      "diff:mlx_audio/tts/generate.py:34",
+      "diff:mlx_audio/tts/generate.py:35",
+      "diff:mlx_audio/tts/generate.py:36",
+      "diff:mlx_audio/tts/generate.py:37",
+      "diff:mlx_audio/tts/generate.py:38",
+      "diff:mlx_audio/tts/generate.py:39",
+      "diff:mlx_audio/tts/generate.py:40",
+      "diff:mlx_audio/tts/generate.py:41",
+      "diff:mlx_audio/tts/generate.py:42",
+      "diff:mlx_audio/tts/generate.py:43",
+      "diff:mlx_audio/tts/generate.py:44",
+      "diff:mlx_audio/tts/generate.py:45",
+      "diff:mlx_audio/tts/generate.py:46",
+      "diff:mlx_audio/tts/generate.py:47",
+      "diff:mlx_audio/tts/generate.py:48",
+      "diff:mlx_audio/tts/generate.py:5",
+      "diff:mlx_audio/tts/generate.py:50",
+      "diff:mlx_audio/tts/generate.py:51",
+      "diff:mlx_audio/tts/generate.py:6",
+      "diff:mlx_audio/tts/generate.py:7",
+      "diff:mlx_audio/tts/generate.py:8",
+      "diff:mlx_audio/tts/generate.py:9",
+      "risk:security_sensitive:mlx_audio/tts/generate.py",
+      "entity:mlx_audio/tts/generate.py:mlx_audio.tts.generate",
+      "risk:api_change:mlx_audio/tts/generate.py"
+    ],
+    "selected_risk_signal_count": 2,
+    "context_truncated": true,
+    "shard_count": 1,
+    "refill_count": 1,
+    "context_request_count": 1,
+    "context_requests": [
+      {
+        "request_type": "same_file_more_evidence",
+        "path": "mlx_audio/tts/generate.py",
+        "evidence_ids": [
+          "diff:mlx_audio/tts/generate.py:26",
+          "diff:mlx_audio/tts/generate.py:49"
+        ],
+        "risk_tag": null,
+        "symbol": null,
+        "reason": "The diff hunk is truncated and does not show the full new function signature or the new function body. The api_change risk signal indicates a public function signature change, but the evidence does not show the new signature or the new function. Requesting the omitted diff lines to assess the API change and any security implications.",
+        "source_shard_id": "shard-001",
+        "fulfilled_evidence_ids": [
+          "diff:mlx_audio/tts/generate.py:26",
+          "diff:mlx_audio/tts/generate.py:49",
+          "diff_hunk:mlx_audio/tts/generate.py:1"
+        ]
+      }
+    ],
+    "shards": [
+      {
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 1,
+        "omitted_evidence_count": 53,
+        "estimated_input_tokens": 1994,
+        "context_truncated": true
+      },
+      {
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "is_refill": true,
+        "parent_shard_id": "shard-001",
+        "selected_evidence_count": 3,
+        "omitted_evidence_count": 0,
+        "estimated_input_tokens": 1610,
+        "context_truncated": false
+      }
+    ],
+    "warnings": []
+  },
+  "loop": {
+    "enabled": true,
+    "max_iter": 1,
+    "iterations_completed": 1,
+    "converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "checkpoint_path": "D:\\learn\\code-review-agent\\workspace\\hf_codereview_live\\samples\\sample_000\\review\\loop_checkpoint.json",
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "iterations": [
+      {
+        "i": 0,
+        "candidate_issue_count": 0,
+        "verified_count": 0,
+        "needs_human_review_count": 0,
+        "discarded_count": 0,
+        "keep_count": 0,
+        "uncertain_count": 0,
+        "reject_count": 0,
+        "feedback_sent": [],
+        "agent_runs": [
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+            "input_evidence_ids": [
+              "diff_hunk:mlx_audio/tts/generate.py:1"
+            ],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 1,
+            "retry_log": [
+              "attempt=1 error=timeout delay=1.00s"
+            ],
+            "latency_ms": 88194,
+            "token_count_in": 3221,
+            "token_count_out": 154,
+            "trace_id": "88f05a4cd8054df7ba9d83eb33ee93d3",
+            "span_id": "7eb47a0beed243df",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001",
+            "shard_index": 0,
+            "shard_count": 1,
+            "context_request_count": 1,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+            "input_evidence_ids": [
+              "diff:mlx_audio/tts/generate.py:26",
+              "diff:mlx_audio/tts/generate.py:49",
+              "diff_hunk:mlx_audio/tts/generate.py:1"
+            ],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 2,
+            "retry_log": [
+              "attempt=1 error=timeout delay=1.00s",
+              "attempt=2 error=timeout delay=2.00s"
+            ],
+            "latency_ms": 183178,
+            "token_count_in": 0,
+            "token_count_out": 0,
+            "trace_id": "9f70127b5d9b4705be0b68e65620ebf7",
+            "span_id": "dd32e5413a894678",
+            "parent_span_id": "",
+            "status": "error",
+            "error_type": "_AgentTransientError",
+            "shard_id": "shard-001-refill",
+            "shard_index": 0,
+            "shard_count": 1,
+            "context_request_count": 0,
+            "context_refill_used": true
+          },
+          {
+            "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+            "model": null,
+            "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+            "input_evidence_ids": [],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 0,
+            "token_count_in": 0,
+            "token_count_out": 0,
+            "trace_id": "",
+            "span_id": "",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "",
+            "shard_index": 0,
+            "shard_count": 0,
+            "context_request_count": 0,
+            "context_refill_used": false
+          }
+        ],
+        "issue_set": [],
+        "keep": [],
+        "needs_human_review": [],
+        "discarded": []
+      }
+    ]
+  },
+  "tracing": {
+    "total_latency_ms": 271372,
+    "total_token_count_in": 3221,
+    "total_token_count_out": 154,
+    "total_retry_count": 3,
+    "run_count": 3,
+    "status_counts": {
+      "ok": 2,
+      "error": 1
+    }
+  }
+}

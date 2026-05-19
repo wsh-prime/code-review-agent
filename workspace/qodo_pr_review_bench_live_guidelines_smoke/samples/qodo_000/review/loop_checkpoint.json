@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0",
+  "run_id": "758912ad75f444de97a9a05473efc79c",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": true,
+  "package_hash": "sha256:857c0a76ba12d4c597e4c5584f89a61da4ca06c1cce0abcff95b3d90152e54cb",
+  "diff_hash": "sha256:062a6eb825eab43b9dfb09c5b03ccb186c6eddd9ffd082a1c6d3a05b657fcb5f",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 1,
+      "verified_count": 1,
+      "needs_human_review_count": 0,
+      "discarded_count": 0,
+      "keep_count": 1,
+      "uncertain_count": 0,
+      "reject_count": 0,
+      "feedback_sent": [],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:ghost/core/core/boot.js:310",
+            "diff_hunk:ghost/core/core/server/services/xmlrpc.js:1",
+            "diff_hunk:ghost/core/core/shared/config/env/config.development.json:23",
+            "diff_hunk:ghost/core/test/unit/server/services/xmlrpc.test.js:1"
+          ],
+          "output_issue_ids": [
+            "functionality:ghost/core/core/shared/config/env/config.development.json:26"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 21070,
+          "token_count_in": 6626,
+          "token_count_out": 179,
+          "trace_id": "117b848c992548feb712832b8a61627c",
+          "span_id": "341abf522788459b",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 1,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [
+            "diff_hunk:ghost/core/core/shared/config/env/config.development.json:23"
+          ],
+          "output_issue_ids": [
+            "functionality:ghost/core/core/shared/config/env/config.development.json:26"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [
+        "functionality:ghost/core/core/shared/config/env/config.development.json:26"
+      ],
+      "keep": [
+        {
+          "file": "ghost/core/core/shared/config/env/config.development.json",
+          "line": 26,
+          "severity": "medium",
+          "category": "functionality",
+          "message": "Removing the 'useRpcPing' privacy config option disables the ability to control XML-RPC ping behavior via configuration, which may affect existing deployments that rely on this setting.",
+          "suggestion": "If the XMLRPC service is intentionally removed, ensure the config removal is coordinated with the service deletion. If the service is kept, retain the config option.",
+          "confidence": 0.85,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/shared/config/env/config.development.json:23"
+          ]
+        }
+      ],
+      "needs_human_review": [],
+      "discarded": []
+    }
+  ],
+  "last_feedback": null
+}

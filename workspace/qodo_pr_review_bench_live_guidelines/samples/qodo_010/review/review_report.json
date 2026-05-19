@@ -1,0 +1,2916 @@
+{
+  "schema_version": "1.3",
+  "summary": {
+    "mode": "hybrid-live",
+    "changed_file_count": 3,
+    "changed_entity_count": 3,
+    "risk_signal_count": 0,
+    "finding_count": 0,
+    "needs_human_review_count": 0,
+    "discarded_count": 1,
+    "evidence_count": 109,
+    "missing_evidence_id_count": 0,
+    "agent_run_count": 2,
+    "prompt_exported": false,
+    "loop_enabled": true,
+    "loop_iterations_completed": 1,
+    "loop_converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "total_latency_ms": 5973,
+    "total_token_count_in": 5827,
+    "total_token_count_out": 146,
+    "context_budget_enabled": true,
+    "context_truncated": true,
+    "selected_evidence_count": 3,
+    "omitted_evidence_count": 106,
+    "review_shard_count": 1,
+    "context_refill_count": 0,
+    "context_request_count": 0,
+    "target_repo_modified": false
+  },
+  "findings": [],
+  "needs_human_review": [],
+  "discarded": [
+    {
+      "file": "apps/shade/src/components/ui/filters.tsx",
+      "line": 105,
+      "severity": "medium",
+      "category": "correctness",
+      "message": "Empty string label for 'Add filter' button may render an invisible or non-functional UI element, breaking the add-filter feature.",
+      "suggestion": "Restore a non-empty label or use an accessible alternative such as an aria-label on the button.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:apps/shade/src/components/ui/filters.tsx:102"
+      ],
+      "filter_reason": "low_signal_suggestion"
+    }
+  ],
+  "changed_files": [
+    {
+      "old_path": "apps/shade/src/components/ui/filters.tsx",
+      "new_path": "apps/shade/src/components/ui/filters.tsx",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 102,
+          "old_count": 7,
+          "new_start": 102,
+          "new_count": 7,
+          "section_header": "export interface FilterI18nConfig {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 102,
+              "new_lineno": 102,
+              "content": "// Default English i18n configuration"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 103,
+              "new_lineno": 103,
+              "content": "export const DEFAULT_I18N: FilterI18nConfig = {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 104,
+              "new_lineno": 104,
+              "content": "    // UI Labels"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 105,
+              "new_lineno": null,
+              "content": "    addFilter: 'Add filter',"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 105,
+              "content": "    addFilter: '',"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 106,
+              "new_lineno": 106,
+              "content": "    searchFields: 'Search fields...',"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 107,
+              "new_lineno": 107,
+              "content": "    noFieldsFound: 'No fields found.',"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 108,
+              "new_lineno": 108,
+              "content": "    noResultsFound: 'No results found.',"
+            }
+          ]
+        },
+        {
+          "old_start": 119,
+          "old_count": 7,
+          "new_start": 119,
+          "new_count": 7,
+          "section_header": "export const DEFAULT_I18N: FilterI18nConfig = {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 119,
+              "new_lineno": 119,
+              "content": "    percent: '%',"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 120,
+              "new_lineno": 120,
+              "content": "    defaultCurrency: '$',"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 121,
+              "new_lineno": 121,
+              "content": "    defaultColor: '#000000',"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 122,
+              "new_lineno": null,
+              "content": "    addFilterTitle: 'Add filter',"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 122,
+              "content": "    addFilterTitle: '',"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 123,
+              "new_lineno": 123,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 124,
+              "new_lineno": 124,
+              "content": "    // Operators"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 125,
+              "new_lineno": 125,
+              "content": "    operators: {"
+            }
+          ]
+        },
+        {
+          "old_start": 236,
+          "old_count": 7,
+          "new_start": 236,
+          "new_count": 7,
+          "section_header": "const filterInputVariants = cva(",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 236,
+              "new_lineno": 236,
+              "content": "            size: {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 237,
+              "new_lineno": 237,
+              "content": "                lg: 'h-10 px-2.5 text-sm has-[[data-slot=filters-prefix]]:ps-0 has-[[data-slot=filters-suffix]]:pe-0',"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 238,
+              "new_lineno": 238,
+              "content": "                md: 'h-[34px] px-2 text-sm has-[[data-slot=filters-prefix]]:ps-0 has-[[data-slot=filters-suffix]]:pe-0',"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 239,
+              "new_lineno": null,
+              "content": "                sm: 'h-8 px-1.5 text-xs has-[[data-slot=filters-prefix]]:ps-0 has-[[data-slot=filters-suffix]]:pe-0'"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 239,
+              "content": "                sm: 'h-8 px-2 text-xs has-[[data-slot=filters-prefix]]:ps-0 has-[[data-slot=filters-suffix]]:pe-0'"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 240,
+              "new_lineno": 240,
+              "content": "            },"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 241,
+              "new_lineno": 241,
+              "content": "            cursorPointer: {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 242,
+              "new_lineno": 242,
+              "content": "                true: 'cursor-pointer',"
+            }
+          ]
+        },
+        {
+          "old_start": 747,
+          "old_count": 6,
+          "new_start": 747,
+          "new_count": 8,
+          "section_header": "export interface FilterFieldConfig<T = unknown> {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 747,
+              "new_lineno": 747,
+              "content": "    // Controlled values support for this field"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 748,
+              "new_lineno": 748,
+              "content": "    value?: T[];"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 749,
+              "new_lineno": 749,
+              "content": "    onValueChange?: (values: T[]) => void;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 750,
+              "content": "    // Auto-close dropdown after selection (even for multiselect types)"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 751,
+              "content": "    autoCloseOnSelect?: boolean;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 750,
+              "new_lineno": 752,
+              "content": "}"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 751,
+              "new_lineno": 753,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 752,
+              "new_lineno": 754,
+              "content": "// Helper functions to handle both flat and grouped field configurations"
+            }
+          ]
+        },
+        {
+          "old_start": 941,
+          "old_count": 7,
+          "new_start": 943,
+          "new_count": 7,
+          "section_header": "function FilterOperatorDropdown<T = unknown>({field, operator, values, onChange}",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 941,
+              "new_lineno": 943,
+              "content": "    // If hideOperatorSelect is true, just render the operator as plain text"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 942,
+              "new_lineno": 944,
+              "content": "    if (field.hideOperatorSelect) {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 943,
+              "new_lineno": 945,
+              "content": "        return ("
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 944,
+              "new_lineno": null,
+              "content": "            <div className=\"flex items-center border-x px-3 text-sm text-muted-foreground\">"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 946,
+              "content": "            <div className=\"flex items-center self-stretch border border-r-[0px] px-3 text-sm text-muted-foreground\">"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 945,
+              "new_lineno": 947,
+              "content": "                {operatorLabel}"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 946,
+              "new_lineno": 948,
+              "content": "            </div>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 947,
+              "new_lineno": 949,
+              "content": "        );"
+            }
+          ]
+        },
+        {
+          "old_start": 1046,
+          "old_count": 6,
+          "new_start": 1048,
+          "new_count": 7,
+          "section_header": "function SelectOptionsPopover<T = unknown>({",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 1046,
+              "new_lineno": 1048,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1047,
+              "new_lineno": 1049,
+              "content": "    const handleClose = () => {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1048,
+              "new_lineno": 1050,
+              "content": "        setOpen(false);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1051,
+              "content": "        setSearchInput('');"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1049,
+              "new_lineno": 1052,
+              "content": "        onClose?.();"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1050,
+              "new_lineno": 1053,
+              "content": "    };"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1051,
+              "new_lineno": 1054,
+              "content": ""
+            }
+          ]
+        },
+        {
+          "old_start": 1119,
+          "old_count": 7,
+          "new_start": 1122,
+          "new_count": 7,
+          "section_header": "function SelectOptionsPopover<T = unknown>({",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 1119,
+              "new_lineno": 1122,
+              "content": "                                            value={option.label}"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1120,
+              "new_lineno": 1123,
+              "content": "                                            onSelect={() => {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1121,
+              "new_lineno": 1124,
+              "content": "                                                if (isMultiSelect) {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 1122,
+              "new_lineno": null,
+              "content": "                                                    const newValues = [...effectiveValues, option.value] as T[];"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1125,
+              "content": "                                                    var newValues = [...effectiveValues, option.value] as T[];"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1123,
+              "new_lineno": 1126,
+              "content": "                                                    if (field.maxSelections && newValues.length > field.maxSelections) {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1124,
+              "new_lineno": 1127,
+              "content": "                                                        return; // Don't exceed max selections"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1125,
+              "new_lineno": 1128,
+              "content": "                                                    }"
+            }
+          ]
+        },
+        {
+          "old_start": 1128,
+          "old_count": 6,
+          "new_start": 1131,
+          "new_count": 10,
+          "section_header": "function SelectOptionsPopover<T = unknown>({",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 1128,
+              "new_lineno": 1131,
+              "content": "                                                    } else {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1129,
+              "new_lineno": 1132,
+              "content": "                                                        onChange(newValues);"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1130,
+              "new_lineno": 1133,
+              "content": "                                                    }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1134,
+              "content": "                                                    // Auto-close if configured"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1135,
+              "content": "                                                    if (field.autoCloseOnSelect) {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1136,
+              "content": "                                                        onClose?.();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1137,
+              "content": "                                                    }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1131,
+              "new_lineno": 1138,
+              "content": "                                                    // For multiselect, don't close the popover to allow multiple selections"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1132,
+              "new_lineno": 1139,
+              "content": "                                                } else {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1133,
+              "new_lineno": 1140,
+              "content": "                                                    if (field.onValueChange) {"
+            }
+          ]
+        },
+        {
+          "old_start": 1191,
+          "old_count": 7,
+          "new_start": 1198,
+          "new_count": 13,
+          "section_header": "function SelectOptionsPopover<T = unknown>({",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 1191,
+              "new_lineno": 1198,
+              "content": "                    )}"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1192,
+              "new_lineno": 1199,
+              "content": "                </div>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1193,
+              "new_lineno": 1200,
+              "content": "            </PopoverTrigger>"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 1194,
+              "new_lineno": null,
+              "content": "            <PopoverContent align=\"start\" className={cn('w-[200px] p-0', field.className)}>"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1201,
+              "content": "            <PopoverContent"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1202,
+              "content": "                align=\"start\""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1203,
+              "content": "                className={cn("
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1204,
+              "content": "                    'p-0 data-[state=closed]:!animation-none data-[state=closed]:!duration-0',"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1205,
+              "content": "                    field.className || 'w-[200px]'"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1206,
+              "content": "                )}"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1207,
+              "content": "            >"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1195,
+              "new_lineno": 1208,
+              "content": "                <Command shouldFilter={!isAsyncSearch}>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1196,
+              "new_lineno": 1209,
+              "content": "                    {field.searchable !== false && ("
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1197,
+              "new_lineno": 1210,
+              "content": "                        <CommandInput"
+            }
+          ]
+        },
+        {
+          "old_start": 1255,
+          "old_count": 10,
+          "new_start": 1268,
+          "new_count": 13,
+          "section_header": "function SelectOptionsPopover<T = unknown>({",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 1255,
+              "new_lineno": 1268,
+              "content": "                                                        return; // Don't exceed max selections"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1256,
+              "new_lineno": 1269,
+              "content": "                                                    }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1257,
+              "new_lineno": 1270,
+              "content": "                                                    onChange(newValues);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1271,
+              "content": "                                                    // Auto-close if configured"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1272,
+              "content": "                                                    if (field.autoCloseOnSelect) {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1273,
+              "content": "                                                        handleClose();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1274,
+              "content": "                                                    }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1258,
+              "new_lineno": 1275,
+              "content": "                                                } else {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1259,
+              "new_lineno": 1276,
+              "content": "                                                    onChange([option.value] as T[]);"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1260,
+              "new_lineno": 1277,
+              "content": "                                                    setOpen(false);"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 1261,
+              "new_lineno": null,
+              "content": "                                                    handleClose();"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1262,
+              "new_lineno": 1278,
+              "content": "                                                }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1263,
+              "new_lineno": 1279,
+              "content": "                                            }}"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1264,
+              "new_lineno": 1280,
+              "content": "                                        >"
+            }
+          ]
+        },
+        {
+          "old_start": 1625,
+          "old_count": 7,
+          "new_start": 1641,
+          "new_count": 7,
+          "section_header": "function FilterValueSelector<T = unknown>({field, values, onChange, operator}: F",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 1625,
+              "new_lineno": 1641,
+              "content": "                    )}"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1626,
+              "new_lineno": 1642,
+              "content": "                </div>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1627,
+              "new_lineno": 1643,
+              "content": "            </PopoverTrigger>"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 1628,
+              "new_lineno": null,
+              "content": "            <PopoverContent className={cn('w-36 p-0', field.popoverContentClassName)}>"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1644,
+              "content": "            <PopoverContent className={cn('w-36 p-0 data-[state=closed]:!animation-none data-[state=closed]:!duration-0', field.popoverContentClassName)}>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1629,
+              "new_lineno": 1645,
+              "content": "                <Command shouldFilter={!isAsyncSearch}>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1630,
+              "new_lineno": 1646,
+              "content": "                    {field.searchable !== false && ("
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 1631,
+              "new_lineno": 1647,
+              "content": "                        <CommandInput"
+            }
+          ]
+        },
+        {
+          "old_start": 2059,
+          "old_count": 7,
+          "new_start": 2075,
+          "new_count": 13,
+          "section_header": "export function Filters<T = unknown>({",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 2059,
+              "new_lineno": 2075,
+              "content": "                                </button>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 2060,
+              "new_lineno": 2076,
+              "content": "                            )}"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 2061,
+              "new_lineno": 2077,
+              "content": "                        </PopoverTrigger>"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 2062,
+              "new_lineno": null,
+              "content": "                        <PopoverContent align={popoverAlign} className={cn('w-[200px] p-0', popoverContentClassName)}>"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 2078,
+              "content": "                        <PopoverContent"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 2079,
+              "content": "                            align={popoverAlign}"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 2080,
+              "content": "                            className={cn("
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 2081,
+              "content": "                                'p-0 data-[state=closed]:!animation-none data-[state=closed]:!duration-0',"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 2082,
+              "content": "                                selectedFieldForOptions?.className || popoverContentClassName || 'w-[200px]'"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 2083,
+              "content": "                            )}"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 2084,
+              "content": "                        >"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 2063,
+              "new_lineno": 2085,
+              "content": "                            {selectedFieldForOptions ? ("
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 2064,
+              "new_lineno": 2086,
+              "content": "                                // Show original select/multiselect rendering without back button"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 2065,
+              "new_lineno": 2087,
+              "content": "                                // SelectOptionsPopover renders its own Command component when inline={true}"
+            }
+          ]
+        },
+        {
+          "old_start": 2073,
+          "old_count": 7,
+          "new_start": 2095,
+          "new_count": 10,
+          "section_header": "export function Filters<T = unknown>({",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 2073,
+              "new_lineno": 2095,
+              "content": "                                        const shouldClosePopover = selectedFieldForOptions.type === 'select';"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 2074,
+              "new_lineno": 2096,
+              "content": "                                        addFilterWithOption(selectedFieldForOptions, values as unknown[], shouldClosePopover);"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 2075,
+              "new_lineno": 2097,
+              "content": "                                    }}"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 2076,
+              "new_lineno": null,
+              "content": "                                    onClose={() => setAddFilterOpen(false)}"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 2098,
+              "content": "                                    onClose={() => {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 2099,
+              "content": "                                        setAddFilterOpen(false);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 2100,
+              "content": "                                        setSelectedFieldKeyForOptions(null);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 2101,
+              "content": "                                    }}"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 2077,
+              "new_lineno": 2102,
+              "content": "                                />"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 2078,
+              "new_lineno": 2103,
+              "content": "                            ) : ("
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 2079,
+              "new_lineno": 2104,
+              "content": "                                // Show field selection - needs Command wrapper for search/list"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "apps/stats/src/views/Stats/components/stats-filter.tsx",
+      "new_path": "apps/stats/src/views/Stats/components/stats-filter.tsx",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 90,
+          "old_count": 7,
+          "new_start": 90,
+          "new_count": 7,
+          "section_header": "const useUtmOptionsForField = (fieldKey: string, currentFilters: Filter[] = [])",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 90,
+              "new_lineno": 90,
+              "content": "                value: value,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 91,
+              "new_lineno": 91,
+              "content": "                // Add a custom icon element that shows the count badge"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 92,
+              "new_lineno": 92,
+              "content": "                icon: ("
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 93,
+              "new_lineno": null,
+              "content": "                    <span className=\"flex items-center justify-center rounded-full bg-grey-200 px-2 py-0.5 text-xs font-medium text-grey-900 dark:bg-grey-800 dark:text-grey-100\">"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 93,
+              "content": "                    <span className=\"order-2 font-mono text-xs text-muted-foreground\">"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 94,
+              "new_lineno": 94,
+              "content": "                        {visits.toLocaleString()}"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 95,
+              "new_lineno": 95,
+              "content": "                    </span>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 96,
+              "new_lineno": 96,
+              "content": "                )"
+            }
+          ]
+        },
+        {
+          "old_start": 156,
+          "old_count": 7,
+          "new_start": 156,
+          "new_count": 7,
+          "section_header": "const useSourceOptions = (currentFilters: Filter[] = []) => {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 156,
+              "new_lineno": 156,
+              "content": "                value,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 157,
+              "new_lineno": 157,
+              "content": "                // Add a custom icon element that shows the count badge"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 158,
+              "new_lineno": 158,
+              "content": "                icon: ("
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 159,
+              "new_lineno": null,
+              "content": "                    <span className=\"flex items-center justify-center rounded-full bg-grey-200 px-2 py-0.5 text-xs font-medium text-grey-900 dark:bg-grey-800 dark:text-grey-100\">"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 159,
+              "content": "                    <span className=\"order-2 font-mono text-xs text-muted-foreground\">"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 160,
+              "new_lineno": 160,
+              "content": "                        {visits.toLocaleString()}"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 161,
+              "new_lineno": 161,
+              "content": "                    </span>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 162,
+              "new_lineno": 162,
+              "content": "                )"
+            }
+          ]
+        },
+        {
+          "old_start": 185,
+          "old_count": 7,
+          "new_start": 185,
+          "new_count": 7,
+          "section_header": "const usePostOptions = () => {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 185,
+              "new_lineno": 185,
+              "content": "    // When searching, filter by title containing the search query"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 186,
+              "new_lineno": 186,
+              "content": "    // When not searching, fetch latest 20 published posts"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 187,
+              "new_lineno": 187,
+              "content": "    const hasSearchQuery = debouncedSearchQuery.trim().length > 0;"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 188,
+              "new_lineno": null,
+              "content": "    "
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 188,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 189,
+              "new_lineno": 189,
+              "content": "    const filter = hasSearchQuery"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 190,
+              "new_lineno": 190,
+              "content": "        ? `title:~'${debouncedSearchQuery.replace(/'/g, '\\\\\\'')}'+status:[published,sent]`"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 191,
+              "new_lineno": 191,
+              "content": "        : 'status:[published,sent]';"
+            }
+          ]
+        },
+        {
+          "old_start": 211,
+          "old_count": 7,
+          "new_start": 211,
+          "new_count": 7,
+          "section_header": "const usePostOptions = () => {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 211,
+              "new_lineno": 211,
+              "content": "            value: post.uuid"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 212,
+              "new_lineno": 212,
+              "content": "        }));"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 213,
+              "new_lineno": 213,
+              "content": "    }, [browseData]);"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 214,
+              "new_lineno": null,
+              "content": "    "
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 214,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 215,
+              "new_lineno": 215,
+              "content": "    // Memoize the callback to avoid recreating the function on each render"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 216,
+              "new_lineno": 216,
+              "content": "    const setSearchQuery = useCallback((query: string) => {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 217,
+              "new_lineno": 217,
+              "content": "        setSearchQueryInternal(query);"
+            }
+          ]
+        },
+        {
+          "old_start": 383,
+          "old_count": 7,
+          "new_start": 383,
+          "new_count": 8,
+          "section_header": "function StatsFilter({filters, utmTrackingEnabled = false, onChange, ...props}:",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 383,
+              "new_lineno": 383,
+              "content": "                defaultOperator: 'is',"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 384,
+              "new_lineno": 384,
+              "content": "                hideOperatorSelect: true,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 385,
+              "new_lineno": 385,
+              "content": "                options: utmSourceOptions,"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 386,
+              "new_lineno": null,
+              "content": "                searchable: true"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 386,
+              "content": "                searchable: true,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 387,
+              "content": "                selectedOptionsClassName: 'hidden'"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 387,
+              "new_lineno": 388,
+              "content": "            },"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 388,
+              "new_lineno": 389,
+              "content": "            {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 389,
+              "new_lineno": 390,
+              "content": "                key: 'utm_medium',"
+            }
+          ]
+        },
+        {
+          "old_start": 395,
+          "old_count": 7,
+          "new_start": 396,
+          "new_count": 8,
+          "section_header": "function StatsFilter({filters, utmTrackingEnabled = false, onChange, ...props}:",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 395,
+              "new_lineno": 396,
+              "content": "                defaultOperator: 'is',"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 396,
+              "new_lineno": 397,
+              "content": "                hideOperatorSelect: true,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 397,
+              "new_lineno": 398,
+              "content": "                options: utmMediumOptions,"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 398,
+              "new_lineno": null,
+              "content": "                searchable: true"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 399,
+              "content": "                searchable: true,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 400,
+              "content": "                selectedOptionsClassName: 'hidden'"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 399,
+              "new_lineno": 401,
+              "content": "            },"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 400,
+              "new_lineno": 402,
+              "content": "            {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 401,
+              "new_lineno": 403,
+              "content": "                key: 'utm_campaign',"
+            }
+          ]
+        },
+        {
+          "old_start": 407,
+          "old_count": 7,
+          "new_start": 409,
+          "new_count": 8,
+          "section_header": "function StatsFilter({filters, utmTrackingEnabled = false, onChange, ...props}:",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 407,
+              "new_lineno": 409,
+              "content": "                defaultOperator: 'is',"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 408,
+              "new_lineno": 410,
+              "content": "                hideOperatorSelect: true,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 409,
+              "new_lineno": 411,
+              "content": "                options: utmCampaignOptions,"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 410,
+              "new_lineno": null,
+              "content": "                searchable: true"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 412,
+              "content": "                searchable: true,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 413,
+              "content": "                selectedOptionsClassName: 'hidden'"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 411,
+              "new_lineno": 414,
+              "content": "            },"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 412,
+              "new_lineno": 415,
+              "content": "            {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 413,
+              "new_lineno": 416,
+              "content": "                key: 'utm_content',"
+            }
+          ]
+        },
+        {
+          "old_start": 419,
+          "old_count": 7,
+          "new_start": 422,
+          "new_count": 8,
+          "section_header": "function StatsFilter({filters, utmTrackingEnabled = false, onChange, ...props}:",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 419,
+              "new_lineno": 422,
+              "content": "                defaultOperator: 'is',"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 420,
+              "new_lineno": 423,
+              "content": "                hideOperatorSelect: true,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 421,
+              "new_lineno": 424,
+              "content": "                options: utmContentOptions,"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 422,
+              "new_lineno": null,
+              "content": "                searchable: true"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 425,
+              "content": "                searchable: true,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 426,
+              "content": "                selectedOptionsClassName: 'hidden'"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 423,
+              "new_lineno": 427,
+              "content": "            },"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 424,
+              "new_lineno": 428,
+              "content": "            {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 425,
+              "new_lineno": 429,
+              "content": "                key: 'utm_term',"
+            }
+          ]
+        },
+        {
+          "old_start": 431,
+          "old_count": 7,
+          "new_start": 435,
+          "new_count": 8,
+          "section_header": "function StatsFilter({filters, utmTrackingEnabled = false, onChange, ...props}:",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 431,
+              "new_lineno": 435,
+              "content": "                defaultOperator: 'is',"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 432,
+              "new_lineno": 436,
+              "content": "                hideOperatorSelect: true,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 433,
+              "new_lineno": 437,
+              "content": "                options: utmTermOptions,"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 434,
+              "new_lineno": null,
+              "content": "                searchable: true"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 438,
+              "content": "                searchable: true,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 439,
+              "content": "                selectedOptionsClassName: 'hidden'"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 435,
+              "new_lineno": 440,
+              "content": "            }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 436,
+              "new_lineno": 441,
+              "content": "        ] : [];"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 437,
+              "new_lineno": 442,
+              "content": ""
+            }
+          ]
+        },
+        {
+          "old_start": 444,
+          "old_count": 13,
+          "new_start": 449,
+          "new_count": 16,
+          "section_header": "function StatsFilter({filters, utmTrackingEnabled = false, onChange, ...props}:",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 444,
+              "new_lineno": 449,
+              "content": "                        label: 'Audience',"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 445,
+              "new_lineno": 450,
+              "content": "                        type: 'multiselect',"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 446,
+              "new_lineno": 451,
+              "content": "                        icon: <LucideIcon.Users />,"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 447,
+              "new_lineno": null,
+              "content": "                        options: audienceOptions.map(({value, label, icon}) => ({value, label, icon}))"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 452,
+              "content": "                        options: audienceOptions.map(({value, label, icon}) => ({value, label, icon})),"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 453,
+              "content": "                        defaultOperator: 'is any of',"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 454,
+              "content": "                        hideOperatorSelect: true,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 455,
+              "content": "                        autoCloseOnSelect: true"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 448,
+              "new_lineno": 456,
+              "content": "                    },"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 449,
+              "new_lineno": 457,
+              "content": "                    {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 450,
+              "new_lineno": 458,
+              "content": "                        key: 'post',"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 451,
+              "new_lineno": 459,
+              "content": "                        label: 'Post or page',"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 452,
+              "new_lineno": 460,
+              "content": "                        type: 'select',"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 453,
+              "new_lineno": null,
+              "content": "                        icon: <LucideIcon.File />,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 461,
+              "content": "                        icon: <LucideIcon.PenLine />,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 454,
+              "new_lineno": 462,
+              "content": "                        options: postOptions,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 455,
+              "new_lineno": 463,
+              "content": "                        searchable: true,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 456,
+              "new_lineno": 464,
+              "content": "                        asyncSearch: true,"
+            }
+          ]
+        },
+        {
+          "old_start": 458,
+          "old_count": 6,
+          "new_start": 466,
+          "new_count": 8,
+          "section_header": "function StatsFilter({filters, utmTrackingEnabled = false, onChange, ...props}:",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 458,
+              "new_lineno": 466,
+              "content": "                        onSearchChange: setSearchQuery,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 459,
+              "new_lineno": 467,
+              "content": "                        operators: supportedOperators,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 460,
+              "new_lineno": 468,
+              "content": "                        defaultOperator: 'is',"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 469,
+              "content": "                        className: 'w-80',"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 470,
+              "content": "                        popoverContentClassName: 'w-80',"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 461,
+              "new_lineno": 471,
+              "content": "                        hideOperatorSelect: true"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 462,
+              "new_lineno": 472,
+              "content": "                    },"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 463,
+              "new_lineno": 473,
+              "content": "                    {"
+            }
+          ]
+        },
+        {
+          "old_start": 470,
+          "old_count": 7,
+          "new_start": 480,
+          "new_count": 8,
+          "section_header": "function StatsFilter({filters, utmTrackingEnabled = false, onChange, ...props}:",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 470,
+              "new_lineno": 480,
+              "content": "                        defaultOperator: 'is',"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 471,
+              "new_lineno": 481,
+              "content": "                        hideOperatorSelect: true,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 472,
+              "new_lineno": 482,
+              "content": "                        options: sourceOptions,"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 473,
+              "new_lineno": null,
+              "content": "                        searchable: true"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 483,
+              "content": "                        searchable: true,"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 484,
+              "content": "                        selectedOptionsClassName: 'hidden'"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 474,
+              "new_lineno": 485,
+              "content": "                    }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 475,
+              "new_lineno": 486,
+              "content": "                ]"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 476,
+              "new_lineno": 487,
+              "content": "            },"
+            }
+          ]
+        },
+        {
+          "old_start": 483,
+          "old_count": 12,
+          "new_start": 494,
+          "new_count": 13,
+          "section_header": "function StatsFilter({filters, utmTrackingEnabled = false, onChange, ...props}:",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 483,
+              "new_lineno": 494,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 484,
+              "new_lineno": 495,
+              "content": "    return ("
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 485,
+              "new_lineno": 496,
+              "content": "        <Filters"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 486,
+              "new_lineno": null,
+              "content": "            addButtonIcon={filters.length ? <LucideIcon.Plus /> : <LucideIcon.ListFilter />}"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 487,
+              "new_lineno": null,
+              "content": "            addButtonText={filters.length ? 'Add filter' : 'Filter'}"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 488,
+              "new_lineno": null,
+              "content": "            className='mb-6 mt-0.5 [&>button]:order-last'"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 497,
+              "content": "            addButtonIcon={<LucideIcon.FunnelPlus />}"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 498,
+              "content": "            addButtonText={filters.length ? '' : ''}"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 499,
+              "content": "            className='mb-6 [&>button]:order-last'"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 489,
+              "new_lineno": 500,
+              "content": "            fields={groupedFields}"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 490,
+              "new_lineno": 501,
+              "content": "            filters={filters}"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 491,
+              "new_lineno": 502,
+              "content": "            showSearchInput={false}"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 503,
+              "content": "            size='sm'"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 492,
+              "new_lineno": 504,
+              "content": "            onChange={handleFilterChange}"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 493,
+              "new_lineno": 505,
+              "content": "            {...props}"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 494,
+              "new_lineno": 506,
+              "content": "        />"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "apps/stats/src/views/Stats/layout/stats-header.tsx",
+      "new_path": "apps/stats/src/views/Stats/layout/stats-header.tsx",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 64,
+          "old_count": 7,
+          "new_start": 64,
+          "new_count": 7,
+          "section_header": "const StatsHeader:React.FC<StatsHeaderProps> = ({",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 64,
+              "new_lineno": 64,
+              "content": "                    )}"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 65,
+              "new_lineno": 65,
+              "content": "                </div>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 66,
+              "new_lineno": 66,
+              "content": "            </header>"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 67,
+              "new_lineno": null,
+              "content": "            <Navbar className='sticky top-0 z-40 flex-col items-start gap-y-5 border-none bg-white/70 py-8 backdrop-blur-md lg:flex-row lg:items-center dark:bg-black'>"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 67,
+              "content": "            <Navbar className='sticky top-0 z-40 flex-col items-start gap-y-5 border-none bg-white/70 pb-6 pt-9 backdrop-blur-md lg:flex-row lg:items-center dark:bg-black'>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 68,
+              "new_lineno": 68,
+              "content": "                <PageMenu defaultValue={normalizedPath} responsive>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 69,
+              "new_lineno": 69,
+              "content": "                    <PageMenuItem value=\"/analytics/\" onClick={() => {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 70,
+              "new_lineno": 70,
+              "content": "                        navigate('/analytics/');"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "changed_entities": [
+    {
+      "path": "apps/shade/src/components/ui/filters.tsx",
+      "entity_type": "module",
+      "name": "filters.tsx",
+      "qualified_name": "apps.shade.src.components.ui.filters",
+      "line_start": 105,
+      "line_end": 105,
+      "hunk_ids": [
+        "apps/shade/src/components/ui/filters.tsx:102",
+        "apps/shade/src/components/ui/filters.tsx:119",
+        "apps/shade/src/components/ui/filters.tsx:236",
+        "apps/shade/src/components/ui/filters.tsx:747",
+        "apps/shade/src/components/ui/filters.tsx:943",
+        "apps/shade/src/components/ui/filters.tsx:1048",
+        "apps/shade/src/components/ui/filters.tsx:1122",
+        "apps/shade/src/components/ui/filters.tsx:1131",
+        "apps/shade/src/components/ui/filters.tsx:1198",
+        "apps/shade/src/components/ui/filters.tsx:1268",
+        "apps/shade/src/components/ui/filters.tsx:1641",
+        "apps/shade/src/components/ui/filters.tsx:2075",
+        "apps/shade/src/components/ui/filters.tsx:2095"
+      ]
+    },
+    {
+      "path": "apps/stats/src/views/Stats/components/stats-filter.tsx",
+      "entity_type": "module",
+      "name": "stats-filter.tsx",
+      "qualified_name": "apps.stats.src.views.Stats.components.stats-filter",
+      "line_start": 93,
+      "line_end": 93,
+      "hunk_ids": [
+        "apps/stats/src/views/Stats/components/stats-filter.tsx:90",
+        "apps/stats/src/views/Stats/components/stats-filter.tsx:156",
+        "apps/stats/src/views/Stats/components/stats-filter.tsx:185",
+        "apps/stats/src/views/Stats/components/stats-filter.tsx:211",
+        "apps/stats/src/views/Stats/components/stats-filter.tsx:383",
+        "apps/stats/src/views/Stats/components/stats-filter.tsx:396",
+        "apps/stats/src/views/Stats/components/stats-filter.tsx:409",
+        "apps/stats/src/views/Stats/components/stats-filter.tsx:422",
+        "apps/stats/src/views/Stats/components/stats-filter.tsx:435",
+        "apps/stats/src/views/Stats/components/stats-filter.tsx:449",
+        "apps/stats/src/views/Stats/components/stats-filter.tsx:466",
+        "apps/stats/src/views/Stats/components/stats-filter.tsx:480",
+        "apps/stats/src/views/Stats/components/stats-filter.tsx:494"
+      ]
+    },
+    {
+      "path": "apps/stats/src/views/Stats/layout/stats-header.tsx",
+      "entity_type": "module",
+      "name": "stats-header.tsx",
+      "qualified_name": "apps.stats.src.views.Stats.layout.stats-header",
+      "line_start": 67,
+      "line_end": 67,
+      "hunk_ids": [
+        "apps/stats/src/views/Stats/layout/stats-header.tsx:64"
+      ]
+    }
+  ],
+  "risk_signals": [],
+  "evidence_index": {
+    "diff_hunk:apps/shade/src/components/ui/filters.tsx:102": {
+      "id": "diff_hunk:apps/shade/src/components/ui/filters.tsx:102",
+      "kind": "diff_hunk",
+      "source": "apps/shade/src/components/ui/filters.tsx:102",
+      "message": "@@ -102,7 +102,7 @@ export interface FilterI18nConfig {\n // Default English i18n configuration\n export const DEFAULT_I18N: FilterI18nConfig = {\n     // UI Labels\n-    addFilter: 'Add filter',\n+    addFilter: '',\n     searchFields: 'Search fields...',\n     noFieldsFound: 'No fields found.',\n     noResultsFound: 'No results found.',"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:105": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:105",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:105",
+      "message": "Added line: addFilter: '',"
+    },
+    "diff_hunk:apps/shade/src/components/ui/filters.tsx:119": {
+      "id": "diff_hunk:apps/shade/src/components/ui/filters.tsx:119",
+      "kind": "diff_hunk",
+      "source": "apps/shade/src/components/ui/filters.tsx:119",
+      "message": "@@ -119,7 +119,7 @@ export const DEFAULT_I18N: FilterI18nConfig = {\n     percent: '%',\n     defaultCurrency: '$',\n     defaultColor: '#000000',\n-    addFilterTitle: 'Add filter',\n+    addFilterTitle: '',\n \n     // Operators\n     operators: {"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:122": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:122",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:122",
+      "message": "Added line: addFilterTitle: '',"
+    },
+    "diff_hunk:apps/shade/src/components/ui/filters.tsx:236": {
+      "id": "diff_hunk:apps/shade/src/components/ui/filters.tsx:236",
+      "kind": "diff_hunk",
+      "source": "apps/shade/src/components/ui/filters.tsx:236",
+      "message": "@@ -236,7 +236,7 @@ const filterInputVariants = cva(\n             size: {\n                 lg: 'h-10 px-2.5 text-sm has-[[data-slot=filters-prefix]]:ps-0 has-[[data-slot=filters-suffix]]:pe-0',\n                 md: 'h-[34px] px-2 text-sm has-[[data-slot=filters-prefix]]:ps-0 has-[[data-slot=filters-suffix]]:pe-0',\n-                sm: 'h-8 px-1.5 text-xs has-[[data-slot=filters-prefix]]:ps-0 has-[[data-slot=filters-suffix]]:pe-0'\n+                sm: 'h-8 px-2 text-xs has-[[data-slot=filters-prefix]]:ps-0 has-[[data-slot=filters-suffix]]:pe-0'\n             },\n             cursorPointer: {\n                 true: 'cursor-pointer',"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:239": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:239",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:239",
+      "message": "Added line: sm: 'h-8 px-2 text-xs has-[[data-slot=filters-prefix]]:ps-0 has-[[data-slot=filters-suffix]]:pe-0'"
+    },
+    "diff_hunk:apps/shade/src/components/ui/filters.tsx:747": {
+      "id": "diff_hunk:apps/shade/src/components/ui/filters.tsx:747",
+      "kind": "diff_hunk",
+      "source": "apps/shade/src/components/ui/filters.tsx:747",
+      "message": "@@ -747,6 +747,8 @@ export interface FilterFieldConfig<T = unknown> {\n     // Controlled values support for this field\n     value?: T[];\n     onValueChange?: (values: T[]) => void;\n+    // Auto-close dropdown after selection (even for multiselect types)\n+    autoCloseOnSelect?: boolean;\n }\n \n // Helper functions to handle both flat and grouped field configurations"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:750": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:750",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:750",
+      "message": "Added line: // Auto-close dropdown after selection (even for multiselect types)"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:751": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:751",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:751",
+      "message": "Added line: autoCloseOnSelect?: boolean;"
+    },
+    "diff_hunk:apps/shade/src/components/ui/filters.tsx:943": {
+      "id": "diff_hunk:apps/shade/src/components/ui/filters.tsx:943",
+      "kind": "diff_hunk",
+      "source": "apps/shade/src/components/ui/filters.tsx:943",
+      "message": "@@ -941,7 +943,7 @@ function FilterOperatorDropdown<T = unknown>({field, operator, values, onChange}\n     // If hideOperatorSelect is true, just render the operator as plain text\n     if (field.hideOperatorSelect) {\n         return (\n-            <div className=\"flex items-center border-x px-3 text-sm text-muted-foreground\">\n+            <div className=\"flex items-center self-stretch border border-r-[0px] px-3 text-sm text-muted-foreground\">\n                 {operatorLabel}\n             </div>\n         );"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:944": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:944",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:944",
+      "message": "Removed line: <div className=\"flex items-center border-x px-3 text-sm text-muted-foreground\">"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:946": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:946",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:946",
+      "message": "Added line: <div className=\"flex items-center self-stretch border border-r-[0px] px-3 text-sm text-muted-foreground\">"
+    },
+    "diff_hunk:apps/shade/src/components/ui/filters.tsx:1048": {
+      "id": "diff_hunk:apps/shade/src/components/ui/filters.tsx:1048",
+      "kind": "diff_hunk",
+      "source": "apps/shade/src/components/ui/filters.tsx:1048",
+      "message": "@@ -1046,6 +1048,7 @@ function SelectOptionsPopover<T = unknown>({\n \n     const handleClose = () => {\n         setOpen(false);\n+        setSearchInput('');\n         onClose?.();\n     };\n "
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:1051": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:1051",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:1051",
+      "message": "Added line: setSearchInput('');"
+    },
+    "diff_hunk:apps/shade/src/components/ui/filters.tsx:1122": {
+      "id": "diff_hunk:apps/shade/src/components/ui/filters.tsx:1122",
+      "kind": "diff_hunk",
+      "source": "apps/shade/src/components/ui/filters.tsx:1122",
+      "message": "@@ -1119,7 +1122,7 @@ function SelectOptionsPopover<T = unknown>({\n                                             value={option.label}\n                                             onSelect={() => {\n                                                 if (isMultiSelect) {\n-                                                    const newValues = [...effectiveValues, option.value] as T[];\n+                                                    var newValues = [...effectiveValues, option.value] as T[];\n                                                     if (field.maxSelections && newValues.length > field.maxSelections) {\n                                                         return; // Don't exceed max selections\n                                                     }"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:1122": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:1122",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:1122",
+      "message": "Removed line: const newValues = [...effectiveValues, option.value] as T[];"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:1125": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:1125",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:1125",
+      "message": "Added line: var newValues = [...effectiveValues, option.value] as T[];"
+    },
+    "diff_hunk:apps/shade/src/components/ui/filters.tsx:1131": {
+      "id": "diff_hunk:apps/shade/src/components/ui/filters.tsx:1131",
+      "kind": "diff_hunk",
+      "source": "apps/shade/src/components/ui/filters.tsx:1131",
+      "message": "@@ -1128,6 +1131,10 @@ function SelectOptionsPopover<T = unknown>({\n                                                     } else {\n                                                         onChange(newValues);\n                                                     }\n+                                                    // Auto-close if configured\n+                                                    if (field.autoCloseOnSelect) {\n+                                                        onClose?.();\n+                                                    }\n                                                     // For multiselect, don't close the popover to allow multiple selections\n                                                 } else {\n                                                     if (field.onValueChange) {"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:1134": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:1134",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:1134",
+      "message": "Added line: // Auto-close if configured"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:1135": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:1135",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:1135",
+      "message": "Added line: if (field.autoCloseOnSelect) {"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:1136": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:1136",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:1136",
+      "message": "Added line: onClose?.();"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:1137": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:1137",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:1137",
+      "message": "Added line: }"
+    },
+    "diff_hunk:apps/shade/src/components/ui/filters.tsx:1198": {
+      "id": "diff_hunk:apps/shade/src/components/ui/filters.tsx:1198",
+      "kind": "diff_hunk",
+      "source": "apps/shade/src/components/ui/filters.tsx:1198",
+      "message": "@@ -1191,7 +1198,13 @@ function SelectOptionsPopover<T = unknown>({\n                     )}\n                 </div>\n             </PopoverTrigger>\n-            <PopoverContent align=\"start\" className={cn('w-[200px] p-0', field.className)}>\n+            <PopoverContent\n+                align=\"start\"\n+                className={cn(\n+                    'p-0 data-[state=closed]:!animation-none data-[state=closed]:!duration-0',\n+                    field.className || 'w-[200px]'\n+                )}\n+            >\n                 <Command shouldFilter={!isAsyncSearch}>\n                     {field.searchable !== false && (\n                         <CommandInput"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:1194": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:1194",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:1194",
+      "message": "Removed line: <PopoverContent align=\"start\" className={cn('w-[200px] p-0', field.className)}>"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:1201": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:1201",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:1201",
+      "message": "Added line: <PopoverContent"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:1202": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:1202",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:1202",
+      "message": "Added line: align=\"start\""
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:1203": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:1203",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:1203",
+      "message": "Added line: className={cn("
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:1204": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:1204",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:1204",
+      "message": "Added line: 'p-0 data-[state=closed]:!animation-none data-[state=closed]:!duration-0',"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:1205": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:1205",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:1205",
+      "message": "Added line: field.className || 'w-[200px]'"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:1206": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:1206",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:1206",
+      "message": "Added line: )}"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:1207": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:1207",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:1207",
+      "message": "Added line: >"
+    },
+    "diff_hunk:apps/shade/src/components/ui/filters.tsx:1268": {
+      "id": "diff_hunk:apps/shade/src/components/ui/filters.tsx:1268",
+      "kind": "diff_hunk",
+      "source": "apps/shade/src/components/ui/filters.tsx:1268",
+      "message": "@@ -1255,10 +1268,13 @@ function SelectOptionsPopover<T = unknown>({\n                                                         return; // Don't exceed max selections\n                                                     }\n                                                     onChange(newValues);\n+                                                    // Auto-close if configured\n+                                                    if (field.autoCloseOnSelect) {\n+                                                        handleClose();\n+                                                    }\n                                                 } else {\n                                                     onChange([option.value] as T[]);\n                                                     setOpen(false);\n-                                                    handleClose();\n                                                 }\n                                             }}\n                                         >"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:1271": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:1271",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:1271",
+      "message": "Added line: // Auto-close if configured"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:1272": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:1272",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:1272",
+      "message": "Added line: if (field.autoCloseOnSelect) {"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:1273": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:1273",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:1273",
+      "message": "Added line: handleClose();"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:1274": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:1274",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:1274",
+      "message": "Added line: }"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:1261": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:1261",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:1261",
+      "message": "Removed line: handleClose();"
+    },
+    "diff_hunk:apps/shade/src/components/ui/filters.tsx:1641": {
+      "id": "diff_hunk:apps/shade/src/components/ui/filters.tsx:1641",
+      "kind": "diff_hunk",
+      "source": "apps/shade/src/components/ui/filters.tsx:1641",
+      "message": "@@ -1625,7 +1641,7 @@ function FilterValueSelector<T = unknown>({field, values, onChange, operator}: F\n                     )}\n                 </div>\n             </PopoverTrigger>\n-            <PopoverContent className={cn('w-36 p-0', field.popoverContentClassName)}>\n+            <PopoverContent className={cn('w-36 p-0 data-[state=closed]:!animation-none data-[state=closed]:!duration-0', field.popoverContentClassName)}>\n                 <Command shouldFilter={!isAsyncSearch}>\n                     {field.searchable !== false && (\n                         <CommandInput"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:1628": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:1628",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:1628",
+      "message": "Removed line: <PopoverContent className={cn('w-36 p-0', field.popoverContentClassName)}>"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:1644": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:1644",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:1644",
+      "message": "Added line: <PopoverContent className={cn('w-36 p-0 data-[state=closed]:!animation-none data-[state=closed]:!duration-0', field.p..."
+    },
+    "diff_hunk:apps/shade/src/components/ui/filters.tsx:2075": {
+      "id": "diff_hunk:apps/shade/src/components/ui/filters.tsx:2075",
+      "kind": "diff_hunk",
+      "source": "apps/shade/src/components/ui/filters.tsx:2075",
+      "message": "@@ -2059,7 +2075,13 @@ export function Filters<T = unknown>({\n                                 </button>\n                             )}\n                         </PopoverTrigger>\n-                        <PopoverContent align={popoverAlign} className={cn('w-[200px] p-0', popoverContentClassName)}>\n+                        <PopoverContent\n+                            align={popoverAlign}\n+                            className={cn(\n+                                'p-0 data-[state=closed]:!animation-none data-[state=closed]:!duration-0',\n+                                selectedFieldForOptions?.className || popoverContentClassName || 'w-[200px]'\n+                            )}\n+                        >\n                             {selectedFieldForOptions ? (\n                                 // Show original select/multiselect rendering without back button\n                                 // SelectOptionsPopover renders its own Command component when inline={true}"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:2062": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:2062",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:2062",
+      "message": "Removed line: <PopoverContent align={popoverAlign} className={cn('w-[200px] p-0', popoverContentClassName)}>"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:2078": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:2078",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:2078",
+      "message": "Added line: <PopoverContent"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:2079": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:2079",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:2079",
+      "message": "Added line: align={popoverAlign}"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:2080": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:2080",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:2080",
+      "message": "Added line: className={cn("
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:2081": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:2081",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:2081",
+      "message": "Added line: 'p-0 data-[state=closed]:!animation-none data-[state=closed]:!duration-0',"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:2082": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:2082",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:2082",
+      "message": "Added line: selectedFieldForOptions?.className || popoverContentClassName || 'w-[200px]'"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:2083": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:2083",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:2083",
+      "message": "Added line: )}"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:2084": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:2084",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:2084",
+      "message": "Added line: >"
+    },
+    "diff_hunk:apps/shade/src/components/ui/filters.tsx:2095": {
+      "id": "diff_hunk:apps/shade/src/components/ui/filters.tsx:2095",
+      "kind": "diff_hunk",
+      "source": "apps/shade/src/components/ui/filters.tsx:2095",
+      "message": "@@ -2073,7 +2095,10 @@ export function Filters<T = unknown>({\n                                         const shouldClosePopover = selectedFieldForOptions.type === 'select';\n                                         addFilterWithOption(selectedFieldForOptions, values as unknown[], shouldClosePopover);\n                                     }}\n-                                    onClose={() => setAddFilterOpen(false)}\n+                                    onClose={() => {\n+                                        setAddFilterOpen(false);\n+                                        setSelectedFieldKeyForOptions(null);\n+                                    }}\n                                 />\n                             ) : (\n                                 // Show field selection - needs Command wrapper for search/list"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:2076": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:2076",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:2076",
+      "message": "Removed line: onClose={() => setAddFilterOpen(false)}"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:2098": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:2098",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:2098",
+      "message": "Added line: onClose={() => {"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:2099": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:2099",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:2099",
+      "message": "Added line: setAddFilterOpen(false);"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:2100": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:2100",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:2100",
+      "message": "Added line: setSelectedFieldKeyForOptions(null);"
+    },
+    "diff:apps/shade/src/components/ui/filters.tsx:2101": {
+      "id": "diff:apps/shade/src/components/ui/filters.tsx:2101",
+      "kind": "diff",
+      "source": "apps/shade/src/components/ui/filters.tsx:2101",
+      "message": "Added line: }}"
+    },
+    "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:90": {
+      "id": "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:90",
+      "kind": "diff_hunk",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:90",
+      "message": "@@ -90,7 +90,7 @@ const useUtmOptionsForField = (fieldKey: string, currentFilters: Filter[] = [])\n                 value: value,\n                 // Add a custom icon element that shows the count badge\n                 icon: (\n-                    <span className=\"flex items-center justify-center rounded-full bg-grey-200 px-2 py-0.5 text-xs font-medium text-grey-900 dark:bg-grey-800 dark:text-grey-100\">\n+                    <span className=\"order-2 font-mono text-xs text-muted-foreground\">\n                         {visits.toLocaleString()}\n                     </span>\n                 )"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:93": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:93",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:93",
+      "message": "Added line: <span className=\"order-2 font-mono text-xs text-muted-foreground\">"
+    },
+    "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:156": {
+      "id": "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:156",
+      "kind": "diff_hunk",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:156",
+      "message": "@@ -156,7 +156,7 @@ const useSourceOptions = (currentFilters: Filter[] = []) => {\n                 value,\n                 // Add a custom icon element that shows the count badge\n                 icon: (\n-                    <span className=\"flex items-center justify-center rounded-full bg-grey-200 px-2 py-0.5 text-xs font-medium text-grey-900 dark:bg-grey-800 dark:text-grey-100\">\n+                    <span className=\"order-2 font-mono text-xs text-muted-foreground\">\n                         {visits.toLocaleString()}\n                     </span>\n                 )"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:159": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:159",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:159",
+      "message": "Added line: <span className=\"order-2 font-mono text-xs text-muted-foreground\">"
+    },
+    "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:185": {
+      "id": "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:185",
+      "kind": "diff_hunk",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:185",
+      "message": "@@ -185,7 +185,7 @@ const usePostOptions = () => {\n     // When searching, filter by title containing the search query\n     // When not searching, fetch latest 20 published posts\n     const hasSearchQuery = debouncedSearchQuery.trim().length > 0;\n-    \n+\n     const filter = hasSearchQuery\n         ? `title:~'${debouncedSearchQuery.replace(/'/g, '\\\\\\'')}'+status:[published,sent]`\n         : 'status:[published,sent]';"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:188": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:188",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:188",
+      "message": "Added line: "
+    },
+    "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:211": {
+      "id": "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:211",
+      "kind": "diff_hunk",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:211",
+      "message": "@@ -211,7 +211,7 @@ const usePostOptions = () => {\n             value: post.uuid\n         }));\n     }, [browseData]);\n-    \n+\n     // Memoize the callback to avoid recreating the function on each render\n     const setSearchQuery = useCallback((query: string) => {\n         setSearchQueryInternal(query);"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:214": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:214",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:214",
+      "message": "Added line: "
+    },
+    "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:383": {
+      "id": "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:383",
+      "kind": "diff_hunk",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:383",
+      "message": "@@ -383,7 +383,8 @@ function StatsFilter({filters, utmTrackingEnabled = false, onChange, ...props}:\n                 defaultOperator: 'is',\n                 hideOperatorSelect: true,\n                 options: utmSourceOptions,\n-                searchable: true\n+                searchable: true,\n+                selectedOptionsClassName: 'hidden'\n             },\n             {\n                 key: 'utm_medium',"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:386": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:386",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:386",
+      "message": "Added line: searchable: true,"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:387": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:387",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:387",
+      "message": "Added line: selectedOptionsClassName: 'hidden'"
+    },
+    "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:396": {
+      "id": "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:396",
+      "kind": "diff_hunk",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:396",
+      "message": "@@ -395,7 +396,8 @@ function StatsFilter({filters, utmTrackingEnabled = false, onChange, ...props}:\n                 defaultOperator: 'is',\n                 hideOperatorSelect: true,\n                 options: utmMediumOptions,\n-                searchable: true\n+                searchable: true,\n+                selectedOptionsClassName: 'hidden'\n             },\n             {\n                 key: 'utm_campaign',"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:398": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:398",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:398",
+      "message": "Removed line: searchable: true"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:399": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:399",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:399",
+      "message": "Added line: searchable: true,"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:400": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:400",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:400",
+      "message": "Added line: selectedOptionsClassName: 'hidden'"
+    },
+    "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:409": {
+      "id": "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:409",
+      "kind": "diff_hunk",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:409",
+      "message": "@@ -407,7 +409,8 @@ function StatsFilter({filters, utmTrackingEnabled = false, onChange, ...props}:\n                 defaultOperator: 'is',\n                 hideOperatorSelect: true,\n                 options: utmCampaignOptions,\n-                searchable: true\n+                searchable: true,\n+                selectedOptionsClassName: 'hidden'\n             },\n             {\n                 key: 'utm_content',"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:410": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:410",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:410",
+      "message": "Removed line: searchable: true"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:412": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:412",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:412",
+      "message": "Added line: searchable: true,"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:413": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:413",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:413",
+      "message": "Added line: selectedOptionsClassName: 'hidden'"
+    },
+    "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:422": {
+      "id": "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:422",
+      "kind": "diff_hunk",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:422",
+      "message": "@@ -419,7 +422,8 @@ function StatsFilter({filters, utmTrackingEnabled = false, onChange, ...props}:\n                 defaultOperator: 'is',\n                 hideOperatorSelect: true,\n                 options: utmContentOptions,\n-                searchable: true\n+                searchable: true,\n+                selectedOptionsClassName: 'hidden'\n             },\n             {\n                 key: 'utm_term',"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:422": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:422",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:422",
+      "message": "Removed line: searchable: true"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:425": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:425",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:425",
+      "message": "Added line: searchable: true,"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:426": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:426",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:426",
+      "message": "Added line: selectedOptionsClassName: 'hidden'"
+    },
+    "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:435": {
+      "id": "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:435",
+      "kind": "diff_hunk",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:435",
+      "message": "@@ -431,7 +435,8 @@ function StatsFilter({filters, utmTrackingEnabled = false, onChange, ...props}:\n                 defaultOperator: 'is',\n                 hideOperatorSelect: true,\n                 options: utmTermOptions,\n-                searchable: true\n+                searchable: true,\n+                selectedOptionsClassName: 'hidden'\n             }\n         ] : [];\n "
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:434": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:434",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:434",
+      "message": "Removed line: searchable: true"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:438": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:438",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:438",
+      "message": "Added line: searchable: true,"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:439": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:439",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:439",
+      "message": "Added line: selectedOptionsClassName: 'hidden'"
+    },
+    "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:449": {
+      "id": "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:449",
+      "kind": "diff_hunk",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:449",
+      "message": "@@ -444,13 +449,16 @@ function StatsFilter({filters, utmTrackingEnabled = false, onChange, ...props}:\n                         label: 'Audience',\n                         type: 'multiselect',\n                         icon: <LucideIcon.Users />,\n-                        options: audienceOptions.map(({value, label, icon}) => ({value, label, icon}))\n+                        options: audienceOptions.map(({value, label, icon}) => ({value, label, icon})),\n+                        defaultOperator: 'is any of',\n+                        hideOperatorSelect: true,\n+                        autoCloseOnSelect: true\n                     },\n                     {\n                         key: 'post',\n                         label: 'Post or page',\n                         type: 'select',\n-                        icon: <LucideIcon.File />,\n+                        icon: <LucideIcon.PenLine />,\n                         options: postOptions,\n                         searchable: true,\n                         asyncSearch: true,"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:447": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:447",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:447",
+      "message": "Removed line: options: audienceOptions.map(({value, label, icon}) => ({value, label, icon}))"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:452": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:452",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:452",
+      "message": "Added line: options: audienceOptions.map(({value, label, icon}) => ({value, label, icon})),"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:453": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:453",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:453",
+      "message": "Removed line: icon: <LucideIcon.File />,"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:454": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:454",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:454",
+      "message": "Added line: hideOperatorSelect: true,"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:455": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:455",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:455",
+      "message": "Added line: autoCloseOnSelect: true"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:461": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:461",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:461",
+      "message": "Added line: icon: <LucideIcon.PenLine />,"
+    },
+    "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:466": {
+      "id": "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:466",
+      "kind": "diff_hunk",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:466",
+      "message": "@@ -458,6 +466,8 @@ function StatsFilter({filters, utmTrackingEnabled = false, onChange, ...props}:\n                         onSearchChange: setSearchQuery,\n                         operators: supportedOperators,\n                         defaultOperator: 'is',\n+                        className: 'w-80',\n+                        popoverContentClassName: 'w-80',\n                         hideOperatorSelect: true\n                     },\n                     {"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:469": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:469",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:469",
+      "message": "Added line: className: 'w-80',"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:470": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:470",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:470",
+      "message": "Added line: popoverContentClassName: 'w-80',"
+    },
+    "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:480": {
+      "id": "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:480",
+      "kind": "diff_hunk",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:480",
+      "message": "@@ -470,7 +480,8 @@ function StatsFilter({filters, utmTrackingEnabled = false, onChange, ...props}:\n                         defaultOperator: 'is',\n                         hideOperatorSelect: true,\n                         options: sourceOptions,\n-                        searchable: true\n+                        searchable: true,\n+                        selectedOptionsClassName: 'hidden'\n                     }\n                 ]\n             },"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:473": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:473",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:473",
+      "message": "Removed line: searchable: true"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:483": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:483",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:483",
+      "message": "Added line: searchable: true,"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:484": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:484",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:484",
+      "message": "Added line: selectedOptionsClassName: 'hidden'"
+    },
+    "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:494": {
+      "id": "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:494",
+      "kind": "diff_hunk",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:494",
+      "message": "@@ -483,12 +494,13 @@ function StatsFilter({filters, utmTrackingEnabled = false, onChange, ...props}:\n \n     return (\n         <Filters\n-            addButtonIcon={filters.length ? <LucideIcon.Plus /> : <LucideIcon.ListFilter />}\n-            addButtonText={filters.length ? 'Add filter' : 'Filter'}\n-            className='mb-6 mt-0.5 [&>button]:order-last'\n+            addButtonIcon={<LucideIcon.FunnelPlus />}\n+            addButtonText={filters.length ? '' : ''}\n+            className='mb-6 [&>button]:order-last'\n             fields={groupedFields}\n             filters={filters}\n             showSearchInput={false}\n+            size='sm'\n             onChange={handleFilterChange}\n             {...props}\n         />"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:486": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:486",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:486",
+      "message": "Removed line: addButtonIcon={filters.length ? <LucideIcon.Plus /> : <LucideIcon.ListFilter />}"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:487": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:487",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:487",
+      "message": "Removed line: addButtonText={filters.length ? 'Add filter' : 'Filter'}"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:488": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:488",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:488",
+      "message": "Removed line: className='mb-6 mt-0.5 [&>button]:order-last'"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:497": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:497",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:497",
+      "message": "Added line: addButtonIcon={<LucideIcon.FunnelPlus />}"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:498": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:498",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:498",
+      "message": "Added line: addButtonText={filters.length ? '' : ''}"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:499": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:499",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:499",
+      "message": "Added line: className='mb-6 [&>button]:order-last'"
+    },
+    "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:503": {
+      "id": "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:503",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:503",
+      "message": "Added line: size='sm'"
+    },
+    "diff_hunk:apps/stats/src/views/Stats/layout/stats-header.tsx:64": {
+      "id": "diff_hunk:apps/stats/src/views/Stats/layout/stats-header.tsx:64",
+      "kind": "diff_hunk",
+      "source": "apps/stats/src/views/Stats/layout/stats-header.tsx:64",
+      "message": "@@ -64,7 +64,7 @@ const StatsHeader:React.FC<StatsHeaderProps> = ({\n                     )}\n                 </div>\n             </header>\n-            <Navbar className='sticky top-0 z-40 flex-col items-start gap-y-5 border-none bg-white/70 py-8 backdrop-blur-md lg:flex-row lg:items-center dark:bg-black'>\n+            <Navbar className='sticky top-0 z-40 flex-col items-start gap-y-5 border-none bg-white/70 pb-6 pt-9 backdrop-blur-md lg:flex-row lg:items-center dark:bg-black'>\n                 <PageMenu defaultValue={normalizedPath} responsive>\n                     <PageMenuItem value=\"/analytics/\" onClick={() => {\n                         navigate('/analytics/');"
+    },
+    "diff:apps/stats/src/views/Stats/layout/stats-header.tsx:67": {
+      "id": "diff:apps/stats/src/views/Stats/layout/stats-header.tsx:67",
+      "kind": "diff",
+      "source": "apps/stats/src/views/Stats/layout/stats-header.tsx:67",
+      "message": "Added line: <Navbar className='sticky top-0 z-40 flex-col items-start gap-y-5 border-none bg-white/70 pb-6 pt-9 backdrop-blur-md ..."
+    },
+    "entity:apps/shade/src/components/ui/filters.tsx:apps.shade.src.components.ui.filters": {
+      "id": "entity:apps/shade/src/components/ui/filters.tsx:apps.shade.src.components.ui.filters",
+      "kind": "entity",
+      "source": "apps/shade/src/components/ui/filters.tsx:105-105",
+      "message": "Changed module apps.shade.src.components.ui.filters touched by 13 hunk(s)."
+    },
+    "entity:apps/stats/src/views/Stats/components/stats-filter.tsx:apps.stats.src.views.Stats.components.stats-filter": {
+      "id": "entity:apps/stats/src/views/Stats/components/stats-filter.tsx:apps.stats.src.views.Stats.components.stats-filter",
+      "kind": "entity",
+      "source": "apps/stats/src/views/Stats/components/stats-filter.tsx:93-93",
+      "message": "Changed module apps.stats.src.views.Stats.components.stats-filter touched by 13 hunk(s)."
+    },
+    "entity:apps/stats/src/views/Stats/layout/stats-header.tsx:apps.stats.src.views.Stats.layout.stats-header": {
+      "id": "entity:apps/stats/src/views/Stats/layout/stats-header.tsx:apps.stats.src.views.Stats.layout.stats-header",
+      "kind": "entity",
+      "source": "apps/stats/src/views/Stats/layout/stats-header.tsx:67-67",
+      "message": "Changed module apps.stats.src.views.Stats.layout.stats-header touched by 1 hunk(s)."
+    }
+  },
+  "missing_evidence_ids": [],
+  "agent_runs": [
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+      "input_evidence_ids": [
+        "diff_hunk:apps/shade/src/components/ui/filters.tsx:102",
+        "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:90",
+        "diff_hunk:apps/stats/src/views/Stats/layout/stats-header.tsx:64"
+      ],
+      "output_issue_ids": [
+        "correctness:apps/shade/src/components/ui/filters.tsx:105"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 5973,
+      "token_count_in": 5827,
+      "token_count_out": 146,
+      "trace_id": "5fe721a598d64b4b894a01e7bd19487d",
+      "span_id": "09f6818cddc9406e",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001",
+      "shard_index": 0,
+      "shard_count": 1,
+      "context_request_count": 0,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+      "model": null,
+      "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+      "input_evidence_ids": [],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 0,
+      "token_count_in": 0,
+      "token_count_out": 0,
+      "trace_id": "",
+      "span_id": "",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "",
+      "shard_index": 0,
+      "shard_count": 0,
+      "context_request_count": 0,
+      "context_refill_used": false
+    }
+  ],
+  "prompt_exports": {},
+  "context_budget": {
+    "enabled": true,
+    "strategy": "risk_first_v1",
+    "context_profile": "risk_compact_manifest_v1",
+    "max_input_tokens": 9000,
+    "estimated_input_tokens": 5107,
+    "selected_evidence_count": 3,
+    "omitted_evidence_count": 106,
+    "selected_evidence_ids": [
+      "diff_hunk:apps/shade/src/components/ui/filters.tsx:102",
+      "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:90",
+      "diff_hunk:apps/stats/src/views/Stats/layout/stats-header.tsx:64"
+    ],
+    "omitted_evidence_ids": [
+      "diff_hunk:apps/shade/src/components/ui/filters.tsx:1048",
+      "diff_hunk:apps/shade/src/components/ui/filters.tsx:1122",
+      "diff_hunk:apps/shade/src/components/ui/filters.tsx:1131",
+      "diff_hunk:apps/shade/src/components/ui/filters.tsx:119",
+      "diff_hunk:apps/shade/src/components/ui/filters.tsx:1198",
+      "diff_hunk:apps/shade/src/components/ui/filters.tsx:1268",
+      "diff_hunk:apps/shade/src/components/ui/filters.tsx:1641",
+      "diff_hunk:apps/shade/src/components/ui/filters.tsx:2075",
+      "diff_hunk:apps/shade/src/components/ui/filters.tsx:2095",
+      "diff_hunk:apps/shade/src/components/ui/filters.tsx:236",
+      "diff_hunk:apps/shade/src/components/ui/filters.tsx:747",
+      "diff_hunk:apps/shade/src/components/ui/filters.tsx:943",
+      "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:156",
+      "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:185",
+      "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:211",
+      "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:383",
+      "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:396",
+      "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:409",
+      "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:422",
+      "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:435",
+      "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:449",
+      "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:466",
+      "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:480",
+      "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:494",
+      "entity:apps/shade/src/components/ui/filters.tsx:apps.shade.src.components.ui.filters",
+      "entity:apps/stats/src/views/Stats/components/stats-filter.tsx:apps.stats.src.views.Stats.components.stats-filter",
+      "entity:apps/stats/src/views/Stats/layout/stats-header.tsx:apps.stats.src.views.Stats.layout.stats-header",
+      "diff:apps/shade/src/components/ui/filters.tsx:105",
+      "diff:apps/shade/src/components/ui/filters.tsx:1051",
+      "diff:apps/shade/src/components/ui/filters.tsx:1122",
+      "diff:apps/shade/src/components/ui/filters.tsx:1125",
+      "diff:apps/shade/src/components/ui/filters.tsx:1134",
+      "diff:apps/shade/src/components/ui/filters.tsx:1135",
+      "diff:apps/shade/src/components/ui/filters.tsx:1136",
+      "diff:apps/shade/src/components/ui/filters.tsx:1137",
+      "diff:apps/shade/src/components/ui/filters.tsx:1194",
+      "diff:apps/shade/src/components/ui/filters.tsx:1201",
+      "diff:apps/shade/src/components/ui/filters.tsx:1202",
+      "diff:apps/shade/src/components/ui/filters.tsx:1203",
+      "diff:apps/shade/src/components/ui/filters.tsx:1204",
+      "diff:apps/shade/src/components/ui/filters.tsx:1205",
+      "diff:apps/shade/src/components/ui/filters.tsx:1206",
+      "diff:apps/shade/src/components/ui/filters.tsx:1207",
+      "diff:apps/shade/src/components/ui/filters.tsx:122",
+      "diff:apps/shade/src/components/ui/filters.tsx:1261",
+      "diff:apps/shade/src/components/ui/filters.tsx:1271",
+      "diff:apps/shade/src/components/ui/filters.tsx:1272",
+      "diff:apps/shade/src/components/ui/filters.tsx:1273",
+      "diff:apps/shade/src/components/ui/filters.tsx:1274",
+      "diff:apps/shade/src/components/ui/filters.tsx:1628",
+      "diff:apps/shade/src/components/ui/filters.tsx:1644",
+      "diff:apps/shade/src/components/ui/filters.tsx:2062",
+      "diff:apps/shade/src/components/ui/filters.tsx:2076",
+      "diff:apps/shade/src/components/ui/filters.tsx:2078",
+      "diff:apps/shade/src/components/ui/filters.tsx:2079",
+      "diff:apps/shade/src/components/ui/filters.tsx:2080",
+      "diff:apps/shade/src/components/ui/filters.tsx:2081",
+      "diff:apps/shade/src/components/ui/filters.tsx:2082",
+      "diff:apps/shade/src/components/ui/filters.tsx:2083",
+      "diff:apps/shade/src/components/ui/filters.tsx:2084",
+      "diff:apps/shade/src/components/ui/filters.tsx:2098",
+      "diff:apps/shade/src/components/ui/filters.tsx:2099",
+      "diff:apps/shade/src/components/ui/filters.tsx:2100",
+      "diff:apps/shade/src/components/ui/filters.tsx:2101",
+      "diff:apps/shade/src/components/ui/filters.tsx:239",
+      "diff:apps/shade/src/components/ui/filters.tsx:750",
+      "diff:apps/shade/src/components/ui/filters.tsx:751",
+      "diff:apps/shade/src/components/ui/filters.tsx:944",
+      "diff:apps/shade/src/components/ui/filters.tsx:946",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:159",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:188",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:214",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:386",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:387",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:398",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:399",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:400",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:410",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:412",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:413",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:422",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:425",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:426",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:434",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:438",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:439",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:447",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:452",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:453",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:454",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:455",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:461",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:469",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:470",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:473",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:483",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:484",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:486",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:487",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:488",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:497",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:498",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:499",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:503",
+      "diff:apps/stats/src/views/Stats/components/stats-filter.tsx:93",
+      "diff:apps/stats/src/views/Stats/layout/stats-header.tsx:67"
+    ],
+    "selected_risk_signal_count": 0,
+    "context_truncated": true,
+    "shard_count": 1,
+    "refill_count": 0,
+    "context_request_count": 0,
+    "context_requests": [],
+    "shards": [
+      {
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 3,
+        "omitted_evidence_count": 106,
+        "estimated_input_tokens": 5107,
+        "context_truncated": true
+      }
+    ],
+    "warnings": []
+  },
+  "loop": {
+    "enabled": true,
+    "max_iter": 1,
+    "iterations_completed": 1,
+    "converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "checkpoint_path": "D:\\learn\\code-review-agent\\workspace\\qodo_pr_review_bench_live_guidelines\\samples\\qodo_010\\review\\loop_checkpoint.json",
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "iterations": [
+      {
+        "i": 0,
+        "candidate_issue_count": 1,
+        "verified_count": 0,
+        "needs_human_review_count": 0,
+        "discarded_count": 1,
+        "keep_count": 0,
+        "uncertain_count": 0,
+        "reject_count": 0,
+        "feedback_sent": [],
+        "agent_runs": [
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+            "input_evidence_ids": [
+              "diff_hunk:apps/shade/src/components/ui/filters.tsx:102",
+              "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:90",
+              "diff_hunk:apps/stats/src/views/Stats/layout/stats-header.tsx:64"
+            ],
+            "output_issue_ids": [
+              "correctness:apps/shade/src/components/ui/filters.tsx:105"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 5973,
+            "token_count_in": 5827,
+            "token_count_out": 146,
+            "trace_id": "5fe721a598d64b4b894a01e7bd19487d",
+            "span_id": "09f6818cddc9406e",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001",
+            "shard_index": 0,
+            "shard_count": 1,
+            "context_request_count": 0,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+            "model": null,
+            "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+            "input_evidence_ids": [],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 0,
+            "token_count_in": 0,
+            "token_count_out": 0,
+            "trace_id": "",
+            "span_id": "",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "",
+            "shard_index": 0,
+            "shard_count": 0,
+            "context_request_count": 0,
+            "context_refill_used": false
+          }
+        ],
+        "issue_set": [],
+        "keep": [],
+        "needs_human_review": [],
+        "discarded": [
+          {
+            "file": "apps/shade/src/components/ui/filters.tsx",
+            "line": 105,
+            "severity": "medium",
+            "category": "correctness",
+            "message": "Empty string label for 'Add filter' button may render an invisible or non-functional UI element, breaking the add-filter feature.",
+            "suggestion": "Restore a non-empty label or use an accessible alternative such as an aria-label on the button.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:apps/shade/src/components/ui/filters.tsx:102"
+            ],
+            "filter_reason": "low_signal_suggestion"
+          }
+        ]
+      }
+    ]
+  },
+  "tracing": {
+    "total_latency_ms": 5973,
+    "total_token_count_in": 5827,
+    "total_token_count_out": 146,
+    "total_retry_count": 0,
+    "run_count": 2,
+    "status_counts": {
+      "ok": 2
+    }
+  }
+}

@@ -1,0 +1,247 @@
+{
+  "schema_version": "1.0",
+  "run_id": "ef6adf7384cc42bd9a5fc7ab9f8710d8",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": false,
+  "package_hash": "sha256:76c7c7881c24f33628cf6d1d3fe3de415b6a5c6d30878b0296100beef47e2f6d",
+  "diff_hash": "sha256:fb38e9647a0e846438d1314c48b3a0bdc42c28d23ed16cb509e7654d263c283a",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 4,
+      "verified_count": 2,
+      "needs_human_review_count": 0,
+      "discarded_count": 2,
+      "keep_count": 0,
+      "uncertain_count": 2,
+      "reject_count": 0,
+      "feedback_sent": [
+        {
+          "issue_id": "style:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:279",
+          "category": "style",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276"
+          ]
+        },
+        {
+          "issue_id": "maintainability:src/Components/test/testassets/Components.TestServer/Program.cs:27",
+          "category": "maintainability",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24"
+          ]
+        }
+      ],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:10",
+            "diff_hunk:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:31",
+            "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+            "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276"
+          ],
+          "output_issue_ids": [
+            "style:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:279",
+            "style:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:279"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 51166,
+          "token_count_in": 6804,
+          "token_count_out": 417,
+          "trace_id": "2ba8a4a0d2aa4dd98c1a021a019139d2",
+          "span_id": "5de606ded2084902",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 2,
+          "context_request_count": 1,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118"
+          ],
+          "output_issue_ids": [
+            "correctness:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:143"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 1370,
+          "token_count_in": 3812,
+          "token_count_out": 141,
+          "trace_id": "0df294d1b55f48a1b9ef8ad8f17ecf72",
+          "span_id": "f8d0e02a385d44cc",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001-refill",
+          "shard_index": 0,
+          "shard_count": 2,
+          "context_request_count": 0,
+          "context_refill_used": true
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24",
+            "diff_hunk:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51"
+          ],
+          "output_issue_ids": [
+            "correctness:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:54",
+            "maintainability:src/Components/test/testassets/Components.TestServer/Program.cs:27"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 3757,
+          "token_count_in": 4376,
+          "token_count_out": 353,
+          "trace_id": "c8036684f4e94591926f28a03b557281",
+          "span_id": "50433e626c9a4e43",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-002",
+          "shard_index": 1,
+          "shard_count": 2,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276",
+            "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [
+        "maintainability:src/Components/test/testassets/Components.TestServer/Program.cs:27",
+        "style:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:279"
+      ],
+      "keep": [],
+      "needs_human_review": [
+        {
+          "file": "src/Components/test/E2ETest/Tests/StatePersistenceTest.cs",
+          "line": 279,
+          "severity": "medium",
+          "category": "style",
+          "message": "Test method 'PersistentStateIsSupportedInDynamicJSRoots' lacks explicit '// Arrange', '// Act', and '// Assert' comments, violating the Arrange-Act-Assert pattern requirement.",
+          "suggestion": "Add '// Arrange', '// Act', and '// Assert' comments to delineate the test phases.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276"
+          ]
+        },
+        {
+          "file": "src/Components/test/testassets/Components.TestServer/Program.cs",
+          "line": 27,
+          "severity": "low",
+          "category": "maintainability",
+          "message": "Removed the test scenario entry for 'Razor Component Endpoints with JS Root Component' without adding a replacement. This reduces test coverage for the dynamic JS root component registration path.",
+          "suggestion": "If the scenario is no longer needed, confirm that the removed test case is covered elsewhere. Otherwise, restore the entry or add a new test scenario.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24"
+          ]
+        }
+      ],
+      "discarded": [
+        {
+          "file": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts",
+          "line": 143,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Missing curly braces around for loop body may lead to maintenance bugs.",
+          "suggestion": "Add curly braces around the inner for loop body to prevent future errors when adding statements.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118"
+          ],
+          "filter_reason": "low_signal_suggestion"
+        },
+        {
+          "file": "src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs",
+          "line": 54,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Removed conditional guard around RootComponents registration; the dynamic JS root component is now always registered regardless of configuration, which may break scenarios that relied on the 'RegisterDynamicJSRootComponent' flag to control registration.",
+          "suggestion": "If the conditional registration was intentionally removed, ensure all callers are updated. Otherwise, restore the conditional check or add a new configuration mechanism.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51"
+          ],
+          "filter_reason": "low_signal_suggestion"
+        }
+      ]
+    }
+  ],
+  "last_feedback": {
+    "iteration": 0,
+    "uncertain_items": [
+      {
+        "issue_id": "style:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:279",
+        "category": "style",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276"
+        ]
+      },
+      {
+        "issue_id": "maintainability:src/Components/test/testassets/Components.TestServer/Program.cs:27",
+        "category": "maintainability",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:e8c520c1f319922349c742ea70da23af1d92afdc9b1fc76ff90c0fdd5dadaba0",
+  "diff_hash": "sha256:c01da051757911780fe41fa48ea2af7b86fa18bcd8b4724f3539e569ec416623",
+  "shards": {
+    "94847b1c176ad20b1d51157dfc9bf0de098c0322984a58ed8da358a85708090d": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:718",
+        "diff_hunk:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1",
+        "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:1"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "src/Components/Endpoints/test/TestComponents/GenericComponent.razor",
+          "line": 1,
+          "severity": "medium",
+          "category": "style",
+          "message": "New file GenericComponent.razor is missing the required MIT license header. Review guideline 'All C# Source Files Must Include MIT License Header' requires the exact two-line comment header at the start of every .cs file. Although this is a .razor file, the guideline applies to all C# source files; .razor files with @code blocks are considered C# source files.",
+          "suggestion": "Add the license header at the top of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1"
+          ]
+        },
+        {
+          "file": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs",
+          "line": 10,
+          "severity": "medium",
+          "category": "style",
+          "message": "Test class 'ServerComponentDeserializerTest' does not follow the naming convention. Review guideline 'Test Classes Must Follow Naming Convention' requires test class names to end with 'Test' or 'Tests' suffix. The class name ends with 'Test' but the guideline expects a clear suffix; however, the class name is acceptable as it ends with 'Test'. No issue.",
+          "suggestion": "",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:1"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:718",
+          "diff_hunk:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1",
+          "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:1"
+        ],
+        "output_issue_ids": [
+          "style:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1",
+          "style:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:10"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 12010,
+        "token_count_in": 6065,
+        "token_count_out": 403,
+        "trace_id": "8a0d7277bb284f199eec54ac20af2d5a",
+        "span_id": "1719e3d72a4544e2",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

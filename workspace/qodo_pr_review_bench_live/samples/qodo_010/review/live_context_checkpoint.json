@@ -1,0 +1,64 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:1896df70c589c33aeb43fe2d6d512a2898c7f26625814dd3f397d944e6d89237",
+  "diff_hash": "sha256:3e0f165f200aa2162d00427e16071ad754bffa748a4d6747e382891bfe8b684c",
+  "shards": {
+    "d876caab85e3f25bc1f54e5897051464894a04237f009f930f24e55c160d84d7": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:apps/shade/src/components/ui/filters.tsx:102",
+        "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:90",
+        "diff_hunk:apps/stats/src/views/Stats/layout/stats-header.tsx:64"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "apps/shade/src/components/ui/filters.tsx",
+          "line": 105,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "The default label for the 'Add filter' button is set to an empty string, which may result in an inaccessible or confusing UI element with no visible text.",
+          "suggestion": "Provide a meaningful default label (e.g., 'Add filter') or ensure the component handles an empty label gracefully with an aria-label or tooltip.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/shade/src/components/ui/filters.tsx:102"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:apps/shade/src/components/ui/filters.tsx:102",
+          "diff_hunk:apps/stats/src/views/Stats/components/stats-filter.tsx:90",
+          "diff_hunk:apps/stats/src/views/Stats/layout/stats-header.tsx:64"
+        ],
+        "output_issue_ids": [
+          "correctness:apps/shade/src/components/ui/filters.tsx:105"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 3424,
+        "token_count_in": 3703,
+        "token_count_out": 163,
+        "trace_id": "58ad464015224438a88ff03eb9969d06",
+        "span_id": "1599f3210e134ff4",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

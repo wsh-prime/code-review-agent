@@ -1,0 +1,234 @@
+{
+  "schema_version": "1.0",
+  "run_id": "ae1c2c2f22e5455b9dfc8152aad49966",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": false,
+  "package_hash": "sha256:7a4de960fab5c376ba620afc69198967b9954803fc89e3414f2eb4d97335bee9",
+  "diff_hash": "sha256:fb38e9647a0e846438d1314c48b3a0bdc42c28d23ed16cb509e7654d263c283a",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 3,
+      "verified_count": 2,
+      "needs_human_review_count": 0,
+      "discarded_count": 1,
+      "keep_count": 0,
+      "uncertain_count": 2,
+      "reject_count": 0,
+      "feedback_sent": [
+        {
+          "issue_id": "test_coverage:src/Components/test/testassets/Components.TestServer/Program.cs:27",
+          "category": "test_coverage",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24"
+          ]
+        },
+        {
+          "issue_id": "behavior_change:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:54",
+          "category": "behavior_change",
+          "critic_reason": "requires semantic confirmation",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51"
+          ]
+        }
+      ],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:10",
+            "diff_hunk:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:31",
+            "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1",
+            "diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 2123,
+          "token_count_in": 4775,
+          "token_count_out": 268,
+          "trace_id": "068f01157e58425989fd6ad9c1cdadad",
+          "span_id": "9e6a4f66d994409b",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 2,
+          "context_request_count": 2,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:34",
+            "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118",
+            "diff_hunk:src/Components/Web.JS/src/Rendering/WebRendererInteropMethods.ts:31"
+          ],
+          "output_issue_ids": [
+            "correctness:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118",
+            "correctness:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 43965,
+          "token_count_in": 2352,
+          "token_count_out": 465,
+          "trace_id": "2914486c96e542669194f89f838e49d5",
+          "span_id": "085697da179f443d",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001-refill",
+          "shard_index": 0,
+          "shard_count": 2,
+          "context_request_count": 0,
+          "context_refill_used": true
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24",
+            "diff_hunk:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51"
+          ],
+          "output_issue_ids": [
+            "test_coverage:src/Components/test/testassets/Components.TestServer/Program.cs:27",
+            "behavior_change:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:54"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 15369,
+          "token_count_in": 2347,
+          "token_count_out": 356,
+          "trace_id": "b07176f7e757404e8bfd5b3b47a5ae24",
+          "span_id": "430eef8a91f14644",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-002",
+          "shard_index": 1,
+          "shard_count": 2,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [
+            "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24",
+            "diff_hunk:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [
+        "behavior_change:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:54",
+        "test_coverage:src/Components/test/testassets/Components.TestServer/Program.cs:27"
+      ],
+      "keep": [],
+      "needs_human_review": [
+        {
+          "file": "src/Components/test/testassets/Components.TestServer/Program.cs",
+          "line": 27,
+          "severity": "medium",
+          "category": "test_coverage",
+          "message": "Removal of the 'Razor Component Endpoints with JS Root Component' test scenario eliminates test coverage for the dynamic JS root component registration path.",
+          "suggestion": "Consider keeping the test scenario or adding an equivalent test elsewhere to ensure the dynamic JS root component registration continues to be validated.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24"
+          ]
+        },
+        {
+          "file": "src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs",
+          "line": 54,
+          "severity": "medium",
+          "category": "behavior_change",
+          "message": "The conditional registration of the dynamic JS root component (guarded by 'RegisterDynamicJSRootComponent' config) is now unconditional. This changes behavior for all test scenarios that use this startup class, potentially causing side effects or failures in scenarios that did not previously register this component.",
+          "suggestion": "If the dynamic JS root component should always be registered, ensure all dependent tests are updated. Otherwise, keep the conditional guard or add a new configuration flag.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51"
+          ]
+        }
+      ],
+      "discarded": [
+        {
+          "file": "src/Components/Web.JS/src/Rendering/JSRootComponents.ts",
+          "line": 118,
+          "severity": "high",
+          "category": "correctness",
+          "message": "The guard `if (manager && currentRendererId === rendererId)` throws an error only when the same renderer ID re-enables, but the comment says 'A different renderer type... is trying to enable JS root components.' This is contradictory: the condition checks for equal rendererId, not different. If a different renderer type (different rendererId) calls enableJSRootComponents, the condition is false, so no error is thrown and the manager is silently overwritten. This could lead to a scenario where two different renderer types both claim to manage dynamic root components, violating the stated unsupported multi-host assumption.",
+          "suggestion": "Change the condition to `if (manager && currentRendererId !== rendererId)` to correctly detect a different renderer type attempting to enable JS root components, or update the comment to match the actual logic.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/Web.JS/src/Rendering/JSRootComponents.ts:118"
+          ],
+          "filter_reason": "low_signal_suggestion"
+        }
+      ]
+    }
+  ],
+  "last_feedback": {
+    "iteration": 0,
+    "uncertain_items": [
+      {
+        "issue_id": "test_coverage:src/Components/test/testassets/Components.TestServer/Program.cs:27",
+        "category": "test_coverage",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:src/Components/test/testassets/Components.TestServer/Program.cs:24"
+        ]
+      },
+      {
+        "issue_id": "behavior_change:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:54",
+        "category": "behavior_change",
+        "critic_reason": "requires semantic confirmation",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51"
+        ]
+      }
+    ]
+  }
+}

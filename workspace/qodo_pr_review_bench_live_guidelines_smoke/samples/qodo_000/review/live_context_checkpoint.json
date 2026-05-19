@@ -1,0 +1,66 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:857c0a76ba12d4c597e4c5584f89a61da4ca06c1cce0abcff95b3d90152e54cb",
+  "diff_hash": "sha256:062a6eb825eab43b9dfb09c5b03ccb186c6eddd9ffd082a1c6d3a05b657fcb5f",
+  "shards": {
+    "593140202da4ca874ffee8aff177e6445713a297bfdd8b126a648587dcb6169a": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/core/boot.js:310",
+        "diff_hunk:ghost/core/core/server/services/xmlrpc.js:1",
+        "diff_hunk:ghost/core/core/shared/config/env/config.development.json:23",
+        "diff_hunk:ghost/core/test/unit/server/services/xmlrpc.test.js:1"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "ghost/core/core/shared/config/env/config.development.json",
+          "line": 26,
+          "severity": "medium",
+          "category": "functionality",
+          "message": "Removing the 'useRpcPing' privacy config option disables the ability to control XML-RPC ping behavior via configuration, which may affect existing deployments that rely on this setting.",
+          "suggestion": "If the XMLRPC service is intentionally removed, ensure the config removal is coordinated with the service deletion. If the service is kept, retain the config option.",
+          "confidence": 0.85,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/shared/config/env/config.development.json:23"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/core/boot.js:310",
+          "diff_hunk:ghost/core/core/server/services/xmlrpc.js:1",
+          "diff_hunk:ghost/core/core/shared/config/env/config.development.json:23",
+          "diff_hunk:ghost/core/test/unit/server/services/xmlrpc.test.js:1"
+        ],
+        "output_issue_ids": [
+          "functionality:ghost/core/core/shared/config/env/config.development.json:26"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 21070,
+        "token_count_in": 6626,
+        "token_count_out": 179,
+        "trace_id": "117b848c992548feb712832b8a61627c",
+        "span_id": "341abf522788459b",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

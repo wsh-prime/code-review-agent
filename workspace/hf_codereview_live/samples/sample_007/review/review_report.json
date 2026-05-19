@@ -1,0 +1,417 @@
+{
+  "schema_version": "1.3",
+  "summary": {
+    "mode": "hybrid-live",
+    "changed_file_count": 1,
+    "changed_entity_count": 1,
+    "risk_signal_count": 0,
+    "finding_count": 0,
+    "needs_human_review_count": 0,
+    "discarded_count": 0,
+    "evidence_count": 4,
+    "missing_evidence_id_count": 0,
+    "agent_run_count": 2,
+    "prompt_exported": false,
+    "loop_enabled": true,
+    "loop_iterations_completed": 1,
+    "loop_converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "total_latency_ms": 31764,
+    "total_token_count_in": 1452,
+    "total_token_count_out": 12,
+    "context_budget_enabled": true,
+    "context_truncated": true,
+    "selected_evidence_count": 1,
+    "omitted_evidence_count": 3,
+    "review_shard_count": 1,
+    "context_refill_count": 0,
+    "context_request_count": 0,
+    "target_repo_modified": false
+  },
+  "findings": [],
+  "needs_human_review": [],
+  "discarded": [],
+  "changed_files": [
+    {
+      "old_path": "gpt_engineer/steps.py",
+      "new_path": "gpt_engineer/steps.py",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 18,
+          "old_count": 21,
+          "new_start": 18,
+          "new_count": 21,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 18,
+              "new_lineno": 18,
+              "content": "        ai.fsystem(dbs.preprompts[\"use_feedback\"]),"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 19,
+              "new_lineno": 19,
+              "content": "    ]"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 20,
+              "new_lineno": 20,
+              "content": "    messages = ai.next(messages, dbs.input[\"feedback\"])"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 21,
+              "new_lineno": 21,
+              "content": "    to_files(messages[-1][\"content\"], dbs.workspace)"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 22,
+              "new_lineno": 22,
+              "content": "    return messages"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 23,
+              "new_lineno": 23,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 24,
+              "new_lineno": 24,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 25,
+              "new_lineno": 25,
+              "content": "def fix_code(ai: AI, dbs: DBs):"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 26,
+              "new_lineno": null,
+              "content": "    code_ouput = json.loads(dbs.logs[gen_code.__name__])[-1][\"content\"]"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 26,
+              "content": "    code_output = json.loads(dbs.logs[gen_code.__name__])[-1][\"content\"]"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 27,
+              "new_lineno": 27,
+              "content": "    messages = ["
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 28,
+              "new_lineno": 28,
+              "content": "        ai.fsystem(setup_sys_prompt(dbs)),"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 29,
+              "new_lineno": 29,
+              "content": "        ai.fuser(f\"Instructions: {dbs.input['main_prompt']}\"),"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 30,
+              "new_lineno": null,
+              "content": "        ai.fuser(code_ouput),"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 30,
+              "content": "        ai.fuser(code_output),"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 31,
+              "new_lineno": 31,
+              "content": "        ai.fsystem(dbs.preprompts[\"fix_code\"]),"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 32,
+              "new_lineno": 32,
+              "content": "    ]"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 33,
+              "new_lineno": 33,
+              "content": "    messages = ai.next(messages, \"Please fix any errors in the code above.\")"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 34,
+              "new_lineno": 34,
+              "content": "    to_files(messages[-1][\"content\"], dbs.workspace)"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 35,
+              "new_lineno": 35,
+              "content": "    return messages"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 36,
+              "new_lineno": 36,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 37,
+              "new_lineno": 37,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 38,
+              "new_lineno": 38,
+              "content": "class Config(str, Enum):"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "changed_entities": [
+    {
+      "path": "gpt_engineer/steps.py",
+      "entity_type": "module",
+      "name": "steps.py",
+      "qualified_name": "gpt_engineer.steps",
+      "line_start": 26,
+      "line_end": 30,
+      "hunk_ids": [
+        "gpt_engineer/steps.py:18"
+      ]
+    }
+  ],
+  "risk_signals": [],
+  "evidence_index": {
+    "diff_hunk:gpt_engineer/steps.py:18": {
+      "id": "diff_hunk:gpt_engineer/steps.py:18",
+      "kind": "diff_hunk",
+      "source": "gpt_engineer/steps.py:18",
+      "message": "@@ -18,21 +18,21 @@\n         ai.fsystem(dbs.preprompts[\"use_feedback\"]),\n     ]\n     messages = ai.next(messages, dbs.input[\"feedback\"])\n     to_files(messages[-1][\"content\"], dbs.workspace)\n     return messages\n \n \n def fix_code(ai: AI, dbs: DBs):\n-    code_ouput = json.loads(dbs.logs[gen_code.__name__])[-1][\"content\"]\n+    code_output = json.loads(dbs.logs[gen_code.__name__])[-1][\"content\"]\n     messages = [\n         ai.fsystem(setup_sys_prompt(dbs)),\n         ai.fuser(f\"Instructions: {dbs.input['main_prompt']}\"),\n-        ai.fuser(code_ouput),\n+        ai.fuser(code_output),\n         ai.fsystem(dbs.preprompts[\"fix_code\"]),\n     ]\n     messages = ai.next(messages, \"Please fix any errors in the code above.\")\n     to_files(messages[-1][\"content\"], dbs.workspace)\n     return messages\n \n \n class Config(str, Enum):"
+    },
+    "diff:gpt_engineer/steps.py:26": {
+      "id": "diff:gpt_engineer/steps.py:26",
+      "kind": "diff",
+      "source": "gpt_engineer/steps.py:26",
+      "message": "Added line: code_output = json.loads(dbs.logs[gen_code.__name__])[-1][\"content\"]"
+    },
+    "diff:gpt_engineer/steps.py:30": {
+      "id": "diff:gpt_engineer/steps.py:30",
+      "kind": "diff",
+      "source": "gpt_engineer/steps.py:30",
+      "message": "Added line: ai.fuser(code_output),"
+    },
+    "entity:gpt_engineer/steps.py:gpt_engineer.steps": {
+      "id": "entity:gpt_engineer/steps.py:gpt_engineer.steps",
+      "kind": "entity",
+      "source": "gpt_engineer/steps.py:26-30",
+      "message": "Changed module gpt_engineer.steps touched by 1 hunk(s)."
+    }
+  },
+  "missing_evidence_ids": [],
+  "agent_runs": [
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+      "input_evidence_ids": [
+        "diff_hunk:gpt_engineer/steps.py:18"
+      ],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 31764,
+      "token_count_in": 1452,
+      "token_count_out": 12,
+      "trace_id": "17d274f37cb849c5abb0ae5195e2e7df",
+      "span_id": "5cb00562515f4d60",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001",
+      "shard_index": 0,
+      "shard_count": 1,
+      "context_request_count": 0,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+      "model": null,
+      "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+      "input_evidence_ids": [],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 0,
+      "token_count_in": 0,
+      "token_count_out": 0,
+      "trace_id": "",
+      "span_id": "",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "",
+      "shard_index": 0,
+      "shard_count": 0,
+      "context_request_count": 0,
+      "context_refill_used": false
+    }
+  ],
+  "prompt_exports": {},
+  "context_budget": {
+    "enabled": true,
+    "strategy": "risk_first_v1",
+    "context_profile": "risk_compact_manifest_v1",
+    "max_input_tokens": 9000,
+    "estimated_input_tokens": 651,
+    "selected_evidence_count": 1,
+    "omitted_evidence_count": 3,
+    "selected_evidence_ids": [
+      "diff_hunk:gpt_engineer/steps.py:18"
+    ],
+    "omitted_evidence_ids": [
+      "entity:gpt_engineer/steps.py:gpt_engineer.steps",
+      "diff:gpt_engineer/steps.py:26",
+      "diff:gpt_engineer/steps.py:30"
+    ],
+    "selected_risk_signal_count": 0,
+    "context_truncated": true,
+    "shard_count": 1,
+    "refill_count": 0,
+    "context_request_count": 0,
+    "context_requests": [],
+    "shards": [
+      {
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 1,
+        "omitted_evidence_count": 3,
+        "estimated_input_tokens": 651,
+        "context_truncated": true
+      }
+    ],
+    "warnings": []
+  },
+  "loop": {
+    "enabled": true,
+    "max_iter": 1,
+    "iterations_completed": 1,
+    "converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "checkpoint_path": "D:\\learn\\code-review-agent\\workspace\\hf_codereview_live\\samples\\sample_007\\review\\loop_checkpoint.json",
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "iterations": [
+      {
+        "i": 0,
+        "candidate_issue_count": 0,
+        "verified_count": 0,
+        "needs_human_review_count": 0,
+        "discarded_count": 0,
+        "keep_count": 0,
+        "uncertain_count": 0,
+        "reject_count": 0,
+        "feedback_sent": [],
+        "agent_runs": [
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+            "input_evidence_ids": [
+              "diff_hunk:gpt_engineer/steps.py:18"
+            ],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 31764,
+            "token_count_in": 1452,
+            "token_count_out": 12,
+            "trace_id": "17d274f37cb849c5abb0ae5195e2e7df",
+            "span_id": "5cb00562515f4d60",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001",
+            "shard_index": 0,
+            "shard_count": 1,
+            "context_request_count": 0,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+            "model": null,
+            "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+            "input_evidence_ids": [],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 0,
+            "token_count_in": 0,
+            "token_count_out": 0,
+            "trace_id": "",
+            "span_id": "",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "",
+            "shard_index": 0,
+            "shard_count": 0,
+            "context_request_count": 0,
+            "context_refill_used": false
+          }
+        ],
+        "issue_set": [],
+        "keep": [],
+        "needs_human_review": [],
+        "discarded": []
+      }
+    ]
+  },
+  "tracing": {
+    "total_latency_ms": 31764,
+    "total_token_count_in": 1452,
+    "total_token_count_out": 12,
+    "total_retry_count": 0,
+    "run_count": 2,
+    "status_counts": {
+      "ok": 2
+    }
+  }
+}

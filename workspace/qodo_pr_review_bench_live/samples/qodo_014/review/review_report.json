@@ -1,0 +1,3169 @@
+{
+  "schema_version": "1.3",
+  "summary": {
+    "mode": "hybrid-live",
+    "changed_file_count": 11,
+    "changed_entity_count": 11,
+    "risk_signal_count": 4,
+    "finding_count": 2,
+    "needs_human_review_count": 4,
+    "discarded_count": 2,
+    "evidence_count": 86,
+    "missing_evidence_id_count": 0,
+    "agent_run_count": 6,
+    "prompt_exported": false,
+    "loop_enabled": true,
+    "loop_iterations_completed": 1,
+    "loop_converged": false,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "total_latency_ms": 71178,
+    "total_token_count_in": 15226,
+    "total_token_count_out": 1692,
+    "context_budget_enabled": true,
+    "context_truncated": true,
+    "selected_evidence_count": 15,
+    "omitted_evidence_count": 71,
+    "review_shard_count": 3,
+    "context_refill_count": 2,
+    "context_request_count": 5,
+    "target_repo_modified": false
+  },
+  "findings": [
+    {
+      "file": "eng/common/core-templates/job/source-index-stage1.yml",
+      "line": 9,
+      "severity": "high",
+      "category": "potential_regression",
+      "message": "The condition for the source-index-stage1 job is changed from always running (empty string) to only running on the main branch. This will prevent source indexing from running on non-main branches, which may be intentional but could break CI workflows that depend on source indexing for all branches.",
+      "suggestion": "If source indexing is needed for all branches, revert the condition to empty string. Otherwise, ensure that all dependent pipelines are aware of this change.",
+      "confidence": 0.85,
+      "evidence_ids": [
+        "diff_hunk:eng/common/core-templates/job/source-index-stage1.yml:6"
+      ]
+    },
+    {
+      "file": "eng/common/core-templates/job/source-build.yml",
+      "line": 68,
+      "severity": "medium",
+      "category": "compatibility",
+      "message": "The build image is changed from '1es-mariner-2' to '1es-azurelinux-3'. This may introduce breaking changes if the new image has different tooling, dependencies, or environment variables. The patch does not show any corresponding adjustments to the build steps or scripts.",
+      "suggestion": "Verify that the new image '1es-azurelinux-3' is compatible with all build steps and scripts used in this job. Update any environment-specific commands or paths if necessary.",
+      "confidence": 0.7,
+      "evidence_ids": [
+        "diff_hunk:eng/common/core-templates/job/source-build.yml:65"
+      ]
+    }
+  ],
+  "needs_human_review": [
+    {
+      "file": "eng/common/internal-feed-operations.ps1",
+      "line": 29,
+      "severity": "low",
+      "category": "compatibility",
+      "message": "Adding '-UseBasicParsing' to Invoke-WebRequest may change the response object type (e.g., no HtmlWebResponseObject), which could break downstream code that expects the default parsing behavior.",
+      "suggestion": "Ensure that no code downstream relies on the Internet Explorer engine's HTML parsing (e.g., accessing .Links, .Images, or .Forms). If not needed, the change is safe.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:eng/common/internal-feed-operations.ps1:26"
+      ]
+    },
+    {
+      "file": "eng/common/post-build/nuget-verification.ps1",
+      "line": 68,
+      "severity": "low",
+      "category": "compatibility",
+      "message": "Adding '-UseBasicParsing' to Invoke-WebRequest may change the response object type, potentially breaking code that expects the default IE-driven parsing.",
+      "suggestion": "Confirm that no downstream code depends on the default HTML parsing features. If not, the change is safe.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:eng/common/post-build/nuget-verification.ps1:65"
+      ]
+    },
+    {
+      "file": "eng/common/tools.ps1",
+      "line": 269,
+      "severity": "low",
+      "category": "compatibility",
+      "message": "Adding '-UseBasicParsing' to Invoke-WebRequest may change the response object type, potentially breaking code that expects the default IE-driven parsing.",
+      "suggestion": "Ensure that no downstream code relies on the default HTML parsing. If not, the change is safe.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:eng/common/tools.ps1:266"
+      ]
+    },
+    {
+      "file": "eng/common/core-templates/steps/source-build.yml",
+      "line": 44,
+      "severity": "medium",
+      "category": "security",
+      "message": "The patch changes the internal runtime download source URL from 'https://dotnetbuilds.blob.core.windows.net/internal' to 'https://ci.dot.net/internal' and adds a new '--runtimesourcefeed' argument. This alters the trust boundary for runtime artifact downloads, potentially exposing the build to a different internal endpoint without evidence of equivalent security controls.",
+      "suggestion": "Verify that the new URL 'https://ci.dot.net/internal' is an authorized internal feed with equivalent or stronger access controls and that the added '--runtimesourcefeed' argument does not bypass existing authentication or introduce a man-in-the-middle risk.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:eng/common/core-templates/steps/source-build.yml:41",
+        "diff:eng/common/core-templates/steps/source-build.yml:44"
+      ]
+    }
+  ],
+  "discarded": [
+    {
+      "file": "eng/common/core-templates/steps/source-build.yml",
+      "line": 44,
+      "severity": "medium",
+      "category": "correctness",
+      "message": "The patch changes the internal runtime download feed URL from 'https://dotnetbuilds.blob.core.windows.net/internal' to 'https://ci.dot.net/internal' and adds a new '--runtimesourcefeed' argument. If the new URL or argument format is incorrect or not supported by the build tooling, the download may fail silently or use an unintended source.",
+      "suggestion": "Verify that 'https://ci.dot.net/internal' is the correct and accessible internal feed URL, and that the '--runtimesourcefeed' argument is properly handled by the build scripts.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:eng/common/core-templates/steps/source-build.yml:41"
+      ],
+      "filter_reason": "style_preference"
+    },
+    {
+      "file": "src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs",
+      "line": 92,
+      "severity": "medium",
+      "category": "test_quality",
+      "message": "Test method 'CanSendAndReceiveUserMessagesFromMultipleConnectionsWithSameUser' is quarantined due to a known issue, but the patch does not include any fix or mitigation for the underlying flakiness.",
+      "suggestion": "Consider adding a retry mechanism or investigating the root cause of the flakiness referenced in the issue before quarantining.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:89"
+      ],
+      "filter_reason": "low_signal_suggestion"
+    }
+  ],
+  "changed_files": [
+    {
+      "old_path": "eng/Version.Details.xml",
+      "new_path": "eng/Version.Details.xml",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 388,
+          "old_count": 31,
+          "new_start": 388,
+          "new_count": 31,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 388,
+              "new_lineno": 388,
+              "content": "      <Uri>https://github.com/dotnet/winforms</Uri>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 389,
+              "new_lineno": 389,
+              "content": "      <Sha>9b822fd70005bf5632d12fe76811b97b3dd044e4</Sha>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 390,
+              "new_lineno": 390,
+              "content": "    </Dependency>"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 391,
+              "new_lineno": null,
+              "content": "    <Dependency Name=\"Microsoft.DotNet.Arcade.Sdk\" Version=\"9.0.0-beta.25562.4\">"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 391,
+              "content": "    <Dependency Name=\"Microsoft.DotNet.Arcade.Sdk\" Version=\"9.0.0-beta.25626.6\">"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 392,
+              "new_lineno": 392,
+              "content": "      <Uri>https://github.com/dotnet/arcade</Uri>"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 393,
+              "new_lineno": null,
+              "content": "      <Sha>6e2d8e204cebac7d3989c1996f96e5a9ed63fa80</Sha>"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 393,
+              "content": "      <Sha>ab5773ac30dce73227fa1dff6bf1a21eea67cbd0</Sha>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 394,
+              "new_lineno": 394,
+              "content": "    </Dependency>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 395,
+              "new_lineno": 395,
+              "content": "    <!-- Intermediate is necessary for source build. -->"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 396,
+              "new_lineno": null,
+              "content": "    <Dependency Name=\"Microsoft.SourceBuild.Intermediate.arcade\" Version=\"9.0.0-beta.25562.4\">"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 396,
+              "content": "    <Dependency Name=\"Microsoft.SourceBuild.Intermediate.arcade\" Version=\"9.0.0-beta.25626.6\">"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 397,
+              "new_lineno": 397,
+              "content": "      <Uri>https://github.com/dotnet/arcade</Uri>"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 398,
+              "new_lineno": null,
+              "content": "      <Sha>6e2d8e204cebac7d3989c1996f96e5a9ed63fa80</Sha>"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 398,
+              "content": "      <Sha>ab5773ac30dce73227fa1dff6bf1a21eea67cbd0</Sha>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 399,
+              "new_lineno": 399,
+              "content": "      <SourceBuild RepoName=\"arcade\" ManagedOnly=\"true\" />"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 400,
+              "new_lineno": 400,
+              "content": "    </Dependency>"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 401,
+              "new_lineno": null,
+              "content": "    <Dependency Name=\"Microsoft.DotNet.Build.Tasks.Installers\" Version=\"9.0.0-beta.25562.4\">"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 401,
+              "content": "    <Dependency Name=\"Microsoft.DotNet.Build.Tasks.Installers\" Version=\"9.0.0-beta.25626.6\">"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 402,
+              "new_lineno": 402,
+              "content": "      <Uri>https://github.com/dotnet/arcade</Uri>"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 403,
+              "new_lineno": null,
+              "content": "      <Sha>6e2d8e204cebac7d3989c1996f96e5a9ed63fa80</Sha>"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 403,
+              "content": "      <Sha>ab5773ac30dce73227fa1dff6bf1a21eea67cbd0</Sha>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 404,
+              "new_lineno": 404,
+              "content": "    </Dependency>"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 405,
+              "new_lineno": null,
+              "content": "    <Dependency Name=\"Microsoft.DotNet.Build.Tasks.Templating\" Version=\"9.0.0-beta.25562.4\">"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 405,
+              "content": "    <Dependency Name=\"Microsoft.DotNet.Build.Tasks.Templating\" Version=\"9.0.0-beta.25626.6\">"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 406,
+              "new_lineno": 406,
+              "content": "      <Uri>https://github.com/dotnet/arcade</Uri>"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 407,
+              "new_lineno": null,
+              "content": "      <Sha>6e2d8e204cebac7d3989c1996f96e5a9ed63fa80</Sha>"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 407,
+              "content": "      <Sha>ab5773ac30dce73227fa1dff6bf1a21eea67cbd0</Sha>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 408,
+              "new_lineno": 408,
+              "content": "    </Dependency>"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 409,
+              "new_lineno": null,
+              "content": "    <Dependency Name=\"Microsoft.DotNet.Helix.Sdk\" Version=\"9.0.0-beta.25562.4\">"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 409,
+              "content": "    <Dependency Name=\"Microsoft.DotNet.Helix.Sdk\" Version=\"9.0.0-beta.25626.6\">"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 410,
+              "new_lineno": 410,
+              "content": "      <Uri>https://github.com/dotnet/arcade</Uri>"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 411,
+              "new_lineno": null,
+              "content": "      <Sha>6e2d8e204cebac7d3989c1996f96e5a9ed63fa80</Sha>"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 411,
+              "content": "      <Sha>ab5773ac30dce73227fa1dff6bf1a21eea67cbd0</Sha>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 412,
+              "new_lineno": 412,
+              "content": "    </Dependency>"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 413,
+              "new_lineno": null,
+              "content": "    <Dependency Name=\"Microsoft.DotNet.RemoteExecutor\" Version=\"9.0.0-beta.25562.4\">"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 413,
+              "content": "    <Dependency Name=\"Microsoft.DotNet.RemoteExecutor\" Version=\"9.0.0-beta.25626.6\">"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 414,
+              "new_lineno": 414,
+              "content": "      <Uri>https://github.com/dotnet/arcade</Uri>"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 415,
+              "new_lineno": null,
+              "content": "      <Sha>6e2d8e204cebac7d3989c1996f96e5a9ed63fa80</Sha>"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 415,
+              "content": "      <Sha>ab5773ac30dce73227fa1dff6bf1a21eea67cbd0</Sha>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 416,
+              "new_lineno": 416,
+              "content": "    </Dependency>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 417,
+              "new_lineno": 417,
+              "content": "    <Dependency Name=\"Microsoft.Extensions.Diagnostics.Testing\" Version=\"10.1.0-preview.1.25578.1\">"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 418,
+              "new_lineno": 418,
+              "content": "      <Uri>https://github.com/dotnet/extensions</Uri>"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "eng/Versions.props",
+      "new_path": "eng/Versions.props",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 166,
+          "old_count": 10,
+          "new_start": 166,
+          "new_count": 10,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 166,
+              "new_lineno": 166,
+              "content": "    <NuGetVersioningVersion>6.2.4</NuGetVersioningVersion>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 167,
+              "new_lineno": 167,
+              "content": "    <NuGetFrameworksVersion>6.2.4</NuGetFrameworksVersion>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 168,
+              "new_lineno": 168,
+              "content": "    <!-- Packages from dotnet/arcade -->"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 169,
+              "new_lineno": null,
+              "content": "    <MicrosoftDotNetBuildTasksInstallersVersion>9.0.0-beta.25562.4</MicrosoftDotNetBuildTasksInstallersVersion>"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 170,
+              "new_lineno": null,
+              "content": "    <MicrosoftDotNetBuildTasksTemplatingVersion>9.0.0-beta.25562.4</MicrosoftDotNetBuildTasksTemplatingVersion>"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 171,
+              "new_lineno": null,
+              "content": "    <MicrosoftDotNetRemoteExecutorVersion>9.0.0-beta.25562.4</MicrosoftDotNetRemoteExecutorVersion>"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 172,
+              "new_lineno": null,
+              "content": "    <MicrosoftSourceBuildIntermediatearcadeVersion>9.0.0-beta.25562.4</MicrosoftSourceBuildIntermediatearcadeVersion>"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 169,
+              "content": "    <MicrosoftDotNetBuildTasksInstallersVersion>9.0.0-beta.25626.6</MicrosoftDotNetBuildTasksInstallersVersion>"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 170,
+              "content": "    <MicrosoftDotNetBuildTasksTemplatingVersion>9.0.0-beta.25626.6</MicrosoftDotNetBuildTasksTemplatingVersion>"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 171,
+              "content": "    <MicrosoftDotNetRemoteExecutorVersion>9.0.0-beta.25626.6</MicrosoftDotNetRemoteExecutorVersion>"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 172,
+              "content": "    <MicrosoftSourceBuildIntermediatearcadeVersion>9.0.0-beta.25626.6</MicrosoftSourceBuildIntermediatearcadeVersion>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 173,
+              "new_lineno": 173,
+              "content": "    <!-- Packages from dotnet/source-build-externals -->"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 174,
+              "new_lineno": 174,
+              "content": "    <MicrosoftSourceBuildIntermediatesourcebuildexternalsVersion>9.0.0-alpha.1.24575.1</MicrosoftSourceBuildIntermediatesourcebuildexternalsVersion>"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 175,
+              "new_lineno": 175,
+              "content": "    <!-- Packages from dotnet/source-build-reference-packages -->"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "eng/common/core-templates/job/source-build.yml",
+      "new_path": "eng/common/core-templates/job/source-build.yml",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 65,
+          "old_count": 7,
+          "new_start": 65,
+          "new_count": 7,
+          "section_header": "jobs:",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 65,
+              "new_lineno": 65,
+              "content": "          demands: ImageOverride -equals build.ubuntu.2004.amd64"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 66,
+              "new_lineno": 66,
+              "content": "        ${{ if eq(variables['System.TeamProject'], 'internal') }}:"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 67,
+              "new_lineno": 67,
+              "content": "          name: $[replace(replace(eq(contains(coalesce(variables['System.PullRequest.TargetBranch'], variables['Build.SourceBranch'], 'refs/heads/main'), 'release'), 'true'), True, 'NetCore1ESPool-Svc-Internal'), False, 'NetCore1ESPool-Internal')]"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 68,
+              "new_lineno": null,
+              "content": "          image: 1es-mariner-2"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 68,
+              "content": "          image: 1es-azurelinux-3"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 69,
+              "new_lineno": 69,
+              "content": "          os: linux"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 70,
+              "new_lineno": 70,
+              "content": "    ${{ else }}:"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 71,
+              "new_lineno": 71,
+              "content": "      pool:"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "eng/common/core-templates/job/source-index-stage1.yml",
+      "new_path": "eng/common/core-templates/job/source-index-stage1.yml",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 6,
+          "old_count": 7,
+          "new_start": 6,
+          "new_count": 7,
+          "section_header": "parameters:",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 6,
+              "new_lineno": 6,
+              "content": "  sourceIndexBuildCommand: powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -Command \"eng/common/build.ps1 -restore -build -binarylog -ci\""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 7,
+              "new_lineno": 7,
+              "content": "  preSteps: []"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 8,
+              "new_lineno": 8,
+              "content": "  binlogPath: artifacts/log/Debug/Build.binlog"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 9,
+              "new_lineno": null,
+              "content": "  condition: ''"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 9,
+              "content": "  condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 10,
+              "new_lineno": 10,
+              "content": "  dependsOn: ''"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 11,
+              "new_lineno": 11,
+              "content": "  pool: ''"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 12,
+              "new_lineno": 12,
+              "content": "  is1ESPipeline: ''"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "eng/common/core-templates/steps/source-build.yml",
+      "new_path": "eng/common/core-templates/steps/source-build.yml",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 41,
+          "old_count": 7,
+          "new_start": 41,
+          "new_count": 7,
+          "section_header": "steps:",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 41,
+              "new_lineno": 41,
+              "content": "    # in the default public locations."
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 42,
+              "new_lineno": 42,
+              "content": "    internalRuntimeDownloadArgs="
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 43,
+              "new_lineno": 43,
+              "content": "    if [ '$(dotnetbuilds-internal-container-read-token-base64)' != '$''(dotnetbuilds-internal-container-read-token-base64)' ]; then"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 44,
+              "new_lineno": null,
+              "content": "      internalRuntimeDownloadArgs='/p:DotNetRuntimeSourceFeed=https://dotnetbuilds.blob.core.windows.net/internal /p:DotNetRuntimeSourceFeedKey=$(dotnetbuilds-internal-container-read-token-base64) --runtimesourcefeed https://dotnetbuilds.blob.core.windows.net/internal --runtimesourcefeedkey $(dotnetbuilds-internal-container-read-token-base64)'"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 44,
+              "content": "      internalRuntimeDownloadArgs='/p:DotNetRuntimeSourceFeed=https://ci.dot.net/internal /p:DotNetRuntimeSourceFeedKey=$(dotnetbuilds-internal-container-read-token-base64) --runtimesourcefeed https://ci.dot.net/internal --runtimesourcefeedkey $(dotnetbuilds-internal-container-read-token-base64)'"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 45,
+              "new_lineno": 45,
+              "content": "    fi"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 46,
+              "new_lineno": 46,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 47,
+              "new_lineno": 47,
+              "content": "    buildConfig=Release"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "eng/common/internal-feed-operations.ps1",
+      "new_path": "eng/common/internal-feed-operations.ps1",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 26,
+          "old_count": 7,
+          "new_start": 26,
+          "new_count": 7,
+          "section_header": "function SetupCredProvider {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 26,
+              "new_lineno": 26,
+              "content": "  $url = 'https://raw.githubusercontent.com/microsoft/artifacts-credprovider/master/helpers/installcredprovider.ps1'"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 27,
+              "new_lineno": 27,
+              "content": "  "
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 28,
+              "new_lineno": 28,
+              "content": "  Write-Host \"Writing the contents of 'installcredprovider.ps1' locally...\""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 29,
+              "new_lineno": null,
+              "content": "  Invoke-WebRequest $url -OutFile installcredprovider.ps1"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 29,
+              "content": "  Invoke-WebRequest $url -UseBasicParsing -OutFile installcredprovider.ps1"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 30,
+              "new_lineno": 30,
+              "content": "  "
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 31,
+              "new_lineno": 31,
+              "content": "  Write-Host 'Installing plugin...'"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 32,
+              "new_lineno": 32,
+              "content": "  .\\installcredprovider.ps1 -Force"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "eng/common/post-build/nuget-verification.ps1",
+      "new_path": "eng/common/post-build/nuget-verification.ps1",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 65,
+          "old_count": 7,
+          "new_start": 65,
+          "new_count": 7,
+          "section_header": "if ($NuGetExePath) {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 65,
+              "new_lineno": 65,
+              "content": "        Write-Host \"Downloading nuget.exe from $nugetExeUrl...\""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 66,
+              "new_lineno": 66,
+              "content": "        $ProgressPreference = 'SilentlyContinue'"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 67,
+              "new_lineno": 67,
+              "content": "        try {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 68,
+              "new_lineno": null,
+              "content": "            Invoke-WebRequest $nugetExeUrl -OutFile $downloadedNuGetExe"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 68,
+              "content": "            Invoke-WebRequest $nugetExeUrl -UseBasicParsing -OutFile $downloadedNuGetExe"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 69,
+              "new_lineno": 69,
+              "content": "            $ProgressPreference = 'Continue'"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 70,
+              "new_lineno": 70,
+              "content": "        } catch {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 71,
+              "new_lineno": 71,
+              "content": "            $ProgressPreference = 'Continue'"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "eng/common/tools.ps1",
+      "new_path": "eng/common/tools.ps1",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 266,
+          "old_count": 7,
+          "new_start": 266,
+          "new_count": 7,
+          "section_header": "function GetDotNetInstallScript([string] $dotnetRoot) {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 266,
+              "new_lineno": 266,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 267,
+              "new_lineno": 267,
+              "content": "    Retry({"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 268,
+              "new_lineno": 268,
+              "content": "      Write-Host \"GET $uri\""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 269,
+              "new_lineno": null,
+              "content": "      Invoke-WebRequest $uri -OutFile $installScript"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 269,
+              "content": "      Invoke-WebRequest $uri -UseBasicParsing -OutFile $installScript"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 270,
+              "new_lineno": 270,
+              "content": "    })"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 271,
+              "new_lineno": 271,
+              "content": "  }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 272,
+              "new_lineno": 272,
+              "content": ""
+            }
+          ]
+        },
+        {
+          "old_start": 499,
+          "old_count": 7,
+          "new_start": 499,
+          "new_count": 7,
+          "section_header": "function InitializeXCopyMSBuild([string]$packageVersion, [bool]$install) {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 499,
+              "new_lineno": 499,
+              "content": "    Write-Host \"Downloading $packageName $packageVersion\""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 500,
+              "new_lineno": 500,
+              "content": "    $ProgressPreference = 'SilentlyContinue' # Don't display the console progress UI - it's a huge perf hit"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 501,
+              "new_lineno": 501,
+              "content": "    Retry({"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 502,
+              "new_lineno": null,
+              "content": "      Invoke-WebRequest \"https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/flat2/$packageName/$packageVersion/$packageName.$packageVersion.nupkg\" -OutFile $packagePath"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 502,
+              "content": "      Invoke-WebRequest \"https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/flat2/$packageName/$packageVersion/$packageName.$packageVersion.nupkg\" -UseBasicParsing -OutFile $packagePath"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 503,
+              "new_lineno": 503,
+              "content": "    })"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 504,
+              "new_lineno": 504,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 505,
+              "new_lineno": 505,
+              "content": "    if (!(Test-Path $packagePath)) {"
+            }
+          ]
+        },
+        {
+          "old_start": 543,
+          "old_count": 23,
+          "new_start": 543,
+          "new_count": 30,
+          "section_header": "function LocateVisualStudio([object]$vsRequirements = $null){",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 543,
+              "new_lineno": 543,
+              "content": "    Create-Directory $vsWhereDir"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 544,
+              "new_lineno": 544,
+              "content": "    Write-Host 'Downloading vswhere'"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 545,
+              "new_lineno": 545,
+              "content": "    Retry({"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 546,
+              "new_lineno": null,
+              "content": "      Invoke-WebRequest \"https://netcorenativeassets.blob.core.windows.net/resource-packages/external/windows/vswhere/$vswhereVersion/vswhere.exe\" -OutFile $vswhereExe"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 546,
+              "content": "      Invoke-WebRequest \"https://netcorenativeassets.blob.core.windows.net/resource-packages/external/windows/vswhere/$vswhereVersion/vswhere.exe\" -UseBasicParsing -OutFile $vswhereExe"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 547,
+              "new_lineno": 547,
+              "content": "    })"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 548,
+              "new_lineno": 548,
+              "content": "  }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 549,
+              "new_lineno": 549,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 550,
+              "new_lineno": null,
+              "content": "  if (!$vsRequirements) { $vsRequirements = $GlobalJson.tools.vs }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 550,
+              "content": "  if (!$vsRequirements) {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 551,
+              "content": "    if (Get-Member -InputObject $GlobalJson.tools -Name 'vs' -ErrorAction SilentlyContinue) {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 552,
+              "content": "      $vsRequirements = $GlobalJson.tools.vs"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 553,
+              "content": "    } else {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 554,
+              "content": "      $vsRequirements = $null"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 555,
+              "content": "    }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 556,
+              "content": "  }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 557,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 551,
+              "new_lineno": 558,
+              "content": "  $args = @('-latest', '-format', 'json', '-requires', 'Microsoft.Component.MSBuild', '-products', '*')"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 552,
+              "new_lineno": 559,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 553,
+              "new_lineno": 560,
+              "content": "  if (!$excludePrereleaseVS) {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 554,
+              "new_lineno": 561,
+              "content": "    $args += '-prerelease'"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 555,
+              "new_lineno": 562,
+              "content": "  }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 556,
+              "new_lineno": 563,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 557,
+              "new_lineno": null,
+              "content": "  if (Get-Member -InputObject $vsRequirements -Name 'version') {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 564,
+              "content": "  if ($vsRequirements -and (Get-Member -InputObject $vsRequirements -Name 'version' -ErrorAction SilentlyContinue)) {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 558,
+              "new_lineno": 565,
+              "content": "    $args += '-version'"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 559,
+              "new_lineno": 566,
+              "content": "    $args += $vsRequirements.version"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 560,
+              "new_lineno": 567,
+              "content": "  }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 561,
+              "new_lineno": 568,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 562,
+              "new_lineno": null,
+              "content": "  if (Get-Member -InputObject $vsRequirements -Name 'components') {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 569,
+              "content": "  if ($vsRequirements -and (Get-Member -InputObject $vsRequirements -Name 'components' -ErrorAction SilentlyContinue)) {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 563,
+              "new_lineno": 570,
+              "content": "    foreach ($component in $vsRequirements.components) {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 564,
+              "new_lineno": 571,
+              "content": "      $args += '-requires'"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 565,
+              "new_lineno": 572,
+              "content": "      $args += $component"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "global.json",
+      "new_path": "global.json",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 27,
+          "old_count": 7,
+          "new_start": 27,
+          "new_count": 7,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 27,
+              "new_lineno": 27,
+              "content": "    \"jdk\": \"latest\""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 28,
+              "new_lineno": 28,
+              "content": "  },"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 29,
+              "new_lineno": 29,
+              "content": "  \"msbuild-sdks\": {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 30,
+              "new_lineno": null,
+              "content": "    \"Microsoft.DotNet.Arcade.Sdk\": \"9.0.0-beta.25562.4\","
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 31,
+              "new_lineno": null,
+              "content": "    \"Microsoft.DotNet.Helix.Sdk\": \"9.0.0-beta.25562.4\""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 30,
+              "content": "    \"Microsoft.DotNet.Arcade.Sdk\": \"9.0.0-beta.25626.6\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 31,
+              "content": "    \"Microsoft.DotNet.Helix.Sdk\": \"9.0.0-beta.25626.6\""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 32,
+              "new_lineno": 32,
+              "content": "  }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 33,
+              "new_lineno": 33,
+              "content": "}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs",
+      "new_path": "src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 104,
+          "old_count": 11,
+          "new_start": 104,
+          "new_count": 17,
+          "section_header": "public void EmbeddingServerAppInsideIframe_WithCompressionEnabled_Fails()",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 104,
+              "new_lineno": 104,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 105,
+              "new_lineno": 105,
+              "content": "        Assert.True(logs.Count > 0);"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 106,
+              "new_lineno": 106,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 107,
+              "new_lineno": null,
+              "content": "        Assert.Matches(ParseErrorMessage(), logs[0].Message);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 107,
+              "content": "        Assert.True("
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 108,
+              "content": "            ParseErrorMessageRegexOld.IsMatch(logs[0].Message) &&"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 109,
+              "content": "            ParseErrorMessageRegexNew.IsMatch(logs[0].Message),"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 110,
+              "content": "            $\"Expected log message to match one of the CSP error patterns: {ParseErrorMessageRegexOld} or {ParseErrorMessageRegexNew}. Actual: {logs[0].Message}\");"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 108,
+              "new_lineno": 111,
+              "content": "    }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 109,
+              "new_lineno": 112,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 110,
+              "new_lineno": 113,
+              "content": "    [GeneratedRegex(@\"security - Refused to frame 'http://\\d+\\.\\d+\\.\\d+\\.\\d+:\\d+/' because an ancestor violates the following Content Security Policy directive: \"\"frame-ancestors 'none'\"\".\")]"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 111,
+              "new_lineno": null,
+              "content": "    private static partial Regex ParseErrorMessage();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 114,
+              "content": "    private static partial Regex ParseErrorMessageRegexOld { get; }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 115,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 116,
+              "content": "    [GeneratedRegex(@\"security - Framing 'http://\\d+\\.\\d+\\.\\d+\\.\\d+:\\d+/' violates the following Content Security Policy directive: \"\"frame-ancestors 'none'\"\".\")]"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 117,
+              "content": "    private static partial Regex ParseErrorMessageRegexNew { get; }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 112,
+              "new_lineno": 118,
+              "content": "}"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 113,
+              "new_lineno": 119,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 114,
+              "new_lineno": 120,
+              "content": "public partial class DefaultConfigurationWebSocketCompressionTests : AllowedWebSocketCompressionTests"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs",
+      "new_path": "src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 89,
+          "old_count": 6,
+          "new_start": 89,
+          "new_count": 7,
+          "section_header": "public async Task HubConnectionCanSendAndReceiveGroupMessages(HttpTransportType",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 89,
+              "new_lineno": 89,
+              "content": "    [ConditionalTheory]"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 90,
+              "new_lineno": 90,
+              "content": "    [SkipIfDockerNotPresent]"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 91,
+              "new_lineno": 91,
+              "content": "    [MemberData(nameof(TransportTypesAndProtocolTypes))]"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 92,
+              "content": "    [QuarantinedTest(\"https://github.com/dotnet/aspnetcore/issues/59991\")]"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 92,
+              "new_lineno": 93,
+              "content": "    public async Task CanSendAndReceiveUserMessagesFromMultipleConnectionsWithSameUser(HttpTransportType transportType, string protocolName)"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 93,
+              "new_lineno": 94,
+              "content": "    {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 94,
+              "new_lineno": 95,
+              "content": "        using (StartVerifiableLog())"
+            }
+          ]
+        },
+        {
+          "old_start": 184,
+          "old_count": 6,
+          "new_start": 185,
+          "new_count": 7,
+          "section_header": "public async Task HubConnectionCanSendAndReceiveGroupMessagesGroupNameWithPatter",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 184,
+              "new_lineno": 185,
+              "content": "    [ConditionalTheory]"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 185,
+              "new_lineno": 186,
+              "content": "    [SkipIfDockerNotPresent]"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 186,
+              "new_lineno": 187,
+              "content": "    [MemberData(nameof(TransportTypesAndProtocolTypes))]"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 188,
+              "content": "    [QuarantinedTest(\"https://github.com/dotnet/aspnetcore/issues/63582\")]"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 187,
+              "new_lineno": 189,
+              "content": "    public async Task CanSendAndReceiveUserMessagesUserNameWithPatternIsTreatedAsLiteral(HttpTransportType transportType, string protocolName)"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 188,
+              "new_lineno": 190,
+              "content": "    {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 189,
+              "new_lineno": 191,
+              "content": "        using (StartVerifiableLog())"
+            }
+          ]
+        },
+        {
+          "old_start": 208,
+          "old_count": 8,
+          "new_start": 210,
+          "new_count": 8,
+          "section_header": "public async Task CanSendAndReceiveUserMessagesUserNameWithPatternIsTreatedAsLit",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 208,
+              "new_lineno": 210,
+              "content": "            await connection.InvokeAsync(\"EchoUser\", \"*\", \"Hello, World!\").DefaultTimeout();"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 209,
+              "new_lineno": 211,
+              "content": "            Assert.Equal(\"Hello, World!\", await tcs.Task.DefaultTimeout());"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 210,
+              "new_lineno": 212,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 211,
+              "new_lineno": null,
+              "content": "            await connection.DisposeAsync().DefaultTimeout();"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 212,
+              "new_lineno": 213,
+              "content": "            await secondConnection.DisposeAsync().DefaultTimeout();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 214,
+              "content": "            await connection.DisposeAsync().DefaultTimeout();"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 213,
+              "new_lineno": 215,
+              "content": "        }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 214,
+              "new_lineno": 216,
+              "content": "    }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 215,
+              "new_lineno": 217,
+              "content": ""
+            }
+          ]
+        },
+        {
+          "old_start": 357,
+          "old_count": 7,
+          "new_start": 359,
+          "new_count": 7,
+          "section_header": "public static IEnumerable<object[]> TransportTypesAndProtocolTypes",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 357,
+              "new_lineno": 359,
+              "content": "        }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 358,
+              "new_lineno": 360,
+              "content": "    }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 359,
+              "new_lineno": 361,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 360,
+              "new_lineno": null,
+              "content": "    internal sealed class WebSocketWrapper : WebSocket"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 362,
+              "content": "    internal class WebSocketWrapper : WebSocket"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 361,
+              "new_lineno": 363,
+              "content": "    {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 362,
+              "new_lineno": 364,
+              "content": "        private readonly WebSocket _inner;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 363,
+              "new_lineno": 365,
+              "content": "        private TaskCompletionSource<(WebSocketReceiveResult, ReadOnlyMemory<byte>)> _receiveTcs = new(TaskCreationOptions.RunContinuationsAsynchronously);"
+            }
+          ]
+        },
+        {
+          "old_start": 404,
+          "old_count": 12,
+          "new_start": 406,
+          "new_count": 12,
+          "section_header": "public void SetReceiveResult((WebSocketReceiveResult, ReadOnlyMemory<byte>) resu",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 404,
+              "new_lineno": 406,
+              "content": "        public override async Task<WebSocketReceiveResult> ReceiveAsync(ArraySegment<byte> buffer, CancellationToken cancellationToken)"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 405,
+              "new_lineno": 407,
+              "content": "        {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 406,
+              "new_lineno": 408,
+              "content": "            var res = await _receiveTcs.Task;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 409,
+              "content": "            _receiveTcs = new(TaskCreationOptions.RunContinuationsAsynchronously);"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 407,
+              "new_lineno": 410,
+              "content": "            // Handle zero-byte reads"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 408,
+              "new_lineno": 411,
+              "content": "            if (buffer.Count == 0)"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 409,
+              "new_lineno": 412,
+              "content": "            {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 410,
+              "new_lineno": 413,
+              "content": "                return res.Item1;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 411,
+              "new_lineno": 414,
+              "content": "            }"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 412,
+              "new_lineno": null,
+              "content": "            _receiveTcs = new(TaskCreationOptions.RunContinuationsAsynchronously);"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 413,
+              "new_lineno": 415,
+              "content": "            res.Item2.CopyTo(buffer);"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 414,
+              "new_lineno": 416,
+              "content": "            return res.Item1;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 415,
+              "new_lineno": 417,
+              "content": "        }"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "changed_entities": [
+    {
+      "path": "eng/Version.Details.xml",
+      "entity_type": "module",
+      "name": "Version.Details.xml",
+      "qualified_name": "eng.Version.Details",
+      "line_start": 391,
+      "line_end": 415,
+      "hunk_ids": [
+        "eng/Version.Details.xml:388"
+      ]
+    },
+    {
+      "path": "eng/Versions.props",
+      "entity_type": "module",
+      "name": "Versions.props",
+      "qualified_name": "eng.Versions",
+      "line_start": 169,
+      "line_end": 172,
+      "hunk_ids": [
+        "eng/Versions.props:166"
+      ]
+    },
+    {
+      "path": "eng/common/core-templates/job/source-build.yml",
+      "entity_type": "module",
+      "name": "source-build.yml",
+      "qualified_name": "eng.common.core-templates.job.source-build",
+      "line_start": 68,
+      "line_end": 68,
+      "hunk_ids": [
+        "eng/common/core-templates/job/source-build.yml:65"
+      ]
+    },
+    {
+      "path": "eng/common/core-templates/job/source-index-stage1.yml",
+      "entity_type": "module",
+      "name": "source-index-stage1.yml",
+      "qualified_name": "eng.common.core-templates.job.source-index-stage1",
+      "line_start": 9,
+      "line_end": 9,
+      "hunk_ids": [
+        "eng/common/core-templates/job/source-index-stage1.yml:6"
+      ]
+    },
+    {
+      "path": "eng/common/core-templates/steps/source-build.yml",
+      "entity_type": "module",
+      "name": "source-build.yml",
+      "qualified_name": "eng.common.core-templates.steps.source-build",
+      "line_start": 44,
+      "line_end": 44,
+      "hunk_ids": [
+        "eng/common/core-templates/steps/source-build.yml:41"
+      ]
+    },
+    {
+      "path": "eng/common/internal-feed-operations.ps1",
+      "entity_type": "module",
+      "name": "internal-feed-operations.ps1",
+      "qualified_name": "eng.common.internal-feed-operations",
+      "line_start": 29,
+      "line_end": 29,
+      "hunk_ids": [
+        "eng/common/internal-feed-operations.ps1:26"
+      ]
+    },
+    {
+      "path": "eng/common/post-build/nuget-verification.ps1",
+      "entity_type": "module",
+      "name": "nuget-verification.ps1",
+      "qualified_name": "eng.common.post-build.nuget-verification",
+      "line_start": 68,
+      "line_end": 68,
+      "hunk_ids": [
+        "eng/common/post-build/nuget-verification.ps1:65"
+      ]
+    },
+    {
+      "path": "eng/common/tools.ps1",
+      "entity_type": "module",
+      "name": "tools.ps1",
+      "qualified_name": "eng.common.tools",
+      "line_start": 269,
+      "line_end": 269,
+      "hunk_ids": [
+        "eng/common/tools.ps1:266",
+        "eng/common/tools.ps1:499",
+        "eng/common/tools.ps1:543"
+      ]
+    },
+    {
+      "path": "global.json",
+      "entity_type": "module",
+      "name": "global.json",
+      "qualified_name": "global",
+      "line_start": 30,
+      "line_end": 31,
+      "hunk_ids": [
+        "global.json:27"
+      ]
+    },
+    {
+      "path": "src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs",
+      "entity_type": "module",
+      "name": "WebSocketCompressionTests.cs",
+      "qualified_name": "src.Components.test.E2ETest.ServerExecutionTests.WebSocketCompressionTests",
+      "line_start": 107,
+      "line_end": 117,
+      "hunk_ids": [
+        "src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:104"
+      ]
+    },
+    {
+      "path": "src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs",
+      "entity_type": "module",
+      "name": "RedisEndToEnd.cs",
+      "qualified_name": "src.SignalR.server.StackExchangeRedis.test.RedisEndToEnd",
+      "line_start": 92,
+      "line_end": 92,
+      "hunk_ids": [
+        "src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:89",
+        "src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:185",
+        "src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:210",
+        "src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:359",
+        "src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:406"
+      ]
+    }
+  ],
+  "risk_signals": [
+    {
+      "tag": "config_change",
+      "confidence": 0.86,
+      "reason": "Configuration file changed: eng/common/core-templates/job/source-build.yml.",
+      "evidence_ids": [
+        "diff:eng/common/core-templates/job/source-build.yml:68"
+      ]
+    },
+    {
+      "tag": "config_change",
+      "confidence": 0.86,
+      "reason": "Configuration file changed: eng/common/core-templates/job/source-index-stage1.yml.",
+      "evidence_ids": [
+        "diff:eng/common/core-templates/job/source-index-stage1.yml:9"
+      ]
+    },
+    {
+      "tag": "config_change",
+      "confidence": 0.86,
+      "reason": "Configuration file changed: eng/common/core-templates/steps/source-build.yml.",
+      "evidence_ids": [
+        "diff:eng/common/core-templates/steps/source-build.yml:44"
+      ]
+    },
+    {
+      "tag": "security_sensitive",
+      "confidence": 0.74,
+      "reason": "Security-sensitive keywords changed in eng/common/core-templates/steps/source-build.yml.",
+      "evidence_ids": [
+        "diff:eng/common/core-templates/steps/source-build.yml:44"
+      ]
+    }
+  ],
+  "evidence_index": {
+    "diff_hunk:eng/Version.Details.xml:388": {
+      "id": "diff_hunk:eng/Version.Details.xml:388",
+      "kind": "diff_hunk",
+      "source": "eng/Version.Details.xml:388",
+      "message": "@@ -388,31 +388,31 @@\n       <Uri>https://github.com/dotnet/winforms</Uri>\n       <Sha>9b822fd70005bf5632d12fe76811b97b3dd044e4</Sha>\n     </Dependency>\n-    <Dependency Name=\"Microsoft.DotNet.Arcade.Sdk\" Version=\"9.0.0-beta.25562.4\">\n+    <Dependency Name=\"Microsoft.DotNet.Arcade.Sdk\" Version=\"9.0.0-beta.25626.6\">\n       <Uri>https://github.com/dotnet/arcade</Uri>\n-      <Sha>6e2d8e204cebac7d3989c1996f96e5a9ed63fa80</Sha>\n+      <Sha>ab5773ac30dce73227fa1dff6bf1a21eea67cbd0</Sha>\n     </Dependency>\n     <!-- Intermediate is necessary for source build. -->\n-    <Dependency Name=\"Microsoft.SourceBuild.Intermediate.arcade\" Version=\"9.0.0-beta.25562.4\">\n+    <Dependency Name=\"Microsoft.SourceBuild.Intermediate.arcade\" Version=\"9.0.0-beta.25626.6\">\n       <Uri>https://github.com/dotnet/arcade</Uri>\n-      <Sha>6e2d8e204cebac7d3989c1996f96e5a9ed63fa80</Sha>\n+      <Sha>ab5773ac30dce73227fa1dff6bf1a21eea67cbd0</Sha>\n       <SourceBuild RepoName=\"arcade\" ManagedOnly=\"true\" />\n     </Dependency>\n-    <Dependency Name=\"Microsoft.DotNet.Build.Tasks.Installers\" Version=\"9.0.0-beta.25562.4\">\n+    <Dependency Name=\"Microsoft.DotNet.Build.Tasks.Installers\" Version=\"9.0.0-beta.25626.6\">\n       <Uri>https://github.com/dotnet/arcade</Uri>\n-      <Sha>6e2d8e204cebac7d3989c1996f96e5a9ed63fa80</Sha>\n+      <Sha>ab5773ac30dce73227fa1dff6bf1a21eea67cbd0</Sha>\n     </Dependency>\n-    <Dependency Name=\"Microsoft.DotNet.Build.Tasks.Templating\" Version=\"9.0.0-beta.25562.4\">\n+    <Dependency Name=\"Microsoft.DotNet.Build.Tasks.Templating\" Version=\"9.0.0-beta.25626.6\">\n       <Uri>https://github.com/dotnet/arcade</Uri>\n-      <Sha>6e2d8e204cebac7d3989c1996f96e5a9ed63fa80</Sha>\n+      <Sha>ab5773ac30dce73227fa1dff6bf1a21eea67cbd0</Sha>\n     </Dependency>\n-    <Dependency Name=\"Microsoft.DotNet.Helix.Sdk\" Version=\"9.0.0-beta.25562.4\">\n+    <Dependency Name=\"Microsoft.DotNet.Helix.Sdk\" Version=\"9.0.0-beta.25626.6\">\n       <Uri>https://github.com/dotnet/arcade</Uri>\n-      <Sha>6e2d8e204cebac7d3989c1996f96e5a9ed63fa80</Sha>\n+      <Sha>ab5773ac30dce73227fa1dff6bf1a21eea67cbd0</Sha>\n     </Dependency>\n-    <Dependency Name=\"Microsoft.DotNet.RemoteExecutor\" Version=\"9.0.0-beta.25562.4\">\n+    <Dependency Name=\"Microsoft.DotNet.RemoteExecutor\" Version=\"9.0.0-beta.25626.6\">\n       <Uri>https://github.com/dotnet/arcade</Uri>\n-      <Sha>6e2d8e204cebac7d3989c1996f96e5a9ed63fa80</Sha>\n+      <Sha>ab5773ac30dce73227fa1dff6bf1a21eea67cbd0</Sha>\n     </Dependency>\n     <Dependency Name=\"Microsoft.Extensions.Diagnostics.Testing\" Version=\"10.1.0-preview.1.25578.1\">\n       <Uri>https://github.com/dotnet/extensions</Uri>"
+    },
+    "diff:eng/Version.Details.xml:391": {
+      "id": "diff:eng/Version.Details.xml:391",
+      "kind": "diff",
+      "source": "eng/Version.Details.xml:391",
+      "message": "Added line: <Dependency Name=\"Microsoft.DotNet.Arcade.Sdk\" Version=\"9.0.0-beta.25626.6\">"
+    },
+    "diff:eng/Version.Details.xml:393": {
+      "id": "diff:eng/Version.Details.xml:393",
+      "kind": "diff",
+      "source": "eng/Version.Details.xml:393",
+      "message": "Added line: <Sha>ab5773ac30dce73227fa1dff6bf1a21eea67cbd0</Sha>"
+    },
+    "diff:eng/Version.Details.xml:396": {
+      "id": "diff:eng/Version.Details.xml:396",
+      "kind": "diff",
+      "source": "eng/Version.Details.xml:396",
+      "message": "Added line: <Dependency Name=\"Microsoft.SourceBuild.Intermediate.arcade\" Version=\"9.0.0-beta.25626.6\">"
+    },
+    "diff:eng/Version.Details.xml:398": {
+      "id": "diff:eng/Version.Details.xml:398",
+      "kind": "diff",
+      "source": "eng/Version.Details.xml:398",
+      "message": "Added line: <Sha>ab5773ac30dce73227fa1dff6bf1a21eea67cbd0</Sha>"
+    },
+    "diff:eng/Version.Details.xml:401": {
+      "id": "diff:eng/Version.Details.xml:401",
+      "kind": "diff",
+      "source": "eng/Version.Details.xml:401",
+      "message": "Added line: <Dependency Name=\"Microsoft.DotNet.Build.Tasks.Installers\" Version=\"9.0.0-beta.25626.6\">"
+    },
+    "diff:eng/Version.Details.xml:403": {
+      "id": "diff:eng/Version.Details.xml:403",
+      "kind": "diff",
+      "source": "eng/Version.Details.xml:403",
+      "message": "Added line: <Sha>ab5773ac30dce73227fa1dff6bf1a21eea67cbd0</Sha>"
+    },
+    "diff:eng/Version.Details.xml:405": {
+      "id": "diff:eng/Version.Details.xml:405",
+      "kind": "diff",
+      "source": "eng/Version.Details.xml:405",
+      "message": "Added line: <Dependency Name=\"Microsoft.DotNet.Build.Tasks.Templating\" Version=\"9.0.0-beta.25626.6\">"
+    },
+    "diff:eng/Version.Details.xml:407": {
+      "id": "diff:eng/Version.Details.xml:407",
+      "kind": "diff",
+      "source": "eng/Version.Details.xml:407",
+      "message": "Added line: <Sha>ab5773ac30dce73227fa1dff6bf1a21eea67cbd0</Sha>"
+    },
+    "diff:eng/Version.Details.xml:409": {
+      "id": "diff:eng/Version.Details.xml:409",
+      "kind": "diff",
+      "source": "eng/Version.Details.xml:409",
+      "message": "Added line: <Dependency Name=\"Microsoft.DotNet.Helix.Sdk\" Version=\"9.0.0-beta.25626.6\">"
+    },
+    "diff:eng/Version.Details.xml:411": {
+      "id": "diff:eng/Version.Details.xml:411",
+      "kind": "diff",
+      "source": "eng/Version.Details.xml:411",
+      "message": "Added line: <Sha>ab5773ac30dce73227fa1dff6bf1a21eea67cbd0</Sha>"
+    },
+    "diff:eng/Version.Details.xml:413": {
+      "id": "diff:eng/Version.Details.xml:413",
+      "kind": "diff",
+      "source": "eng/Version.Details.xml:413",
+      "message": "Added line: <Dependency Name=\"Microsoft.DotNet.RemoteExecutor\" Version=\"9.0.0-beta.25626.6\">"
+    },
+    "diff:eng/Version.Details.xml:415": {
+      "id": "diff:eng/Version.Details.xml:415",
+      "kind": "diff",
+      "source": "eng/Version.Details.xml:415",
+      "message": "Added line: <Sha>ab5773ac30dce73227fa1dff6bf1a21eea67cbd0</Sha>"
+    },
+    "diff_hunk:eng/Versions.props:166": {
+      "id": "diff_hunk:eng/Versions.props:166",
+      "kind": "diff_hunk",
+      "source": "eng/Versions.props:166",
+      "message": "@@ -166,10 +166,10 @@\n     <NuGetVersioningVersion>6.2.4</NuGetVersioningVersion>\n     <NuGetFrameworksVersion>6.2.4</NuGetFrameworksVersion>\n     <!-- Packages from dotnet/arcade -->\n-    <MicrosoftDotNetBuildTasksInstallersVersion>9.0.0-beta.25562.4</MicrosoftDotNetBuildTasksInstallersVersion>\n-    <MicrosoftDotNetBuildTasksTemplatingVersion>9.0.0-beta.25562.4</MicrosoftDotNetBuildTasksTemplatingVersion>\n-    <MicrosoftDotNetRemoteExecutorVersion>9.0.0-beta.25562.4</MicrosoftDotNetRemoteExecutorVersion>\n-    <MicrosoftSourceBuildIntermediatearcadeVersion>9.0.0-beta.25562.4</MicrosoftSourceBuildIntermediatearcadeVersion>\n+    <MicrosoftDotNetBuildTasksInstallersVersion>9.0.0-beta.25626.6</MicrosoftDotNetBuildTasksInstallersVersion>\n+    <MicrosoftDotNetBuildTasksTemplatingVersion>9.0.0-beta.25626.6</MicrosoftDotNetBuildTasksTemplatingVersion>\n+    <MicrosoftDotNetRemoteExecutorVersion>9.0.0-beta.25626.6</MicrosoftDotNetRemoteExecutorVersion>\n+    <MicrosoftSourceBuildIntermediatearcadeVersion>9.0.0-beta.25626.6</MicrosoftSourceBuildIntermediatearcadeVersion>\n     <!-- Packages from dotnet/source-build-externals -->\n     <MicrosoftSourceBuildIntermediatesourcebuildexternalsVersion>9.0.0-alpha.1.24575.1</MicrosoftSourceBuildIntermediatesourcebuildexternalsVersion>\n     <!-- Packages from dotnet/source-build-reference-packages -->"
+    },
+    "diff:eng/Versions.props:169": {
+      "id": "diff:eng/Versions.props:169",
+      "kind": "diff",
+      "source": "eng/Versions.props:169",
+      "message": "Added line: <MicrosoftDotNetBuildTasksInstallersVersion>9.0.0-beta.25626.6</MicrosoftDotNetBuildTasksInstallersVersion>"
+    },
+    "diff:eng/Versions.props:170": {
+      "id": "diff:eng/Versions.props:170",
+      "kind": "diff",
+      "source": "eng/Versions.props:170",
+      "message": "Added line: <MicrosoftDotNetBuildTasksTemplatingVersion>9.0.0-beta.25626.6</MicrosoftDotNetBuildTasksTemplatingVersion>"
+    },
+    "diff:eng/Versions.props:171": {
+      "id": "diff:eng/Versions.props:171",
+      "kind": "diff",
+      "source": "eng/Versions.props:171",
+      "message": "Added line: <MicrosoftDotNetRemoteExecutorVersion>9.0.0-beta.25626.6</MicrosoftDotNetRemoteExecutorVersion>"
+    },
+    "diff:eng/Versions.props:172": {
+      "id": "diff:eng/Versions.props:172",
+      "kind": "diff",
+      "source": "eng/Versions.props:172",
+      "message": "Added line: <MicrosoftSourceBuildIntermediatearcadeVersion>9.0.0-beta.25626.6</MicrosoftSourceBuildIntermediatearcadeVersion>"
+    },
+    "diff_hunk:eng/common/core-templates/job/source-build.yml:65": {
+      "id": "diff_hunk:eng/common/core-templates/job/source-build.yml:65",
+      "kind": "diff_hunk",
+      "source": "eng/common/core-templates/job/source-build.yml:65",
+      "message": "@@ -65,7 +65,7 @@ jobs:\n           demands: ImageOverride -equals build.ubuntu.2004.amd64\n         ${{ if eq(variables['System.TeamProject'], 'internal') }}:\n           name: $[replace(replace(eq(contains(coalesce(variables['System.PullRequest.TargetBranch'], variables['Build.SourceBranch'], 'refs/heads/main'), 'release'), 'true'), True, 'NetCore1ESPool-...\n-          image: 1es-mariner-2\n+          image: 1es-azurelinux-3\n           os: linux\n     ${{ else }}:\n       pool:"
+    },
+    "diff:eng/common/core-templates/job/source-build.yml:68": {
+      "id": "diff:eng/common/core-templates/job/source-build.yml:68",
+      "kind": "diff",
+      "source": "eng/common/core-templates/job/source-build.yml:68",
+      "message": "Added line: image: 1es-azurelinux-3"
+    },
+    "diff_hunk:eng/common/core-templates/job/source-index-stage1.yml:6": {
+      "id": "diff_hunk:eng/common/core-templates/job/source-index-stage1.yml:6",
+      "kind": "diff_hunk",
+      "source": "eng/common/core-templates/job/source-index-stage1.yml:6",
+      "message": "@@ -6,7 +6,7 @@ parameters:\n   sourceIndexBuildCommand: powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -Command \"eng/common/build.ps1 -restore -build -binarylog -ci\"\n   preSteps: []\n   binlogPath: artifacts/log/Debug/Build.binlog\n-  condition: ''\n+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')\n   dependsOn: ''\n   pool: ''\n   is1ESPipeline: ''"
+    },
+    "diff:eng/common/core-templates/job/source-index-stage1.yml:9": {
+      "id": "diff:eng/common/core-templates/job/source-index-stage1.yml:9",
+      "kind": "diff",
+      "source": "eng/common/core-templates/job/source-index-stage1.yml:9",
+      "message": "Added line: condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')"
+    },
+    "diff_hunk:eng/common/core-templates/steps/source-build.yml:41": {
+      "id": "diff_hunk:eng/common/core-templates/steps/source-build.yml:41",
+      "kind": "diff_hunk",
+      "source": "eng/common/core-templates/steps/source-build.yml:41",
+      "message": "@@ -41,7 +41,7 @@ steps:\n     # in the default public locations.\n     internalRuntimeDownloadArgs=\n     if [ '$(dotnetbuilds-internal-container-read-token-base64)' != '$''(dotnetbuilds-internal-container-read-token-base64)' ]; then\n-      internalRuntimeDownloadArgs='/p:DotNetRuntimeSourceFeed=https://dotnetbuilds.blob.core.windows.net/internal /p:DotNetRuntimeSourceFeedKey=$(dotnetbuilds-internal-container-read-token-base64) ...\n+      internalRuntimeDownloadArgs='/p:DotNetRuntimeSourceFeed=https://ci.dot.net/internal /p:DotNetRuntimeSourceFeedKey=$(dotnetbuilds-internal-container-read-token-base64) --runtimesourcefeed http...\n     fi\n \n     buildConfig=Release"
+    },
+    "diff:eng/common/core-templates/steps/source-build.yml:44": {
+      "id": "diff:eng/common/core-templates/steps/source-build.yml:44",
+      "kind": "diff",
+      "source": "eng/common/core-templates/steps/source-build.yml:44",
+      "message": "Added line: internalRuntimeDownloadArgs='/p:DotNetRuntimeSourceFeed=https://ci.dot.net/internal /p:DotNetRuntimeSourceFeedKey=$(d..."
+    },
+    "diff_hunk:eng/common/internal-feed-operations.ps1:26": {
+      "id": "diff_hunk:eng/common/internal-feed-operations.ps1:26",
+      "kind": "diff_hunk",
+      "source": "eng/common/internal-feed-operations.ps1:26",
+      "message": "@@ -26,7 +26,7 @@ function SetupCredProvider {\n   $url = 'https://raw.githubusercontent.com/microsoft/artifacts-credprovider/master/helpers/installcredprovider.ps1'\n   \n   Write-Host \"Writing the contents of 'installcredprovider.ps1' locally...\"\n-  Invoke-WebRequest $url -OutFile installcredprovider.ps1\n+  Invoke-WebRequest $url -UseBasicParsing -OutFile installcredprovider.ps1\n   \n   Write-Host 'Installing plugin...'\n   .\\installcredprovider.ps1 -Force"
+    },
+    "diff:eng/common/internal-feed-operations.ps1:29": {
+      "id": "diff:eng/common/internal-feed-operations.ps1:29",
+      "kind": "diff",
+      "source": "eng/common/internal-feed-operations.ps1:29",
+      "message": "Added line: Invoke-WebRequest $url -UseBasicParsing -OutFile installcredprovider.ps1"
+    },
+    "diff_hunk:eng/common/post-build/nuget-verification.ps1:65": {
+      "id": "diff_hunk:eng/common/post-build/nuget-verification.ps1:65",
+      "kind": "diff_hunk",
+      "source": "eng/common/post-build/nuget-verification.ps1:65",
+      "message": "@@ -65,7 +65,7 @@ if ($NuGetExePath) {\n         Write-Host \"Downloading nuget.exe from $nugetExeUrl...\"\n         $ProgressPreference = 'SilentlyContinue'\n         try {\n-            Invoke-WebRequest $nugetExeUrl -OutFile $downloadedNuGetExe\n+            Invoke-WebRequest $nugetExeUrl -UseBasicParsing -OutFile $downloadedNuGetExe\n             $ProgressPreference = 'Continue'\n         } catch {\n             $ProgressPreference = 'Continue'"
+    },
+    "diff:eng/common/post-build/nuget-verification.ps1:68": {
+      "id": "diff:eng/common/post-build/nuget-verification.ps1:68",
+      "kind": "diff",
+      "source": "eng/common/post-build/nuget-verification.ps1:68",
+      "message": "Added line: Invoke-WebRequest $nugetExeUrl -UseBasicParsing -OutFile $downloadedNuGetExe"
+    },
+    "diff_hunk:eng/common/tools.ps1:266": {
+      "id": "diff_hunk:eng/common/tools.ps1:266",
+      "kind": "diff_hunk",
+      "source": "eng/common/tools.ps1:266",
+      "message": "@@ -266,7 +266,7 @@ function GetDotNetInstallScript([string] $dotnetRoot) {\n \n     Retry({\n       Write-Host \"GET $uri\"\n-      Invoke-WebRequest $uri -OutFile $installScript\n+      Invoke-WebRequest $uri -UseBasicParsing -OutFile $installScript\n     })\n   }\n "
+    },
+    "diff:eng/common/tools.ps1:269": {
+      "id": "diff:eng/common/tools.ps1:269",
+      "kind": "diff",
+      "source": "eng/common/tools.ps1:269",
+      "message": "Added line: Invoke-WebRequest $uri -UseBasicParsing -OutFile $installScript"
+    },
+    "diff_hunk:eng/common/tools.ps1:499": {
+      "id": "diff_hunk:eng/common/tools.ps1:499",
+      "kind": "diff_hunk",
+      "source": "eng/common/tools.ps1:499",
+      "message": "@@ -499,7 +499,7 @@ function InitializeXCopyMSBuild([string]$packageVersion, [bool]$install) {\n     Write-Host \"Downloading $packageName $packageVersion\"\n     $ProgressPreference = 'SilentlyContinue' # Don't display the console progress UI - it's a huge perf hit\n     Retry({\n-      Invoke-WebRequest \"https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/flat2/$packageName/$packageVersion/$packageName.$packageVersion.nupkg\" -OutFile $packagePath\n+      Invoke-WebRequest \"https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/flat2/$packageName/$packageVersion/$packageName.$packageVersion.nupkg\" -UseBasicParsing -OutFile $pa...\n     })\n \n     if (!(Test-Path $packagePath)) {"
+    },
+    "diff:eng/common/tools.ps1:502": {
+      "id": "diff:eng/common/tools.ps1:502",
+      "kind": "diff",
+      "source": "eng/common/tools.ps1:502",
+      "message": "Added line: Invoke-WebRequest \"https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/flat2/$packageName/$packag..."
+    },
+    "diff_hunk:eng/common/tools.ps1:543": {
+      "id": "diff_hunk:eng/common/tools.ps1:543",
+      "kind": "diff_hunk",
+      "source": "eng/common/tools.ps1:543",
+      "message": "@@ -543,23 +543,30 @@ function LocateVisualStudio([object]$vsRequirements = $null){\n     Create-Directory $vsWhereDir\n     Write-Host 'Downloading vswhere'\n     Retry({\n-      Invoke-WebRequest \"https://netcorenativeassets.blob.core.windows.net/resource-packages/external/windows/vswhere/$vswhereVersion/vswhere.exe\" -OutFile $vswhereExe\n+      Invoke-WebRequest \"https://netcorenativeassets.blob.core.windows.net/resource-packages/external/windows/vswhere/$vswhereVersion/vswhere.exe\" -UseBasicParsing -OutFile $vswhereExe\n     })\n   }\n \n-  if (!$vsRequirements) { $vsRequirements = $GlobalJson.tools.vs }\n+  if (!$vsRequirements) {\n+    if (Get-Member -InputObject $GlobalJson.tools -Name 'vs' -ErrorAction SilentlyContinue) {\n+      $vsRequirements = $GlobalJson.tools.vs\n+    } else {\n+      $vsRequirements = $null\n+    }\n+  }\n+\n   $args = @('-latest', '-format', 'json', '-requires', 'Microsoft.Component.MSBuild', '-products', '*')\n \n   if (!$excludePrereleaseVS) {\n     $args += '-prerelease'\n   }\n \n-  if (Get-Member -InputObject $vsRequirements -Name 'version') {\n+  if ($vsRequirements -and (Get-Member -InputObject $vsRequirements -Name 'version' -ErrorAction SilentlyContinue)) {\n     $args += '-version'\n     $args += $vsRequirements.version\n   }\n \n-  if (Get-Member -InputObject $vsRequirements -Name 'components') {\n+  if ($vsRequirements -and (Get-Member -InputObject $vsRequirements -Name 'components' -ErrorAction SilentlyContinue)) {\n     foreach ($component in $vsRequirements.components) {\n       $args += '-requires'\n       $args += $component"
+    },
+    "diff:eng/common/tools.ps1:546": {
+      "id": "diff:eng/common/tools.ps1:546",
+      "kind": "diff",
+      "source": "eng/common/tools.ps1:546",
+      "message": "Added line: Invoke-WebRequest \"https://netcorenativeassets.blob.core.windows.net/resource-packages/external/windows/vswhere/$vswh..."
+    },
+    "diff:eng/common/tools.ps1:550": {
+      "id": "diff:eng/common/tools.ps1:550",
+      "kind": "diff",
+      "source": "eng/common/tools.ps1:550",
+      "message": "Added line: if (!$vsRequirements) {"
+    },
+    "diff:eng/common/tools.ps1:551": {
+      "id": "diff:eng/common/tools.ps1:551",
+      "kind": "diff",
+      "source": "eng/common/tools.ps1:551",
+      "message": "Added line: if (Get-Member -InputObject $GlobalJson.tools -Name 'vs' -ErrorAction SilentlyContinue) {"
+    },
+    "diff:eng/common/tools.ps1:552": {
+      "id": "diff:eng/common/tools.ps1:552",
+      "kind": "diff",
+      "source": "eng/common/tools.ps1:552",
+      "message": "Added line: $vsRequirements = $GlobalJson.tools.vs"
+    },
+    "diff:eng/common/tools.ps1:553": {
+      "id": "diff:eng/common/tools.ps1:553",
+      "kind": "diff",
+      "source": "eng/common/tools.ps1:553",
+      "message": "Added line: } else {"
+    },
+    "diff:eng/common/tools.ps1:554": {
+      "id": "diff:eng/common/tools.ps1:554",
+      "kind": "diff",
+      "source": "eng/common/tools.ps1:554",
+      "message": "Added line: $vsRequirements = $null"
+    },
+    "diff:eng/common/tools.ps1:555": {
+      "id": "diff:eng/common/tools.ps1:555",
+      "kind": "diff",
+      "source": "eng/common/tools.ps1:555",
+      "message": "Added line: }"
+    },
+    "diff:eng/common/tools.ps1:556": {
+      "id": "diff:eng/common/tools.ps1:556",
+      "kind": "diff",
+      "source": "eng/common/tools.ps1:556",
+      "message": "Added line: }"
+    },
+    "diff:eng/common/tools.ps1:557": {
+      "id": "diff:eng/common/tools.ps1:557",
+      "kind": "diff",
+      "source": "eng/common/tools.ps1:557",
+      "message": "Removed line: if (Get-Member -InputObject $vsRequirements -Name 'version') {"
+    },
+    "diff:eng/common/tools.ps1:564": {
+      "id": "diff:eng/common/tools.ps1:564",
+      "kind": "diff",
+      "source": "eng/common/tools.ps1:564",
+      "message": "Added line: if ($vsRequirements -and (Get-Member -InputObject $vsRequirements -Name 'version' -ErrorAction SilentlyContinue)) {"
+    },
+    "diff:eng/common/tools.ps1:562": {
+      "id": "diff:eng/common/tools.ps1:562",
+      "kind": "diff",
+      "source": "eng/common/tools.ps1:562",
+      "message": "Removed line: if (Get-Member -InputObject $vsRequirements -Name 'components') {"
+    },
+    "diff:eng/common/tools.ps1:569": {
+      "id": "diff:eng/common/tools.ps1:569",
+      "kind": "diff",
+      "source": "eng/common/tools.ps1:569",
+      "message": "Added line: if ($vsRequirements -and (Get-Member -InputObject $vsRequirements -Name 'components' -ErrorAction SilentlyContinue)) {"
+    },
+    "diff_hunk:global.json:27": {
+      "id": "diff_hunk:global.json:27",
+      "kind": "diff_hunk",
+      "source": "global.json:27",
+      "message": "@@ -27,7 +27,7 @@\n     \"jdk\": \"latest\"\n   },\n   \"msbuild-sdks\": {\n-    \"Microsoft.DotNet.Arcade.Sdk\": \"9.0.0-beta.25562.4\",\n-    \"Microsoft.DotNet.Helix.Sdk\": \"9.0.0-beta.25562.4\"\n+    \"Microsoft.DotNet.Arcade.Sdk\": \"9.0.0-beta.25626.6\",\n+    \"Microsoft.DotNet.Helix.Sdk\": \"9.0.0-beta.25626.6\"\n   }\n }"
+    },
+    "diff:global.json:30": {
+      "id": "diff:global.json:30",
+      "kind": "diff",
+      "source": "global.json:30",
+      "message": "Added line: \"Microsoft.DotNet.Arcade.Sdk\": \"9.0.0-beta.25626.6\","
+    },
+    "diff:global.json:31": {
+      "id": "diff:global.json:31",
+      "kind": "diff",
+      "source": "global.json:31",
+      "message": "Added line: \"Microsoft.DotNet.Helix.Sdk\": \"9.0.0-beta.25626.6\""
+    },
+    "diff_hunk:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:104": {
+      "id": "diff_hunk:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:104",
+      "kind": "diff_hunk",
+      "source": "src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:104",
+      "message": "@@ -104,11 +104,17 @@ public void EmbeddingServerAppInsideIframe_WithCompressionEnabled_Fails()\n \n         Assert.True(logs.Count > 0);\n \n-        Assert.Matches(ParseErrorMessage(), logs[0].Message);\n+        Assert.True(\n+            ParseErrorMessageRegexOld.IsMatch(logs[0].Message) &&\n+            ParseErrorMessageRegexNew.IsMatch(logs[0].Message),\n+            $\"Expected log message to match one of the CSP error patterns: {ParseErrorMessageRegexOld} or {ParseErrorMessageRegexNew}. Actual: {logs[0].Message}\");\n     }\n \n     [GeneratedRegex(@\"security - Refused to frame 'http://\\d+\\.\\d+\\.\\d+\\.\\d+:\\d+/' because an ancestor violates the following Content Security Policy directive: \"\"frame-ancestors 'none'\"\".\")]\n-    private static partial Regex ParseErrorMessage();\n+    private static partial Regex ParseErrorMessageRegexOld { get; }\n+\n+    [GeneratedRegex(@\"security - Framing 'http://\\d+\\.\\d+\\.\\d+\\.\\d+:\\d+/' violates the following Content Security Policy directive: \"\"frame-ancestors 'none'\"\".\")]\n+    private static partial Regex ParseErrorMessageRegexNew { get; }\n }\n \n public partial class DefaultConfigurationWebSocketCompressionTests : AllowedWebSocketCompressionTests"
+    },
+    "diff:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:107": {
+      "id": "diff:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:107",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:107",
+      "message": "Added line: Assert.True("
+    },
+    "diff:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:108": {
+      "id": "diff:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:108",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:108",
+      "message": "Added line: ParseErrorMessageRegexOld.IsMatch(logs[0].Message) &&"
+    },
+    "diff:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:109": {
+      "id": "diff:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:109",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:109",
+      "message": "Added line: ParseErrorMessageRegexNew.IsMatch(logs[0].Message),"
+    },
+    "diff:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:110": {
+      "id": "diff:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:110",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:110",
+      "message": "Added line: $\"Expected log message to match one of the CSP error patterns: {ParseErrorMessageRegexOld} or {ParseErrorMessageRegex..."
+    },
+    "diff:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:111": {
+      "id": "diff:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:111",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:111",
+      "message": "Removed line: private static partial Regex ParseErrorMessage();"
+    },
+    "diff:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:114": {
+      "id": "diff:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:114",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:114",
+      "message": "Added line: private static partial Regex ParseErrorMessageRegexOld { get; }"
+    },
+    "diff:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:115": {
+      "id": "diff:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:115",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:115",
+      "message": "Added line: "
+    },
+    "diff:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:116": {
+      "id": "diff:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:116",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:116",
+      "message": "Added line: [GeneratedRegex(@\"security - Framing 'http://\\d+\\.\\d+\\.\\d+\\.\\d+:\\d+/' violates the following Content Security Policy ..."
+    },
+    "diff:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:117": {
+      "id": "diff:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:117",
+      "kind": "diff",
+      "source": "src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:117",
+      "message": "Added line: private static partial Regex ParseErrorMessageRegexNew { get; }"
+    },
+    "diff_hunk:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:89": {
+      "id": "diff_hunk:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:89",
+      "kind": "diff_hunk",
+      "source": "src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:89",
+      "message": "@@ -89,6 +89,7 @@ public async Task HubConnectionCanSendAndReceiveGroupMessages(HttpTransportType\n     [ConditionalTheory]\n     [SkipIfDockerNotPresent]\n     [MemberData(nameof(TransportTypesAndProtocolTypes))]\n+    [QuarantinedTest(\"https://github.com/dotnet/aspnetcore/issues/59991\")]\n     public async Task CanSendAndReceiveUserMessagesFromMultipleConnectionsWithSameUser(HttpTransportType transportType, string protocolName)\n     {\n         using (StartVerifiableLog())"
+    },
+    "diff:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:92": {
+      "id": "diff:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:92",
+      "kind": "diff",
+      "source": "src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:92",
+      "message": "Added line: [QuarantinedTest(\"https://github.com/dotnet/aspnetcore/issues/59991\")]"
+    },
+    "diff_hunk:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:185": {
+      "id": "diff_hunk:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:185",
+      "kind": "diff_hunk",
+      "source": "src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:185",
+      "message": "@@ -184,6 +185,7 @@ public async Task HubConnectionCanSendAndReceiveGroupMessagesGroupNameWithPatter\n     [ConditionalTheory]\n     [SkipIfDockerNotPresent]\n     [MemberData(nameof(TransportTypesAndProtocolTypes))]\n+    [QuarantinedTest(\"https://github.com/dotnet/aspnetcore/issues/63582\")]\n     public async Task CanSendAndReceiveUserMessagesUserNameWithPatternIsTreatedAsLiteral(HttpTransportType transportType, string protocolName)\n     {\n         using (StartVerifiableLog())"
+    },
+    "diff:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:188": {
+      "id": "diff:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:188",
+      "kind": "diff",
+      "source": "src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:188",
+      "message": "Added line: [QuarantinedTest(\"https://github.com/dotnet/aspnetcore/issues/63582\")]"
+    },
+    "diff_hunk:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:210": {
+      "id": "diff_hunk:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:210",
+      "kind": "diff_hunk",
+      "source": "src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:210",
+      "message": "@@ -208,8 +210,8 @@ public async Task CanSendAndReceiveUserMessagesUserNameWithPatternIsTreatedAsLit\n             await connection.InvokeAsync(\"EchoUser\", \"*\", \"Hello, World!\").DefaultTimeout();\n             Assert.Equal(\"Hello, World!\", await tcs.Task.DefaultTimeout());\n \n-            await connection.DisposeAsync().DefaultTimeout();\n             await secondConnection.DisposeAsync().DefaultTimeout();\n+            await connection.DisposeAsync().DefaultTimeout();\n         }\n     }\n "
+    },
+    "diff:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:211": {
+      "id": "diff:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:211",
+      "kind": "diff",
+      "source": "src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:211",
+      "message": "Removed line: await connection.DisposeAsync().DefaultTimeout();"
+    },
+    "diff:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:214": {
+      "id": "diff:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:214",
+      "kind": "diff",
+      "source": "src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:214",
+      "message": "Added line: await connection.DisposeAsync().DefaultTimeout();"
+    },
+    "diff_hunk:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:359": {
+      "id": "diff_hunk:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:359",
+      "kind": "diff_hunk",
+      "source": "src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:359",
+      "message": "@@ -357,7 +359,7 @@ public static IEnumerable<object[]> TransportTypesAndProtocolTypes\n         }\n     }\n \n-    internal sealed class WebSocketWrapper : WebSocket\n+    internal class WebSocketWrapper : WebSocket\n     {\n         private readonly WebSocket _inner;\n         private TaskCompletionSource<(WebSocketReceiveResult, ReadOnlyMemory<byte>)> _receiveTcs = new(TaskCreationOptions.RunContinuationsAsynchronously);"
+    },
+    "diff:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:360": {
+      "id": "diff:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:360",
+      "kind": "diff",
+      "source": "src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:360",
+      "message": "Removed line: internal sealed class WebSocketWrapper : WebSocket"
+    },
+    "diff:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:362": {
+      "id": "diff:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:362",
+      "kind": "diff",
+      "source": "src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:362",
+      "message": "Added line: internal class WebSocketWrapper : WebSocket"
+    },
+    "diff_hunk:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:406": {
+      "id": "diff_hunk:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:406",
+      "kind": "diff_hunk",
+      "source": "src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:406",
+      "message": "@@ -404,12 +406,12 @@ public void SetReceiveResult((WebSocketReceiveResult, ReadOnlyMemory<byte>) resu\n         public override async Task<WebSocketReceiveResult> ReceiveAsync(ArraySegment<byte> buffer, CancellationToken cancellationToken)\n         {\n             var res = await _receiveTcs.Task;\n+            _receiveTcs = new(TaskCreationOptions.RunContinuationsAsynchronously);\n             // Handle zero-byte reads\n             if (buffer.Count == 0)\n             {\n                 return res.Item1;\n             }\n-            _receiveTcs = new(TaskCreationOptions.RunContinuationsAsynchronously);\n             res.Item2.CopyTo(buffer);\n             return res.Item1;\n         }"
+    },
+    "diff:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:409": {
+      "id": "diff:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:409",
+      "kind": "diff",
+      "source": "src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:409",
+      "message": "Added line: _receiveTcs = new(TaskCreationOptions.RunContinuationsAsynchronously);"
+    },
+    "diff:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:412": {
+      "id": "diff:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:412",
+      "kind": "diff",
+      "source": "src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:412",
+      "message": "Removed line: _receiveTcs = new(TaskCreationOptions.RunContinuationsAsynchronously);"
+    },
+    "entity:eng/Version.Details.xml:eng.Version.Details": {
+      "id": "entity:eng/Version.Details.xml:eng.Version.Details",
+      "kind": "entity",
+      "source": "eng/Version.Details.xml:391-415",
+      "message": "Changed module eng.Version.Details touched by 1 hunk(s)."
+    },
+    "entity:eng/Versions.props:eng.Versions": {
+      "id": "entity:eng/Versions.props:eng.Versions",
+      "kind": "entity",
+      "source": "eng/Versions.props:169-172",
+      "message": "Changed module eng.Versions touched by 1 hunk(s)."
+    },
+    "entity:eng/common/core-templates/job/source-build.yml:eng.common.core-templates.job.source-build": {
+      "id": "entity:eng/common/core-templates/job/source-build.yml:eng.common.core-templates.job.source-build",
+      "kind": "entity",
+      "source": "eng/common/core-templates/job/source-build.yml:68-68",
+      "message": "Changed module eng.common.core-templates.job.source-build touched by 1 hunk(s)."
+    },
+    "entity:eng/common/core-templates/job/source-index-stage1.yml:eng.common.core-templates.job.source-index-stage1": {
+      "id": "entity:eng/common/core-templates/job/source-index-stage1.yml:eng.common.core-templates.job.source-index-stage1",
+      "kind": "entity",
+      "source": "eng/common/core-templates/job/source-index-stage1.yml:9-9",
+      "message": "Changed module eng.common.core-templates.job.source-index-stage1 touched by 1 hunk(s)."
+    },
+    "entity:eng/common/core-templates/steps/source-build.yml:eng.common.core-templates.steps.source-build": {
+      "id": "entity:eng/common/core-templates/steps/source-build.yml:eng.common.core-templates.steps.source-build",
+      "kind": "entity",
+      "source": "eng/common/core-templates/steps/source-build.yml:44-44",
+      "message": "Changed module eng.common.core-templates.steps.source-build touched by 1 hunk(s)."
+    },
+    "entity:eng/common/internal-feed-operations.ps1:eng.common.internal-feed-operations": {
+      "id": "entity:eng/common/internal-feed-operations.ps1:eng.common.internal-feed-operations",
+      "kind": "entity",
+      "source": "eng/common/internal-feed-operations.ps1:29-29",
+      "message": "Changed module eng.common.internal-feed-operations touched by 1 hunk(s)."
+    },
+    "entity:eng/common/post-build/nuget-verification.ps1:eng.common.post-build.nuget-verification": {
+      "id": "entity:eng/common/post-build/nuget-verification.ps1:eng.common.post-build.nuget-verification",
+      "kind": "entity",
+      "source": "eng/common/post-build/nuget-verification.ps1:68-68",
+      "message": "Changed module eng.common.post-build.nuget-verification touched by 1 hunk(s)."
+    },
+    "entity:eng/common/tools.ps1:eng.common.tools": {
+      "id": "entity:eng/common/tools.ps1:eng.common.tools",
+      "kind": "entity",
+      "source": "eng/common/tools.ps1:269-269",
+      "message": "Changed module eng.common.tools touched by 3 hunk(s)."
+    },
+    "entity:global.json:global": {
+      "id": "entity:global.json:global",
+      "kind": "entity",
+      "source": "global.json:30-31",
+      "message": "Changed module global touched by 1 hunk(s)."
+    },
+    "entity:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:src.Components.test.E2ETest.ServerExecutionTests.WebSocketCompressionTests": {
+      "id": "entity:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:src.Components.test.E2ETest.ServerExecutionTests.WebSocketCompressionTests",
+      "kind": "entity",
+      "source": "src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:107-117",
+      "message": "Changed module src.Components.test.E2ETest.ServerExecutionTests.WebSocketCompressionTests touched by 1 hunk(s)."
+    },
+    "entity:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:src.SignalR.server.StackExchangeRedis.test.RedisEndToEnd": {
+      "id": "entity:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:src.SignalR.server.StackExchangeRedis.test.RedisEndToEnd",
+      "kind": "entity",
+      "source": "src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:92-92",
+      "message": "Changed module src.SignalR.server.StackExchangeRedis.test.RedisEndToEnd touched by 5 hunk(s)."
+    },
+    "risk:config_change:eng/common/core-templates/job/source-build.yml": {
+      "id": "risk:config_change:eng/common/core-templates/job/source-build.yml",
+      "kind": "risk",
+      "source": "config_change",
+      "message": "Configuration file changed: eng/common/core-templates/job/source-build.yml."
+    },
+    "risk:config_change:eng/common/core-templates/job/source-index-stage1.yml": {
+      "id": "risk:config_change:eng/common/core-templates/job/source-index-stage1.yml",
+      "kind": "risk",
+      "source": "config_change",
+      "message": "Configuration file changed: eng/common/core-templates/job/source-index-stage1.yml."
+    },
+    "risk:config_change:eng/common/core-templates/steps/source-build.yml": {
+      "id": "risk:config_change:eng/common/core-templates/steps/source-build.yml",
+      "kind": "risk",
+      "source": "config_change",
+      "message": "Configuration file changed: eng/common/core-templates/steps/source-build.yml."
+    },
+    "risk:security_sensitive:eng/common/core-templates/steps/source-build.yml": {
+      "id": "risk:security_sensitive:eng/common/core-templates/steps/source-build.yml",
+      "kind": "risk",
+      "source": "security_sensitive",
+      "message": "Security-sensitive keywords changed in eng/common/core-templates/steps/source-build.yml."
+    }
+  },
+  "missing_evidence_ids": [],
+  "agent_runs": [
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+      "input_evidence_ids": [
+        "diff_hunk:eng/Version.Details.xml:388",
+        "diff_hunk:eng/Versions.props:166",
+        "diff_hunk:eng/common/core-templates/job/source-build.yml:65",
+        "diff_hunk:eng/common/core-templates/job/source-index-stage1.yml:6"
+      ],
+      "output_issue_ids": [
+        "potential_regression:eng/common/core-templates/job/source-index-stage1.yml:9",
+        "compatibility:eng/common/core-templates/job/source-build.yml:68"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 7517,
+      "token_count_in": 4759,
+      "token_count_out": 438,
+      "trace_id": "f517a7e34d5644249842c19d024775a4",
+      "span_id": "1a6e39d998fc4905",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001",
+      "shard_index": 0,
+      "shard_count": 3,
+      "context_request_count": 1,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+      "input_evidence_ids": [
+        "risk:config_change:eng/common/core-templates/job/source-build.yml",
+        "risk:config_change:eng/common/core-templates/job/source-index-stage1.yml"
+      ],
+      "output_issue_ids": [],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 860,
+      "token_count_in": 1675,
+      "token_count_out": 92,
+      "trace_id": "fd628cce40f44ef8b53c9b19f3c95926",
+      "span_id": "d168be59d7b24813",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001-refill",
+      "shard_index": 0,
+      "shard_count": 3,
+      "context_request_count": 2,
+      "context_refill_used": true
+    },
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+      "input_evidence_ids": [
+        "diff_hunk:eng/common/core-templates/steps/source-build.yml:41",
+        "diff_hunk:eng/common/internal-feed-operations.ps1:26",
+        "diff_hunk:eng/common/post-build/nuget-verification.ps1:65",
+        "diff_hunk:eng/common/tools.ps1:266"
+      ],
+      "output_issue_ids": [
+        "correctness:eng/common/core-templates/steps/source-build.yml:44",
+        "compatibility:eng/common/internal-feed-operations.ps1:29",
+        "compatibility:eng/common/post-build/nuget-verification.ps1:68",
+        "compatibility:eng/common/tools.ps1:269"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 5255,
+      "token_count_in": 3651,
+      "token_count_out": 730,
+      "trace_id": "6b3be5197791498ea8ea3d69111d4ca3",
+      "span_id": "ac298c84b26a41dc",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-002",
+      "shard_index": 1,
+      "shard_count": 3,
+      "context_request_count": 2,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+      "input_evidence_ids": [
+        "diff:eng/common/core-templates/steps/source-build.yml:44",
+        "diff_hunk:eng/common/core-templates/steps/source-build.yml:41",
+        "risk:security_sensitive:eng/common/core-templates/steps/source-build.yml"
+      ],
+      "output_issue_ids": [
+        "security:eng/common/core-templates/steps/source-build.yml:44"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 8458,
+      "token_count_in": 1779,
+      "token_count_out": 249,
+      "trace_id": "d8141e29861f4a0382756c9f038e48d9",
+      "span_id": "9fc11a9833124dd0",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-002-refill",
+      "shard_index": 1,
+      "shard_count": 3,
+      "context_request_count": 0,
+      "context_refill_used": true
+    },
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+      "input_evidence_ids": [
+        "diff_hunk:global.json:27",
+        "diff_hunk:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:104",
+        "diff_hunk:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:89"
+      ],
+      "output_issue_ids": [
+        "test_quality:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:92"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 49088,
+      "token_count_in": 3362,
+      "token_count_out": 183,
+      "trace_id": "fbc97564ef9546438b19ce6595eb4a59",
+      "span_id": "499e17f133514cf9",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-003",
+      "shard_index": 2,
+      "shard_count": 3,
+      "context_request_count": 0,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+      "model": null,
+      "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+      "input_evidence_ids": [
+        "diff:eng/common/core-templates/steps/source-build.yml:44",
+        "diff_hunk:eng/common/core-templates/job/source-build.yml:65",
+        "diff_hunk:eng/common/core-templates/job/source-index-stage1.yml:6",
+        "diff_hunk:eng/common/core-templates/steps/source-build.yml:41",
+        "diff_hunk:eng/common/internal-feed-operations.ps1:26",
+        "diff_hunk:eng/common/post-build/nuget-verification.ps1:65",
+        "diff_hunk:eng/common/tools.ps1:266"
+      ],
+      "output_issue_ids": [
+        "potential_regression:eng/common/core-templates/job/source-index-stage1.yml:9",
+        "compatibility:eng/common/core-templates/job/source-build.yml:68"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 0,
+      "token_count_in": 0,
+      "token_count_out": 0,
+      "trace_id": "",
+      "span_id": "",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "",
+      "shard_index": 0,
+      "shard_count": 0,
+      "context_request_count": 0,
+      "context_refill_used": false
+    }
+  ],
+  "prompt_exports": {},
+  "context_budget": {
+    "enabled": true,
+    "strategy": "file_risk_shards_v1",
+    "context_profile": "risk_compact_manifest_v1",
+    "max_input_tokens": 9000,
+    "estimated_input_tokens": 10101,
+    "selected_evidence_count": 15,
+    "omitted_evidence_count": 71,
+    "selected_evidence_ids": [
+      "diff_hunk:eng/common/core-templates/job/source-build.yml:65",
+      "diff_hunk:eng/common/core-templates/job/source-index-stage1.yml:6",
+      "diff_hunk:eng/Version.Details.xml:388",
+      "diff_hunk:eng/Versions.props:166",
+      "diff_hunk:eng/common/core-templates/steps/source-build.yml:41",
+      "diff_hunk:eng/common/internal-feed-operations.ps1:26",
+      "diff_hunk:eng/common/post-build/nuget-verification.ps1:65",
+      "diff_hunk:eng/common/tools.ps1:266",
+      "diff_hunk:global.json:27",
+      "diff_hunk:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:104",
+      "diff_hunk:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:89",
+      "risk:config_change:eng/common/core-templates/job/source-build.yml",
+      "risk:config_change:eng/common/core-templates/job/source-index-stage1.yml",
+      "diff:eng/common/core-templates/steps/source-build.yml:44",
+      "risk:security_sensitive:eng/common/core-templates/steps/source-build.yml"
+    ],
+    "omitted_evidence_ids": [
+      "diff:eng/common/core-templates/job/source-build.yml:68",
+      "diff:eng/common/core-templates/job/source-index-stage1.yml:9",
+      "entity:eng/common/core-templates/job/source-build.yml:eng.common.core-templates.job.source-build",
+      "entity:eng/common/core-templates/job/source-index-stage1.yml:eng.common.core-templates.job.source-index-stage1",
+      "entity:eng/Version.Details.xml:eng.Version.Details",
+      "entity:eng/Versions.props:eng.Versions",
+      "diff:eng/Version.Details.xml:391",
+      "diff:eng/Version.Details.xml:393",
+      "diff:eng/Version.Details.xml:396",
+      "diff:eng/Version.Details.xml:398",
+      "diff:eng/Version.Details.xml:401",
+      "diff:eng/Version.Details.xml:403",
+      "diff:eng/Version.Details.xml:405",
+      "diff:eng/Version.Details.xml:407",
+      "diff:eng/Version.Details.xml:409",
+      "diff:eng/Version.Details.xml:411",
+      "diff:eng/Version.Details.xml:413",
+      "diff:eng/Version.Details.xml:415",
+      "diff:eng/Versions.props:169",
+      "diff:eng/Versions.props:170",
+      "diff:eng/Versions.props:171",
+      "diff:eng/Versions.props:172",
+      "entity:eng/common/core-templates/steps/source-build.yml:eng.common.core-templates.steps.source-build",
+      "risk:config_change:eng/common/core-templates/steps/source-build.yml",
+      "diff_hunk:eng/common/tools.ps1:499",
+      "diff_hunk:eng/common/tools.ps1:543",
+      "entity:eng/common/internal-feed-operations.ps1:eng.common.internal-feed-operations",
+      "entity:eng/common/post-build/nuget-verification.ps1:eng.common.post-build.nuget-verification",
+      "entity:eng/common/tools.ps1:eng.common.tools",
+      "diff:eng/common/internal-feed-operations.ps1:29",
+      "diff:eng/common/post-build/nuget-verification.ps1:68",
+      "diff:eng/common/tools.ps1:269",
+      "diff:eng/common/tools.ps1:502",
+      "diff:eng/common/tools.ps1:546",
+      "diff:eng/common/tools.ps1:550",
+      "diff:eng/common/tools.ps1:551",
+      "diff:eng/common/tools.ps1:552",
+      "diff:eng/common/tools.ps1:553",
+      "diff:eng/common/tools.ps1:554",
+      "diff:eng/common/tools.ps1:555",
+      "diff:eng/common/tools.ps1:556",
+      "diff:eng/common/tools.ps1:557",
+      "diff:eng/common/tools.ps1:562",
+      "diff:eng/common/tools.ps1:564",
+      "diff:eng/common/tools.ps1:569",
+      "diff_hunk:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:185",
+      "diff_hunk:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:210",
+      "diff_hunk:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:359",
+      "diff_hunk:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:406",
+      "entity:global.json:global",
+      "entity:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:src.Components.test.E2ETest.ServerExecutionTests.WebSocketCompressionTests",
+      "entity:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:src.SignalR.server.StackExchangeRedis.test.RedisEndToEnd",
+      "diff:global.json:30",
+      "diff:global.json:31",
+      "diff:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:107",
+      "diff:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:108",
+      "diff:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:109",
+      "diff:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:110",
+      "diff:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:111",
+      "diff:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:114",
+      "diff:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:115",
+      "diff:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:116",
+      "diff:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:117",
+      "diff:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:188",
+      "diff:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:211",
+      "diff:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:214",
+      "diff:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:360",
+      "diff:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:362",
+      "diff:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:409",
+      "diff:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:412",
+      "diff:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:92"
+    ],
+    "selected_risk_signal_count": 4,
+    "context_truncated": true,
+    "shard_count": 3,
+    "refill_count": 2,
+    "context_request_count": 5,
+    "context_requests": [
+      {
+        "request_type": "risk_evidence",
+        "path": null,
+        "evidence_ids": [
+          "risk:config_change:eng/common/core-templates/job/source-build.yml",
+          "risk:config_change:eng/common/core-templates/job/source-index-stage1.yml"
+        ],
+        "risk_tag": null,
+        "symbol": null,
+        "reason": "",
+        "source_shard_id": "shard-001",
+        "fulfilled_evidence_ids": [
+          "risk:config_change:eng/common/core-templates/job/source-build.yml",
+          "risk:config_change:eng/common/core-templates/job/source-index-stage1.yml"
+        ]
+      },
+      {
+        "request_type": "risk_evidence",
+        "path": "eng/common/core-templates/job/source-build.yml",
+        "evidence_ids": [],
+        "risk_tag": "config_change",
+        "symbol": null,
+        "reason": "",
+        "source_shard_id": "shard-001-refill",
+        "fulfilled_evidence_ids": []
+      },
+      {
+        "request_type": "risk_evidence",
+        "path": "eng/common/core-templates/job/source-index-stage1.yml",
+        "evidence_ids": [],
+        "risk_tag": "config_change",
+        "symbol": null,
+        "reason": "",
+        "source_shard_id": "shard-001-refill",
+        "fulfilled_evidence_ids": []
+      },
+      {
+        "request_type": "risk_evidence",
+        "path": null,
+        "evidence_ids": [
+          "risk:security_sensitive:eng/common/core-templates/steps/source-build.yml"
+        ],
+        "risk_tag": null,
+        "symbol": null,
+        "reason": "",
+        "source_shard_id": "shard-002",
+        "fulfilled_evidence_ids": [
+          "risk:security_sensitive:eng/common/core-templates/steps/source-build.yml"
+        ]
+      },
+      {
+        "request_type": "same_file_more_evidence",
+        "path": null,
+        "evidence_ids": [
+          "diff:eng/common/core-templates/steps/source-build.yml:44"
+        ],
+        "risk_tag": null,
+        "symbol": null,
+        "reason": "",
+        "source_shard_id": "shard-002",
+        "fulfilled_evidence_ids": [
+          "diff:eng/common/core-templates/steps/source-build.yml:44",
+          "diff_hunk:eng/common/core-templates/steps/source-build.yml:41"
+        ]
+      }
+    ],
+    "shards": [
+      {
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 4,
+        "omitted_evidence_count": 24,
+        "estimated_input_tokens": 3223,
+        "context_truncated": true
+      },
+      {
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 4,
+        "omitted_evidence_count": 25,
+        "estimated_input_tokens": 2512,
+        "context_truncated": true
+      },
+      {
+        "shard_id": "shard-003",
+        "shard_index": 2,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 3,
+        "omitted_evidence_count": 26,
+        "estimated_input_tokens": 2347,
+        "context_truncated": true
+      },
+      {
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "is_refill": true,
+        "parent_shard_id": "shard-001",
+        "selected_evidence_count": 2,
+        "omitted_evidence_count": 0,
+        "estimated_input_tokens": 956,
+        "context_truncated": false
+      },
+      {
+        "shard_id": "shard-002-refill",
+        "shard_index": 1,
+        "is_refill": true,
+        "parent_shard_id": "shard-002",
+        "selected_evidence_count": 3,
+        "omitted_evidence_count": 0,
+        "estimated_input_tokens": 1063,
+        "context_truncated": false
+      }
+    ],
+    "warnings": []
+  },
+  "loop": {
+    "enabled": true,
+    "max_iter": 1,
+    "iterations_completed": 1,
+    "converged": false,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "checkpoint_path": "D:\\learn\\code-review-agent\\workspace\\qodo_pr_review_bench_live\\samples\\qodo_014\\review\\loop_checkpoint.json",
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "iterations": [
+      {
+        "i": 0,
+        "candidate_issue_count": 8,
+        "verified_count": 6,
+        "needs_human_review_count": 0,
+        "discarded_count": 2,
+        "keep_count": 2,
+        "uncertain_count": 4,
+        "reject_count": 0,
+        "feedback_sent": [
+          {
+            "issue_id": "compatibility:eng/common/internal-feed-operations.ps1:29",
+            "category": "compatibility",
+            "critic_reason": "low confidence",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:eng/common/internal-feed-operations.ps1:26"
+            ]
+          },
+          {
+            "issue_id": "compatibility:eng/common/post-build/nuget-verification.ps1:68",
+            "category": "compatibility",
+            "critic_reason": "low confidence",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:eng/common/post-build/nuget-verification.ps1:65"
+            ]
+          },
+          {
+            "issue_id": "compatibility:eng/common/tools.ps1:269",
+            "category": "compatibility",
+            "critic_reason": "low confidence",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:eng/common/tools.ps1:266"
+            ]
+          },
+          {
+            "issue_id": "security:eng/common/core-templates/steps/source-build.yml:44",
+            "category": "security",
+            "critic_reason": "low confidence",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:eng/common/core-templates/steps/source-build.yml:41",
+              "diff:eng/common/core-templates/steps/source-build.yml:44"
+            ]
+          }
+        ],
+        "agent_runs": [
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+            "input_evidence_ids": [
+              "diff_hunk:eng/Version.Details.xml:388",
+              "diff_hunk:eng/Versions.props:166",
+              "diff_hunk:eng/common/core-templates/job/source-build.yml:65",
+              "diff_hunk:eng/common/core-templates/job/source-index-stage1.yml:6"
+            ],
+            "output_issue_ids": [
+              "potential_regression:eng/common/core-templates/job/source-index-stage1.yml:9",
+              "compatibility:eng/common/core-templates/job/source-build.yml:68"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 7517,
+            "token_count_in": 4759,
+            "token_count_out": 438,
+            "trace_id": "f517a7e34d5644249842c19d024775a4",
+            "span_id": "1a6e39d998fc4905",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001",
+            "shard_index": 0,
+            "shard_count": 3,
+            "context_request_count": 1,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+            "input_evidence_ids": [
+              "risk:config_change:eng/common/core-templates/job/source-build.yml",
+              "risk:config_change:eng/common/core-templates/job/source-index-stage1.yml"
+            ],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 860,
+            "token_count_in": 1675,
+            "token_count_out": 92,
+            "trace_id": "fd628cce40f44ef8b53c9b19f3c95926",
+            "span_id": "d168be59d7b24813",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001-refill",
+            "shard_index": 0,
+            "shard_count": 3,
+            "context_request_count": 2,
+            "context_refill_used": true
+          },
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+            "input_evidence_ids": [
+              "diff_hunk:eng/common/core-templates/steps/source-build.yml:41",
+              "diff_hunk:eng/common/internal-feed-operations.ps1:26",
+              "diff_hunk:eng/common/post-build/nuget-verification.ps1:65",
+              "diff_hunk:eng/common/tools.ps1:266"
+            ],
+            "output_issue_ids": [
+              "correctness:eng/common/core-templates/steps/source-build.yml:44",
+              "compatibility:eng/common/internal-feed-operations.ps1:29",
+              "compatibility:eng/common/post-build/nuget-verification.ps1:68",
+              "compatibility:eng/common/tools.ps1:269"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 5255,
+            "token_count_in": 3651,
+            "token_count_out": 730,
+            "trace_id": "6b3be5197791498ea8ea3d69111d4ca3",
+            "span_id": "ac298c84b26a41dc",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-002",
+            "shard_index": 1,
+            "shard_count": 3,
+            "context_request_count": 2,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+            "input_evidence_ids": [
+              "diff:eng/common/core-templates/steps/source-build.yml:44",
+              "diff_hunk:eng/common/core-templates/steps/source-build.yml:41",
+              "risk:security_sensitive:eng/common/core-templates/steps/source-build.yml"
+            ],
+            "output_issue_ids": [
+              "security:eng/common/core-templates/steps/source-build.yml:44"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 8458,
+            "token_count_in": 1779,
+            "token_count_out": 249,
+            "trace_id": "d8141e29861f4a0382756c9f038e48d9",
+            "span_id": "9fc11a9833124dd0",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-002-refill",
+            "shard_index": 1,
+            "shard_count": 3,
+            "context_request_count": 0,
+            "context_refill_used": true
+          },
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+            "input_evidence_ids": [
+              "diff_hunk:global.json:27",
+              "diff_hunk:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:104",
+              "diff_hunk:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:89"
+            ],
+            "output_issue_ids": [
+              "test_quality:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:92"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 49088,
+            "token_count_in": 3362,
+            "token_count_out": 183,
+            "trace_id": "fbc97564ef9546438b19ce6595eb4a59",
+            "span_id": "499e17f133514cf9",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-003",
+            "shard_index": 2,
+            "shard_count": 3,
+            "context_request_count": 0,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+            "model": null,
+            "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+            "input_evidence_ids": [
+              "diff:eng/common/core-templates/steps/source-build.yml:44",
+              "diff_hunk:eng/common/core-templates/job/source-build.yml:65",
+              "diff_hunk:eng/common/core-templates/job/source-index-stage1.yml:6",
+              "diff_hunk:eng/common/core-templates/steps/source-build.yml:41",
+              "diff_hunk:eng/common/internal-feed-operations.ps1:26",
+              "diff_hunk:eng/common/post-build/nuget-verification.ps1:65",
+              "diff_hunk:eng/common/tools.ps1:266"
+            ],
+            "output_issue_ids": [
+              "potential_regression:eng/common/core-templates/job/source-index-stage1.yml:9",
+              "compatibility:eng/common/core-templates/job/source-build.yml:68"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 0,
+            "token_count_in": 0,
+            "token_count_out": 0,
+            "trace_id": "",
+            "span_id": "",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "",
+            "shard_index": 0,
+            "shard_count": 0,
+            "context_request_count": 0,
+            "context_refill_used": false
+          }
+        ],
+        "issue_set": [
+          "compatibility:eng/common/core-templates/job/source-build.yml:68",
+          "compatibility:eng/common/internal-feed-operations.ps1:29",
+          "compatibility:eng/common/post-build/nuget-verification.ps1:68",
+          "compatibility:eng/common/tools.ps1:269",
+          "potential_regression:eng/common/core-templates/job/source-index-stage1.yml:9",
+          "security:eng/common/core-templates/steps/source-build.yml:44"
+        ],
+        "keep": [
+          {
+            "file": "eng/common/core-templates/job/source-index-stage1.yml",
+            "line": 9,
+            "severity": "high",
+            "category": "potential_regression",
+            "message": "The condition for the source-index-stage1 job is changed from always running (empty string) to only running on the main branch. This will prevent source indexing from running on non-main branches, which may be intentional but could break CI workflows that depend on source indexing for all branches.",
+            "suggestion": "If source indexing is needed for all branches, revert the condition to empty string. Otherwise, ensure that all dependent pipelines are aware of this change.",
+            "confidence": 0.85,
+            "evidence_ids": [
+              "diff_hunk:eng/common/core-templates/job/source-index-stage1.yml:6"
+            ]
+          },
+          {
+            "file": "eng/common/core-templates/job/source-build.yml",
+            "line": 68,
+            "severity": "medium",
+            "category": "compatibility",
+            "message": "The build image is changed from '1es-mariner-2' to '1es-azurelinux-3'. This may introduce breaking changes if the new image has different tooling, dependencies, or environment variables. The patch does not show any corresponding adjustments to the build steps or scripts.",
+            "suggestion": "Verify that the new image '1es-azurelinux-3' is compatible with all build steps and scripts used in this job. Update any environment-specific commands or paths if necessary.",
+            "confidence": 0.7,
+            "evidence_ids": [
+              "diff_hunk:eng/common/core-templates/job/source-build.yml:65"
+            ]
+          }
+        ],
+        "needs_human_review": [
+          {
+            "file": "eng/common/internal-feed-operations.ps1",
+            "line": 29,
+            "severity": "low",
+            "category": "compatibility",
+            "message": "Adding '-UseBasicParsing' to Invoke-WebRequest may change the response object type (e.g., no HtmlWebResponseObject), which could break downstream code that expects the default parsing behavior.",
+            "suggestion": "Ensure that no code downstream relies on the Internet Explorer engine's HTML parsing (e.g., accessing .Links, .Images, or .Forms). If not needed, the change is safe.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:eng/common/internal-feed-operations.ps1:26"
+            ]
+          },
+          {
+            "file": "eng/common/post-build/nuget-verification.ps1",
+            "line": 68,
+            "severity": "low",
+            "category": "compatibility",
+            "message": "Adding '-UseBasicParsing' to Invoke-WebRequest may change the response object type, potentially breaking code that expects the default IE-driven parsing.",
+            "suggestion": "Confirm that no downstream code depends on the default HTML parsing features. If not, the change is safe.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:eng/common/post-build/nuget-verification.ps1:65"
+            ]
+          },
+          {
+            "file": "eng/common/tools.ps1",
+            "line": 269,
+            "severity": "low",
+            "category": "compatibility",
+            "message": "Adding '-UseBasicParsing' to Invoke-WebRequest may change the response object type, potentially breaking code that expects the default IE-driven parsing.",
+            "suggestion": "Ensure that no downstream code relies on the default HTML parsing. If not, the change is safe.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:eng/common/tools.ps1:266"
+            ]
+          },
+          {
+            "file": "eng/common/core-templates/steps/source-build.yml",
+            "line": 44,
+            "severity": "medium",
+            "category": "security",
+            "message": "The patch changes the internal runtime download source URL from 'https://dotnetbuilds.blob.core.windows.net/internal' to 'https://ci.dot.net/internal' and adds a new '--runtimesourcefeed' argument. This alters the trust boundary for runtime artifact downloads, potentially exposing the build to a different internal endpoint without evidence of equivalent security controls.",
+            "suggestion": "Verify that the new URL 'https://ci.dot.net/internal' is an authorized internal feed with equivalent or stronger access controls and that the added '--runtimesourcefeed' argument does not bypass existing authentication or introduce a man-in-the-middle risk.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:eng/common/core-templates/steps/source-build.yml:41",
+              "diff:eng/common/core-templates/steps/source-build.yml:44"
+            ]
+          }
+        ],
+        "discarded": [
+          {
+            "file": "eng/common/core-templates/steps/source-build.yml",
+            "line": 44,
+            "severity": "medium",
+            "category": "correctness",
+            "message": "The patch changes the internal runtime download feed URL from 'https://dotnetbuilds.blob.core.windows.net/internal' to 'https://ci.dot.net/internal' and adds a new '--runtimesourcefeed' argument. If the new URL or argument format is incorrect or not supported by the build tooling, the download may fail silently or use an unintended source.",
+            "suggestion": "Verify that 'https://ci.dot.net/internal' is the correct and accessible internal feed URL, and that the '--runtimesourcefeed' argument is properly handled by the build scripts.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:eng/common/core-templates/steps/source-build.yml:41"
+            ],
+            "filter_reason": "style_preference"
+          },
+          {
+            "file": "src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs",
+            "line": 92,
+            "severity": "medium",
+            "category": "test_quality",
+            "message": "Test method 'CanSendAndReceiveUserMessagesFromMultipleConnectionsWithSameUser' is quarantined due to a known issue, but the patch does not include any fix or mitigation for the underlying flakiness.",
+            "suggestion": "Consider adding a retry mechanism or investigating the root cause of the flakiness referenced in the issue before quarantining.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:src/SignalR/server/StackExchangeRedis/test/RedisEndToEnd.cs:89"
+            ],
+            "filter_reason": "low_signal_suggestion"
+          }
+        ]
+      }
+    ]
+  },
+  "tracing": {
+    "total_latency_ms": 71178,
+    "total_token_count_in": 15226,
+    "total_token_count_out": 1692,
+    "total_retry_count": 0,
+    "run_count": 6,
+    "status_counts": {
+      "ok": 6
+    }
+  }
+}

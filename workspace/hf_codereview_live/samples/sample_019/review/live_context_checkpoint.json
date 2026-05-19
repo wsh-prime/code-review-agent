@@ -1,0 +1,107 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:783f46ed8980047256f74169cd258350471b38ffa6b775a9c4228fa32f2d0bd4",
+  "diff_hash": "sha256:ab396c56a84be20106420f665de6298cf28d76c8d4fd9b6c0a7c2a925e5f2d89",
+  "shards": {
+    "831a7c37a6dfcba75358d6bb4b6dc34e5b2861bba3c0b985b81bf6e739ec338b": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:tests/test_db.py:1"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": null,
+          "evidence_ids": [
+            "entity:tests/test_db.py:tests.test_db"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-001",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:tests/test_db.py:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 487,
+        "token_count_in": 1030,
+        "token_count_out": 37,
+        "trace_id": "ebf2c92a7f734a7ab331350d6fe12fca",
+        "span_id": "f72b14529f9f4e79",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "5f2f56ae80d04b6666b52af90fa254ca3944e798eccc24da2ede8f5640cda253": {
+      "status": "completed",
+      "shard_id": "shard-001-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-001",
+      "selected_evidence_ids": [
+        "entity:tests/test_db.py:tests.test_db"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "tests/test_db.py",
+          "evidence_ids": [],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The primary evidence only shows the module entity; no diff hunks or line changes are available to assess the patch.",
+          "source_shard_id": "shard-001-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "entity:tests/test_db.py:tests.test_db"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 10729,
+        "token_count_in": 989,
+        "token_count_out": 66,
+        "trace_id": "5e4f51e397c64bdc9ba4ee0a2f8f251f",
+        "span_id": "75a1d2684ab2422a",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 1,
+        "context_refill_used": true
+      }
+    }
+  }
+}

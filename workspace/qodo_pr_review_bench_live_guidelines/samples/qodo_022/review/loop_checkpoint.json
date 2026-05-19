@@ -1,0 +1,335 @@
+{
+  "schema_version": "1.0",
+  "run_id": "82edd68578854af59ce4a35508604ef3",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": false,
+  "package_hash": "sha256:77aa59a2a7357a1fc1d46653c4e964e96dfb1724f6f629d91ebc94865b20b9e1",
+  "diff_hash": "sha256:ac7d7c63de3cf5dc779a43c5545ec0a29078004fe5c29d809ca25420166da406",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 10,
+      "verified_count": 1,
+      "needs_human_review_count": 9,
+      "discarded_count": 0,
+      "keep_count": 0,
+      "uncertain_count": 1,
+      "reject_count": 0,
+      "feedback_sent": [
+        {
+          "issue_id": "namespace_style:src/Validation/src/ValidationOptions.cs:7",
+          "category": "namespace_style",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Validation/src/ValidationOptions.cs:7"
+          ]
+        }
+      ],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Caching/SqlServer/src/SqlServerCacheOptions.cs:8",
+            "diff_hunk:src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs:11",
+            "diff_hunk:src/Logging.AzureAppServices/src/AzureAppServicesLoggerFactoryExtensions.cs:13",
+            "diff_hunk:src/Logging.AzureAppServices/src/AzureBlobLoggerContext.cs:6"
+          ],
+          "output_issue_ids": [
+            "code_style:src/Caching/SqlServer/src/SqlServerCacheOptions.cs:1",
+            "code_style:src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs:1",
+            "code_style:src/Logging.AzureAppServices/src/AzureAppServicesLoggerFactoryExtensions.cs:1",
+            "code_style:src/Logging.AzureAppServices/src/AzureBlobLoggerContext.cs:1"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 54674,
+          "token_count_in": 7108,
+          "token_count_out": 703,
+          "trace_id": "71b80fbe532943c089fdbc5fd44a8669",
+          "span_id": "b101e401aa3e4028",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 4,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Logging.AzureAppServices/src/AzureBlobLoggerOptions.cs:7",
+            "diff_hunk:src/Logging.AzureAppServices/src/AzureFileLoggerOptions.cs:7",
+            "diff_hunk:src/Logging.AzureAppServices/src/BatchingLoggerOptions.cs:6",
+            "diff_hunk:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:11",
+            "diff_hunk:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:124",
+            "diff_hunk:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:59"
+          ],
+          "output_issue_ids": [
+            "license:src/Logging.AzureAppServices/src/AzureBlobLoggerOptions.cs:1",
+            "license:src/Logging.AzureAppServices/src/AzureFileLoggerOptions.cs:1",
+            "license:src/Logging.AzureAppServices/src/BatchingLoggerOptions.cs:1",
+            "license:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:1"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 3880,
+          "token_count_in": 6937,
+          "token_count_out": 643,
+          "trace_id": "54ee29b8543c4d03bfbe20b294969dc2",
+          "span_id": "a5666fb42ee04de9",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-002",
+          "shard_index": 1,
+          "shard_count": 4,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Logging.AzureAppServices/src/FileLoggerProvider.cs:12",
+            "diff_hunk:src/Validation/src/IValidatableInfoResolver.cs:18",
+            "diff_hunk:src/Validation/src/SkipValidationAttribute.cs:6",
+            "diff_hunk:src/Validation/src/ValidateContext.cs:23"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 515,
+          "token_count_in": 5795,
+          "token_count_out": 12,
+          "trace_id": "3cda7946144c476bbfb9e43ad5754a8d",
+          "span_id": "bdecca91a3534630",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-003",
+          "shard_index": 2,
+          "shard_count": 4,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Validation/src/ValidationOptions.cs:7"
+          ],
+          "output_issue_ids": [
+            "license_header:src/Validation/src/ValidationOptions.cs:1",
+            "namespace_style:src/Validation/src/ValidationOptions.cs:7"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 2125,
+          "token_count_in": 3766,
+          "token_count_out": 281,
+          "trace_id": "89fd393940544435a9cc154397386062",
+          "span_id": "a37db359037b42bf",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-004",
+          "shard_index": 3,
+          "shard_count": 4,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [
+            "diff_hunk:src/Validation/src/ValidationOptions.cs:7"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [
+        "namespace_style:src/Validation/src/ValidationOptions.cs:7"
+      ],
+      "keep": [],
+      "needs_human_review": [
+        {
+          "file": "src/Caching/SqlServer/src/SqlServerCacheOptions.cs",
+          "line": 1,
+          "severity": "high",
+          "category": "code_style",
+          "message": "Missing MIT license header. All C# source files must include the standardized .NET Foundation MIT license header at the beginning of the file.",
+          "suggestion": "Add the following two-line comment at the top of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Caching/SqlServer/src/SqlServerCacheOptions.cs:8"
+          ]
+        },
+        {
+          "file": "src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs",
+          "line": 1,
+          "severity": "high",
+          "category": "code_style",
+          "message": "Missing MIT license header. All C# source files must include the standardized .NET Foundation MIT license header at the beginning of the file.",
+          "suggestion": "Add the following two-line comment at the top of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs:11"
+          ]
+        },
+        {
+          "file": "src/Logging.AzureAppServices/src/AzureAppServicesLoggerFactoryExtensions.cs",
+          "line": 1,
+          "severity": "high",
+          "category": "code_style",
+          "message": "Missing MIT license header. All C# source files must include the standardized .NET Foundation MIT license header at the beginning of the file.",
+          "suggestion": "Add the following two-line comment at the top of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Logging.AzureAppServices/src/AzureAppServicesLoggerFactoryExtensions.cs:13"
+          ]
+        },
+        {
+          "file": "src/Logging.AzureAppServices/src/AzureBlobLoggerContext.cs",
+          "line": 1,
+          "severity": "high",
+          "category": "code_style",
+          "message": "Missing MIT license header. All C# source files must include the standardized .NET Foundation MIT license header at the beginning of the file.",
+          "suggestion": "Add the following two-line comment at the top of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Logging.AzureAppServices/src/AzureBlobLoggerContext.cs:6"
+          ]
+        },
+        {
+          "file": "src/Logging.AzureAppServices/src/AzureBlobLoggerOptions.cs",
+          "line": 1,
+          "severity": "high",
+          "category": "license",
+          "message": "Missing MIT license header. All C# source files must include the exact two-line comment header: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+          "suggestion": "Add the required license header at the top of the file.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Logging.AzureAppServices/src/AzureBlobLoggerOptions.cs:7"
+          ]
+        },
+        {
+          "file": "src/Logging.AzureAppServices/src/AzureFileLoggerOptions.cs",
+          "line": 1,
+          "severity": "high",
+          "category": "license",
+          "message": "Missing MIT license header. All C# source files must include the exact two-line comment header: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+          "suggestion": "Add the required license header at the top of the file.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Logging.AzureAppServices/src/AzureFileLoggerOptions.cs:7"
+          ]
+        },
+        {
+          "file": "src/Logging.AzureAppServices/src/BatchingLoggerOptions.cs",
+          "line": 1,
+          "severity": "high",
+          "category": "license",
+          "message": "Missing MIT license header. All C# source files must include the exact two-line comment header: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+          "suggestion": "Add the required license header at the top of the file.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Logging.AzureAppServices/src/BatchingLoggerOptions.cs:6"
+          ]
+        },
+        {
+          "file": "src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs",
+          "line": 1,
+          "severity": "high",
+          "category": "license",
+          "message": "Missing MIT license header. All C# source files must include the exact two-line comment header: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+          "suggestion": "Add the required license header at the top of the file.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:11"
+          ]
+        },
+        {
+          "file": "src/Validation/src/ValidationOptions.cs",
+          "line": 1,
+          "severity": "high",
+          "category": "license_header",
+          "message": "C# source file is missing the required MIT license header.",
+          "suggestion": "Add the exact two-line comment header at the beginning of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Validation/src/ValidationOptions.cs:7"
+          ]
+        },
+        {
+          "file": "src/Validation/src/ValidationOptions.cs",
+          "line": 7,
+          "severity": "medium",
+          "category": "namespace_style",
+          "message": "File uses a block-scoped namespace declaration instead of a file-scoped namespace declaration.",
+          "suggestion": "Change 'namespace Microsoft.Extensions.Validation;' to a file-scoped namespace declaration (ending with semicolon, no braces).",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Validation/src/ValidationOptions.cs:7"
+          ]
+        }
+      ],
+      "discarded": []
+    }
+  ],
+  "last_feedback": {
+    "iteration": 0,
+    "uncertain_items": [
+      {
+        "issue_id": "namespace_style:src/Validation/src/ValidationOptions.cs:7",
+        "category": "namespace_style",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:src/Validation/src/ValidationOptions.cs:7"
+        ]
+      }
+    ]
+  }
+}

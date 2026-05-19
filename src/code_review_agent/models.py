@@ -283,6 +283,7 @@ class ReviewerContext:
     omitted_changed_file_count: int = 0
     changed_entities: list[dict[str, Any]] = field(default_factory=list)
     risk_signals: list[dict[str, Any]] = field(default_factory=list)
+    review_guidelines: list[dict[str, Any]] = field(default_factory=list)
     evidence_index: dict[str, dict[str, Any]] = field(default_factory=dict)
     available_context: dict[str, Any] = field(default_factory=dict)
     context_budget: dict[str, Any] = field(default_factory=dict)

@@ -70,6 +70,73 @@ def test_build_live_review_input_limits_changed_file_summaries() -> None:
     assert live_input.context_budget["selected_evidence_count"] > 0
 
 
+def test_build_live_review_input_includes_review_guidelines() -> None:
+    package = _large_package()
+    package.evidence_index["diff_hunk:package.json:1"] = ReviewEvidence(
+        id="diff_hunk:package.json:1",
+        kind="diff_hunk",
+        source="package.json:1",
+        message='@@ -1,1 +1,1 @@ scripts\n+    "setup": "npm install"',
+    )
+    package.changed_files.append(_change_with_line("package.json", '"setup": "npm install"'))
+    package.metadata["review_guidelines"] = [
+        {
+            "title": "Use Yarn",
+            "objective": "Package manager commands must use yarn.",
+            "failure_criteria": "npm install is referenced.",
+        }
+    ]
+
+    live_input = build_live_review_input(
+        package,
+        max_input_tokens=900,
+        max_evidence_per_file=2,
+    )
+
+    assert live_input.payload["review_guidelines"][0]["title"] == "Use Yarn"
+    assert live_input.payload["review_guidelines"][0]["body"] == (
+        "Package manager commands must use yarn. npm install is referenced."
+    )
+    assert live_input.payload["review_guidelines"][0]["selection_score"] > 0
+    assert "npm" in live_input.payload["review_guidelines"][0]["matched_terms"]
+
+
+def test_build_live_review_input_ranks_review_guidelines_by_shard_relevance() -> None:
+    package = _large_package()
+    package.evidence_index["diff_hunk:package.json:1"] = ReviewEvidence(
+        id="diff_hunk:package.json:1",
+        kind="diff_hunk",
+        source="package.json:1",
+        message='@@ -1,1 +1,1 @@ scripts\n+    "setup": "npm install"',
+    )
+    package.changed_files.append(_change_with_line("package.json", '"setup": "npm install"'))
+    package.metadata["review_guidelines"] = [
+        {
+            "title": f"Irrelevant Rule {index}",
+            "objective": "Database migration classes must use a timestamp naming convention.",
+        }
+        for index in range(20)
+    ]
+    package.metadata["review_guidelines"].append(
+        {
+            "title": "Package Manager Must Be Yarn v1",
+            "objective": "All package management commands must use yarn.",
+            "failure_criteria": "npm install is referenced.",
+        }
+    )
+
+    live_input = build_live_review_input(
+        package,
+        max_input_tokens=1200,
+        max_evidence_per_file=2,
+        allowed_paths={"package.json"},
+    )
+
+    titles = [item["title"] for item in live_input.payload["review_guidelines"]]
+    assert titles[0] == "Package Manager Must Be Yarn v1"
+    assert "Irrelevant Rule 0" not in titles
+
+
 def test_build_live_review_input_does_not_embed_full_package() -> None:
     package = _large_package()
 
@@ -440,6 +507,26 @@ def _change(path: str) -> DiffFileChange:
                 section_header="def run",
                 lines=[
                     DiffLine("added", None, 1, "    return True"),
+                ],
+            )
+        ],
+    )
+
+
+def _change_with_line(path: str, content: str) -> DiffFileChange:
+    return DiffFileChange(
+        old_path=path,
+        new_path=path,
+        change_type="modified",
+        hunks=[
+            DiffHunk(
+                old_start=1,
+                old_count=1,
+                new_start=1,
+                new_count=1,
+                section_header="scripts",
+                lines=[
+                    DiffLine("added", None, 1, content),
                 ],
             )
         ],

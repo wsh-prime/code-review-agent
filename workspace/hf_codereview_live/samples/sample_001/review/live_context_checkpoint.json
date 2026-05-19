@@ -1,0 +1,99 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:0a0c34a5c2a5c343341b569c92a8ed1fb524f3dde551c2571324e3b53978d023",
+  "diff_hash": "sha256:769594e03d58300dd3fa2206f5b1870cd3861a5a070bbb705880f91cec99ebf7",
+  "shards": {
+    "0329dc63c3f65170efd3dc4e4e891c59f637eb33d6838957716876a82385d2ec": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:gpt_engineer/db.py:1"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "gpt_engineer/db.py",
+          "line": 14,
+          "severity": "medium",
+          "category": "behavior_change",
+          "message": "Changed __contains__ from checking path existence to checking if it is a file. This breaks the contract for callers that rely on directory keys or symlinks.",
+          "suggestion": "If directory keys are not intended, document the new behavior. Otherwise, revert to .exists() or add explicit directory handling.",
+          "confidence": 0.85,
+          "evidence_ids": [
+            "diff_hunk:gpt_engineer/db.py:1"
+          ]
+        },
+        {
+          "file": "gpt_engineer/db.py",
+          "line": 17,
+          "severity": "medium",
+          "category": "error_handling_change",
+          "message": "Removed try/except FileNotFoundError in __getitem__ and replaced with an explicit is_file() check. This changes error handling for race conditions (file deleted between check and open) and for non-file paths (e.g., directories).",
+          "suggestion": "Consider keeping the try/except to handle race conditions gracefully, or document the new behavior and ensure callers are aware.",
+          "confidence": 0.8,
+          "evidence_ids": [
+            "diff_hunk:gpt_engineer/db.py:1"
+          ]
+        },
+        {
+          "file": "gpt_engineer/db.py",
+          "line": 25,
+          "severity": "medium",
+          "category": "behavior_change",
+          "message": "Added type check in __setitem__ that raises TypeError for non-string values. Previously any value was converted to string via str(val). This breaks callers that pass non-string values (e.g., bytes, int).",
+          "suggestion": "If the intent is to only accept strings, update callers. Otherwise, keep the old behavior or add explicit bytes support.",
+          "confidence": 0.9,
+          "evidence_ids": [
+            "diff_hunk:gpt_engineer/db.py:1"
+          ]
+        },
+        {
+          "file": "gpt_engineer/db.py",
+          "line": 41,
+          "severity": "low",
+          "category": "behavior_change",
+          "message": "Replaced identity DB with preprompts DB in DBs dataclass. This changes the schema of the DBs object and may break code that accesses dbs.identity.",
+          "suggestion": "Ensure all references to dbs.identity are updated to dbs.preprompts, or add both fields if backward compatibility is needed.",
+          "confidence": 0.95,
+          "evidence_ids": [
+            "diff_hunk:gpt_engineer/db.py:1"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:gpt_engineer/db.py:1"
+        ],
+        "output_issue_ids": [
+          "behavior_change:gpt_engineer/db.py:14",
+          "error_handling_change:gpt_engineer/db.py:17",
+          "behavior_change:gpt_engineer/db.py:25",
+          "behavior_change:gpt_engineer/db.py:41"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 20281,
+        "token_count_in": 3661,
+        "token_count_out": 613,
+        "trace_id": "5926f805d9b546fba6ecf7518bf5eeee",
+        "span_id": "edd74110576f4ecd",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

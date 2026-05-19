@@ -1,0 +1,62 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:41cea7cf486367e711a4e0c454218dd6b7c1960b5d7f020a41009afaad44954f",
+  "diff_hash": "sha256:d63f123fc1fdab8229c765361353eaab0bc6c87de63dac4890513d0213671539",
+  "shards": {
+    "d03bd1b23ee9dc95c3253ccf5f1e800c45b1d85014109acd9d577cdcccf7524c": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:scripts/benchmark.py:1",
+        "diff_hunk:scripts/benchmark.py:18"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "scripts/benchmark.py",
+          "line": 18,
+          "severity": "high",
+          "category": "error_handling",
+          "message": "Replacing try/except KeyboardInterrupt with contextlib.suppress(KeyboardInterrupt) changes error handling semantics: suppress will catch KeyboardInterrupt from any statement in the with block, including the subprocess.run call, whereas the original only caught it from the subprocess.run call. This could mask unexpected KeyboardInterrupts from other sources.",
+          "suggestion": "Restore the original try/except KeyboardInterrupt pattern to limit the scope of caught exceptions to the subprocess.run call only, or add a comment explaining why broader suppression is safe.",
+          "confidence": 0.85,
+          "evidence_ids": [
+            "diff_hunk:scripts/benchmark.py:18"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:scripts/benchmark.py:1",
+          "diff_hunk:scripts/benchmark.py:18"
+        ],
+        "output_issue_ids": [
+          "error_handling:scripts/benchmark.py:18"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 2731,
+        "token_count_in": 1716,
+        "token_count_out": 202,
+        "trace_id": "76f2105d4e7f4eeca97dc3703da2a471",
+        "span_id": "4d5f8a3ec809409a",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

@@ -117,6 +117,15 @@ def build_parser() -> argparse.ArgumentParser:
         help="Optional project_hygiene.json produced by the hygiene command.",
     )
     review_parser.add_argument(
+        "--review-guidelines",
+        type=Path,
+        default=None,
+        help=(
+            "Optional JSON/JSONL/Markdown file with repository-specific "
+            "review rules to include in hybrid-live context."
+        ),
+    )
+    review_parser.add_argument(
         "--mode",
         choices=["rules", "hybrid-fake", "hybrid-live"],
         default="rules",
@@ -340,6 +349,7 @@ def run_review_command(args: argparse.Namespace) -> int:
         args.out,
         repo_map_path=args.repo_map,
         hygiene_path=args.hygiene,
+        review_guidelines=load_review_guidelines(args.review_guidelines),
         mode=args.mode,
         export_prompts=args.export_prompts,
         max_iter=args.max_iter,
@@ -381,6 +391,40 @@ def run_review_command(args: argparse.Namespace) -> int:
         print(f"Wrote prompts: {args.out / 'prompts'}")
     print("No target repository files were modified.")
     return 0
+
+
+def load_review_guidelines(path: Path | None) -> list[dict[str, str]]:
+    if path is None:
+        return []
+    text = path.read_text(encoding="utf-8")
+    suffix = path.suffix.lower()
+    if suffix == ".jsonl":
+        guidelines: list[dict[str, str]] = []
+        for line in text.splitlines():
+            if not line.strip():
+                continue
+            item = json.loads(line)
+            if isinstance(item, dict):
+                guidelines.append({key: str(value) for key, value in item.items()})
+        return guidelines
+    if suffix == ".json":
+        data = json.loads(text)
+        if isinstance(data, list):
+            return [
+                {key: str(value) for key, value in item.items()}
+                if isinstance(item, dict)
+                else {"body": str(item)}
+                for item in data
+            ]
+        if isinstance(data, dict):
+            if isinstance(data.get("extracted_rules"), list):
+                return [
+                    {key: str(value) for key, value in item.items()}
+                    for item in data["extracted_rules"]
+                    if isinstance(item, dict)
+                ]
+            return [{key: str(value) for key, value in data.items()}]
+    return [{"title": path.name, "body": text}]
 
 
 def run_eval_command(args: argparse.Namespace) -> int:

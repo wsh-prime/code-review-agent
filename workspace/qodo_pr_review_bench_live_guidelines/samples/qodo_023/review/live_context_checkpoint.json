@@ -1,0 +1,136 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:f2e59841e77a7bbeb1f4c1c0e0b46289f5cf30474ea639ed3027164c24bfc004",
+  "diff_hash": "sha256:35cb840818adcd12bca1e3c99a69719de9e1374fb9286c8c2465b555f474271e",
+  "shards": {
+    "b61d6c27ed8cb65e0e10ec7937288d23a9d54db53671eeaf8dbd8c2d29c997a7": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:packages/features/pbac/domain/repositories/IPermissionRepository.ts:63",
+        "diff_hunk:packages/features/pbac/infrastructure/repositories/PermissionRepository.ts:212",
+        "diff_hunk:packages/features/pbac/infrastructure/repositories/__tests__/PermissionRepository.integration-test.ts:969",
+        "diff_hunk:packages/features/pbac/services/permission-check.service.ts:3"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "packages/features/pbac/services/permission-check.service.ts",
+          "line": 3,
+          "severity": "error",
+          "category": "architecture",
+          "message": "Importing from @trpc/server in a features package violates the 'Prevent Circular Dependencies Between Core Packages' guideline: features must not import from trpc.",
+          "suggestion": "Remove the TRPCError import and use a features-specific error class or a shared error utility instead.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:packages/features/pbac/services/permission-check.service.ts:3"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:packages/features/pbac/domain/repositories/IPermissionRepository.ts:63",
+          "diff_hunk:packages/features/pbac/infrastructure/repositories/PermissionRepository.ts:212",
+          "diff_hunk:packages/features/pbac/infrastructure/repositories/__tests__/PermissionRepository.integration-test.ts:969",
+          "diff_hunk:packages/features/pbac/services/permission-check.service.ts:3"
+        ],
+        "output_issue_ids": [
+          "architecture:packages/features/pbac/services/permission-check.service.ts:3"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 5280,
+        "token_count_in": 6633,
+        "token_count_out": 157,
+        "trace_id": "3095d8df6e7741c99e74c671e0a19c42",
+        "span_id": "c99b64c621664f2d",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 2,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "8169c2d9c1111636bb042ee5d6b8cc49e9b3c4564d3700e7694935f5fc57b8c0": {
+      "status": "completed",
+      "shard_id": "shard-002",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:packages/trpc/server/routers/viewer/bookings/get.handler.test.ts:1",
+        "diff_hunk:packages/trpc/server/routers/viewer/bookings/get.handler.ts:5",
+        "diff_hunk:packages/trpc/server/routers/viewer/bookings/get.handler.ts:943"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "packages/trpc/server/routers/viewer/bookings/get.handler.ts",
+          "line": 943,
+          "severity": "high",
+          "category": "security",
+          "message": "The patch removes the admin/owner membership check (getEventTypeIdsWhereUserIsAdminOrOwner) and replaces it with a function (getUserIdsAndEmailsFromTeamIds) that accepts arbitrary teamIds without verifying the requesting user's role. This allows any authenticated user to enumerate members and emails of any team by providing teamIds, bypassing the previous authorization guard.",
+          "suggestion": "Reintroduce a membership condition check that ensures the requesting user is an admin or owner of the specified teams before returning member IDs and emails. Alternatively, validate that the provided teamIds are teams where the user has the required role.",
+          "confidence": 0.85,
+          "evidence_ids": [
+            "diff_hunk:packages/trpc/server/routers/viewer/bookings/get.handler.ts:943"
+          ]
+        },
+        {
+          "file": "packages/trpc/server/routers/viewer/bookings/get.handler.ts",
+          "line": 5,
+          "severity": "medium",
+          "category": "architecture",
+          "message": "The import of PermissionCheckService from '@calcom/features/pbac/services/permission-check.service' introduces a cross-package dependency from trpc to features, violating the 'Prevent Circular Dependencies Between Core Packages' guideline which states that trpc must not import from features.",
+          "suggestion": "Move the permission check logic to a shared package that both trpc and features can depend on, or refactor to avoid the dependency.",
+          "confidence": 0.95,
+          "evidence_ids": [
+            "diff_hunk:packages/trpc/server/routers/viewer/bookings/get.handler.ts:5"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:packages/trpc/server/routers/viewer/bookings/get.handler.test.ts:1",
+          "diff_hunk:packages/trpc/server/routers/viewer/bookings/get.handler.ts:5",
+          "diff_hunk:packages/trpc/server/routers/viewer/bookings/get.handler.ts:943"
+        ],
+        "output_issue_ids": [
+          "security:packages/trpc/server/routers/viewer/bookings/get.handler.ts:943",
+          "architecture:packages/trpc/server/routers/viewer/bookings/get.handler.ts:5"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 15319,
+        "token_count_in": 6274,
+        "token_count_out": 428,
+        "trace_id": "24f90448d8dd4cee9a16c07523c7563b",
+        "span_id": "8243e6aaf26b4309",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "shard_count": 2,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:f80fa989da8a892a0f64937afc4e753c4b64fc467d9cf06c5fccfdc31bffb0d8",
+  "diff_hash": "sha256:ec3586770827b1634186ebbb12add0afa18be6b5aeb821d37c53d1e1d0e81fcb",
+  "shards": {
+    "1b1db5ff5272996d0f84001e36ddddd3de8adc06ada37692e4d535ae5a4396b7": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:gpt_engineer/ai.py:18"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "gpt_engineer/ai.py",
+          "line": 26,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "The patch changes `messages = messages + [...]` to `messages += [...]` for the prompt and assistant response. This mutates the original list passed to `next()`, which may cause unintended side effects for callers that reuse the same list.",
+          "suggestion": "Use `messages = messages + [...]` to create a new list and avoid mutating the caller's list, or document that the list is modified in place.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:gpt_engineer/ai.py:18"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:gpt_engineer/ai.py:18"
+        ],
+        "output_issue_ids": [
+          "correctness:gpt_engineer/ai.py:26"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 13940,
+        "token_count_in": 1482,
+        "token_count_out": 172,
+        "trace_id": "8eddabcb82c44a54bdd4a16edccb6c0b",
+        "span_id": "e761a2415494473c",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

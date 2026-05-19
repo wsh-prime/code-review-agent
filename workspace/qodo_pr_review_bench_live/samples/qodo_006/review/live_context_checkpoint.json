@@ -1,0 +1,4332 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:59d91c12a1f5eed012d3d3847acd6c8c21a4987499ba561cd5e29351698d26c8",
+  "diff_hash": "sha256:446be770b275a65749800e3fe859ea3f98218e627f1d2cd2dd7280f431077dc5",
+  "shards": {
+    "38443f11de4bd6306d82ee4203075fe97cd826b0ba1619f6a4a2ac67804e410d": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/core/server/api/endpoints/authentication.js:10",
+        "diff_hunk:ghost/core/core/server/api/endpoints/users.js:6",
+        "diff_hunk:ghost/core/core/server/api/endpoints/utils/validators/input/settings.js:2",
+        "diff_hunk:ghost/core/core/server/services/activitypub/activity-pub-service.ts:1"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/core/server/api/endpoints/authentication.js:10",
+          "diff_hunk:ghost/core/core/server/api/endpoints/users.js:6",
+          "diff_hunk:ghost/core/core/server/api/endpoints/utils/validators/input/settings.js:2",
+          "diff_hunk:ghost/core/core/server/services/activitypub/activity-pub-service.ts:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 6931,
+        "token_count_in": 4189,
+        "token_count_out": 12,
+        "trace_id": "6b29903282d848d1ba23280b2d93c6d7",
+        "span_id": "8c8840bdedfd4452",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "5fe2e3c2247bf23b1389997b79412fc317915dd48c0a2a696fbb4d1ea249f5bd": {
+      "status": "completed",
+      "shard_id": "shard-002",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/adapter-manager/adapter-manager.js:1",
+        "diff:ghost/core/core/server/services/announcement-bar-service/announcement-visibility-values.js:1",
+        "diff_hunk:ghost/core/core/server/services/adapter-manager/index.js:1",
+        "diff_hunk:ghost/core/core/server/services/announcement-bar-service/announcement-bar-settings.js:1"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/adapter-manager/adapter-manager.js:1",
+          "diff:ghost/core/core/server/services/announcement-bar-service/announcement-visibility-values.js:1",
+          "diff_hunk:ghost/core/core/server/services/adapter-manager/index.js:1",
+          "diff_hunk:ghost/core/core/server/services/announcement-bar-service/announcement-bar-settings.js:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 793,
+        "token_count_in": 2855,
+        "token_count_out": 12,
+        "trace_id": "547e3fcd2c004522b7c9f379086a3c47",
+        "span_id": "f138f553305a429c",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "1fabc12d64f690552ec38d1d3093c98500f384f6fb06a085eba1f3f69c9868f9": {
+      "status": "completed",
+      "shard_id": "shard-003",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/audience-feedback/audience-feedback-service.js:1",
+        "diff:ghost/core/core/server/services/audience-feedback/feedback-repository.js:1",
+        "diff_hunk:ghost/core/core/server/services/announcement-bar-service/index.js:1",
+        "diff_hunk:ghost/core/core/server/services/audience-feedback/audience-feedback-controller.js:1"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/audience-feedback/audience-feedback-service.js:1",
+          "diff:ghost/core/core/server/services/audience-feedback/feedback-repository.js:1",
+          "diff_hunk:ghost/core/core/server/services/announcement-bar-service/index.js:1",
+          "diff_hunk:ghost/core/core/server/services/audience-feedback/audience-feedback-controller.js:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 2594,
+        "token_count_in": 3042,
+        "token_count_out": 12,
+        "trace_id": "b787b109477e40ed84944b51e73ae022",
+        "span_id": "d4ff7723f9e64ff3",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-003",
+        "shard_index": 2,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "c2e50481101406896acb846d9b7eff4581e0acf623cb02244e65775d80f2769d": {
+      "status": "completed",
+      "shard_id": "shard-004",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/audience-feedback/feedback.js:1",
+        "diff:ghost/core/core/server/services/auth/session/session-store.js:1",
+        "diff_hunk:ghost/core/core/server/services/audience-feedback/index.js:1",
+        "diff_hunk:ghost/core/core/server/services/auth/session/express-session.js:5"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/audience-feedback/feedback.js:1",
+          "diff:ghost/core/core/server/services/auth/session/session-store.js:1",
+          "diff_hunk:ghost/core/core/server/services/audience-feedback/index.js:1",
+          "diff_hunk:ghost/core/core/server/services/auth/session/express-session.js:5"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 346,
+        "token_count_in": 2865,
+        "token_count_out": 12,
+        "trace_id": "76e412f81a4743f79159fefb2dd0664c",
+        "span_id": "9301ecc9fbef4316",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-004",
+        "shard_index": 3,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "eca21ab21fcfa80877ba0e559be94bf2e9aba40e42b3526576a9bd9531336264": {
+      "status": "completed",
+      "shard_id": "shard-005",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/comments/comments-service-email-renderer.js:1",
+        "diff_hunk:ghost/core/core/server/services/comments/comments-controller.js:17",
+        "diff_hunk:ghost/core/core/server/services/comments/comments-service-emails.js:1",
+        "diff_hunk:ghost/core/core/server/services/comments/comments-service.js:25"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/comments/comments-service-email-renderer.js:1",
+          "diff_hunk:ghost/core/core/server/services/comments/comments-controller.js:17",
+          "diff_hunk:ghost/core/core/server/services/comments/comments-service-emails.js:1",
+          "diff_hunk:ghost/core/core/server/services/comments/comments-service.js:25"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 362,
+        "token_count_in": 2936,
+        "token_count_out": 15,
+        "trace_id": "3994dafeef414b838a286f118ce8bcaf",
+        "span_id": "2de524756fc14027",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-005",
+        "shard_index": 4,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "324fd9d408c8e590894c729f4968b431e955c165add9fd8dc11680b0d6758d0c": {
+      "status": "completed",
+      "shard_id": "shard-006",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/comments/comments-stats-service.js:1",
+        "diff:ghost/core/core/server/services/custom-redirects/custom-redirects-api.js:1",
+        "diff_hunk:ghost/core/core/server/services/comments/index.js:1",
+        "diff_hunk:ghost/core/core/server/services/custom-redirects/index.js:1"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/core/server/services/custom-redirects/index.js"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The security_sensitive risk signal was triggered for custom-redirects/index.js, but the primary diff hunk only shows require path renames. Need the full risk evidence to determine if a concrete security issue was introduced.",
+          "source_shard_id": "shard-006",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/comments/comments-stats-service.js:1",
+          "diff:ghost/core/core/server/services/custom-redirects/custom-redirects-api.js:1",
+          "diff_hunk:ghost/core/core/server/services/comments/index.js:1",
+          "diff_hunk:ghost/core/core/server/services/custom-redirects/index.js:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 911,
+        "token_count_in": 3148,
+        "token_count_out": 109,
+        "trace_id": "4917c400fe1c4b85b184d8a9cfc0ddcf",
+        "span_id": "977434543e5143f3",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-006",
+        "shard_index": 5,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "5cd7be51640310badb1fab03836b3c7296827c06411d82ffd6052541e79ae732": {
+      "status": "completed",
+      "shard_id": "shard-006-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-006",
+      "selected_evidence_ids": [
+        "risk:security_sensitive:ghost/core/core/server/services/custom-redirects/index.js"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/core/server/services/custom-redirects/index.js"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-006-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "risk:security_sensitive:ghost/core/core/server/services/custom-redirects/index.js"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 63742,
+        "token_count_in": 1245,
+        "token_count_out": 43,
+        "trace_id": "1f713a03d547433abaf66a7fdf54236e",
+        "span_id": "8df493e6dedf460b",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-006-refill",
+        "shard_index": 5,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": true
+      }
+    },
+    "aef776911feddb54d4cfa36adf2e9a6d0bb45d081c2a5b589b0164421d624eff": {
+      "status": "completed",
+      "shard_id": "shard-007",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/donations/donation-payment-event.ts:1",
+        "diff:ghost/core/core/server/services/donations/donation-service-wrapper.js:1",
+        "diff_hunk:ghost/core/core/server/services/donations/donation-bookshelf-repository.ts:1",
+        "diff_hunk:ghost/core/core/server/services/donations/index.js:1"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/donations/donation-payment-event.ts:1",
+          "diff:ghost/core/core/server/services/donations/donation-service-wrapper.js:1",
+          "diff_hunk:ghost/core/core/server/services/donations/donation-bookshelf-repository.ts:1",
+          "diff_hunk:ghost/core/core/server/services/donations/index.js:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 761,
+        "token_count_in": 2698,
+        "token_count_out": 12,
+        "trace_id": "4331737ec667425bb0c3384d12b1bb3e",
+        "span_id": "a54bd405bf39431f",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-007",
+        "shard_index": 6,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "c29662fec696f7de8c5e7df60855068f01d564112fec81abf570c1de76486942": {
+      "status": "completed",
+      "shard_id": "shard-008",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/email-analytics/event-processing-result.js:1",
+        "diff_hunk:ghost/core/core/server/services/email-analytics/email-analytics-provider-mailgun.js:1",
+        "diff_hunk:ghost/core/core/server/services/email-analytics/email-analytics-service-wrapper.js:8",
+        "diff_hunk:ghost/core/core/server/services/email-analytics/email-analytics-service.js:1"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/core/server/services/email-analytics/email-analytics-provider-mailgun.js",
+            "risk:security_sensitive:ghost/core/core/server/services/email-analytics/email-analytics-service-wrapper.js"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The risk signals indicate security-sensitive changes, but the primary diff hunks only show file renames and require path updates. Need the full risk evidence to determine if there is a concrete security concern.",
+          "source_shard_id": "shard-008",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/email-analytics/event-processing-result.js:1",
+          "diff_hunk:ghost/core/core/server/services/email-analytics/email-analytics-provider-mailgun.js:1",
+          "diff_hunk:ghost/core/core/server/services/email-analytics/email-analytics-service-wrapper.js:8",
+          "diff_hunk:ghost/core/core/server/services/email-analytics/email-analytics-service.js:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 2205,
+        "token_count_in": 3944,
+        "token_count_out": 136,
+        "trace_id": "d73ac07b0fca427ea759d9d15f520723",
+        "span_id": "ff3f86ec11274e6c",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-008",
+        "shard_index": 7,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "7efa9e6897f3c918aaeb94b7b9fd51c59424d0c5a67fc5e90189f7718ce8abd9": {
+      "status": "completed",
+      "shard_id": "shard-008-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-008",
+      "selected_evidence_ids": [
+        "risk:security_sensitive:ghost/core/core/server/services/email-analytics/email-analytics-provider-mailgun.js",
+        "risk:security_sensitive:ghost/core/core/server/services/email-analytics/email-analytics-service-wrapper.js"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/core/server/services/email-analytics/email-analytics-provider-mailgun.js",
+            "risk:security_sensitive:ghost/core/core/server/services/email-analytics/email-analytics-service-wrapper.js"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-008-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "risk:security_sensitive:ghost/core/core/server/services/email-analytics/email-analytics-provider-mailgun.js",
+          "risk:security_sensitive:ghost/core/core/server/services/email-analytics/email-analytics-service-wrapper.js"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 28444,
+        "token_count_in": 1860,
+        "token_count_out": 92,
+        "trace_id": "e4274abf643840938c9301efd9bef91d",
+        "span_id": "49d1d70dfc934757",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-008-refill",
+        "shard_index": 7,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": true
+      }
+    },
+    "ec98bafb94179f655924a01e7f208d84151b6d6110b049f05b50ebcb6babc4ac": {
+      "status": "completed",
+      "shard_id": "shard-009",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/email-analytics/events/start-email-analytics-job-event.js:1",
+        "diff_hunk:ghost/core/core/server/services/email-analytics/index.js:1",
+        "diff_hunk:ghost/core/core/server/services/email-analytics/jobs/fetch-latest/index.js:1",
+        "diff_hunk:ghost/core/core/server/services/email-service/EmailServiceWrapper.js:25"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/core/server/services/email-analytics/jobs/fetch-latest/index.js",
+            "risk:security_sensitive:ghost/core/core/server/services/email-service/EmailServiceWrapper.js"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The patch renames module imports but the security_sensitive risk signals lack expanded evidence to determine if the rename introduces a security exposure or trust boundary change.",
+          "source_shard_id": "shard-009",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/email-analytics/events/start-email-analytics-job-event.js:1",
+          "diff_hunk:ghost/core/core/server/services/email-analytics/index.js:1",
+          "diff_hunk:ghost/core/core/server/services/email-analytics/jobs/fetch-latest/index.js:1",
+          "diff_hunk:ghost/core/core/server/services/email-service/EmailServiceWrapper.js:25"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 5509,
+        "token_count_in": 3543,
+        "token_count_out": 123,
+        "trace_id": "e9f9714d9cd5414b8713a508143f0be7",
+        "span_id": "76d0db19010b4871",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-009",
+        "shard_index": 8,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "0edebfef7bb4157512f1cce0ed032e602e46293f97b482adfeaf0de18b3370a9": {
+      "status": "completed",
+      "shard_id": "shard-009-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-009",
+      "selected_evidence_ids": [
+        "risk:security_sensitive:ghost/core/core/server/services/email-analytics/jobs/fetch-latest/index.js",
+        "risk:security_sensitive:ghost/core/core/server/services/email-service/EmailServiceWrapper.js"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/core/server/services/email-analytics/jobs/fetch-latest/index.js",
+            "risk:security_sensitive:ghost/core/core/server/services/email-service/EmailServiceWrapper.js"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-009-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "risk:security_sensitive:ghost/core/core/server/services/email-analytics/jobs/fetch-latest/index.js",
+          "risk:security_sensitive:ghost/core/core/server/services/email-service/EmailServiceWrapper.js"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 62654,
+        "token_count_in": 1795,
+        "token_count_out": 83,
+        "trace_id": "c7e0dc3252a4431da1852a4fd14d9cbf",
+        "span_id": "8467d7ea035d4080",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-009-refill",
+        "shard_index": 8,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": true
+      }
+    },
+    "feb36efbb17ccbaba29ab4bbd2656b3856efc03fd76fa16facd1119c7117b976": {
+      "status": "completed",
+      "shard_id": "shard-010",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/email-suppression-list/email-suppression-list.js:1",
+        "diff_hunk:ghost/core/core/server/services/email-suppression-list/in-memory-email-suppression-list.js:1",
+        "diff_hunk:ghost/core/core/server/services/email-suppression-list/mailgun-email-suppression-list.js:1",
+        "diff_hunk:ghost/core/core/server/services/email-suppression-list/service.js:2"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/email-suppression-list/email-suppression-list.js:1",
+          "diff_hunk:ghost/core/core/server/services/email-suppression-list/in-memory-email-suppression-list.js:1",
+          "diff_hunk:ghost/core/core/server/services/email-suppression-list/mailgun-email-suppression-list.js:1",
+          "diff_hunk:ghost/core/core/server/services/email-suppression-list/service.js:2"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 975,
+        "token_count_in": 3511,
+        "token_count_out": 12,
+        "trace_id": "0103a6da9f9b4073b1a510313bfbf091",
+        "span_id": "2832000d170847ef",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-010",
+        "shard_index": 9,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "64704321b2141c388b9b79eeff61bf7d8a6a71ce464f383790a5b7ab07290c4e": {
+      "status": "completed",
+      "shard_id": "shard-011",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/explore-ping/explore-ping-service.js:1",
+        "diff:ghost/core/core/server/services/explore/explore-service.js:1",
+        "diff_hunk:ghost/core/core/server/services/explore-ping/index.js:1",
+        "diff_hunk:ghost/core/core/server/services/explore/index.js:1"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/explore-ping/explore-ping-service.js:1",
+          "diff:ghost/core/core/server/services/explore/explore-service.js:1",
+          "diff_hunk:ghost/core/core/server/services/explore-ping/index.js:1",
+          "diff_hunk:ghost/core/core/server/services/explore/index.js:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 3070,
+        "token_count_in": 2684,
+        "token_count_out": 15,
+        "trace_id": "5aa52c0282484a42a4bf630624e64eff",
+        "span_id": "afef3717452047df",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-011",
+        "shard_index": 10,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "a57bf2ec19fe0d3c5af0f17507fa16b8a0a74e346d50fddcf2ad640cf79e48b7": {
+      "status": "completed",
+      "shard_id": "shard-012",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/frontend-data-service/front-end-data-service.js:1",
+        "diff:ghost/core/core/server/services/identity-tokens/identity-token-service.ts:1",
+        "diff_hunk:ghost/core/core/server/services/frontend-data-service/index.js:1",
+        "diff_hunk:ghost/core/core/server/services/identity-tokens/identity-token-service-wrapper.js:1"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/core/server/services/identity-tokens/identity-token-service-wrapper.js"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The security_sensitive risk signal has high confidence but the primary diff hunk only shows a require path rename. Need the risk evidence to understand what security concern is triggered.",
+          "source_shard_id": "shard-012",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/frontend-data-service/front-end-data-service.js:1",
+          "diff:ghost/core/core/server/services/identity-tokens/identity-token-service.ts:1",
+          "diff_hunk:ghost/core/core/server/services/frontend-data-service/index.js:1",
+          "diff_hunk:ghost/core/core/server/services/identity-tokens/identity-token-service-wrapper.js:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 1149,
+        "token_count_in": 3073,
+        "token_count_out": 103,
+        "trace_id": "b76a228bca0d428998dda8af760c262d",
+        "span_id": "3da0f9357bd449ff",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-012",
+        "shard_index": 11,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "5ae974298b10d9ba0134d4a15cb9ce7b7b4f4a2d3b6a62f912c50e87bf113ec6": {
+      "status": "completed",
+      "shard_id": "shard-012-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-012",
+      "selected_evidence_ids": [
+        "risk:security_sensitive:ghost/core/core/server/services/identity-tokens/identity-token-service-wrapper.js"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/identity-tokens/identity-token-service-wrapper.js:1"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-012-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "risk:security_sensitive:ghost/core/core/server/services/identity-tokens/identity-token-service-wrapper.js"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 1232,
+        "token_count_in": 1306,
+        "token_count_out": 59,
+        "trace_id": "ed4c37810d754069b1acdd9739b14a59",
+        "span_id": "b0d065f8e71f4e58",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-012-refill",
+        "shard_index": 11,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": true
+      }
+    },
+    "eb013e159849666b8a2fc90dbc627d28c16158b34119ac76651732cfd7ecdf87": {
+      "status": "completed",
+      "shard_id": "shard-013",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/invites/invites.js:1",
+        "diff:ghost/core/core/server/services/lib/dynamic-redirect-manager.js:1",
+        "diff_hunk:ghost/core/core/server/services/identity-tokens/index.js:1",
+        "diff_hunk:ghost/core/core/server/services/invites/index.js:2"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/core/server/services/identity-tokens/index.js",
+          "evidence_ids": [],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The diff shows a require path change from './IdentityTokenServiceWrapper' to './identity-token-service-wrapper'. The security_sensitive risk signal suggests this may be security-relevant, but the hunk alone does not show whether the new module is equivalent or introduces a different implementation. Additional evidence from the same file (e.g., the full file content or the diff of the renamed module) is needed to assess if this is a safe rename or a behavioral change.",
+          "source_shard_id": "shard-013",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/invites/invites.js:1",
+          "diff:ghost/core/core/server/services/lib/dynamic-redirect-manager.js:1",
+          "diff_hunk:ghost/core/core/server/services/identity-tokens/index.js:1",
+          "diff_hunk:ghost/core/core/server/services/invites/index.js:2"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 2940,
+        "token_count_in": 2828,
+        "token_count_out": 149,
+        "trace_id": "738e280ab15040f1abd09c8c09aeca11",
+        "span_id": "77b5d5fb67a54a55",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-013",
+        "shard_index": 12,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "1e16fb5bc7c468ac04c0ea4067b7a320d56c2c55c476fbc3341d0b3341e78e04": {
+      "status": "completed",
+      "shard_id": "shard-013-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-013",
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/identity-tokens/index.js:1",
+        "entity:ghost/core/core/server/services/identity-tokens/index.js:ghost.core.core.server.services.identity-tokens.index",
+        "risk:security_sensitive:ghost/core/core/server/services/identity-tokens/index.js"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/core/server/services/identity-tokens/index.js",
+          "evidence_ids": [],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The diff only shows a single added line re-exporting a wrapper module. To assess whether this introduces a security risk (e.g., untrusted input or trust boundary change), I need to see the full file context and the implementation of the required module.",
+          "source_shard_id": "shard-013-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/identity-tokens/index.js:1",
+          "entity:ghost/core/core/server/services/identity-tokens/index.js:ghost.core.core.server.services.identity-tokens.index",
+          "risk:security_sensitive:ghost/core/core/server/services/identity-tokens/index.js"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 7940,
+        "token_count_in": 1447,
+        "token_count_out": 108,
+        "trace_id": "a1377bee210645078ceed0e0472080d4",
+        "span_id": "e61c66294088491b",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-013-refill",
+        "shard_index": 12,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": true
+      }
+    },
+    "af74e4ed5a53d8002af4b5371c857bb0a249282b24e51b73b2de4e69c1bca843": {
+      "status": "completed",
+      "shard_id": "shard-014",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/lib/email-content-generator.js:1",
+        "diff:ghost/core/core/server/services/lib/in-memory-repository.ts:1",
+        "diff:ghost/core/core/server/services/lib/mailgun-client.js:1",
+        "diff:ghost/core/core/server/services/mail/ghost-mailer.js:1"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/core/server/services/lib/email-content-generator.js",
+          "evidence_ids": [
+            "entity:ghost/core/core/server/services/lib/email-content-generator.js:ghost.core.core.server.services.lib.email-content-generator"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The diff shows only a rename with no text changes. Need entity evidence to verify if any imports or references were updated.",
+          "source_shard_id": "shard-014",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/core/server/services/lib/in-memory-repository.ts",
+          "evidence_ids": [
+            "entity:ghost/core/core/server/services/lib/in-memory-repository.ts:ghost.core.core.server.services.lib.in-memory-repository"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The diff shows only a rename with no text changes. Need entity evidence to verify if any imports or references were updated.",
+          "source_shard_id": "shard-014",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/core/server/services/lib/mailgun-client.js",
+          "evidence_ids": [
+            "entity:ghost/core/core/server/services/lib/mailgun-client.js:ghost.core.core.server.services.lib.mailgun-client"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The diff shows only a rename with no text changes. Need entity evidence to verify if any imports or references were updated.",
+          "source_shard_id": "shard-014",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/core/server/services/mail/ghost-mailer.js",
+          "evidence_ids": [
+            "entity:ghost/core/core/server/services/mail/ghost-mailer.js:ghost.core.core.server.services.mail.ghost-mailer"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The diff shows only a rename with no text changes. Need entity evidence to verify if any imports or references were updated.",
+          "source_shard_id": "shard-014",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/lib/email-content-generator.js:1",
+          "diff:ghost/core/core/server/services/lib/in-memory-repository.ts:1",
+          "diff:ghost/core/core/server/services/lib/mailgun-client.js:1",
+          "diff:ghost/core/core/server/services/mail/ghost-mailer.js:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 3897,
+        "token_count_in": 2387,
+        "token_count_out": 428,
+        "trace_id": "a9cc5309754c42ee8e0bd657641e9552",
+        "span_id": "f5435149af1e403b",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-014",
+        "shard_index": 13,
+        "shard_count": 50,
+        "context_request_count": 4,
+        "context_refill_used": false
+      }
+    },
+    "7bd000031f60d8bca86bedd26a97509aafd6e7e2673736af3e78b5041cf99a36": {
+      "status": "completed",
+      "shard_id": "shard-014-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-014",
+      "selected_evidence_ids": [
+        "entity:ghost/core/core/server/services/lib/email-content-generator.js:ghost.core.core.server.services.lib.email-content-generator",
+        "entity:ghost/core/core/server/services/lib/in-memory-repository.ts:ghost.core.core.server.services.lib.in-memory-repository",
+        "entity:ghost/core/core/server/services/lib/mailgun-client.js:ghost.core.core.server.services.lib.mailgun-client",
+        "entity:ghost/core/core/server/services/mail/ghost-mailer.js:ghost.core.core.server.services.mail.ghost-mailer"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "entity:ghost/core/core/server/services/lib/email-content-generator.js:ghost.core.core.server.services.lib.email-content-generator",
+          "entity:ghost/core/core/server/services/lib/in-memory-repository.ts:ghost.core.core.server.services.lib.in-memory-repository",
+          "entity:ghost/core/core/server/services/lib/mailgun-client.js:ghost.core.core.server.services.lib.mailgun-client",
+          "entity:ghost/core/core/server/services/mail/ghost-mailer.js:ghost.core.core.server.services.mail.ghost-mailer"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 61475,
+        "token_count_in": 2091,
+        "token_count_out": 15,
+        "trace_id": "fd7e5bec07534efd9ba05131c33558b2",
+        "span_id": "fb8d10f245c14076",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-014-refill",
+        "shard_index": 13,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    },
+    "be42586978f58dd7f7df5ccfc3f13f8af158dbfcc795705c5be6255610989619": {
+      "status": "completed",
+      "shard_id": "shard-015",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/media-inliner/external-media-inliner.js:1",
+        "diff_hunk:ghost/core/core/server/services/mail/index.js:1",
+        "diff_hunk:ghost/core/core/server/services/mail/index.js:9",
+        "diff_hunk:ghost/core/core/server/services/media-inliner/service.js:1",
+        "diff_hunk:ghost/core/core/server/services/member-attribution/README.md:40"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/core/server/services/mail/index.js"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The security_sensitive risk signal was triggered for mail/index.js, but the primary diff hunks only show require path renames. Need the risk evidence to understand the actual security concern.",
+          "source_shard_id": "shard-015",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/media-inliner/external-media-inliner.js:1",
+          "diff_hunk:ghost/core/core/server/services/mail/index.js:1",
+          "diff_hunk:ghost/core/core/server/services/mail/index.js:9",
+          "diff_hunk:ghost/core/core/server/services/media-inliner/service.js:1",
+          "diff_hunk:ghost/core/core/server/services/member-attribution/README.md:40"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 1154,
+        "token_count_in": 3700,
+        "token_count_out": 99,
+        "trace_id": "a527c358e90c4068a55ad25334d12204",
+        "span_id": "98ca55ce898e42b3",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-015",
+        "shard_index": 14,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "6650b5f72b1729c352f5517dd6f0d9edfe24fed4ce187f806096d3cb4642806c": {
+      "status": "completed",
+      "shard_id": "shard-015-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-015",
+      "selected_evidence_ids": [
+        "risk:security_sensitive:ghost/core/core/server/services/mail/index.js"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/mail/index.js:1",
+            "diff_hunk:ghost/core/core/server/services/mail/index.js:9"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-015-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "risk:security_sensitive:ghost/core/core/server/services/mail/index.js"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 648,
+        "token_count_in": 1236,
+        "token_count_out": 76,
+        "trace_id": "948b91ff072f494bbd1b4d2035e99b01",
+        "span_id": "9fe969cdcc804d61",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-015-refill",
+        "shard_index": 14,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": true
+      }
+    },
+    "b5f705a97ae35ca37b24274c3a944379e0fb09d8a40379f40812570358f1e4f5": {
+      "status": "completed",
+      "shard_id": "shard-016",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/member-attribution/outbound-link-tagger.js:1",
+        "diff_hunk:ghost/core/core/server/services/member-attribution/attribution-builder.js:15",
+        "diff_hunk:ghost/core/core/server/services/member-attribution/index.js:11",
+        "diff_hunk:ghost/core/core/server/services/member-attribution/member-attribution-service.js:1"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/member-attribution/outbound-link-tagger.js:1",
+          "diff_hunk:ghost/core/core/server/services/member-attribution/attribution-builder.js:15",
+          "diff_hunk:ghost/core/core/server/services/member-attribution/index.js:11",
+          "diff_hunk:ghost/core/core/server/services/member-attribution/member-attribution-service.js:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 2716,
+        "token_count_in": 3839,
+        "token_count_out": 12,
+        "trace_id": "40b85d7649b94f8497f911bf0571cee9",
+        "span_id": "ed6a38bd5dd4427d",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-016",
+        "shard_index": 15,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "fb62886b7a07f052bc3db5e03524c6b5f89fa682fad56b3cebcf6486aecea5fd": {
+      "status": "completed",
+      "shard_id": "shard-017",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/member-attribution/url-history.js:1",
+        "diff:ghost/core/core/server/services/member-welcome-emails/member-welcome-email-renderer.js:1",
+        "diff_hunk:ghost/core/core/server/services/member-attribution/referrer-translator.js:32",
+        "diff_hunk:ghost/core/core/server/services/member-attribution/url-translator.js:54"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/member-attribution/url-history.js:1",
+          "diff:ghost/core/core/server/services/member-welcome-emails/member-welcome-email-renderer.js:1",
+          "diff_hunk:ghost/core/core/server/services/member-attribution/referrer-translator.js:32",
+          "diff_hunk:ghost/core/core/server/services/member-attribution/url-translator.js:54"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 1207,
+        "token_count_in": 2969,
+        "token_count_out": 12,
+        "trace_id": "b35ff3b7ed0e45908654ee32442f4826",
+        "span_id": "7ee278c82ed940f1",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-017",
+        "shard_index": 16,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "9df279f7bb47265041f31e421ba033433cd87217205255c5f92c0f79eae88ad3": {
+      "status": "completed",
+      "shard_id": "shard-018",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/members-events/event-storage.js:1",
+        "diff:ghost/core/core/server/services/members-events/last-seen-at-cache.js:1",
+        "diff_hunk:ghost/core/core/server/services/member-welcome-emails/service.js:7",
+        "diff_hunk:ghost/core/core/server/services/members-events/index.js:13"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/members-events/event-storage.js:1",
+          "diff:ghost/core/core/server/services/members-events/last-seen-at-cache.js:1",
+          "diff_hunk:ghost/core/core/server/services/member-welcome-emails/service.js:7",
+          "diff_hunk:ghost/core/core/server/services/members-events/index.js:13"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 2061,
+        "token_count_in": 3141,
+        "token_count_out": 12,
+        "trace_id": "53ffde5bc6144f309c3b15c8ee0794cf",
+        "span_id": "6c9dc99707e742c4",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-018",
+        "shard_index": 17,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "4d5f02d4b2c78d7425566b1eb7f9e991951b5b9e16570c264e9ddf2be077e33e": {
+      "status": "completed",
+      "shard_id": "shard-019",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/members/importer/members-csv-importer-stripe-utils.js:1",
+        "diff_hunk:ghost/core/core/server/services/members-events/last-seen-at-updater.js:3",
+        "diff_hunk:ghost/core/core/server/services/members/api.js:10",
+        "diff_hunk:ghost/core/core/server/services/members/importer/index.js:1"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/core/server/services/members/api.js"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-019",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": null,
+          "evidence_ids": [
+            "diff:ghost/core/core/server/services/members/api.js:13"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-019",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/members/importer/members-csv-importer-stripe-utils.js:1",
+          "diff_hunk:ghost/core/core/server/services/members-events/last-seen-at-updater.js:3",
+          "diff_hunk:ghost/core/core/server/services/members/api.js:10",
+          "diff_hunk:ghost/core/core/server/services/members/importer/index.js:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 2,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s",
+          "attempt=2 error=timeout delay=2.00s"
+        ],
+        "latency_ms": 126877,
+        "token_count_in": 3420,
+        "token_count_out": 90,
+        "trace_id": "ac1008c393d74d059abfa166419eafa5",
+        "span_id": "5ccc823a48064e02",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-019",
+        "shard_index": 18,
+        "shard_count": 50,
+        "context_request_count": 2,
+        "context_refill_used": false
+      }
+    },
+    "2744c02f948c6c92c11728fd3a791c003e1ee2fa467e1fa397ccccc318f74a09": {
+      "status": "completed",
+      "shard_id": "shard-019-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-019",
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/members/api.js:13",
+        "diff_hunk:ghost/core/core/server/services/members/api.js:10",
+        "risk:security_sensitive:ghost/core/core/server/services/members/api.js"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/core/server/services/members/api.js"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-019-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/members/api.js:13",
+          "diff_hunk:ghost/core/core/server/services/members/api.js:10",
+          "risk:security_sensitive:ghost/core/core/server/services/members/api.js"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 61626,
+        "token_count_in": 1520,
+        "token_count_out": 53,
+        "trace_id": "7f292e69f19a4f828ac0380c51107e28",
+        "span_id": "53d480a0115f4992",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-019-refill",
+        "shard_index": 18,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": true
+      }
+    },
+    "5d492225000844106fa9e1a4971cc6b897ada8a198120f92f935868531775635": {
+      "status": "completed",
+      "shard_id": "shard-020",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/members/importer/members-csv-importer.js:1",
+        "diff:ghost/core/core/server/services/members/members-api/controllers/member-controller.js:1",
+        "diff:ghost/core/core/server/services/members/members-api/controllers/router-controller.js:1",
+        "diff:ghost/core/core/server/services/members/members-api/controllers/well-known-controller.js:1"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/members/importer/members-csv-importer.js:1",
+          "diff:ghost/core/core/server/services/members/members-api/controllers/member-controller.js:1",
+          "diff:ghost/core/core/server/services/members/members-api/controllers/router-controller.js:1",
+          "diff:ghost/core/core/server/services/members/members-api/controllers/well-known-controller.js:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 8157,
+        "token_count_in": 2678,
+        "token_count_out": 12,
+        "trace_id": "db5347cb99f442e2a047474994430364",
+        "span_id": "c15e7442c69c482a",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-020",
+        "shard_index": 19,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "7e4299660f8748e2f5db0fa0853f2a576a990bcc82c9c9372170ebb485f47f6b": {
+      "status": "completed",
+      "shard_id": "shard-021",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/members/members-api/repositories/event-repository.js:1",
+        "diff:ghost/core/core/server/services/members/members-api/repositories/product-repository.js:1",
+        "diff_hunk:ghost/core/core/server/services/members/members-api/members-api.js:1",
+        "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/member-repository.js:9"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/core/server/services/members/members-api/members-api.js",
+          "evidence_ids": [
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:1",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:10",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:11",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:12",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:13",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:14",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:15",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:16",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:17",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:18",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:19",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:2",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:3",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:4",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:5",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:6",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:7",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:8",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:9"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The diff hunk shows only import path renames (e.g., './services/PaymentsService' -> './services/payments-service'). To assess whether this introduces a security or functional risk, I need to see the full diff of the file to check for any other changes beyond import path normalization.",
+          "source_shard_id": "shard-021",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/core/server/services/members/members-api/repositories/member-repository.js",
+          "evidence_ids": [
+            "diff:ghost/core/core/server/services/members/members-api/repositories/member-repository.js:12"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The diff hunk shows only an import path rename. To verify there are no other changes in this file that could introduce a security or functional issue, I need the full diff.",
+          "source_shard_id": "shard-021",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/members/members-api/repositories/event-repository.js:1",
+          "diff:ghost/core/core/server/services/members/members-api/repositories/product-repository.js:1",
+          "diff_hunk:ghost/core/core/server/services/members/members-api/members-api.js:1",
+          "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/member-repository.js:9"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 72131,
+        "token_count_in": 4438,
+        "token_count_out": 658,
+        "trace_id": "a5bddcc9270e4568807069e286bebcbb",
+        "span_id": "9ab66d97999c4802",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-021",
+        "shard_index": 20,
+        "shard_count": 50,
+        "context_request_count": 2,
+        "context_refill_used": false
+      }
+    },
+    "3d682c3668883c2a331ce2a3132ad991ab6459b0fc89a07fb6c6ef3d08ab7dd0": {
+      "status": "completed",
+      "shard_id": "shard-021-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-021",
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/members/members-api/members-api.js:1",
+        "diff:ghost/core/core/server/services/members/members-api/members-api.js:10",
+        "diff:ghost/core/core/server/services/members/members-api/members-api.js:11",
+        "diff:ghost/core/core/server/services/members/members-api/members-api.js:12",
+        "diff:ghost/core/core/server/services/members/members-api/members-api.js:13",
+        "diff:ghost/core/core/server/services/members/members-api/members-api.js:14",
+        "diff:ghost/core/core/server/services/members/members-api/members-api.js:15",
+        "diff:ghost/core/core/server/services/members/members-api/members-api.js:16",
+        "diff:ghost/core/core/server/services/members/members-api/repositories/member-repository.js:12",
+        "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/member-repository.js:9"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/core/server/services/members/members-api/members-api.js",
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/members/members-api/members-api.js:1"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-021-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/members/members-api/members-api.js:1",
+          "diff:ghost/core/core/server/services/members/members-api/members-api.js:10",
+          "diff:ghost/core/core/server/services/members/members-api/members-api.js:11",
+          "diff:ghost/core/core/server/services/members/members-api/members-api.js:12",
+          "diff:ghost/core/core/server/services/members/members-api/members-api.js:13",
+          "diff:ghost/core/core/server/services/members/members-api/members-api.js:14",
+          "diff:ghost/core/core/server/services/members/members-api/members-api.js:15",
+          "diff:ghost/core/core/server/services/members/members-api/members-api.js:16",
+          "diff:ghost/core/core/server/services/members/members-api/repositories/member-repository.js:12",
+          "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/member-repository.js:9"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 1844,
+        "token_count_in": 2921,
+        "token_count_out": 82,
+        "trace_id": "0395e18a0e334e4eb28e815a5743a11f",
+        "span_id": "8d7a964a048b4c67",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-021-refill",
+        "shard_index": 20,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": true
+      }
+    },
+    "0da13c55c78ef6a0b601529ddf9d878f26b1415fcfa18c25fc1840b39f79efa8": {
+      "status": "completed",
+      "shard_id": "shard-022",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/members/members-api/services/geolocation-service.js:1",
+        "diff:ghost/core/core/server/services/members/members-api/services/payments-service.js:1",
+        "diff:ghost/core/core/server/services/members/members-api/services/token-service.js:1",
+        "diff_hunk:ghost/core/core/server/services/members/members-api/services/member-bread-service.js:30"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/core/server/services/members/members-api/services/member-bread-service.js"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-022",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": null,
+          "evidence_ids": [
+            "diff:ghost/core/core/server/services/members/members-api/services/member-bread-service.js:33"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-022",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/members/members-api/services/geolocation-service.js:1",
+          "diff:ghost/core/core/server/services/members/members-api/services/payments-service.js:1",
+          "diff:ghost/core/core/server/services/members/members-api/services/token-service.js:1",
+          "diff_hunk:ghost/core/core/server/services/members/members-api/services/member-bread-service.js:30"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 3658,
+        "token_count_in": 3108,
+        "token_count_out": 114,
+        "trace_id": "d81980e61c264b8aabdcb95575c61a84",
+        "span_id": "c38b8e871043424d",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-022",
+        "shard_index": 21,
+        "shard_count": 50,
+        "context_request_count": 2,
+        "context_refill_used": false
+      }
+    },
+    "a0108367cb9b170a647fe24a167da381c265310de6076195340482deec0cd3cd": {
+      "status": "completed",
+      "shard_id": "shard-022-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-022",
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/members/members-api/services/member-bread-service.js:33",
+        "diff_hunk:ghost/core/core/server/services/members/members-api/services/member-bread-service.js:30",
+        "risk:security_sensitive:ghost/core/core/server/services/members/members-api/services/member-bread-service.js"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/members/members-api/services/member-bread-service.js:33",
+          "diff_hunk:ghost/core/core/server/services/members/members-api/services/member-bread-service.js:30",
+          "risk:security_sensitive:ghost/core/core/server/services/members/members-api/services/member-bread-service.js"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 384,
+        "token_count_in": 1695,
+        "token_count_out": 15,
+        "trace_id": "34ce07940b14480190868107eb33e286",
+        "span_id": "73dbeebb9f074dfc",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-022-refill",
+        "shard_index": 21,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    },
+    "c8383feb6e359c3430e34856092f27b70c908ebc6253d693b36f0fa95a71681c": {
+      "status": "completed",
+      "shard_id": "shard-023",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/members/members-config-provider.js:1",
+        "diff:ghost/core/core/server/services/members/request-integrity-token-provider.js:1",
+        "diff:ghost/core/core/server/services/members/single-use-token-provider.js:1",
+        "diff_hunk:ghost/core/core/server/services/members/service.js:16",
+        "diff_hunk:ghost/core/core/server/services/members/service.js:3"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/core/server/services/members/service.js",
+          "evidence_ids": [
+            "diff:ghost/core/core/server/services/members/service.js:6",
+            "diff:ghost/core/core/server/services/members/service.js:8",
+            "diff:ghost/core/core/server/services/members/service.js:19",
+            "diff:ghost/core/core/server/services/members/service.js:22"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The patch renames several require paths but the diff hunks only show import changes. To assess whether the renamed modules have the same exports and behavior, I need to see the full diff of service.js, especially any non-import lines that may have changed.",
+          "source_shard_id": "shard-023",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "risk_evidence",
+          "path": "ghost/core/core/server/services/members/service.js",
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/core/server/services/members/service.js"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The risk signal indicates security-sensitive changes, but the current hunks only show import path renames. I need the full risk evidence to understand what specific security concern was detected.",
+          "source_shard_id": "shard-023",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/members/members-config-provider.js:1",
+          "diff:ghost/core/core/server/services/members/request-integrity-token-provider.js:1",
+          "diff:ghost/core/core/server/services/members/single-use-token-provider.js:1",
+          "diff_hunk:ghost/core/core/server/services/members/service.js:16",
+          "diff_hunk:ghost/core/core/server/services/members/service.js:3"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 63479,
+        "token_count_in": 3319,
+        "token_count_out": 278,
+        "trace_id": "cdaeb7c86ef64ba382867df89e552847",
+        "span_id": "61d44f07df7848f7",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-023",
+        "shard_index": 22,
+        "shard_count": 50,
+        "context_request_count": 2,
+        "context_refill_used": false
+      }
+    },
+    "39fe7d9ffc5bc7d5007ce8d93d3a1c461899cc6f04cccef4f3b8c7908f14e57c": {
+      "status": "completed",
+      "shard_id": "shard-023-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-023",
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/members/service.js:19",
+        "diff:ghost/core/core/server/services/members/service.js:22",
+        "diff:ghost/core/core/server/services/members/service.js:6",
+        "diff:ghost/core/core/server/services/members/service.js:8",
+        "diff_hunk:ghost/core/core/server/services/members/service.js:16",
+        "diff_hunk:ghost/core/core/server/services/members/service.js:3",
+        "risk:security_sensitive:ghost/core/core/server/services/members/service.js"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/members/service.js:19",
+          "diff:ghost/core/core/server/services/members/service.js:22",
+          "diff:ghost/core/core/server/services/members/service.js:6",
+          "diff:ghost/core/core/server/services/members/service.js:8",
+          "diff_hunk:ghost/core/core/server/services/members/service.js:16",
+          "diff_hunk:ghost/core/core/server/services/members/service.js:3",
+          "risk:security_sensitive:ghost/core/core/server/services/members/service.js"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 983,
+        "token_count_in": 2119,
+        "token_count_out": 15,
+        "trace_id": "1757244de1d5494ebe97b69e358ad6fa",
+        "span_id": "0bef85d287694247",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-023-refill",
+        "shard_index": 22,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    },
+    "841221258418a1bd429dbb7d674b565f7198b763c5e203e677afff574c4eced3": {
+      "status": "completed",
+      "shard_id": "shard-024",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/members/stats/members-stats.js:1",
+        "diff:ghost/core/core/server/services/mentions-email-report/mention-email-report-job.js:1",
+        "diff_hunk:ghost/core/core/server/services/mentions-email-report/job.js:1",
+        "diff_hunk:ghost/core/core/server/services/mentions-email-report/service.js:1"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": null,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/mentions-email-report/service.js:140"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The diff_hunk for service.js line 140 is omitted; it may contain additional changes that affect the behavior of the mention email report service.",
+          "source_shard_id": "shard-024",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/members/stats/members-stats.js:1",
+          "diff:ghost/core/core/server/services/mentions-email-report/mention-email-report-job.js:1",
+          "diff_hunk:ghost/core/core/server/services/mentions-email-report/job.js:1",
+          "diff_hunk:ghost/core/core/server/services/mentions-email-report/service.js:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 61768,
+        "token_count_in": 2923,
+        "token_count_out": 82,
+        "trace_id": "d1e0683fb50048a7a9a42d0142e06cf9",
+        "span_id": "427536ba6e8b4466",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-024",
+        "shard_index": 23,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "3fe1c715f6d2078fb58179d663caae4dec988a6a3a26f93922120ca1538e82a3": {
+      "status": "completed",
+      "shard_id": "shard-024-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-024",
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/core/server/services/mentions-email-report/service.js:140"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": null,
+          "evidence_ids": [],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "To verify that the renamed file 'start-mention-email-report-job.js' exists and is correctly exported, and to check for any other references to the old file name that may need updating.",
+          "source_shard_id": "shard-024-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [
+        {
+          "file": "ghost/core/core/server/services/mentions-email-report/service.js",
+          "line": 143,
+          "severity": "high",
+          "category": "bug_risk",
+          "message": "The require path for StartMentionEmailReportJob has been changed from './StartMentionEmailReportJob' to './start-mention-email-report-job'. If the corresponding file was not renamed or does not exist, this will cause a runtime module resolution failure.",
+          "suggestion": "Ensure that the file 'start-mention-email-report-job.js' exists in the same directory and exports the expected class, or revert the require path if the rename was unintentional.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/mentions-email-report/service.js:140"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/core/server/services/mentions-email-report/service.js:140"
+        ],
+        "output_issue_ids": [
+          "bug_risk:ghost/core/core/server/services/mentions-email-report/service.js:143"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 1565,
+        "token_count_in": 1220,
+        "token_count_out": 262,
+        "trace_id": "1fe1d62664954fd29a4d70ae7e48b662",
+        "span_id": "c0114c16992e4147",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-024-refill",
+        "shard_index": 23,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": true
+      }
+    },
+    "e6d3b2b048d94ab98ea2f10390248c39d19997f184bc017f11f0dfce20135b79": {
+      "status": "completed",
+      "shard_id": "shard-025",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/mentions-email-report/start-mention-email-report-job.js:1",
+        "diff:ghost/core/core/server/services/newsletters/newsletters-service.js:1",
+        "diff_hunk:ghost/core/core/server/services/newsletters/index.js:1",
+        "diff_hunk:ghost/core/core/server/services/notifications/index.js:1"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/core/server/services/newsletters/index.js"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The security_sensitive risk signal has moderate confidence but no risk evidence was expanded. The diff hunks only show require path renames (lowercasing). Need to verify if the renamed modules introduce any security-relevant behavior changes.",
+          "source_shard_id": "shard-025",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/mentions-email-report/start-mention-email-report-job.js:1",
+          "diff:ghost/core/core/server/services/newsletters/newsletters-service.js:1",
+          "diff_hunk:ghost/core/core/server/services/newsletters/index.js:1",
+          "diff_hunk:ghost/core/core/server/services/notifications/index.js:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 70556,
+        "token_count_in": 2969,
+        "token_count_out": 108,
+        "trace_id": "e4f02e71adbd4bca96b06edccc968a66",
+        "span_id": "4fdc1faf25284987",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-025",
+        "shard_index": 24,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "2d3bce53e2ed05cb58e5972e546ffb9650831156abebb534bf0c4d4006d0b050": {
+      "status": "completed",
+      "shard_id": "shard-025-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-025",
+      "selected_evidence_ids": [
+        "risk:security_sensitive:ghost/core/core/server/services/newsletters/index.js"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/core/server/services/newsletters/index.js"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-025-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "risk:security_sensitive:ghost/core/core/server/services/newsletters/index.js"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 1239,
+        "token_count_in": 1205,
+        "token_count_out": 53,
+        "trace_id": "837b4471d39548e9a51cc7c81dd52c54",
+        "span_id": "a654e6a3f4bf46e7",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-025-refill",
+        "shard_index": 24,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": true
+      }
+    },
+    "462267a43fc014adb32d17d58fd705242a9f1b18541af5d5429c119fdce47008": {
+      "status": "completed",
+      "shard_id": "shard-026",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/notifications/notifications.js:1",
+        "diff:ghost/core/core/server/services/outbox/events/start-outbox-processing-event.js:1",
+        "diff_hunk:ghost/core/core/server/services/offers/service.js:1",
+        "diff_hunk:ghost/core/core/server/services/outbox/index.js:1"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/core/server/services/offers/service.js"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The risk signal indicates a security-sensitive change in offers/service.js, but the primary diff_hunk only shows a require path rename. Additional risk evidence is needed to determine if there is a concrete security exposure.",
+          "source_shard_id": "shard-026",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/notifications/notifications.js:1",
+          "diff:ghost/core/core/server/services/outbox/events/start-outbox-processing-event.js:1",
+          "diff_hunk:ghost/core/core/server/services/offers/service.js:1",
+          "diff_hunk:ghost/core/core/server/services/outbox/index.js:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 8935,
+        "token_count_in": 3016,
+        "token_count_out": 104,
+        "trace_id": "28774afcd39f4296a93130af5590b27b",
+        "span_id": "1b096471f7c24113",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-026",
+        "shard_index": 25,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "c5b88628c3bb56b772dc9a6a6c1c04afe49e1eb051d9baab76c9656ccf4f3e9f": {
+      "status": "completed",
+      "shard_id": "shard-026-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-026",
+      "selected_evidence_ids": [
+        "risk:security_sensitive:ghost/core/core/server/services/offers/service.js"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/offers/service.js:1"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-026-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "risk:security_sensitive:ghost/core/core/server/services/offers/service.js"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 33078,
+        "token_count_in": 1218,
+        "token_count_out": 53,
+        "trace_id": "0493e5aae4a44baeb5674b75268fc501",
+        "span_id": "cc9aeadec42648f3",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-026-refill",
+        "shard_index": 25,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": true
+      }
+    },
+    "cde1e5e78658adbfcab65865b7edf9068bb278ed81d462d3e12371eae4578aec": {
+      "status": "completed",
+      "shard_id": "shard-027",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/core/server/services/outbox/jobs/outbox-job.js:1",
+        "diff_hunk:ghost/core/core/server/services/outbox/jobs/outbox-job.js:33",
+        "diff_hunk:ghost/core/core/server/services/recommendations/recommendation-enabler-service.js:1",
+        "diff_hunk:ghost/core/core/server/services/recommendations/service/in-memory-recommendation-repository.ts:1",
+        "diff_hunk:ghost/core/core/server/services/recommendations/service/recommendation-service.ts:1"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/core/server/services/outbox/jobs/outbox-job.js",
+            "risk:security_sensitive:ghost/core/core/server/services/recommendations/recommendation-enabler-service.js",
+            "risk:security_sensitive:ghost/core/core/server/services/recommendations/service/in-memory-recommendation-repository.ts",
+            "risk:security_sensitive:ghost/core/core/server/services/recommendations/service/recommendation-service.ts"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The security_sensitive risk signals are triggered by import path changes (case-only renames). Need to verify if these renames correspond to actual file renames or if they could cause module resolution failures.",
+          "source_shard_id": "shard-027",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/core/server/services/outbox/jobs/outbox-job.js:1",
+          "diff_hunk:ghost/core/core/server/services/outbox/jobs/outbox-job.js:33",
+          "diff_hunk:ghost/core/core/server/services/recommendations/recommendation-enabler-service.js:1",
+          "diff_hunk:ghost/core/core/server/services/recommendations/service/in-memory-recommendation-repository.ts:1",
+          "diff_hunk:ghost/core/core/server/services/recommendations/service/recommendation-service.ts:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 1885,
+        "token_count_in": 4793,
+        "token_count_out": 191,
+        "trace_id": "54a2d4b08f43424f8c35f39100950345",
+        "span_id": "5141d0d444cd4c4e",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-027",
+        "shard_index": 26,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "719145dc5f2aeeab9b0570e80e55f8ed0bb4c1db29cd4b63d8b08cd9500c223c": {
+      "status": "completed",
+      "shard_id": "shard-027-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-027",
+      "selected_evidence_ids": [
+        "risk:security_sensitive:ghost/core/core/server/services/outbox/jobs/outbox-job.js",
+        "risk:security_sensitive:ghost/core/core/server/services/recommendations/recommendation-enabler-service.js",
+        "risk:security_sensitive:ghost/core/core/server/services/recommendations/service/in-memory-recommendation-repository.ts",
+        "risk:security_sensitive:ghost/core/core/server/services/recommendations/service/recommendation-service.ts"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": "ghost/core/core/server/services/outbox/jobs/outbox-job.js",
+          "evidence_ids": [],
+          "risk_tag": "security_sensitive",
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-027-refill",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "risk_evidence",
+          "path": "ghost/core/core/server/services/recommendations/recommendation-enabler-service.js",
+          "evidence_ids": [],
+          "risk_tag": "security_sensitive",
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-027-refill",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "risk_evidence",
+          "path": "ghost/core/core/server/services/recommendations/service/in-memory-recommendation-repository.ts",
+          "evidence_ids": [],
+          "risk_tag": "security_sensitive",
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-027-refill",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "risk_evidence",
+          "path": "ghost/core/core/server/services/recommendations/service/recommendation-service.ts",
+          "evidence_ids": [],
+          "risk_tag": "security_sensitive",
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-027-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "risk:security_sensitive:ghost/core/core/server/services/outbox/jobs/outbox-job.js",
+          "risk:security_sensitive:ghost/core/core/server/services/recommendations/recommendation-enabler-service.js",
+          "risk:security_sensitive:ghost/core/core/server/services/recommendations/service/in-memory-recommendation-repository.ts",
+          "risk:security_sensitive:ghost/core/core/server/services/recommendations/service/recommendation-service.ts"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 2572,
+        "token_count_in": 2987,
+        "token_count_out": 200,
+        "trace_id": "45a2380fc7d742deb6e4d7e7b6807a6a",
+        "span_id": "15310b3e21cd4902",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-027-refill",
+        "shard_index": 26,
+        "shard_count": 50,
+        "context_request_count": 4,
+        "context_refill_used": true
+      }
+    },
+    "8ead70938755c28ca39fc858595d10b4c8f6e7937e6bb012f59e4d9da234152e": {
+      "status": "completed",
+      "shard_id": "shard-028",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/settings-helpers/settings-helpers.js:1",
+        "diff:ghost/core/core/server/services/settings/settings-bread-service.js:1",
+        "diff_hunk:ghost/core/core/server/services/settings-helpers/index.js:1",
+        "diff_hunk:ghost/core/core/server/services/settings/settings-service.js:9"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/core/server/services/settings/settings-service.js"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The security_sensitive risk signal has moderate confidence (0.74) but the primary diff hunk only shows require path renames. Need the risk evidence to determine if there is an actual security exposure introduced.",
+          "source_shard_id": "shard-028",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/settings-helpers/settings-helpers.js:1",
+          "diff:ghost/core/core/server/services/settings/settings-bread-service.js:1",
+          "diff_hunk:ghost/core/core/server/services/settings-helpers/index.js:1",
+          "diff_hunk:ghost/core/core/server/services/settings/settings-service.js:9"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 6790,
+        "token_count_in": 3085,
+        "token_count_out": 106,
+        "trace_id": "19175c12c5ad4635baa0bd0a7fce64b8",
+        "span_id": "de1647099b8d4fa2",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-028",
+        "shard_index": 27,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "dc161f82f7b58805d33f905617d08d978d4cfb9e61871b3216efb4790622685b": {
+      "status": "completed",
+      "shard_id": "shard-028-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-028",
+      "selected_evidence_ids": [
+        "risk:security_sensitive:ghost/core/core/server/services/settings/settings-service.js"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/settings/settings-service.js:9"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-028-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "risk:security_sensitive:ghost/core/core/server/services/settings/settings-service.js"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 622,
+        "token_count_in": 1233,
+        "token_count_out": 54,
+        "trace_id": "c4f9cbd30ba947cca3e76d3a97f40a95",
+        "span_id": "0dc92f4bfb9e4f40",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-028-refill",
+        "shard_index": 27,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": true
+      }
+    },
+    "ad5df7fdc05d1b7b14fab8cfa17c535141c8e3b61ca2f8a4b2072fb46929d1c0": {
+      "status": "completed",
+      "shard_id": "shard-029",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/stats/content-stats-service.js:1",
+        "diff:ghost/core/core/server/services/stats/members-stats-service.js:1",
+        "diff:ghost/core/core/server/services/stats/mrr-stats-service.js:1",
+        "diff_hunk:ghost/core/core/server/services/staff/staff-service-emails.js:263"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/core/server/services/staff/staff-service-emails.js",
+          "evidence_ids": [
+            "diff:ghost/core/core/server/services/staff/staff-service-emails.js:266",
+            "risk:security_sensitive:ghost/core/core/server/services/staff/staff-service-emails.js"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The diff hunk shows only a JSDoc import path change. To assess if this is a security-sensitive change (e.g., a renamed module with different behavior), I need to see the actual code around line 266 and the risk evidence.",
+          "source_shard_id": "shard-029",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/stats/content-stats-service.js:1",
+          "diff:ghost/core/core/server/services/stats/members-stats-service.js:1",
+          "diff:ghost/core/core/server/services/stats/mrr-stats-service.js:1",
+          "diff_hunk:ghost/core/core/server/services/staff/staff-service-emails.js:263"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 1093,
+        "token_count_in": 2850,
+        "token_count_out": 160,
+        "trace_id": "3838bcf2b8274e5baf994fda745b4572",
+        "span_id": "ff878b7560904e8c",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-029",
+        "shard_index": 28,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "f4bf2d6bbb62830ac361509cdd5ada569fa2b245011303c963a1290aff128800": {
+      "status": "completed",
+      "shard_id": "shard-029-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-029",
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/staff/staff-service-emails.js:266",
+        "diff_hunk:ghost/core/core/server/services/staff/staff-service-emails.js:263",
+        "risk:security_sensitive:ghost/core/core/server/services/staff/staff-service-emails.js"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/staff/staff-service-emails.js:266",
+          "diff_hunk:ghost/core/core/server/services/staff/staff-service-emails.js:263",
+          "risk:security_sensitive:ghost/core/core/server/services/staff/staff-service-emails.js"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 338,
+        "token_count_in": 1577,
+        "token_count_out": 15,
+        "trace_id": "fb0f6e0848384058b16e3fba32d1f4ab",
+        "span_id": "2980b2d2a2264795",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-029-refill",
+        "shard_index": 28,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    },
+    "c24f399b4467597fa30e951db0ff4facac649509b73c240e88cac47ee1b5b26b": {
+      "status": "completed",
+      "shard_id": "shard-030",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/stats/referrers-stats-service.js:1",
+        "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:3",
+        "diff_hunk:ghost/core/core/server/services/stats/service.js:10",
+        "diff_hunk:ghost/core/core/server/services/stats/stats-service.js:1"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/core/server/services/stats/posts-stats-service.js",
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:147",
+            "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:215",
+            "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:253",
+            "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:269",
+            "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:362",
+            "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:372",
+            "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:453",
+            "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:515",
+            "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:559",
+            "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:841",
+            "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:861",
+            "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:1119",
+            "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:1127",
+            "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:1135",
+            "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:1208",
+            "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:1300",
+            "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:1474",
+            "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:1483",
+            "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:1568"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The primary evidence only shows a single import path rename. To assess whether the rename introduces any functional or behavioral issues, I need to inspect the actual logic changes in the posts-stats-service.js file.",
+          "source_shard_id": "shard-030",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/core/server/services/stats/stats-service.js",
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/stats/stats-service.js:78",
+            "diff_hunk:ghost/core/core/server/services/stats/stats-service.js:94",
+            "diff_hunk:ghost/core/core/server/services/stats/stats-service.js:124",
+            "diff_hunk:ghost/core/core/server/services/stats/stats-service.js:142",
+            "diff_hunk:ghost/core/core/server/services/stats/stats-service.js:195",
+            "diff_hunk:ghost/core/core/server/services/stats/stats-service.js:221",
+            "diff_hunk:ghost/core/core/server/services/stats/stats-service.js:255"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The primary evidence only shows import path renames. To evaluate whether the rename introduces any functional or behavioral issues, I need to inspect the actual logic changes in the stats-service.js file.",
+          "source_shard_id": "shard-030",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/stats/referrers-stats-service.js:1",
+          "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:3",
+          "diff_hunk:ghost/core/core/server/services/stats/service.js:10",
+          "diff_hunk:ghost/core/core/server/services/stats/stats-service.js:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 24989,
+        "token_count_in": 4238,
+        "token_count_out": 782,
+        "trace_id": "32eff9e02a7b4c58b7a9868f096e0b45",
+        "span_id": "346a1df945c54676",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-030",
+        "shard_index": 29,
+        "shard_count": 50,
+        "context_request_count": 2,
+        "context_refill_used": false
+      }
+    },
+    "344e33d16eb62447aafe350c9e8cd0faee2470f8aff3bd084453f63808117f44": {
+      "status": "completed",
+      "shard_id": "shard-030-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-030",
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:1119",
+        "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:1127",
+        "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:1135",
+        "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:1208",
+        "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:1300",
+        "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:147",
+        "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:1474",
+        "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:1483",
+        "diff_hunk:ghost/core/core/server/services/stats/stats-service.js:124",
+        "diff_hunk:ghost/core/core/server/services/stats/stats-service.js:142",
+        "diff_hunk:ghost/core/core/server/services/stats/stats-service.js:195",
+        "diff_hunk:ghost/core/core/server/services/stats/stats-service.js:221",
+        "diff_hunk:ghost/core/core/server/services/stats/stats-service.js:255",
+        "diff_hunk:ghost/core/core/server/services/stats/stats-service.js:78",
+        "diff_hunk:ghost/core/core/server/services/stats/stats-service.js:94"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:1119",
+          "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:1127",
+          "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:1135",
+          "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:1208",
+          "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:1300",
+          "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:147",
+          "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:1474",
+          "diff_hunk:ghost/core/core/server/services/stats/posts-stats-service.js:1483",
+          "diff_hunk:ghost/core/core/server/services/stats/stats-service.js:124",
+          "diff_hunk:ghost/core/core/server/services/stats/stats-service.js:142",
+          "diff_hunk:ghost/core/core/server/services/stats/stats-service.js:195",
+          "diff_hunk:ghost/core/core/server/services/stats/stats-service.js:221",
+          "diff_hunk:ghost/core/core/server/services/stats/stats-service.js:255",
+          "diff_hunk:ghost/core/core/server/services/stats/stats-service.js:78",
+          "diff_hunk:ghost/core/core/server/services/stats/stats-service.js:94"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 462,
+        "token_count_in": 5232,
+        "token_count_out": 15,
+        "trace_id": "5ac4c44540084e609abb2c97f8f5e6bc",
+        "span_id": "8be4c18c10c74855",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-030-refill",
+        "shard_index": 29,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    },
+    "2cf663716643447da58bb695d79abcc7c1659eb6b056e7987798426ac29c7c94": {
+      "status": "completed",
+      "shard_id": "shard-031",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/stats/subscription-stats-service.js:1",
+        "diff:ghost/core/core/server/services/themes/theme-storage.js:1",
+        "diff_hunk:ghost/core/core/server/services/stripe/services/webhook/CheckoutSessionEventService.js:62",
+        "diff_hunk:ghost/core/core/server/services/themes/storage.js:8"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/core/server/services/stripe/services/webhook/CheckoutSessionEventService.js"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The security_sensitive risk signal has moderate confidence (0.74) but the primary diff_hunk only shows a require path rename. Need the full risk evidence to determine if a concrete security issue was introduced.",
+          "source_shard_id": "shard-031",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": null,
+          "evidence_ids": [
+            "diff:ghost/core/core/server/services/stripe/services/webhook/CheckoutSessionEventService.js:65"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The omitted diff evidence at line 65 may contain additional context about the security-sensitive change in CheckoutSessionEventService.js.",
+          "source_shard_id": "shard-031",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/stats/subscription-stats-service.js:1",
+          "diff:ghost/core/core/server/services/themes/theme-storage.js:1",
+          "diff_hunk:ghost/core/core/server/services/stripe/services/webhook/CheckoutSessionEventService.js:62",
+          "diff_hunk:ghost/core/core/server/services/themes/storage.js:8"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 3551,
+        "token_count_in": 3085,
+        "token_count_out": 191,
+        "trace_id": "037c9418e3384eb08ab64f28d63f40ec",
+        "span_id": "a52abbbd363f48ba",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-031",
+        "shard_index": 30,
+        "shard_count": 50,
+        "context_request_count": 2,
+        "context_refill_used": false
+      }
+    },
+    "957e1ed4cef8a57abff77310b95e0a697e5998f3db0a3f02b43982d0915d7ff8": {
+      "status": "completed",
+      "shard_id": "shard-031-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-031",
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/stripe/services/webhook/CheckoutSessionEventService.js:65",
+        "diff_hunk:ghost/core/core/server/services/stripe/services/webhook/CheckoutSessionEventService.js:62",
+        "risk:security_sensitive:ghost/core/core/server/services/stripe/services/webhook/CheckoutSessionEventService.js"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/core/server/services/stripe/services/webhook/CheckoutSessionEventService.js",
+          "evidence_ids": [],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "To confirm the file rename or check for other usages of DonationPaymentEvent in the same file.",
+          "source_shard_id": "shard-031-refill",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "related_symbol",
+          "path": "ghost/core/core/server/services/stripe/services/webhook/CheckoutSessionEventService.js",
+          "evidence_ids": [],
+          "risk_tag": null,
+          "symbol": "DonationPaymentEvent",
+          "reason": "To verify that the module at the new path exports the expected symbol.",
+          "source_shard_id": "shard-031-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [
+        {
+          "file": "ghost/core/core/server/services/stripe/services/webhook/CheckoutSessionEventService.js",
+          "line": 65,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "The require path for DonationPaymentEvent is changed from a PascalCase file to a kebab-case file. If the file was renamed, this is correct; otherwise, the module will not be found at runtime.",
+          "suggestion": "Verify that the file '../../../donations/donation-payment-event' exists and exports DonationPaymentEvent correctly. If the file was not renamed, revert the path change.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/stripe/services/webhook/CheckoutSessionEventService.js:62",
+            "diff:ghost/core/core/server/services/stripe/services/webhook/CheckoutSessionEventService.js:65"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/stripe/services/webhook/CheckoutSessionEventService.js:65",
+          "diff_hunk:ghost/core/core/server/services/stripe/services/webhook/CheckoutSessionEventService.js:62",
+          "risk:security_sensitive:ghost/core/core/server/services/stripe/services/webhook/CheckoutSessionEventService.js"
+        ],
+        "output_issue_ids": [
+          "correctness:ghost/core/core/server/services/stripe/services/webhook/CheckoutSessionEventService.js:65"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 5386,
+        "token_count_in": 1703,
+        "token_count_out": 356,
+        "trace_id": "1200598805fb43d2926530c0f94ff776",
+        "span_id": "9c0e259d2a5f4fc8",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-031-refill",
+        "shard_index": 30,
+        "shard_count": 50,
+        "context_request_count": 2,
+        "context_refill_used": true
+      }
+    },
+    "5d4d63ca44a561d0a4b9318003fc64b64520f627858503bb4ee2c7a50548bc20": {
+      "status": "completed",
+      "shard_id": "shard-032",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/update-check/update-check-service.js:1",
+        "diff:ghost/core/core/server/services/users.js:1",
+        "diff:ghost/core/core/server/services/verification-trigger.js:1",
+        "diff_hunk:ghost/core/core/server/services/update-check/index.js:10"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/update-check/update-check-service.js:1",
+          "diff:ghost/core/core/server/services/users.js:1",
+          "diff:ghost/core/core/server/services/verification-trigger.js:1",
+          "diff_hunk:ghost/core/core/server/services/update-check/index.js:10"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 813,
+        "token_count_in": 2430,
+        "token_count_out": 15,
+        "trace_id": "24d27a2f4afd4f72ab25c85f5c9b97be",
+        "span_id": "ef0bdb139ddb4e64",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-032",
+        "shard_index": 31,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "993d97c08e1782bcd248a472507ecadc775d15dea7b83d8553b62b6663dfdfdb": {
+      "status": "completed",
+      "shard_id": "shard-033",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/webhooks/webhook-trigger.js:1",
+        "diff_hunk:ghost/core/core/server/services/webhooks/listen.js:1",
+        "diff_hunk:ghost/core/test/e2e-api/admin/settings.test.js:1",
+        "diff_hunk:ghost/core/test/e2e-api/members/send-magic-link.test.js:876"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/test/e2e-api/admin/settings.test.js",
+            "risk:security_sensitive:ghost/core/test/e2e-api/members/send-magic-link.test.js"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The security_sensitive risk signals for the test files are not backed by any evidence in the current shard. The diff hunks only show require path changes (case-only rename of SingleUseTokenProvider to single-use-token-provider). Without the risk evidence, it is unclear whether the rename introduces a security concern or is a false positive.",
+          "source_shard_id": "shard-033",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/webhooks/webhook-trigger.js:1",
+          "diff_hunk:ghost/core/core/server/services/webhooks/listen.js:1",
+          "diff_hunk:ghost/core/test/e2e-api/admin/settings.test.js:1",
+          "diff_hunk:ghost/core/test/e2e-api/members/send-magic-link.test.js:876"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 2312,
+        "token_count_in": 3479,
+        "token_count_out": 160,
+        "trace_id": "f4ed8f0f45ab4a37976fd562992183ce",
+        "span_id": "7268503c01654919",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-033",
+        "shard_index": 32,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "bc39d9d4b24d1a2fdf4674e7afbd2bb3edd2a65c1475b14eb1530331ee0bd131": {
+      "status": "completed",
+      "shard_id": "shard-033-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-033",
+      "selected_evidence_ids": [
+        "risk:security_sensitive:ghost/core/test/e2e-api/admin/settings.test.js",
+        "risk:security_sensitive:ghost/core/test/e2e-api/members/send-magic-link.test.js"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/test/e2e-api/admin/settings.test.js:1",
+            "diff_hunk:ghost/core/test/e2e-api/members/send-magic-link.test.js:876"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The security_sensitive risk signals lack primary diff evidence. Need to see the actual code changes to assess if a concrete failure scenario is introduced.",
+          "source_shard_id": "shard-033-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "risk:security_sensitive:ghost/core/test/e2e-api/admin/settings.test.js",
+          "risk:security_sensitive:ghost/core/test/e2e-api/members/send-magic-link.test.js"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 2096,
+        "token_count_in": 1773,
+        "token_count_out": 98,
+        "trace_id": "85136bd760884852bc27f1f521a0f936",
+        "span_id": "14da5f8748d14611",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-033-refill",
+        "shard_index": 32,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": true
+      }
+    },
+    "c482668579abf491ee9006e03ba5c0c38cf4db341395eae6c2f6f7e1f6585ffe": {
+      "status": "completed",
+      "shard_id": "shard-034",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/test/e2e-browser/fixtures/ghost-test.js:8",
+        "diff_hunk:ghost/core/test/integration/services/email-service/email-event-storage.test.js:1",
+        "diff_hunk:ghost/core/test/integration/services/mailgun-email-suppression-list.test.js:3",
+        "diff_hunk:ghost/core/test/unit/server/services/activitypub/activity-pub-service.test.ts:1"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/test/e2e-browser/fixtures/ghost-test.js",
+          "evidence_ids": [
+            "diff:ghost/core/test/e2e-browser/fixtures/ghost-test.js:11"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-034",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/test/integration/services/email-service/email-event-storage.test.js",
+          "evidence_ids": [
+            "diff:ghost/core/test/integration/services/email-service/email-event-storage.test.js:4"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-034",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/test/integration/services/mailgun-email-suppression-list.test.js",
+          "evidence_ids": [
+            "diff:ghost/core/test/integration/services/mailgun-email-suppression-list.test.js:6"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-034",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/test/unit/server/services/activitypub/activity-pub-service.test.ts",
+          "evidence_ids": [
+            "diff:ghost/core/test/unit/server/services/activitypub/activity-pub-service.test.ts:4"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-034",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/test/e2e-browser/fixtures/ghost-test.js:8",
+          "diff_hunk:ghost/core/test/integration/services/email-service/email-event-storage.test.js:1",
+          "diff_hunk:ghost/core/test/integration/services/mailgun-email-suppression-list.test.js:3",
+          "diff_hunk:ghost/core/test/unit/server/services/activitypub/activity-pub-service.test.ts:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 36026,
+        "token_count_in": 4549,
+        "token_count_out": 291,
+        "trace_id": "ecf690f9dca84207afa238957d3e348e",
+        "span_id": "f66b00a7ed92427e",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-034",
+        "shard_index": 33,
+        "shard_count": 50,
+        "context_request_count": 4,
+        "context_refill_used": false
+      }
+    },
+    "cc74776757dfefe957f68fb6c42dbebcbea6f30d40f790ec03d0892ba64dd1ed": {
+      "status": "completed",
+      "shard_id": "shard-034-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-034",
+      "selected_evidence_ids": [
+        "diff:ghost/core/test/e2e-browser/fixtures/ghost-test.js:11",
+        "diff:ghost/core/test/integration/services/email-service/email-event-storage.test.js:4",
+        "diff:ghost/core/test/integration/services/mailgun-email-suppression-list.test.js:6",
+        "diff:ghost/core/test/unit/server/services/activitypub/activity-pub-service.test.ts:4",
+        "diff_hunk:ghost/core/test/e2e-browser/fixtures/ghost-test.js:8",
+        "diff_hunk:ghost/core/test/integration/services/email-service/email-event-storage.test.js:1",
+        "diff_hunk:ghost/core/test/integration/services/mailgun-email-suppression-list.test.js:3",
+        "diff_hunk:ghost/core/test/unit/server/services/activitypub/activity-pub-service.test.ts:1"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/test/e2e-browser/fixtures/ghost-test.js:11",
+          "diff:ghost/core/test/integration/services/email-service/email-event-storage.test.js:4",
+          "diff:ghost/core/test/integration/services/mailgun-email-suppression-list.test.js:6",
+          "diff:ghost/core/test/unit/server/services/activitypub/activity-pub-service.test.ts:4",
+          "diff_hunk:ghost/core/test/e2e-browser/fixtures/ghost-test.js:8",
+          "diff_hunk:ghost/core/test/integration/services/email-service/email-event-storage.test.js:1",
+          "diff_hunk:ghost/core/test/integration/services/mailgun-email-suppression-list.test.js:3",
+          "diff_hunk:ghost/core/test/unit/server/services/activitypub/activity-pub-service.test.ts:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 420,
+        "token_count_in": 3960,
+        "token_count_out": 15,
+        "trace_id": "30d16c68701b4501a73710204c3a161b",
+        "span_id": "05a35f99e78849ba",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-034-refill",
+        "shard_index": 33,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    },
+    "2944ed99144220137f6bea72f7d9ef3b4ee44bab7ad17a10230b73b743a2ed6a": {
+      "status": "completed",
+      "shard_id": "shard-035",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/test/unit/server/services/adapter-manager/adapter-manager.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/announcement-bar/announcement-bar-settings.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/audience-feedback/audience-feedback-service.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/auth/session/store.test.js:1"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/test/unit/server/services/adapter-manager/adapter-manager.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/announcement-bar/announcement-bar-settings.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/audience-feedback/audience-feedback-service.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/auth/session/store.test.js:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 61481,
+        "token_count_in": 4507,
+        "token_count_out": 12,
+        "trace_id": "f4dfc1bf0ca940b9b6ed61dd4035aa22",
+        "span_id": "e242ed6906054669",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-035",
+        "shard_index": 34,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "2f585bf897b94caebc93fa160d23e160241d7affe4f29385db0bd80491170d2a": {
+      "status": "completed",
+      "shard_id": "shard-036",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/test/unit/server/services/comments/comments-service-emails-renderer.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/custom-redirects/api.test.js:4",
+        "diff_hunk:ghost/core/test/unit/server/services/email-analytics/email-analytics-provider-mailgun.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/email-analytics/email-analytics-service.test.js:3"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/test/unit/server/services/comments/comments-service-emails-renderer.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/custom-redirects/api.test.js:4",
+          "diff_hunk:ghost/core/test/unit/server/services/email-analytics/email-analytics-provider-mailgun.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/email-analytics/email-analytics-service.test.js:3"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 62252,
+        "token_count_in": 4883,
+        "token_count_out": 12,
+        "trace_id": "19fae82791654b21b02adac2e38f4e78",
+        "span_id": "6b9df4fb87e14092",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-036",
+        "shard_index": 35,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "01da99bccf656aefa7d4cca594109b3c7aca649f3d33f13b24d83a7de5d931ad": {
+      "status": "completed",
+      "shard_id": "shard-037",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/test/unit/server/services/email-analytics/event-processing-result.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/email-suppression-list/email-suppression-list.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/explore-ping/explore-ping-service.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/frontend-data-service/frontend-data-service.test.js:3"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/test/unit/server/services/email-analytics/event-processing-result.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/email-suppression-list/email-suppression-list.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/explore-ping/explore-ping-service.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/frontend-data-service/frontend-data-service.test.js:3"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 1123,
+        "token_count_in": 4641,
+        "token_count_out": 12,
+        "trace_id": "d233eb090b704cfd8822278e20abed74",
+        "span_id": "8d49e1dbba064de0",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-037",
+        "shard_index": 36,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "8b884cadd6f077abad2d543fdba09ab7a56de1c9beb94de94e9959d1314f8e49": {
+      "status": "completed",
+      "shard_id": "shard-038",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/test/unit/server/services/identity-tokens/identity-token-service.test.ts:1",
+        "diff_hunk:ghost/core/test/unit/server/services/lib/dynamic-redirect-manager.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/lib/email-content-generator.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/lib/in-memory-repository.test.ts:1"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/test/unit/server/services/identity-tokens/identity-token-service.test.ts:1",
+          "diff_hunk:ghost/core/test/unit/server/services/lib/dynamic-redirect-manager.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/lib/email-content-generator.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/lib/in-memory-repository.test.ts:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 1083,
+        "token_count_in": 4327,
+        "token_count_out": 12,
+        "trace_id": "5f9db9f168004ba9831a88d5e3e6f296",
+        "span_id": "43b108db757b4072",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-038",
+        "shard_index": 37,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "c2c65f2c1f3b0e3a9907e5faf29ef75582e719b25df31b613753dfce24f3b983": {
+      "status": "completed",
+      "shard_id": "shard-039",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/test/unit/server/services/lib/mailgun-client.test.js:3",
+        "diff_hunk:ghost/core/test/unit/server/services/media-inliner/test/external-media-inliner.test.js:5",
+        "diff_hunk:ghost/core/test/unit/server/services/member-attribution/attribution.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/member-attribution/history.test.js:1"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/test/unit/server/services/lib/mailgun-client.test.js:3",
+          "diff_hunk:ghost/core/test/unit/server/services/media-inliner/test/external-media-inliner.test.js:5",
+          "diff_hunk:ghost/core/test/unit/server/services/member-attribution/attribution.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/member-attribution/history.test.js:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 430,
+        "token_count_in": 4460,
+        "token_count_out": 12,
+        "trace_id": "12ace2fb49f14ef9a9689b49114df977",
+        "span_id": "221fa647e2914c1a",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-039",
+        "shard_index": 38,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "517f3ad335c07fffc4c511ddeab632f2fc76e978bf427ec506c24ef86ec70270": {
+      "status": "completed",
+      "shard_id": "shard-040",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/test/unit/server/services/member-attribution/outbound-link-tagger.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/member-attribution/referrer-translator.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/member-attribution/service.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/member-attribution/url-translator.test.js:1"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/test/unit/server/services/member-attribution/outbound-link-tagger.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/member-attribution/referrer-translator.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/member-attribution/service.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/member-attribution/url-translator.test.js:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 12751,
+        "token_count_in": 4491,
+        "token_count_out": 12,
+        "trace_id": "658803bdce3246528952b2a470c930c1",
+        "span_id": "6c3e9bae6a6a4a7c",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-040",
+        "shard_index": 39,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "cbd4d6d2eb77f22b9f4249f77048bade1d752a29b5201b34315dc3536a48a946": {
+      "status": "completed",
+      "shard_id": "shard-041",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/test/unit/server/services/member-welcome-emails/member-welcome-email-renderer.test.js:16",
+        "diff_hunk:ghost/core/test/unit/server/services/members-events/event-storage.test.js:2",
+        "diff_hunk:ghost/core/test/unit/server/services/members-events/last-seen-at-cache.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/members-events/last-seen-at-updater.test.js:1"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/test/unit/server/services/member-welcome-emails/member-welcome-email-renderer.test.js:16",
+          "diff_hunk:ghost/core/test/unit/server/services/members-events/event-storage.test.js:2",
+          "diff_hunk:ghost/core/test/unit/server/services/members-events/last-seen-at-cache.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/members-events/last-seen-at-updater.test.js:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 6582,
+        "token_count_in": 4886,
+        "token_count_out": 12,
+        "trace_id": "af8d096db92c4b8f905116b2112e588e",
+        "span_id": "d67440456e4a4254",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-041",
+        "shard_index": 40,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "7719730425709fd6e1219c8f167e6b686491f18a4d639771d0eff8aad582fcbc": {
+      "status": "completed",
+      "shard_id": "shard-042",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/test/unit/server/services/members/config.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/members/importer/index.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/members/importer/members-csv-importer-stripe-utils.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/members/importer/members-csv-importer.test.js:6"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": null,
+          "evidence_ids": [
+            "diff:ghost/core/test/unit/server/services/members/config.test.js:4",
+            "diff:ghost/core/test/unit/server/services/members/importer/index.test.js:2",
+            "diff:ghost/core/test/unit/server/services/members/importer/members-csv-importer-stripe-utils.test.js:4",
+            "diff:ghost/core/test/unit/server/services/members/importer/members-csv-importer.test.js:9"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The patch only changes require paths to lowercase versions. To determine if this introduces a concrete failure, I need to see the corresponding source file renames or the actual module resolution changes.",
+          "source_shard_id": "shard-042",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/test/unit/server/services/members/config.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/members/importer/index.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/members/importer/members-csv-importer-stripe-utils.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/members/importer/members-csv-importer.test.js:6"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 18307,
+        "token_count_in": 4558,
+        "token_count_out": 157,
+        "trace_id": "b145469ccf3e4bf5b8dcff07dbe73e38",
+        "span_id": "cb17965730f345a8",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-042",
+        "shard_index": 41,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "96c940bac86082756bf94586f3df05f7ac3b1d49b3c6a52c376f68881efb9470": {
+      "status": "completed",
+      "shard_id": "shard-042-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-042",
+      "selected_evidence_ids": [
+        "diff:ghost/core/test/unit/server/services/members/config.test.js:4",
+        "diff:ghost/core/test/unit/server/services/members/importer/index.test.js:2",
+        "diff:ghost/core/test/unit/server/services/members/importer/members-csv-importer-stripe-utils.test.js:4",
+        "diff:ghost/core/test/unit/server/services/members/importer/members-csv-importer.test.js:9",
+        "diff_hunk:ghost/core/test/unit/server/services/members/config.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/members/importer/index.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/members/importer/members-csv-importer-stripe-utils.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/members/importer/members-csv-importer.test.js:6"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/test/unit/server/services/members/config.test.js:4",
+          "diff:ghost/core/test/unit/server/services/members/importer/index.test.js:2",
+          "diff:ghost/core/test/unit/server/services/members/importer/members-csv-importer-stripe-utils.test.js:4",
+          "diff:ghost/core/test/unit/server/services/members/importer/members-csv-importer.test.js:9",
+          "diff_hunk:ghost/core/test/unit/server/services/members/config.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/members/importer/index.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/members/importer/members-csv-importer-stripe-utils.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/members/importer/members-csv-importer.test.js:6"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 15488,
+        "token_count_in": 3978,
+        "token_count_out": 15,
+        "trace_id": "511d04d361454a708f680e8148bacdec",
+        "span_id": "664e6ff058e34a1c",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-042-refill",
+        "shard_index": 41,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    },
+    "fd4c43e076734f3c3b4e97182637221adbc0b509d5dcdf234438218a29de6d7b": {
+      "status": "completed",
+      "shard_id": "shard-043",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/test/unit/server/services/members/members-api/controllers/member-controller.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/members/members-api/controllers/router-controller.test.js:4",
+        "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/event-repository.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/member-repository.test.js:2"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/test/unit/server/services/members/members-api/controllers/member-controller.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/members/members-api/controllers/router-controller.test.js:4",
+          "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/event-repository.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/member-repository.test.js:2"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 464,
+        "token_count_in": 4796,
+        "token_count_out": 12,
+        "trace_id": "ae25ae0bd9f64213bdf0f50988238b72",
+        "span_id": "4a9c72c4213a4234",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-043",
+        "shard_index": 42,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "2dc83960a89a0bc556469cb1d9b027d397093ab11ff509780729f658e3294fa9": {
+      "status": "completed",
+      "shard_id": "shard-044",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/product-repository.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/members/members-api/services/geolocation-service.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/members/members-api/services/members-bread-service.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/members/members-api/services/payments-service.test.js:4"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/test/unit/server/services/members/members-api/repositories/product-repository.test.js",
+          "evidence_ids": [
+            "diff:ghost/core/test/unit/server/services/members/members-api/repositories/product-repository.test.js:3"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-044",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/test/unit/server/services/members/members-api/services/geolocation-service.test.js",
+          "evidence_ids": [
+            "diff:ghost/core/test/unit/server/services/members/members-api/services/geolocation-service.test.js:3"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-044",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/test/unit/server/services/members/members-api/services/members-bread-service.test.js",
+          "evidence_ids": [
+            "diff:ghost/core/test/unit/server/services/members/members-api/services/members-bread-service.test.js:3"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-044",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/test/unit/server/services/members/members-api/services/payments-service.test.js",
+          "evidence_ids": [
+            "diff:ghost/core/test/unit/server/services/members/members-api/services/payments-service.test.js:7"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-044",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/product-repository.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/members/members-api/services/geolocation-service.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/members/members-api/services/members-bread-service.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/members/members-api/services/payments-service.test.js:4"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 42094,
+        "token_count_in": 4707,
+        "token_count_out": 262,
+        "trace_id": "f95db87b3a4d4a97bc6d80f7a3b9de65",
+        "span_id": "d893064532384a5d",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-044",
+        "shard_index": 43,
+        "shard_count": 50,
+        "context_request_count": 4,
+        "context_refill_used": false
+      }
+    },
+    "30839e614ea7975636b04942697c20b198480a3bcc492bb667b1471cc5e513f2": {
+      "status": "completed",
+      "shard_id": "shard-044-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-044",
+      "selected_evidence_ids": [
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/product-repository.test.js:3",
+        "diff:ghost/core/test/unit/server/services/members/members-api/services/geolocation-service.test.js:3",
+        "diff:ghost/core/test/unit/server/services/members/members-api/services/members-bread-service.test.js:3",
+        "diff:ghost/core/test/unit/server/services/members/members-api/services/payments-service.test.js:7",
+        "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/product-repository.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/members/members-api/services/geolocation-service.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/members/members-api/services/members-bread-service.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/members/members-api/services/payments-service.test.js:4"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/test/unit/server/services/members/members-api/repositories/product-repository.test.js",
+          "evidence_ids": [
+            "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/product-repository.test.js:1"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-044-refill",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/test/unit/server/services/members/members-api/services/geolocation-service.test.js",
+          "evidence_ids": [
+            "diff_hunk:ghost/core/test/unit/server/services/members/members-api/services/geolocation-service.test.js:1"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-044-refill",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/test/unit/server/services/members/members-api/services/members-bread-service.test.js",
+          "evidence_ids": [
+            "diff_hunk:ghost/core/test/unit/server/services/members/members-api/services/members-bread-service.test.js:1"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-044-refill",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/test/unit/server/services/members/members-api/services/payments-service.test.js",
+          "evidence_ids": [
+            "diff_hunk:ghost/core/test/unit/server/services/members/members-api/services/payments-service.test.js:4"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-044-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/test/unit/server/services/members/members-api/repositories/product-repository.test.js:3",
+          "diff:ghost/core/test/unit/server/services/members/members-api/services/geolocation-service.test.js:3",
+          "diff:ghost/core/test/unit/server/services/members/members-api/services/members-bread-service.test.js:3",
+          "diff:ghost/core/test/unit/server/services/members/members-api/services/payments-service.test.js:7",
+          "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/product-repository.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/members/members-api/services/geolocation-service.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/members/members-api/services/members-bread-service.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/members/members-api/services/payments-service.test.js:4"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 7110,
+        "token_count_in": 4068,
+        "token_count_out": 319,
+        "trace_id": "69b6504786444ef9b3be5f2a95f9233b",
+        "span_id": "a7a18e23f1cb4990",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-044-refill",
+        "shard_index": 43,
+        "shard_count": 50,
+        "context_request_count": 4,
+        "context_refill_used": true
+      }
+    },
+    "cf60d2f53b6ce0a9babe1c6cdf269f22c2b0b98e610dfb8021bad95573836b59": {
+      "status": "completed",
+      "shard_id": "shard-045",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/test/unit/server/services/members/members-api/services/token-service.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/members/request-integrity-token-provider.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/members/single-use-token-provider.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/mentions-email-report/mention-email-report-job.test.js:1"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/test/unit/server/services/members/members-api/services/token-service.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/members/request-integrity-token-provider.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/members/single-use-token-provider.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/mentions-email-report/mention-email-report-job.test.js:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 1199,
+        "token_count_in": 4750,
+        "token_count_out": 12,
+        "trace_id": "e299c233683e483fa92193e31dec52b1",
+        "span_id": "e02ec47df21d4cc3",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-045",
+        "shard_index": 44,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "bf469d9d19d2d17745ea26726884d95c181ac4241d31e6107a6e2d5b17a09263": {
+      "status": "completed",
+      "shard_id": "shard-046",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/test/unit/server/services/newsletters/service.test.js:9",
+        "diff_hunk:ghost/core/test/unit/server/services/notifications/notifications.test.js:3",
+        "diff_hunk:ghost/core/test/unit/server/services/outbox/index.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/outbox/index.test.js:49",
+        "diff_hunk:ghost/core/test/unit/server/services/recommendations/service/recommendation-service.test.ts:1"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/test/unit/server/services/newsletters/service.test.js:9",
+          "diff_hunk:ghost/core/test/unit/server/services/notifications/notifications.test.js:3",
+          "diff_hunk:ghost/core/test/unit/server/services/outbox/index.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/outbox/index.test.js:49",
+          "diff_hunk:ghost/core/test/unit/server/services/recommendations/service/recommendation-service.test.ts:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 70537,
+        "token_count_in": 4581,
+        "token_count_out": 12,
+        "trace_id": "e8878e8aa49541719e5e116c9ad7dbc7",
+        "span_id": "7e5a1f3c120d465e",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-046",
+        "shard_index": 45,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "3621e712387e1cea1f6cbdfad9149ac8989602940cc518bda92b77612a9a9b61": {
+      "status": "completed",
+      "shard_id": "shard-047",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/test/unit/server/services/settings-helpers/settings-helpers.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/settings/settings-bread-service.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/stats/content.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/stats/members.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/stats/members.test.js:413",
+        "diff_hunk:ghost/core/test/unit/server/services/stats/members.test.js:473"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/test/unit/server/services/settings-helpers/settings-helpers.test.js",
+            "risk:security_sensitive:ghost/core/test/unit/server/services/settings/settings-bread-service.test.js",
+            "risk:security_sensitive:ghost/core/test/unit/server/services/stats/content.test.js",
+            "risk:security_sensitive:ghost/core/test/unit/server/services/stats/members.test.js"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The security_sensitive risk signals are triggered by require path changes (case-only renames). Need to verify if the source modules have been renamed or if this is a case-insensitive filesystem issue that could cause runtime failures on case-sensitive systems.",
+          "source_shard_id": "shard-047",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/test/unit/server/services/settings-helpers/settings-helpers.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/settings/settings-bread-service.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/stats/content.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/stats/members.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/stats/members.test.js:413",
+          "diff_hunk:ghost/core/test/unit/server/services/stats/members.test.js:473"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 6223,
+        "token_count_in": 4761,
+        "token_count_out": 190,
+        "trace_id": "14bd70bf171848d98ee4c8ca6bbab66f",
+        "span_id": "797f46740a854d4c",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-047",
+        "shard_index": 46,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "ba58581917046dd19af275c49d126b58a357a680fed21a34a78adc36d896c3b1": {
+      "status": "completed",
+      "shard_id": "shard-047-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-047",
+      "selected_evidence_ids": [
+        "risk:security_sensitive:ghost/core/test/unit/server/services/settings-helpers/settings-helpers.test.js",
+        "risk:security_sensitive:ghost/core/test/unit/server/services/settings/settings-bread-service.test.js",
+        "risk:security_sensitive:ghost/core/test/unit/server/services/stats/content.test.js",
+        "risk:security_sensitive:ghost/core/test/unit/server/services/stats/members.test.js"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/test/unit/server/services/settings-helpers/settings-helpers.test.js",
+            "risk:security_sensitive:ghost/core/test/unit/server/services/settings/settings-bread-service.test.js",
+            "risk:security_sensitive:ghost/core/test/unit/server/services/stats/content.test.js",
+            "risk:security_sensitive:ghost/core/test/unit/server/services/stats/members.test.js"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-047-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "risk:security_sensitive:ghost/core/test/unit/server/services/settings-helpers/settings-helpers.test.js",
+          "risk:security_sensitive:ghost/core/test/unit/server/services/settings/settings-bread-service.test.js",
+          "risk:security_sensitive:ghost/core/test/unit/server/services/stats/content.test.js",
+          "risk:security_sensitive:ghost/core/test/unit/server/services/stats/members.test.js"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 1060,
+        "token_count_in": 2876,
+        "token_count_out": 136,
+        "trace_id": "2c9bb8d26ea94f83aab2f6758a76f35e",
+        "span_id": "4b3d861b06ee45a1",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-047-refill",
+        "shard_index": 46,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": true
+      }
+    },
+    "be10fa74462e48f557920dfa5861b99efc9dd51270ae500f39552fcded2b93cb": {
+      "status": "completed",
+      "shard_id": "shard-048",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/test/unit/server/services/stats/mrr.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/stats/mrr.test.js:362",
+        "diff_hunk:ghost/core/test/unit/server/services/stats/posts.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/stats/posts.test.js:1087",
+        "diff_hunk:ghost/core/test/unit/server/services/stats/posts.test.js:1138",
+        "diff_hunk:ghost/core/test/unit/server/services/stats/posts.test.js:1166",
+        "diff_hunk:ghost/core/test/unit/server/services/stats/referrers.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/stats/referrers.test.js:177",
+        "diff_hunk:ghost/core/test/unit/server/services/stats/referrers.test.js:185",
+        "diff_hunk:ghost/core/test/unit/server/services/stats/referrers.test.js:203",
+        "diff_hunk:ghost/core/test/unit/server/services/stats/referrers.test.js:230",
+        "diff_hunk:ghost/core/test/unit/server/services/stats/stats.test.js:1"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/test/unit/server/services/stats/mrr.test.js",
+            "risk:security_sensitive:ghost/core/test/unit/server/services/stats/posts.test.js",
+            "risk:security_sensitive:ghost/core/test/unit/server/services/stats/referrers.test.js",
+            "risk:security_sensitive:ghost/core/test/unit/server/services/stats/stats.test.js"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The risk signals indicate security-sensitive keyword changes, but the primary evidence only shows import path renames and whitespace changes. Need to inspect the actual risk evidence to determine if there is a concrete security issue introduced.",
+          "source_shard_id": "shard-048",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/test/unit/server/services/stats/mrr.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/stats/mrr.test.js:362",
+          "diff_hunk:ghost/core/test/unit/server/services/stats/posts.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/stats/posts.test.js:1087",
+          "diff_hunk:ghost/core/test/unit/server/services/stats/posts.test.js:1138",
+          "diff_hunk:ghost/core/test/unit/server/services/stats/posts.test.js:1166",
+          "diff_hunk:ghost/core/test/unit/server/services/stats/referrers.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/stats/referrers.test.js:177",
+          "diff_hunk:ghost/core/test/unit/server/services/stats/referrers.test.js:185",
+          "diff_hunk:ghost/core/test/unit/server/services/stats/referrers.test.js:203",
+          "diff_hunk:ghost/core/test/unit/server/services/stats/referrers.test.js:230",
+          "diff_hunk:ghost/core/test/unit/server/services/stats/stats.test.js:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 7799,
+        "token_count_in": 7514,
+        "token_count_out": 179,
+        "trace_id": "5387fbad25de46b1811e44d6ad2c24d1",
+        "span_id": "f64f73d4d6e24cc2",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-048",
+        "shard_index": 47,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "f0e5294f88e7f21b2d87b3f1a9448a1e0aa7218ae94860658dcff4412b167545": {
+      "status": "completed",
+      "shard_id": "shard-048-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-048",
+      "selected_evidence_ids": [
+        "risk:security_sensitive:ghost/core/test/unit/server/services/stats/mrr.test.js",
+        "risk:security_sensitive:ghost/core/test/unit/server/services/stats/posts.test.js",
+        "risk:security_sensitive:ghost/core/test/unit/server/services/stats/referrers.test.js",
+        "risk:security_sensitive:ghost/core/test/unit/server/services/stats/stats.test.js"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/test/unit/server/services/stats/mrr.test.js",
+            "risk:security_sensitive:ghost/core/test/unit/server/services/stats/posts.test.js",
+            "risk:security_sensitive:ghost/core/test/unit/server/services/stats/referrers.test.js",
+            "risk:security_sensitive:ghost/core/test/unit/server/services/stats/stats.test.js"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-048-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "risk:security_sensitive:ghost/core/test/unit/server/services/stats/mrr.test.js",
+          "risk:security_sensitive:ghost/core/test/unit/server/services/stats/posts.test.js",
+          "risk:security_sensitive:ghost/core/test/unit/server/services/stats/referrers.test.js",
+          "risk:security_sensitive:ghost/core/test/unit/server/services/stats/stats.test.js"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 1063,
+        "token_count_in": 3761,
+        "token_count_out": 127,
+        "trace_id": "799b7bcbee354ea98565fbdcdc9da694",
+        "span_id": "bfd44a77f1c74f2f",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-048-refill",
+        "shard_index": 47,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": true
+      }
+    },
+    "9c96843bc3099d5bbc3968e14b8e0a0545408d891ac192c456c156d76b5e8636": {
+      "status": "completed",
+      "shard_id": "shard-049",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/test/unit/server/services/stats/subscriptions.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/update-check.test.js:7",
+        "diff_hunk:ghost/core/test/unit/server/services/users/users-service.test.js:1",
+        "diff_hunk:ghost/core/test/unit/server/services/verification-trigger.test.js:3"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/test/unit/server/services/stats/subscriptions.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/update-check.test.js:7",
+          "diff_hunk:ghost/core/test/unit/server/services/users/users-service.test.js:1",
+          "diff_hunk:ghost/core/test/unit/server/services/verification-trigger.test.js:3"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 3335,
+        "token_count_in": 4104,
+        "token_count_out": 12,
+        "trace_id": "fba05d36702e4e66832a75d4fdced31c",
+        "span_id": "6f9e7570459b4cec",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-049",
+        "shard_index": 48,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "22ee5be462993e7d3e4cd4120dac727174fdc1133c98f24ff1af0bd2de681ea9": {
+      "status": "completed",
+      "shard_id": "shard-050",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/test/unit/server/services/webhooks/trigger.test.js:3",
+        "diff_hunk:ghost/core/test/utils/e2e-framework-mock-manager.js:13"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/test/unit/server/services/webhooks/trigger.test.js",
+          "evidence_ids": [
+            "diff:ghost/core/test/unit/server/services/webhooks/trigger.test.js:6"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-050",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/test/utils/e2e-framework-mock-manager.js",
+          "evidence_ids": [
+            "diff:ghost/core/test/utils/e2e-framework-mock-manager.js:16"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-050",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/test/unit/server/services/webhooks/trigger.test.js:3",
+          "diff_hunk:ghost/core/test/utils/e2e-framework-mock-manager.js:13"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 13372,
+        "token_count_in": 2503,
+        "token_count_out": 141,
+        "trace_id": "48d49e0a6cec4f249d46fbc80901f7c8",
+        "span_id": "c637e9914b754e2c",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-050",
+        "shard_index": 49,
+        "shard_count": 50,
+        "context_request_count": 2,
+        "context_refill_used": false
+      }
+    },
+    "218582e85f61149417de08171ca9a3138f368c853c546d6e6084f3c528c8c886": {
+      "status": "completed",
+      "shard_id": "shard-050-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-050",
+      "selected_evidence_ids": [
+        "diff:ghost/core/test/unit/server/services/webhooks/trigger.test.js:6",
+        "diff:ghost/core/test/utils/e2e-framework-mock-manager.js:16",
+        "diff_hunk:ghost/core/test/unit/server/services/webhooks/trigger.test.js:3",
+        "diff_hunk:ghost/core/test/utils/e2e-framework-mock-manager.js:13"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff:ghost/core/test/unit/server/services/webhooks/trigger.test.js:6",
+          "diff:ghost/core/test/utils/e2e-framework-mock-manager.js:16",
+          "diff_hunk:ghost/core/test/unit/server/services/webhooks/trigger.test.js:3",
+          "diff_hunk:ghost/core/test/utils/e2e-framework-mock-manager.js:13"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 3031,
+        "token_count_in": 2250,
+        "token_count_out": 15,
+        "trace_id": "3d11405ecc07434688387cd926bbc677",
+        "span_id": "4ffe3d1fa142401b",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-050-refill",
+        "shard_index": 49,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    }
+  }
+}

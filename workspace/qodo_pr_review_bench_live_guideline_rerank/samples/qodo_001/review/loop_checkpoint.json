@@ -1,0 +1,216 @@
+{
+  "schema_version": "1.0",
+  "run_id": "3d539f5fb88b4901b22cefd66a04daf0",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": false,
+  "package_hash": "sha256:1fbb5704d62183e291bdc5424e70e646fa5aa186ffc53f6cc5da6d081758196c",
+  "diff_hash": "sha256:e5b82b74cf451ae97a02bedefdc4fd9f909b6eda24e2101d391cce3587759445",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 5,
+      "verified_count": 1,
+      "needs_human_review_count": 0,
+      "discarded_count": 4,
+      "keep_count": 0,
+      "uncertain_count": 1,
+      "reject_count": 0,
+      "feedback_sent": [
+        {
+          "issue_id": "correctness:apps/comments-ui/src/components/content/forms/form.tsx:261",
+          "category": "correctness",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:261"
+          ]
+        }
+      ],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:241",
+            "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:27",
+            "diff_hunk:apps/comments-ui/test/e2e/actions.test.ts:611"
+          ],
+          "output_issue_ids": [
+            "correctness:apps/comments-ui/src/components/content/forms/form.tsx:244",
+            "correctness:apps/comments-ui/src/components/content/forms/reply-form.tsx:30"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 3708,
+          "token_count_in": 5816,
+          "token_count_out": 488,
+          "trace_id": "d11a60db07034db5aeac2356e63b3bb4",
+          "span_id": "929f3b55c6924f7d",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 1,
+          "context_request_count": 2,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:261",
+            "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:289",
+            "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:297",
+            "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:305",
+            "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:44"
+          ],
+          "output_issue_ids": [
+            "correctness:apps/comments-ui/src/components/content/forms/form.tsx:305",
+            "correctness:apps/comments-ui/src/components/content/forms/form.tsx:261",
+            "best-practice:apps/comments-ui/src/components/content/forms/form.tsx:308"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 2,
+          "retry_log": [
+            "attempt=1 error=timeout delay=1.00s",
+            "attempt=2 error=timeout delay=2.00s"
+          ],
+          "latency_ms": 150253,
+          "token_count_in": 3797,
+          "token_count_out": 415,
+          "trace_id": "b17dee88d71440e4b84c24964f14921f",
+          "span_id": "c2bce48908384af7",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001-refill",
+          "shard_index": 0,
+          "shard_count": 1,
+          "context_request_count": 0,
+          "context_refill_used": true
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [
+            "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:261"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [
+        "correctness:apps/comments-ui/src/components/content/forms/form.tsx:261"
+      ],
+      "keep": [],
+      "needs_human_review": [
+        {
+          "file": "apps/comments-ui/src/components/content/forms/form.tsx",
+          "line": 261,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Changed editor editable condition from memberName to member.expertise; if member is null or undefined, this will throw a TypeError.",
+          "suggestion": "Add optional chaining: member?.expertise to safely access the property.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:261"
+          ]
+        }
+      ],
+      "discarded": [
+        {
+          "file": "apps/comments-ui/src/components/content/forms/form.tsx",
+          "line": 244,
+          "severity": "high",
+          "category": "correctness",
+          "message": "Removing fallback to comment author's name may break reply form display when logged-in member has no name.",
+          "suggestion": "Keep the fallback to comment?.member?.name when member?.name is null/undefined to preserve the parent comment author's name in the reply form.",
+          "confidence": 0.85,
+          "evidence_ids": [
+            "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:241"
+          ],
+          "filter_reason": "low_signal_suggestion"
+        },
+        {
+          "file": "apps/comments-ui/src/components/content/forms/reply-form.tsx",
+          "line": 30,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Changed in_reply_to_id from openForm.in_reply_to_id to parent.id may alter reply threading behavior.",
+          "suggestion": "Verify that parent.id is the correct identifier for the reply target, as openForm.in_reply_to_id may have been more specific.",
+          "confidence": 0.6,
+          "evidence_ids": [
+            "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:27"
+          ],
+          "filter_reason": "low_signal_suggestion"
+        },
+        {
+          "file": "apps/comments-ui/src/components/content/forms/form.tsx",
+          "line": 305,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Removing fallback to comment member data may cause null/undefined access when member is null and openForm is used without optional chaining.",
+          "suggestion": "Restore the fallback or add optional chaining to openForm.in_reply_to_snippet to avoid potential runtime error when openForm is null.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:305"
+          ],
+          "filter_reason": "low_signal_suggestion"
+        },
+        {
+          "file": "apps/comments-ui/src/components/content/forms/form.tsx",
+          "line": 308,
+          "severity": "low",
+          "category": "best-practice",
+          "message": "Review guideline violation: 'React Button Elements Must Have Explicit Type Attribute' - the <form> element does not have an explicit type attribute, but the guideline applies to <button> elements. No button type issue found.",
+          "suggestion": "",
+          "confidence": 0.5,
+          "evidence_ids": [],
+          "filter_reason": "missing_evidence"
+        }
+      ]
+    }
+  ],
+  "last_feedback": {
+    "iteration": 0,
+    "uncertain_items": [
+      {
+        "issue_id": "correctness:apps/comments-ui/src/components/content/forms/form.tsx:261",
+        "category": "correctness",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:261"
+        ]
+      }
+    ]
+  }
+}

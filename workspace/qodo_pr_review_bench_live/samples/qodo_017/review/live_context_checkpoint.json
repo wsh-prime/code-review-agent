@@ -1,0 +1,103 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:ed920660eab7c020d518131eb31f1156caea8aba66567e61209f9fd69a12848f",
+  "diff_hash": "sha256:c01da051757911780fe41fa48ea2af7b86fa18bcd8b4724f3539e569ec416623",
+  "shards": {
+    "94847b1c176ad20b1d51157dfc9bf0de098c0322984a58ed8da358a85708090d": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:718",
+        "diff_hunk:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1",
+        "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:1"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": null,
+          "evidence_ids": [
+            "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:76",
+            "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:586"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The patch modifies ServerComponentDeserializerTest.cs with 3 hunks, but only the first hunk (namespace/class restructuring) is provided. Hunks at lines 76 and 586 may contain changes that affect deserialization logic or introduce new test cases for generic components, which could reveal risks in the deserializer's handling of closed generic types.",
+          "source_shard_id": "shard-001",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:src/Components/Endpoints/test/EndpointHtmlRendererTest.cs:718",
+          "diff_hunk:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1",
+          "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 9373,
+        "token_count_in": 4422,
+        "token_count_out": 160,
+        "trace_id": "566cc9ecc59f46be8808a35a11fb9e84",
+        "span_id": "55447ce6f5324595",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "e47ab4fd37268c3b0d71e97552e731fe84c8d8853ec983cbc7d7a2ffecddf1aa": {
+      "status": "completed",
+      "shard_id": "shard-001-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-001",
+      "selected_evidence_ids": [
+        "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:586",
+        "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:76"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:586",
+          "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:76"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 2775,
+        "token_count_in": 2312,
+        "token_count_out": 12,
+        "trace_id": "e13a02a3095c4f5d99336ed09d81425f",
+        "span_id": "4255769ec5e04da1",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    }
+  }
+}

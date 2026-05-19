@@ -1,0 +1,2361 @@
+{
+  "schema_version": "1.3",
+  "summary": {
+    "mode": "hybrid-live",
+    "changed_file_count": 4,
+    "changed_entity_count": 4,
+    "risk_signal_count": 4,
+    "finding_count": 2,
+    "needs_human_review_count": 0,
+    "discarded_count": 0,
+    "evidence_count": 77,
+    "missing_evidence_id_count": 0,
+    "agent_run_count": 2,
+    "prompt_exported": false,
+    "loop_enabled": true,
+    "loop_iterations_completed": 1,
+    "loop_converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "total_latency_ms": 64386,
+    "total_token_count_in": 9044,
+    "total_token_count_out": 326,
+    "context_budget_enabled": true,
+    "context_truncated": true,
+    "selected_evidence_count": 9,
+    "omitted_evidence_count": 68,
+    "review_shard_count": 1,
+    "context_refill_count": 0,
+    "context_request_count": 0,
+    "target_repo_modified": false
+  },
+  "findings": [
+    {
+      "file": "ghost/core/core/server/services/member-welcome-emails/jobs/index.js",
+      "line": 15,
+      "severity": "high",
+      "category": "logic_error",
+      "message": "Negated condition on hasScheduled.processOutbox was removed, causing the job to be scheduled only when already true, which prevents the job from ever being added.",
+      "suggestion": "Restore the negation: change `if (hasScheduled.processOutbox && ...)` back to `if (!hasScheduled.processOutbox && ...)`.",
+      "confidence": 0.95,
+      "evidence_ids": [
+        "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8"
+      ]
+    },
+    {
+      "file": "ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js",
+      "line": 340,
+      "severity": "medium",
+      "category": "code_style",
+      "message": "Variable declaration changed from `let` to `var` for `member`, violating the guideline 'Code Must Use let or const Instead of var'.",
+      "suggestion": "Use `let member;` instead of `var member;`.",
+      "confidence": 1.0,
+      "evidence_ids": [
+        "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337"
+      ]
+    }
+  ],
+  "needs_human_review": [],
+  "discarded": [],
+  "changed_files": [
+    {
+      "old_path": "ghost/core/core/server/services/member-welcome-emails/jobs/index.js",
+      "new_path": "ghost/core/core/server/services/member-welcome-emails/jobs/index.js",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 1,
+          "old_count": 6,
+          "new_start": 1,
+          "new_count": 6,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 1,
+              "new_lineno": 1,
+              "content": "const path = require('path');"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 2,
+              "new_lineno": 2,
+              "content": "const jobsService = require('../../jobs');"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 3,
+              "new_lineno": null,
+              "content": "const labs = require('../../../../shared/labs');"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 3,
+              "content": "const config = require('../../../../shared/config');"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 4,
+              "new_lineno": 4,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 5,
+              "new_lineno": 5,
+              "content": "let hasScheduled = {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 6,
+              "new_lineno": 6,
+              "content": "    processOutbox: false"
+            }
+          ]
+        },
+        {
+          "old_start": 8,
+          "old_count": 11,
+          "new_start": 8,
+          "new_count": 11,
+          "section_header": "let hasScheduled = {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 8,
+              "new_lineno": 8,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 9,
+              "new_lineno": 9,
+              "content": "module.exports = {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 10,
+              "new_lineno": 10,
+              "content": "    async scheduleMemberWelcomeEmailJob() {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 11,
+              "new_lineno": null,
+              "content": "        if (!labs.isSet('welcomeEmails')) {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 11,
+              "content": "        if (!config.get('memberWelcomeEmailTestInbox')) {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 12,
+              "new_lineno": 12,
+              "content": "            return false;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 13,
+              "new_lineno": 13,
+              "content": "        }"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 14,
+              "new_lineno": 14,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 15,
+              "new_lineno": null,
+              "content": "        if (!hasScheduled.processOutbox && !process.env.NODE_ENV.startsWith('test')) {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 15,
+              "content": "        if (hasScheduled.processOutbox && !process.env.NODE_ENV.startsWith('test')) {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 16,
+              "new_lineno": 16,
+              "content": "            jobsService.addJob({"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 17,
+              "new_lineno": 17,
+              "content": "                at: '0 */5 * * * *',"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 18,
+              "new_lineno": 18,
+              "content": "                job: path.resolve(__dirname, 'process-outbox.js'),"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js",
+      "new_path": "ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 8,
+          "old_count": 6,
+          "new_start": 8,
+          "new_count": 7,
+          "section_header": "const ObjectId = require('bson-objectid').default;",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 8,
+              "new_lineno": 8,
+              "content": "const {NotFoundError} = require('@tryghost/errors');"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 9,
+              "new_lineno": 9,
+              "content": "const validator = require('@tryghost/validator');"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 10,
+              "new_lineno": 10,
+              "content": "const crypto = require('crypto');"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 11,
+              "content": "const config = require('../../../../../shared/config');"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 11,
+              "new_lineno": 12,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 12,
+              "new_lineno": 13,
+              "content": "const messages = {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 13,
+              "new_lineno": 14,
+              "content": "    noStripeConnection: 'Cannot {action} without a Stripe Connection',"
+            }
+          ]
+        },
+        {
+          "old_start": 336,
+          "old_count": 8,
+          "new_start": 337,
+          "new_count": 9,
+          "section_header": "module.exports = class MemberRepository {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 336,
+              "new_lineno": 337,
+              "content": "        const eventData = _.pick(data, ['created_at']);"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 337,
+              "new_lineno": 338,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 338,
+              "new_lineno": 339,
+              "content": "        const memberAddOptions = {...(options || {}), withRelated};"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 339,
+              "new_lineno": null,
+              "content": "        let member;"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 340,
+              "new_lineno": null,
+              "content": "        if (this._labsService.isSet('welcomeEmails') && WELCOME_EMAIL_SOURCES.includes(source)) {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 340,
+              "content": "        var member;"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 341,
+              "content": "        const welcomeEmailConfig = config.get('memberWelcomeEmailTestInbox');"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 342,
+              "content": "        if (welcomeEmailConfig || WELCOME_EMAIL_SOURCES.includes(source)) {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 341,
+              "new_lineno": 343,
+              "content": "            const runMemberCreation = async (transacting) => {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 342,
+              "new_lineno": 344,
+              "content": "                const newMember = await this._Member.add({"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 343,
+              "new_lineno": 345,
+              "content": "                    ...memberData,"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "ghost/core/test/integration/services/member-welcome-emails.test.js",
+      "new_path": "ghost/core/test/integration/services/member-welcome-emails.test.js",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 3,
+          "old_count": 8,
+          "new_start": 3,
+          "new_count": 7,
+          "section_header": "const testUtils = require('../../utils');",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 3,
+              "new_lineno": 3,
+              "content": "const models = require('../../../core/server/models');"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 4,
+              "new_lineno": 4,
+              "content": "const {OUTBOX_STATUSES} = require('../../../core/server/models/outbox');"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 5,
+              "new_lineno": 5,
+              "content": "const db = require('../../../core/server/data/db');"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 6,
+              "new_lineno": null,
+              "content": "const labs = require('../../../core/shared/labs');"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 7,
+              "new_lineno": null,
+              "content": "const sinon = require('sinon');"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 6,
+              "content": "const configUtils = require('../../utils/configUtils');"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 8,
+              "new_lineno": 7,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 9,
+              "new_lineno": 8,
+              "content": "describe('Member Welcome Emails Integration', function () {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 10,
+              "new_lineno": 9,
+              "content": "    let membersService;"
+            }
+          ]
+        },
+        {
+          "old_start": 22,
+          "old_count": 12,
+          "new_start": 21,
+          "new_count": 12,
+          "section_header": "describe('Member Welcome Emails Integration', function () {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 22,
+              "new_lineno": 21,
+              "content": "    afterEach(async function () {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 23,
+              "new_lineno": 22,
+              "content": "        await db.knex('outbox').del();"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 24,
+              "new_lineno": 23,
+              "content": "        await db.knex('members').del();"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 25,
+              "new_lineno": null,
+              "content": "        sinon.restore();"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 24,
+              "content": "        await configUtils.restore();"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 26,
+              "new_lineno": 25,
+              "content": "    });"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 27,
+              "new_lineno": 26,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 28,
+              "new_lineno": 27,
+              "content": "    describe('Member creation with welcome emails enabled', function () {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 29,
+              "new_lineno": 28,
+              "content": "        it('creates outbox entry when member source is \"member\"', async function () {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 30,
+              "new_lineno": null,
+              "content": "            sinon.stub(labs, 'isSet').withArgs('welcomeEmails').returns(true);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 29,
+              "content": "            configUtils.set('memberWelcomeEmailTestInbox', 'test-inbox@example.com');"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 31,
+              "new_lineno": 30,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 32,
+              "new_lineno": 31,
+              "content": "            const member = await membersService.api.members.create({"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 33,
+              "new_lineno": 32,
+              "content": "                email: 'welcome-test@example.com',"
+            }
+          ]
+        },
+        {
+          "old_start": 50,
+          "old_count": 9,
+          "new_start": 49,
+          "new_count": 9,
+          "section_header": "describe('Member Welcome Emails Integration', function () {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 50,
+              "new_lineno": 49,
+              "content": "            assert.equal(payload.source, 'member');"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 51,
+              "new_lineno": 50,
+              "content": "        });"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 52,
+              "new_lineno": 51,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 53,
+              "new_lineno": null,
+              "content": "        it('does NOT create outbox entry when welcome emails feature is disabled', async function () {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 54,
+              "new_lineno": null,
+              "content": "            sinon.stub(labs, 'isSet').withArgs('welcomeEmails').returns(false);"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 55,
+              "new_lineno": null,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 52,
+              "content": "        it('does NOT create outbox entry when config is not set', async function () {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 53,
+              "content": "            configUtils.set('memberWelcomeEmailTestInbox', '');"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 54,
+              "content": "            "
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 56,
+              "new_lineno": 55,
+              "content": "            await membersService.api.members.create({"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 57,
+              "new_lineno": 56,
+              "content": "                email: 'no-welcome@example.com',"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 58,
+              "new_lineno": 57,
+              "content": "                name: 'No Welcome Member'"
+            }
+          ]
+        },
+        {
+          "old_start": 66,
+          "old_count": 7,
+          "new_start": 65,
+          "new_count": 7,
+          "section_header": "describe('Member Welcome Emails Integration', function () {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 66,
+              "new_lineno": 65,
+              "content": "        });"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 67,
+              "new_lineno": 66,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 68,
+              "new_lineno": 67,
+              "content": "        it('does NOT create outbox entry when member is imported', async function () {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 69,
+              "new_lineno": null,
+              "content": "            sinon.stub(labs, 'isSet').withArgs('welcomeEmails').returns(true);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 68,
+              "content": "            configUtils.set('memberWelcomeEmailTestInbox', 'test-inbox@example.com');"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 70,
+              "new_lineno": 69,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 71,
+              "new_lineno": 70,
+              "content": "            await membersService.api.members.create({"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 72,
+              "new_lineno": 71,
+              "content": "                email: 'imported@example.com',"
+            }
+          ]
+        },
+        {
+          "old_start": 81,
+          "old_count": 7,
+          "new_start": 80,
+          "new_count": 7,
+          "section_header": "describe('Member Welcome Emails Integration', function () {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 81,
+              "new_lineno": 80,
+              "content": "        });"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 82,
+              "new_lineno": 81,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 83,
+              "new_lineno": 82,
+              "content": "        it('does NOT create outbox entry when member is created by admin', async function () {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 84,
+              "new_lineno": null,
+              "content": "            sinon.stub(labs, 'isSet').withArgs('welcomeEmails').returns(true);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 83,
+              "content": "            configUtils.set('memberWelcomeEmailTestInbox', 'test-inbox@example.com');"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 85,
+              "new_lineno": 84,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 86,
+              "new_lineno": 85,
+              "content": "            await membersService.api.members.create({"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 87,
+              "new_lineno": 86,
+              "content": "                email: 'admin-created@example.com',"
+            }
+          ]
+        },
+        {
+          "old_start": 96,
+          "old_count": 7,
+          "new_start": 95,
+          "new_count": 7,
+          "section_header": "describe('Member Welcome Emails Integration', function () {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 96,
+              "new_lineno": 95,
+              "content": "        });"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 97,
+              "new_lineno": 96,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 98,
+              "new_lineno": 97,
+              "content": "        it('creates outbox entry with correct timestamp', async function () {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 99,
+              "new_lineno": null,
+              "content": "            sinon.stub(labs, 'isSet').withArgs('welcomeEmails').returns(true);"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 98,
+              "content": "            configUtils.set('memberWelcomeEmailTestInbox', 'test-inbox@example.com');"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 100,
+              "new_lineno": 99,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 101,
+              "new_lineno": 100,
+              "content": "            const beforeCreation = new Date(Date.now() - 1000);"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 102,
+              "new_lineno": 101,
+              "content": "            "
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "old_path": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js",
+      "new_path": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 4,
+          "old_count": 6,
+          "new_start": 4,
+          "new_count": 7,
+          "section_header": "const sinon = require('sinon');",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 4,
+              "new_lineno": 4,
+              "content": "const DomainEvents = require('@tryghost/domain-events');"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 5,
+              "new_lineno": 5,
+              "content": "const MemberRepository = require('../../../../../../../core/server/services/members/members-api/repositories/MemberRepository');"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 6,
+              "new_lineno": 6,
+              "content": "const {SubscriptionCreatedEvent, OfferRedemptionEvent} = require('../../../../../../../core/shared/events');"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 7,
+              "content": "const config = require('../../../../../../../core/shared/config');"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 7,
+              "new_lineno": 8,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 8,
+              "new_lineno": 9,
+              "content": "const mockOfferRedemption = {"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 9,
+              "new_lineno": 10,
+              "content": "    add: sinon.stub(),"
+            }
+          ]
+        },
+        {
+          "old_start": 466,
+          "old_count": 7,
+          "new_start": 467,
+          "new_count": 6,
+          "section_header": "describe('MemberRepository', function () {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 466,
+              "new_lineno": 467,
+              "content": "        let Outbox;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 467,
+              "new_lineno": 468,
+              "content": "        let MemberStatusEvent;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 468,
+              "new_lineno": 469,
+              "content": "        let MemberSubscribeEvent;"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 469,
+              "new_lineno": null,
+              "content": "        let labsService;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 470,
+              "new_lineno": 470,
+              "content": "        let newslettersService;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 471,
+              "new_lineno": 471,
+              "content": "        const oldNodeEnv = process.env.NODE_ENV;"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 472,
+              "new_lineno": 472,
+              "content": ""
+            }
+          ]
+        },
+        {
+          "old_start": 527,
+          "old_count": 16,
+          "new_start": 527,
+          "new_count": 13,
+          "section_header": "describe('MemberRepository', function () {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 527,
+              "new_lineno": 527,
+              "content": "        });"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 528,
+              "new_lineno": 528,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 529,
+              "new_lineno": 529,
+              "content": "        it('creates outbox entry for allowed source', async function () {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 530,
+              "new_lineno": null,
+              "content": "            labsService = {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 531,
+              "new_lineno": null,
+              "content": "                isSet: sinon.stub().withArgs('welcomeEmails').returns(true)"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 532,
+              "new_lineno": null,
+              "content": "            };"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 530,
+              "content": "            sinon.stub(config, 'get').withArgs('memberWelcomeEmailTestInbox').returns('test-inbox@example.com');"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 533,
+              "new_lineno": 531,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 534,
+              "new_lineno": 532,
+              "content": "            const repo = new MemberRepository({"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 535,
+              "new_lineno": 533,
+              "content": "                Member,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 536,
+              "new_lineno": 534,
+              "content": "                Outbox,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 537,
+              "new_lineno": 535,
+              "content": "                MemberStatusEvent,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 538,
+              "new_lineno": 536,
+              "content": "                MemberSubscribeEventModel: MemberSubscribeEvent,"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 539,
+              "new_lineno": null,
+              "content": "                labsService,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 540,
+              "new_lineno": 537,
+              "content": "                newslettersService,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 541,
+              "new_lineno": 538,
+              "content": "                OfferRedemption: mockOfferRedemption"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 542,
+              "new_lineno": 539,
+              "content": "            });"
+            }
+          ]
+        },
+        {
+          "old_start": 554,
+          "old_count": 17,
+          "new_start": 551,
+          "new_count": 14,
+          "section_header": "describe('MemberRepository', function () {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 554,
+              "new_lineno": 551,
+              "content": "            assert.equal(payload.source, 'member');"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 555,
+              "new_lineno": 552,
+              "content": "        });"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 556,
+              "new_lineno": 553,
+              "content": ""
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 557,
+              "new_lineno": null,
+              "content": "        it('does NOT create outbox entry when welcomeEmails lab flag is disabled', async function () {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 558,
+              "new_lineno": null,
+              "content": "            labsService = {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 559,
+              "new_lineno": null,
+              "content": "                isSet: sinon.stub().withArgs('welcomeEmails').returns(false)"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 560,
+              "new_lineno": null,
+              "content": "            };"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 554,
+              "content": "        it('does NOT create outbox entry when config is not set', async function () {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 555,
+              "content": "            sinon.stub(config, 'get').withArgs('memberWelcomeEmailTestInbox').returns(undefined);"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 561,
+              "new_lineno": 556,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 562,
+              "new_lineno": 557,
+              "content": "            const repo = new MemberRepository({"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 563,
+              "new_lineno": 558,
+              "content": "                Member,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 564,
+              "new_lineno": 559,
+              "content": "                Outbox,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 565,
+              "new_lineno": 560,
+              "content": "                MemberStatusEvent,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 566,
+              "new_lineno": 561,
+              "content": "                MemberSubscribeEventModel: MemberSubscribeEvent,"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 567,
+              "new_lineno": null,
+              "content": "                labsService,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 568,
+              "new_lineno": 562,
+              "content": "                newslettersService,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 569,
+              "new_lineno": 563,
+              "content": "                OfferRedemption: mockOfferRedemption"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 570,
+              "new_lineno": 564,
+              "content": "            });"
+            }
+          ]
+        },
+        {
+          "old_start": 575,
+          "old_count": 16,
+          "new_start": 569,
+          "new_count": 13,
+          "section_header": "describe('MemberRepository', function () {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 575,
+              "new_lineno": 569,
+              "content": "        });"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 576,
+              "new_lineno": 570,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 577,
+              "new_lineno": 571,
+              "content": "        it('does not create outbox entry for disallowed sources', async function () {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 578,
+              "new_lineno": null,
+              "content": "            labsService = {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 579,
+              "new_lineno": null,
+              "content": "                isSet: sinon.stub().withArgs('welcomeEmails').returns(true)"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 580,
+              "new_lineno": null,
+              "content": "            };"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 572,
+              "content": "            sinon.stub(config, 'get').withArgs('memberWelcomeEmailTestInbox').returns('test-inbox@example.com');"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 581,
+              "new_lineno": 573,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 582,
+              "new_lineno": 574,
+              "content": "            const repo = new MemberRepository({"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 583,
+              "new_lineno": 575,
+              "content": "                Member,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 584,
+              "new_lineno": 576,
+              "content": "                Outbox,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 585,
+              "new_lineno": 577,
+              "content": "                MemberStatusEvent,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 586,
+              "new_lineno": 578,
+              "content": "                MemberSubscribeEventModel: MemberSubscribeEvent,"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 587,
+              "new_lineno": null,
+              "content": "                labsService,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 588,
+              "new_lineno": 579,
+              "content": "                newslettersService,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 589,
+              "new_lineno": 580,
+              "content": "                OfferRedemption: mockOfferRedemption"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 590,
+              "new_lineno": 581,
+              "content": "            });"
+            }
+          ]
+        },
+        {
+          "old_start": 603,
+          "old_count": 16,
+          "new_start": 594,
+          "new_count": 13,
+          "section_header": "describe('MemberRepository', function () {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 603,
+              "new_lineno": 594,
+              "content": "        });"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 604,
+              "new_lineno": 595,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 605,
+              "new_lineno": 596,
+              "content": "        it('includes timestamp in outbox payload', async function () {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 606,
+              "new_lineno": null,
+              "content": "            labsService = {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 607,
+              "new_lineno": null,
+              "content": "                isSet: sinon.stub().withArgs('welcomeEmails').returns(true)"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 608,
+              "new_lineno": null,
+              "content": "            };"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 597,
+              "content": "            sinon.stub(config, 'get').withArgs('memberWelcomeEmailTestInbox').returns('test-inbox@example.com');"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 609,
+              "new_lineno": 598,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 610,
+              "new_lineno": 599,
+              "content": "            const repo = new MemberRepository({"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 611,
+              "new_lineno": 600,
+              "content": "                Member,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 612,
+              "new_lineno": 601,
+              "content": "                Outbox,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 613,
+              "new_lineno": 602,
+              "content": "                MemberStatusEvent,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 614,
+              "new_lineno": 603,
+              "content": "                MemberSubscribeEventModel: MemberSubscribeEvent,"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 615,
+              "new_lineno": null,
+              "content": "                labsService,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 616,
+              "new_lineno": 604,
+              "content": "                newslettersService,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 617,
+              "new_lineno": 605,
+              "content": "                OfferRedemption: mockOfferRedemption"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 618,
+              "new_lineno": 606,
+              "content": "            });"
+            }
+          ]
+        },
+        {
+          "old_start": 625,
+          "old_count": 16,
+          "new_start": 613,
+          "new_count": 13,
+          "section_header": "describe('MemberRepository', function () {",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 625,
+              "new_lineno": 613,
+              "content": "        });"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 626,
+              "new_lineno": 614,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 627,
+              "new_lineno": 615,
+              "content": "        it('passes transaction to outbox entry creation', async function () {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 628,
+              "new_lineno": null,
+              "content": "            labsService = {"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 629,
+              "new_lineno": null,
+              "content": "                isSet: sinon.stub().withArgs('welcomeEmails').returns(true)"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 630,
+              "new_lineno": null,
+              "content": "            };"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 616,
+              "content": "            sinon.stub(config, 'get').withArgs('memberWelcomeEmailTestInbox').returns('test-inbox@example.com');"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 631,
+              "new_lineno": 617,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 632,
+              "new_lineno": 618,
+              "content": "            const repo = new MemberRepository({"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 633,
+              "new_lineno": 619,
+              "content": "                Member,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 634,
+              "new_lineno": 620,
+              "content": "                Outbox,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 635,
+              "new_lineno": 621,
+              "content": "                MemberStatusEvent,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 636,
+              "new_lineno": 622,
+              "content": "                MemberSubscribeEventModel: MemberSubscribeEvent,"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 637,
+              "new_lineno": null,
+              "content": "                labsService,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 638,
+              "new_lineno": 623,
+              "content": "                newslettersService,"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 639,
+              "new_lineno": 624,
+              "content": "                OfferRedemption: mockOfferRedemption"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 640,
+              "new_lineno": 625,
+              "content": "            });"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "changed_entities": [
+    {
+      "path": "ghost/core/core/server/services/member-welcome-emails/jobs/index.js",
+      "entity_type": "module",
+      "name": "index.js",
+      "qualified_name": "ghost.core.core.server.services.member-welcome-emails.jobs.index",
+      "line_start": 3,
+      "line_end": 3,
+      "hunk_ids": [
+        "ghost/core/core/server/services/member-welcome-emails/jobs/index.js:1",
+        "ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8"
+      ]
+    },
+    {
+      "path": "ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js",
+      "entity_type": "module",
+      "name": "MemberRepository.js",
+      "qualified_name": "ghost.core.core.server.services.members.members-api.repositories.MemberRepository",
+      "line_start": 11,
+      "line_end": 11,
+      "hunk_ids": [
+        "ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:8",
+        "ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337"
+      ]
+    },
+    {
+      "path": "ghost/core/test/integration/services/member-welcome-emails.test.js",
+      "entity_type": "module",
+      "name": "member-welcome-emails.test.js",
+      "qualified_name": "ghost.core.test.integration.services.member-welcome-emails.test",
+      "line_start": 6,
+      "line_end": 7,
+      "hunk_ids": [
+        "ghost/core/test/integration/services/member-welcome-emails.test.js:3",
+        "ghost/core/test/integration/services/member-welcome-emails.test.js:21",
+        "ghost/core/test/integration/services/member-welcome-emails.test.js:49",
+        "ghost/core/test/integration/services/member-welcome-emails.test.js:65",
+        "ghost/core/test/integration/services/member-welcome-emails.test.js:80",
+        "ghost/core/test/integration/services/member-welcome-emails.test.js:95"
+      ]
+    },
+    {
+      "path": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js",
+      "entity_type": "module",
+      "name": "MemberRepository.test.js",
+      "qualified_name": "ghost.core.test.unit.server.services.members.members-api.repositories.MemberRepository.test",
+      "line_start": 7,
+      "line_end": 7,
+      "hunk_ids": [
+        "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:4",
+        "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:467",
+        "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:527",
+        "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:551",
+        "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:569",
+        "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:594",
+        "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:613"
+      ]
+    }
+  ],
+  "risk_signals": [
+    {
+      "tag": "security_sensitive",
+      "confidence": 0.74,
+      "reason": "Security-sensitive keywords changed in ghost/core/core/server/services/member-welcome-emails/jobs/index.js.",
+      "evidence_ids": [
+        "diff:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:11",
+        "diff:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:15",
+        "diff:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:3"
+      ]
+    },
+    {
+      "tag": "security_sensitive",
+      "confidence": 0.74,
+      "reason": "Security-sensitive keywords changed in ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js.",
+      "evidence_ids": [
+        "diff:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:11",
+        "diff:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:339",
+        "diff:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340",
+        "diff:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:341",
+        "diff:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:342"
+      ]
+    },
+    {
+      "tag": "security_sensitive",
+      "confidence": 0.74,
+      "reason": "Security-sensitive keywords changed in ghost/core/test/integration/services/member-welcome-emails.test.js.",
+      "evidence_ids": [
+        "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:24",
+        "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:25",
+        "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:29",
+        "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:30",
+        "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:52",
+        "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:53",
+        "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:54",
+        "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:55",
+        "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:6",
+        "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:68",
+        "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:69",
+        "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:7",
+        "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:83",
+        "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:84",
+        "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:98",
+        "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:99"
+      ]
+    },
+    {
+      "tag": "security_sensitive",
+      "confidence": 0.74,
+      "reason": "Security-sensitive keywords changed in ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js.",
+      "evidence_ids": [
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:469",
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:530",
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:531",
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:532",
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:539",
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:554",
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:555",
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:557",
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:558",
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:559",
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:560",
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:567",
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:572",
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:578",
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:579",
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:580",
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:587",
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:597",
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:606",
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:607",
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:608",
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:615",
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:616",
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:628",
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:629",
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:630",
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:637",
+        "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:7"
+      ]
+    }
+  ],
+  "evidence_index": {
+    "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:1": {
+      "id": "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:1",
+      "kind": "diff_hunk",
+      "source": "ghost/core/core/server/services/member-welcome-emails/jobs/index.js:1",
+      "message": "@@ -1,6 +1,6 @@\n const path = require('path');\n const jobsService = require('../../jobs');\n-const labs = require('../../../../shared/labs');\n+const config = require('../../../../shared/config');\n \n let hasScheduled = {\n     processOutbox: false"
+    },
+    "diff:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:3": {
+      "id": "diff:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:3",
+      "kind": "diff",
+      "source": "ghost/core/core/server/services/member-welcome-emails/jobs/index.js:3",
+      "message": "Added line: const config = require('../../../../shared/config');"
+    },
+    "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8": {
+      "id": "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8",
+      "kind": "diff_hunk",
+      "source": "ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8",
+      "message": "@@ -8,11 +8,11 @@ let hasScheduled = {\n \n module.exports = {\n     async scheduleMemberWelcomeEmailJob() {\n-        if (!labs.isSet('welcomeEmails')) {\n+        if (!config.get('memberWelcomeEmailTestInbox')) {\n             return false;\n         }\n \n-        if (!hasScheduled.processOutbox && !process.env.NODE_ENV.startsWith('test')) {\n+        if (hasScheduled.processOutbox && !process.env.NODE_ENV.startsWith('test')) {\n             jobsService.addJob({\n                 at: '0 */5 * * * *',\n                 job: path.resolve(__dirname, 'process-outbox.js'),"
+    },
+    "diff:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:11": {
+      "id": "diff:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:11",
+      "kind": "diff",
+      "source": "ghost/core/core/server/services/member-welcome-emails/jobs/index.js:11",
+      "message": "Added line: if (!config.get('memberWelcomeEmailTestInbox')) {"
+    },
+    "diff:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:15": {
+      "id": "diff:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:15",
+      "kind": "diff",
+      "source": "ghost/core/core/server/services/member-welcome-emails/jobs/index.js:15",
+      "message": "Added line: if (hasScheduled.processOutbox && !process.env.NODE_ENV.startsWith('test')) {"
+    },
+    "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:8": {
+      "id": "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:8",
+      "kind": "diff_hunk",
+      "source": "ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:8",
+      "message": "@@ -8,6 +8,7 @@ const ObjectId = require('bson-objectid').default;\n const {NotFoundError} = require('@tryghost/errors');\n const validator = require('@tryghost/validator');\n const crypto = require('crypto');\n+const config = require('../../../../../shared/config');\n \n const messages = {\n     noStripeConnection: 'Cannot {action} without a Stripe Connection',"
+    },
+    "diff:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:11": {
+      "id": "diff:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:11",
+      "kind": "diff",
+      "source": "ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:11",
+      "message": "Added line: const config = require('../../../../../shared/config');"
+    },
+    "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337": {
+      "id": "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337",
+      "kind": "diff_hunk",
+      "source": "ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337",
+      "message": "@@ -336,8 +337,9 @@ module.exports = class MemberRepository {\n         const eventData = _.pick(data, ['created_at']);\n \n         const memberAddOptions = {...(options || {}), withRelated};\n-        let member;\n-        if (this._labsService.isSet('welcomeEmails') && WELCOME_EMAIL_SOURCES.includes(source)) {\n+        var member;\n+        const welcomeEmailConfig = config.get('memberWelcomeEmailTestInbox');\n+        if (welcomeEmailConfig || WELCOME_EMAIL_SOURCES.includes(source)) {\n             const runMemberCreation = async (transacting) => {\n                 const newMember = await this._Member.add({\n                     ...memberData,"
+    },
+    "diff:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:339": {
+      "id": "diff:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:339",
+      "kind": "diff",
+      "source": "ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:339",
+      "message": "Removed line: let member;"
+    },
+    "diff:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340": {
+      "id": "diff:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340",
+      "kind": "diff",
+      "source": "ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340",
+      "message": "Added line: var member;"
+    },
+    "diff:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:341": {
+      "id": "diff:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:341",
+      "kind": "diff",
+      "source": "ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:341",
+      "message": "Added line: const welcomeEmailConfig = config.get('memberWelcomeEmailTestInbox');"
+    },
+    "diff:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:342": {
+      "id": "diff:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:342",
+      "kind": "diff",
+      "source": "ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:342",
+      "message": "Added line: if (welcomeEmailConfig || WELCOME_EMAIL_SOURCES.includes(source)) {"
+    },
+    "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:3": {
+      "id": "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:3",
+      "kind": "diff_hunk",
+      "source": "ghost/core/test/integration/services/member-welcome-emails.test.js:3",
+      "message": "@@ -3,8 +3,7 @@ const testUtils = require('../../utils');\n const models = require('../../../core/server/models');\n const {OUTBOX_STATUSES} = require('../../../core/server/models/outbox');\n const db = require('../../../core/server/data/db');\n-const labs = require('../../../core/shared/labs');\n-const sinon = require('sinon');\n+const configUtils = require('../../utils/configUtils');\n \n describe('Member Welcome Emails Integration', function () {\n     let membersService;"
+    },
+    "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:6": {
+      "id": "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:6",
+      "kind": "diff",
+      "source": "ghost/core/test/integration/services/member-welcome-emails.test.js:6",
+      "message": "Added line: const configUtils = require('../../utils/configUtils');"
+    },
+    "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:7": {
+      "id": "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:7",
+      "kind": "diff",
+      "source": "ghost/core/test/integration/services/member-welcome-emails.test.js:7",
+      "message": "Removed line: const sinon = require('sinon');"
+    },
+    "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:21": {
+      "id": "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:21",
+      "kind": "diff_hunk",
+      "source": "ghost/core/test/integration/services/member-welcome-emails.test.js:21",
+      "message": "@@ -22,12 +21,12 @@ describe('Member Welcome Emails Integration', function () {\n     afterEach(async function () {\n         await db.knex('outbox').del();\n         await db.knex('members').del();\n-        sinon.restore();\n+        await configUtils.restore();\n     });\n \n     describe('Member creation with welcome emails enabled', function () {\n         it('creates outbox entry when member source is \"member\"', async function () {\n-            sinon.stub(labs, 'isSet').withArgs('welcomeEmails').returns(true);\n+            configUtils.set('memberWelcomeEmailTestInbox', 'test-inbox@example.com');\n \n             const member = await membersService.api.members.create({\n                 email: 'welcome-test@example.com',"
+    },
+    "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:25": {
+      "id": "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:25",
+      "kind": "diff",
+      "source": "ghost/core/test/integration/services/member-welcome-emails.test.js:25",
+      "message": "Removed line: sinon.restore();"
+    },
+    "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:24": {
+      "id": "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:24",
+      "kind": "diff",
+      "source": "ghost/core/test/integration/services/member-welcome-emails.test.js:24",
+      "message": "Added line: await configUtils.restore();"
+    },
+    "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:30": {
+      "id": "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:30",
+      "kind": "diff",
+      "source": "ghost/core/test/integration/services/member-welcome-emails.test.js:30",
+      "message": "Removed line: sinon.stub(labs, 'isSet').withArgs('welcomeEmails').returns(true);"
+    },
+    "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:29": {
+      "id": "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:29",
+      "kind": "diff",
+      "source": "ghost/core/test/integration/services/member-welcome-emails.test.js:29",
+      "message": "Added line: configUtils.set('memberWelcomeEmailTestInbox', 'test-inbox@example.com');"
+    },
+    "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:49": {
+      "id": "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:49",
+      "kind": "diff_hunk",
+      "source": "ghost/core/test/integration/services/member-welcome-emails.test.js:49",
+      "message": "@@ -50,9 +49,9 @@ describe('Member Welcome Emails Integration', function () {\n             assert.equal(payload.source, 'member');\n         });\n \n-        it('does NOT create outbox entry when welcome emails feature is disabled', async function () {\n-            sinon.stub(labs, 'isSet').withArgs('welcomeEmails').returns(false);\n-\n+        it('does NOT create outbox entry when config is not set', async function () {\n+            configUtils.set('memberWelcomeEmailTestInbox', '');\n+            \n             await membersService.api.members.create({\n                 email: 'no-welcome@example.com',\n                 name: 'No Welcome Member'"
+    },
+    "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:53": {
+      "id": "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:53",
+      "kind": "diff",
+      "source": "ghost/core/test/integration/services/member-welcome-emails.test.js:53",
+      "message": "Added line: configUtils.set('memberWelcomeEmailTestInbox', '');"
+    },
+    "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:54": {
+      "id": "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:54",
+      "kind": "diff",
+      "source": "ghost/core/test/integration/services/member-welcome-emails.test.js:54",
+      "message": "Added line: "
+    },
+    "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:55": {
+      "id": "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:55",
+      "kind": "diff",
+      "source": "ghost/core/test/integration/services/member-welcome-emails.test.js:55",
+      "message": "Removed line: "
+    },
+    "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:52": {
+      "id": "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:52",
+      "kind": "diff",
+      "source": "ghost/core/test/integration/services/member-welcome-emails.test.js:52",
+      "message": "Added line: it('does NOT create outbox entry when config is not set', async function () {"
+    },
+    "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:65": {
+      "id": "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:65",
+      "kind": "diff_hunk",
+      "source": "ghost/core/test/integration/services/member-welcome-emails.test.js:65",
+      "message": "@@ -66,7 +65,7 @@ describe('Member Welcome Emails Integration', function () {\n         });\n \n         it('does NOT create outbox entry when member is imported', async function () {\n-            sinon.stub(labs, 'isSet').withArgs('welcomeEmails').returns(true);\n+            configUtils.set('memberWelcomeEmailTestInbox', 'test-inbox@example.com');\n \n             await membersService.api.members.create({\n                 email: 'imported@example.com',"
+    },
+    "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:69": {
+      "id": "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:69",
+      "kind": "diff",
+      "source": "ghost/core/test/integration/services/member-welcome-emails.test.js:69",
+      "message": "Removed line: sinon.stub(labs, 'isSet').withArgs('welcomeEmails').returns(true);"
+    },
+    "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:68": {
+      "id": "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:68",
+      "kind": "diff",
+      "source": "ghost/core/test/integration/services/member-welcome-emails.test.js:68",
+      "message": "Added line: configUtils.set('memberWelcomeEmailTestInbox', 'test-inbox@example.com');"
+    },
+    "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:80": {
+      "id": "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:80",
+      "kind": "diff_hunk",
+      "source": "ghost/core/test/integration/services/member-welcome-emails.test.js:80",
+      "message": "@@ -81,7 +80,7 @@ describe('Member Welcome Emails Integration', function () {\n         });\n \n         it('does NOT create outbox entry when member is created by admin', async function () {\n-            sinon.stub(labs, 'isSet').withArgs('welcomeEmails').returns(true);\n+            configUtils.set('memberWelcomeEmailTestInbox', 'test-inbox@example.com');\n \n             await membersService.api.members.create({\n                 email: 'admin-created@example.com',"
+    },
+    "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:84": {
+      "id": "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:84",
+      "kind": "diff",
+      "source": "ghost/core/test/integration/services/member-welcome-emails.test.js:84",
+      "message": "Removed line: sinon.stub(labs, 'isSet').withArgs('welcomeEmails').returns(true);"
+    },
+    "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:83": {
+      "id": "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:83",
+      "kind": "diff",
+      "source": "ghost/core/test/integration/services/member-welcome-emails.test.js:83",
+      "message": "Added line: configUtils.set('memberWelcomeEmailTestInbox', 'test-inbox@example.com');"
+    },
+    "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:95": {
+      "id": "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:95",
+      "kind": "diff_hunk",
+      "source": "ghost/core/test/integration/services/member-welcome-emails.test.js:95",
+      "message": "@@ -96,7 +95,7 @@ describe('Member Welcome Emails Integration', function () {\n         });\n \n         it('creates outbox entry with correct timestamp', async function () {\n-            sinon.stub(labs, 'isSet').withArgs('welcomeEmails').returns(true);\n+            configUtils.set('memberWelcomeEmailTestInbox', 'test-inbox@example.com');\n \n             const beforeCreation = new Date(Date.now() - 1000);\n             "
+    },
+    "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:99": {
+      "id": "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:99",
+      "kind": "diff",
+      "source": "ghost/core/test/integration/services/member-welcome-emails.test.js:99",
+      "message": "Removed line: sinon.stub(labs, 'isSet').withArgs('welcomeEmails').returns(true);"
+    },
+    "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:98": {
+      "id": "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:98",
+      "kind": "diff",
+      "source": "ghost/core/test/integration/services/member-welcome-emails.test.js:98",
+      "message": "Added line: configUtils.set('memberWelcomeEmailTestInbox', 'test-inbox@example.com');"
+    },
+    "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:4": {
+      "id": "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:4",
+      "kind": "diff_hunk",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:4",
+      "message": "@@ -4,6 +4,7 @@ const sinon = require('sinon');\n const DomainEvents = require('@tryghost/domain-events');\n const MemberRepository = require('../../../../../../../core/server/services/members/members-api/repositories/MemberRepository');\n const {SubscriptionCreatedEvent, OfferRedemptionEvent} = require('../../../../../../../core/shared/events');\n+const config = require('../../../../../../../core/shared/config');\n \n const mockOfferRedemption = {\n     add: sinon.stub(),"
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:7": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:7",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:7",
+      "message": "Added line: const config = require('../../../../../../../core/shared/config');"
+    },
+    "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:467": {
+      "id": "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:467",
+      "kind": "diff_hunk",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:467",
+      "message": "@@ -466,7 +467,6 @@ describe('MemberRepository', function () {\n         let Outbox;\n         let MemberStatusEvent;\n         let MemberSubscribeEvent;\n-        let labsService;\n         let newslettersService;\n         const oldNodeEnv = process.env.NODE_ENV;\n "
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:469": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:469",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:469",
+      "message": "Removed line: let labsService;"
+    },
+    "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:527": {
+      "id": "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:527",
+      "kind": "diff_hunk",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:527",
+      "message": "@@ -527,16 +527,13 @@ describe('MemberRepository', function () {\n         });\n \n         it('creates outbox entry for allowed source', async function () {\n-            labsService = {\n-                isSet: sinon.stub().withArgs('welcomeEmails').returns(true)\n-            };\n+            sinon.stub(config, 'get').withArgs('memberWelcomeEmailTestInbox').returns('test-inbox@example.com');\n \n             const repo = new MemberRepository({\n                 Member,\n                 Outbox,\n                 MemberStatusEvent,\n                 MemberSubscribeEventModel: MemberSubscribeEvent,\n-                labsService,\n                 newslettersService,\n                 OfferRedemption: mockOfferRedemption\n             });"
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:530": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:530",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:530",
+      "message": "Added line: sinon.stub(config, 'get').withArgs('memberWelcomeEmailTestInbox').returns('test-inbox@example.com');"
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:531": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:531",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:531",
+      "message": "Removed line: isSet: sinon.stub().withArgs('welcomeEmails').returns(true)"
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:532": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:532",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:532",
+      "message": "Removed line: };"
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:539": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:539",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:539",
+      "message": "Removed line: labsService,"
+    },
+    "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:551": {
+      "id": "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:551",
+      "kind": "diff_hunk",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:551",
+      "message": "@@ -554,17 +551,14 @@ describe('MemberRepository', function () {\n             assert.equal(payload.source, 'member');\n         });\n \n-        it('does NOT create outbox entry when welcomeEmails lab flag is disabled', async function () {\n-            labsService = {\n-                isSet: sinon.stub().withArgs('welcomeEmails').returns(false)\n-            };\n+        it('does NOT create outbox entry when config is not set', async function () {\n+            sinon.stub(config, 'get').withArgs('memberWelcomeEmailTestInbox').returns(undefined);\n \n             const repo = new MemberRepository({\n                 Member,\n                 Outbox,\n                 MemberStatusEvent,\n                 MemberSubscribeEventModel: MemberSubscribeEvent,\n-                labsService,\n                 newslettersService,\n                 OfferRedemption: mockOfferRedemption\n             });"
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:557": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:557",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:557",
+      "message": "Removed line: it('does NOT create outbox entry when welcomeEmails lab flag is disabled', async function () {"
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:558": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:558",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:558",
+      "message": "Removed line: labsService = {"
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:559": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:559",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:559",
+      "message": "Removed line: isSet: sinon.stub().withArgs('welcomeEmails').returns(false)"
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:560": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:560",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:560",
+      "message": "Removed line: };"
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:554": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:554",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:554",
+      "message": "Added line: it('does NOT create outbox entry when config is not set', async function () {"
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:555": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:555",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:555",
+      "message": "Added line: sinon.stub(config, 'get').withArgs('memberWelcomeEmailTestInbox').returns(undefined);"
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:567": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:567",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:567",
+      "message": "Removed line: labsService,"
+    },
+    "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:569": {
+      "id": "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:569",
+      "kind": "diff_hunk",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:569",
+      "message": "@@ -575,16 +569,13 @@ describe('MemberRepository', function () {\n         });\n \n         it('does not create outbox entry for disallowed sources', async function () {\n-            labsService = {\n-                isSet: sinon.stub().withArgs('welcomeEmails').returns(true)\n-            };\n+            sinon.stub(config, 'get').withArgs('memberWelcomeEmailTestInbox').returns('test-inbox@example.com');\n \n             const repo = new MemberRepository({\n                 Member,\n                 Outbox,\n                 MemberStatusEvent,\n                 MemberSubscribeEventModel: MemberSubscribeEvent,\n-                labsService,\n                 newslettersService,\n                 OfferRedemption: mockOfferRedemption\n             });"
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:578": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:578",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:578",
+      "message": "Removed line: labsService = {"
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:579": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:579",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:579",
+      "message": "Removed line: isSet: sinon.stub().withArgs('welcomeEmails').returns(true)"
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:580": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:580",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:580",
+      "message": "Removed line: };"
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:572": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:572",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:572",
+      "message": "Added line: sinon.stub(config, 'get').withArgs('memberWelcomeEmailTestInbox').returns('test-inbox@example.com');"
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:587": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:587",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:587",
+      "message": "Removed line: labsService,"
+    },
+    "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:594": {
+      "id": "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:594",
+      "kind": "diff_hunk",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:594",
+      "message": "@@ -603,16 +594,13 @@ describe('MemberRepository', function () {\n         });\n \n         it('includes timestamp in outbox payload', async function () {\n-            labsService = {\n-                isSet: sinon.stub().withArgs('welcomeEmails').returns(true)\n-            };\n+            sinon.stub(config, 'get').withArgs('memberWelcomeEmailTestInbox').returns('test-inbox@example.com');\n \n             const repo = new MemberRepository({\n                 Member,\n                 Outbox,\n                 MemberStatusEvent,\n                 MemberSubscribeEventModel: MemberSubscribeEvent,\n-                labsService,\n                 newslettersService,\n                 OfferRedemption: mockOfferRedemption\n             });"
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:606": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:606",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:606",
+      "message": "Removed line: labsService = {"
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:607": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:607",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:607",
+      "message": "Removed line: isSet: sinon.stub().withArgs('welcomeEmails').returns(true)"
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:608": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:608",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:608",
+      "message": "Removed line: };"
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:597": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:597",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:597",
+      "message": "Added line: sinon.stub(config, 'get').withArgs('memberWelcomeEmailTestInbox').returns('test-inbox@example.com');"
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:615": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:615",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:615",
+      "message": "Removed line: labsService,"
+    },
+    "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:613": {
+      "id": "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:613",
+      "kind": "diff_hunk",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:613",
+      "message": "@@ -625,16 +613,13 @@ describe('MemberRepository', function () {\n         });\n \n         it('passes transaction to outbox entry creation', async function () {\n-            labsService = {\n-                isSet: sinon.stub().withArgs('welcomeEmails').returns(true)\n-            };\n+            sinon.stub(config, 'get').withArgs('memberWelcomeEmailTestInbox').returns('test-inbox@example.com');\n \n             const repo = new MemberRepository({\n                 Member,\n                 Outbox,\n                 MemberStatusEvent,\n                 MemberSubscribeEventModel: MemberSubscribeEvent,\n-                labsService,\n                 newslettersService,\n                 OfferRedemption: mockOfferRedemption\n             });"
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:628": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:628",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:628",
+      "message": "Removed line: labsService = {"
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:629": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:629",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:629",
+      "message": "Removed line: isSet: sinon.stub().withArgs('welcomeEmails').returns(true)"
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:630": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:630",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:630",
+      "message": "Removed line: };"
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:616": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:616",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:616",
+      "message": "Added line: sinon.stub(config, 'get').withArgs('memberWelcomeEmailTestInbox').returns('test-inbox@example.com');"
+    },
+    "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:637": {
+      "id": "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:637",
+      "kind": "diff",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:637",
+      "message": "Removed line: labsService,"
+    },
+    "entity:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:ghost.core.core.server.services.member-welcome-emails.jobs.index": {
+      "id": "entity:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:ghost.core.core.server.services.member-welcome-emails.jobs.index",
+      "kind": "entity",
+      "source": "ghost/core/core/server/services/member-welcome-emails/jobs/index.js:3-3",
+      "message": "Changed module ghost.core.core.server.services.member-welcome-emails.jobs.index touched by 2 hunk(s)."
+    },
+    "entity:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:ghost.core.core.server.services.members.members-api.repositories.MemberRepository": {
+      "id": "entity:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:ghost.core.core.server.services.members.members-api.repositories.MemberRepository",
+      "kind": "entity",
+      "source": "ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:11-11",
+      "message": "Changed module ghost.core.core.server.services.members.members-api.repositories.MemberRepository touched by 2 hunk(s)."
+    },
+    "entity:ghost/core/test/integration/services/member-welcome-emails.test.js:ghost.core.test.integration.services.member-welcome-emails.test": {
+      "id": "entity:ghost/core/test/integration/services/member-welcome-emails.test.js:ghost.core.test.integration.services.member-welcome-emails.test",
+      "kind": "entity",
+      "source": "ghost/core/test/integration/services/member-welcome-emails.test.js:6-7",
+      "message": "Changed module ghost.core.test.integration.services.member-welcome-emails.test touched by 6 hunk(s)."
+    },
+    "entity:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:ghost.core.test.unit.server.services.members.members-api.repositories.MemberRepository.test": {
+      "id": "entity:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:ghost.core.test.unit.server.services.members.members-api.repositories.MemberRepository.test",
+      "kind": "entity",
+      "source": "ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:7-7",
+      "message": "Changed module ghost.core.test.unit.server.services.members.members-api.repositories.MemberRepository.test touched by 7 hunk(s)."
+    },
+    "risk:security_sensitive:ghost/core/core/server/services/member-welcome-emails/jobs/index.js": {
+      "id": "risk:security_sensitive:ghost/core/core/server/services/member-welcome-emails/jobs/index.js",
+      "kind": "risk",
+      "source": "security_sensitive",
+      "message": "Security-sensitive keywords changed in ghost/core/core/server/services/member-welcome-emails/jobs/index.js."
+    },
+    "risk:security_sensitive:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js": {
+      "id": "risk:security_sensitive:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js",
+      "kind": "risk",
+      "source": "security_sensitive",
+      "message": "Security-sensitive keywords changed in ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js."
+    },
+    "risk:security_sensitive:ghost/core/test/integration/services/member-welcome-emails.test.js": {
+      "id": "risk:security_sensitive:ghost/core/test/integration/services/member-welcome-emails.test.js",
+      "kind": "risk",
+      "source": "security_sensitive",
+      "message": "Security-sensitive keywords changed in ghost/core/test/integration/services/member-welcome-emails.test.js."
+    },
+    "risk:security_sensitive:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js": {
+      "id": "risk:security_sensitive:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js",
+      "kind": "risk",
+      "source": "security_sensitive",
+      "message": "Security-sensitive keywords changed in ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js."
+    }
+  },
+  "missing_evidence_ids": [],
+  "agent_runs": [
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+      "input_evidence_ids": [
+        "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:1",
+        "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8",
+        "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337",
+        "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:8",
+        "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:21",
+        "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:3",
+        "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:4",
+        "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:467",
+        "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:527"
+      ],
+      "output_issue_ids": [
+        "logic_error:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:15",
+        "code_style:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 1,
+      "retry_log": [
+        "attempt=1 error=timeout delay=1.00s"
+      ],
+      "latency_ms": 64386,
+      "token_count_in": 9044,
+      "token_count_out": 326,
+      "trace_id": "84b3b077b0bc40cb9c4db689f980163b",
+      "span_id": "6d7f326397e64b9f",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001",
+      "shard_index": 0,
+      "shard_count": 1,
+      "context_request_count": 0,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+      "model": null,
+      "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+      "input_evidence_ids": [
+        "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8",
+        "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337"
+      ],
+      "output_issue_ids": [
+        "logic_error:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:15",
+        "code_style:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 0,
+      "token_count_in": 0,
+      "token_count_out": 0,
+      "trace_id": "",
+      "span_id": "",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "",
+      "shard_index": 0,
+      "shard_count": 0,
+      "context_request_count": 0,
+      "context_refill_used": false
+    }
+  ],
+  "prompt_exports": {},
+  "context_budget": {
+    "enabled": true,
+    "strategy": "risk_first_v1",
+    "context_profile": "risk_compact_manifest_v1",
+    "max_input_tokens": 9000,
+    "estimated_input_tokens": 8481,
+    "selected_evidence_count": 9,
+    "omitted_evidence_count": 68,
+    "selected_evidence_ids": [
+      "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:1",
+      "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8",
+      "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337",
+      "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:8",
+      "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:21",
+      "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:3",
+      "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:4",
+      "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:467",
+      "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:527"
+    ],
+    "omitted_evidence_ids": [
+      "diff:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:11",
+      "diff:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:15",
+      "diff:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:3",
+      "diff:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:11",
+      "diff:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:339",
+      "diff:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340",
+      "diff:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:341",
+      "diff:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:342",
+      "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:24",
+      "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:25",
+      "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:29",
+      "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:30",
+      "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:52",
+      "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:53",
+      "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:54",
+      "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:55",
+      "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:6",
+      "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:68",
+      "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:69",
+      "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:7",
+      "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:83",
+      "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:84",
+      "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:98",
+      "diff:ghost/core/test/integration/services/member-welcome-emails.test.js:99",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:469",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:530",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:531",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:532",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:539",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:554",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:555",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:557",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:558",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:559",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:560",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:567",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:572",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:578",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:579",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:580",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:587",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:597",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:606",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:607",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:608",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:615",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:616",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:628",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:629",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:630",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:637",
+      "diff:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:7",
+      "risk:security_sensitive:ghost/core/core/server/services/member-welcome-emails/jobs/index.js",
+      "risk:security_sensitive:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js",
+      "risk:security_sensitive:ghost/core/test/integration/services/member-welcome-emails.test.js",
+      "risk:security_sensitive:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js",
+      "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:49",
+      "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:65",
+      "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:80",
+      "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:95",
+      "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:551",
+      "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:569",
+      "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:594",
+      "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:613",
+      "entity:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:ghost.core.core.server.services.member-welcome-emails.jobs.index",
+      "entity:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:ghost.core.core.server.services.members.members-api.repositories.MemberRepository",
+      "entity:ghost/core/test/integration/services/member-welcome-emails.test.js:ghost.core.test.integration.services.member-welcome-emails.test",
+      "entity:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:ghost.core.test.unit.server.services.members.members-api.repositories.MemberRepository.test"
+    ],
+    "selected_risk_signal_count": 4,
+    "context_truncated": true,
+    "shard_count": 1,
+    "refill_count": 0,
+    "context_request_count": 0,
+    "context_requests": [],
+    "shards": [
+      {
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 9,
+        "omitted_evidence_count": 68,
+        "estimated_input_tokens": 8481,
+        "context_truncated": true
+      }
+    ],
+    "warnings": []
+  },
+  "loop": {
+    "enabled": true,
+    "max_iter": 1,
+    "iterations_completed": 1,
+    "converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "checkpoint_path": "D:\\learn\\code-review-agent\\workspace\\qodo_pr_review_bench_live_guidelines\\samples\\qodo_005\\review\\loop_checkpoint.json",
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "iterations": [
+      {
+        "i": 0,
+        "candidate_issue_count": 2,
+        "verified_count": 2,
+        "needs_human_review_count": 0,
+        "discarded_count": 0,
+        "keep_count": 2,
+        "uncertain_count": 0,
+        "reject_count": 0,
+        "feedback_sent": [],
+        "agent_runs": [
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+            "input_evidence_ids": [
+              "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:1",
+              "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8",
+              "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337",
+              "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:8",
+              "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:21",
+              "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:3",
+              "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:4",
+              "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:467",
+              "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:527"
+            ],
+            "output_issue_ids": [
+              "logic_error:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:15",
+              "code_style:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 1,
+            "retry_log": [
+              "attempt=1 error=timeout delay=1.00s"
+            ],
+            "latency_ms": 64386,
+            "token_count_in": 9044,
+            "token_count_out": 326,
+            "trace_id": "84b3b077b0bc40cb9c4db689f980163b",
+            "span_id": "6d7f326397e64b9f",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001",
+            "shard_index": 0,
+            "shard_count": 1,
+            "context_request_count": 0,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+            "model": null,
+            "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+            "input_evidence_ids": [
+              "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8",
+              "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337"
+            ],
+            "output_issue_ids": [
+              "logic_error:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:15",
+              "code_style:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 0,
+            "token_count_in": 0,
+            "token_count_out": 0,
+            "trace_id": "",
+            "span_id": "",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "",
+            "shard_index": 0,
+            "shard_count": 0,
+            "context_request_count": 0,
+            "context_refill_used": false
+          }
+        ],
+        "issue_set": [
+          "code_style:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340",
+          "logic_error:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:15"
+        ],
+        "keep": [
+          {
+            "file": "ghost/core/core/server/services/member-welcome-emails/jobs/index.js",
+            "line": 15,
+            "severity": "high",
+            "category": "logic_error",
+            "message": "Negated condition on hasScheduled.processOutbox was removed, causing the job to be scheduled only when already true, which prevents the job from ever being added.",
+            "suggestion": "Restore the negation: change `if (hasScheduled.processOutbox && ...)` back to `if (!hasScheduled.processOutbox && ...)`.",
+            "confidence": 0.95,
+            "evidence_ids": [
+              "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8"
+            ]
+          },
+          {
+            "file": "ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js",
+            "line": 340,
+            "severity": "medium",
+            "category": "code_style",
+            "message": "Variable declaration changed from `let` to `var` for `member`, violating the guideline 'Code Must Use let or const Instead of var'.",
+            "suggestion": "Use `let member;` instead of `var member;`.",
+            "confidence": 1.0,
+            "evidence_ids": [
+              "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337"
+            ]
+          }
+        ],
+        "needs_human_review": [],
+        "discarded": []
+      }
+    ]
+  },
+  "tracing": {
+    "total_latency_ms": 64386,
+    "total_token_count_in": 9044,
+    "total_token_count_out": 326,
+    "total_retry_count": 1,
+    "run_count": 2,
+    "status_counts": {
+      "ok": 2
+    }
+  }
+}

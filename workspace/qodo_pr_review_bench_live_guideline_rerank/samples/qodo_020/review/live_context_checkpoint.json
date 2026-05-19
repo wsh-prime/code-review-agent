@@ -1,0 +1,167 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:e03ce6f860d07c530c2c7774e6a00c94ab9121d7a73c0280ea29c5e4f85b348b",
+  "diff_hash": "sha256:93c9400ce3bb5b9193d17e39aa9be43adf850214144a2d0b650615dc094af20c",
+  "shards": {
+    "67ecba52d530cac7033f57bf8da432581a3c23132ad683679eb2b5e3ca4739d0": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/OpenApi/gen/XmlCommentGenerator.Emitter.cs:1",
+        "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/OperationTests.Controllers.cs:96",
+        "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/AddOpenApiTests.CanInterceptAddOpenApi#OpenApiXmlCommentSupport.generated.verified.cs:426",
+        "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/AdditionalTextsTests.CanHandleXmlForSchemasInAdditionalTexts#OpenApiXmlCommentSupport.generated.verified.cs:455"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "src/OpenApi/gen/XmlCommentGenerator.Emitter.cs",
+          "line": 1,
+          "severity": "error",
+          "category": "license",
+          "message": "The MIT license header has been removed from the file, violating the repository rule: 'All C# Source Files Must Include MIT License Header'.",
+          "suggestion": "Restore the two-line MIT license header at the top of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/OpenApi/gen/XmlCommentGenerator.Emitter.cs:1"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:src/OpenApi/gen/XmlCommentGenerator.Emitter.cs:1",
+          "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/OperationTests.Controllers.cs:96",
+          "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/AddOpenApiTests.CanInterceptAddOpenApi#OpenApiXmlCommentSupport.generated.verified.cs:426",
+          "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/AdditionalTextsTests.CanHandleXmlForSchemasInAdditionalTexts#OpenApiXmlCommentSupport.generated.verified.cs:455"
+        ],
+        "output_issue_ids": [
+          "license:src/OpenApi/gen/XmlCommentGenerator.Emitter.cs:1"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 1439,
+        "token_count_in": 7074,
+        "token_count_out": 181,
+        "trace_id": "94c3048bb43f47aa819c9db41a5164e9",
+        "span_id": "97ed4042df484560",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 3,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "ad66d6a874aebddc9aefadb6d275d3695bf6d44eef9ec12d8c1c55167e711834": {
+      "status": "completed",
+      "shard_id": "shard-002",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/CompletenessTests.SupportsAllXmlTagsOnSchemas#OpenApiXmlCommentSupport.generated.verified.cs:553",
+        "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsRouteParametersFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:1",
+        "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsXmlCommentsOnOperationsFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:430"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsRouteParametersFromControllers#OpenApiXmlCommentSupport.generated.verified.cs",
+          "line": 1,
+          "severity": "medium",
+          "category": "guideline",
+          "message": "New file violates 'All C# Source Files Must Include MIT License Header' rule: the file starts with an auto-generated header and lacks the required MIT license header.",
+          "suggestion": "Add the MIT license header comment at the top of the file before the auto-generated header.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsRouteParametersFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:1"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/CompletenessTests.SupportsAllXmlTagsOnSchemas#OpenApiXmlCommentSupport.generated.verified.cs:553",
+          "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsRouteParametersFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:1",
+          "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsXmlCommentsOnOperationsFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:430"
+        ],
+        "output_issue_ids": [
+          "guideline:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsRouteParametersFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:1"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 2083,
+        "token_count_in": 8982,
+        "token_count_out": 214,
+        "trace_id": "b95a606c17b0429fa3b7b4101ce70a23",
+        "span_id": "10e5f87a57b94e99",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "shard_count": 3,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "23f966b0a400621f31a8fcbaa49e1cb89b6cc66cfa10755c601cb96bd97fe86d": {
+      "status": "completed",
+      "shard_id": "shard-003",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsXmlCommentsOnOperationsFromMinimalApis#OpenApiXmlCommentSupport.generated.verified.cs:474",
+        "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/SchemaTests.SupportsXmlCommentsOnSchemas#OpenApiXmlCommentSupport.generated.verified.cs:456",
+        "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/SchemaTests.XmlCommentsOnPropertiesShouldApplyToSchemaReferences#OpenApiXmlCommentSupport.generated.verified.cs:435",
+        "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/XmlCommentDocumentationIdTests.CanMergeXmlCommentsWithDifferentDocumentationIdFormats#OpenApiXmlCommentSupport.generated.verified.cs:427"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsXmlCommentsOnOperationsFromMinimalApis#OpenApiXmlCommentSupport.generated.verified.cs:474",
+          "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/SchemaTests.SupportsXmlCommentsOnSchemas#OpenApiXmlCommentSupport.generated.verified.cs:456",
+          "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/SchemaTests.XmlCommentsOnPropertiesShouldApplyToSchemaReferences#OpenApiXmlCommentSupport.generated.verified.cs:435",
+          "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/XmlCommentDocumentationIdTests.CanMergeXmlCommentsWithDifferentDocumentationIdFormats#OpenApiXmlCommentSupport.generated.verified.cs:427"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 614,
+        "token_count_in": 7130,
+        "token_count_out": 12,
+        "trace_id": "2986e25107a74c9fbf54f3be19a301dd",
+        "span_id": "776abb37959b4311",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-003",
+        "shard_index": 2,
+        "shard_count": 3,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

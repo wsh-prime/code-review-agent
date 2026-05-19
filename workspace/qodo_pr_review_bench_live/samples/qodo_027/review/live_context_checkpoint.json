@@ -1,0 +1,678 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:d9033da383d8a47ef751aad760ea6b2114f69d333c6b8344968fdac305ff7d85",
+  "diff_hash": "sha256:65e482a2a677bc15fa65d8370916c7a44400e2bc57334fc91767f4d99a96b6b7",
+  "shards": {
+    "80dae14a7dee0527ecc7f7fdd0c521edab10c5e64ad56337d4ca5998e6bbff80": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:companion/app/(tabs)/(availability)/availability-detail.tsx:88",
+        "diff_hunk:companion/app/(tabs)/(bookings)/index.ios.tsx:62",
+        "diff_hunk:companion/app/(tabs)/(bookings)/index.tsx:62",
+        "diff_hunk:companion/app/(tabs)/(event-types)/event-type-detail.tsx:177"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:companion/app/(tabs)/(availability)/availability-detail.tsx:88",
+          "diff_hunk:companion/app/(tabs)/(bookings)/index.ios.tsx:62",
+          "diff_hunk:companion/app/(tabs)/(bookings)/index.tsx:62",
+          "diff_hunk:companion/app/(tabs)/(event-types)/event-type-detail.tsx:177"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 1740,
+        "token_count_in": 4290,
+        "token_count_out": 12,
+        "trace_id": "5090737f9d22412fbe1e33057ebe9f3b",
+        "span_id": "44034a47da284f6c",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 6,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "5153405a5a3d565b4a232ccbd1cfc18acddc7faf45ffff84a94ef62eb55bcc16": {
+      "status": "completed",
+      "shard_id": "shard-002",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:1",
+        "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:37",
+        "diff_hunk:companion/app/profile-sheet.ios.tsx:147",
+        "diff_hunk:companion/app/profile-sheet.tsx:124"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "companion/app/(tabs)/(event-types)/index.ios.tsx",
+          "evidence_ids": [
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:111",
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:124",
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:232"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-002",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "companion/app/(tabs)/(event-types)/index.tsx",
+          "evidence_ids": [
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:133",
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:146",
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:285"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-002",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [
+        {
+          "file": "companion/app/(tabs)/(event-types)/index.ios.tsx",
+          "line": 1,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Removing import of `ContextMenu` and `fixedSize` modifier may break functionality if these are used elsewhere in the file.",
+          "suggestion": "Verify that `ContextMenu` and `fixedSize` are not used in the remaining code; if they are, keep the imports.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:1"
+          ]
+        },
+        {
+          "file": "companion/app/(tabs)/(event-types)/index.tsx",
+          "line": 37,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Removing import of `CalComAPIService` may break functionality if it is used elsewhere in the file.",
+          "suggestion": "Ensure that `CalComAPIService` is not used in the remaining code; if it is, keep the import.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:37"
+          ]
+        },
+        {
+          "file": "companion/app/profile-sheet.ios.tsx",
+          "line": 150,
+          "severity": "low",
+          "category": "visual",
+          "message": "Removing `border-b border-gray-200` class removes the bottom border from the profile header, which may affect visual consistency.",
+          "suggestion": "If the border was intentional for visual separation, consider keeping it or adding an alternative styling.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/app/profile-sheet.ios.tsx:147"
+          ]
+        },
+        {
+          "file": "companion/app/profile-sheet.tsx",
+          "line": 127,
+          "severity": "low",
+          "category": "visual",
+          "message": "Removing `border-b border-gray-200` class removes the bottom border from the profile header, which may affect visual consistency.",
+          "suggestion": "If the border was intentional for visual separation, consider keeping it or adding an alternative styling.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/app/profile-sheet.tsx:124"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:1",
+          "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:37",
+          "diff_hunk:companion/app/profile-sheet.ios.tsx:147",
+          "diff_hunk:companion/app/profile-sheet.tsx:124"
+        ],
+        "output_issue_ids": [
+          "correctness:companion/app/(tabs)/(event-types)/index.ios.tsx:1",
+          "correctness:companion/app/(tabs)/(event-types)/index.tsx:37",
+          "visual:companion/app/profile-sheet.ios.tsx:150",
+          "visual:companion/app/profile-sheet.tsx:127"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 69210,
+        "token_count_in": 4007,
+        "token_count_out": 768,
+        "trace_id": "d282ca0814bd4acebe74d7d2a6923619",
+        "span_id": "6d29da7440244235",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "shard_count": 6,
+        "context_request_count": 2,
+        "context_refill_used": false
+      }
+    },
+    "5b9a1fc8de02b5471a77709fedf75018d4993f63f5540c25cbb0cc9eefbb91b2": {
+      "status": "completed",
+      "shard_id": "shard-002-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-002",
+      "selected_evidence_ids": [
+        "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:111",
+        "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:124",
+        "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:232",
+        "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:133",
+        "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:146",
+        "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:285"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "companion/app/(tabs)/(event-types)/index.ios.tsx",
+          "line": 111,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Removed async link building and replaced with direct use of eventType.bookingUrl without verifying that the URL is valid or that the event type is properly configured.",
+          "suggestion": "Consider validating the bookingUrl format (e.g., starts with http/https) before using it, or fall back to building the link if the URL is missing.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:111"
+          ]
+        },
+        {
+          "file": "companion/app/(tabs)/(event-types)/index.ios.tsx",
+          "line": 124,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Removed async link building and replaced with direct use of eventType.bookingUrl without verifying that the URL is valid or that the event type is properly configured.",
+          "suggestion": "Consider validating the bookingUrl format (e.g., starts with http/https) before using it, or fall back to building the link if the URL is missing.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:124"
+          ]
+        },
+        {
+          "file": "companion/app/(tabs)/(event-types)/index.ios.tsx",
+          "line": 232,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Removed async link building and replaced with direct use of eventType.bookingUrl without verifying that the URL is valid or that the event type is properly configured.",
+          "suggestion": "Consider validating the bookingUrl format (e.g., starts with http/https) before using it, or fall back to building the link if the URL is missing.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:232"
+          ]
+        },
+        {
+          "file": "companion/app/(tabs)/(event-types)/index.tsx",
+          "line": 133,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Removed async link building and replaced with direct use of eventType.bookingUrl without verifying that the URL is valid or that the event type is properly configured.",
+          "suggestion": "Consider validating the bookingUrl format (e.g., starts with http/https) before using it, or fall back to building the link if the URL is missing.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:133"
+          ]
+        },
+        {
+          "file": "companion/app/(tabs)/(event-types)/index.tsx",
+          "line": 146,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Removed async link building and replaced with direct use of eventType.bookingUrl without verifying that the URL is valid or that the event type is properly configured.",
+          "suggestion": "Consider validating the bookingUrl format (e.g., starts with http/https) before using it, or fall back to building the link if the URL is missing.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:146"
+          ]
+        },
+        {
+          "file": "companion/app/(tabs)/(event-types)/index.tsx",
+          "line": 285,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Removed async link building and replaced with direct use of eventType.bookingUrl without verifying that the URL is valid or that the event type is properly configured.",
+          "suggestion": "Consider validating the bookingUrl format (e.g., starts with http/https) before using it, or fall back to building the link if the URL is missing.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:285"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:111",
+          "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:124",
+          "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:232",
+          "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:133",
+          "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:146",
+          "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:285"
+        ],
+        "output_issue_ids": [
+          "correctness:companion/app/(tabs)/(event-types)/index.ios.tsx:111",
+          "correctness:companion/app/(tabs)/(event-types)/index.ios.tsx:124",
+          "correctness:companion/app/(tabs)/(event-types)/index.ios.tsx:232",
+          "correctness:companion/app/(tabs)/(event-types)/index.tsx:133",
+          "correctness:companion/app/(tabs)/(event-types)/index.tsx:146",
+          "correctness:companion/app/(tabs)/(event-types)/index.tsx:285"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 116456,
+        "token_count_in": 3022,
+        "token_count_out": 970,
+        "trace_id": "20d9b99c5b884839b141dc426b404122",
+        "span_id": "7e14eb6cd30241a8",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002-refill",
+        "shard_index": 1,
+        "shard_count": 6,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    },
+    "1e65af9ef26bba406ef28efac74d57da25b608fed1392174a1f6eb0ffaa1462a": {
+      "status": "completed",
+      "shard_id": "shard-003",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:companion/components/Header.tsx:103",
+        "diff_hunk:companion/components/event-type-detail/tabs/AdvancedTab.tsx:138",
+        "diff_hunk:companion/components/event-type-detail/tabs/BasicsTab.tsx:37",
+        "diff_hunk:companion/components/event-type-detail/tabs/LimitsTab.tsx:124"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:companion/components/Header.tsx:103",
+          "diff_hunk:companion/components/event-type-detail/tabs/AdvancedTab.tsx:138",
+          "diff_hunk:companion/components/event-type-detail/tabs/BasicsTab.tsx:37",
+          "diff_hunk:companion/components/event-type-detail/tabs/LimitsTab.tsx:124"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 913,
+        "token_count_in": 4049,
+        "token_count_out": 12,
+        "trace_id": "0b933daff3414ea49c6db90b65884ae8",
+        "span_id": "bb1ad5b1c82d4c8f",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-003",
+        "shard_index": 2,
+        "shard_count": 6,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "1e931bde9fe67799e55f4fdc3e5a4523c8a77b3baf9069b80995c58859a81cf4": {
+      "status": "completed",
+      "shard_id": "shard-004",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:companion/components/event-type-detail/tabs/RecurringTab.tsx:89",
+        "diff_hunk:companion/components/event-type-list-item/EventTypeListItem.ios.tsx:100",
+        "diff_hunk:companion/components/event-type-list-item/EventTypeListItem.tsx:51",
+        "diff_hunk:companion/components/event-type-list-item/EventTypeListItemParts.tsx:4"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:companion/components/event-type-detail/tabs/RecurringTab.tsx:89",
+          "diff_hunk:companion/components/event-type-list-item/EventTypeListItem.ios.tsx:100",
+          "diff_hunk:companion/components/event-type-list-item/EventTypeListItem.tsx:51",
+          "diff_hunk:companion/components/event-type-list-item/EventTypeListItemParts.tsx:4"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 1045,
+        "token_count_in": 4189,
+        "token_count_out": 12,
+        "trace_id": "8b1a2700a3184812b84bf40e3f0b4766",
+        "span_id": "d1f1e637f91148fe",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-004",
+        "shard_index": 3,
+        "shard_count": 6,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "0fc8b97f801c41321de5740144c3b5ad26511f8e5a824a744aa132447b235940": {
+      "status": "completed",
+      "shard_id": "shard-005",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:companion/extension/entrypoints/background/index.ts:278",
+        "diff_hunk:companion/extension/entrypoints/content.ts:833",
+        "diff_hunk:companion/extension/lib/linkedin.ts:115",
+        "diff_hunk:companion/services/calcom.ts:318"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": null,
+          "evidence_ids": [
+            "diff_hunk:companion/extension/entrypoints/content.ts:1078",
+            "diff_hunk:companion/extension/entrypoints/content.ts:1122",
+            "diff_hunk:companion/extension/entrypoints/content.ts:1291",
+            "diff_hunk:companion/extension/entrypoints/content.ts:1319",
+            "diff_hunk:companion/extension/entrypoints/content.ts:1582",
+            "diff_hunk:companion/extension/entrypoints/content.ts:1624",
+            "diff_hunk:companion/extension/entrypoints/content.ts:1640",
+            "diff_hunk:companion/extension/entrypoints/content.ts:1826",
+            "diff_hunk:companion/extension/entrypoints/content.ts:1868",
+            "diff_hunk:companion/extension/entrypoints/content.ts:2036",
+            "diff_hunk:companion/extension/entrypoints/content.ts:875",
+            "diff_hunk:companion/extension/entrypoints/content.ts:891"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The patch adds a bookingUrl field to event types in content.ts and linkedin.ts, and removes buildEventTypeLink from calcom.ts. To assess whether the removal of buildEventTypeLink is safe and whether bookingUrl is properly used, I need to see how bookingUrl is populated and consumed in content.ts hunks.",
+          "source_shard_id": "shard-005",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": null,
+          "evidence_ids": [
+            "diff_hunk:companion/services/calcom.ts:1651",
+            "diff_hunk:companion/services/calcom.ts:1671"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The removal of buildEventTypeLink and getUsername from calcom.ts may affect other parts of the file. I need to see the surrounding context to verify that no remaining code depends on these functions.",
+          "source_shard_id": "shard-005",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:companion/extension/entrypoints/background/index.ts:278",
+          "diff_hunk:companion/extension/entrypoints/content.ts:833",
+          "diff_hunk:companion/extension/lib/linkedin.ts:115",
+          "diff_hunk:companion/services/calcom.ts:318"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 7730,
+        "token_count_in": 3613,
+        "token_count_out": 417,
+        "trace_id": "989041095ec34ed69ac04459d2f9f192",
+        "span_id": "4e641bd17b104973",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-005",
+        "shard_index": 4,
+        "shard_count": 6,
+        "context_request_count": 2,
+        "context_refill_used": false
+      }
+    },
+    "3873d9f2de047e5481aec64652c14636dbba797da9dd137252f39a45fc5cfe18": {
+      "status": "completed",
+      "shard_id": "shard-005-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-005",
+      "selected_evidence_ids": [
+        "diff_hunk:companion/extension/entrypoints/content.ts:1078",
+        "diff_hunk:companion/extension/entrypoints/content.ts:1122",
+        "diff_hunk:companion/extension/entrypoints/content.ts:1291",
+        "diff_hunk:companion/extension/entrypoints/content.ts:1319",
+        "diff_hunk:companion/extension/entrypoints/content.ts:1582",
+        "diff_hunk:companion/extension/entrypoints/content.ts:1624",
+        "diff_hunk:companion/extension/entrypoints/content.ts:1640",
+        "diff_hunk:companion/extension/entrypoints/content.ts:1826",
+        "diff_hunk:companion/services/calcom.ts:1651",
+        "diff_hunk:companion/services/calcom.ts:1671"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "companion/extension/entrypoints/content.ts",
+          "line": 1082,
+          "severity": "medium",
+          "category": "potential_bug",
+          "message": "Using eventType.bookingUrl directly without validation may allow an attacker-controlled URL to be opened via window.open, leading to an open redirect or phishing risk.",
+          "suggestion": "Validate that bookingUrl is a trusted, same-origin URL (e.g., starts with 'https://cal.com/') before using it in window.open.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/extension/entrypoints/content.ts:1078",
+            "diff_hunk:companion/extension/entrypoints/content.ts:1826"
+          ]
+        },
+        {
+          "file": "companion/extension/entrypoints/content.ts",
+          "line": 1295,
+          "severity": "medium",
+          "category": "potential_bug",
+          "message": "Using eventType.bookingUrl directly without validation may allow an attacker-controlled URL to be inserted into the compose field or copied to clipboard, enabling phishing or data exfiltration.",
+          "suggestion": "Validate that bookingUrl is a trusted, same-origin URL (e.g., starts with 'https://cal.com/') before inserting or copying it.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/extension/entrypoints/content.ts:1291",
+            "diff_hunk:companion/extension/entrypoints/content.ts:1319"
+          ]
+        },
+        {
+          "file": "companion/services/calcom.ts",
+          "line": 1654,
+          "severity": "low",
+          "category": "maintainability",
+          "message": "The new getUsername helper is added but buildEventTypeLink is removed. If buildEventTypeLink was used elsewhere, this removal may break callers.",
+          "suggestion": "Ensure that all callers of buildEventTypeLink have been migrated to the new bookingUrl-based approach before removing the function.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/services/calcom.ts:1671"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:companion/extension/entrypoints/content.ts:1078",
+          "diff_hunk:companion/extension/entrypoints/content.ts:1122",
+          "diff_hunk:companion/extension/entrypoints/content.ts:1291",
+          "diff_hunk:companion/extension/entrypoints/content.ts:1319",
+          "diff_hunk:companion/extension/entrypoints/content.ts:1582",
+          "diff_hunk:companion/extension/entrypoints/content.ts:1624",
+          "diff_hunk:companion/extension/entrypoints/content.ts:1640",
+          "diff_hunk:companion/extension/entrypoints/content.ts:1826",
+          "diff_hunk:companion/services/calcom.ts:1651",
+          "diff_hunk:companion/services/calcom.ts:1671"
+        ],
+        "output_issue_ids": [
+          "potential_bug:companion/extension/entrypoints/content.ts:1082",
+          "potential_bug:companion/extension/entrypoints/content.ts:1295",
+          "maintainability:companion/services/calcom.ts:1654"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 30787,
+        "token_count_in": 3270,
+        "token_count_out": 503,
+        "trace_id": "076bd8ed04064091be238604afb4b982",
+        "span_id": "69e85240e2b84e48",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-005-refill",
+        "shard_index": 4,
+        "shard_count": 6,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    },
+    "3294b804cb722bd9793343ee9633f288070bd7f9561f97e083ef432ba820465c": {
+      "status": "completed",
+      "shard_id": "shard-006",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:companion/services/types/event-types.types.ts:278"
+      ],
+      "context_requests": [
+        {
+          "request_type": "related_symbol",
+          "path": null,
+          "evidence_ids": [
+            "entity:companion/services/types/event-types.types.ts:companion.services.types.event-types.types"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The patch adds a new optional field 'bookingUrl' to the EventType interface. To assess if this field is properly consumed or validated elsewhere, I need to see how EventType is used in the codebase.",
+          "source_shard_id": "shard-006",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:companion/services/types/event-types.types.ts:278"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 23027,
+        "token_count_in": 1314,
+        "token_count_out": 106,
+        "trace_id": "2926846c127a4936bc22e1f1984d932d",
+        "span_id": "f9aa6697bc75405f",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-006",
+        "shard_index": 5,
+        "shard_count": 6,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "75c1145a7a876b161154047841dbb42a82e71b84faf805c4125c80b2e889adff": {
+      "status": "completed",
+      "shard_id": "shard-006-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-006",
+      "selected_evidence_ids": [
+        "entity:companion/services/types/event-types.types.ts:companion.services.types.event-types.types"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": null,
+          "evidence_ids": [],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The primary evidence only shows the module entity; the actual diff hunks and changed lines are missing, making it impossible to assess the patch's impact.",
+          "source_shard_id": "shard-006-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "entity:companion/services/types/event-types.types.ts:companion.services.types.event-types.types"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 30766,
+        "token_count_in": 1069,
+        "token_count_out": 68,
+        "trace_id": "cc07a141209845c0b632b8a492c1835a",
+        "span_id": "8dd167ea0dc24d00",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-006-refill",
+        "shard_index": 5,
+        "shard_count": 6,
+        "context_request_count": 1,
+        "context_refill_used": true
+      }
+    }
+  }
+}

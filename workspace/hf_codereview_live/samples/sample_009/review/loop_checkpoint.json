@@ -1,0 +1,138 @@
+{
+  "schema_version": "1.0",
+  "run_id": "6f17ff8f552e47e9853e1a3636ca7b3f",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": true,
+  "package_hash": "sha256:e1940fe1411e8f472d5b3eabbeae7fb8542172302cf94f1e8bacbf21ad35ba20",
+  "diff_hash": "sha256:f2ecfba58d53cda22afa726b17d33704155bc83dd23d749f5737098d84dee8b2",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 1,
+      "verified_count": 1,
+      "needs_human_review_count": 0,
+      "discarded_count": 0,
+      "keep_count": 1,
+      "uncertain_count": 0,
+      "reject_count": 0,
+      "feedback_sent": [],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff_hunk:scripts/clean_benchmarks.py:11"
+          ],
+          "output_issue_ids": [
+            "correctness:scripts/clean_benchmarks.py:19"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 1,
+          "retry_log": [
+            "attempt=1 error=timeout delay=1.00s"
+          ],
+          "latency_ms": 66697,
+          "token_count_in": 1457,
+          "token_count_out": 252,
+          "trace_id": "2d1ba2115a0b40a3b747be88c94723f0",
+          "span_id": "91007c22df464a40",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 1,
+          "context_request_count": 2,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff:scripts/clean_benchmarks.py:19",
+            "diff_hunk:scripts/clean_benchmarks.py:11",
+            "entity:scripts/clean_benchmarks.py:main"
+          ],
+          "output_issue_ids": [
+            "correctness:scripts/clean_benchmarks.py:19"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 2728,
+          "token_count_in": 1465,
+          "token_count_out": 165,
+          "trace_id": "0b3042b888f44447943ee1df5dd48ee3",
+          "span_id": "44436d6dbe2d48c7",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001-refill",
+          "shard_index": 0,
+          "shard_count": 1,
+          "context_request_count": 0,
+          "context_refill_used": true
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [
+            "diff:scripts/clean_benchmarks.py:19",
+            "diff_hunk:scripts/clean_benchmarks.py:11"
+          ],
+          "output_issue_ids": [
+            "correctness:scripts/clean_benchmarks.py:19"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [
+        "correctness:scripts/clean_benchmarks.py:19"
+      ],
+      "keep": [
+        {
+          "file": "scripts/clean_benchmarks.py",
+          "line": 19,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "The patch adds 'prompt' to the skip list but the directory may contain other files or directories that are not meant to be deleted, potentially causing unintended data loss.",
+          "suggestion": "Verify that skipping 'prompt' is correct and that no other files/directories should be excluded. Consider adding a more explicit allowlist or confirmation step.",
+          "confidence": 0.65,
+          "evidence_ids": [
+            "diff:scripts/clean_benchmarks.py:19",
+            "diff_hunk:scripts/clean_benchmarks.py:11"
+          ]
+        }
+      ],
+      "needs_human_review": [],
+      "discarded": []
+    }
+  ],
+  "last_feedback": null
+}

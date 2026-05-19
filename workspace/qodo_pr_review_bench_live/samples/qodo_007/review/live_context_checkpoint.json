@@ -1,0 +1,49 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:0ebd06ed1a5ff5d4d4419b4dca757cfb61a31897971f9e7b346a2fe676de7b83",
+  "diff_hash": "sha256:c547fa4c29e15ff96389a4eecdf0ae71146851fdb7bd6f7bd0887b7b7f12472b",
+  "shards": {
+    "7040e6d7037cd913622d7994817feca03fe827149b23dae476f65eec37029e56": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/i18n/locales/zh/comments.json:1",
+        "diff_hunk:ghost/i18n/locales/zh/ghost.json:3",
+        "diff_hunk:ghost/i18n/locales/zh/portal.json:6"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/i18n/locales/zh/comments.json:1",
+          "diff_hunk:ghost/i18n/locales/zh/ghost.json:3",
+          "diff_hunk:ghost/i18n/locales/zh/portal.json:6"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 2845,
+        "token_count_in": 4598,
+        "token_count_out": 12,
+        "trace_id": "5375631c078c41ef859d8a9c30daa2d2",
+        "span_id": "656b61edec914ebe",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

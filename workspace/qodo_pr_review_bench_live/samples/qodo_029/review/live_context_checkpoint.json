@@ -1,0 +1,266 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:2c8c16a5f04edba9cfd2a59aed01d9c4203c65d3058e4c0c098014dc3b862533",
+  "diff_hash": "sha256:085d9c709ea02d89f19cbf99baad3855f454e465533cccb52f801c120a542a58",
+  "shards": {
+    "859af141eed8e4f153365669e0d814fb1a1f67d1451eddcf85210897da6ce309": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:4",
+        "diff_hunk:packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts:392",
+        "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:112",
+        "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:21"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts",
+          "evidence_ids": [
+            "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:57"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "Need to see the implementation of getGenericCalendarSuffixes to verify it correctly maps provider to suffixes.",
+          "source_shard_id": "shard-001",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts",
+          "evidence_ids": [
+            "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:391",
+            "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:423",
+            "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:455",
+            "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:487"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "Need to see test cases that exercise the new genericCalendarSuffixes filtering logic to ensure coverage of the exclusion behavior.",
+          "source_shard_id": "shard-001",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:4",
+          "diff_hunk:packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts:392",
+          "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:112",
+          "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:21"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 10518,
+        "token_count_in": 4519,
+        "token_count_out": 304,
+        "trace_id": "ec5bb475d3df43b5a400e008d6dbf391",
+        "span_id": "419532fa79924b2c",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 2,
+        "context_request_count": 2,
+        "context_refill_used": false
+      }
+    },
+    "a12300d7c95be90c00e146efd7d232f5d29b5c7246241d54a10d90ffce916db0": {
+      "status": "completed",
+      "shard_id": "shard-001-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-001",
+      "selected_evidence_ids": [
+        "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:57",
+        "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:391",
+        "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:423",
+        "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:455",
+        "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:487"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": null,
+          "evidence_ids": [
+            "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:4"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-001-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:57",
+          "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:391",
+          "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:423",
+          "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:455",
+          "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:487"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 64042,
+        "token_count_in": 2652,
+        "token_count_out": 84,
+        "trace_id": "75397617f429451483d3014f1c9da1d4",
+        "span_id": "173c3e6b3c63444d",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "shard_count": 2,
+        "context_request_count": 1,
+        "context_refill_used": true
+      }
+    },
+    "4551b3976d48f849437870ed79c035fea81765e75542f5297a18c5ff4f788f77": {
+      "status": "completed",
+      "shard_id": "shard-002",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:131",
+        "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:2"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts",
+          "evidence_ids": [
+            "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:19",
+            "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:38"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "To understand the production code changes that correspond to the test assertion adding `AND: undefined`.",
+          "source_shard_id": "shard-002",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [
+        {
+          "file": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts",
+          "line": 137,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Test adds `AND: undefined` to the expected query object, but the corresponding production code change that would produce this output is not visible in the provided evidence. This could indicate a test that does not match actual behavior or a missing production change.",
+          "suggestion": "Verify that the production code in SelectedCalendarRepository.ts actually generates an `AND: undefined` clause in the Prisma query, or remove the assertion if it is not needed.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:131"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:131",
+          "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:2"
+        ],
+        "output_issue_ids": [
+          "correctness:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.test.ts:137"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 63021,
+        "token_count_in": 2857,
+        "token_count_out": 315,
+        "trace_id": "013b257a57a14e8fabd7211e375c609b",
+        "span_id": "a960fa797d3347b5",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "shard_count": 2,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "00acbaff61d369cd3038c100be4e1309e6edd321ad802109a82102830af23122": {
+      "status": "completed",
+      "shard_id": "shard-002-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-002",
+      "selected_evidence_ids": [
+        "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:19",
+        "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:38"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts",
+          "line": 43,
+          "severity": "high",
+          "category": "potential_bug",
+          "message": "The new filter uses `AND` with `NOT: { externalId: { endsWith: suffix } }` to exclude calendars whose externalId ends with any of the provided suffixes. However, if `genericCalendarSuffixes` is an empty array, the condition becomes `AND: []`, which in Prisma/PostgreSQL may cause the query to return no results (empty AND is always false) instead of being ignored. This would break the existing behavior of returning all matching calendars when no suffixes are provided.",
+          "suggestion": "Change the condition to only apply the AND filter when `genericCalendarSuffixes` is non-empty, and omit it entirely otherwise. For example: `...(genericCalendarSuffixes && genericCalendarSuffixes.length > 0 ? { AND: genericCalendarSuffixes.map(suffix => ({ NOT: { externalId: { endsWith: suffix } } })) } : {})`",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:38"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:19",
+          "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:38"
+        ],
+        "output_issue_ids": [
+          "potential_bug:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:43"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 2394,
+        "token_count_in": 1402,
+        "token_count_out": 300,
+        "trace_id": "d8d4605e28a9478ea7afd1127ae91048",
+        "span_id": "277d034692c64576",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002-refill",
+        "shard_index": 1,
+        "shard_count": 2,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    }
+  }
+}

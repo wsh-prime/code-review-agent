@@ -1,0 +1,13 @@
+--- a/gpt_engineer/db.py
++++ b/gpt_engineer/db.py
+@@ -18,9 +18,9 @@
+ # dataclass for all dbs:
+ @dataclass
+ class DBs:
+     memory: DB
+     logs: DB
+     preprompts: DB
+     input: DB
+     workspace: DB
+-    archive: Optional[DB]
++    archive: DB

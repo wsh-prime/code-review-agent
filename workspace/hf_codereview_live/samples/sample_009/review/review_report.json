@@ -1,0 +1,547 @@
+{
+  "schema_version": "1.3",
+  "summary": {
+    "mode": "hybrid-live",
+    "changed_file_count": 1,
+    "changed_entity_count": 1,
+    "risk_signal_count": 1,
+    "finding_count": 1,
+    "needs_human_review_count": 0,
+    "discarded_count": 0,
+    "evidence_count": 4,
+    "missing_evidence_id_count": 0,
+    "agent_run_count": 3,
+    "prompt_exported": false,
+    "loop_enabled": true,
+    "loop_iterations_completed": 1,
+    "loop_converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "total_latency_ms": 69425,
+    "total_token_count_in": 2922,
+    "total_token_count_out": 417,
+    "context_budget_enabled": true,
+    "context_truncated": true,
+    "selected_evidence_count": 3,
+    "omitted_evidence_count": 1,
+    "review_shard_count": 1,
+    "context_refill_count": 1,
+    "context_request_count": 2,
+    "target_repo_modified": false
+  },
+  "findings": [
+    {
+      "file": "scripts/clean_benchmarks.py",
+      "line": 19,
+      "severity": "medium",
+      "category": "correctness",
+      "message": "The patch adds 'prompt' to the skip list but the directory may contain other files or directories that are not meant to be deleted, potentially causing unintended data loss.",
+      "suggestion": "Verify that skipping 'prompt' is correct and that no other files/directories should be excluded. Consider adding a more explicit allowlist or confirmation step.",
+      "confidence": 0.65,
+      "evidence_ids": [
+        "diff:scripts/clean_benchmarks.py:19",
+        "diff_hunk:scripts/clean_benchmarks.py:11"
+      ]
+    }
+  ],
+  "needs_human_review": [],
+  "discarded": [],
+  "changed_files": [
+    {
+      "old_path": "scripts/clean_benchmarks.py",
+      "new_path": "scripts/clean_benchmarks.py",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 11,
+          "old_count": 17,
+          "new_start": 11,
+          "new_count": 17,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "context",
+              "old_lineno": 11,
+              "new_lineno": 11,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 12,
+              "new_lineno": 12,
+              "content": "def main():"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 13,
+              "new_lineno": 13,
+              "content": "    benchmarks = Path(\"benchmark\")"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 14,
+              "new_lineno": 14,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 15,
+              "new_lineno": 15,
+              "content": "    for benchmark in benchmarks.iterdir():"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 16,
+              "new_lineno": 16,
+              "content": "        if benchmark.is_dir():"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 17,
+              "new_lineno": 17,
+              "content": "            print(f\"Cleaning {benchmark}\")"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 18,
+              "new_lineno": 18,
+              "content": "            for path in benchmark.iterdir():"
+            },
+            {
+              "line_type": "removed",
+              "old_lineno": 19,
+              "new_lineno": null,
+              "content": "                if path.name == \"main_prompt\":"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 19,
+              "content": "                if path.name in [\"prompt\", \"main_prompt\"]:"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 20,
+              "new_lineno": 20,
+              "content": "                    continue"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 21,
+              "new_lineno": 21,
+              "content": ""
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 22,
+              "new_lineno": 22,
+              "content": "                # Get filename of Path object"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 23,
+              "new_lineno": 23,
+              "content": "                if path.is_dir():"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 24,
+              "new_lineno": 24,
+              "content": "                    # delete the entire directory"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 25,
+              "new_lineno": 25,
+              "content": "                    shutil.rmtree(path)"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 26,
+              "new_lineno": 26,
+              "content": "                else:"
+            },
+            {
+              "line_type": "context",
+              "old_lineno": 27,
+              "new_lineno": 27,
+              "content": "                    # delete the file"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "changed_entities": [
+    {
+      "path": "scripts/clean_benchmarks.py",
+      "entity_type": "function",
+      "name": "main",
+      "qualified_name": "main",
+      "line_start": 12,
+      "line_end": 28,
+      "hunk_ids": [
+        "scripts/clean_benchmarks.py:11"
+      ]
+    }
+  ],
+  "risk_signals": [
+    {
+      "tag": "behavior_change",
+      "confidence": 0.72,
+      "reason": "Executable logic changed inside main.",
+      "evidence_ids": [
+        "entity:scripts/clean_benchmarks.py:main",
+        "diff:scripts/clean_benchmarks.py:19"
+      ]
+    }
+  ],
+  "evidence_index": {
+    "diff_hunk:scripts/clean_benchmarks.py:11": {
+      "id": "diff_hunk:scripts/clean_benchmarks.py:11",
+      "kind": "diff_hunk",
+      "source": "scripts/clean_benchmarks.py:11",
+      "message": "@@ -11,17 +11,17 @@\n \n def main():\n     benchmarks = Path(\"benchmark\")\n \n     for benchmark in benchmarks.iterdir():\n         if benchmark.is_dir():\n             print(f\"Cleaning {benchmark}\")\n             for path in benchmark.iterdir():\n-                if path.name == \"main_prompt\":\n+                if path.name in [\"prompt\", \"main_prompt\"]:\n                     continue\n \n                 # Get filename of Path object\n                 if path.is_dir():\n                     # delete the entire directory\n                     shutil.rmtree(path)\n                 else:\n                     # delete the file"
+    },
+    "diff:scripts/clean_benchmarks.py:19": {
+      "id": "diff:scripts/clean_benchmarks.py:19",
+      "kind": "diff",
+      "source": "scripts/clean_benchmarks.py:19",
+      "message": "Added line: if path.name in [\"prompt\", \"main_prompt\"]:"
+    },
+    "entity:scripts/clean_benchmarks.py:main": {
+      "id": "entity:scripts/clean_benchmarks.py:main",
+      "kind": "entity",
+      "source": "scripts/clean_benchmarks.py:12-28",
+      "message": "Changed function main touched by 1 hunk(s)."
+    },
+    "risk:behavior_change:scripts/clean_benchmarks.py": {
+      "id": "risk:behavior_change:scripts/clean_benchmarks.py",
+      "kind": "risk",
+      "source": "behavior_change",
+      "message": "Executable logic changed inside main."
+    }
+  },
+  "missing_evidence_ids": [],
+  "agent_runs": [
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+      "input_evidence_ids": [
+        "diff_hunk:scripts/clean_benchmarks.py:11"
+      ],
+      "output_issue_ids": [
+        "correctness:scripts/clean_benchmarks.py:19"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 1,
+      "retry_log": [
+        "attempt=1 error=timeout delay=1.00s"
+      ],
+      "latency_ms": 66697,
+      "token_count_in": 1457,
+      "token_count_out": 252,
+      "trace_id": "2d1ba2115a0b40a3b747be88c94723f0",
+      "span_id": "91007c22df464a40",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001",
+      "shard_index": 0,
+      "shard_count": 1,
+      "context_request_count": 2,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+      "input_evidence_ids": [
+        "diff:scripts/clean_benchmarks.py:19",
+        "diff_hunk:scripts/clean_benchmarks.py:11",
+        "entity:scripts/clean_benchmarks.py:main"
+      ],
+      "output_issue_ids": [
+        "correctness:scripts/clean_benchmarks.py:19"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 2728,
+      "token_count_in": 1465,
+      "token_count_out": 165,
+      "trace_id": "0b3042b888f44447943ee1df5dd48ee3",
+      "span_id": "44436d6dbe2d48c7",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001-refill",
+      "shard_index": 0,
+      "shard_count": 1,
+      "context_request_count": 0,
+      "context_refill_used": true
+    },
+    {
+      "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+      "model": null,
+      "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+      "input_evidence_ids": [
+        "diff:scripts/clean_benchmarks.py:19",
+        "diff_hunk:scripts/clean_benchmarks.py:11"
+      ],
+      "output_issue_ids": [
+        "correctness:scripts/clean_benchmarks.py:19"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 0,
+      "token_count_in": 0,
+      "token_count_out": 0,
+      "trace_id": "",
+      "span_id": "",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "",
+      "shard_index": 0,
+      "shard_count": 0,
+      "context_request_count": 0,
+      "context_refill_used": false
+    }
+  ],
+  "prompt_exports": {},
+  "context_budget": {
+    "enabled": true,
+    "strategy": "file_risk_shards_v1",
+    "context_profile": "risk_compact_manifest_v1",
+    "max_input_tokens": 9000,
+    "estimated_input_tokens": 1512,
+    "selected_evidence_count": 3,
+    "omitted_evidence_count": 1,
+    "selected_evidence_ids": [
+      "diff_hunk:scripts/clean_benchmarks.py:11",
+      "diff:scripts/clean_benchmarks.py:19",
+      "entity:scripts/clean_benchmarks.py:main"
+    ],
+    "omitted_evidence_ids": [
+      "risk:behavior_change:scripts/clean_benchmarks.py"
+    ],
+    "selected_risk_signal_count": 1,
+    "context_truncated": true,
+    "shard_count": 1,
+    "refill_count": 1,
+    "context_request_count": 2,
+    "context_requests": [
+      {
+        "request_type": "same_file_more_evidence",
+        "path": "scripts/clean_benchmarks.py",
+        "evidence_ids": [
+          "diff:scripts/clean_benchmarks.py:19"
+        ],
+        "risk_tag": null,
+        "symbol": null,
+        "reason": "",
+        "source_shard_id": "shard-001",
+        "fulfilled_evidence_ids": [
+          "diff:scripts/clean_benchmarks.py:19",
+          "diff_hunk:scripts/clean_benchmarks.py:11"
+        ]
+      },
+      {
+        "request_type": "risk_evidence",
+        "path": null,
+        "evidence_ids": [
+          "entity:scripts/clean_benchmarks.py:main"
+        ],
+        "risk_tag": "behavior_change",
+        "symbol": null,
+        "reason": "",
+        "source_shard_id": "shard-001",
+        "fulfilled_evidence_ids": [
+          "entity:scripts/clean_benchmarks.py:main"
+        ]
+      }
+    ],
+    "shards": [
+      {
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 1,
+        "omitted_evidence_count": 3,
+        "estimated_input_tokens": 762,
+        "context_truncated": true
+      },
+      {
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "is_refill": true,
+        "parent_shard_id": "shard-001",
+        "selected_evidence_count": 3,
+        "omitted_evidence_count": 0,
+        "estimated_input_tokens": 750,
+        "context_truncated": false
+      }
+    ],
+    "warnings": []
+  },
+  "loop": {
+    "enabled": true,
+    "max_iter": 1,
+    "iterations_completed": 1,
+    "converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "checkpoint_path": "D:\\learn\\code-review-agent\\workspace\\hf_codereview_live\\samples\\sample_009\\review\\loop_checkpoint.json",
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "iterations": [
+      {
+        "i": 0,
+        "candidate_issue_count": 1,
+        "verified_count": 1,
+        "needs_human_review_count": 0,
+        "discarded_count": 0,
+        "keep_count": 1,
+        "uncertain_count": 0,
+        "reject_count": 0,
+        "feedback_sent": [],
+        "agent_runs": [
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+            "input_evidence_ids": [
+              "diff_hunk:scripts/clean_benchmarks.py:11"
+            ],
+            "output_issue_ids": [
+              "correctness:scripts/clean_benchmarks.py:19"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 1,
+            "retry_log": [
+              "attempt=1 error=timeout delay=1.00s"
+            ],
+            "latency_ms": 66697,
+            "token_count_in": 1457,
+            "token_count_out": 252,
+            "trace_id": "2d1ba2115a0b40a3b747be88c94723f0",
+            "span_id": "91007c22df464a40",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001",
+            "shard_index": 0,
+            "shard_count": 1,
+            "context_request_count": 2,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+            "input_evidence_ids": [
+              "diff:scripts/clean_benchmarks.py:19",
+              "diff_hunk:scripts/clean_benchmarks.py:11",
+              "entity:scripts/clean_benchmarks.py:main"
+            ],
+            "output_issue_ids": [
+              "correctness:scripts/clean_benchmarks.py:19"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 2728,
+            "token_count_in": 1465,
+            "token_count_out": 165,
+            "trace_id": "0b3042b888f44447943ee1df5dd48ee3",
+            "span_id": "44436d6dbe2d48c7",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001-refill",
+            "shard_index": 0,
+            "shard_count": 1,
+            "context_request_count": 0,
+            "context_refill_used": true
+          },
+          {
+            "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+            "model": null,
+            "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+            "input_evidence_ids": [
+              "diff:scripts/clean_benchmarks.py:19",
+              "diff_hunk:scripts/clean_benchmarks.py:11"
+            ],
+            "output_issue_ids": [
+              "correctness:scripts/clean_benchmarks.py:19"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 0,
+            "token_count_in": 0,
+            "token_count_out": 0,
+            "trace_id": "",
+            "span_id": "",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "",
+            "shard_index": 0,
+            "shard_count": 0,
+            "context_request_count": 0,
+            "context_refill_used": false
+          }
+        ],
+        "issue_set": [
+          "correctness:scripts/clean_benchmarks.py:19"
+        ],
+        "keep": [
+          {
+            "file": "scripts/clean_benchmarks.py",
+            "line": 19,
+            "severity": "medium",
+            "category": "correctness",
+            "message": "The patch adds 'prompt' to the skip list but the directory may contain other files or directories that are not meant to be deleted, potentially causing unintended data loss.",
+            "suggestion": "Verify that skipping 'prompt' is correct and that no other files/directories should be excluded. Consider adding a more explicit allowlist or confirmation step.",
+            "confidence": 0.65,
+            "evidence_ids": [
+              "diff:scripts/clean_benchmarks.py:19",
+              "diff_hunk:scripts/clean_benchmarks.py:11"
+            ]
+          }
+        ],
+        "needs_human_review": [],
+        "discarded": []
+      }
+    ]
+  },
+  "tracing": {
+    "total_latency_ms": 69425,
+    "total_token_count_in": 2922,
+    "total_token_count_out": 417,
+    "total_retry_count": 1,
+    "run_count": 3,
+    "status_counts": {
+      "ok": 3
+    }
+  }
+}

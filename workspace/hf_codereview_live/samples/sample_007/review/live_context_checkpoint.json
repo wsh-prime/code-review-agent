@@ -1,0 +1,45 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:046dd154827910110ca7c56b479522c938255c3ac09662cf999f2a128ca60a38",
+  "diff_hash": "sha256:5f94fb07f8a9ab6d643e7f5fde1561d485944cc6c77d32329aba25ccbbf408a7",
+  "shards": {
+    "84f30c41beda6053bb5fbf75aaf46f9210ab29b28ea3385372cb6de71192c7fa": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:gpt_engineer/steps.py:18"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:gpt_engineer/steps.py:18"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 31764,
+        "token_count_in": 1452,
+        "token_count_out": 12,
+        "trace_id": "17d274f37cb849c5abb0ae5195e2e7df",
+        "span_id": "5cb00562515f4d60",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

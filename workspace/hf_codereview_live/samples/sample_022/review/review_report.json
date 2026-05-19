@@ -1,0 +1,811 @@
+{
+  "schema_version": "1.3",
+  "summary": {
+    "mode": "hybrid-live",
+    "changed_file_count": 1,
+    "changed_entity_count": 2,
+    "risk_signal_count": 1,
+    "finding_count": 1,
+    "needs_human_review_count": 0,
+    "discarded_count": 0,
+    "evidence_count": 40,
+    "missing_evidence_id_count": 0,
+    "agent_run_count": 2,
+    "prompt_exported": false,
+    "loop_enabled": true,
+    "loop_iterations_completed": 1,
+    "loop_converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "total_latency_ms": 117842,
+    "total_token_count_in": 2175,
+    "total_token_count_out": 235,
+    "context_budget_enabled": true,
+    "context_truncated": true,
+    "selected_evidence_count": 1,
+    "omitted_evidence_count": 39,
+    "review_shard_count": 1,
+    "context_refill_count": 0,
+    "context_request_count": 0,
+    "target_repo_modified": false
+  },
+  "findings": [
+    {
+      "file": "tests/test_collect.py",
+      "line": 13,
+      "severity": "medium",
+      "category": "test_quality",
+      "message": "The test `test_collect_learnings` does not assert that `collect_learnings` actually calls `rudder_analytics.track` with the expected arguments; it only checks call count and event name/properties after calling `extract_learning`. If `collect_learnings` fails silently or does not call `track`, the test may still pass if `extract_learning` triggers a separate track call.",
+      "suggestion": "Add an assertion that `rudder_analytics.track` is called exactly once with the expected arguments during `collect_learnings`, or restructure the test to verify the behavior of `collect_learnings` independently of `extract_learning`.",
+      "confidence": 0.7,
+      "evidence_ids": [
+        "diff_hunk:tests/test_collect.py:1"
+      ]
+    }
+  ],
+  "needs_human_review": [],
+  "discarded": [],
+  "changed_files": [
+    {
+      "old_path": "tests/test_collect.py",
+      "new_path": "tests/test_collect.py",
+      "change_type": "modified",
+      "hunks": [
+        {
+          "old_start": 0,
+          "old_count": 0,
+          "new_start": 1,
+          "new_count": 36,
+          "section_header": "",
+          "lines": [
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 1,
+              "content": "import os"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 2,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 3,
+              "content": "from unittest.mock import MagicMock"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 4,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 5,
+              "content": "import pytest"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 6,
+              "content": "import rudderstack.analytics as rudder_analytics"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 7,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 8,
+              "content": "from gpt_engineer.collect import collect_learnings, extract_learning"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 9,
+              "content": "from gpt_engineer.db import DB, DBs"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 10,
+              "content": "from gpt_engineer.steps import gen_code"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 11,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 12,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 13,
+              "content": "def test_collect_learnings(monkeypatch):"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 14,
+              "content": "    monkeypatch.setattr(os, \"environ\", {\"COLLECT_LEARNINGS_OPT_OUT\": \"false\"})"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 15,
+              "content": "    monkeypatch.setattr(rudder_analytics, \"track\", MagicMock())"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 16,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 17,
+              "content": "    model = \"test_model\""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 18,
+              "content": "    temperature = 0.5"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 19,
+              "content": "    steps = [gen_code]"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 20,
+              "content": "    dbs = DBs(DB(\"/tmp\"), DB(\"/tmp\"), DB(\"/tmp\"), DB(\"/tmp\"), DB(\"/tmp\"))"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 21,
+              "content": "    dbs.input = {"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 22,
+              "content": "        \"prompt\": \"test prompt\\n with newlines\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 23,
+              "content": "        \"feedback\": \"test feedback\","
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 24,
+              "content": "    }"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 25,
+              "content": "    dbs.logs = {gen_code.__name__: \"test logs\"}"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 26,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 27,
+              "content": "    collect_learnings(model, temperature, steps, dbs)"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 28,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 29,
+              "content": "    learnings = extract_learning(model, temperature, steps, dbs)"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 30,
+              "content": "    assert rudder_analytics.track.call_count == 1"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 31,
+              "content": "    assert rudder_analytics.track.call_args[1][\"event\"] == \"learning\""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 32,
+              "content": "    assert rudder_analytics.track.call_args[1][\"properties\"] == learnings.to_dict()"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 33,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 34,
+              "content": ""
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 35,
+              "content": "if __name__ == \"__main__\":"
+            },
+            {
+              "line_type": "added",
+              "old_lineno": null,
+              "new_lineno": 36,
+              "content": "    pytest.main([\"-v\"])"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "changed_entities": [
+    {
+      "path": "tests/test_collect.py",
+      "entity_type": "module",
+      "name": "test_collect.py",
+      "qualified_name": "tests.test_collect",
+      "line_start": 1,
+      "line_end": 36,
+      "hunk_ids": [
+        "tests/test_collect.py:1"
+      ]
+    },
+    {
+      "path": "tests/test_collect.py",
+      "entity_type": "function",
+      "name": "test_collect_learnings",
+      "qualified_name": "test_collect_learnings",
+      "line_start": 13,
+      "line_end": 32,
+      "hunk_ids": [
+        "tests/test_collect.py:1"
+      ]
+    }
+  ],
+  "risk_signals": [
+    {
+      "tag": "api_change",
+      "confidence": 0.82,
+      "reason": "Public function or class signature changed in tests/test_collect.py.",
+      "evidence_ids": [
+        "diff:tests/test_collect.py:13"
+      ]
+    }
+  ],
+  "evidence_index": {
+    "diff_hunk:tests/test_collect.py:1": {
+      "id": "diff_hunk:tests/test_collect.py:1",
+      "kind": "diff_hunk",
+      "source": "tests/test_collect.py:1",
+      "message": "@@ -0,0 +1,36 @@\n+import os\n+\n+from unittest.mock import MagicMock\n+\n+import pytest\n+import rudderstack.analytics as rudder_analytics\n+\n+from gpt_engineer.collect import collect_learnings, extract_learning\n+from gpt_engineer.db import DB, DBs\n+from gpt_engineer.steps import gen_code\n+\n+\n+def test_collect_learnings(monkeypatch):\n+    monkeypatch.setattr(os, \"environ\", {\"COLLECT_LEARNINGS_OPT_OUT\": \"false\"})\n+    monkeypatch.setattr(rudder_analytics, \"track\", MagicMock())\n+\n+    model = \"test_model\"\n+    temperature = 0.5\n+    steps = [gen_code]\n+    dbs = DBs(DB(\"/tmp\"), DB(\"/tmp\"), DB(\"/tmp\"), DB(\"/tmp\"), DB(\"/tmp\"))\n+    dbs.input = {\n+        \"prompt\": \"test prompt\\n with newlines\",\n+        \"feedback\": \"test feedback\",\n+    }\n+    dbs.logs = {gen_code.__name__: \"test logs\"}\n+\n+    collect_learnings(model, temperature, steps, dbs)\n+\n+    learnings = extract_learning(model, temperature, steps, dbs)\n+    assert rudder_analytics.track.call_count == 1\n+    assert rudder_analytics.track.call_args[1][\"event\"] == \"learning\"\n+    assert rudder_analytics.track.call_args[1][\"properties\"] == learnings.to_dict()\n+\n+\n+if __name__ == \"__main__\":\n+    pytest.main([\"-v\"])"
+    },
+    "diff:tests/test_collect.py:1": {
+      "id": "diff:tests/test_collect.py:1",
+      "kind": "diff",
+      "source": "tests/test_collect.py:1",
+      "message": "Added line: import os"
+    },
+    "diff:tests/test_collect.py:2": {
+      "id": "diff:tests/test_collect.py:2",
+      "kind": "diff",
+      "source": "tests/test_collect.py:2",
+      "message": "Added line: "
+    },
+    "diff:tests/test_collect.py:3": {
+      "id": "diff:tests/test_collect.py:3",
+      "kind": "diff",
+      "source": "tests/test_collect.py:3",
+      "message": "Added line: from unittest.mock import MagicMock"
+    },
+    "diff:tests/test_collect.py:4": {
+      "id": "diff:tests/test_collect.py:4",
+      "kind": "diff",
+      "source": "tests/test_collect.py:4",
+      "message": "Added line: "
+    },
+    "diff:tests/test_collect.py:5": {
+      "id": "diff:tests/test_collect.py:5",
+      "kind": "diff",
+      "source": "tests/test_collect.py:5",
+      "message": "Added line: import pytest"
+    },
+    "diff:tests/test_collect.py:6": {
+      "id": "diff:tests/test_collect.py:6",
+      "kind": "diff",
+      "source": "tests/test_collect.py:6",
+      "message": "Added line: import rudderstack.analytics as rudder_analytics"
+    },
+    "diff:tests/test_collect.py:7": {
+      "id": "diff:tests/test_collect.py:7",
+      "kind": "diff",
+      "source": "tests/test_collect.py:7",
+      "message": "Added line: "
+    },
+    "diff:tests/test_collect.py:8": {
+      "id": "diff:tests/test_collect.py:8",
+      "kind": "diff",
+      "source": "tests/test_collect.py:8",
+      "message": "Added line: from gpt_engineer.collect import collect_learnings, extract_learning"
+    },
+    "diff:tests/test_collect.py:9": {
+      "id": "diff:tests/test_collect.py:9",
+      "kind": "diff",
+      "source": "tests/test_collect.py:9",
+      "message": "Added line: from gpt_engineer.db import DB, DBs"
+    },
+    "diff:tests/test_collect.py:10": {
+      "id": "diff:tests/test_collect.py:10",
+      "kind": "diff",
+      "source": "tests/test_collect.py:10",
+      "message": "Added line: from gpt_engineer.steps import gen_code"
+    },
+    "diff:tests/test_collect.py:11": {
+      "id": "diff:tests/test_collect.py:11",
+      "kind": "diff",
+      "source": "tests/test_collect.py:11",
+      "message": "Added line: "
+    },
+    "diff:tests/test_collect.py:12": {
+      "id": "diff:tests/test_collect.py:12",
+      "kind": "diff",
+      "source": "tests/test_collect.py:12",
+      "message": "Added line: "
+    },
+    "diff:tests/test_collect.py:13": {
+      "id": "diff:tests/test_collect.py:13",
+      "kind": "diff",
+      "source": "tests/test_collect.py:13",
+      "message": "Added line: def test_collect_learnings(monkeypatch):"
+    },
+    "diff:tests/test_collect.py:14": {
+      "id": "diff:tests/test_collect.py:14",
+      "kind": "diff",
+      "source": "tests/test_collect.py:14",
+      "message": "Added line: monkeypatch.setattr(os, \"environ\", {\"COLLECT_LEARNINGS_OPT_OUT\": \"false\"})"
+    },
+    "diff:tests/test_collect.py:15": {
+      "id": "diff:tests/test_collect.py:15",
+      "kind": "diff",
+      "source": "tests/test_collect.py:15",
+      "message": "Added line: monkeypatch.setattr(rudder_analytics, \"track\", MagicMock())"
+    },
+    "diff:tests/test_collect.py:16": {
+      "id": "diff:tests/test_collect.py:16",
+      "kind": "diff",
+      "source": "tests/test_collect.py:16",
+      "message": "Added line: "
+    },
+    "diff:tests/test_collect.py:17": {
+      "id": "diff:tests/test_collect.py:17",
+      "kind": "diff",
+      "source": "tests/test_collect.py:17",
+      "message": "Added line: model = \"test_model\""
+    },
+    "diff:tests/test_collect.py:18": {
+      "id": "diff:tests/test_collect.py:18",
+      "kind": "diff",
+      "source": "tests/test_collect.py:18",
+      "message": "Added line: temperature = 0.5"
+    },
+    "diff:tests/test_collect.py:19": {
+      "id": "diff:tests/test_collect.py:19",
+      "kind": "diff",
+      "source": "tests/test_collect.py:19",
+      "message": "Added line: steps = [gen_code]"
+    },
+    "diff:tests/test_collect.py:20": {
+      "id": "diff:tests/test_collect.py:20",
+      "kind": "diff",
+      "source": "tests/test_collect.py:20",
+      "message": "Added line: dbs = DBs(DB(\"/tmp\"), DB(\"/tmp\"), DB(\"/tmp\"), DB(\"/tmp\"), DB(\"/tmp\"))"
+    },
+    "diff:tests/test_collect.py:21": {
+      "id": "diff:tests/test_collect.py:21",
+      "kind": "diff",
+      "source": "tests/test_collect.py:21",
+      "message": "Added line: dbs.input = {"
+    },
+    "diff:tests/test_collect.py:22": {
+      "id": "diff:tests/test_collect.py:22",
+      "kind": "diff",
+      "source": "tests/test_collect.py:22",
+      "message": "Added line: \"prompt\": \"test prompt\\n with newlines\","
+    },
+    "diff:tests/test_collect.py:23": {
+      "id": "diff:tests/test_collect.py:23",
+      "kind": "diff",
+      "source": "tests/test_collect.py:23",
+      "message": "Added line: \"feedback\": \"test feedback\","
+    },
+    "diff:tests/test_collect.py:24": {
+      "id": "diff:tests/test_collect.py:24",
+      "kind": "diff",
+      "source": "tests/test_collect.py:24",
+      "message": "Added line: }"
+    },
+    "diff:tests/test_collect.py:25": {
+      "id": "diff:tests/test_collect.py:25",
+      "kind": "diff",
+      "source": "tests/test_collect.py:25",
+      "message": "Added line: dbs.logs = {gen_code.__name__: \"test logs\"}"
+    },
+    "diff:tests/test_collect.py:26": {
+      "id": "diff:tests/test_collect.py:26",
+      "kind": "diff",
+      "source": "tests/test_collect.py:26",
+      "message": "Added line: "
+    },
+    "diff:tests/test_collect.py:27": {
+      "id": "diff:tests/test_collect.py:27",
+      "kind": "diff",
+      "source": "tests/test_collect.py:27",
+      "message": "Added line: collect_learnings(model, temperature, steps, dbs)"
+    },
+    "diff:tests/test_collect.py:28": {
+      "id": "diff:tests/test_collect.py:28",
+      "kind": "diff",
+      "source": "tests/test_collect.py:28",
+      "message": "Added line: "
+    },
+    "diff:tests/test_collect.py:29": {
+      "id": "diff:tests/test_collect.py:29",
+      "kind": "diff",
+      "source": "tests/test_collect.py:29",
+      "message": "Added line: learnings = extract_learning(model, temperature, steps, dbs)"
+    },
+    "diff:tests/test_collect.py:30": {
+      "id": "diff:tests/test_collect.py:30",
+      "kind": "diff",
+      "source": "tests/test_collect.py:30",
+      "message": "Added line: assert rudder_analytics.track.call_count == 1"
+    },
+    "diff:tests/test_collect.py:31": {
+      "id": "diff:tests/test_collect.py:31",
+      "kind": "diff",
+      "source": "tests/test_collect.py:31",
+      "message": "Added line: assert rudder_analytics.track.call_args[1][\"event\"] == \"learning\""
+    },
+    "diff:tests/test_collect.py:32": {
+      "id": "diff:tests/test_collect.py:32",
+      "kind": "diff",
+      "source": "tests/test_collect.py:32",
+      "message": "Added line: assert rudder_analytics.track.call_args[1][\"properties\"] == learnings.to_dict()"
+    },
+    "diff:tests/test_collect.py:33": {
+      "id": "diff:tests/test_collect.py:33",
+      "kind": "diff",
+      "source": "tests/test_collect.py:33",
+      "message": "Added line: "
+    },
+    "diff:tests/test_collect.py:34": {
+      "id": "diff:tests/test_collect.py:34",
+      "kind": "diff",
+      "source": "tests/test_collect.py:34",
+      "message": "Added line: "
+    },
+    "diff:tests/test_collect.py:35": {
+      "id": "diff:tests/test_collect.py:35",
+      "kind": "diff",
+      "source": "tests/test_collect.py:35",
+      "message": "Added line: if __name__ == \"__main__\":"
+    },
+    "diff:tests/test_collect.py:36": {
+      "id": "diff:tests/test_collect.py:36",
+      "kind": "diff",
+      "source": "tests/test_collect.py:36",
+      "message": "Added line: pytest.main([\"-v\"])"
+    },
+    "entity:tests/test_collect.py:tests.test_collect": {
+      "id": "entity:tests/test_collect.py:tests.test_collect",
+      "kind": "entity",
+      "source": "tests/test_collect.py:1-36",
+      "message": "Changed module tests.test_collect touched by 1 hunk(s)."
+    },
+    "entity:tests/test_collect.py:test_collect_learnings": {
+      "id": "entity:tests/test_collect.py:test_collect_learnings",
+      "kind": "entity",
+      "source": "tests/test_collect.py:13-32",
+      "message": "Changed function test_collect_learnings touched by 1 hunk(s)."
+    },
+    "risk:api_change:tests/test_collect.py": {
+      "id": "risk:api_change:tests/test_collect.py",
+      "kind": "risk",
+      "source": "api_change",
+      "message": "Public function or class signature changed in tests/test_collect.py."
+    }
+  },
+  "missing_evidence_ids": [],
+  "agent_runs": [
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+      "input_evidence_ids": [
+        "diff_hunk:tests/test_collect.py:1"
+      ],
+      "output_issue_ids": [
+        "test_quality:tests/test_collect.py:13"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 1,
+      "retry_log": [
+        "attempt=1 error=timeout delay=1.00s"
+      ],
+      "latency_ms": 117842,
+      "token_count_in": 2175,
+      "token_count_out": 235,
+      "trace_id": "7e9805ca16f5469eaabd960d16a82c2e",
+      "span_id": "c86dfc980317407d",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001",
+      "shard_index": 0,
+      "shard_count": 1,
+      "context_request_count": 0,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+      "model": null,
+      "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+      "input_evidence_ids": [
+        "diff_hunk:tests/test_collect.py:1"
+      ],
+      "output_issue_ids": [
+        "test_quality:tests/test_collect.py:13"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 0,
+      "token_count_in": 0,
+      "token_count_out": 0,
+      "trace_id": "",
+      "span_id": "",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "",
+      "shard_index": 0,
+      "shard_count": 0,
+      "context_request_count": 0,
+      "context_refill_used": false
+    }
+  ],
+  "prompt_exports": {},
+  "context_budget": {
+    "enabled": true,
+    "strategy": "risk_first_v1",
+    "context_profile": "risk_compact_manifest_v1",
+    "max_input_tokens": 9000,
+    "estimated_input_tokens": 1245,
+    "selected_evidence_count": 1,
+    "omitted_evidence_count": 39,
+    "selected_evidence_ids": [
+      "diff_hunk:tests/test_collect.py:1"
+    ],
+    "omitted_evidence_ids": [
+      "diff:tests/test_collect.py:13",
+      "risk:api_change:tests/test_collect.py",
+      "diff:tests/test_collect.py:1",
+      "diff:tests/test_collect.py:10",
+      "diff:tests/test_collect.py:11",
+      "diff:tests/test_collect.py:12",
+      "diff:tests/test_collect.py:14",
+      "diff:tests/test_collect.py:15",
+      "diff:tests/test_collect.py:16",
+      "diff:tests/test_collect.py:17",
+      "diff:tests/test_collect.py:18",
+      "diff:tests/test_collect.py:19",
+      "diff:tests/test_collect.py:2",
+      "diff:tests/test_collect.py:20",
+      "diff:tests/test_collect.py:21",
+      "diff:tests/test_collect.py:22",
+      "diff:tests/test_collect.py:23",
+      "diff:tests/test_collect.py:24",
+      "diff:tests/test_collect.py:25",
+      "diff:tests/test_collect.py:26",
+      "diff:tests/test_collect.py:27",
+      "diff:tests/test_collect.py:28",
+      "diff:tests/test_collect.py:29",
+      "diff:tests/test_collect.py:3",
+      "diff:tests/test_collect.py:30",
+      "diff:tests/test_collect.py:31",
+      "diff:tests/test_collect.py:32",
+      "diff:tests/test_collect.py:33",
+      "diff:tests/test_collect.py:34",
+      "diff:tests/test_collect.py:35",
+      "diff:tests/test_collect.py:36",
+      "diff:tests/test_collect.py:4",
+      "diff:tests/test_collect.py:5",
+      "diff:tests/test_collect.py:6",
+      "diff:tests/test_collect.py:7",
+      "diff:tests/test_collect.py:8",
+      "diff:tests/test_collect.py:9",
+      "entity:tests/test_collect.py:test_collect_learnings",
+      "entity:tests/test_collect.py:tests.test_collect"
+    ],
+    "selected_risk_signal_count": 1,
+    "context_truncated": true,
+    "shard_count": 1,
+    "refill_count": 0,
+    "context_request_count": 0,
+    "context_requests": [],
+    "shards": [
+      {
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "is_refill": false,
+        "parent_shard_id": null,
+        "selected_evidence_count": 1,
+        "omitted_evidence_count": 39,
+        "estimated_input_tokens": 1245,
+        "context_truncated": true
+      }
+    ],
+    "warnings": []
+  },
+  "loop": {
+    "enabled": true,
+    "max_iter": 1,
+    "iterations_completed": 1,
+    "converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "checkpoint_path": "D:\\learn\\code-review-agent\\workspace\\hf_codereview_live\\samples\\sample_022\\review\\loop_checkpoint.json",
+    "resume_used": false,
+    "resume_ignored_reason": null,
+    "iterations": [
+      {
+        "i": 0,
+        "candidate_issue_count": 1,
+        "verified_count": 1,
+        "needs_human_review_count": 0,
+        "discarded_count": 0,
+        "keep_count": 1,
+        "uncertain_count": 0,
+        "reject_count": 0,
+        "feedback_sent": [],
+        "agent_runs": [
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+            "input_evidence_ids": [
+              "diff_hunk:tests/test_collect.py:1"
+            ],
+            "output_issue_ids": [
+              "test_quality:tests/test_collect.py:13"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 1,
+            "retry_log": [
+              "attempt=1 error=timeout delay=1.00s"
+            ],
+            "latency_ms": 117842,
+            "token_count_in": 2175,
+            "token_count_out": 235,
+            "trace_id": "7e9805ca16f5469eaabd960d16a82c2e",
+            "span_id": "c86dfc980317407d",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001",
+            "shard_index": 0,
+            "shard_count": 1,
+            "context_request_count": 0,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+            "model": null,
+            "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+            "input_evidence_ids": [
+              "diff_hunk:tests/test_collect.py:1"
+            ],
+            "output_issue_ids": [
+              "test_quality:tests/test_collect.py:13"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 0,
+            "token_count_in": 0,
+            "token_count_out": 0,
+            "trace_id": "",
+            "span_id": "",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "",
+            "shard_index": 0,
+            "shard_count": 0,
+            "context_request_count": 0,
+            "context_refill_used": false
+          }
+        ],
+        "issue_set": [
+          "test_quality:tests/test_collect.py:13"
+        ],
+        "keep": [
+          {
+            "file": "tests/test_collect.py",
+            "line": 13,
+            "severity": "medium",
+            "category": "test_quality",
+            "message": "The test `test_collect_learnings` does not assert that `collect_learnings` actually calls `rudder_analytics.track` with the expected arguments; it only checks call count and event name/properties after calling `extract_learning`. If `collect_learnings` fails silently or does not call `track`, the test may still pass if `extract_learning` triggers a separate track call.",
+            "suggestion": "Add an assertion that `rudder_analytics.track` is called exactly once with the expected arguments during `collect_learnings`, or restructure the test to verify the behavior of `collect_learnings` independently of `extract_learning`.",
+            "confidence": 0.7,
+            "evidence_ids": [
+              "diff_hunk:tests/test_collect.py:1"
+            ]
+          }
+        ],
+        "needs_human_review": [],
+        "discarded": []
+      }
+    ]
+  },
+  "tracing": {
+    "total_latency_ms": 117842,
+    "total_token_count_in": 2175,
+    "total_token_count_out": 235,
+    "total_retry_count": 1,
+    "run_count": 2,
+    "status_counts": {
+      "ok": 2
+    }
+  }
+}

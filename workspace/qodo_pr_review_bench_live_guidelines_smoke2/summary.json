@@ -1,0 +1,53 @@
+{
+  "aggregate": {
+    "total": 1,
+    "ok": 1,
+    "errors": 0,
+    "fallbacks": 0,
+    "ground_truth_issues": 4,
+    "findings": 2,
+    "findings_plus_nhr": 2,
+    "finding_recall_exact": 0.25,
+    "broad_recall_exact": 0.25,
+    "finding_recall_line10": 0.25,
+    "broad_recall_line10": 0.25,
+    "finding_recall_file": 0.25,
+    "broad_recall_file": 0.25,
+    "finding_precision_line10": 0.5,
+    "broad_precision_line10": 0.5,
+    "total_token_in": 7540,
+    "total_token_out": 390
+  },
+  "results": [
+    {
+      "sample_id": "qodo_000",
+      "dataset_index": 0,
+      "repo": "Ghost",
+      "pr_url_to_review": "https://github.com/agentic-review-benchmarks/Ghost/pull/1",
+      "ground_truth_issue_count": 4,
+      "status": "ok",
+      "diff_bytes": 16652,
+      "mode": "hybrid-live",
+      "fallback_used": false,
+      "finding_count": 2,
+      "needs_human_review_count": 0,
+      "discarded_count": 0,
+      "agent_run_count": 2,
+      "token_in": 7540,
+      "token_out": 390,
+      "review_shard_count": 1,
+      "context_refill_count": 0,
+      "context_request_count": 0,
+      "elapsed_ms": 12352,
+      "report_path": "D:\\learn\\code-review-agent\\workspace\\qodo_pr_review_bench_live_guidelines_smoke2\\samples\\qodo_000\\review\\review_report.json",
+      "gt_matched_findings_exact": 1,
+      "gt_matched_broad_exact": 1,
+      "gt_matched_findings_line10": 1,
+      "gt_matched_broad_line10": 1,
+      "gt_matched_findings_file": 1,
+      "gt_matched_broad_file": 1,
+      "unmatched_findings_line10": 1,
+      "unmatched_broad_line10": 1
+    }
+  ]
+}

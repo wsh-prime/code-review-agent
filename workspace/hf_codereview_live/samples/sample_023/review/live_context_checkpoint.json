@@ -1,0 +1,109 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:190162ed76050e73daf257c7055a0ed7fa71b1072747ef477f192d1d9215dda9",
+  "diff_hash": "sha256:33fa4ea004ae32a0e611a427465f2819143349146349d8d740155f7cd90d64f7",
+  "shards": {
+    "1aec943ff6da407295e441bb99bb1a92d0677927b791a3e757446a76b2b8cd98": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:tests/steps/test_archive.py:1"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:api_change:tests/steps/test_archive.py"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-001",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "diff_hunk:tests/steps/test_archive.py:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 524,
+        "token_count_in": 2553,
+        "token_count_out": 49,
+        "trace_id": "ceb6fb2d0765474bb17185327f7022b6",
+        "span_id": "77b61d3818b84a3a",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    },
+    "97acd992d22d67e5bdb4d564523cb4a180df24922d74539260da46d123770607": {
+      "status": "completed",
+      "shard_id": "shard-001-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-001",
+      "selected_evidence_ids": [
+        "risk:api_change:tests/steps/test_archive.py"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:api_change:tests/steps/test_archive.py"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-001-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+        "input_evidence_ids": [
+          "risk:api_change:tests/steps/test_archive.py"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 1124,
+        "token_count_in": 1362,
+        "token_count_out": 44,
+        "trace_id": "338254c06bca426d8fa6a73c5f5fb783",
+        "span_id": "d6026993f27448b5",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 1,
+        "context_refill_used": true
+      }
+    }
+  }
+}

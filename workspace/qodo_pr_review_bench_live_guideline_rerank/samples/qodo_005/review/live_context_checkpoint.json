@@ -1,0 +1,89 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:070cb64f5e123a1278b63bebed2ddee4dc1c76452704ca47ba40ff0d3835013a",
+  "diff_hash": "sha256:b49af190505c77847b7bb2201ca91cf354ef82d669990364966b92b0df198fc1",
+  "shards": {
+    "7f330613a8963e5f0662a898e92c4b2ed164c549cbef2828b26215baae0db86d": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:1",
+        "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8",
+        "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337",
+        "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:8",
+        "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:21",
+        "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:3",
+        "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:4",
+        "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:467",
+        "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:527"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "ghost/core/core/server/services/member-welcome-emails/jobs/index.js",
+          "line": 15,
+          "severity": "high",
+          "category": "logic_error",
+          "message": "Negated condition in `scheduleMemberWelcomeEmailJob` flips scheduling logic: previously the job was scheduled when `processOutbox` was false, now it is scheduled only when `processOutbox` is true, which means the job will never be scheduled on the first call and will be scheduled repeatedly on subsequent calls.",
+          "suggestion": "Change `if (hasScheduled.processOutbox && ...)` back to `if (!hasScheduled.processOutbox && ...)` to preserve the original once-per-process scheduling guard.",
+          "confidence": 0.95,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8"
+          ]
+        },
+        {
+          "file": "ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js",
+          "line": 340,
+          "severity": "high",
+          "category": "logic_error",
+          "message": "Welcome email condition changed from `labs.isSet('welcomeEmails') && WELCOME_EMAIL_SOURCES.includes(source)` to `config.get('memberWelcomeEmailTestInbox') || WELCOME_EMAIL_SOURCES.includes(source)`. The new OR logic means that if `memberWelcomeEmailTestInbox` is set to any truthy value, welcome emails are sent for *all* sources, not just the allowed ones, which can cause unintended email sending for sources like 'import' or 'admin'.",
+          "suggestion": "Change the condition to `(welcomeEmailConfig || this._labsService.isSet('welcomeEmails')) && WELCOME_EMAIL_SOURCES.includes(source)` to preserve the source restriction while allowing the test config override.",
+          "confidence": 0.9,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:1",
+          "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8",
+          "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337",
+          "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:8",
+          "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:21",
+          "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:3",
+          "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:4",
+          "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:467",
+          "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:527"
+        ],
+        "output_issue_ids": [
+          "logic_error:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:15",
+          "logic_error:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 29000,
+        "token_count_in": 8463,
+        "token_count_out": 472,
+        "trace_id": "737d2e15ae6440608292f9fe93a67088",
+        "span_id": "cb35a802e0ca4350",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

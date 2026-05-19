@@ -1,0 +1,79 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:40b81bfc03235b81c7d6fccfe47da037f384201bb988661b59189955b7ef8b77",
+  "diff_hash": "sha256:062a6eb825eab43b9dfb09c5b03ccb186c6eddd9ffd082a1c6d3a05b657fcb5f",
+  "shards": {
+    "593140202da4ca874ffee8aff177e6445713a297bfdd8b126a648587dcb6169a": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/core/boot.js:310",
+        "diff_hunk:ghost/core/core/server/services/xmlrpc.js:1",
+        "diff_hunk:ghost/core/core/shared/config/env/config.development.json:23",
+        "diff_hunk:ghost/core/test/unit/server/services/xmlrpc.test.js:1"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "ghost/core/core/shared/config/env/config.development.json",
+          "line": 26,
+          "severity": "medium",
+          "category": "functionality",
+          "message": "Removing the 'useRpcPing' privacy config option disables the ability to control XML-RPC ping behavior via environment configuration, which may cause unexpected ping behavior in development environments.",
+          "suggestion": "If the XMLRPC service is intentionally removed, ensure the privacy config key is also removed from all environment configs or kept for backward compatibility. If the service is kept, restore the config entry.",
+          "confidence": 0.8,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/shared/config/env/config.development.json:23"
+          ]
+        },
+        {
+          "file": "ghost/core/core/boot.js",
+          "line": 313,
+          "severity": "medium",
+          "category": "functionality",
+          "message": "The XMLRPC service module is removed from the service initialization in boot.js, but the corresponding config option 'useRpcPing' is also removed from the development config. This change removes the XML-RPC ping functionality entirely, which may affect external ping services (e.g., Pingomatic) that notify search engines of content updates.",
+          "suggestion": "If the XMLRPC service is intentionally being removed, ensure this is documented and that no other parts of the system depend on it. If the service should remain, restore the require and initialization.",
+          "confidence": 0.9,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/boot.js:310"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/core/boot.js:310",
+          "diff_hunk:ghost/core/core/server/services/xmlrpc.js:1",
+          "diff_hunk:ghost/core/core/shared/config/env/config.development.json:23",
+          "diff_hunk:ghost/core/test/unit/server/services/xmlrpc.test.js:1"
+        ],
+        "output_issue_ids": [
+          "functionality:ghost/core/core/shared/config/env/config.development.json:26",
+          "functionality:ghost/core/core/boot.js:313"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 15725,
+        "token_count_in": 7536,
+        "token_count_out": 374,
+        "trace_id": "bd41e8705a574e5e928dbd6f6013df64",
+        "span_id": "9aeaba9f5c7c402f",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

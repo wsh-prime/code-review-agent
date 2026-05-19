@@ -1,0 +1,134 @@
+{
+  "schema_version": "1.0",
+  "run_id": "075c6c98568f404ca0f8870d8f0077d2",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": true,
+  "package_hash": "sha256:455f335c567b2d5d708e99ccce9c26eb991e78162208541c311c45cc252a178f",
+  "diff_hash": "sha256:4debe6b73ff1d99a04683477cb0eb386879f47780adb724fc596179886fb7e5f",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 1,
+      "verified_count": 1,
+      "needs_human_review_count": 0,
+      "discarded_count": 0,
+      "keep_count": 1,
+      "uncertain_count": 0,
+      "reject_count": 0,
+      "feedback_sent": [],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff_hunk:apps/admin-x-framework/src/api/comments.ts:25",
+            "diff_hunk:apps/posts/src/views/comments/components/comments-list.tsx:59",
+            "diff_hunk:apps/posts/src/views/comments/components/comments-list.tsx:7",
+            "diff_hunk:ghost/core/core/server/api/endpoints/utils/serializers/output/mappers/comments.js:35",
+            "diff_hunk:ghost/core/test/e2e-api/admin/__snapshots__/activity-feed.test.js.snap:22699"
+          ],
+          "output_issue_ids": [
+            "security:apps/posts/src/views/comments/components/comments-list.tsx:59"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 5610,
+          "token_count_in": 5303,
+          "token_count_out": 190,
+          "trace_id": "20862bc2cabe45b1b605085304953165",
+          "span_id": "706cb29aac6c46aa",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 2,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff_hunk:ghost/core/test/e2e-api/admin/__snapshots__/comments.test.js.snap:25"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 2569,
+          "token_count_in": 2819,
+          "token_count_out": 12,
+          "trace_id": "07ca4087e7c947198dd173245fa8c0c0",
+          "span_id": "7143e04090644570",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-002",
+          "shard_index": 1,
+          "shard_count": 2,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [
+            "diff_hunk:apps/posts/src/views/comments/components/comments-list.tsx:59"
+          ],
+          "output_issue_ids": [
+            "security:apps/posts/src/views/comments/components/comments-list.tsx:59"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [
+        "security:apps/posts/src/views/comments/components/comments-list.tsx:59"
+      ],
+      "keep": [
+        {
+          "file": "apps/posts/src/views/comments/components/comments-list.tsx",
+          "line": 59,
+          "severity": "high",
+          "category": "security",
+          "message": "The patch introduces `dangerouslySetInnerHTML` with `item.html` content, which can lead to Cross-Site Scripting (XSS) if `item.html` contains unsanitized user input.",
+          "suggestion": "Sanitize `item.html` before rendering, or use a safe rendering method that escapes HTML. Consider using DOMPurify or a similar library to sanitize the HTML content.",
+          "confidence": 0.85,
+          "evidence_ids": [
+            "diff_hunk:apps/posts/src/views/comments/components/comments-list.tsx:59"
+          ]
+        }
+      ],
+      "needs_human_review": [],
+      "discarded": []
+    }
+  ],
+  "last_feedback": null
+}

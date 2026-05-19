@@ -1,0 +1,288 @@
+{
+  "schema_version": "1.0",
+  "run_id": "2290a59369a14716ab8d6b4ad41840e6",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": false,
+  "package_hash": "sha256:cbdc19f93f928c4afbb060638038a947125b8f9f940eebc4ff38b6f8f0b86aca",
+  "diff_hash": "sha256:93c9400ce3bb5b9193d17e39aa9be43adf850214144a2d0b650615dc094af20c",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 4,
+      "verified_count": 4,
+      "needs_human_review_count": 0,
+      "discarded_count": 0,
+      "keep_count": 0,
+      "uncertain_count": 4,
+      "reject_count": 0,
+      "feedback_sent": [
+        {
+          "issue_id": "maintainability:src/OpenApi/gen/XmlCommentGenerator.Emitter.cs:1",
+          "category": "maintainability",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/OpenApi/gen/XmlCommentGenerator.Emitter.cs:1"
+          ]
+        },
+        {
+          "issue_id": "correctness:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/CompletenessTests.SupportsAllXmlTagsOnSchemas#OpenApiXmlCommentSupport.generated.verified.cs:556",
+          "category": "correctness",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/CompletenessTests.SupportsAllXmlTagsOnSchemas#OpenApiXmlCommentSupport.generated.verified.cs:553"
+          ]
+        },
+        {
+          "issue_id": "correctness:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsXmlCommentsOnOperationsFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:433",
+          "category": "correctness",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsXmlCommentsOnOperationsFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:430"
+          ]
+        },
+        {
+          "issue_id": "correctness:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsXmlCommentsOnOperationsFromMinimalApis#OpenApiXmlCommentSupport.generated.verified.cs:477",
+          "category": "correctness",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsXmlCommentsOnOperationsFromMinimalApis#OpenApiXmlCommentSupport.generated.verified.cs:474"
+          ]
+        }
+      ],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff_hunk:src/OpenApi/gen/XmlCommentGenerator.Emitter.cs:1",
+            "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/OperationTests.Controllers.cs:96",
+            "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/AddOpenApiTests.CanInterceptAddOpenApi#OpenApiXmlCommentSupport.generated.verified.cs:426",
+            "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/AdditionalTextsTests.CanHandleXmlForSchemasInAdditionalTexts#OpenApiXmlCommentSupport.generated.verified.cs:455"
+          ],
+          "output_issue_ids": [
+            "maintainability:src/OpenApi/gen/XmlCommentGenerator.Emitter.cs:1"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 1,
+          "retry_log": [
+            "attempt=1 error=timeout delay=1.00s"
+          ],
+          "latency_ms": 63076,
+          "token_count_in": 5461,
+          "token_count_out": 152,
+          "trace_id": "341ce948ad044dc593cb380b0aa57ade",
+          "span_id": "85786fd9fa0e4d19",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 3,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/CompletenessTests.SupportsAllXmlTagsOnSchemas#OpenApiXmlCommentSupport.generated.verified.cs:553",
+            "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsRouteParametersFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:1",
+            "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsXmlCommentsOnOperationsFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:430",
+            "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsXmlCommentsOnOperationsFromMinimalApis#OpenApiXmlCommentSupport.generated.verified.cs:474"
+          ],
+          "output_issue_ids": [
+            "correctness:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/CompletenessTests.SupportsAllXmlTagsOnSchemas#OpenApiXmlCommentSupport.generated.verified.cs:556",
+            "correctness:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsXmlCommentsOnOperationsFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:433",
+            "correctness:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsXmlCommentsOnOperationsFromMinimalApis#OpenApiXmlCommentSupport.generated.verified.cs:477"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 30272,
+          "token_count_in": 8343,
+          "token_count_out": 705,
+          "trace_id": "769011769eb54e5d94eec683b795b15b",
+          "span_id": "4598ce0c671d401d",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-002",
+          "shard_index": 1,
+          "shard_count": 3,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "b8fdb79277c4f03d94f483b1c06bd0ad0c345d7e304690682217fa2081e261fe",
+          "input_evidence_ids": [
+            "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/SchemaTests.SupportsXmlCommentsOnSchemas#OpenApiXmlCommentSupport.generated.verified.cs:456",
+            "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/SchemaTests.XmlCommentsOnPropertiesShouldApplyToSchemaReferences#OpenApiXmlCommentSupport.generated.verified.cs:435",
+            "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/XmlCommentDocumentationIdTests.CanMergeXmlCommentsWithDifferentDocumentationIdFormats#OpenApiXmlCommentSupport.generated.verified.cs:427"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 18009,
+          "token_count_in": 4384,
+          "token_count_out": 12,
+          "trace_id": "e927a7b54f1549e78a1e8b751c798c31",
+          "span_id": "f7f738287bed4d05",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-003",
+          "shard_index": 2,
+          "shard_count": 3,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [
+            "diff_hunk:src/OpenApi/gen/XmlCommentGenerator.Emitter.cs:1",
+            "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/CompletenessTests.SupportsAllXmlTagsOnSchemas#OpenApiXmlCommentSupport.generated.verified.cs:553",
+            "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsXmlCommentsOnOperationsFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:430",
+            "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsXmlCommentsOnOperationsFromMinimalApis#OpenApiXmlCommentSupport.generated.verified.cs:474"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [
+        "correctness:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/CompletenessTests.SupportsAllXmlTagsOnSchemas#OpenApiXmlCommentSupport.generated.verified.cs:556",
+        "correctness:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsXmlCommentsOnOperationsFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:433",
+        "correctness:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsXmlCommentsOnOperationsFromMinimalApis#OpenApiXmlCommentSupport.generated.verified.cs:477",
+        "maintainability:src/OpenApi/gen/XmlCommentGenerator.Emitter.cs:1"
+      ],
+      "keep": [],
+      "needs_human_review": [
+        {
+          "file": "src/OpenApi/gen/XmlCommentGenerator.Emitter.cs",
+          "line": 1,
+          "severity": "low",
+          "category": "maintainability",
+          "message": "Removal of the MIT license header from the source file may cause licensing compliance issues if the project requires a license notice in every file.",
+          "suggestion": "Restore the license header or ensure the project's licensing policy allows omission of per-file headers.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/OpenApi/gen/XmlCommentGenerator.Emitter.cs:1"
+          ]
+        },
+        {
+          "file": "src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/CompletenessTests.SupportsAllXmlTagsOnSchemas#OpenApiXmlCommentSupport.generated.verified.cs",
+          "line": 556,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Adding a null check for `metadata` before accessing `MetadataKind` may change behavior when `metadata` is null. Previously, a null reference exception would occur; now the condition silently skips the parameter, potentially omitting XML comments for parameters with null metadata.",
+          "suggestion": "Ensure that skipping parameters with null metadata is the intended behavior and does not lead to missing XML documentation for valid parameters.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/CompletenessTests.SupportsAllXmlTagsOnSchemas#OpenApiXmlCommentSupport.generated.verified.cs:553"
+          ]
+        },
+        {
+          "file": "src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsXmlCommentsOnOperationsFromControllers#OpenApiXmlCommentSupport.generated.verified.cs",
+          "line": 433,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Adding a null check for `metadata` before accessing `MetadataKind` may change behavior when `metadata` is null. Previously, a null reference exception would occur; now the condition silently skips the parameter, potentially omitting XML comments for parameters with null metadata.",
+          "suggestion": "Ensure that skipping parameters with null metadata is the intended behavior and does not lead to missing XML documentation for valid parameters.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsXmlCommentsOnOperationsFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:430"
+          ]
+        },
+        {
+          "file": "src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsXmlCommentsOnOperationsFromMinimalApis#OpenApiXmlCommentSupport.generated.verified.cs",
+          "line": 477,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Adding a null check for `metadata` before accessing `MetadataKind` may change behavior when `metadata` is null. Previously, a null reference exception would occur; now the condition silently skips the parameter, potentially omitting XML comments for parameters with null metadata.",
+          "suggestion": "Ensure that skipping parameters with null metadata is the intended behavior and does not lead to missing XML documentation for valid parameters.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsXmlCommentsOnOperationsFromMinimalApis#OpenApiXmlCommentSupport.generated.verified.cs:474"
+          ]
+        }
+      ],
+      "discarded": []
+    }
+  ],
+  "last_feedback": {
+    "iteration": 0,
+    "uncertain_items": [
+      {
+        "issue_id": "maintainability:src/OpenApi/gen/XmlCommentGenerator.Emitter.cs:1",
+        "category": "maintainability",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:src/OpenApi/gen/XmlCommentGenerator.Emitter.cs:1"
+        ]
+      },
+      {
+        "issue_id": "correctness:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/CompletenessTests.SupportsAllXmlTagsOnSchemas#OpenApiXmlCommentSupport.generated.verified.cs:556",
+        "category": "correctness",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/CompletenessTests.SupportsAllXmlTagsOnSchemas#OpenApiXmlCommentSupport.generated.verified.cs:553"
+        ]
+      },
+      {
+        "issue_id": "correctness:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsXmlCommentsOnOperationsFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:433",
+        "category": "correctness",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsXmlCommentsOnOperationsFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:430"
+        ]
+      },
+      {
+        "issue_id": "correctness:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsXmlCommentsOnOperationsFromMinimalApis#OpenApiXmlCommentSupport.generated.verified.cs:477",
+        "category": "correctness",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsXmlCommentsOnOperationsFromMinimalApis#OpenApiXmlCommentSupport.generated.verified.cs:474"
+        ]
+      }
+    ]
+  }
+}
