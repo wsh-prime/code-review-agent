@@ -7,7 +7,7 @@
 - Changed entities: 11
 - Risk signals: 2
 - Findings: 1
-- Needs human review: 2
+- Needs human review: 1
 - Discarded: 0
 - Agent runs: 4
 - Loop enabled: True
@@ -21,11 +21,11 @@
 | Converged | False |
 | Fallback | False |
 | Retry count | 0 |
-| Total latency | 4136 ms |
+| Total latency | 52563 ms |
 | Token in | 23186 |
-| Token out | 407 |
+| Token out | 203 |
 
-- Iteration 0: 2 candidates, 2 verified, 2 uncertain, 0 kept, 0 rejected
+- Iteration 0: 1 candidates, 1 verified, 1 uncertain, 0 kept, 0 rejected
 
 ## Context Budget Summary
 
@@ -51,14 +51,9 @@
 ## Needs Human Review
 
 - `license` error at `src/OpenApi/gen/XmlCommentGenerator.Emitter.cs:1` (0.50)
-  - The MIT license header has been removed from the file, violating the repository rule: 'All C# Source Files Must Include MIT License Header'.
-  - Suggestion: Restore the two-line MIT license header at the top of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'
+  - MIT license header removed from C# source file, violating the repository rule requiring the exact two-line header at the start of every .cs file.
+  - Suggestion: Restore the removed license header: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.' at the top of the file.
   - Evidence: `diff_hunk:src/OpenApi/gen/XmlCommentGenerator.Emitter.cs:1`
-
-- `guideline` medium at `src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsRouteParametersFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:1` (0.50)
-  - New file violates 'All C# Source Files Must Include MIT License Header' rule: the file starts with an auto-generated header and lacks the required MIT license header.
-  - Suggestion: Add the MIT license header comment at the top of the file before the auto-generated header.
-  - Evidence: `diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsRouteParametersFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:1`
 
 ## Changed Files
 

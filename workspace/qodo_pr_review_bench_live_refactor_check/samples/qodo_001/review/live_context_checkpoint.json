@@ -1,0 +1,127 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:9c80eebdd6b67d4acbe0f25f6b79ba5acc171131a3f61677940ef52e83d7eef4",
+  "diff_hash": "sha256:e5b82b74cf451ae97a02bedefdc4fd9f909b6eda24e2101d391cce3587759445",
+  "shards": {
+    "2d64a761f5c9fc9ea13c77c926e5ebf7db27cf1326f98efc7063653f8b2a0d72": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:241",
+        "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:261",
+        "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:289",
+        "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:297",
+        "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:305",
+        "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:27",
+        "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:44",
+        "diff_hunk:apps/comments-ui/test/e2e/actions.test.ts:611"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "apps/comments-ui/src/components/content/forms/form.tsx",
+          "line": 264,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Editor editability now depends on member.expertise instead of memberName, which may prevent editing when the member has a name but no expertise.",
+          "suggestion": "Consider using memberName (or member?.name) as the condition for editability, or add a separate check for expertise if that is the intended behavior.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:261"
+          ]
+        },
+        {
+          "file": "apps/comments-ui/src/components/content/forms/form.tsx",
+          "line": 305,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Removed fallback to comment?.member?.name and comment?.member?.expertise in FormWrapper; reply forms will no longer inherit parent comment author's name/expertise, which is the intended fix but may break existing behavior if any other caller relied on the fallback.",
+          "suggestion": "Verify that all callers of FormWrapper (including reply-form.tsx) pass the correct member context and that no other component depends on the old fallback behavior.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:305"
+          ]
+        },
+        {
+          "file": "apps/comments-ui/src/components/content/forms/form.tsx",
+          "line": 289,
+          "severity": "low",
+          "category": "maintainability",
+          "message": "Removed comment prop from FormWrapperProps and FormWrapper, but the prop was previously used for fallback name/expertise. This is a breaking change for any other component that passed comment to FormWrapper.",
+          "suggestion": "Ensure no other components pass the comment prop to FormWrapper, or add a deprecation warning if backward compatibility is needed.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:289",
+            "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:297"
+          ]
+        },
+        {
+          "file": "apps/comments-ui/src/components/content/forms/reply-form.tsx",
+          "line": 30,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Changed in_reply_to_id from openForm.in_reply_to_id to parent.id. This may change the reply threading behavior if openForm.in_reply_to_id differed from parent.id (e.g., when replying to a nested reply).",
+          "suggestion": "Verify that parent.id is the correct identifier for the reply target in all cases, especially when replying to nested replies.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:27"
+          ]
+        },
+        {
+          "file": "apps/comments-ui/src/components/content/forms/reply-form.tsx",
+          "line": 47,
+          "severity": "low",
+          "category": "maintainability",
+          "message": "Removed comment={parent} prop from FormWrapper in reply-form.tsx, which is consistent with the removal of the comment prop from FormWrapper. However, this means the reply form no longer has access to the parent comment's member info for fallback.",
+          "suggestion": "Confirm that the reply form's member context (from useAppContext) always provides the correct logged-in member, and that no fallback to parent comment author is needed.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:44"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:241",
+          "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:261",
+          "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:289",
+          "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:297",
+          "diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:305",
+          "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:27",
+          "diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:44",
+          "diff_hunk:apps/comments-ui/test/e2e/actions.test.ts:611"
+        ],
+        "output_issue_ids": [
+          "correctness:apps/comments-ui/src/components/content/forms/form.tsx:264",
+          "correctness:apps/comments-ui/src/components/content/forms/form.tsx:305",
+          "maintainability:apps/comments-ui/src/components/content/forms/form.tsx:289",
+          "correctness:apps/comments-ui/src/components/content/forms/reply-form.tsx:30",
+          "maintainability:apps/comments-ui/src/components/content/forms/reply-form.tsx:47"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 29202,
+        "token_count_in": 6798,
+        "token_count_out": 864,
+        "trace_id": "48daf48660b142ebbc17c59f57a31c9c",
+        "span_id": "145ae1ad1d54488f",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

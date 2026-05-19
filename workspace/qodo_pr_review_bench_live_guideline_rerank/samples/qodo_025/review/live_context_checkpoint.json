@@ -21,8 +21,8 @@
           "line": 6,
           "severity": "medium",
           "category": "naming_convention",
-          "message": "Repository class name 'PrismaBookingAttendeeRepository' does not follow the required naming pattern 'Prisma<Entity>Repository' because the entity name 'BookingAttendee' is not a single PascalCase entity name; the file is named 'prisma-booking-attendee.repository.ts' which uses kebab-case and a dot-suffix, violating the guideline that filenames must match class names exactly in PascalCase.",
-          "suggestion": "Rename the file to 'PrismaBookingAttendeeRepository.ts' and ensure the class name matches exactly.",
+          "message": "Repository class name 'PrismaBookingAttendeeRepository' does not match the required 'Prisma<Entity>Repository' pattern because the entity name 'BookingAttendee' is not a single PascalCase entity name; the file is named 'prisma-booking-attendee.repository.ts' which uses kebab-case instead of PascalCase matching the class name.",
+          "suggestion": "Rename the file to 'PrismaBookingAttendeeRepository.ts' to match the exported class name exactly in PascalCase, or adjust the class name to follow the convention strictly.",
           "confidence": 0.5,
           "evidence_ids": [
             "diff_hunk:apps/api/v2/src/lib/repositories/prisma-booking-attendee.repository.ts:1"
@@ -33,8 +33,8 @@
           "line": 6,
           "severity": "medium",
           "category": "naming_convention",
-          "message": "Repository class name 'PrismaBookingReferenceRepository' does not follow the required naming pattern 'Prisma<Entity>Repository' because the entity name 'BookingReference' is not a single PascalCase entity name; the file is named 'prisma-booking-reference.repository.ts' which uses kebab-case and a dot-suffix, violating the guideline that filenames must match class names exactly in PascalCase.",
-          "suggestion": "Rename the file to 'PrismaBookingReferenceRepository.ts' and ensure the class name matches exactly.",
+          "message": "Repository class name 'PrismaBookingReferenceRepository' does not match the required 'Prisma<Entity>Repository' pattern because the entity name 'BookingReference' is not a single PascalCase entity name; the file is named 'prisma-booking-reference.repository.ts' which uses kebab-case instead of PascalCase matching the class name.",
+          "suggestion": "Rename the file to 'PrismaBookingReferenceRepository.ts' to match the exported class name exactly in PascalCase, or adjust the class name to follow the convention strictly.",
           "confidence": 0.5,
           "evidence_ids": [
             "diff_hunk:apps/api/v2/src/lib/repositories/prisma-booking-reference.repository.ts:1"
@@ -45,8 +45,8 @@
           "line": 6,
           "severity": "medium",
           "category": "naming_convention",
-          "message": "Repository class name 'PrismaProfileRepository' does not follow the required naming pattern 'Prisma<Entity>Repository' because the entity name 'Profile' is a single PascalCase entity name, but the file is named 'prisma-profile.repository.ts' which uses kebab-case and a dot-suffix, violating the guideline that filenames must match class names exactly in PascalCase.",
-          "suggestion": "Rename the file to 'PrismaProfileRepository.ts' and ensure the class name matches exactly.",
+          "message": "Repository class name 'PrismaProfileRepository' does not match the required 'Prisma<Entity>Repository' pattern because the entity name 'Profile' is not a single PascalCase entity name; the file is named 'prisma-profile.repository.ts' which uses kebab-case instead of PascalCase matching the class name.",
+          "suggestion": "Rename the file to 'PrismaProfileRepository.ts' to match the exported class name exactly in PascalCase, or adjust the class name to follow the convention strictly.",
           "confidence": 0.5,
           "evidence_ids": [
             "diff_hunk:apps/api/v2/src/lib/repositories/prisma-profile.repository.ts:1"
@@ -71,15 +71,13 @@
         "fallback_used": false,
         "iteration": 0,
         "feedback_hash": "",
-        "retry_count": 1,
-        "retry_log": [
-          "attempt=1 error=timeout delay=1.00s"
-        ],
-        "latency_ms": 84633,
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 33299,
         "token_count_in": 5884,
         "token_count_out": 629,
-        "trace_id": "877e90f7be0940d0935ca14b8ae16e91",
-        "span_id": "0ddb05b5035f4389",
+        "trace_id": "a10df4d19015490eadaa0f5aebf08506",
+        "span_id": "965176165d724f1a",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -102,15 +100,48 @@
         "diff_hunk:packages/features/bookings/di/BookingCancelService.module.ts:1",
         "diff_hunk:packages/features/bookings/di/BookingCancelService.module.ts:17"
       ],
-      "context_requests": [],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "packages/features/bookings/di/BookingCancelService.module.ts",
+          "evidence_ids": [
+            "diff:packages/features/bookings/di/BookingCancelService.module.ts:1",
+            "diff:packages/features/bookings/di/BookingCancelService.module.ts:2",
+            "diff:packages/features/bookings/di/BookingCancelService.module.ts:3",
+            "diff:packages/features/bookings/di/BookingCancelService.module.ts:4",
+            "diff:packages/features/bookings/di/BookingCancelService.module.ts:5",
+            "diff:packages/features/bookings/di/BookingCancelService.module.ts:6",
+            "diff:packages/features/bookings/di/BookingCancelService.module.ts:7",
+            "diff:packages/features/bookings/di/BookingCancelService.module.ts:8"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-002",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "packages/features/bookingReference/repositories/BookingReferenceRepository.ts",
+          "evidence_ids": [
+            "diff_hunk:packages/features/bookingReference/repositories/BookingReferenceRepository.ts:15",
+            "diff_hunk:packages/features/bookingReference/repositories/BookingReferenceRepository.ts:64"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-002",
+          "fulfilled_evidence_ids": []
+        }
+      ],
       "issues": [
         {
           "file": "packages/features/bookings/di/BookingAttendeeRepository.module.ts",
           "line": 1,
           "severity": "medium",
           "category": "naming_convention",
-          "message": "Repository class PrismaBookingAttendeeRepository is imported but the file is named BookingAttendeeRepository.module.ts, not PrismaBookingAttendeeRepository.ts. This violates the naming convention requiring repository files to be named 'Prisma<Entity>Repository.ts' with matching exported class names.",
-          "suggestion": "Rename the file to PrismaBookingAttendeeRepository.ts and ensure the exported class name matches.",
+          "message": "Repository file does not follow naming convention: expected 'Prisma<Entity>Repository.ts' pattern, but file is named 'BookingAttendeeRepository.module.ts'.",
+          "suggestion": "Rename file to 'PrismaBookingAttendeeRepository.ts' and update the exported class name accordingly.",
           "confidence": 0.9,
           "evidence_ids": [
             "diff_hunk:packages/features/bookings/di/BookingAttendeeRepository.module.ts:1"
@@ -121,23 +152,11 @@
           "line": 1,
           "severity": "medium",
           "category": "naming_convention",
-          "message": "File is named BookingReferenceRepository.ts but the class is not exported in this hunk; the file does not follow the 'Prisma<Entity>Repository' pattern. This violates the naming convention requiring repository classes to use 'Prisma<Entity>Repository' pattern.",
-          "suggestion": "Rename the file to PrismaBookingReferenceRepository.ts and update the class name accordingly.",
-          "confidence": 0.85,
-          "evidence_ids": [
-            "diff_hunk:packages/features/bookingReference/repositories/BookingReferenceRepository.ts:1"
-          ]
-        },
-        {
-          "file": "packages/features/bookings/di/BookingCancelService.module.ts",
-          "line": 1,
-          "severity": "medium",
-          "category": "naming_convention",
-          "message": "Service class BookingCancelService is imported but the file is named BookingCancelService.module.ts, not BookingCancelService.ts. This violates the naming convention requiring service files to be named '<Entity>Service.ts' with matching class names.",
-          "suggestion": "Rename the file to BookingCancelService.ts and ensure the exported class name matches.",
+          "message": "Repository file does not follow naming convention: expected 'Prisma<Entity>Repository.ts' pattern, but file is named 'BookingReferenceRepository.ts'.",
+          "suggestion": "Rename file to 'PrismaBookingReferenceRepository.ts' and update the exported class name accordingly.",
           "confidence": 0.9,
           "evidence_ids": [
-            "diff_hunk:packages/features/bookings/di/BookingCancelService.module.ts:1"
+            "diff_hunk:packages/features/bookingReference/repositories/BookingReferenceRepository.ts:1"
           ]
         },
         {
@@ -145,11 +164,23 @@
           "line": 1,
           "severity": "medium",
           "category": "naming_convention",
-          "message": "Service file is named booking-cancel.service.ts (kebab-case) but the class is BookingCancelService (PascalCase). This violates the naming convention requiring service filenames to match class names exactly in PascalCase.",
-          "suggestion": "Rename the file to BookingCancelService.ts to match the class name.",
+          "message": "Service file does not follow naming convention: expected '<Entity>Service.ts' pattern with matching class name, but file is named 'booking-cancel.service.ts' (kebab-case) and class is 'BookingCancelService' (PascalCase).",
+          "suggestion": "Rename file to 'BookingCancelService.ts' to match the exported class name.",
           "confidence": 0.9,
           "evidence_ids": [
             "diff_hunk:apps/api/v2/src/lib/services/booking-cancel.service.ts:1"
+          ]
+        },
+        {
+          "file": "packages/features/bookings/di/BookingCancelService.module.ts",
+          "line": 3,
+          "severity": "high",
+          "category": "circular_dependency",
+          "message": "Import from '../lib/handleCancelBooking' introduces a potential circular dependency: 'packages/features/bookings/di/BookingCancelService.module.ts' imports from '../lib/handleCancelBooking', which likely imports from the same package, violating the rule that 'features' should not import from 'lib'.",
+          "suggestion": "Refactor to avoid importing from '../lib/handleCancelBooking' in the DI module; consider moving the service class to a separate package or using a shared interface.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:packages/features/bookings/di/BookingCancelService.module.ts:1"
           ]
         }
       ],
@@ -167,8 +198,8 @@
         "output_issue_ids": [
           "naming_convention:packages/features/bookings/di/BookingAttendeeRepository.module.ts:1",
           "naming_convention:packages/features/bookingReference/repositories/BookingReferenceRepository.ts:1",
-          "naming_convention:packages/features/bookings/di/BookingCancelService.module.ts:1",
-          "naming_convention:apps/api/v2/src/lib/services/booking-cancel.service.ts:1"
+          "naming_convention:apps/api/v2/src/lib/services/booking-cancel.service.ts:1",
+          "circular_dependency:packages/features/bookings/di/BookingCancelService.module.ts:3"
         ],
         "fallback_used": false,
         "iteration": 0,
@@ -178,19 +209,110 @@
           "attempt=1 error=timeout delay=1.00s",
           "attempt=2 error=timeout delay=2.00s"
         ],
-        "latency_ms": 127988,
+        "latency_ms": 150639,
         "token_count_in": 7054,
-        "token_count_out": 695,
-        "trace_id": "3ed25359af9244a28daefd6b14f56eb1",
-        "span_id": "dfa3fabe5ece453b",
+        "token_count_out": 962,
+        "trace_id": "ca3e9e3cad6f4ae5a0a5542aff60c522",
+        "span_id": "9f88e6fd3b0d43f8",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
         "shard_id": "shard-002",
         "shard_index": 1,
         "shard_count": 6,
-        "context_request_count": 0,
+        "context_request_count": 2,
         "context_refill_used": false
+      }
+    },
+    "f6687dacd87665e05029067ccbdbc78b03a9e44232fd0cbdcced05e9d8ddb7cf": {
+      "status": "completed",
+      "shard_id": "shard-002-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-002",
+      "selected_evidence_ids": [
+        "diff:packages/features/bookings/di/BookingCancelService.module.ts:1",
+        "diff:packages/features/bookings/di/BookingCancelService.module.ts:2",
+        "diff:packages/features/bookings/di/BookingCancelService.module.ts:3",
+        "diff:packages/features/bookings/di/BookingCancelService.module.ts:4",
+        "diff:packages/features/bookings/di/BookingCancelService.module.ts:5",
+        "diff:packages/features/bookings/di/BookingCancelService.module.ts:6",
+        "diff:packages/features/bookings/di/BookingCancelService.module.ts:7",
+        "diff:packages/features/bookings/di/BookingCancelService.module.ts:8",
+        "diff_hunk:packages/features/bookingReference/repositories/BookingReferenceRepository.ts:15",
+        "diff_hunk:packages/features/bookingReference/repositories/BookingReferenceRepository.ts:64"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "packages/features/bookingReference/repositories/BookingReferenceRepository.ts",
+          "line": 15,
+          "severity": "high",
+          "category": "correctness",
+          "message": "The class BookingReferenceRepository is changed from a static-only class to an instance class with a constructor that accepts a PrismaClient dependency, but the existing static methods (e.g., findDailyVideoReferenceByRoomName) still use the global `prisma` object directly instead of the injected `this.prismaClient`. This creates an inconsistency where some methods use the injected client and others use the global client, which can lead to unexpected behavior (e.g., different transaction contexts or connection pools) and defeats the purpose of dependency injection.",
+          "suggestion": "Refactor all existing static methods in BookingReferenceRepository to use the injected prismaClient instance (e.g., make them instance methods or pass the client as a parameter) to ensure consistent database access.",
+          "confidence": 0.9,
+          "evidence_ids": [
+            "diff_hunk:packages/features/bookingReference/repositories/BookingReferenceRepository.ts:15",
+            "diff_hunk:packages/features/bookingReference/repositories/BookingReferenceRepository.ts:64"
+          ]
+        },
+        {
+          "file": "packages/features/bookings/di/BookingCancelService.module.ts",
+          "line": 2,
+          "severity": "high",
+          "category": "correctness",
+          "message": "The import path for BookingCancelService is changed from an absolute path `@calcom/features/bookings/lib/handleCancelBooking` to a relative path `../lib/handleCancelBooking`. This relative path may break if the module is moved or if the directory structure changes, and it is inconsistent with the other imports in the same file that use absolute `@calcom/...` paths (e.g., lines 3, 6, 7). This can cause module resolution failures in different environments or build configurations.",
+          "suggestion": "Use the absolute `@calcom/...` import path for consistency and to avoid path resolution issues: `import { BookingCancelService } from \"@calcom/features/bookings/lib/handleCancelBooking\";`",
+          "confidence": 0.85,
+          "evidence_ids": [
+            "diff:packages/features/bookings/di/BookingCancelService.module.ts:1",
+            "diff:packages/features/bookings/di/BookingCancelService.module.ts:2",
+            "diff:packages/features/bookings/di/BookingCancelService.module.ts:3",
+            "diff:packages/features/bookings/di/BookingCancelService.module.ts:6",
+            "diff:packages/features/bookings/di/BookingCancelService.module.ts:7"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff:packages/features/bookings/di/BookingCancelService.module.ts:1",
+          "diff:packages/features/bookings/di/BookingCancelService.module.ts:2",
+          "diff:packages/features/bookings/di/BookingCancelService.module.ts:3",
+          "diff:packages/features/bookings/di/BookingCancelService.module.ts:4",
+          "diff:packages/features/bookings/di/BookingCancelService.module.ts:5",
+          "diff:packages/features/bookings/di/BookingCancelService.module.ts:6",
+          "diff:packages/features/bookings/di/BookingCancelService.module.ts:7",
+          "diff:packages/features/bookings/di/BookingCancelService.module.ts:8",
+          "diff_hunk:packages/features/bookingReference/repositories/BookingReferenceRepository.ts:15",
+          "diff_hunk:packages/features/bookingReference/repositories/BookingReferenceRepository.ts:64"
+        ],
+        "output_issue_ids": [
+          "correctness:packages/features/bookingReference/repositories/BookingReferenceRepository.ts:15",
+          "correctness:packages/features/bookings/di/BookingCancelService.module.ts:2"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 65397,
+        "token_count_in": 4482,
+        "token_count_out": 617,
+        "trace_id": "3fbec0c05a164707b00cf9e5712bd5ab",
+        "span_id": "00cd9fb325c745f8",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002-refill",
+        "shard_index": 1,
+        "shard_count": 6,
+        "context_request_count": 0,
+        "context_refill_used": true
       }
     },
     "b5af5ce44a0193ec1c14577291b55818b998bc8d22f1b3ce5636580f656195a1": {
@@ -213,8 +335,8 @@
           "severity": "error",
           "category": "architecture",
           "message": "Violation of 'Prevent Circular Dependencies Between Core Packages': packages/features/bookings/lib/handleCancelBooking.ts imports from @calcom/features/profile/repositories/ProfileRepository and @calcom/features/users/repositories/UserRepository, which are within the 'features' package. The 'lib' package must not import from 'features'.",
-          "suggestion": "Move ProfileRepository and UserRepository to a shared package that both lib and features can depend on, or inject these dependencies via the handler's parameters instead of importing them directly.",
-          "confidence": 0.5,
+          "suggestion": "Move the ProfileRepository and UserRepository dependencies to a shared core package or inject them via the Dependencies parameter instead of importing directly.",
+          "confidence": 0.95,
           "evidence_ids": [
             "diff_hunk:packages/features/bookings/lib/handleCancelBooking.ts:18"
           ]
@@ -224,9 +346,9 @@
           "line": 136,
           "severity": "warning",
           "category": "maintainability",
-          "message": "The handler function now accepts an optional dependencies parameter but falls back to constructing repository instances directly inside the function body when dependencies are not provided. This creates a hidden dependency on concrete repository classes and bypasses the DI container, making the code harder to test and maintain.",
-          "suggestion": "Remove the fallback construction inside the handler and require callers to always provide dependencies, or use the DI container to resolve dependencies consistently.",
-          "confidence": 0.5,
+          "message": "The handler function creates repository instances (UserRepository, BookingRepository, etc.) directly as fallback when no dependencies are provided. This couples the handler to concrete implementations and makes testing harder.",
+          "suggestion": "Require dependencies to always be provided (remove the fallback) or use a dependency injection container to resolve them.",
+          "confidence": 0.8,
           "evidence_ids": [
             "diff_hunk:packages/features/bookings/lib/handleCancelBooking.ts:136"
           ]
@@ -252,11 +374,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 13493,
+        "latency_ms": 10446,
         "token_count_in": 6802,
-        "token_count_out": 378,
-        "trace_id": "a63b0378af0544968ede37ab5182a47a",
-        "span_id": "5325cb2616c748ff",
+        "token_count_out": 363,
+        "trace_id": "44b7be4e12e2449cbe458e1af19ac6af",
+        "span_id": "1fd69d3193dd45ce",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -284,11 +406,11 @@
         {
           "file": "packages/features/bookings/repositories/PrismaBookingAttendeeRepository.ts",
           "line": 1,
-          "severity": "high",
+          "severity": "error",
           "category": "naming_convention",
-          "message": "Repository class name 'PrismaBookingAttendeeRepository' does not follow the required 'Prisma<Entity>Repository' pattern where Entity should be a single entity name (e.g., PrismaAttendeeRepository). The filename also uses a compound name 'PrismaBookingAttendeeRepository.ts' which deviates from the expected pattern.",
-          "suggestion": "Rename the file to 'PrismaAttendeeRepository.ts' and the class to 'PrismaAttendeeRepository' to match the naming convention.",
-          "confidence": 0.9,
+          "message": "Repository class name 'PrismaBookingAttendeeRepository' does not follow the required 'Prisma<Entity>Repository' pattern where Entity should match the domain entity (e.g., 'Attendee' -> 'PrismaAttendeeRepository'). The filename also uses a compound name that may not match the entity name exactly.",
+          "suggestion": "Rename the class to 'PrismaAttendeeRepository' and the file to 'PrismaAttendeeRepository.ts' to follow the naming convention.",
+          "confidence": 0.95,
           "evidence_ids": [
             "diff_hunk:packages/features/bookings/repositories/PrismaBookingAttendeeRepository.ts:1"
           ]
@@ -296,11 +418,11 @@
         {
           "file": "packages/features/bookings/repositories/BookingRepository.ts",
           "line": 10,
-          "severity": "high",
+          "severity": "error",
           "category": "circular_dependency",
-          "message": "Import from '@calcom/lib/server/repository/dto/IBookingRepository' violates the rule that 'lib' package must not import from 'features' package. The import path indicates a dependency from the 'lib' package into the 'features' package, which is a restricted cross-package import.",
-          "suggestion": "Move the IBookingRepository interface to a shared package (e.g., @calcom/types) or restructure to avoid the lib->features dependency.",
-          "confidence": 0.85,
+          "message": "Import from '@calcom/lib/server/repository/dto/IBookingRepository' violates the rule that 'lib' package must not import from 'features' package. The import path indicates a dependency from lib to features, which is a restricted cross-package import.",
+          "suggestion": "Move the DTO interfaces to a shared package that both lib and features can depend on, or restructure to avoid the circular dependency.",
+          "confidence": 0.9,
           "evidence_ids": [
             "diff_hunk:packages/features/bookings/repositories/BookingRepository.ts:10"
           ]
@@ -326,11 +448,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 3557,
+        "latency_ms": 28552,
         "token_count_in": 8120,
-        "token_count_out": 411,
-        "trace_id": "5cdab819877546f6a1a77fefd0122378",
-        "span_id": "4d8dfa399e0f409b",
+        "token_count_out": 389,
+        "trace_id": "96258387294841a384d20ac1bbec3b06",
+        "span_id": "abfba4b64ef846ee",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -353,7 +475,34 @@
         "diff_hunk:packages/lib/server/repository/dto/IBookingReferenceRepository.ts:1"
       ],
       "context_requests": [],
-      "issues": [],
+      "issues": [
+        {
+          "file": "packages/features/users/di/Profile.module.ts",
+          "line": 1,
+          "severity": "error",
+          "category": "architecture",
+          "message": "Circular dependency risk: features package imports from lib/server/repository/dto, but review guidelines prohibit lib from importing from features. The new Profile.module.ts in features/users/di imports ProfileRepository from features/profile/repositories, which now imports IProfileRepository from @calcom/lib/server/repository/dto. This creates a potential circular dependency between features and lib packages.",
+          "suggestion": "Move IProfileRepository interface to a shared types package that both lib and features can depend on, or define the interface within the features package and have lib depend on features if the dependency hierarchy allows it.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:packages/features/users/di/Profile.module.ts:1",
+            "diff_hunk:packages/features/profile/repositories/ProfileRepository.ts:7"
+          ]
+        },
+        {
+          "file": "packages/features/profile/repositories/ProfileRepository.ts",
+          "line": 10,
+          "severity": "warning",
+          "category": "naming",
+          "message": "Naming convention violation: The file is named ProfileRepository.ts but the class is likely named ProfileRepository (based on import in Profile.module.ts). The guideline requires repository classes to use 'Prisma<Entity>Repository' pattern, so the class should be named PrismaProfileRepository.",
+          "suggestion": "Rename the class to PrismaProfileRepository and rename the file to PrismaProfileRepository.ts to follow the established naming convention.",
+          "confidence": 0.6,
+          "evidence_ids": [
+            "diff_hunk:packages/features/users/di/Profile.module.ts:1",
+            "diff_hunk:packages/features/profile/repositories/ProfileRepository.ts:7"
+          ]
+        }
+      ],
       "agent_run": {
         "agent_name": "openai_compatible_reviewer",
         "model": "deepseek-ai/DeepSeek-V4-Flash",
@@ -364,17 +513,20 @@
           "diff_hunk:packages/features/users/repositories/UserRepository.ts:98",
           "diff_hunk:packages/lib/server/repository/dto/IBookingReferenceRepository.ts:1"
         ],
-        "output_issue_ids": [],
+        "output_issue_ids": [
+          "architecture:packages/features/users/di/Profile.module.ts:1",
+          "naming:packages/features/profile/repositories/ProfileRepository.ts:10"
+        ],
         "fallback_used": false,
         "iteration": 0,
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 476,
+        "latency_ms": 4519,
         "token_count_in": 5819,
-        "token_count_out": 12,
-        "trace_id": "5e35c9f21cfb40f1a0a0177d1ae05bea",
-        "span_id": "ad9a51b330d64e4b",
+        "token_count_out": 372,
+        "trace_id": "2dcdf7f548df405e9474a6844f8465b2",
+        "span_id": "93e22099148a4066",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -410,13 +562,15 @@
         "fallback_used": false,
         "iteration": 0,
         "feedback_hash": "",
-        "retry_count": 0,
-        "retry_log": [],
-        "latency_ms": 530,
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 64148,
         "token_count_in": 5384,
         "token_count_out": 12,
-        "trace_id": "216cc26c72b54102b4786bd9936b0c3b",
-        "span_id": "b5603151687440e2",
+        "trace_id": "92a93d703788449980c143b457adfd74",
+        "span_id": "c9acd3b5d9df44c7",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",

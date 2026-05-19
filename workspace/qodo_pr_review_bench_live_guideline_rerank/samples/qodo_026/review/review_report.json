@@ -6,91 +6,34 @@
     "changed_entity_count": 14,
     "risk_signal_count": 0,
     "finding_count": 0,
-    "needs_human_review_count": 2,
-    "discarded_count": 2,
+    "needs_human_review_count": 0,
+    "discarded_count": 0,
     "evidence_count": 318,
     "missing_evidence_id_count": 0,
-    "agent_run_count": 6,
+    "agent_run_count": 5,
     "prompt_exported": false,
     "loop_enabled": true,
     "loop_iterations_completed": 1,
-    "loop_converged": false,
+    "loop_converged": true,
     "fallback_used": false,
     "fallback_reason": null,
     "resume_used": false,
     "resume_ignored_reason": null,
-    "total_latency_ms": 57358,
-    "total_token_count_in": 32620,
-    "total_token_count_out": 1411,
+    "total_latency_ms": 268884,
+    "total_token_count_in": 20687,
+    "total_token_count_out": 36,
     "context_budget_enabled": true,
     "context_truncated": true,
-    "selected_evidence_count": 22,
-    "omitted_evidence_count": 296,
+    "selected_evidence_count": 14,
+    "omitted_evidence_count": 304,
     "review_shard_count": 4,
-    "context_refill_count": 1,
-    "context_request_count": 1,
+    "context_refill_count": 0,
+    "context_request_count": 0,
     "target_repo_modified": false
   },
   "findings": [],
-  "needs_human_review": [
-    {
-      "file": "apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts",
-      "line": 96,
-      "severity": "medium",
-      "category": "correctness",
-      "message": "The new `getDisplayEmail` method strips a 25-character alphanumeric suffix after a '+' from an email address, but the regex pattern `/\\+[a-zA-Z0-9]{25}/` only matches exactly 25 characters. If the plus-suffix is shorter or longer, the replacement silently fails, leaving the full email unchanged. This can cause displayEmail to equal the raw email when it should have been sanitized, or fail to match a valid plus-suffix of a different length.",
-      "suggestion": "Use a more flexible pattern such as `/\\+[a-zA-Z0-9]+/` to match any length of alphanumeric plus-suffix, or validate the expected suffix length against the actual data to ensure the regex matches correctly.",
-      "confidence": 0.5,
-      "evidence_ids": [
-        "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:93"
-      ]
-    },
-    {
-      "file": "apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts",
-      "line": 131,
-      "severity": "medium",
-      "category": "maintainability",
-      "message": "The getDisplayEmail method is called repeatedly with the same attendee email in multiple hunks (lines 131, 154, 216, 275, 299, 383). If getDisplayEmail performs any non-trivial computation or I/O, this could be inefficient.",
-      "suggestion": "Consider caching the result of getDisplayEmail for a given email within the request scope, or ensure the method is lightweight.",
-      "confidence": 0.5,
-      "evidence_ids": [
-        "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:131",
-        "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:154",
-        "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:216",
-        "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:275",
-        "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:299",
-        "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:383"
-      ]
-    }
-  ],
-  "discarded": [
-    {
-      "file": "apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts",
-      "line": 96,
-      "severity": "low",
-      "category": "maintainability",
-      "message": "The class name `OutputBookingsService_2024_08_13` does not follow the naming convention '<Entity>Service' as required by the review guideline 'Repository and Service Classes Must Follow Naming Conventions'. The class name includes a date suffix and does not match the expected pattern.",
-      "suggestion": "Rename the class to follow the '<Entity>Service' pattern, e.g., `OutputBookingsService`, and adjust the filename accordingly if needed.",
-      "confidence": 0.5,
-      "evidence_ids": [
-        "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:93"
-      ],
-      "filter_reason": "style_preference"
-    },
-    {
-      "file": "apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts",
-      "line": 421,
-      "severity": "high",
-      "category": "correctness",
-      "message": "Removing sort from getOutputRecurringSeatedBookings changes the ordering contract of the returned array, which may break callers that expect chronological order.",
-      "suggestion": "Restore the sort or document the new ordering contract explicitly. If callers rely on sorted output, keep the sort; otherwise, update all callers to handle unsorted results.",
-      "confidence": 0.5,
-      "evidence_ids": [
-        "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:421"
-      ],
-      "filter_reason": "low_signal_suggestion"
-    }
-  ],
+  "needs_human_review": [],
+  "discarded": [],
   "changed_files": [
     {
       "old_path": ".github/oasdiff-err-ignore.txt",
@@ -6680,11 +6623,11 @@
       "feedback_hash": "",
       "retry_count": 0,
       "retry_log": [],
-      "latency_ms": 1787,
+      "latency_ms": 3226,
       "token_count_in": 8103,
       "token_count_out": 12,
-      "trace_id": "fd03965c70444c71aeebea1bcc5621be",
-      "span_id": "309b80d907074493",
+      "trace_id": "b132bd547a1c48e283b5507efb2e400b",
+      "span_id": "b0243038d0e2456d",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
@@ -6708,13 +6651,15 @@
       "fallback_used": false,
       "iteration": 0,
       "feedback_hash": "",
-      "retry_count": 0,
-      "retry_log": [],
-      "latency_ms": 22120,
+      "retry_count": 1,
+      "retry_log": [
+        "attempt=1 error=timeout delay=1.00s"
+      ],
+      "latency_ms": 63247,
       "token_count_in": 8171,
       "token_count_out": 12,
-      "trace_id": "4f97d66659f04ef5b18cdf6b887faa66",
-      "span_id": "3655ef04b3c744ca",
+      "trace_id": "d48f18a698d74c20a457de7e34d061ee",
+      "span_id": "f8166505817f4469",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
@@ -6734,65 +6679,28 @@
         "diff_hunk:apps/api/v2/src/modules/organizations/teams/bookings/organizations-teams-bookings.controller.e2e-spec.ts:250",
         "diff_hunk:apps/api/v2/src/modules/organizations/users/bookings/controllers/organizations-users-bookings.e2e-spec.ts:233"
       ],
-      "output_issue_ids": [
-        "correctness:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:96",
-        "maintainability:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:96"
-      ],
+      "output_issue_ids": [],
       "fallback_used": false,
       "iteration": 0,
       "feedback_hash": "",
-      "retry_count": 0,
-      "retry_log": [],
-      "latency_ms": 10521,
-      "token_count_in": 7011,
-      "token_count_out": 851,
-      "trace_id": "c970d06d668743ee829d1ef54e7c6982",
-      "span_id": "55027e8393c54763",
+      "retry_count": 2,
+      "retry_log": [
+        "attempt=1 error=timeout delay=1.00s",
+        "attempt=2 error=timeout delay=2.00s"
+      ],
+      "latency_ms": 183142,
+      "token_count_in": 0,
+      "token_count_out": 0,
+      "trace_id": "4a0e6bb3a067437ab1f55f6077fef84f",
+      "span_id": "5e735a8c11c04b69",
       "parent_span_id": "",
-      "status": "ok",
-      "error_type": "",
+      "status": "error",
+      "error_type": "_AgentTransientError",
       "shard_id": "shard-003",
       "shard_index": 2,
       "shard_count": 4,
-      "context_request_count": 1,
-      "context_refill_used": false
-    },
-    {
-      "agent_name": "openai_compatible_reviewer",
-      "model": "deepseek-ai/DeepSeek-V4-Flash",
-      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
-      "input_evidence_ids": [
-        "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:131",
-        "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:154",
-        "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:216",
-        "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:275",
-        "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:299",
-        "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:383",
-        "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:410",
-        "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:421"
-      ],
-      "output_issue_ids": [
-        "correctness:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:421",
-        "maintainability:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:131"
-      ],
-      "fallback_used": false,
-      "iteration": 0,
-      "feedback_hash": "",
-      "retry_count": 0,
-      "retry_log": [],
-      "latency_ms": 21798,
-      "token_count_in": 4922,
-      "token_count_out": 524,
-      "trace_id": "cd4e57b44c3c41ab9bde0ae1e7fa229d",
-      "span_id": "97e911b1cd844f4b",
-      "parent_span_id": "",
-      "status": "ok",
-      "error_type": "",
-      "shard_id": "shard-003-refill",
-      "shard_index": 2,
-      "shard_count": 4,
       "context_request_count": 0,
-      "context_refill_used": true
+      "context_refill_used": false
     },
     {
       "agent_name": "openai_compatible_reviewer",
@@ -6808,11 +6716,11 @@
       "feedback_hash": "",
       "retry_count": 0,
       "retry_log": [],
-      "latency_ms": 1132,
+      "latency_ms": 19269,
       "token_count_in": 4413,
       "token_count_out": 12,
-      "trace_id": "cf71e597034a4f6bb45afbae1392a387",
-      "span_id": "4258ba03bb0d48b5",
+      "trace_id": "903fe58711464c00aa91c364fe8a123f",
+      "span_id": "9b729a59bbe24086",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
@@ -6826,15 +6734,7 @@
       "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
       "model": null,
       "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
-      "input_evidence_ids": [
-        "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:131",
-        "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:154",
-        "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:216",
-        "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:275",
-        "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:299",
-        "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:383",
-        "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:93"
-      ],
+      "input_evidence_ids": [],
       "output_issue_ids": [],
       "fallback_used": false,
       "iteration": 0,
@@ -6862,9 +6762,9 @@
     "strategy": "file_risk_shards_v1",
     "context_profile": "risk_compact_manifest_v1",
     "max_input_tokens": 9000,
-    "estimated_input_tokens": 25426,
-    "selected_evidence_count": 22,
-    "omitted_evidence_count": 296,
+    "estimated_input_tokens": 21388,
+    "selected_evidence_count": 14,
+    "omitted_evidence_count": 304,
     "selected_evidence_ids": [
       "diff_hunk:.github/oasdiff-err-ignore.txt:2",
       "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/controllers/e2e/api-key-bookings.e2e-spec.ts:177",
@@ -6879,15 +6779,7 @@
       "diff_hunk:apps/api/v2/src/modules/organizations/teams/bookings/organizations-teams-bookings.controller.e2e-spec.ts:250",
       "diff_hunk:apps/api/v2/src/modules/organizations/users/bookings/controllers/organizations-users-bookings.e2e-spec.ts:233",
       "diff_hunk:docs/api-reference/v2/openapi.json:31712",
-      "diff_hunk:packages/platform/types/bookings/2024-08-13/outputs/booking.output.ts:29",
-      "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:131",
-      "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:154",
-      "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:216",
-      "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:275",
-      "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:299",
-      "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:383",
-      "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:410",
-      "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:421"
+      "diff_hunk:packages/platform/types/bookings/2024-08-13/outputs/booking.output.ts:29"
     ],
     "omitted_evidence_ids": [
       "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/controllers/e2e/reassign-bookings.e2e-spec.ts:533",
@@ -7045,6 +6937,14 @@
       "diff:apps/api/v2/src/ee/bookings/2024-08-13/controllers/e2e/user-bookings.e2e-spec.ts:572",
       "diff:apps/api/v2/src/ee/bookings/2024-08-13/controllers/e2e/user-bookings.e2e-spec.ts:595",
       "diff:apps/api/v2/src/ee/bookings/2024-08-13/controllers/e2e/user-bookings.e2e-spec.ts:617",
+      "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:131",
+      "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:154",
+      "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:216",
+      "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:275",
+      "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:299",
+      "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:383",
+      "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:410",
+      "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:421",
       "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:512",
       "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:545",
       "diff_hunk:apps/api/v2/src/modules/organizations/bookings/organizations-bookings.controller.e2e-spec.ts:389",
@@ -7081,53 +6981,14 @@
       "diff:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:278",
       "diff:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:302",
       "diff:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:303",
-      "diff:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:304",
-      "diff:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:305",
-      "diff:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:306",
-      "diff:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:307",
-      "diff:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:308",
-      "diff:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:309",
-      "diff:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:310",
-      "diff:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:311",
-      "diff:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:312"
+      "diff:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:304"
     ],
     "selected_risk_signal_count": 0,
     "context_truncated": true,
     "shard_count": 4,
-    "refill_count": 1,
-    "context_request_count": 1,
-    "context_requests": [
-      {
-        "request_type": "same_file_more_evidence",
-        "path": "apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts",
-        "evidence_ids": [
-          "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:131",
-          "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:154",
-          "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:216",
-          "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:275",
-          "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:299",
-          "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:383",
-          "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:410",
-          "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:421",
-          "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:512",
-          "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:545"
-        ],
-        "risk_tag": null,
-        "symbol": null,
-        "reason": "To verify how `getDisplayEmail` is used in the output service and whether the displayEmail field is correctly populated in the response.",
-        "source_shard_id": "shard-003",
-        "fulfilled_evidence_ids": [
-          "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:131",
-          "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:154",
-          "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:216",
-          "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:275",
-          "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:299",
-          "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:383",
-          "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:410",
-          "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:421"
-        ]
-      }
-    ],
+    "refill_count": 0,
+    "context_request_count": 0,
+    "context_requests": [],
     "shards": [
       {
         "shard_id": "shard-001",
@@ -7168,16 +7029,6 @@
         "omitted_evidence_count": 65,
         "estimated_input_tokens": 3594,
         "context_truncated": true
-      },
-      {
-        "shard_id": "shard-003-refill",
-        "shard_index": 2,
-        "is_refill": true,
-        "parent_shard_id": "shard-003",
-        "selected_evidence_count": 8,
-        "omitted_evidence_count": 0,
-        "estimated_input_tokens": 4038,
-        "context_truncated": false
       }
     ],
     "warnings": []
@@ -7186,7 +7037,7 @@
     "enabled": true,
     "max_iter": 1,
     "iterations_completed": 1,
-    "converged": false,
+    "converged": true,
     "fallback_used": false,
     "fallback_reason": null,
     "checkpoint_path": "D:\\learn\\code-review-agent\\workspace\\qodo_pr_review_bench_live_guideline_rerank\\samples\\qodo_026\\review\\loop_checkpoint.json",
@@ -7195,38 +7046,14 @@
     "iterations": [
       {
         "i": 0,
-        "candidate_issue_count": 4,
-        "verified_count": 2,
+        "candidate_issue_count": 0,
+        "verified_count": 0,
         "needs_human_review_count": 0,
-        "discarded_count": 2,
+        "discarded_count": 0,
         "keep_count": 0,
-        "uncertain_count": 2,
+        "uncertain_count": 0,
         "reject_count": 0,
-        "feedback_sent": [
-          {
-            "issue_id": "correctness:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:96",
-            "category": "correctness",
-            "critic_reason": "low confidence",
-            "original_confidence": 0.5,
-            "evidence_ids": [
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:93"
-            ]
-          },
-          {
-            "issue_id": "maintainability:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:131",
-            "category": "maintainability",
-            "critic_reason": "low confidence",
-            "original_confidence": 0.5,
-            "evidence_ids": [
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:131",
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:154",
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:216",
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:275",
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:299",
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:383"
-            ]
-          }
-        ],
+        "feedback_sent": [],
         "agent_runs": [
           {
             "agent_name": "openai_compatible_reviewer",
@@ -7244,11 +7071,11 @@
             "feedback_hash": "",
             "retry_count": 0,
             "retry_log": [],
-            "latency_ms": 1787,
+            "latency_ms": 3226,
             "token_count_in": 8103,
             "token_count_out": 12,
-            "trace_id": "fd03965c70444c71aeebea1bcc5621be",
-            "span_id": "309b80d907074493",
+            "trace_id": "b132bd547a1c48e283b5507efb2e400b",
+            "span_id": "b0243038d0e2456d",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
@@ -7272,13 +7099,15 @@
             "fallback_used": false,
             "iteration": 0,
             "feedback_hash": "",
-            "retry_count": 0,
-            "retry_log": [],
-            "latency_ms": 22120,
+            "retry_count": 1,
+            "retry_log": [
+              "attempt=1 error=timeout delay=1.00s"
+            ],
+            "latency_ms": 63247,
             "token_count_in": 8171,
             "token_count_out": 12,
-            "trace_id": "4f97d66659f04ef5b18cdf6b887faa66",
-            "span_id": "3655ef04b3c744ca",
+            "trace_id": "d48f18a698d74c20a457de7e34d061ee",
+            "span_id": "f8166505817f4469",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
@@ -7298,65 +7127,28 @@
               "diff_hunk:apps/api/v2/src/modules/organizations/teams/bookings/organizations-teams-bookings.controller.e2e-spec.ts:250",
               "diff_hunk:apps/api/v2/src/modules/organizations/users/bookings/controllers/organizations-users-bookings.e2e-spec.ts:233"
             ],
-            "output_issue_ids": [
-              "correctness:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:96",
-              "maintainability:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:96"
-            ],
+            "output_issue_ids": [],
             "fallback_used": false,
             "iteration": 0,
             "feedback_hash": "",
-            "retry_count": 0,
-            "retry_log": [],
-            "latency_ms": 10521,
-            "token_count_in": 7011,
-            "token_count_out": 851,
-            "trace_id": "c970d06d668743ee829d1ef54e7c6982",
-            "span_id": "55027e8393c54763",
+            "retry_count": 2,
+            "retry_log": [
+              "attempt=1 error=timeout delay=1.00s",
+              "attempt=2 error=timeout delay=2.00s"
+            ],
+            "latency_ms": 183142,
+            "token_count_in": 0,
+            "token_count_out": 0,
+            "trace_id": "4a0e6bb3a067437ab1f55f6077fef84f",
+            "span_id": "5e735a8c11c04b69",
             "parent_span_id": "",
-            "status": "ok",
-            "error_type": "",
+            "status": "error",
+            "error_type": "_AgentTransientError",
             "shard_id": "shard-003",
             "shard_index": 2,
             "shard_count": 4,
-            "context_request_count": 1,
-            "context_refill_used": false
-          },
-          {
-            "agent_name": "openai_compatible_reviewer",
-            "model": "deepseek-ai/DeepSeek-V4-Flash",
-            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
-            "input_evidence_ids": [
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:131",
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:154",
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:216",
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:275",
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:299",
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:383",
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:410",
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:421"
-            ],
-            "output_issue_ids": [
-              "correctness:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:421",
-              "maintainability:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:131"
-            ],
-            "fallback_used": false,
-            "iteration": 0,
-            "feedback_hash": "",
-            "retry_count": 0,
-            "retry_log": [],
-            "latency_ms": 21798,
-            "token_count_in": 4922,
-            "token_count_out": 524,
-            "trace_id": "cd4e57b44c3c41ab9bde0ae1e7fa229d",
-            "span_id": "97e911b1cd844f4b",
-            "parent_span_id": "",
-            "status": "ok",
-            "error_type": "",
-            "shard_id": "shard-003-refill",
-            "shard_index": 2,
-            "shard_count": 4,
             "context_request_count": 0,
-            "context_refill_used": true
+            "context_refill_used": false
           },
           {
             "agent_name": "openai_compatible_reviewer",
@@ -7372,11 +7164,11 @@
             "feedback_hash": "",
             "retry_count": 0,
             "retry_log": [],
-            "latency_ms": 1132,
+            "latency_ms": 19269,
             "token_count_in": 4413,
             "token_count_out": 12,
-            "trace_id": "cf71e597034a4f6bb45afbae1392a387",
-            "span_id": "4258ba03bb0d48b5",
+            "trace_id": "903fe58711464c00aa91c364fe8a123f",
+            "span_id": "9b729a59bbe24086",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
@@ -7390,15 +7182,7 @@
             "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
             "model": null,
             "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
-            "input_evidence_ids": [
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:131",
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:154",
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:216",
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:275",
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:299",
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:383",
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:93"
-            ],
+            "input_evidence_ids": [],
             "output_issue_ids": [],
             "fallback_used": false,
             "iteration": 0,
@@ -7420,81 +7204,22 @@
             "context_refill_used": false
           }
         ],
-        "issue_set": [
-          "correctness:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:96",
-          "maintainability:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:131"
-        ],
+        "issue_set": [],
         "keep": [],
-        "needs_human_review": [
-          {
-            "file": "apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts",
-            "line": 96,
-            "severity": "medium",
-            "category": "correctness",
-            "message": "The new `getDisplayEmail` method strips a 25-character alphanumeric suffix after a '+' from an email address, but the regex pattern `/\\+[a-zA-Z0-9]{25}/` only matches exactly 25 characters. If the plus-suffix is shorter or longer, the replacement silently fails, leaving the full email unchanged. This can cause displayEmail to equal the raw email when it should have been sanitized, or fail to match a valid plus-suffix of a different length.",
-            "suggestion": "Use a more flexible pattern such as `/\\+[a-zA-Z0-9]+/` to match any length of alphanumeric plus-suffix, or validate the expected suffix length against the actual data to ensure the regex matches correctly.",
-            "confidence": 0.5,
-            "evidence_ids": [
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:93"
-            ]
-          },
-          {
-            "file": "apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts",
-            "line": 131,
-            "severity": "medium",
-            "category": "maintainability",
-            "message": "The getDisplayEmail method is called repeatedly with the same attendee email in multiple hunks (lines 131, 154, 216, 275, 299, 383). If getDisplayEmail performs any non-trivial computation or I/O, this could be inefficient.",
-            "suggestion": "Consider caching the result of getDisplayEmail for a given email within the request scope, or ensure the method is lightweight.",
-            "confidence": 0.5,
-            "evidence_ids": [
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:131",
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:154",
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:216",
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:275",
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:299",
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:383"
-            ]
-          }
-        ],
-        "discarded": [
-          {
-            "file": "apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts",
-            "line": 96,
-            "severity": "low",
-            "category": "maintainability",
-            "message": "The class name `OutputBookingsService_2024_08_13` does not follow the naming convention '<Entity>Service' as required by the review guideline 'Repository and Service Classes Must Follow Naming Conventions'. The class name includes a date suffix and does not match the expected pattern.",
-            "suggestion": "Rename the class to follow the '<Entity>Service' pattern, e.g., `OutputBookingsService`, and adjust the filename accordingly if needed.",
-            "confidence": 0.5,
-            "evidence_ids": [
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:93"
-            ],
-            "filter_reason": "style_preference"
-          },
-          {
-            "file": "apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts",
-            "line": 421,
-            "severity": "high",
-            "category": "correctness",
-            "message": "Removing sort from getOutputRecurringSeatedBookings changes the ordering contract of the returned array, which may break callers that expect chronological order.",
-            "suggestion": "Restore the sort or document the new ordering contract explicitly. If callers rely on sorted output, keep the sort; otherwise, update all callers to handle unsorted results.",
-            "confidence": 0.5,
-            "evidence_ids": [
-              "diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:421"
-            ],
-            "filter_reason": "low_signal_suggestion"
-          }
-        ]
+        "needs_human_review": [],
+        "discarded": []
       }
     ]
   },
   "tracing": {
-    "total_latency_ms": 57358,
-    "total_token_count_in": 32620,
-    "total_token_count_out": 1411,
-    "total_retry_count": 0,
-    "run_count": 6,
+    "total_latency_ms": 268884,
+    "total_token_count_in": 20687,
+    "total_token_count_out": 36,
+    "total_retry_count": 3,
+    "run_count": 5,
     "status_counts": {
-      "ok": 6
+      "ok": 4,
+      "error": 1
     }
   }
 }

@@ -46,7 +46,7 @@ from code_review_agent.review.evidence import (
     build_evidence_package,
     find_missing_evidence_ids,
 )
-from code_review_agent.review.filter import filter_issues
+from code_review_agent.review.filter import filter_findings
 from code_review_agent.review.loop import (
     LOOP_CHECKPOINT_FILENAME,
     IterativeHarnessRunner,
@@ -66,6 +66,12 @@ from code_review_agent.review.risk import (
     risk_evidence_id,
 )
 from code_review_agent.review.rules import run_rules
+from code_review_agent.review.schema import (
+    ChangeSet,
+    EvidenceStore,
+    Finding,
+    IssueLifecycleResult,
+)
 
 
 
@@ -231,14 +237,23 @@ def run_review_pipeline(
         *rules_result.needs_human_review,
         *agent_needs_human_review,
     ]
-    filter_result = filter_issues(
-        candidate_findings,
-        candidate_needs_human_review,
+    candidate_lifecycle_items = [
+        Finding.from_legacy_issue(issue, status="candidate")
+        for issue in candidate_findings
+    ]
+    candidate_lifecycle_items.extend(
+        Finding.from_legacy_issue(issue, status="needs_human_review")
+        for issue in candidate_needs_human_review
+    )
+    lifecycle_result = filter_findings(
+        candidate_lifecycle_items,
         package,
         changed_paths,
     )
-    findings = filter_result.findings
-    needs_human_review = filter_result.needs_human_review
+    findings = lifecycle_result.legacy_issues_by_status("finding")
+    needs_human_review = lifecycle_result.legacy_issues_by_status(
+        "needs_human_review"
+    )
     out.mkdir(parents=True, exist_ok=True)
     prompt_exports = (
         export_agent_prompts(
@@ -265,7 +280,7 @@ def run_review_pipeline(
             *agent_candidate_scope,
         ],
         discarded=[
-            *filter_result.to_dict()["discarded"],
+            *_discarded_findings_to_dict(lifecycle_result),
             *_loop_discarded(loop_result),
         ],
         agent_runs=agent_runs,
@@ -354,6 +369,13 @@ def _build_report_dict(
     loop_data = _loop_report(loop_result, max_iter=max_iter)
     tracing_data = _tracing_report(agent_run_items)
     context_budget_data = context_budget or context_budget_disabled_summary()
+    lifecycle = IssueLifecycleResult.from_legacy_buckets(
+        findings=findings,
+        needs_human_review=needs_human_review,
+        discarded=discarded_items,
+    )
+    change_set = ChangeSet.from_legacy_package(package)
+    evidence_store = EvidenceStore.from_legacy_package(package)
     return {
         "schema_version": REVIEW_REPORT_SCHEMA_VERSION,
         "summary": {
@@ -407,7 +429,14 @@ def _build_report_dict(
             "context_request_count": int(
                 context_budget_data.get("context_request_count", 0)
             ),
+            "review_result_count": len(lifecycle.items),
             "target_repo_modified": False,
+        },
+        "review_results": lifecycle.to_dict(),
+        "change_set": change_set.to_dict(),
+        "evidence_store_summary": {
+            "count": len(evidence_store.items),
+            "types": _evidence_type_counts(evidence_store),
         },
         "findings": [issue.to_dict() for issue in findings],
         "needs_human_review": [
@@ -531,6 +560,17 @@ def _loop_discarded(loop_result: LoopResult | None) -> list[dict[str, Any]]:
     if loop_result is None:
         return []
     return [item.to_dict() for item in loop_result.discarded]
+
+
+def _discarded_findings_to_dict(
+    lifecycle_result: IssueLifecycleResult,
+) -> list[dict[str, Any]]:
+    discarded: list[dict[str, Any]] = []
+    for finding in lifecycle_result.by_status("discarded"):
+        data = finding.to_legacy_issue().to_dict()
+        data["filter_reason"] = finding.reason
+        discarded.append(data)
+    return discarded
 
 
 def _loop_report(loop_result: LoopResult | None, *, max_iter: int) -> dict[str, Any]:
@@ -662,6 +702,13 @@ def _tracing_report(agent_runs: list) -> dict[str, Any]:
         "run_count": len(agent_runs),
         "status_counts": status_counts,
     }
+
+
+def _evidence_type_counts(evidence_store: EvidenceStore) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for item in evidence_store.items.values():
+        counts[item.type] = counts.get(item.type, 0) + 1
+    return dict(sorted(counts.items()))
 
 
 def _fallback_agent_runs(exc: Exception, reviewer: object | None) -> list[AgentRun]:

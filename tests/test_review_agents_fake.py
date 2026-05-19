@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import http.client
 from io import BytesIO
 from pathlib import Path
 from urllib import error
@@ -552,6 +553,32 @@ def test_timeout_retries_then_becomes_transient(monkeypatch) -> None:
         "attempt=2 error=timeout delay=2.00s",
     ]
     assert sleeps == [1.0, 2.0]
+
+
+def test_remote_disconnect_retries_then_becomes_transient(monkeypatch) -> None:
+    calls = 0
+    sleeps: list[float] = []
+
+    def call() -> dict:
+        nonlocal calls
+        calls += 1
+        raise http.client.RemoteDisconnected("remote closed")
+
+    monkeypatch.setattr(
+        "code_review_agent.review.agents.time.sleep",
+        lambda seconds: sleeps.append(seconds),
+    )
+    retry_log: list[str] = []
+
+    with pytest.raises(Exception) as exc_info:
+        _retry_with_backoff(call, retry_log=retry_log, max_attempts=2)
+
+    assert exc_info.value.__class__.__name__ == "_AgentTransientError"
+    assert calls == 2
+    assert retry_log == [
+        "attempt=1 error=remote_disconnected delay=1.00s",
+    ]
+    assert sleeps == [1.0]
 
 
 class _FakeLiveAgent:

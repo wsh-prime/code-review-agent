@@ -14,6 +14,8 @@ from code_review_agent.models import (
     ReviewIssue,
 )
 from code_review_agent.review.filter import FilterResult, filter_issues, _merge_duplicates
+from code_review_agent.review.filter import filter_findings
+from code_review_agent.review.schema import Finding
 
 
 # ── helpers ────────────────────────────────────────────────────────────────────
@@ -327,3 +329,20 @@ def test_discarded_to_dict_includes_filter_reason():
     result = filter_issues([issue], [], pkg, CHANGED)
     d = result.to_dict()
     assert d["discarded"][0]["filter_reason"] == "invalid_evidence_ids"
+
+
+def test_filter_findings_returns_lifecycle_statuses():
+    pkg = _make_package(["diff:src/foo.py:10"])
+    finding = Finding.from_legacy_issue(_make_issue())
+    low_confidence = Finding.from_legacy_issue(
+        _make_issue(confidence=0.5),
+        status="candidate",
+    )
+
+    lifecycle = filter_findings([finding, low_confidence], pkg, CHANGED)
+
+    assert lifecycle.counts_by_status() == {
+        "finding": 1,
+        "needs_human_review": 1,
+    }
+    assert lifecycle.by_status("needs_human_review")[0].reason == "low_confidence"

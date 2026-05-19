@@ -9,6 +9,7 @@ from code_review_agent.review.issue_quality import (
     is_low_signal_review_suggestion,
     is_style_preference,
 )
+from code_review_agent.review.schema import Finding, IssueLifecycleResult
 
 
 @dataclass(slots=True)
@@ -47,45 +48,86 @@ def ground_verify(
     package: EvidencePackage,
     changed_paths: set[str],
 ) -> VerifierResult:
-    """Partition candidate issues using deterministic evidence checks."""
+    """Partition legacy candidate issues using deterministic evidence checks."""
 
-    result = VerifierResult()
+    lifecycle = ground_verify_findings(
+        [Finding.from_legacy_issue(issue) for issue in issues],
+        package,
+        changed_paths,
+    )
+    return VerifierResult(
+        verified=lifecycle.legacy_issues_by_status("verified"),
+        needs_human_review=lifecycle.legacy_issues_by_status("needs_human_review"),
+        discarded=[
+            GroundingDiscardedIssue(
+                issue=finding.to_legacy_issue(),
+                reason=finding.reason or "discarded",
+            )
+            for finding in lifecycle.by_status("discarded")
+        ],
+    )
 
-    def discard(issue: ReviewIssue, reason: str) -> None:
-        result.discarded.append(GroundingDiscardedIssue(issue=issue, reason=reason))
 
-    for issue in issues:
-        if not issue.evidence_ids:
-            discard(issue, "missing_evidence")
+def ground_verify_findings(
+    findings: list[Finding],
+    package: EvidencePackage,
+    changed_paths: set[str],
+) -> IssueLifecycleResult:
+    """Partition candidate findings using deterministic evidence checks."""
+
+    result = IssueLifecycleResult()
+
+    def emit(finding: Finding, status: str, reason: str = "") -> None:
+        result.items.append(_finding_with(finding, status=status, reason=reason))
+
+    for finding in findings:
+        issue = finding.to_legacy_issue()
+        if not finding.evidence_ids:
+            emit(finding, "discarded", "missing_evidence")
             continue
 
-        if any(eid not in package.evidence_index for eid in issue.evidence_ids):
-            discard(issue, "invalid_evidence_ids")
+        if any(eid not in package.evidence_index for eid in finding.evidence_ids):
+            emit(finding, "discarded", "invalid_evidence_ids")
             continue
 
         if is_style_preference(issue):
-            discard(issue, "style_preference")
+            emit(finding, "discarded", "style_preference")
             continue
         if is_low_signal_review_suggestion(issue):
-            discard(issue, "low_signal_suggestion")
+            emit(finding, "discarded", "low_signal_suggestion")
             continue
 
         if issue.file not in changed_paths:
             if not _has_related_changed_evidence(
                 issue, package=package, changed_paths=changed_paths
             ):
-                discard(issue, "file_not_changed")
+                emit(finding, "discarded", "file_not_changed")
                 continue
-            result.needs_human_review.append(issue)
+            emit(finding, "needs_human_review", "related_file")
             continue
 
         if not _line_is_related_to_change(issue, package):
-            result.needs_human_review.append(issue)
+            emit(finding, "needs_human_review", "line_uncertain")
             continue
 
-        result.verified.append(issue)
+        emit(finding, "verified")
 
     return result
+
+
+def _finding_with(finding: Finding, *, status: str, reason: str = "") -> Finding:
+    return Finding(
+        file=finding.file,
+        line=finding.line,
+        message=finding.message,
+        suggestion=finding.suggestion,
+        severity=finding.severity,
+        category=finding.category,
+        confidence=finding.confidence,
+        evidence_ids=list(finding.evidence_ids),
+        status=status,
+        reason=reason,
+    )
 
 
 def _has_related_changed_evidence(

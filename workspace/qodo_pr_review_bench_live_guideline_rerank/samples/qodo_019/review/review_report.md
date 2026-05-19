@@ -8,8 +8,8 @@
 - Risk signals: 0
 - Findings: 0
 - Needs human review: 1
-- Discarded: 3
-- Agent runs: 4
+- Discarded: 2
+- Agent runs: 3
 - Loop enabled: True
 - Target repo modified: False
 
@@ -20,12 +20,12 @@
 | Iterations | 1 / 1 |
 | Converged | False |
 | Fallback | False |
-| Retry count | 1 |
-| Total latency | 130365 ms |
-| Token in | 14326 |
-| Token out | 972 |
+| Retry count | 0 |
+| Total latency | 10443 ms |
+| Token in | 10359 |
+| Token out | 654 |
 
-- Iteration 0: 4 candidates, 1 verified, 1 uncertain, 0 kept, 0 rejected
+- Iteration 0: 3 candidates, 1 verified, 1 uncertain, 0 kept, 0 rejected
 
 ## Context Budget Summary
 
@@ -33,13 +33,13 @@
 |---|---:|
 | Strategy | `file_risk_shards_v1` |
 | Max input tokens | 9000 |
-| Estimated input tokens | 12283 |
-| Selected evidence | 8 |
-| Omitted evidence | 95 |
+| Estimated input tokens | 8863 |
+| Selected evidence | 6 |
+| Omitted evidence | 97 |
 | Context truncated | True |
 | Review shards | 2 |
-| Context requests | 2 |
-| Refills | 1 |
+| Context requests | 0 |
+| Refills | 0 |
 
 ## Findings
 
@@ -49,10 +49,10 @@ Checked changed files, changed entities, deterministic risk signals, and evidenc
 
 ## Needs Human Review
 
-- `correctness` high at `src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1` (0.50)
-  - Test class 'StatePersistanceJSRootTest' is deleted but its test logic is moved to 'StatePersistenceTest' without verifying that the new test method covers the same scenarios. The deleted test used a server fixture with '--RegisterDynamicJSRootComponent' argument, which is not present in the new test.
-  - Suggestion: Ensure the new test method 'PersistentStateIsSupportedInDynamicJSRoots' in 'StatePersistenceTest.cs' includes the necessary server fixture configuration (e.g., '--RegisterDynamicJSRootComponent') to replicate the original test's setup.
-  - Evidence: `diff_hunk:src/Components/test/E2ETest/Tests/StatePersistanceJSRootTest.cs:1`, `diff_hunk:src/Components/test/E2ETest/Tests/StatePersistenceTest.cs:276`
+- `correctness` medium at `src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:57` (0.50)
+  - Removing the conditional guard around RegisterForJavaScript changes behavior: the dynamic JS root component is now always registered regardless of the 'RegisterDynamicJSRootComponent' configuration flag. This may cause unintended side effects or test failures if the component registration is only desired under specific configuration.
+  - Suggestion: If the registration should always occur, ensure that the configuration flag is no longer needed and that all callers are updated. Otherwise, restore the conditional check or add a new guard.
+  - Evidence: `diff_hunk:src/Components/test/testassets/Components.TestServer/RazorComponentEndpointsStartup.cs:51`
 
 ## Changed Files
 

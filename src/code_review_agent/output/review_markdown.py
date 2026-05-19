@@ -25,6 +25,7 @@ def render_review_markdown(report: dict[str, Any]) -> str:
         f"- Findings: {summary['finding_count']}",
         f"- Needs human review: {summary['needs_human_review_count']}",
         f"- Discarded: {summary.get('discarded_count', 0)}",
+        f"- Review results: {summary.get('review_result_count', 0)}",
         f"- Agent runs: {summary.get('agent_run_count', 0)}",
         f"- Loop enabled: {summary.get('loop_enabled', False)}",
         f"- Target repo modified: {summary['target_repo_modified']}",
@@ -36,6 +37,9 @@ def render_review_markdown(report: dict[str, Any]) -> str:
 
     if summary.get("context_budget_enabled", False):
         lines.extend(_context_budget_summary_lines(report))
+
+    if isinstance(report.get("review_results"), dict) and report.get("review_results"):
+        lines.extend(_review_results_summary_lines(report))
 
     lines.extend([
         "## Findings",
@@ -184,4 +188,29 @@ def _context_budget_summary_lines(report: dict[str, Any]) -> list[str]:
         for warning in warnings[:10]:
             lines.append(f"- `{warning}`")
         lines.append("")
+    return lines
+
+
+def _review_results_summary_lines(report: dict[str, Any]) -> list[str]:
+    results = report.get("review_results")
+    counts = (
+        results.get("counts_by_status", {})
+        if isinstance(results, dict)
+        else {}
+    )
+    if not isinstance(counts, dict):
+        counts = {}
+    lines = [
+        "## Review Result Lifecycle",
+        "",
+        "| Status | Count |",
+        "|---|---:|",
+    ]
+    for status in ["finding", "needs_human_review", "discarded", "candidate"]:
+        if status in counts:
+            lines.append(f"| `{status}` | {counts[status]} |")
+    for status, count in sorted(counts.items()):
+        if status not in {"finding", "needs_human_review", "discarded", "candidate"}:
+            lines.append(f"| `{status}` | {count} |")
+    lines.append("")
     return lines

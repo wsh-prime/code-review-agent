@@ -7,9 +7,9 @@
 - Changed entities: 14
 - Risk signals: 0
 - Findings: 0
-- Needs human review: 2
-- Discarded: 2
-- Agent runs: 6
+- Needs human review: 0
+- Discarded: 0
+- Agent runs: 5
 - Loop enabled: True
 - Target repo modified: False
 
@@ -18,14 +18,14 @@
 | Metric | Value |
 |---|---:|
 | Iterations | 1 / 1 |
-| Converged | False |
+| Converged | True |
 | Fallback | False |
-| Retry count | 0 |
-| Total latency | 57358 ms |
-| Token in | 32620 |
-| Token out | 1411 |
+| Retry count | 3 |
+| Total latency | 268884 ms |
+| Token in | 20687 |
+| Token out | 36 |
 
-- Iteration 0: 4 candidates, 2 verified, 2 uncertain, 0 kept, 0 rejected
+- Iteration 0: 0 candidates, 0 verified, 0 uncertain, 0 kept, 0 rejected
 
 ## Context Budget Summary
 
@@ -33,13 +33,13 @@
 |---|---:|
 | Strategy | `file_risk_shards_v1` |
 | Max input tokens | 9000 |
-| Estimated input tokens | 25426 |
-| Selected evidence | 22 |
-| Omitted evidence | 296 |
+| Estimated input tokens | 21388 |
+| Selected evidence | 14 |
+| Omitted evidence | 304 |
 | Context truncated | True |
 | Review shards | 4 |
-| Context requests | 1 |
-| Refills | 1 |
+| Context requests | 0 |
+| Refills | 0 |
 
 ## Findings
 
@@ -49,15 +49,7 @@ Checked changed files, changed entities, deterministic risk signals, and evidenc
 
 ## Needs Human Review
 
-- `correctness` medium at `apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:96` (0.50)
-  - The new `getDisplayEmail` method strips a 25-character alphanumeric suffix after a '+' from an email address, but the regex pattern `/\+[a-zA-Z0-9]{25}/` only matches exactly 25 characters. If the plus-suffix is shorter or longer, the replacement silently fails, leaving the full email unchanged. This can cause displayEmail to equal the raw email when it should have been sanitized, or fail to match a valid plus-suffix of a different length.
-  - Suggestion: Use a more flexible pattern such as `/\+[a-zA-Z0-9]+/` to match any length of alphanumeric plus-suffix, or validate the expected suffix length against the actual data to ensure the regex matches correctly.
-  - Evidence: `diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:93`
-
-- `maintainability` medium at `apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:131` (0.50)
-  - The getDisplayEmail method is called repeatedly with the same attendee email in multiple hunks (lines 131, 154, 216, 275, 299, 383). If getDisplayEmail performs any non-trivial computation or I/O, this could be inefficient.
-  - Suggestion: Consider caching the result of getDisplayEmail for a given email within the request scope, or ensure the method is lightweight.
-  - Evidence: `diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:131`, `diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:154`, `diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:216`, `diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:275`, `diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:299`, `diff_hunk:apps/api/v2/src/ee/bookings/2024-08-13/services/output.service.ts:383`
+None.
 
 ## Changed Files
 

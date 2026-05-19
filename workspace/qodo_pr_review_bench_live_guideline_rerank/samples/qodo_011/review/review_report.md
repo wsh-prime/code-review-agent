@@ -6,10 +6,10 @@
 - Changed files: 14
 - Changed entities: 14
 - Risk signals: 10
-- Findings: 2
-- Needs human review: 0
-- Discarded: 0
-- Agent runs: 6
+- Findings: 0
+- Needs human review: 1
+- Discarded: 2
+- Agent runs: 5
 - Loop enabled: True
 - Target repo modified: False
 
@@ -18,14 +18,14 @@
 | Metric | Value |
 |---|---:|
 | Iterations | 1 / 1 |
-| Converged | True |
+| Converged | False |
 | Fallback | False |
-| Retry count | 1 |
-| Total latency | 111095 ms |
-| Token in | 34842 |
-| Token out | 690 |
+| Retry count | 0 |
+| Total latency | 92941 ms |
+| Token in | 31649 |
+| Token out | 637 |
 
-- Iteration 0: 3 candidates, 3 verified, 0 uncertain, 3 kept, 0 rejected
+- Iteration 0: 3 candidates, 1 verified, 1 uncertain, 0 kept, 0 rejected
 
 ## Context Budget Summary
 
@@ -33,29 +33,26 @@
 |---|---:|
 | Strategy | `file_risk_shards_v1` |
 | Max input tokens | 9000 |
-| Estimated input tokens | 27299 |
-| Selected evidence | 25 |
-| Omitted evidence | 407 |
+| Estimated input tokens | 24756 |
+| Selected evidence | 23 |
+| Omitted evidence | 409 |
 | Context truncated | True |
 | Review shards | 4 |
-| Context requests | 1 |
-| Refills | 1 |
+| Context requests | 0 |
+| Refills | 0 |
 
 ## Findings
 
-- `security` high at `ghost/core/core/server/services/tinybird/TinybirdService.js:146` (0.90)
-  - Removing `noTimestamp: true` from JWT signing options exposes the token to timestamp-based attacks (e.g., replay) by including the `iat` claim, which was previously suppressed.
-  - Suggestion: Restore `noTimestamp: true` or explicitly set `{noTimestamp: true}` in the jwt.sign options to maintain the original security posture.
-  - Evidence: `diff:ghost/core/core/server/services/tinybird/TinybirdService.js:146`, `diff:ghost/core/core/server/services/tinybird/TinybirdService.js:147`, `diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:144`
+No findings.
 
-- `correctness` medium at `ghost/core/core/server/services/tinybird/TinybirdService.js:51` (0.85)
-  - Removing 'api_top_browsers', 'api_top_devices', and 'api_top_os' from TINYBIRD_PIPES without corresponding removal of test cases that filter by browser and device will cause test failures for the removed pipes.
-  - Suggestion: Either keep the pipes in the list or remove the associated test cases that depend on them.
-  - Evidence: `diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:48`, `diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_terms.yaml:11`
+Checked changed files, changed entities, deterministic risk signals, and evidence references. No high-confidence review finding was produced.
 
 ## Needs Human Review
 
-None.
+- `security` high at `ghost/core/core/server/services/tinybird/TinybirdService.js:147` (0.50)
+  - Removing `noTimestamp: true` from JWT signing options causes the token to include an `iat` (issued at) claim, which may break token validation on the Tinybird side if it expects tokens without timestamps.
+  - Suggestion: Verify that Tinybird accepts JWT tokens with an `iat` claim. If not, restore `{noTimestamp: true}` or add explicit `iat` handling.
+  - Evidence: `diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:144`
 
 ## Changed Files
 

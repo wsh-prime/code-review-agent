@@ -9,7 +9,8 @@ from code_review_agent.models import (
     ReviewEvidence,
     ReviewIssue,
 )
-from code_review_agent.review.verifier import ground_verify
+from code_review_agent.review.schema import Finding
+from code_review_agent.review.verifier import ground_verify, ground_verify_findings
 
 
 def test_ground_verify_empty_evidence_ids() -> None:
@@ -79,6 +80,18 @@ def test_ground_verify_keeps_valid_issue() -> None:
     assert result.needs_human_review == []
     assert result.discarded == []
     assert result.to_dict()["verified"][0]["category"] == "test_gap"
+
+
+def test_ground_verify_findings_returns_lifecycle_result() -> None:
+    issue = _issue()
+    lifecycle = ground_verify_findings(
+        [Finding.from_legacy_issue(issue)],
+        _package(),
+        {"src/foo.py"},
+    )
+
+    assert lifecycle.counts_by_status() == {"verified": 1}
+    assert lifecycle.legacy_issues_by_status("verified") == [issue]
 
 
 def _issue(

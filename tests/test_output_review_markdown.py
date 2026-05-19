@@ -62,6 +62,9 @@ def test_review_json_has_stable_schema_version_and_fields() -> None:
     assert list(data) == [
         "schema_version",
         "summary",
+        "review_results",
+        "change_set",
+        "evidence_store_summary",
         "findings",
         "needs_human_review",
         "discarded",
@@ -77,6 +80,34 @@ def test_review_json_has_stable_schema_version_and_fields() -> None:
         "tracing",
     ]
     assert data["summary"]["target_repo_modified"] is False
+
+
+def test_review_json_tolerates_none_for_new_compatibility_fields() -> None:
+    data = json.loads(
+        review_report_to_json(
+            {
+                "summary": None,
+                "review_results": None,
+                "change_set": None,
+                "evidence_store_summary": None,
+            }
+        )
+    )
+
+    assert data["summary"]["review_result_count"] == 0
+    assert data["review_results"] == {}
+    assert data["change_set"] == {}
+    assert data["evidence_store_summary"] == {}
+
+
+def test_review_markdown_tolerates_malformed_review_results() -> None:
+    report = _sample_report()
+    report["review_results"] = ["unexpected"]
+
+    markdown = render_review_markdown(report)
+
+    assert "# Review Report" in markdown
+    assert "## Review Result Lifecycle" not in markdown
 
 
 def test_review_markdown_includes_loop_summary_when_enabled() -> None:

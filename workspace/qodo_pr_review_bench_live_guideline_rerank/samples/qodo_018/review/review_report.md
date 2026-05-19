@@ -6,10 +6,10 @@
 - Changed files: 20
 - Changed entities: 20
 - Risk signals: 7
-- Findings: 2
+- Findings: 5
 - Needs human review: 4
-- Discarded: 0
-- Agent runs: 6
+- Discarded: 3
+- Agent runs: 9
 - Loop enabled: True
 - Target repo modified: False
 
@@ -20,12 +20,12 @@
 | Iterations | 1 / 1 |
 | Converged | False |
 | Fallback | False |
-| Retry count | 2 |
-| Total latency | 265605 ms |
-| Token in | 28862 |
-| Token out | 1138 |
+| Retry count | 4 |
+| Total latency | 337671 ms |
+| Token in | 45396 |
+| Token out | 2845 |
 
-- Iteration 0: 6 candidates, 6 verified, 4 uncertain, 2 kept, 0 rejected
+- Iteration 0: 13 candidates, 10 verified, 4 uncertain, 6 kept, 0 rejected
 
 ## Context Budget Summary
 
@@ -33,47 +33,62 @@
 |---|---:|
 | Strategy | `file_risk_shards_v1` |
 | Max input tokens | 9000 |
-| Estimated input tokens | 33044 |
-| Selected evidence | 20 |
-| Omitted evidence | 485 |
+| Estimated input tokens | 41603 |
+| Selected evidence | 29 |
+| Omitted evidence | 476 |
 | Context truncated | True |
 | Review shards | 5 |
-| Context requests | 0 |
-| Refills | 0 |
+| Context requests | 6 |
+| Refills | 3 |
 
 ## Findings
 
-- `correctness` high at `src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:38` (0.95)
-  - Removing the null check for _tokenResult.InteractiveRequestUrl can cause a NullReferenceException when InteractiveRequestUrl is null.
-  - Suggestion: Restore the null check for _tokenResult.InteractiveRequestUrl before calling NavigateToLogin or NavigateTo.
-  - Evidence: `diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:35`
+- `api_breaking_change` medium at `src/Components/WebAssembly/WebAssembly.Authentication/src/PublicAPI.Unshipped.txt:2` (0.90)
+  - Multiple public API entries are being removed, including AccessTokenResult constructor, RemoteAuthenticationService constructor, and the entire SignOutSessionStateManager class. This is a breaking change for consumers.
+  - Suggestion: If these removals are intentional, ensure they are documented in a migration guide and that consumers have a clear upgrade path.
+  - Evidence: `diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/PublicAPI.Unshipped.txt:1`
 
-- `maintainability` medium at `src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:38` (0.80)
-  - The patch removes the obsolete RedirectUrl fallback path but replaces it with InteractiveRequestUrl without a null guard, which may break existing callers relying on the fallback.
-  - Suggestion: Ensure InteractiveRequestUrl is non-null before using it, or provide a fallback to RedirectUrl if available.
-  - Evidence: `diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:35`
+- `api_breaking_change` low at `src/Components/Web/src/WebRenderer.cs:55` (0.70)
+  - Removal of the obsolete init setter for RendererId may break derived classes that were using the init accessor to set the renderer ID.
+  - Suggestion: If the init setter is no longer needed, ensure that derived classes have an alternative way to set the renderer ID (e.g., via GetWebRendererId override).
+  - Evidence: `diff_hunk:src/Components/Web/src/WebRenderer.cs:52`
+
+- `api_breaking_change` medium at `src/Components/WebAssembly/JSInterop/src/InternalCalls.cs:12` (0.80)
+  - Removal of the obsolete InvokeJS<T0,T1,T2,TRes> method may break consumers that still depend on this backward-compatibility shim.
+  - Suggestion: Ensure that all consumers have migrated to the new InvokeJSJson method before removing the obsolete method.
+  - Evidence: `diff_hunk:src/Components/WebAssembly/JSInterop/src/InternalCalls.cs:1`
+
+- `security` high at `src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:278` (0.85)
+  - Removal of fallback sign-out state validation may allow externally initiated logouts to bypass state validation when HistoryEntryState is null.
+  - Suggestion: Restore the fallback check for SignOutManager.ValidateSignOutState() when Navigation.HistoryEntryState is null, or ensure that ValidateSignOutRequestState() covers both cases.
+  - Evidence: `diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/RemoteAuthenticatorViewCore.cs:278`
+
+- `correctness` high at `src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:38` (0.90)
+  - Removing the null check for _tokenResult.InteractiveRequestUrl can cause a NullReferenceException when _tokenResult.InteractiveRequestUrl is null but InteractionOptions is not null.
+  - Suggestion: Restore the null check for _tokenResult.InteractiveRequestUrl before passing it to _navigation.NavigateToLogin, or ensure InteractiveRequestUrl is always non-null when InteractionOptions is set.
+  - Evidence: `diff:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:44`, `diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/Services/AccessTokenNotAvailableException.cs:35`
 
 ## Needs Human Review
 
-- `maintainability` medium at `src/Components/Forms/test/EditContextDataAnnotationsExtensionsTest.cs:18` (0.50)
-  - Removed test 'ObsoleteApiReturnsEditContextForChaining' without adding a replacement test for the new API behavior, reducing test coverage for the chaining functionality.
-  - Suggestion: Add a new test that validates the current (non-obsolete) API returns EditContext for chaining, or ensure the removal is intentional and covered elsewhere.
+- `correctness` medium at `src/Components/Forms/test/EditContextDataAnnotationsExtensionsTest.cs:18` (0.50)
+  - Removal of test 'ObsoleteApiReturnsEditContextForChaining' without verifying that the obsolete API it tested is still functional or that its removal is covered elsewhere.
+  - Suggestion: Ensure the obsolete API 'AddDataAnnotationsValidation' is either removed or its behavior is covered by another test.
   - Evidence: `diff_hunk:src/Components/Forms/test/EditContextDataAnnotationsExtensionsTest.cs:18`
 
 - `test_quality` medium at `src/Components/WebAssembly/WebAssembly.Authentication/test/RemoteAuthenticatorCoreTests.cs:370` (0.50)
-  - Removed test 'AuthenticationManager_Logout_RedirectsToFailureOnInvalidSignOutState' without replacement. This test validated behavior when SignOutSessionStateManager returns false, which is now untested.
-  - Suggestion: Add a new test that covers the scenario where sign-out state is invalid, using the updated service registration (without SignOutSessionStateManager).
-  - Evidence: `diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/test/RemoteAuthenticatorCoreTests.cs:370`, `diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:71`
+  - Removed test 'AuthenticationManager_Logout_RedirectsToFailureOnInvalidSignOutState' without replacement, reducing coverage for the SignOutSessionStateManager flow. The test validated that an invalid sign-out state redirects to the logout-failed page with the correct error message.
+  - Suggestion: Ensure the removed scenario is covered by an existing or new test, or add a test that validates the behavior when SignOutSessionStateManager returns false for sign-out state.
+  - Evidence: `diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/test/RemoteAuthenticatorCoreTests.cs:370`
 
 - `backward_compatibility` medium at `src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:74` (0.50)
-  - Removal of SignOutSessionStateManager registration from DI is a breaking change for any consumer that depends on this service being available. The class is marked obsolete but was previously registered for backward compatibility.
-  - Suggestion: If the service is still needed by external consumers, keep the registration with an updated obsoletion message. If removal is intentional, document the breaking change in release notes.
+  - Removed registration of 'SignOutSessionStateManager' (marked obsolete) from DI. This is a breaking change for any consumer that depends on this service being available via DI, even if the type is obsolete.
+  - Suggestion: If the service is no longer needed, ensure all internal consumers have been migrated. If external consumers may still rely on it, consider keeping the registration with an extended obsoletion message or providing a shim.
   - Evidence: `diff_hunk:src/Components/WebAssembly/WebAssembly.Authentication/src/WebAssemblyAuthenticationServiceCollectionExtensions.cs:71`
 
 - `backward_compatibility` medium at `src/Components/WebAssembly/WebAssembly/src/Infrastructure/JSInteropMethods.cs:17` (0.50)
-  - Removal of public API 'JSInteropMethods.NotifyLocationChanged' is a breaking change. The method was marked obsolete but was still part of the public surface. Consumers using this method will fail to compile.
-  - Suggestion: If removal is intentional, ensure consumers are migrated. Consider keeping the method with [Obsolete] and a removal date if needed.
-  - Evidence: `diff_hunk:src/Components/WebAssembly/WebAssembly/src/Infrastructure/JSInteropMethods.cs:14`, `diff_hunk:src/Components/WebAssembly/WebAssembly/src/PublicAPI.Unshipped.txt:1`
+  - Removed public method 'NotifyLocationChanged' which was marked obsolete but still part of the public API surface. This is a breaking change for any external caller that may still reference it.
+  - Suggestion: If the method is no longer used internally and safe to remove, ensure no external consumers depend on it. Otherwise, keep the method with an updated obsoletion message.
+  - Evidence: `diff_hunk:src/Components/WebAssembly/WebAssembly/src/Infrastructure/JSInteropMethods.cs:14`
 
 ## Changed Files
 

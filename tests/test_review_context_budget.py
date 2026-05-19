@@ -70,6 +70,23 @@ def test_build_live_review_input_limits_changed_file_summaries() -> None:
     assert live_input.context_budget["selected_evidence_count"] > 0
 
 
+def test_build_live_review_input_selects_all_hunks_for_changed_file() -> None:
+    package = _multi_hunk_package()
+
+    live_input = build_live_review_input(
+        package,
+        max_input_tokens=2000,
+        max_evidence_per_file=10,
+    )
+
+    selected_ids = set(live_input.context_budget["selected_evidence_ids"])
+    assert {
+        "diff_hunk:src/boot.js:10",
+        "diff_hunk:src/boot.js:40",
+        "diff_hunk:src/boot.js:80",
+    } <= selected_ids
+
+
 def test_build_live_review_input_includes_review_guidelines() -> None:
     package = _large_package()
     package.evidence_index["diff_hunk:package.json:1"] = ReviewEvidence(
@@ -530,4 +547,55 @@ def _change_with_line(path: str, content: str) -> DiffFileChange:
                 ],
             )
         ],
+    )
+
+
+def _multi_hunk_package() -> EvidencePackage:
+    path = "src/boot.js"
+    hunks = [
+        DiffHunk(
+            old_start=10,
+            old_count=2,
+            new_start=10,
+            new_count=2,
+            section_header="init",
+            lines=[DiffLine("added", None, 10, "    useNpmInstall();")],
+        ),
+        DiffHunk(
+            old_start=40,
+            old_count=2,
+            new_start=40,
+            new_count=2,
+            section_header="startSlack",
+            lines=[DiffLine("removed", 40, None, "    slack.listen();")],
+        ),
+        DiffHunk(
+            old_start=80,
+            old_count=2,
+            new_start=80,
+            new_count=2,
+            section_header="startScheduler",
+            lines=[DiffLine("removed", 80, None, "    scheduler.init(apiUrl);")],
+        ),
+    ]
+    evidence_index = {
+        f"diff_hunk:{path}:{hunk.new_start}": ReviewEvidence(
+            id=f"diff_hunk:{path}:{hunk.new_start}",
+            kind="diff_hunk",
+            source=f"{path}:{hunk.new_start}",
+            message=hunk.section_header,
+        )
+        for hunk in hunks
+    }
+    return EvidencePackage(
+        repo_root="/repo",
+        changed_files=[
+            DiffFileChange(
+                old_path=path,
+                new_path=path,
+                change_type="modified",
+                hunks=hunks,
+            )
+        ],
+        evidence_index=evidence_index,
     )

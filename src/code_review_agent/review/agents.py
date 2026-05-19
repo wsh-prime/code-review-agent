@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import ast
 import hashlib
+import http.client
 import json
 import os
 import time
@@ -740,14 +741,18 @@ def _retry_with_backoff(
             delay = base_delay_seconds * (2 ** (attempt - 1))
             retry_log.append(f"attempt={attempt} error=url_error delay={delay:.2f}s")
             time.sleep(delay)
-        except TimeoutError as exc:
+        except (ConnectionError, http.client.RemoteDisconnected, TimeoutError) as exc:
             if attempt >= attempts:
+                error_name = _transport_error_name(exc)
                 raise _AgentTransientError(
-                    f"OpenAI-compatible API request timed out after "
-                    f"{attempts} attempts."
+                    "OpenAI-compatible API transport failed after "
+                    f"{attempts} attempts: {error_name}."
                 ) from exc
             delay = base_delay_seconds * (2 ** (attempt - 1))
-            retry_log.append(f"attempt={attempt} error=timeout delay={delay:.2f}s")
+            retry_log.append(
+                "attempt="
+                f"{attempt} error={_transport_error_name(exc)} delay={delay:.2f}s"
+            )
             time.sleep(delay)
 
     raise _AgentTransientError(
@@ -762,6 +767,14 @@ def _retry_delay_seconds(
     if retry_after is not None:
         return float(retry_after)
     return float(base_delay_seconds * (2 ** (attempt - 1)))
+
+
+def _transport_error_name(exc: BaseException) -> str:
+    if isinstance(exc, TimeoutError):
+        return "timeout"
+    if isinstance(exc, http.client.RemoteDisconnected):
+        return "remote_disconnected"
+    return exc.__class__.__name__.lower()
 
 
 def _retry_after_seconds(headers) -> float | None:

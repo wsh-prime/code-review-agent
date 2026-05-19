@@ -1,27 +1,27 @@
 {
   "schema_version": "1.3",
   "summary": {
-    "mode": "hybrid-live/fallback-rules",
+    "mode": "hybrid-live",
     "changed_file_count": 6,
     "changed_entity_count": 6,
     "risk_signal_count": 4,
-    "finding_count": 0,
-    "needs_human_review_count": 4,
+    "finding_count": 2,
+    "needs_human_review_count": 0,
     "discarded_count": 0,
     "evidence_count": 324,
     "missing_evidence_id_count": 0,
-    "agent_run_count": 1,
+    "agent_run_count": 3,
     "prompt_exported": false,
     "loop_enabled": true,
-    "loop_iterations_completed": 0,
-    "loop_converged": false,
-    "fallback_used": true,
-    "fallback_reason": "OpenAI-compatible reviewer produced invalid output: malformed node or string on line 29: <ast.Name object at 0x0000028963369450>: line 1 column 1 (char 0)",
+    "loop_iterations_completed": 1,
+    "loop_converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
     "resume_used": false,
     "resume_ignored_reason": null,
-    "total_latency_ms": 6939,
-    "total_token_count_in": 0,
-    "total_token_count_out": 0,
+    "total_latency_ms": 186033,
+    "total_token_count_in": 4841,
+    "total_token_count_out": 314,
     "context_budget_enabled": true,
     "context_truncated": true,
     "selected_evidence_count": 8,
@@ -31,97 +31,34 @@
     "context_request_count": 0,
     "target_repo_modified": false
   },
-  "findings": [],
-  "needs_human_review": [
+  "findings": [
     {
-      "file": "apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.e2e-spec.ts",
-      "line": 1,
-      "severity": "medium",
-      "category": "security_sensitive",
-      "message": "Live reviewer was unavailable; this deterministic risk needs human review.",
-      "suggestion": "Inspect the linked evidence and decide whether the change requires follow-up.",
-      "confidence": 0.74,
+      "file": "packages/features/ee/teams/services/teamService.ts",
+      "line": 99,
+      "severity": "high",
+      "category": "bug_risk",
+      "message": "The condition for buildInviteLink is inverted, causing org context to return the generic invite link instead of the getting-started path.",
+      "suggestion": "Revert the condition back to `if (!isOrgContext)` to preserve original behavior where non-org contexts get the generic link and org contexts get the getting-started path.",
+      "confidence": 0.95,
       "evidence_ids": [
-        "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.e2e-spec.ts:1",
-        "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.e2e-spec.ts:10",
-        "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.e2e-spec.ts:100",
-        "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.e2e-spec.ts:101",
-        "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.e2e-spec.ts:102",
-        "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.e2e-spec.ts:103",
-        "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.e2e-spec.ts:104",
-        "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.e2e-spec.ts:105",
-        "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.e2e-spec.ts:106",
-        "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.e2e-spec.ts:107",
-        "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.e2e-spec.ts:108",
-        "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.e2e-spec.ts:109",
-        "risk:security_sensitive:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.e2e-spec.ts"
-      ]
-    },
-    {
-      "file": "apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts",
-      "line": 1,
-      "severity": "medium",
-      "category": "security_sensitive",
-      "message": "Live reviewer was unavailable; this deterministic risk needs human review.",
-      "suggestion": "Inspect the linked evidence and decide whether the change requires follow-up.",
-      "confidence": 0.74,
-      "evidence_ids": [
-        "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:1",
-        "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:10",
-        "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:11",
-        "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:12",
-        "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:13",
-        "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:14",
-        "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:15",
-        "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:16",
-        "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:17",
-        "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:18",
-        "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:19",
-        "diff:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:2",
-        "risk:security_sensitive:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts"
-      ]
-    },
-    {
-      "file": "apps/api/v2/src/modules/teams/invite/outputs/invite.output.ts",
-      "line": 1,
-      "severity": "medium",
-      "category": "security_sensitive",
-      "message": "Live reviewer was unavailable; this deterministic risk needs human review.",
-      "suggestion": "Inspect the linked evidence and decide whether the change requires follow-up.",
-      "confidence": 0.74,
-      "evidence_ids": [
-        "diff:apps/api/v2/src/modules/teams/invite/outputs/invite.output.ts:1",
-        "diff:apps/api/v2/src/modules/teams/invite/outputs/invite.output.ts:10",
-        "diff:apps/api/v2/src/modules/teams/invite/outputs/invite.output.ts:11",
-        "diff:apps/api/v2/src/modules/teams/invite/outputs/invite.output.ts:12",
-        "diff:apps/api/v2/src/modules/teams/invite/outputs/invite.output.ts:13",
-        "diff:apps/api/v2/src/modules/teams/invite/outputs/invite.output.ts:14",
-        "diff:apps/api/v2/src/modules/teams/invite/outputs/invite.output.ts:15",
-        "diff:apps/api/v2/src/modules/teams/invite/outputs/invite.output.ts:16",
-        "diff:apps/api/v2/src/modules/teams/invite/outputs/invite.output.ts:17",
-        "diff:apps/api/v2/src/modules/teams/invite/outputs/invite.output.ts:18",
-        "diff:apps/api/v2/src/modules/teams/invite/outputs/invite.output.ts:19",
-        "diff:apps/api/v2/src/modules/teams/invite/outputs/invite.output.ts:2",
-        "risk:security_sensitive:apps/api/v2/src/modules/teams/invite/outputs/invite.output.ts"
+        "diff_hunk:packages/features/ee/teams/services/teamService.ts:96"
       ]
     },
     {
       "file": "packages/features/ee/teams/services/teamService.ts",
-      "line": 106,
+      "line": 99,
       "severity": "medium",
-      "category": "security_sensitive",
-      "message": "Live reviewer was unavailable; this deterministic risk needs human review.",
-      "suggestion": "Inspect the linked evidence and decide whether the change requires follow-up.",
-      "confidence": 0.74,
+      "category": "security",
+      "message": "The returned token is now `newToken.identifier` instead of the original `token` variable, but `buildInviteLink` still uses the original `token` parameter, creating a mismatch between the returned token and the one embedded in the invite link.",
+      "suggestion": "Either pass `newToken.identifier` to `buildInviteLink` or return the original `token` to ensure consistency between the returned token and the link.",
+      "confidence": 0.85,
       "evidence_ids": [
-        "diff:packages/features/ee/teams/services/teamService.ts:106",
-        "diff:packages/features/ee/teams/services/teamService.ts:567",
-        "diff:packages/features/ee/teams/services/teamService.ts:88",
-        "diff:packages/features/ee/teams/services/teamService.ts:99",
-        "risk:security_sensitive:packages/features/ee/teams/services/teamService.ts"
+        "diff_hunk:packages/features/ee/teams/services/teamService.ts:85",
+        "diff_hunk:packages/features/ee/teams/services/teamService.ts:96"
       ]
     }
   ],
+  "needs_human_review": [],
   "discarded": [],
   "changed_files": [
     {
@@ -4652,22 +4589,89 @@
         "diff_hunk:apps/api/v2/src/modules/teams/invite/outputs/invite.output.ts:1"
       ],
       "output_issue_ids": [],
-      "fallback_used": true,
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 2,
+      "retry_log": [
+        "attempt=1 error=timeout delay=1.00s",
+        "attempt=2 error=timeout delay=2.00s"
+      ],
+      "latency_ms": 183207,
+      "token_count_in": 0,
+      "token_count_out": 0,
+      "trace_id": "cdbb22c4601c4bd68c2454eade22c2cf",
+      "span_id": "a8e0f69c11844a74",
+      "parent_span_id": "",
+      "status": "error",
+      "error_type": "_AgentTransientError",
+      "shard_id": "shard-001",
+      "shard_index": 0,
+      "shard_count": 2,
+      "context_request_count": 0,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+      "input_evidence_ids": [
+        "diff_hunk:apps/api/v2/src/modules/teams/invite/teams-invite.module.ts:1",
+        "diff_hunk:packages/features/ee/teams/services/teamService.ts:564",
+        "diff_hunk:packages/features/ee/teams/services/teamService.ts:85",
+        "diff_hunk:packages/features/ee/teams/services/teamService.ts:96"
+      ],
+      "output_issue_ids": [
+        "bug_risk:packages/features/ee/teams/services/teamService.ts:99",
+        "security:packages/features/ee/teams/services/teamService.ts:99"
+      ],
+      "fallback_used": false,
       "iteration": 0,
       "feedback_hash": "",
       "retry_count": 0,
       "retry_log": [],
-      "latency_ms": 6939,
+      "latency_ms": 2826,
+      "token_count_in": 4841,
+      "token_count_out": 314,
+      "trace_id": "94f4d8fb3bf94d81a4deadf165e35cf7",
+      "span_id": "bdb78ab7a8f141f6",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-002",
+      "shard_index": 1,
+      "shard_count": 2,
+      "context_request_count": 0,
+      "context_refill_used": false
+    },
+    {
+      "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+      "model": null,
+      "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+      "input_evidence_ids": [
+        "diff_hunk:packages/features/ee/teams/services/teamService.ts:85",
+        "diff_hunk:packages/features/ee/teams/services/teamService.ts:96"
+      ],
+      "output_issue_ids": [
+        "bug_risk:packages/features/ee/teams/services/teamService.ts:99",
+        "security:packages/features/ee/teams/services/teamService.ts:99"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 0,
       "token_count_in": 0,
       "token_count_out": 0,
-      "trace_id": "fb1cd619954148249d75af01ac34987a",
-      "span_id": "76fc8ea8db214371",
+      "trace_id": "",
+      "span_id": "",
       "parent_span_id": "",
-      "status": "fallback",
-      "error_type": "_AgentFatalError",
-      "shard_id": "shard-001",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "",
       "shard_index": 0,
-      "shard_count": 2,
+      "shard_count": 0,
       "context_request_count": 0,
       "context_refill_used": false
     }
@@ -4926,23 +4930,168 @@
   "loop": {
     "enabled": true,
     "max_iter": 1,
-    "iterations_completed": 0,
-    "converged": false,
-    "fallback_used": true,
-    "fallback_reason": "OpenAI-compatible reviewer produced invalid output: malformed node or string on line 29: <ast.Name object at 0x0000028963369450>: line 1 column 1 (char 0)",
-    "checkpoint_path": null,
+    "iterations_completed": 1,
+    "converged": true,
+    "fallback_used": false,
+    "fallback_reason": null,
+    "checkpoint_path": "D:\\learn\\code-review-agent\\workspace\\qodo_pr_review_bench_live_guideline_rerank\\samples\\qodo_028\\review\\loop_checkpoint.json",
     "resume_used": false,
     "resume_ignored_reason": null,
-    "iterations": []
+    "iterations": [
+      {
+        "i": 0,
+        "candidate_issue_count": 2,
+        "verified_count": 2,
+        "needs_human_review_count": 0,
+        "discarded_count": 0,
+        "keep_count": 2,
+        "uncertain_count": 0,
+        "reject_count": 0,
+        "feedback_sent": [],
+        "agent_runs": [
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+            "input_evidence_ids": [
+              "diff_hunk:apps/api/v2/src/ee/platform-endpoints-module.ts:13",
+              "diff_hunk:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.e2e-spec.ts:1",
+              "diff_hunk:apps/api/v2/src/modules/teams/invite/controllers/teams-invite.controller.ts:1",
+              "diff_hunk:apps/api/v2/src/modules/teams/invite/outputs/invite.output.ts:1"
+            ],
+            "output_issue_ids": [],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 2,
+            "retry_log": [
+              "attempt=1 error=timeout delay=1.00s",
+              "attempt=2 error=timeout delay=2.00s"
+            ],
+            "latency_ms": 183207,
+            "token_count_in": 0,
+            "token_count_out": 0,
+            "trace_id": "cdbb22c4601c4bd68c2454eade22c2cf",
+            "span_id": "a8e0f69c11844a74",
+            "parent_span_id": "",
+            "status": "error",
+            "error_type": "_AgentTransientError",
+            "shard_id": "shard-001",
+            "shard_index": 0,
+            "shard_count": 2,
+            "context_request_count": 0,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+            "input_evidence_ids": [
+              "diff_hunk:apps/api/v2/src/modules/teams/invite/teams-invite.module.ts:1",
+              "diff_hunk:packages/features/ee/teams/services/teamService.ts:564",
+              "diff_hunk:packages/features/ee/teams/services/teamService.ts:85",
+              "diff_hunk:packages/features/ee/teams/services/teamService.ts:96"
+            ],
+            "output_issue_ids": [
+              "bug_risk:packages/features/ee/teams/services/teamService.ts:99",
+              "security:packages/features/ee/teams/services/teamService.ts:99"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 2826,
+            "token_count_in": 4841,
+            "token_count_out": 314,
+            "trace_id": "94f4d8fb3bf94d81a4deadf165e35cf7",
+            "span_id": "bdb78ab7a8f141f6",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-002",
+            "shard_index": 1,
+            "shard_count": 2,
+            "context_request_count": 0,
+            "context_refill_used": false
+          },
+          {
+            "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+            "model": null,
+            "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+            "input_evidence_ids": [
+              "diff_hunk:packages/features/ee/teams/services/teamService.ts:85",
+              "diff_hunk:packages/features/ee/teams/services/teamService.ts:96"
+            ],
+            "output_issue_ids": [
+              "bug_risk:packages/features/ee/teams/services/teamService.ts:99",
+              "security:packages/features/ee/teams/services/teamService.ts:99"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 0,
+            "token_count_in": 0,
+            "token_count_out": 0,
+            "trace_id": "",
+            "span_id": "",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "",
+            "shard_index": 0,
+            "shard_count": 0,
+            "context_request_count": 0,
+            "context_refill_used": false
+          }
+        ],
+        "issue_set": [
+          "bug_risk:packages/features/ee/teams/services/teamService.ts:99",
+          "security:packages/features/ee/teams/services/teamService.ts:99"
+        ],
+        "keep": [
+          {
+            "file": "packages/features/ee/teams/services/teamService.ts",
+            "line": 99,
+            "severity": "high",
+            "category": "bug_risk",
+            "message": "The condition for buildInviteLink is inverted, causing org context to return the generic invite link instead of the getting-started path.",
+            "suggestion": "Revert the condition back to `if (!isOrgContext)` to preserve original behavior where non-org contexts get the generic link and org contexts get the getting-started path.",
+            "confidence": 0.95,
+            "evidence_ids": [
+              "diff_hunk:packages/features/ee/teams/services/teamService.ts:96"
+            ]
+          },
+          {
+            "file": "packages/features/ee/teams/services/teamService.ts",
+            "line": 99,
+            "severity": "medium",
+            "category": "security",
+            "message": "The returned token is now `newToken.identifier` instead of the original `token` variable, but `buildInviteLink` still uses the original `token` parameter, creating a mismatch between the returned token and the one embedded in the invite link.",
+            "suggestion": "Either pass `newToken.identifier` to `buildInviteLink` or return the original `token` to ensure consistency between the returned token and the link.",
+            "confidence": 0.85,
+            "evidence_ids": [
+              "diff_hunk:packages/features/ee/teams/services/teamService.ts:85",
+              "diff_hunk:packages/features/ee/teams/services/teamService.ts:96"
+            ]
+          }
+        ],
+        "needs_human_review": [],
+        "discarded": []
+      }
+    ]
   },
   "tracing": {
-    "total_latency_ms": 6939,
-    "total_token_count_in": 0,
-    "total_token_count_out": 0,
-    "total_retry_count": 0,
-    "run_count": 1,
+    "total_latency_ms": 186033,
+    "total_token_count_in": 4841,
+    "total_token_count_out": 314,
+    "total_retry_count": 2,
+    "run_count": 3,
     "status_counts": {
-      "fallback": 1
+      "error": 1,
+      "ok": 2
     }
   }
 }

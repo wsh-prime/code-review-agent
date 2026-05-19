@@ -1,0 +1,172 @@
+{
+  "schema_version": "1.0",
+  "run_id": "0b888eb308da41d4ad598df73e534f9f",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": true,
+  "package_hash": "sha256:d1fb882eb45e74fd1a83c3d3a24ee6203b471e45f13a58d265a7f5427c2fda42",
+  "diff_hash": "sha256:70b2c723ed704c0fdb04d312355389dc3a802c6fafa858ffcdc33726778e0e12",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 3,
+      "verified_count": 0,
+      "needs_human_review_count": 0,
+      "discarded_count": 3,
+      "keep_count": 0,
+      "uncertain_count": 0,
+      "reject_count": 0,
+      "feedback_sent": [],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:121",
+            "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:20",
+            "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:3",
+            "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:98",
+            "diff_hunk:ghost/core/test/integration/services/email-service/domain-warming.test.js:189",
+            "diff_hunk:ghost/core/test/integration/services/email-service/domain-warming.test.js:217",
+            "diff_hunk:ghost/core/test/integration/services/email-service/domain-warming.test.js:287",
+            "diff_hunk:ghost/core/test/integration/services/email-service/domain-warming.test.js:316",
+            "diff_hunk:ghost/core/test/integration/services/email-service/domain-warming.test.js:50"
+          ],
+          "output_issue_ids": [
+            "correctness:ghost/core/core/server/services/email-service/DomainWarmingService.ts:121",
+            "correctness:ghost/core/core/server/services/email-service/DomainWarmingService.ts:98",
+            "correctness:ghost/core/core/server/services/email-service/DomainWarmingService.ts:20"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 50058,
+          "token_count_in": 7684,
+          "token_count_out": 689,
+          "trace_id": "c5d54efaff7a4b608ea0df6c6b694156",
+          "span_id": "65a08598434c4478",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 2,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:ghost/core/test/unit/server/services/email-service/domain-warming-service.test.ts:106",
+            "diff_hunk:ghost/core/test/unit/server/services/email-service/domain-warming-service.test.ts:125",
+            "diff_hunk:ghost/core/test/unit/server/services/email-service/domain-warming-service.test.ts:146",
+            "diff_hunk:ghost/core/test/unit/server/services/email-service/domain-warming-service.test.ts:161",
+            "diff_hunk:ghost/core/test/unit/server/services/email-service/domain-warming-service.test.ts:17",
+            "diff_hunk:ghost/core/test/unit/server/services/email-service/domain-warming-service.test.ts:175",
+            "diff_hunk:ghost/core/test/unit/server/services/email-service/domain-warming-service.test.ts:65",
+            "diff_hunk:ghost/core/test/unit/server/services/email-service/domain-warming-service.test.ts:8",
+            "diff_hunk:ghost/core/test/unit/server/services/email-service/domain-warming-service.test.ts:80",
+            "diff_hunk:ghost/core/test/unit/server/services/email-service/domain-warming-service.test.ts:96"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 2474,
+          "token_count_in": 6784,
+          "token_count_out": 15,
+          "trace_id": "84196d33249d4ec5a5561b728f6c8600",
+          "span_id": "52a9bc29faaa4583",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-002",
+          "shard_index": 1,
+          "shard_count": 2,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [],
+      "keep": [],
+      "needs_human_review": [],
+      "discarded": [
+        {
+          "file": "ghost/core/core/server/services/email-service/DomainWarmingService.ts",
+          "line": 121,
+          "severity": "high",
+          "category": "correctness",
+          "message": "High-volume cap logic may produce a lower limit than the previous threshold's output, causing a non-monotonic warmup curve.",
+          "suggestion": "Ensure the high-volume branch always returns a value >= the result from the 100k–400k threshold (2×). For example, use `Math.max(Math.min(scaledIncrease, absoluteIncrease), Math.ceil(lastCount * 2))`.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:121",
+            "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:20"
+          ],
+          "filter_reason": "low_signal_suggestion"
+        },
+        {
+          "file": "ghost/core/core/server/services/email-service/DomainWarmingService.ts",
+          "line": 98,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Filter changed from `created_at:<` (strictly before today) to `created_at:<=` (includes today), which may include today's email in the highest-count query and cause the warmup limit to be based on the current day's count.",
+          "suggestion": "Revert to `created_at:<` or add an explicit exclusion of today's date to avoid using the in-progress email's count.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:98"
+          ],
+          "filter_reason": "low_signal_suggestion"
+        },
+        {
+          "file": "ghost/core/core/server/services/email-service/DomainWarmingService.ts",
+          "line": 20,
+          "severity": "low",
+          "category": "correctness",
+          "message": "The `highVolume.maxScale` is 1.2, but the comment says 'min(1.2×, +75k) cap'. The code returns `Math.min(scaledIncrease, absoluteIncrease)` which is the minimum of the two, not the maximum. This means the cap is actually the smaller of the two values, which could be lower than expected.",
+          "suggestion": "If the intent is to cap at 1.2× or +75k (whichever is larger), use `Math.max(scaledIncrease, absoluteIncrease)`. If the intent is to cap at 1.2× and +75k (whichever is smaller), the current code is correct but the comment should be updated to 'max(1.2×, +75k)' or 'min(1.2×, +75k)' accordingly.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:20",
+            "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:121"
+          ],
+          "filter_reason": "low_signal_suggestion"
+        }
+      ]
+    }
+  ],
+  "last_feedback": null
+}

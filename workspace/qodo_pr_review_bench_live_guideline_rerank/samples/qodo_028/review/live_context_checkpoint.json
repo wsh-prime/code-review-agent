@@ -1,0 +1,80 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:c45f42fae214bd33009b98ac51af3921aa08b8675bf5b01abbb3c94d71ca4fea",
+  "diff_hash": "sha256:392ae4de1a7e1b43c770dbd4468f50cb126a4ee14b14d2c4cbaf52ece6849847",
+  "shards": {
+    "4ce5e1a6b5dcc3d1273854a6547babfe066160b5fe50a984c47966cce0e178d2": {
+      "status": "completed",
+      "shard_id": "shard-002",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:apps/api/v2/src/modules/teams/invite/teams-invite.module.ts:1",
+        "diff_hunk:packages/features/ee/teams/services/teamService.ts:564",
+        "diff_hunk:packages/features/ee/teams/services/teamService.ts:85",
+        "diff_hunk:packages/features/ee/teams/services/teamService.ts:96"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "packages/features/ee/teams/services/teamService.ts",
+          "line": 99,
+          "severity": "high",
+          "category": "bug_risk",
+          "message": "The condition for buildInviteLink is inverted, causing org context to return the generic invite link instead of the getting-started path.",
+          "suggestion": "Revert the condition back to `if (!isOrgContext)` to preserve original behavior where non-org contexts get the generic link and org contexts get the getting-started path.",
+          "confidence": 0.95,
+          "evidence_ids": [
+            "diff_hunk:packages/features/ee/teams/services/teamService.ts:96"
+          ]
+        },
+        {
+          "file": "packages/features/ee/teams/services/teamService.ts",
+          "line": 99,
+          "severity": "medium",
+          "category": "security",
+          "message": "The returned token is now `newToken.identifier` instead of the original `token` variable, but `buildInviteLink` still uses the original `token` parameter, creating a mismatch between the returned token and the one embedded in the invite link.",
+          "suggestion": "Either pass `newToken.identifier` to `buildInviteLink` or return the original `token` to ensure consistency between the returned token and the link.",
+          "confidence": 0.85,
+          "evidence_ids": [
+            "diff_hunk:packages/features/ee/teams/services/teamService.ts:85",
+            "diff_hunk:packages/features/ee/teams/services/teamService.ts:96"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:apps/api/v2/src/modules/teams/invite/teams-invite.module.ts:1",
+          "diff_hunk:packages/features/ee/teams/services/teamService.ts:564",
+          "diff_hunk:packages/features/ee/teams/services/teamService.ts:85",
+          "diff_hunk:packages/features/ee/teams/services/teamService.ts:96"
+        ],
+        "output_issue_ids": [
+          "bug_risk:packages/features/ee/teams/services/teamService.ts:99",
+          "security:packages/features/ee/teams/services/teamService.ts:99"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 2826,
+        "token_count_in": 4841,
+        "token_count_out": 314,
+        "trace_id": "94f4d8fb3bf94d81a4deadf165e35cf7",
+        "span_id": "bdb78ab7a8f141f6",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "shard_count": 2,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}

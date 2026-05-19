@@ -1,0 +1,118 @@
+# Review Report
+
+## Summary
+
+- Mode: `hybrid-live`
+- Changed files: 3
+- Changed entities: 3
+- Risk signals: 1
+- Findings: 0
+- Needs human review: 2
+- Discarded: 3
+- Review results: 5
+- Agent runs: 2
+- Loop enabled: True
+- Target repo modified: False
+
+## Loop Summary
+
+| Metric | Value |
+|---|---:|
+| Iterations | 1 / 1 |
+| Converged | False |
+| Fallback | False |
+| Retry count | 0 |
+| Total latency | 29202 ms |
+| Token in | 6798 |
+| Token out | 864 |
+
+- Iteration 0: 5 candidates, 2 verified, 2 uncertain, 0 kept, 0 rejected
+
+## Context Budget Summary
+
+| Metric | Value |
+|---|---:|
+| Strategy | `risk_first_v1` |
+| Max input tokens | 9000 |
+| Estimated input tokens | 5571 |
+| Selected evidence | 8 |
+| Omitted evidence | 87 |
+| Context truncated | True |
+| Review shards | 1 |
+| Context requests | 0 |
+| Refills | 0 |
+
+## Review Result Lifecycle
+
+| Status | Count |
+|---|---:|
+| `needs_human_review` | 2 |
+| `discarded` | 3 |
+
+## Findings
+
+No findings.
+
+Checked changed files, changed entities, deterministic risk signals, and evidence references. No high-confidence review finding was produced.
+
+## Needs Human Review
+
+- `maintainability` low at `apps/comments-ui/src/components/content/forms/form.tsx:289` (0.50)
+  - Removed comment prop from FormWrapperProps and FormWrapper, but the prop was previously used for fallback name/expertise. This is a breaking change for any other component that passed comment to FormWrapper.
+  - Suggestion: Ensure no other components pass the comment prop to FormWrapper, or add a deprecation warning if backward compatibility is needed.
+  - Evidence: `diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:289`, `diff_hunk:apps/comments-ui/src/components/content/forms/form.tsx:297`
+
+- `maintainability` low at `apps/comments-ui/src/components/content/forms/reply-form.tsx:47` (0.50)
+  - Removed comment={parent} prop from FormWrapper in reply-form.tsx, which is consistent with the removal of the comment prop from FormWrapper. However, this means the reply form no longer has access to the parent comment's member info for fallback.
+  - Suggestion: Confirm that the reply form's member context (from useAppContext) always provides the correct logged-in member, and that no fallback to parent comment author is needed.
+  - Evidence: `diff_hunk:apps/comments-ui/src/components/content/forms/reply-form.tsx:44`
+
+## Changed Files
+
+- `apps/comments-ui/src/components/content/forms/form.tsx` (modified)
+- `apps/comments-ui/src/components/content/forms/reply-form.tsx` (modified)
+- `apps/comments-ui/test/e2e/actions.test.ts` (modified)
+
+## Changed Entities
+
+- `apps/comments-ui/src/components/content/forms/form.tsx:244-244` module `apps.comments-ui.src.components.content.forms.form`
+- `apps/comments-ui/src/components/content/forms/reply-form.tsx:30-35` module `apps.comments-ui.src.components.content.forms.reply-form`
+- `apps/comments-ui/test/e2e/actions.test.ts:614-681` module `apps.comments-ui.test.e2e.actions.test`
+
+## Risk Signals
+
+- `security_sensitive` (0.74): Security-sensitive keywords changed in apps/comments-ui/test/e2e/actions.test.ts.
+
+## Evidence Index
+
+- `diff:apps/comments-ui/src/components/content/forms/form.tsx:244` [diff]: apps/comments-ui/src/components/content/forms/form.tsx:244
+- `diff:apps/comments-ui/src/components/content/forms/form.tsx:264` [diff]: apps/comments-ui/src/components/content/forms/form.tsx:264
+- `diff:apps/comments-ui/src/components/content/forms/form.tsx:265` [diff]: apps/comments-ui/src/components/content/forms/form.tsx:265
+- `diff:apps/comments-ui/src/components/content/forms/form.tsx:292` [diff]: apps/comments-ui/src/components/content/forms/form.tsx:292
+- `diff:apps/comments-ui/src/components/content/forms/form.tsx:301` [diff]: apps/comments-ui/src/components/content/forms/form.tsx:301
+- `diff:apps/comments-ui/src/components/content/forms/form.tsx:308` [diff]: apps/comments-ui/src/components/content/forms/form.tsx:308
+- `diff:apps/comments-ui/src/components/content/forms/form.tsx:309` [diff]: apps/comments-ui/src/components/content/forms/form.tsx:309
+- `diff:apps/comments-ui/src/components/content/forms/form.tsx:310` [diff]: apps/comments-ui/src/components/content/forms/form.tsx:310
+- `diff:apps/comments-ui/src/components/content/forms/form.tsx:311` [diff]: apps/comments-ui/src/components/content/forms/form.tsx:311
+- `diff:apps/comments-ui/src/components/content/forms/form.tsx:313` [diff]: apps/comments-ui/src/components/content/forms/form.tsx:313
+- `diff:apps/comments-ui/src/components/content/forms/form.tsx:315` [diff]: apps/comments-ui/src/components/content/forms/form.tsx:315
+- `diff:apps/comments-ui/src/components/content/forms/reply-form.tsx:30` [diff]: apps/comments-ui/src/components/content/forms/reply-form.tsx:30
+- `diff:apps/comments-ui/src/components/content/forms/reply-form.tsx:35` [diff]: apps/comments-ui/src/components/content/forms/reply-form.tsx:35
+- `diff:apps/comments-ui/src/components/content/forms/reply-form.tsx:47` [diff]: apps/comments-ui/src/components/content/forms/reply-form.tsx:47
+- `diff:apps/comments-ui/src/components/content/forms/reply-form.tsx:48` [diff]: apps/comments-ui/src/components/content/forms/reply-form.tsx:48
+- `diff:apps/comments-ui/test/e2e/actions.test.ts:614` [diff]: apps/comments-ui/test/e2e/actions.test.ts:614
+- `diff:apps/comments-ui/test/e2e/actions.test.ts:615` [diff]: apps/comments-ui/test/e2e/actions.test.ts:615
+- `diff:apps/comments-ui/test/e2e/actions.test.ts:616` [diff]: apps/comments-ui/test/e2e/actions.test.ts:616
+- `diff:apps/comments-ui/test/e2e/actions.test.ts:617` [diff]: apps/comments-ui/test/e2e/actions.test.ts:617
+- `diff:apps/comments-ui/test/e2e/actions.test.ts:618` [diff]: apps/comments-ui/test/e2e/actions.test.ts:618
+- `diff:apps/comments-ui/test/e2e/actions.test.ts:619` [diff]: apps/comments-ui/test/e2e/actions.test.ts:619
+- `diff:apps/comments-ui/test/e2e/actions.test.ts:620` [diff]: apps/comments-ui/test/e2e/actions.test.ts:620
+- `diff:apps/comments-ui/test/e2e/actions.test.ts:621` [diff]: apps/comments-ui/test/e2e/actions.test.ts:621
+- `diff:apps/comments-ui/test/e2e/actions.test.ts:622` [diff]: apps/comments-ui/test/e2e/actions.test.ts:622
+- `diff:apps/comments-ui/test/e2e/actions.test.ts:623` [diff]: apps/comments-ui/test/e2e/actions.test.ts:623
+- `diff:apps/comments-ui/test/e2e/actions.test.ts:624` [diff]: apps/comments-ui/test/e2e/actions.test.ts:624
+- `diff:apps/comments-ui/test/e2e/actions.test.ts:625` [diff]: apps/comments-ui/test/e2e/actions.test.ts:625
+- `diff:apps/comments-ui/test/e2e/actions.test.ts:626` [diff]: apps/comments-ui/test/e2e/actions.test.ts:626
+- `diff:apps/comments-ui/test/e2e/actions.test.ts:627` [diff]: apps/comments-ui/test/e2e/actions.test.ts:627
+- `diff:apps/comments-ui/test/e2e/actions.test.ts:628` [diff]: apps/comments-ui/test/e2e/actions.test.ts:628
+- ... 65 more evidence items omitted.

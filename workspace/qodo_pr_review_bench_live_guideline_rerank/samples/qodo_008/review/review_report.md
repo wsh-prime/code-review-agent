@@ -7,9 +7,9 @@
 - Changed entities: 3
 - Risk signals: 0
 - Findings: 0
-- Needs human review: 0
+- Needs human review: 2
 - Discarded: 0
-- Agent runs: 2
+- Agent runs: 3
 - Loop enabled: True
 - Target repo modified: False
 
@@ -18,28 +18,28 @@
 | Metric | Value |
 |---|---:|
 | Iterations | 1 / 1 |
-| Converged | True |
+| Converged | False |
 | Fallback | False |
-| Retry count | 2 |
-| Total latency | 125021 ms |
-| Token in | 6314 |
-| Token out | 12 |
+| Retry count | 0 |
+| Total latency | 82887 ms |
+| Token in | 10125 |
+| Token out | 936 |
 
-- Iteration 0: 0 candidates, 0 verified, 0 uncertain, 0 kept, 0 rejected
+- Iteration 0: 4 candidates, 4 verified, 4 uncertain, 0 kept, 0 rejected
 
 ## Context Budget Summary
 
 | Metric | Value |
 |---|---:|
-| Strategy | `risk_first_v1` |
+| Strategy | `file_risk_shards_v1` |
 | Max input tokens | 9000 |
-| Estimated input tokens | 5380 |
-| Selected evidence | 3 |
-| Omitted evidence | 200 |
+| Estimated input tokens | 8518 |
+| Selected evidence | 5 |
+| Omitted evidence | 198 |
 | Context truncated | True |
 | Review shards | 1 |
-| Context requests | 0 |
-| Refills | 0 |
+| Context requests | 1 |
+| Refills | 1 |
 
 ## Findings
 
@@ -49,7 +49,15 @@ Checked changed files, changed entities, deterministic risk signals, and evidenc
 
 ## Needs Human Review
 
-None.
+- `correctness` high at `ghost/core/core/server/services/email-service/DomainWarmingService.ts:15` (0.50)
+  - The new time-based warmup formula uses a hardcoded end value of 200000 and totalDays of 42, but the integration test expects a limit of 237 on day 2. The formula `start * (end/start)^(day/(totalDays-1))` with start=200, end=200000, totalDays=42, day=1 gives 200 * (1000)^(1/41) ≈ 200 * 1.182 ≈ 236.4, which rounds to 236, not 237. The test assertion expects 237, indicating a mismatch between the implementation and the test expectation.
+  - Suggestion: Verify the exact formula implementation and ensure the test expectation matches. Either adjust the formula to produce 237 or correct the test to expect 236.
+  - Evidence: `diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:15`, `diff_hunk:ghost/core/test/integration/services/email-service/domain-warming.test.js:195`
+
+- `correctness` medium at `ghost/core/test/integration/services/email-service/domain-warming.test.js:195` (0.50)
+  - The integration test hardcodes the expected limit for day 2 as 237, but this value is derived from a specific formula and configuration. If the warmup configuration (start, end, totalDays) changes, this test will silently break without indicating which part of the logic is incorrect. The test should derive the expected value from the configuration rather than hardcoding it.
+  - Suggestion: Consider computing the expected limit dynamically from the DefaultWarmupOptions configuration to make the test resilient to configuration changes.
+  - Evidence: `diff_hunk:ghost/core/test/integration/services/email-service/domain-warming.test.js:195`
 
 ## Changed Files
 

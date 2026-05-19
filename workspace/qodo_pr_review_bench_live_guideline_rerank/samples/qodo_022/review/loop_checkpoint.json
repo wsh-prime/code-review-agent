@@ -1,0 +1,340 @@
+{
+  "schema_version": "1.0",
+  "run_id": "9b5b57f0483146feb042036a475ec09e",
+  "mode": "hybrid-live",
+  "max_iter": 1,
+  "iteration": 1,
+  "converged": false,
+  "package_hash": "sha256:2c3f67cfd83cd2cffa70073c3baa95f00056d766627d8ba338f7684361a34de4",
+  "diff_hash": "sha256:ac7d7c63de3cf5dc779a43c5545ec0a29078004fe5c29d809ca25420166da406",
+  "iterations": [
+    {
+      "i": 0,
+      "candidate_issue_count": 7,
+      "verified_count": 2,
+      "needs_human_review_count": 5,
+      "discarded_count": 0,
+      "keep_count": 1,
+      "uncertain_count": 1,
+      "reject_count": 0,
+      "feedback_sent": [
+        {
+          "issue_id": "style:src/Validation/src/ValidationOptions.cs:60",
+          "category": "style",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Validation/src/ValidationOptions.cs:60"
+          ]
+        }
+      ],
+      "agent_runs": [
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Caching/SqlServer/src/SqlServerCacheOptions.cs:8",
+            "diff_hunk:src/HttpClientFactory/Polly/src/DependencyInjection/PollyHttpClientBuilderExtensions.cs:11",
+            "diff_hunk:src/Logging.AzureAppServices/src/AzureAppServicesLoggerFactoryExtensions.cs:13",
+            "diff_hunk:src/Logging.AzureAppServices/src/AzureBlobLoggerContext.cs:6"
+          ],
+          "output_issue_ids": [],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 2,
+          "retry_log": [
+            "attempt=1 error=timeout delay=1.00s",
+            "attempt=2 error=timeout delay=2.00s"
+          ],
+          "latency_ms": 183158,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "7e4f6b7006a54be38e71b78083f6449f",
+          "span_id": "af87bc505bd5445d",
+          "parent_span_id": "",
+          "status": "error",
+          "error_type": "_AgentTransientError",
+          "shard_id": "shard-001",
+          "shard_index": 0,
+          "shard_count": 4,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Logging.AzureAppServices/src/AzureBlobLoggerOptions.cs:7",
+            "diff_hunk:src/Logging.AzureAppServices/src/AzureFileLoggerOptions.cs:7",
+            "diff_hunk:src/Logging.AzureAppServices/src/BatchingLoggerOptions.cs:6",
+            "diff_hunk:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:11",
+            "diff_hunk:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:124",
+            "diff_hunk:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:59"
+          ],
+          "output_issue_ids": [
+            "correctness:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:124"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 27628,
+          "token_count_in": 6552,
+          "token_count_out": 171,
+          "trace_id": "ff76467ef2204456886ed37988979dc0",
+          "span_id": "fcf6e0553cf14c9e",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-002",
+          "shard_index": 1,
+          "shard_count": 4,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Logging.AzureAppServices/src/FileLoggerProvider.cs:12",
+            "diff_hunk:src/Validation/src/IValidatableInfoResolver.cs:18",
+            "diff_hunk:src/Validation/src/SkipValidationAttribute.cs:6",
+            "diff_hunk:src/Validation/src/ValidateContext.cs:23"
+          ],
+          "output_issue_ids": [
+            "license:src/Logging.AzureAppServices/src/FileLoggerProvider.cs:1",
+            "license:src/Validation/src/IValidatableInfoResolver.cs:1",
+            "license:src/Validation/src/SkipValidationAttribute.cs:1",
+            "license:src/Validation/src/ValidateContext.cs:1"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 2,
+          "retry_log": [
+            "attempt=1 error=timeout delay=1.00s",
+            "attempt=2 error=timeout delay=2.00s"
+          ],
+          "latency_ms": 127336,
+          "token_count_in": 5400,
+          "token_count_out": 567,
+          "trace_id": "241ac36c6a7a4ab3b34f2404a02c2d63",
+          "span_id": "fb8415a092054100",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-003",
+          "shard_index": 2,
+          "shard_count": 4,
+          "context_request_count": 0,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Validation/src/ValidationOptions.cs:7"
+          ],
+          "output_issue_ids": [
+            "license_header:src/Validation/src/ValidationOptions.cs:1"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 1,
+          "retry_log": [
+            "attempt=1 error=timeout delay=1.00s"
+          ],
+          "latency_ms": 79919,
+          "token_count_in": 3341,
+          "token_count_out": 328,
+          "trace_id": "d9ee60c60d8949b4be3f7bdbcf40ee39",
+          "span_id": "7ad03de34fcd45b0",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-004",
+          "shard_index": 3,
+          "shard_count": 4,
+          "context_request_count": 1,
+          "context_refill_used": false
+        },
+        {
+          "agent_name": "openai_compatible_reviewer",
+          "model": "deepseek-ai/DeepSeek-V4-Flash",
+          "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+          "input_evidence_ids": [
+            "diff_hunk:src/Validation/src/ValidationOptions.cs:24",
+            "diff_hunk:src/Validation/src/ValidationOptions.cs:38",
+            "diff_hunk:src/Validation/src/ValidationOptions.cs:52",
+            "diff_hunk:src/Validation/src/ValidationOptions.cs:60"
+          ],
+          "output_issue_ids": [
+            "style:src/Validation/src/ValidationOptions.cs:60"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 12072,
+          "token_count_in": 3661,
+          "token_count_out": 152,
+          "trace_id": "d91a9712b74c48deb51170b879a0db40",
+          "span_id": "3492956697754c90",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "shard-004-refill",
+          "shard_index": 3,
+          "shard_count": 4,
+          "context_request_count": 0,
+          "context_refill_used": true
+        },
+        {
+          "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
+          "model": null,
+          "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
+          "input_evidence_ids": [
+            "diff_hunk:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:124",
+            "diff_hunk:src/Validation/src/ValidationOptions.cs:60"
+          ],
+          "output_issue_ids": [
+            "correctness:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:124"
+          ],
+          "fallback_used": false,
+          "iteration": 0,
+          "feedback_hash": "",
+          "retry_count": 0,
+          "retry_log": [],
+          "latency_ms": 0,
+          "token_count_in": 0,
+          "token_count_out": 0,
+          "trace_id": "",
+          "span_id": "",
+          "parent_span_id": "",
+          "status": "ok",
+          "error_type": "",
+          "shard_id": "",
+          "shard_index": 0,
+          "shard_count": 0,
+          "context_request_count": 0,
+          "context_refill_used": false
+        }
+      ],
+      "issue_set": [
+        "correctness:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:124",
+        "style:src/Validation/src/ValidationOptions.cs:60"
+      ],
+      "keep": [
+        {
+          "file": "src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs",
+          "line": 124,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "The IntervalAsync method returns Task.Delay without ConfigureAwait(false), which can cause deadlocks in library code when the synchronization context is blocked.",
+          "suggestion": "Add .ConfigureAwait(false) to the Task.Delay call: return Task.Delay(interval, cancellationToken).ConfigureAwait(false);",
+          "confidence": 0.95,
+          "evidence_ids": [
+            "diff_hunk:src/Logging.AzureAppServices/src/BatchingLoggerProvider.cs:124"
+          ]
+        }
+      ],
+      "needs_human_review": [
+        {
+          "file": "src/Logging.AzureAppServices/src/FileLoggerProvider.cs",
+          "line": 1,
+          "severity": "medium",
+          "category": "license",
+          "message": "File is missing the required MIT license header.",
+          "suggestion": "Add the two-line comment header '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.' at the start of the file.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Logging.AzureAppServices/src/FileLoggerProvider.cs:12"
+          ]
+        },
+        {
+          "file": "src/Validation/src/IValidatableInfoResolver.cs",
+          "line": 1,
+          "severity": "medium",
+          "category": "license",
+          "message": "File is missing the required MIT license header.",
+          "suggestion": "Add the two-line comment header '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.' at the start of the file.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Validation/src/IValidatableInfoResolver.cs:18"
+          ]
+        },
+        {
+          "file": "src/Validation/src/SkipValidationAttribute.cs",
+          "line": 1,
+          "severity": "medium",
+          "category": "license",
+          "message": "File is missing the required MIT license header.",
+          "suggestion": "Add the two-line comment header '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.' at the start of the file.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Validation/src/SkipValidationAttribute.cs:6"
+          ]
+        },
+        {
+          "file": "src/Validation/src/ValidateContext.cs",
+          "line": 1,
+          "severity": "medium",
+          "category": "license",
+          "message": "File is missing the required MIT license header.",
+          "suggestion": "Add the two-line comment header '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.' at the start of the file.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Validation/src/ValidateContext.cs:23"
+          ]
+        },
+        {
+          "file": "src/Validation/src/ValidationOptions.cs",
+          "line": 1,
+          "severity": "high",
+          "category": "license_header",
+          "message": "C# source file is missing the required MIT license header.",
+          "suggestion": "Add the standard .NET Foundation MIT license header at the beginning of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Validation/src/ValidationOptions.cs:7"
+          ]
+        },
+        {
+          "file": "src/Validation/src/ValidationOptions.cs",
+          "line": 60,
+          "severity": "minor",
+          "category": "style",
+          "message": "Brace placement inconsistency: the opening brace for TryGetValidatableParameterInfo is on the same line as the method signature, while other methods in the same file use a new line.",
+          "suggestion": "Consistently place opening braces on a new line to match the existing style in the file.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Validation/src/ValidationOptions.cs:60"
+          ]
+        }
+      ],
+      "discarded": []
+    }
+  ],
+  "last_feedback": {
+    "iteration": 0,
+    "uncertain_items": [
+      {
+        "issue_id": "style:src/Validation/src/ValidationOptions.cs:60",
+        "category": "style",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:src/Validation/src/ValidationOptions.cs:60"
+        ]
+      }
+    ]
+  }
+}

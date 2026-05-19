@@ -6,7 +6,7 @@
     "changed_entity_count": 11,
     "risk_signal_count": 2,
     "finding_count": 1,
-    "needs_human_review_count": 2,
+    "needs_human_review_count": 1,
     "discarded_count": 0,
     "evidence_count": 711,
     "missing_evidence_id_count": 0,
@@ -19,9 +19,9 @@
     "fallback_reason": null,
     "resume_used": false,
     "resume_ignored_reason": null,
-    "total_latency_ms": 4136,
+    "total_latency_ms": 52563,
     "total_token_count_in": 23186,
-    "total_token_count_out": 407,
+    "total_token_count_out": 203,
     "context_budget_enabled": true,
     "context_truncated": true,
     "selected_evidence_count": 11,
@@ -63,23 +63,11 @@
       "line": 1,
       "severity": "error",
       "category": "license",
-      "message": "The MIT license header has been removed from the file, violating the repository rule: 'All C# Source Files Must Include MIT License Header'.",
-      "suggestion": "Restore the two-line MIT license header at the top of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+      "message": "MIT license header removed from C# source file, violating the repository rule requiring the exact two-line header at the start of every .cs file.",
+      "suggestion": "Restore the removed license header: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.' at the top of the file.",
       "confidence": 0.5,
       "evidence_ids": [
         "diff_hunk:src/OpenApi/gen/XmlCommentGenerator.Emitter.cs:1"
-      ]
-    },
-    {
-      "file": "src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsRouteParametersFromControllers#OpenApiXmlCommentSupport.generated.verified.cs",
-      "line": 1,
-      "severity": "medium",
-      "category": "guideline",
-      "message": "New file violates 'All C# Source Files Must Include MIT License Header' rule: the file starts with an auto-generated header and lacks the required MIT license header.",
-      "suggestion": "Add the MIT license header comment at the top of the file before the auto-generated header.",
-      "confidence": 0.5,
-      "evidence_ids": [
-        "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsRouteParametersFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:1"
       ]
     }
   ],
@@ -10605,11 +10593,11 @@
       "feedback_hash": "",
       "retry_count": 0,
       "retry_log": [],
-      "latency_ms": 1439,
+      "latency_ms": 27091,
       "token_count_in": 7074,
-      "token_count_out": 181,
-      "trace_id": "94c3048bb43f47aa819c9db41a5164e9",
-      "span_id": "97ed4042df484560",
+      "token_count_out": 179,
+      "trace_id": "10237f684b424a07b42f7dfccd99c353",
+      "span_id": "70a2a77ad8184440",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
@@ -10628,19 +10616,17 @@
         "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsRouteParametersFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:1",
         "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsXmlCommentsOnOperationsFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:430"
       ],
-      "output_issue_ids": [
-        "guideline:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsRouteParametersFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:1"
-      ],
+      "output_issue_ids": [],
       "fallback_used": false,
       "iteration": 0,
       "feedback_hash": "",
       "retry_count": 0,
       "retry_log": [],
-      "latency_ms": 2083,
+      "latency_ms": 3642,
       "token_count_in": 8982,
-      "token_count_out": 214,
-      "trace_id": "b95a606c17b0429fa3b7b4101ce70a23",
-      "span_id": "10e5f87a57b94e99",
+      "token_count_out": 12,
+      "trace_id": "3b7fb7559f654e8996f19155a557dc31",
+      "span_id": "d63b5905bf8541e8",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
@@ -10666,11 +10652,11 @@
       "feedback_hash": "",
       "retry_count": 0,
       "retry_log": [],
-      "latency_ms": 614,
+      "latency_ms": 21830,
       "token_count_in": 7130,
       "token_count_out": 12,
-      "trace_id": "2986e25107a74c9fbf54f3be19a301dd",
-      "span_id": "776abb37959b4311",
+      "trace_id": "e55caba444f74d7ea2fbfa309cd21dac",
+      "span_id": "51b02d8742c34250",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
@@ -10685,8 +10671,7 @@
       "model": null,
       "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
       "input_evidence_ids": [
-        "diff_hunk:src/OpenApi/gen/XmlCommentGenerator.Emitter.cs:1",
-        "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsRouteParametersFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:1"
+        "diff_hunk:src/OpenApi/gen/XmlCommentGenerator.Emitter.cs:1"
       ],
       "output_issue_ids": [],
       "fallback_used": false,
@@ -10986,12 +10971,12 @@
     "iterations": [
       {
         "i": 0,
-        "candidate_issue_count": 2,
-        "verified_count": 2,
+        "candidate_issue_count": 1,
+        "verified_count": 1,
         "needs_human_review_count": 0,
         "discarded_count": 0,
         "keep_count": 0,
-        "uncertain_count": 2,
+        "uncertain_count": 1,
         "reject_count": 0,
         "feedback_sent": [
           {
@@ -11001,15 +10986,6 @@
             "original_confidence": 0.5,
             "evidence_ids": [
               "diff_hunk:src/OpenApi/gen/XmlCommentGenerator.Emitter.cs:1"
-            ]
-          },
-          {
-            "issue_id": "guideline:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsRouteParametersFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:1",
-            "category": "guideline",
-            "critic_reason": "low confidence",
-            "original_confidence": 0.5,
-            "evidence_ids": [
-              "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsRouteParametersFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:1"
             ]
           }
         ],
@@ -11032,11 +11008,11 @@
             "feedback_hash": "",
             "retry_count": 0,
             "retry_log": [],
-            "latency_ms": 1439,
+            "latency_ms": 27091,
             "token_count_in": 7074,
-            "token_count_out": 181,
-            "trace_id": "94c3048bb43f47aa819c9db41a5164e9",
-            "span_id": "97ed4042df484560",
+            "token_count_out": 179,
+            "trace_id": "10237f684b424a07b42f7dfccd99c353",
+            "span_id": "70a2a77ad8184440",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
@@ -11055,19 +11031,17 @@
               "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsRouteParametersFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:1",
               "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsXmlCommentsOnOperationsFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:430"
             ],
-            "output_issue_ids": [
-              "guideline:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsRouteParametersFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:1"
-            ],
+            "output_issue_ids": [],
             "fallback_used": false,
             "iteration": 0,
             "feedback_hash": "",
             "retry_count": 0,
             "retry_log": [],
-            "latency_ms": 2083,
+            "latency_ms": 3642,
             "token_count_in": 8982,
-            "token_count_out": 214,
-            "trace_id": "b95a606c17b0429fa3b7b4101ce70a23",
-            "span_id": "10e5f87a57b94e99",
+            "token_count_out": 12,
+            "trace_id": "3b7fb7559f654e8996f19155a557dc31",
+            "span_id": "d63b5905bf8541e8",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
@@ -11093,11 +11067,11 @@
             "feedback_hash": "",
             "retry_count": 0,
             "retry_log": [],
-            "latency_ms": 614,
+            "latency_ms": 21830,
             "token_count_in": 7130,
             "token_count_out": 12,
-            "trace_id": "2986e25107a74c9fbf54f3be19a301dd",
-            "span_id": "776abb37959b4311",
+            "trace_id": "e55caba444f74d7ea2fbfa309cd21dac",
+            "span_id": "51b02d8742c34250",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
@@ -11112,8 +11086,7 @@
             "model": null,
             "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
             "input_evidence_ids": [
-              "diff_hunk:src/OpenApi/gen/XmlCommentGenerator.Emitter.cs:1",
-              "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsRouteParametersFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:1"
+              "diff_hunk:src/OpenApi/gen/XmlCommentGenerator.Emitter.cs:1"
             ],
             "output_issue_ids": [],
             "fallback_used": false,
@@ -11137,7 +11110,6 @@
           }
         ],
         "issue_set": [
-          "guideline:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsRouteParametersFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:1",
           "license:src/OpenApi/gen/XmlCommentGenerator.Emitter.cs:1"
         ],
         "keep": [],
@@ -11147,23 +11119,11 @@
             "line": 1,
             "severity": "error",
             "category": "license",
-            "message": "The MIT license header has been removed from the file, violating the repository rule: 'All C# Source Files Must Include MIT License Header'.",
-            "suggestion": "Restore the two-line MIT license header at the top of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+            "message": "MIT license header removed from C# source file, violating the repository rule requiring the exact two-line header at the start of every .cs file.",
+            "suggestion": "Restore the removed license header: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.' at the top of the file.",
             "confidence": 0.5,
             "evidence_ids": [
               "diff_hunk:src/OpenApi/gen/XmlCommentGenerator.Emitter.cs:1"
-            ]
-          },
-          {
-            "file": "src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsRouteParametersFromControllers#OpenApiXmlCommentSupport.generated.verified.cs",
-            "line": 1,
-            "severity": "medium",
-            "category": "guideline",
-            "message": "New file violates 'All C# Source Files Must Include MIT License Header' rule: the file starts with an auto-generated header and lacks the required MIT license header.",
-            "suggestion": "Add the MIT license header comment at the top of the file before the auto-generated header.",
-            "confidence": 0.5,
-            "evidence_ids": [
-              "diff_hunk:src/OpenApi/test/Microsoft.AspNetCore.OpenApi.SourceGenerators.Tests/snapshots/OperationTests.SupportsRouteParametersFromControllers#OpenApiXmlCommentSupport.generated.verified.cs:1"
             ]
           }
         ],
@@ -11172,9 +11132,9 @@
     ]
   },
   "tracing": {
-    "total_latency_ms": 4136,
+    "total_latency_ms": 52563,
     "total_token_count_in": 23186,
-    "total_token_count_out": 407,
+    "total_token_count_out": 203,
     "total_retry_count": 0,
     "run_count": 4,
     "status_counts": {

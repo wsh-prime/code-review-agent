@@ -23,12 +23,24 @@
       "issues": [
         {
           "file": "ghost/core/core/server/services/member-welcome-emails/jobs/index.js",
-          "line": 15,
+          "line": 14,
           "severity": "high",
           "category": "logic_error",
-          "message": "Negated condition in `scheduleMemberWelcomeEmailJob` flips scheduling logic: previously the job was scheduled when `processOutbox` was false, now it is scheduled only when `processOutbox` is true, which means the job will never be scheduled on the first call and will be scheduled repeatedly on subsequent calls.",
-          "suggestion": "Change `if (hasScheduled.processOutbox && ...)` back to `if (!hasScheduled.processOutbox && ...)` to preserve the original once-per-process scheduling guard.",
-          "confidence": 0.95,
+          "message": "Negated condition in `if (!hasScheduled.processOutbox && ...)` was changed to `if (hasScheduled.processOutbox && ...)`, which inverts the scheduling guard. Previously the job was added only when `processOutbox` was false; now it is added only when `processOutbox` is true, meaning the job will never be scheduled on the first invocation and may be scheduled repeatedly after the first run.",
+          "suggestion": "Restore the original negation `!hasScheduled.processOutbox` or confirm the intended logic and update the flag reset accordingly.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8"
+          ]
+        },
+        {
+          "file": "ghost/core/core/server/services/member-welcome-emails/jobs/index.js",
+          "line": 11,
+          "severity": "medium",
+          "category": "behavior_change",
+          "message": "The feature gate check was changed from `labs.isSet('welcomeEmails')` to `config.get('memberWelcomeEmailTestInbox')`. This replaces a boolean labs flag with a config value that is truthy when set. In production, if `memberWelcomeEmailTestInbox` is not configured, the entire welcome email job will be skipped, effectively disabling the feature for all members.",
+          "suggestion": "Ensure the config value is set appropriately for production or keep the labs flag as a fallback.",
+          "confidence": 0.5,
           "evidence_ids": [
             "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8"
           ]
@@ -36,11 +48,23 @@
         {
           "file": "ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js",
           "line": 340,
-          "severity": "high",
-          "category": "logic_error",
-          "message": "Welcome email condition changed from `labs.isSet('welcomeEmails') && WELCOME_EMAIL_SOURCES.includes(source)` to `config.get('memberWelcomeEmailTestInbox') || WELCOME_EMAIL_SOURCES.includes(source)`. The new OR logic means that if `memberWelcomeEmailTestInbox` is set to any truthy value, welcome emails are sent for *all* sources, not just the allowed ones, which can cause unintended email sending for sources like 'import' or 'admin'.",
-          "suggestion": "Change the condition to `(welcomeEmailConfig || this._labsService.isSet('welcomeEmails')) && WELCOME_EMAIL_SOURCES.includes(source)` to preserve the source restriction while allowing the test config override.",
-          "confidence": 0.9,
+          "severity": "medium",
+          "category": "behavior_change",
+          "message": "The condition for triggering welcome email outbox creation was changed from `this._labsService.isSet('welcomeEmails') && WELCOME_EMAIL_SOURCES.includes(source)` to `welcomeEmailConfig || WELCOME_EMAIL_SOURCES.includes(source)`. When `welcomeEmailConfig` is truthy, the source check is bypassed, causing outbox entries to be created for any member source (e.g., admin-created, API-created) instead of only the allowed sources.",
+          "suggestion": "Keep the source filter: `welcomeEmailConfig && WELCOME_EMAIL_SOURCES.includes(source)` or `(welcomeEmailConfig || this._labsService.isSet('welcomeEmails')) && WELCOME_EMAIL_SOURCES.includes(source)`.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337"
+          ]
+        },
+        {
+          "file": "ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js",
+          "line": 339,
+          "severity": "low",
+          "category": "code_style",
+          "message": "Variable declaration changed from `let member` to `var member`. While not a functional issue, it introduces a function-scoped variable in a module where `let` is used elsewhere, reducing consistency.",
+          "suggestion": "Keep `let member` for block scoping consistency.",
+          "confidence": 0.5,
           "evidence_ids": [
             "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337"
           ]
@@ -62,19 +86,21 @@
           "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:527"
         ],
         "output_issue_ids": [
-          "logic_error:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:15",
-          "logic_error:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340"
+          "logic_error:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:14",
+          "behavior_change:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:11",
+          "behavior_change:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340",
+          "code_style:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:339"
         ],
         "fallback_used": false,
         "iteration": 0,
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 29000,
+        "latency_ms": 16455,
         "token_count_in": 8463,
-        "token_count_out": 472,
-        "trace_id": "737d2e15ae6440608292f9fe93a67088",
-        "span_id": "cb35a802e0ca4350",
+        "token_count_out": 830,
+        "trace_id": "fa898a8db2b44fc7a490a0967d4987c8",
+        "span_id": "0952d0a2fcdd44f1",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",

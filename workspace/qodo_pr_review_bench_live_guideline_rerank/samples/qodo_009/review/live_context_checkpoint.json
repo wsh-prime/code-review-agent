@@ -14,28 +14,44 @@
         "diff_hunk:apps/activitypub/src/api/activitypub.ts:26",
         "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2722"
       ],
-      "context_requests": [],
-      "issues": [
+      "context_requests": [
         {
-          "file": "apps/activitypub/src/api/activitypub.test.ts",
-          "line": 1610,
-          "severity": "high",
-          "category": "correctness",
-          "message": "The test mock for the bluesky enable endpoint now returns null response and no longer validates the handle in the response, which may mask regressions in the API response contract.",
-          "suggestion": "Add a response body that matches the expected API response shape, e.g., { handle: '@foo@bar.baz' } or the new shape if changed.",
-          "confidence": 0.85,
+          "request_type": "same_file_more_evidence",
+          "path": "apps/activitypub/src/hooks/use-activity-pub-queries.ts",
           "evidence_ids": [
-            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1607"
-          ]
+            "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2753",
+            "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2786",
+            "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2806"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-001",
+          "fulfilled_evidence_ids": []
         },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "apps/activitypub/src/api/activitypub.ts",
+          "evidence_ids": [
+            "diff_hunk:apps/activitypub/src/api/activitypub.ts:708",
+            "diff_hunk:apps/activitypub/src/api/activitypub.ts:731"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-001",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [
         {
           "file": "apps/activitypub/src/api/activitypub.ts",
           "line": 29,
           "severity": "medium",
           "category": "correctness",
-          "message": "The blueskyHandle field type changed from string | undefined to string | null, which may cause existing consumers that check for undefined to break.",
-          "suggestion": "Update all consumers of blueskyHandle to handle null instead of undefined, or keep the old signature and add a new field.",
-          "confidence": 0.8,
+          "message": "The `blueskyHandle` field type changed from `string | undefined` to `string | null`, but the existing `blueskyEnabled` field remains `boolean | undefined`. The new `blueskyHandleConfirmed` field is added as `boolean | undefined`. This inconsistency in null/undefined handling for related fields may cause runtime type mismatches when consumers check for existence.",
+          "suggestion": "Align the null/undefined pattern: either use `undefined` for all optional fields or use `null` consistently. For example, change `blueskyHandle` to `string | undefined` and `blueskyHandleConfirmed` to `boolean | undefined` to match the existing pattern.",
+          "confidence": 0.5,
           "evidence_ids": [
             "diff_hunk:apps/activitypub/src/api/activitypub.ts:26"
           ]
@@ -45,11 +61,23 @@
           "line": 2725,
           "severity": "medium",
           "category": "correctness",
-          "message": "The updateAccountBlueskyCache function now spreads the entire blueskyDetails object, which may overwrite existing profile fields unexpectedly if blueskyDetails contains extra properties.",
-          "suggestion": "Explicitly destructure only the intended fields (blueskyEnabled, blueskyHandleConfirmed, blueskyHandle) instead of spreading the whole object.",
-          "confidence": 0.75,
+          "message": "The `updateAccountBlueskyCache` function now spreads `blueskyDetails` into the cached profile, which includes `blueskyEnabled`, `blueskyHandleConfirmed`, and `blueskyHandle`. Previously, `blueskyEnabled` was derived from `blueskyHandle !== null`. This change means callers must now explicitly provide `blueskyEnabled` and `blueskyHandleConfirmed`, but the diff does not show any caller updates. If callers omit these fields, the cache may retain stale values.",
+          "suggestion": "Update all callers of `updateAccountBlueskyCache` to pass the full `BlueskyDetails` object, or keep the old derivation logic for `blueskyEnabled` inside the function to avoid breaking existing callers.",
+          "confidence": 0.5,
           "evidence_ids": [
             "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2722"
+          ]
+        },
+        {
+          "file": "apps/activitypub/src/api/activitypub.test.ts",
+          "line": 1610,
+          "severity": "low",
+          "category": "correctness",
+          "message": "The test mock for the bluesky enable endpoint now returns `JSONResponse(null)` and asserts the method is `POST`. However, the previous mock returned a response with a `handle` field. The new response returns `null`, which may cause tests that expect a handle in the response to fail. The diff does not show any test assertions that validate the response body, so this change may be intentional, but it could break downstream tests.",
+          "suggestion": "Ensure all tests that consume the bluesky enable endpoint response are updated to handle a `null` response body, or add a meaningful response object if the API still returns data.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1607"
           ]
         }
       ],
@@ -64,28 +92,105 @@
           "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2722"
         ],
         "output_issue_ids": [
-          "correctness:apps/activitypub/src/api/activitypub.test.ts:1610",
           "correctness:apps/activitypub/src/api/activitypub.ts:29",
-          "correctness:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2725"
+          "correctness:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2725",
+          "correctness:apps/activitypub/src/api/activitypub.test.ts:1610"
         ],
         "fallback_used": false,
         "iteration": 0,
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 20415,
+        "latency_ms": 18669,
         "token_count_in": 5920,
-        "token_count_out": 477,
-        "trace_id": "994b7375021d4f0f9c4ae26ac9f84306",
-        "span_id": "db63c395038c4a42",
+        "token_count_out": 899,
+        "trace_id": "c97a545741ad4174842af4cda4a92a43",
+        "span_id": "0898d401c53746fb",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
         "shard_id": "shard-001",
         "shard_index": 0,
         "shard_count": 2,
-        "context_request_count": 0,
+        "context_request_count": 2,
         "context_refill_used": false
+      }
+    },
+    "22b61ab0a65a5272bc891a9cc3f39fc7818a52004b2888c1f60c2fe768e6b77a": {
+      "status": "completed",
+      "shard_id": "shard-001-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-001",
+      "selected_evidence_ids": [
+        "diff_hunk:apps/activitypub/src/api/activitypub.ts:708",
+        "diff_hunk:apps/activitypub/src/api/activitypub.ts:731",
+        "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2753",
+        "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2786",
+        "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2806"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "apps/activitypub/src/hooks/use-activity-pub-queries.ts",
+          "line": 2828,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Missing invalidation of accountFollows query after confirming Bluesky handle, which may leave stale cached data.",
+          "suggestion": "Add queryClient.invalidateQueries for the accountFollows query in the onSuccess handler.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2806"
+          ]
+        },
+        {
+          "file": "apps/activitypub/src/api/activitypub.ts",
+          "line": 711,
+          "severity": "low",
+          "category": "best-practice",
+          "message": "The enableBluesky method removed its return type annotation (Promise<string>), which may break callers expecting a string result.",
+          "suggestion": "Restore the return type annotation to Promise<string> or update callers accordingly.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/activitypub/src/api/activitypub.ts:708"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:apps/activitypub/src/api/activitypub.ts:708",
+          "diff_hunk:apps/activitypub/src/api/activitypub.ts:731",
+          "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2753",
+          "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2786",
+          "diff_hunk:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2806"
+        ],
+        "output_issue_ids": [
+          "correctness:apps/activitypub/src/hooks/use-activity-pub-queries.ts:2828",
+          "best-practice:apps/activitypub/src/api/activitypub.ts:711"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 2,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s",
+          "attempt=2 error=timeout delay=2.00s"
+        ],
+        "latency_ms": 141495,
+        "token_count_in": 4116,
+        "token_count_out": 283,
+        "trace_id": "90523f4f63684b4298ae6bc46d96b028",
+        "span_id": "021742f29a3044f9",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "shard_count": 2,
+        "context_request_count": 0,
+        "context_refill_used": true
       }
     },
     "07ed80633a29043974e61a074599ba081f55d9c7023b5a07494c546eae1c5eb9": {
@@ -105,8 +210,8 @@
           "line": 18,
           "severity": "error",
           "category": "correctness",
-          "message": "TypeScript Files Must Enable Strict Type Checking: 'strict' is set to false, which disables strict type checking and can allow potential runtime errors.",
-          "suggestion": "Set 'strict' back to true to enable full type checking.",
+          "message": "TypeScript strict mode disabled: 'strict' set to false violates the repository guideline requiring strict type checking.",
+          "suggestion": "Set 'strict' back to true and fix any type errors that arise.",
           "confidence": 0.5,
           "evidence_ids": [
             "diff_hunk:apps/activitypub/tsconfig.json:15"
@@ -130,11 +235,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 3556,
+        "latency_ms": 40816,
         "token_count_in": 5343,
-        "token_count_out": 140,
-        "trace_id": "cb418cc9011c49109141ee27af8b54df",
-        "span_id": "fa1ab1b3fa274e1c",
+        "token_count_out": 133,
+        "trace_id": "cee9e2a1abbc4dd596e22f947ceb9c81",
+        "span_id": "7872b4b59f6a41e9",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",

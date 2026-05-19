@@ -297,7 +297,11 @@ class ReviewerContext:
 
 @dataclass(slots=True)
 class ReviewShard:
-    """Audit metadata for one context shard."""
+    """Compatibility audit metadata for one context shard.
+
+    New review code should prefer ``review.schema.ReviewContext`` plus
+    ``RunTrace``.  This model remains for older reports and public imports.
+    """
 
     shard_id: str
     shard_index: int
@@ -315,7 +319,11 @@ class ReviewShard:
 
 @dataclass(slots=True)
 class ShardReviewResult:
-    """Reviewer output for one shard before global verification/filtering."""
+    """Compatibility reviewer output for one shard.
+
+    New review code should represent issue lifecycle with
+    ``review.schema.Finding`` and ``IssueLifecycleResult``.
+    """
 
     shard_id: str
     issues: list[ReviewIssue] = field(default_factory=list)
@@ -399,6 +407,12 @@ class CritiqueResult:
 
 @dataclass(slots=True)
 class ReviewReport:
+    """Compatibility report container used by hygiene outputs.
+
+    The review pipeline now emits plain report dictionaries with
+    ``review_results``, ``change_set``, and ``evidence_store_summary``.
+    """
+
     summary: dict[str, Any] = field(default_factory=dict)
     issues: list[ReviewIssue] = field(default_factory=list)
     file_classifications: list[FileClassification] = field(default_factory=list)

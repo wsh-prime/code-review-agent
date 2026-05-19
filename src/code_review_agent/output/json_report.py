@@ -15,24 +15,33 @@ def normalize_review_report(report: dict[str, Any]) -> dict[str, Any]:
 
     normalized = {
         "schema_version": report.get("schema_version", REVIEW_REPORT_SCHEMA_VERSION),
-        "summary": dict(report.get("summary", {})),
+        "summary": _dict_or_empty(report.get("summary")),
+        "review_results": _dict_or_empty(report.get("review_results")),
+        "change_set": _dict_or_empty(report.get("change_set")),
+        "evidence_store_summary": _dict_or_empty(
+            report.get("evidence_store_summary")
+        ),
         "findings": list(report.get("findings", [])),
         "needs_human_review": list(report.get("needs_human_review", [])),
         "discarded": list(report.get("discarded", [])),
         "changed_files": list(report.get("changed_files", [])),
         "changed_entities": list(report.get("changed_entities", [])),
         "risk_signals": list(report.get("risk_signals", [])),
-        "evidence_index": dict(report.get("evidence_index", {})),
+        "evidence_index": _dict_or_empty(report.get("evidence_index")),
         "missing_evidence_ids": list(report.get("missing_evidence_ids", [])),
         "agent_runs": list(report.get("agent_runs", [])),
-        "prompt_exports": dict(report.get("prompt_exports", {})),
-        "context_budget": dict(report.get("context_budget", {})),
-        "loop": dict(report.get("loop", {})),
-        "tracing": dict(report.get("tracing", {})),
+        "prompt_exports": _dict_or_empty(report.get("prompt_exports")),
+        "context_budget": _dict_or_empty(report.get("context_budget")),
+        "loop": _dict_or_empty(report.get("loop")),
+        "tracing": _dict_or_empty(report.get("tracing")),
     }
     normalized["summary"].setdefault("target_repo_modified", False)
     normalized["summary"].setdefault("discarded_count", len(normalized["discarded"]))
     normalized["summary"].setdefault("agent_run_count", len(normalized["agent_runs"]))
+    normalized["summary"].setdefault(
+        "review_result_count",
+        len(normalized["review_results"].get("items", [])),
+    )
     normalized["summary"].setdefault("prompt_exported", bool(normalized["prompt_exports"]))
     normalized["summary"].setdefault(
         "context_budget_enabled",
@@ -88,6 +97,10 @@ def normalize_review_report(report: dict[str, Any]) -> dict[str, Any]:
         normalized["tracing"].get("total_token_count_out", 0),
     )
     return normalized
+
+
+def _dict_or_empty(value: object) -> dict[str, Any]:
+    return dict(value) if isinstance(value, dict) else {}
 
 
 def review_report_to_json(report: dict[str, Any]) -> str:

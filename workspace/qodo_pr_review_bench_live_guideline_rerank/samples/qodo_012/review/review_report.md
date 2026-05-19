@@ -6,9 +6,9 @@
 - Changed files: 36
 - Changed entities: 36
 - Risk signals: 27
-- Findings: 0
-- Needs human review: 3
-- Discarded: 0
+- Findings: 3
+- Needs human review: 1
+- Discarded: 2
 - Agent runs: 13
 - Loop enabled: True
 - Target repo modified: False
@@ -20,12 +20,12 @@
 | Iterations | 1 / 1 |
 | Converged | False |
 | Fallback | False |
-| Retry count | 2 |
-| Total latency | 256451 ms |
-| Token in | 91682 |
-| Token out | 1421 |
+| Retry count | 3 |
+| Total latency | 380110 ms |
+| Token in | 92143 |
+| Token out | 2002 |
 
-- Iteration 0: 3 candidates, 3 verified, 3 uncertain, 0 kept, 0 rejected
+- Iteration 0: 6 candidates, 4 verified, 1 uncertain, 3 kept, 0 rejected
 
 ## Context Budget Summary
 
@@ -33,9 +33,9 @@
 |---|---:|
 | Strategy | `file_risk_shards_v1` |
 | Max input tokens | 9000 |
-| Estimated input tokens | 70615 |
-| Selected evidence | 45 |
-| Omitted evidence | 1479 |
+| Estimated input tokens | 70989 |
+| Selected evidence | 49 |
+| Omitted evidence | 1475 |
 | Context truncated | True |
 | Review shards | 10 |
 | Context requests | 4 |
@@ -43,26 +43,27 @@
 
 ## Findings
 
-No findings.
+- `correctness` high at `ghost/core/core/server/services/tinybird/TinybirdService.js:59` (0.80)
+  - The test expects the URL to contain 'test_pipe_v2.json' but the pipe name in the config is 'api_kpis_v2'. The buildRequest method likely appends the version to the pipe name, but the test uses 'test_pipe' as the pipe name and expects 'test_pipe_v2.json'. This mismatch suggests the version is being appended to the pipe name, which would produce 'test_pipe_v2.json' for pipe 'test_pipe' and version 'v2'. However, the actual pipe names in the config already include '_v2' suffix (e.g., 'api_kpis_v2'). If buildRequest appends the version to the pipe name, it would produce 'api_kpis_v2_v2' for those pipes, which is incorrect.
+  - Suggestion: Verify that the buildRequest method does not append the version suffix to pipe names that already contain '_v2'. If it does, either remove the '_v2' suffix from the pipe names in the config or modify buildRequest to avoid double-suffixing.
+  - Evidence: `diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:56`, `diff_hunk:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:70`
 
-Checked changed files, changed entities, deterministic risk signals, and evidence references. No high-confidence review finding was produced.
+- `test_quality` medium at `ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:110` (0.70)
+  - The test 'ignores tbVersion when local is enabled' was removed. This test verified that when local mode is enabled, the tbVersion parameter is ignored and the URL does not contain '__v2'. The removal of this test reduces coverage for the local mode behavior, which could mask a regression where tbVersion is incorrectly applied in local mode.
+  - Suggestion: Consider adding a test that verifies the version from config is ignored when local mode is enabled, similar to the removed test but adapted for the new version config approach.
+  - Evidence: `diff_hunk:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:110`
+
+- `test_coverage` medium at `ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:110` (0.80)
+  - Removed test 'ignores tbVersion when local is enabled' without adding equivalent coverage for the new v2 pipes.
+  - Suggestion: Add a test that verifies tbVersion is ignored when local is enabled, covering the new v2 pipe names to ensure the materialized view optimization does not break local mode behavior.
+  - Evidence: `diff_hunk:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:110`, `diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:56`
 
 ## Needs Human Review
 
-- `correctness` error at `ghost/core/core/server/api/endpoints/stats.js:128` (0.50)
-  - Removing 'tb_version' from allowed parameters may break existing clients that send this parameter, causing unexpected validation failures.
-  - Suggestion: If 'tb_version' is no longer supported, ensure the API gracefully ignores unknown parameters or provides a deprecation path. If it is still needed, add it back to the allowed list.
-  - Evidence: `diff_hunk:ghost/core/core/server/api/endpoints/stats.js:125`
-
-- `maintainability` warning at `ghost/core/core/server/api/endpoints/stats.js:128` (0.50)
-  - The API endpoint controller in stats.js is missing the required JSDoc type annotation '@type {import('@tryghost/api-framework').Controller}' as specified by the review guideline 'API Endpoint Controllers Must Have Type Annotations'.
-  - Suggestion: Add a JSDoc type annotation to the controller object: /** @type {import('@tryghost/api-framework').Controller} */
-  - Evidence: `diff_hunk:ghost/core/core/server/api/endpoints/stats.js:125`
-
-- `correctness` medium at `ghost/core/core/server/services/tinybird/TinybirdService.js:59` (0.50)
-  - The test expects the URL to contain 'test_pipe_v2.json' but the pipe name is 'api_kpis_v2'. The version suffix is appended as '_v2' to the pipe name, which already contains '_v2', resulting in a double suffix 'api_kpis_v2_v2'.
-  - Suggestion: Either rename the pipes to not include the version suffix (e.g., 'api_kpis') and let the code append '_v2', or update the versioning logic to avoid duplicating the suffix.
-  - Evidence: `diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:56`, `diff_hunk:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:70`
+- `maintainability` low at `apps/admin-x-framework/src/providers/framework-provider.tsx:13` (0.50)
+  - The new 'version' property in StatsConfig interface is optional but its usage in stats-config.ts does not handle the case where version is an empty string, which would produce an endpoint name like '_api_kpis'.
+  - Suggestion: Consider treating an empty string version the same as undefined, or add validation to reject empty strings.
+  - Evidence: `diff_hunk:apps/admin-x-framework/src/providers/framework-provider.tsx:10`, `diff_hunk:apps/admin-x-framework/src/utils/stats-config.ts:13`
 
 ## Changed Files
 

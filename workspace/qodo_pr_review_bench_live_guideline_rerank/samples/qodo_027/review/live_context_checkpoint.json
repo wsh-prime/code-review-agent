@@ -21,7 +21,7 @@
           "line": 91,
           "severity": "medium",
           "category": "best_practice",
-          "message": "Default export used in non-Next.js page/layout file, violating the 'Default Exports Allowed Only in Next.js Page and Layout Files' guideline.",
+          "message": "Default export used in non-Next.js page/layout file, violating the 'Default Exports Allowed Only in Next.js Page and Layout Files' rule.",
           "suggestion": "Replace 'export default function AvailabilityDetail()' with a named export (e.g., 'export function AvailabilityDetail()') and update all imports accordingly.",
           "confidence": 0.5,
           "evidence_ids": [
@@ -33,8 +33,8 @@
           "line": 65,
           "severity": "medium",
           "category": "best_practice",
-          "message": "Default export used in non-Next.js page/layout file, violating the 'Default Exports Allowed Only in Next.js Page and Layout Files' guideline.",
-          "suggestion": "Replace 'export default function Bookings()' with a named export and update imports.",
+          "message": "Default export used in non-Next.js page/layout file, violating the 'Default Exports Allowed Only in Next.js Page and Layout Files' rule.",
+          "suggestion": "Replace 'export default function Bookings()' with a named export (e.g., 'export function Bookings()') and update all imports accordingly.",
           "confidence": 0.5,
           "evidence_ids": [
             "diff_hunk:companion/app/(tabs)/(bookings)/index.ios.tsx:62"
@@ -45,8 +45,8 @@
           "line": 65,
           "severity": "medium",
           "category": "best_practice",
-          "message": "Default export used in non-Next.js page/layout file, violating the 'Default Exports Allowed Only in Next.js Page and Layout Files' guideline.",
-          "suggestion": "Replace 'export default function Bookings()' with a named export and update imports.",
+          "message": "Default export used in non-Next.js page/layout file, violating the 'Default Exports Allowed Only in Next.js Page and Layout Files' rule.",
+          "suggestion": "Replace 'export default function Bookings()' with a named export (e.g., 'export function Bookings()') and update all imports accordingly.",
           "confidence": 0.5,
           "evidence_ids": [
             "diff_hunk:companion/app/(tabs)/(bookings)/index.tsx:62"
@@ -57,8 +57,8 @@
           "line": 180,
           "severity": "medium",
           "category": "best_practice",
-          "message": "Default export used in non-Next.js page/layout file, violating the 'Default Exports Allowed Only in Next.js Page and Layout Files' guideline.",
-          "suggestion": "Replace 'export default function EventTypeDetail()' with a named export and update imports.",
+          "message": "Default export used in non-Next.js page/layout file, violating the 'Default Exports Allowed Only in Next.js Page and Layout Files' rule.",
+          "suggestion": "Replace 'export default function EventTypeDetail()' with a named export (e.g., 'export function EventTypeDetail()') and update all imports accordingly.",
           "confidence": 0.5,
           "evidence_ids": [
             "diff_hunk:companion/app/(tabs)/(event-types)/event-type-detail.tsx:177"
@@ -86,16 +86,657 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 44240,
+        "latency_ms": 4197,
         "token_count_in": 5898,
-        "token_count_out": 603,
-        "trace_id": "eb566727915749f3bbe93903c75eda56",
-        "span_id": "ffe4918618f24e23",
+        "token_count_out": 643,
+        "trace_id": "f8fc02418bf14d9c978493b4bc9d9b08",
+        "span_id": "22f159da4fc94e09",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
         "shard_id": "shard-001",
         "shard_index": 0,
+        "shard_count": 6,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "5153405a5a3d565b4a232ccbd1cfc18acddc7faf45ffff84a94ef62eb55bcc16": {
+      "status": "completed",
+      "shard_id": "shard-002",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:1",
+        "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:37",
+        "diff_hunk:companion/app/profile-sheet.ios.tsx:147",
+        "diff_hunk:companion/app/profile-sheet.tsx:124"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "companion/app/(tabs)/(event-types)/index.ios.tsx",
+          "evidence_ids": [
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:111",
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:124",
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:232"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-002",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "companion/app/(tabs)/(event-types)/index.tsx",
+          "evidence_ids": [
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:133",
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:146",
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:285"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-002",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [
+        {
+          "file": "companion/app/(tabs)/(event-types)/index.ios.tsx",
+          "line": 1,
+          "severity": "warning",
+          "category": "correctness",
+          "message": "Removed import of ContextMenu and HStack from @expo/ui/swift-ui without verifying they are unused elsewhere in the file. If these components are still referenced, the removal will cause a runtime error.",
+          "suggestion": "Ensure that ContextMenu and HStack are not used anywhere in the file before removing their imports. If they are used, restore the imports.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:1"
+          ]
+        },
+        {
+          "file": "companion/app/(tabs)/(event-types)/index.tsx",
+          "line": 37,
+          "severity": "warning",
+          "category": "correctness",
+          "message": "Removed import of CalComAPIService from @/services/calcom. If this service is still used elsewhere in the file (e.g., for API calls), the removal will cause a runtime error.",
+          "suggestion": "Verify that CalComAPIService is not used anywhere in the file. If it is used, restore the import.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:37"
+          ]
+        },
+        {
+          "file": "companion/app/profile-sheet.ios.tsx",
+          "line": 150,
+          "severity": "info",
+          "category": "visual",
+          "message": "Removed border-b and border-gray-200 classes from the profile header View. This may change the visual appearance by removing the bottom border separator.",
+          "suggestion": "Confirm that the removal of the bottom border is intentional and does not negatively affect the UI layout or visual hierarchy.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/app/profile-sheet.ios.tsx:147"
+          ]
+        },
+        {
+          "file": "companion/app/profile-sheet.tsx",
+          "line": 127,
+          "severity": "info",
+          "category": "visual",
+          "message": "Removed border-b and border-gray-200 classes from the profile header View. This may change the visual appearance by removing the bottom border separator.",
+          "suggestion": "Confirm that the removal of the bottom border is intentional and does not negatively affect the UI layout or visual hierarchy.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/app/profile-sheet.tsx:124"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:1",
+          "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:37",
+          "diff_hunk:companion/app/profile-sheet.ios.tsx:147",
+          "diff_hunk:companion/app/profile-sheet.tsx:124"
+        ],
+        "output_issue_ids": [
+          "correctness:companion/app/(tabs)/(event-types)/index.ios.tsx:1",
+          "correctness:companion/app/(tabs)/(event-types)/index.tsx:37",
+          "visual:companion/app/profile-sheet.ios.tsx:150",
+          "visual:companion/app/profile-sheet.tsx:127"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 17616,
+        "token_count_in": 5189,
+        "token_count_out": 818,
+        "trace_id": "19bcd210f9fb48eb9399c10cc94bd42d",
+        "span_id": "c592c597cb92411b",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "shard_count": 6,
+        "context_request_count": 2,
+        "context_refill_used": false
+      }
+    },
+    "5b9a1fc8de02b5471a77709fedf75018d4993f63f5540c25cbb0cc9eefbb91b2": {
+      "status": "completed",
+      "shard_id": "shard-002-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-002",
+      "selected_evidence_ids": [
+        "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:111",
+        "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:124",
+        "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:232",
+        "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:133",
+        "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:146",
+        "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:285"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "companion/app/(tabs)/(event-types)/index.ios.tsx",
+          "line": 111,
+          "severity": "major",
+          "category": "correctness",
+          "message": "Removed async API call to CalComAPIService.buildEventTypeLink without verifying that eventType.bookingUrl is always populated. If bookingUrl is missing or stale, the copy, share, and preview actions will silently use an empty or incorrect URL.",
+          "suggestion": "Ensure that eventType.bookingUrl is guaranteed to be set before removing the fallback link generation, or keep the API call as a fallback when bookingUrl is missing.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:111",
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:124",
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:232"
+          ]
+        },
+        {
+          "file": "companion/app/(tabs)/(event-types)/index.tsx",
+          "line": 133,
+          "severity": "major",
+          "category": "correctness",
+          "message": "Removed async API call to CalComAPIService.buildEventTypeLink without verifying that eventType.bookingUrl is always populated. If bookingUrl is missing or stale, the copy, share, and preview actions will silently use an empty or incorrect URL.",
+          "suggestion": "Ensure that eventType.bookingUrl is guaranteed to be set before removing the fallback link generation, or keep the API call as a fallback when bookingUrl is missing.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:133",
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:146",
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:285"
+          ]
+        },
+        {
+          "file": "companion/app/(tabs)/(event-types)/index.ios.tsx",
+          "line": 1,
+          "severity": "minor",
+          "category": "best-practice",
+          "message": "File uses a default export (export default function EventTypesIOS) but does not match the Next.js page/layout exception pattern (apps/web/app/**/page.tsx, apps/web/app/**/layout.tsx). Review guidelines require named exports for non-page/layout files.",
+          "suggestion": "Convert to a named export: export function EventTypesIOS() { ... } and update imports accordingly.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:111"
+          ]
+        },
+        {
+          "file": "companion/app/(tabs)/(event-types)/index.tsx",
+          "line": 40,
+          "severity": "minor",
+          "category": "best-practice",
+          "message": "File uses a default export (export default function EventTypes) but does not match the Next.js page/layout exception pattern (apps/web/app/**/page.tsx, apps/web/app/**/layout.tsx). Review guidelines require named exports for non-page/layout files.",
+          "suggestion": "Convert to a named export: export function EventTypes() { ... } and update imports accordingly.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:133"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:111",
+          "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:124",
+          "diff_hunk:companion/app/(tabs)/(event-types)/index.ios.tsx:232",
+          "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:133",
+          "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:146",
+          "diff_hunk:companion/app/(tabs)/(event-types)/index.tsx:285"
+        ],
+        "output_issue_ids": [
+          "correctness:companion/app/(tabs)/(event-types)/index.ios.tsx:111",
+          "correctness:companion/app/(tabs)/(event-types)/index.tsx:133",
+          "best-practice:companion/app/(tabs)/(event-types)/index.ios.tsx:1",
+          "best-practice:companion/app/(tabs)/(event-types)/index.tsx:40"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 55240,
+        "token_count_in": 4204,
+        "token_count_out": 819,
+        "trace_id": "1a4d2f007cd942c2b371bd9aa1abac6c",
+        "span_id": "45d5ce49956449c7",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002-refill",
+        "shard_index": 1,
+        "shard_count": 6,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    },
+    "1e65af9ef26bba406ef28efac74d57da25b608fed1392174a1f6eb0ffaa1462a": {
+      "status": "completed",
+      "shard_id": "shard-003",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:companion/components/Header.tsx:103",
+        "diff_hunk:companion/components/event-type-detail/tabs/AdvancedTab.tsx:138",
+        "diff_hunk:companion/components/event-type-detail/tabs/BasicsTab.tsx:37",
+        "diff_hunk:companion/components/event-type-detail/tabs/LimitsTab.tsx:124"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "companion/components/Header.tsx",
+          "line": 106,
+          "severity": "minor",
+          "category": "best_practice",
+          "message": "Review guideline violation: 'React Components Must Use react-hook-form with Zod Schema Validation' - The Header component is a form-related component (contains filter dropdown and pressable elements) but does not use react-hook-form with Zod schema validation as required by the repository guidelines.",
+          "suggestion": "If this component handles form-like input (e.g., filter selection), wrap it with react-hook-form and a Zod schema. Otherwise, confirm it is not a form component and consider adding a comment to clarify.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/components/Header.tsx:103"
+          ]
+        },
+        {
+          "file": "companion/components/event-type-detail/tabs/AdvancedTab.tsx",
+          "line": 141,
+          "severity": "minor",
+          "category": "best_practice",
+          "message": "Review guideline violation: 'React Components Must Use react-hook-form with Zod Schema Validation' - The AdvancedTab component is a form tab but does not use react-hook-form with Zod schema validation as required.",
+          "suggestion": "Integrate react-hook-form with zodResolver and define Zod schemas for form fields in this tab.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/components/event-type-detail/tabs/AdvancedTab.tsx:138"
+          ]
+        },
+        {
+          "file": "companion/components/event-type-detail/tabs/BasicsTab.tsx",
+          "line": 40,
+          "severity": "minor",
+          "category": "best_practice",
+          "message": "Review guideline violation: 'React Components Must Use react-hook-form with Zod Schema Validation' - The BasicsTab component is a form tab but does not use react-hook-form with Zod schema validation as required.",
+          "suggestion": "Integrate react-hook-form with zodResolver and define Zod schemas for form fields in this tab.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/components/event-type-detail/tabs/BasicsTab.tsx:37"
+          ]
+        },
+        {
+          "file": "companion/components/event-type-detail/tabs/LimitsTab.tsx",
+          "line": 127,
+          "severity": "minor",
+          "category": "best_practice",
+          "message": "Review guideline violation: 'React Components Must Use react-hook-form with Zod Schema Validation' - The LimitsTab component is a form tab but does not use react-hook-form with Zod schema validation as required.",
+          "suggestion": "Integrate react-hook-form with zodResolver and define Zod schemas for form fields in this tab.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/components/event-type-detail/tabs/LimitsTab.tsx:124"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:companion/components/Header.tsx:103",
+          "diff_hunk:companion/components/event-type-detail/tabs/AdvancedTab.tsx:138",
+          "diff_hunk:companion/components/event-type-detail/tabs/BasicsTab.tsx:37",
+          "diff_hunk:companion/components/event-type-detail/tabs/LimitsTab.tsx:124"
+        ],
+        "output_issue_ids": [
+          "best_practice:companion/components/Header.tsx:106",
+          "best_practice:companion/components/event-type-detail/tabs/AdvancedTab.tsx:141",
+          "best_practice:companion/components/event-type-detail/tabs/BasicsTab.tsx:40",
+          "best_practice:companion/components/event-type-detail/tabs/LimitsTab.tsx:127"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 33535,
+        "token_count_in": 5658,
+        "token_count_out": 672,
+        "trace_id": "bc94c728398447aea6708eb37d2b247f",
+        "span_id": "305cd10666524727",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-003",
+        "shard_index": 2,
+        "shard_count": 6,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "1e931bde9fe67799e55f4fdc3e5a4523c8a77b3baf9069b80995c58859a81cf4": {
+      "status": "completed",
+      "shard_id": "shard-004",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:companion/components/event-type-detail/tabs/RecurringTab.tsx:89",
+        "diff_hunk:companion/components/event-type-list-item/EventTypeListItem.ios.tsx:100",
+        "diff_hunk:companion/components/event-type-list-item/EventTypeListItem.tsx:51",
+        "diff_hunk:companion/components/event-type-list-item/EventTypeListItemParts.tsx:4"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "companion/components/event-type-list-item/EventTypeListItemParts.tsx",
+          "line": 7,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "getDisplayUrl function may produce an incorrect URL path when username is undefined but slug is defined, returning '/undefined/slug' instead of '/slug'.",
+          "suggestion": "Change the fallback to `return slug ? `/${slug}` : '';` to avoid 'undefined' in the URL path.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/components/event-type-list-item/EventTypeListItemParts.tsx:4"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:companion/components/event-type-detail/tabs/RecurringTab.tsx:89",
+          "diff_hunk:companion/components/event-type-list-item/EventTypeListItem.ios.tsx:100",
+          "diff_hunk:companion/components/event-type-list-item/EventTypeListItem.tsx:51",
+          "diff_hunk:companion/components/event-type-list-item/EventTypeListItemParts.tsx:4"
+        ],
+        "output_issue_ids": [
+          "correctness:companion/components/event-type-list-item/EventTypeListItemParts.tsx:7"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 27017,
+        "token_count_in": 5802,
+        "token_count_out": 169,
+        "trace_id": "b86f3bc3ff084637b09939561eba6611",
+        "span_id": "4cd3e04ae94441e1",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-004",
+        "shard_index": 3,
+        "shard_count": 6,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "0fc8b97f801c41321de5740144c3b5ad26511f8e5a824a744aa132447b235940": {
+      "status": "completed",
+      "shard_id": "shard-005",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:companion/extension/entrypoints/background/index.ts:278",
+        "diff_hunk:companion/extension/entrypoints/content.ts:833",
+        "diff_hunk:companion/extension/lib/linkedin.ts:115",
+        "diff_hunk:companion/services/calcom.ts:318"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "companion/services/calcom.ts",
+          "evidence_ids": [
+            "diff_hunk:companion/services/calcom.ts:1651",
+            "diff_hunk:companion/services/calcom.ts:1671"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "To verify if any callers of the removed `getUsername()` and `buildEventTypeLink()` functions exist and whether they have been updated.",
+          "source_shard_id": "shard-005",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "companion/extension/entrypoints/content.ts",
+          "evidence_ids": [
+            "diff_hunk:companion/extension/entrypoints/content.ts:1078",
+            "diff_hunk:companion/extension/entrypoints/content.ts:1122"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "To see how `bookingUrl` is populated and used in the content script event type processing.",
+          "source_shard_id": "shard-005",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "companion/extension/lib/linkedin.ts",
+          "evidence_ids": [
+            "diff_hunk:companion/extension/lib/linkedin.ts:665"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "To see how `bookingUrl` is populated and used in the LinkedIn integration.",
+          "source_shard_id": "shard-005",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [
+        {
+          "file": "companion/services/calcom.ts",
+          "line": 318,
+          "severity": "medium",
+          "category": "functionality",
+          "message": "Removal of `getUsername()` and `buildEventTypeLink()` functions may break callers that depend on building shareable event type links.",
+          "suggestion": "Verify that all callers of `getUsername()` and `buildEventTypeLink()` have been updated to use the new `bookingUrl` field or an alternative mechanism before removing these functions.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/services/calcom.ts:318"
+          ]
+        },
+        {
+          "file": "companion/extension/entrypoints/content.ts",
+          "line": 836,
+          "severity": "low",
+          "category": "maintainability",
+          "message": "New optional field `bookingUrl` is added to the event type interface but no corresponding validation or usage logic is visible in the provided evidence.",
+          "suggestion": "Ensure that `bookingUrl` is properly populated and used where event types are processed, and consider adding validation if the URL format is expected.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/extension/entrypoints/content.ts:833"
+          ]
+        },
+        {
+          "file": "companion/extension/lib/linkedin.ts",
+          "line": 118,
+          "severity": "low",
+          "category": "maintainability",
+          "message": "New optional field `bookingUrl` is added to the EventType interface but no corresponding usage or population logic is visible in the provided evidence.",
+          "suggestion": "Ensure that `bookingUrl` is populated and consumed correctly in the LinkedIn integration logic.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/extension/lib/linkedin.ts:115"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:companion/extension/entrypoints/background/index.ts:278",
+          "diff_hunk:companion/extension/entrypoints/content.ts:833",
+          "diff_hunk:companion/extension/lib/linkedin.ts:115",
+          "diff_hunk:companion/services/calcom.ts:318"
+        ],
+        "output_issue_ids": [
+          "functionality:companion/services/calcom.ts:318",
+          "maintainability:companion/extension/entrypoints/content.ts:836",
+          "maintainability:companion/extension/lib/linkedin.ts:118"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 43084,
+        "token_count_in": 5236,
+        "token_count_out": 701,
+        "trace_id": "33c9ee06e3ff435cb2997c3197ac59ee",
+        "span_id": "20c06c3f42994c18",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-005",
+        "shard_index": 4,
+        "shard_count": 6,
+        "context_request_count": 3,
+        "context_refill_used": false
+      }
+    },
+    "c0a4ff3f7dce9f4a9ac89ce5301e3c5a707aaaae3f1636c7c21d81d4e66632a0": {
+      "status": "completed",
+      "shard_id": "shard-005-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-005",
+      "selected_evidence_ids": [
+        "diff_hunk:companion/extension/entrypoints/content.ts:1078",
+        "diff_hunk:companion/extension/entrypoints/content.ts:1122",
+        "diff_hunk:companion/extension/lib/linkedin.ts:665",
+        "diff_hunk:companion/services/calcom.ts:1651",
+        "diff_hunk:companion/services/calcom.ts:1671"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "companion/services/calcom.ts",
+          "line": 1651,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "The new `getUsername` helper catches errors from `getUserProfile` and throws a generic 'Failed to get username' error, discarding the original error context. This makes debugging harder and violates the guideline requiring custom error classes with typed codes and structured context.",
+          "suggestion": "Either let the error propagate naturally or use a custom error class (e.g., extending ErrorWithCode) that preserves the original error cause and includes a typed error code.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/services/calcom.ts:1651"
+          ]
+        },
+        {
+          "file": "companion/services/calcom.ts",
+          "line": 1671,
+          "severity": "low",
+          "category": "maintainability",
+          "message": "The export `buildEventTypeLink` is removed from `CalComAPIService` but no evidence shows it is still used elsewhere or that a replacement is provided. This could break callers that depend on this export.",
+          "suggestion": "Verify that all consumers of `buildEventTypeLink` have been updated to use an alternative, or keep the export if it is still needed.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/services/calcom.ts:1671"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:companion/extension/entrypoints/content.ts:1078",
+          "diff_hunk:companion/extension/entrypoints/content.ts:1122",
+          "diff_hunk:companion/extension/lib/linkedin.ts:665",
+          "diff_hunk:companion/services/calcom.ts:1651",
+          "diff_hunk:companion/services/calcom.ts:1671"
+        ],
+        "output_issue_ids": [
+          "correctness:companion/services/calcom.ts:1651",
+          "maintainability:companion/services/calcom.ts:1671"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 2734,
+        "token_count_in": 4138,
+        "token_count_out": 339,
+        "trace_id": "ec08bcbab0cc4f349392a825d7ebc929",
+        "span_id": "9526c69dbeaa47f3",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-005-refill",
+        "shard_index": 4,
+        "shard_count": 6,
+        "context_request_count": 0,
+        "context_refill_used": true
+      }
+    },
+    "3294b804cb722bd9793343ee9633f288070bd7f9561f97e083ef432ba820465c": {
+      "status": "completed",
+      "shard_id": "shard-006",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:companion/services/types/event-types.types.ts:278"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "companion/services/types/event-types.types.ts",
+          "line": 282,
+          "severity": "medium",
+          "category": "maintainability",
+          "message": "The new `bookingUrl` property is added to the `EventType` interface without a corresponding Zod schema export in a separate `.schema.ts` file, violating the guideline that schema definitions must be in separate `.schema.ts` files with both TypeScript types and Zod schemas.",
+          "suggestion": "Move the `bookingUrl` property definition to a dedicated `.schema.ts` file (e.g., `event-types.schema.ts`) and export both the TypeScript type and a corresponding Zod schema for validation.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:companion/services/types/event-types.types.ts:278"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:companion/services/types/event-types.types.ts:278"
+        ],
+        "output_issue_ids": [
+          "maintainability:companion/services/types/event-types.types.ts:282"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 42495,
+        "token_count_in": 2922,
+        "token_count_out": 200,
+        "trace_id": "347d79eddc7d423fba48d0326847029f",
+        "span_id": "21c4141f0c9343d6",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-006",
+        "shard_index": 5,
         "shard_count": 6,
         "context_request_count": 0,
         "context_refill_used": false

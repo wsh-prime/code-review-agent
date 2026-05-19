@@ -7,7 +7,7 @@
 - Changed entities: 6
 - Risk signals: 0
 - Findings: 0
-- Needs human review: 0
+- Needs human review: 1
 - Discarded: 1
 - Agent runs: 3
 - Loop enabled: True
@@ -18,14 +18,14 @@
 | Metric | Value |
 |---|---:|
 | Iterations | 1 / 1 |
-| Converged | True |
+| Converged | False |
 | Fallback | False |
 | Retry count | 1 |
-| Total latency | 78569 ms |
+| Total latency | 74684 ms |
 | Token in | 10659 |
-| Token out | 178 |
+| Token out | 457 |
 
-- Iteration 0: 1 candidates, 0 verified, 0 uncertain, 0 kept, 0 rejected
+- Iteration 0: 2 candidates, 1 verified, 1 uncertain, 0 kept, 0 rejected
 
 ## Context Budget Summary
 
@@ -49,7 +49,10 @@ Checked changed files, changed entities, deterministic risk signals, and evidenc
 
 ## Needs Human Review
 
-None.
+- `architecture` high at `packages/features/calendar-subscription/adapters/AdaptersFactory.ts:10` (0.50)
+  - The file AdaptersFactory.ts in the features package exports GENERIC_CALENDAR_SUFFIXES and adds getGenericCalendarSuffixes to the AdapterFactory interface. This new method is called from CalendarSubscriptionService.ts (in the lib package) via this.deps.adapterFactory.getGenericCalendarSuffixes(). This creates a dependency from lib to features, violating the rule that lib must not import from features.
+  - Suggestion: Move the generic calendar suffixes logic into the lib package (e.g., as a constant or configuration) or pass the suffixes as a parameter from a higher layer that already depends on features, so that lib does not import from features.
+  - Evidence: `diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:4`, `diff_hunk:packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts:392`
 
 ## Changed Files
 

@@ -6,10 +6,10 @@
 - Changed files: 6
 - Changed entities: 6
 - Risk signals: 3
-- Findings: 1
-- Needs human review: 2
-- Discarded: 2
-- Agent runs: 3
+- Findings: 0
+- Needs human review: 3
+- Discarded: 4
+- Agent runs: 4
 - Loop enabled: True
 - Target repo modified: False
 
@@ -20,12 +20,12 @@
 | Iterations | 1 / 1 |
 | Converged | False |
 | Fallback | False |
-| Retry count | 0 |
-| Total latency | 23971 ms |
-| Token in | 11263 |
-| Token out | 617 |
+| Retry count | 2 |
+| Total latency | 200980 ms |
+| Token in | 15379 |
+| Token out | 1315 |
 
-- Iteration 0: 4 candidates, 2 verified, 1 uncertain, 1 kept, 0 rejected
+- Iteration 0: 6 candidates, 2 verified, 2 uncertain, 0 kept, 0 rejected
 
 ## Context Budget Summary
 
@@ -33,20 +33,19 @@
 |---|---:|
 | Strategy | `file_risk_shards_v1` |
 | Max input tokens | 9000 |
-| Estimated input tokens | 9069 |
-| Selected evidence | 7 |
-| Omitted evidence | 335 |
+| Estimated input tokens | 12340 |
+| Selected evidence | 12 |
+| Omitted evidence | 330 |
 | Context truncated | True |
 | Review shards | 2 |
-| Context requests | 0 |
-| Refills | 0 |
+| Context requests | 2 |
+| Refills | 1 |
 
 ## Findings
 
-- `correctness` high at `apps/activitypub/src/api/activitypub.test.ts:1610` (0.85)
-  - The test mock for the bluesky enable endpoint now returns null response and no longer validates the handle in the response, which may mask regressions in the API response contract.
-  - Suggestion: Add a response body that matches the expected API response shape, e.g., { handle: '@foo@bar.baz' } or the new shape if changed.
-  - Evidence: `diff_hunk:apps/activitypub/src/api/activitypub.test.ts:1607`
+No findings.
+
+Checked changed files, changed entities, deterministic risk signals, and evidence references. No high-confidence review finding was produced.
 
 ## Needs Human Review
 
@@ -55,9 +54,14 @@
   - Suggestion: Confirm lock files, compatibility, and test coverage for the dependency change.
   - Evidence: `diff:apps/activitypub/package.json:3`, `risk:dependency_change:apps/activitypub/package.json`
 
+- `best-practice` low at `apps/activitypub/src/api/activitypub.ts:711` (0.50)
+  - The enableBluesky method removed its return type annotation (Promise<string>), which may break callers expecting a string result.
+  - Suggestion: Restore the return type annotation to Promise<string> or update callers accordingly.
+  - Evidence: `diff_hunk:apps/activitypub/src/api/activitypub.ts:708`
+
 - `correctness` error at `apps/activitypub/tsconfig.json:18` (0.50)
-  - TypeScript Files Must Enable Strict Type Checking: 'strict' is set to false, which disables strict type checking and can allow potential runtime errors.
-  - Suggestion: Set 'strict' back to true to enable full type checking.
+  - TypeScript strict mode disabled: 'strict' set to false violates the repository guideline requiring strict type checking.
+  - Suggestion: Set 'strict' back to true and fix any type errors that arise.
   - Evidence: `diff_hunk:apps/activitypub/tsconfig.json:15`
 
 ## Changed Files

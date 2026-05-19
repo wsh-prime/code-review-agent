@@ -1,0 +1,154 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:66fdd49611fca244d17803a269a8a823389df9591771658559ca29fc9b48ac24",
+  "diff_hash": "sha256:b49af190505c77847b7bb2201ca91cf354ef82d669990364966b92b0df198fc1",
+  "shards": {
+    "88b513d4152e26ae11cf3f187a1e9a9d023d5e7bbff3cc92f253561a0ac48e64": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:1",
+        "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8",
+        "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337",
+        "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:8",
+        "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:21",
+        "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:3",
+        "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:49",
+        "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:65",
+        "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:80",
+        "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:95"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "ghost/core/core/server/services/member-welcome-emails/jobs/index.js",
+          "line": 15,
+          "severity": "high",
+          "category": "logic_error",
+          "message": "Negated condition in scheduleMemberWelcomeEmailJob: changed from `if (!hasScheduled.processOutbox && ...)` to `if (hasScheduled.processOutbox && ...)`. This inverts the scheduling guard, causing the job to be scheduled only when it has already been scheduled, and never on the first call.",
+          "suggestion": "Restore the original negation: `if (!hasScheduled.processOutbox && !process.env.NODE_ENV.startsWith('test'))`",
+          "confidence": 0.95,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8"
+          ]
+        },
+        {
+          "file": "ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js",
+          "line": 340,
+          "severity": "medium",
+          "category": "logic_change",
+          "message": "Welcome email condition changed from `this._labsService.isSet('welcomeEmails') && WELCOME_EMAIL_SOURCES.includes(source)` to `welcomeEmailConfig || WELCOME_EMAIL_SOURCES.includes(source)`. This broadens the condition: welcome emails will be sent for any source (not just those in WELCOME_EMAIL_SOURCES) when the config is set, and removes the labs feature flag check entirely.",
+          "suggestion": "If the intent is to replace the labs flag with config, keep the source filter: `welcomeEmailConfig && WELCOME_EMAIL_SOURCES.includes(source)`",
+          "confidence": 0.85,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:1",
+          "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8",
+          "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337",
+          "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:8",
+          "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:21",
+          "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:3",
+          "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:49",
+          "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:65",
+          "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:80",
+          "diff_hunk:ghost/core/test/integration/services/member-welcome-emails.test.js:95"
+        ],
+        "output_issue_ids": [
+          "logic_error:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:15",
+          "logic_change:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 14868,
+        "token_count_in": 7472,
+        "token_count_out": 435,
+        "trace_id": "8de7964be83343fd99f4e315c795bb5d",
+        "span_id": "b63cb46f6bfd46f1",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 2,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    },
+    "d925e448cf75e7126e0cee2e2f6e8cbe31243d34c928a06a62496a28e03f5270": {
+      "status": "completed",
+      "shard_id": "shard-002",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:4",
+        "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:467",
+        "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:527",
+        "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:551",
+        "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:569",
+        "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:594",
+        "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:613"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The security_sensitive risk signal (confidence 0.74) was triggered by changes in the test file that replace labsService.isSet('welcomeEmails') with config.get('memberWelcomeEmailTestInbox'). The diff hunks show the test-side changes but not the production code that consumes this config value. To determine if a new security exposure or trust boundary change is introduced, I need to see the corresponding production code changes in MemberRepository.",
+          "source_shard_id": "shard-002",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:4",
+          "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:467",
+          "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:527",
+          "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:551",
+          "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:569",
+          "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:594",
+          "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:613"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 20835,
+        "token_count_in": 5767,
+        "token_count_out": 163,
+        "trace_id": "5e7cc410d1454ff88d587f7bf64dabfc",
+        "span_id": "be2ad6b233f54272",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-002",
+        "shard_index": 1,
+        "shard_count": 2,
+        "context_request_count": 1,
+        "context_refill_used": false
+      }
+    }
+  }
+}

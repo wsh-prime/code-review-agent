@@ -6,33 +6,59 @@
     "changed_entity_count": 3,
     "risk_signal_count": 0,
     "finding_count": 0,
-    "needs_human_review_count": 0,
+    "needs_human_review_count": 2,
     "discarded_count": 0,
     "evidence_count": 288,
     "missing_evidence_id_count": 0,
-    "agent_run_count": 2,
+    "agent_run_count": 3,
     "prompt_exported": false,
     "loop_enabled": true,
     "loop_iterations_completed": 1,
-    "loop_converged": true,
+    "loop_converged": false,
     "fallback_used": false,
     "fallback_reason": null,
     "resume_used": false,
     "resume_ignored_reason": null,
-    "total_latency_ms": 125021,
-    "total_token_count_in": 6314,
-    "total_token_count_out": 12,
+    "total_latency_ms": 82887,
+    "total_token_count_in": 10125,
+    "total_token_count_out": 936,
     "context_budget_enabled": true,
     "context_truncated": true,
-    "selected_evidence_count": 3,
-    "omitted_evidence_count": 200,
+    "selected_evidence_count": 5,
+    "omitted_evidence_count": 198,
     "review_shard_count": 1,
-    "context_refill_count": 0,
-    "context_request_count": 0,
+    "context_refill_count": 1,
+    "context_request_count": 1,
     "target_repo_modified": false
   },
   "findings": [],
-  "needs_human_review": [],
+  "needs_human_review": [
+    {
+      "file": "ghost/core/core/server/services/email-service/DomainWarmingService.ts",
+      "line": 15,
+      "severity": "high",
+      "category": "correctness",
+      "message": "The new time-based warmup formula uses a hardcoded end value of 200000 and totalDays of 42, but the integration test expects a limit of 237 on day 2. The formula `start * (end/start)^(day/(totalDays-1))` with start=200, end=200000, totalDays=42, day=1 gives 200 * (1000)^(1/41) ≈ 200 * 1.182 ≈ 236.4, which rounds to 236, not 237. The test assertion expects 237, indicating a mismatch between the implementation and the test expectation.",
+      "suggestion": "Verify the exact formula implementation and ensure the test expectation matches. Either adjust the formula to produce 237 or correct the test to expect 236.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:15",
+        "diff_hunk:ghost/core/test/integration/services/email-service/domain-warming.test.js:195"
+      ]
+    },
+    {
+      "file": "ghost/core/test/integration/services/email-service/domain-warming.test.js",
+      "line": 195,
+      "severity": "medium",
+      "category": "correctness",
+      "message": "The integration test hardcodes the expected limit for day 2 as 237, but this value is derived from a specific formula and configuration. If the warmup configuration (start, end, totalDays) changes, this test will silently break without indicating which part of the logic is incorrect. The test should derive the expected value from the configuration rather than hardcoding it.",
+      "suggestion": "Consider computing the expected limit dynamically from the DefaultWarmupOptions configuration to make the test resilient to configuration changes.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:ghost/core/test/integration/services/email-service/domain-warming.test.js:195"
+      ]
+    }
+  ],
   "discarded": [],
   "changed_files": [
     {
@@ -4951,34 +4977,70 @@
         "diff_hunk:ghost/core/test/integration/services/email-service/domain-warming.test.js:195",
         "diff_hunk:ghost/core/test/unit/server/services/email-service/domain-warming-service.test.ts:13"
       ],
-      "output_issue_ids": [],
+      "output_issue_ids": [
+        "correctness:ghost/core/core/server/services/email-service/DomainWarmingService.ts:15",
+        "correctness:ghost/core/test/integration/services/email-service/domain-warming.test.js:195"
+      ],
       "fallback_used": false,
       "iteration": 0,
       "feedback_hash": "",
-      "retry_count": 2,
-      "retry_log": [
-        "attempt=1 error=timeout delay=1.00s",
-        "attempt=2 error=timeout delay=2.00s"
-      ],
-      "latency_ms": 125021,
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 44173,
       "token_count_in": 6314,
-      "token_count_out": 12,
-      "trace_id": "4a2a0fb28b9c4fc49d10e608552a507d",
-      "span_id": "f7e755869b60422d",
+      "token_count_out": 596,
+      "trace_id": "a5112fe86c06491cb3ac5515dab39840",
+      "span_id": "5959d946eadc4700",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
       "shard_id": "shard-001",
       "shard_index": 0,
       "shard_count": 1,
-      "context_request_count": 0,
+      "context_request_count": 1,
       "context_refill_used": false
+    },
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+      "input_evidence_ids": [
+        "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:41",
+        "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:61"
+      ],
+      "output_issue_ids": [
+        "correctness:ghost/core/core/server/services/email-service/DomainWarmingService.ts:61",
+        "correctness:ghost/core/core/server/services/email-service/DomainWarmingService.ts:41"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 38714,
+      "token_count_in": 3811,
+      "token_count_out": 340,
+      "trace_id": "cd3c0df61acc4524b3f822292b68e8b6",
+      "span_id": "a5651f2bfe7e4959",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-001-refill",
+      "shard_index": 0,
+      "shard_count": 1,
+      "context_request_count": 0,
+      "context_refill_used": true
     },
     {
       "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
       "model": null,
       "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
-      "input_evidence_ids": [],
+      "input_evidence_ids": [
+        "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:15",
+        "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:41",
+        "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:61",
+        "diff_hunk:ghost/core/test/integration/services/email-service/domain-warming.test.js:195"
+      ],
       "output_issue_ids": [],
       "fallback_used": false,
       "iteration": 0,
@@ -5003,20 +5065,20 @@
   "prompt_exports": {},
   "context_budget": {
     "enabled": true,
-    "strategy": "risk_first_v1",
+    "strategy": "file_risk_shards_v1",
     "context_profile": "risk_compact_manifest_v1",
     "max_input_tokens": 9000,
-    "estimated_input_tokens": 5380,
-    "selected_evidence_count": 3,
-    "omitted_evidence_count": 200,
+    "estimated_input_tokens": 8518,
+    "selected_evidence_count": 5,
+    "omitted_evidence_count": 198,
     "selected_evidence_ids": [
       "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:15",
       "diff_hunk:ghost/core/test/integration/services/email-service/domain-warming.test.js:195",
-      "diff_hunk:ghost/core/test/unit/server/services/email-service/domain-warming-service.test.ts:13"
+      "diff_hunk:ghost/core/test/unit/server/services/email-service/domain-warming-service.test.ts:13",
+      "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:41",
+      "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:61"
     ],
     "omitted_evidence_ids": [
-      "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:41",
-      "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:61",
       "diff_hunk:ghost/core/test/integration/services/email-service/domain-warming.test.js:220",
       "diff_hunk:ghost/core/test/integration/services/email-service/domain-warming.test.js:293",
       "diff_hunk:ghost/core/test/integration/services/email-service/domain-warming.test.js:309",
@@ -5219,9 +5281,26 @@
     "selected_risk_signal_count": 0,
     "context_truncated": true,
     "shard_count": 1,
-    "refill_count": 0,
-    "context_request_count": 0,
-    "context_requests": [],
+    "refill_count": 1,
+    "context_request_count": 1,
+    "context_requests": [
+      {
+        "request_type": "same_file_more_evidence",
+        "path": "ghost/core/core/server/services/email-service/DomainWarmingService.ts",
+        "evidence_ids": [
+          "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:41",
+          "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:61"
+        ],
+        "risk_tag": null,
+        "symbol": null,
+        "reason": "",
+        "source_shard_id": "shard-001",
+        "fulfilled_evidence_ids": [
+          "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:41",
+          "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:61"
+        ]
+      }
+    ],
     "shards": [
       {
         "shard_id": "shard-001",
@@ -5232,6 +5311,16 @@
         "omitted_evidence_count": 200,
         "estimated_input_tokens": 5380,
         "context_truncated": true
+      },
+      {
+        "shard_id": "shard-001-refill",
+        "shard_index": 0,
+        "is_refill": true,
+        "parent_shard_id": "shard-001",
+        "selected_evidence_count": 2,
+        "omitted_evidence_count": 0,
+        "estimated_input_tokens": 3138,
+        "context_truncated": false
       }
     ],
     "warnings": []
@@ -5240,7 +5329,7 @@
     "enabled": true,
     "max_iter": 1,
     "iterations_completed": 1,
-    "converged": true,
+    "converged": false,
     "fallback_used": false,
     "fallback_reason": null,
     "checkpoint_path": "D:\\learn\\code-review-agent\\workspace\\qodo_pr_review_bench_live_guideline_rerank\\samples\\qodo_008\\review\\loop_checkpoint.json",
@@ -5249,14 +5338,52 @@
     "iterations": [
       {
         "i": 0,
-        "candidate_issue_count": 0,
-        "verified_count": 0,
+        "candidate_issue_count": 4,
+        "verified_count": 4,
         "needs_human_review_count": 0,
         "discarded_count": 0,
         "keep_count": 0,
-        "uncertain_count": 0,
+        "uncertain_count": 4,
         "reject_count": 0,
-        "feedback_sent": [],
+        "feedback_sent": [
+          {
+            "issue_id": "correctness:ghost/core/core/server/services/email-service/DomainWarmingService.ts:15",
+            "category": "correctness",
+            "critic_reason": "low confidence",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:15",
+              "diff_hunk:ghost/core/test/integration/services/email-service/domain-warming.test.js:195"
+            ]
+          },
+          {
+            "issue_id": "correctness:ghost/core/test/integration/services/email-service/domain-warming.test.js:195",
+            "category": "correctness",
+            "critic_reason": "low confidence",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:ghost/core/test/integration/services/email-service/domain-warming.test.js:195"
+            ]
+          },
+          {
+            "issue_id": "correctness:ghost/core/core/server/services/email-service/DomainWarmingService.ts:61",
+            "category": "correctness",
+            "critic_reason": "low confidence",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:61"
+            ]
+          },
+          {
+            "issue_id": "correctness:ghost/core/core/server/services/email-service/DomainWarmingService.ts:41",
+            "category": "correctness",
+            "critic_reason": "low confidence",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:41"
+            ]
+          }
+        ],
         "agent_runs": [
           {
             "agent_name": "openai_compatible_reviewer",
@@ -5267,34 +5394,70 @@
               "diff_hunk:ghost/core/test/integration/services/email-service/domain-warming.test.js:195",
               "diff_hunk:ghost/core/test/unit/server/services/email-service/domain-warming-service.test.ts:13"
             ],
-            "output_issue_ids": [],
+            "output_issue_ids": [
+              "correctness:ghost/core/core/server/services/email-service/DomainWarmingService.ts:15",
+              "correctness:ghost/core/test/integration/services/email-service/domain-warming.test.js:195"
+            ],
             "fallback_used": false,
             "iteration": 0,
             "feedback_hash": "",
-            "retry_count": 2,
-            "retry_log": [
-              "attempt=1 error=timeout delay=1.00s",
-              "attempt=2 error=timeout delay=2.00s"
-            ],
-            "latency_ms": 125021,
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 44173,
             "token_count_in": 6314,
-            "token_count_out": 12,
-            "trace_id": "4a2a0fb28b9c4fc49d10e608552a507d",
-            "span_id": "f7e755869b60422d",
+            "token_count_out": 596,
+            "trace_id": "a5112fe86c06491cb3ac5515dab39840",
+            "span_id": "5959d946eadc4700",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
             "shard_id": "shard-001",
             "shard_index": 0,
             "shard_count": 1,
-            "context_request_count": 0,
+            "context_request_count": 1,
             "context_refill_used": false
+          },
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+            "input_evidence_ids": [
+              "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:41",
+              "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:61"
+            ],
+            "output_issue_ids": [
+              "correctness:ghost/core/core/server/services/email-service/DomainWarmingService.ts:61",
+              "correctness:ghost/core/core/server/services/email-service/DomainWarmingService.ts:41"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 38714,
+            "token_count_in": 3811,
+            "token_count_out": 340,
+            "trace_id": "cd3c0df61acc4524b3f822292b68e8b6",
+            "span_id": "a5651f2bfe7e4959",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-001-refill",
+            "shard_index": 0,
+            "shard_count": 1,
+            "context_request_count": 0,
+            "context_refill_used": true
           },
           {
             "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
             "model": null,
             "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
-            "input_evidence_ids": [],
+            "input_evidence_ids": [
+              "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:15",
+              "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:41",
+              "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:61",
+              "diff_hunk:ghost/core/test/integration/services/email-service/domain-warming.test.js:195"
+            ],
             "output_issue_ids": [],
             "fallback_used": false,
             "iteration": 0,
@@ -5316,21 +5479,76 @@
             "context_refill_used": false
           }
         ],
-        "issue_set": [],
+        "issue_set": [
+          "correctness:ghost/core/core/server/services/email-service/DomainWarmingService.ts:15",
+          "correctness:ghost/core/core/server/services/email-service/DomainWarmingService.ts:41",
+          "correctness:ghost/core/core/server/services/email-service/DomainWarmingService.ts:61",
+          "correctness:ghost/core/test/integration/services/email-service/domain-warming.test.js:195"
+        ],
         "keep": [],
-        "needs_human_review": [],
+        "needs_human_review": [
+          {
+            "file": "ghost/core/core/server/services/email-service/DomainWarmingService.ts",
+            "line": 15,
+            "severity": "high",
+            "category": "correctness",
+            "message": "The new time-based warmup formula uses a hardcoded end value of 200000 and totalDays of 42, but the integration test expects a limit of 237 on day 2. The formula `start * (end/start)^(day/(totalDays-1))` with start=200, end=200000, totalDays=42, day=1 gives 200 * (1000)^(1/41) ≈ 200 * 1.182 ≈ 236.4, which rounds to 236, not 237. The test assertion expects 237, indicating a mismatch between the implementation and the test expectation.",
+            "suggestion": "Verify the exact formula implementation and ensure the test expectation matches. Either adjust the formula to produce 237 or correct the test to expect 236.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:15",
+              "diff_hunk:ghost/core/test/integration/services/email-service/domain-warming.test.js:195"
+            ]
+          },
+          {
+            "file": "ghost/core/test/integration/services/email-service/domain-warming.test.js",
+            "line": 195,
+            "severity": "medium",
+            "category": "correctness",
+            "message": "The integration test hardcodes the expected limit for day 2 as 237, but this value is derived from a specific formula and configuration. If the warmup configuration (start, end, totalDays) changes, this test will silently break without indicating which part of the logic is incorrect. The test should derive the expected value from the configuration rather than hardcoding it.",
+            "suggestion": "Consider computing the expected limit dynamically from the DefaultWarmupOptions configuration to make the test resilient to configuration changes.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:ghost/core/test/integration/services/email-service/domain-warming.test.js:195"
+            ]
+          },
+          {
+            "file": "ghost/core/core/server/services/email-service/DomainWarmingService.ts",
+            "line": 61,
+            "severity": "high",
+            "category": "correctness",
+            "message": "The new warmup limit calculation uses a geometric progression formula that can produce a limit of 0 on day 0, causing the first newsletter to send zero emails from the warming domain.",
+            "suggestion": "Ensure that on day 0 (first email) the limit is at least 1 or the start value, e.g., return Math.max(1, Math.min(emailCount, limit)).",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:61"
+            ]
+          },
+          {
+            "file": "ghost/core/core/server/services/email-service/DomainWarmingService.ts",
+            "line": 41,
+            "severity": "medium",
+            "category": "correctness",
+            "message": "The warmup config is hardcoded to DefaultWarmupOptions and never updated from any external configuration, so the warmup behavior cannot be customized per deployment.",
+            "suggestion": "Accept warmupConfig as an optional dependency parameter with a fallback to DefaultWarmupOptions, or load it from configuration.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:ghost/core/core/server/services/email-service/DomainWarmingService.ts:41"
+            ]
+          }
+        ],
         "discarded": []
       }
     ]
   },
   "tracing": {
-    "total_latency_ms": 125021,
-    "total_token_count_in": 6314,
-    "total_token_count_out": 12,
-    "total_retry_count": 2,
-    "run_count": 2,
+    "total_latency_ms": 82887,
+    "total_token_count_in": 10125,
+    "total_token_count_out": 936,
+    "total_retry_count": 0,
+    "run_count": 3,
     "status_counts": {
-      "ok": 2
+      "ok": 3
     }
   }
 }

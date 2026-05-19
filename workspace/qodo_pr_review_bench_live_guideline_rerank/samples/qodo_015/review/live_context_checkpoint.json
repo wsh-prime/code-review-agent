@@ -18,11 +18,19 @@
           "request_type": "same_file_more_evidence",
           "path": "src/Shared/CertificateGeneration/UnixCertificateManager.cs",
           "evidence_ids": [
-            "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358",
-            "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:359",
-            "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:360",
-            "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:361",
-            "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:362"
+            "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:991"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-001",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "risk_evidence",
+          "path": "src/Tools/dotnet-dev-certs/src/Program.cs",
+          "evidence_ids": [
+            "risk:security_sensitive:src/Tools/dotnet-dev-certs/src/Program.cs"
           ],
           "risk_tag": null,
           "symbol": null,
@@ -33,37 +41,37 @@
       ],
       "issues": [
         {
-          "file": "src/Shared/CertificateGeneration/CertificateManager.cs",
-          "line": 969,
-          "severity": "medium",
-          "category": "maintainability",
-          "message": "Removed documentation comment that explained the verbose-only logging behavior of dotnet-dev-certs, which is important context for developers maintaining this EventSource.",
-          "suggestion": "Consider keeping the remarks comment or moving it to a more appropriate location to preserve the documentation of logging behavior.",
-          "confidence": 0.5,
-          "evidence_ids": [
-            "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:966"
-          ]
-        },
-        {
           "file": "src/Tools/dotnet-dev-certs/src/Program.cs",
           "line": 132,
           "severity": "medium",
           "category": "correctness",
-          "message": "The ReporterEventListener is now created unconditionally but only enabled for verbose or LogAlways. If the listener is created and not enabled, it may still be active and could cause unexpected behavior or resource leaks.",
-          "suggestion": "Ensure the listener is disposed or only created when needed, or verify that creating it without enabling events is safe.",
-          "confidence": 0.5,
+          "message": "ReporterEventListener is created unconditionally but only enabled for verbose or LogAlways; if neither condition holds, the listener is never enabled, which may lead to unexpected event subscription behavior.",
+          "suggestion": "Move the listener creation inside the conditional blocks or ensure it is only created when it will be enabled.",
+          "confidence": 0.7,
           "evidence_ids": [
             "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124"
           ]
         },
         {
+          "file": "src/Shared/CertificateGeneration/CertificateManager.cs",
+          "line": 969,
+          "severity": "low",
+          "category": "maintainability",
+          "message": "Removed the XML documentation comment from CertificateManagerEventSource class without adding a replacement comment, reducing API documentation.",
+          "suggestion": "Restore or update the XML doc comment to describe the event source's purpose.",
+          "confidence": 0.9,
+          "evidence_ids": [
+            "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:966"
+          ]
+        },
+        {
           "file": "src/Shared/CertificateGeneration/UnixCertificateManager.cs",
           "line": 358,
-          "severity": "high",
+          "severity": "medium",
           "category": "correctness",
-          "message": "The variable `sawTrustFailure` is set based on `!hasValidSslCertDir` but `sawTrustFailure` is not declared or initialized in the provided evidence. If it was previously declared and used, the logic change may alter trust failure reporting behavior.",
-          "suggestion": "Verify that `sawTrustFailure` is properly declared and initialized before this assignment, and that the new logic correctly reflects trust failures.",
-          "confidence": 0.5,
+          "message": "The variable 'hasValidSslCertDir' is set to false in all branches except when SSL_CERT_DIR already includes certDir; however, the 'sawTrustFailure' assignment at line 408 uses '!hasValidSslCertDir', which may incorrectly report trust failure when SSL_CERT_DIR is unset but OpenSSL directory is valid.",
+          "suggestion": "Ensure that when TryGetOpenSslDirectory succeeds, hasValidSslCertDir is set to true if the OpenSSL directory is valid, or adjust the logic to avoid false trust failures.",
+          "confidence": 0.6,
           "evidence_ids": [
             "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355"
           ]
@@ -79,84 +87,62 @@
           "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124"
         ],
         "output_issue_ids": [
-          "maintainability:src/Shared/CertificateGeneration/CertificateManager.cs:969",
           "correctness:src/Tools/dotnet-dev-certs/src/Program.cs:132",
+          "maintainability:src/Shared/CertificateGeneration/CertificateManager.cs:969",
           "correctness:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358"
         ],
         "fallback_used": false,
         "iteration": 0,
         "feedback_hash": "",
-        "retry_count": 0,
-        "retry_log": [],
-        "latency_ms": 12580,
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 86612,
         "token_count_in": 5768,
-        "token_count_out": 610,
-        "trace_id": "ff3c19d2169e4d8b84bc3f779b3ed3f4",
-        "span_id": "e47f713baab74271",
+        "token_count_out": 615,
+        "trace_id": "4b4b5b96adee42e9aaf10d856baa7dd4",
+        "span_id": "e38c4df455934d43",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
         "shard_id": "shard-001",
         "shard_index": 0,
         "shard_count": 1,
-        "context_request_count": 1,
+        "context_request_count": 2,
         "context_refill_used": false
       }
     },
-    "e2440e03da17a1a5a10f09a991e4824677c9c5c0ee7e628f39e9cfd67518fba6": {
+    "a6c58198a5cba35f11f6e21e304235bda18f9d2b516ef80d0b9879000dd1a4cb": {
       "status": "completed",
       "shard_id": "shard-001-refill",
       "is_refill": true,
       "parent_shard_id": "shard-001",
       "selected_evidence_ids": [
-        "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358",
-        "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:359",
-        "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:360",
-        "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:361",
-        "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:362",
-        "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355"
+        "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:991",
+        "risk:security_sensitive:src/Tools/dotnet-dev-certs/src/Program.cs"
       ],
       "context_requests": [],
-      "issues": [
-        {
-          "file": "src/Shared/CertificateGeneration/UnixCertificateManager.cs",
-          "line": 358,
-          "severity": "medium",
-          "category": "maintainability",
-          "message": "The new variable 'hasValidSslCertDir' is set to false in all branches except the 'isCertDirIncluded' branch, but the 'sawTrustFailure' assignment at line 408 uses it directly. If 'existingSslCertDir' is set and 'isCertDirIncluded' is true, 'hasValidSslCertDir' remains true and 'sawTrustFailure' is set to false, which is correct. However, if 'existingSslCertDir' is set but 'isCertDirIncluded' is false, 'hasValidSslCertDir' is set to false, and 'sawTrustFailure' becomes true. This logic is sound, but the variable is never used elsewhere and the assignment at line 408 is the only consumer. Consider removing the intermediate variable and directly assigning 'sawTrustFailure' in each branch for clarity.",
-          "suggestion": "Replace 'hasValidSslCertDir' with direct assignments to 'sawTrustFailure' in each branch to improve readability and reduce unnecessary state.",
-          "confidence": 0.5,
-          "evidence_ids": [
-            "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355",
-            "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358"
-          ]
-        }
-      ],
+      "issues": [],
       "agent_run": {
         "agent_name": "openai_compatible_reviewer",
         "model": "deepseek-ai/DeepSeek-V4-Flash",
         "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
         "input_evidence_ids": [
-          "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358",
-          "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:359",
-          "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:360",
-          "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:361",
-          "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:362",
-          "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355"
+          "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:991",
+          "risk:security_sensitive:src/Tools/dotnet-dev-certs/src/Program.cs"
         ],
-        "output_issue_ids": [
-          "maintainability:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358"
-        ],
+        "output_issue_ids": [],
         "fallback_used": false,
         "iteration": 0,
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 33799,
-        "token_count_in": 3667,
-        "token_count_out": 342,
-        "trace_id": "98a9431109fd4b0abecf8d4f4f42176e",
-        "span_id": "c45973a05d964b8a",
+        "latency_ms": 397,
+        "token_count_in": 3290,
+        "token_count_out": 12,
+        "trace_id": "e1b19557a4014f91aabd97527b79aec5",
+        "span_id": "0401e2278a0c4e3d",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",

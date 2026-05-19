@@ -6,8 +6,8 @@
 - Changed files: 4
 - Changed entities: 4
 - Risk signals: 4
-- Findings: 2
-- Needs human review: 0
+- Findings: 0
+- Needs human review: 4
 - Discarded: 0
 - Agent runs: 2
 - Loop enabled: True
@@ -18,14 +18,14 @@
 | Metric | Value |
 |---|---:|
 | Iterations | 1 / 1 |
-| Converged | True |
+| Converged | False |
 | Fallback | False |
 | Retry count | 0 |
-| Total latency | 29000 ms |
+| Total latency | 16455 ms |
 | Token in | 8463 |
-| Token out | 472 |
+| Token out | 830 |
 
-- Iteration 0: 2 candidates, 2 verified, 0 uncertain, 2 kept, 0 rejected
+- Iteration 0: 4 candidates, 4 verified, 4 uncertain, 0 kept, 0 rejected
 
 ## Context Budget Summary
 
@@ -43,19 +43,31 @@
 
 ## Findings
 
-- `logic_error` high at `ghost/core/core/server/services/member-welcome-emails/jobs/index.js:15` (0.95)
-  - Negated condition in `scheduleMemberWelcomeEmailJob` flips scheduling logic: previously the job was scheduled when `processOutbox` was false, now it is scheduled only when `processOutbox` is true, which means the job will never be scheduled on the first call and will be scheduled repeatedly on subsequent calls.
-  - Suggestion: Change `if (hasScheduled.processOutbox && ...)` back to `if (!hasScheduled.processOutbox && ...)` to preserve the original once-per-process scheduling guard.
-  - Evidence: `diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8`
+No findings.
 
-- `logic_error` high at `ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340` (0.90)
-  - Welcome email condition changed from `labs.isSet('welcomeEmails') && WELCOME_EMAIL_SOURCES.includes(source)` to `config.get('memberWelcomeEmailTestInbox') || WELCOME_EMAIL_SOURCES.includes(source)`. The new OR logic means that if `memberWelcomeEmailTestInbox` is set to any truthy value, welcome emails are sent for *all* sources, not just the allowed ones, which can cause unintended email sending for sources like 'import' or 'admin'.
-  - Suggestion: Change the condition to `(welcomeEmailConfig || this._labsService.isSet('welcomeEmails')) && WELCOME_EMAIL_SOURCES.includes(source)` to preserve the source restriction while allowing the test config override.
-  - Evidence: `diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337`
+Checked changed files, changed entities, deterministic risk signals, and evidence references. No high-confidence review finding was produced.
 
 ## Needs Human Review
 
-None.
+- `logic_error` high at `ghost/core/core/server/services/member-welcome-emails/jobs/index.js:14` (0.50)
+  - Negated condition in `if (!hasScheduled.processOutbox && ...)` was changed to `if (hasScheduled.processOutbox && ...)`, which inverts the scheduling guard. Previously the job was added only when `processOutbox` was false; now it is added only when `processOutbox` is true, meaning the job will never be scheduled on the first invocation and may be scheduled repeatedly after the first run.
+  - Suggestion: Restore the original negation `!hasScheduled.processOutbox` or confirm the intended logic and update the flag reset accordingly.
+  - Evidence: `diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8`
+
+- `behavior_change` medium at `ghost/core/core/server/services/member-welcome-emails/jobs/index.js:11` (0.50)
+  - The feature gate check was changed from `labs.isSet('welcomeEmails')` to `config.get('memberWelcomeEmailTestInbox')`. This replaces a boolean labs flag with a config value that is truthy when set. In production, if `memberWelcomeEmailTestInbox` is not configured, the entire welcome email job will be skipped, effectively disabling the feature for all members.
+  - Suggestion: Ensure the config value is set appropriately for production or keep the labs flag as a fallback.
+  - Evidence: `diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8`
+
+- `behavior_change` medium at `ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340` (0.50)
+  - The condition for triggering welcome email outbox creation was changed from `this._labsService.isSet('welcomeEmails') && WELCOME_EMAIL_SOURCES.includes(source)` to `welcomeEmailConfig || WELCOME_EMAIL_SOURCES.includes(source)`. When `welcomeEmailConfig` is truthy, the source check is bypassed, causing outbox entries to be created for any member source (e.g., admin-created, API-created) instead of only the allowed sources.
+  - Suggestion: Keep the source filter: `welcomeEmailConfig && WELCOME_EMAIL_SOURCES.includes(source)` or `(welcomeEmailConfig || this._labsService.isSet('welcomeEmails')) && WELCOME_EMAIL_SOURCES.includes(source)`.
+  - Evidence: `diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337`
+
+- `code_style` low at `ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:339` (0.50)
+  - Variable declaration changed from `let member` to `var member`. While not a functional issue, it introduces a function-scoped variable in a module where `let` is used elsewhere, reducing consistency.
+  - Suggestion: Keep `let member` for block scoping consistency.
+  - Evidence: `diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337`
 
 ## Changed Files
 

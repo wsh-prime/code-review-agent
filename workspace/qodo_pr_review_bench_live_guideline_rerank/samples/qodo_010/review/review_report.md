@@ -21,9 +21,9 @@
 | Converged | True |
 | Fallback | False |
 | Retry count | 0 |
-| Total latency | 3203 ms |
+| Total latency | 10237 ms |
 | Token in | 5171 |
-| Token out | 142 |
+| Token out | 134 |
 
 - Iteration 0: 1 candidates, 0 verified, 0 uncertain, 0 kept, 0 rejected
 

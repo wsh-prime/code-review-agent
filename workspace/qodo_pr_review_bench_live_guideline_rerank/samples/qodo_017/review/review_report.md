@@ -20,10 +20,10 @@
 | Iterations | 1 / 1 |
 | Converged | False |
 | Fallback | False |
-| Retry count | 0 |
-| Total latency | 12010 ms |
+| Retry count | 1 |
+| Total latency | 100946 ms |
 | Token in | 6065 |
-| Token out | 403 |
+| Token out | 436 |
 
 - Iteration 0: 2 candidates, 1 verified, 1 uncertain, 0 kept, 0 rejected
 
@@ -49,9 +49,9 @@ Checked changed files, changed entities, deterministic risk signals, and evidenc
 
 ## Needs Human Review
 
-- `style` medium at `src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1` (0.50)
-  - New file GenericComponent.razor is missing the required MIT license header. Review guideline 'All C# Source Files Must Include MIT License Header' requires the exact two-line comment header at the start of every .cs file. Although this is a .razor file, the guideline applies to all C# source files; .razor files with @code blocks are considered C# source files.
-  - Suggestion: Add the license header at the top of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'
+- `convention` medium at `src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1` (0.50)
+  - New file GenericComponent.razor is missing the required MIT license header. Review guideline 'All C# Source Files Must Include MIT License Header' requires every .cs file to start with the exact two-line comment header. Although this is a .razor file, the guideline explicitly mentions 'C# source files' and the file contains C# code in the @code block; the same licensing expectation applies.
+  - Suggestion: Add the standard license header as the first two lines: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'
   - Evidence: `diff_hunk:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1`
 
 ## Changed Files

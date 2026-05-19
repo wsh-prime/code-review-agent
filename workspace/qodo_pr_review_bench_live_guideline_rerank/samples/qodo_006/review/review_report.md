@@ -6,10 +6,10 @@
 - Changed files: 198
 - Changed entities: 198
 - Risk signals: 95
-- Findings: 3
-- Needs human review: 3
-- Discarded: 11
-- Agent runs: 65
+- Findings: 4
+- Needs human review: 0
+- Discarded: 10
+- Agent runs: 61
 - Loop enabled: True
 - Target repo modified: False
 
@@ -18,14 +18,14 @@
 | Metric | Value |
 |---|---:|
 | Iterations | 1 / 1 |
-| Converged | False |
+| Converged | True |
 | Fallback | False |
-| Retry count | 11 |
-| Total latency | 1281143 ms |
-| Token in | 312124 |
-| Token out | 7351 |
+| Retry count | 1 |
+| Total latency | 534062 ms |
+| Token in | 297893 |
+| Token out | 5917 |
 
-- Iteration 0: 20 candidates, 9 verified, 6 uncertain, 3 kept, 0 rejected
+- Iteration 0: 14 candidates, 4 verified, 0 uncertain, 4 kept, 0 rejected
 
 ## Context Budget Summary
 
@@ -33,47 +33,39 @@
 |---|---:|
 | Strategy | `file_risk_shards_v1` |
 | Max input tokens | 9000 |
-| Estimated input tokens | 268092 |
-| Selected evidence | 258 |
-| Omitted evidence | 663 |
+| Estimated input tokens | 252711 |
+| Selected evidence | 245 |
+| Omitted evidence | 676 |
 | Context truncated | True |
 | Review shards | 50 |
-| Context requests | 29 |
-| Refills | 14 |
+| Context requests | 22 |
+| Refills | 10 |
 
 ## Findings
 
-- `correctness` medium at `ghost/core/core/server/services/members/api.js:13` (0.80)
-  - Renamed require path may cause module resolution failure if the target file does not exist at the new path.
-  - Suggestion: Verify that the file 'single-use-token-provider.js' exists in the same directory and that all other references to 'SingleUseTokenProvider' have been updated accordingly.
-  - Evidence: `diff_hunk:ghost/core/core/server/services/members/api.js:10`
+- `best_practice` medium at `ghost/core/core/server/api/endpoints/authentication.js:13` (0.90)
+  - API endpoint controller file 'authentication.js' is missing the required JSDoc type annotation '@type {import('@tryghost/api-framework').Controller}' as per review guideline 'API Endpoint Controllers Must Have Type Annotations'.
+  - Suggestion: Add a JSDoc type annotation to the exported controller object: /** @type {import('@tryghost/api-framework').Controller} */
+  - Evidence: `diff_hunk:ghost/core/core/server/api/endpoints/authentication.js:10`
 
-- `correctness` medium at `ghost/core/core/server/services/members-events/last-seen-at-updater.js:6` (0.80)
-  - Renamed require path may cause module resolution failure if the target file does not exist at the new path.
-  - Suggestion: Verify that the file 'last-seen-at-cache.js' exists in the same directory and that all other references to 'LastSeenAtCache' have been updated accordingly.
-  - Evidence: `diff_hunk:ghost/core/core/server/services/members-events/last-seen-at-updater.js:3`
+- `best_practice` medium at `ghost/core/core/server/api/endpoints/users.js:9` (0.90)
+  - API endpoint controller file 'users.js' is missing the required JSDoc type annotation '@type {import('@tryghost/api-framework').Controller}' as per review guideline 'API Endpoint Controllers Must Have Type Annotations'.
+  - Suggestion: Add a JSDoc type annotation to the exported controller object: /** @type {import('@tryghost/api-framework').Controller} */
+  - Evidence: `diff_hunk:ghost/core/core/server/api/endpoints/users.js:6`
 
-- `correctness` medium at `ghost/core/core/server/services/members/importer/index.js:1` (0.80)
-  - Renamed require paths may cause module resolution failure if the target files do not exist at the new paths.
-  - Suggestion: Verify that the files 'members-csv-importer.js' and 'members-csv-importer-stripe-utils.js' exist in the same directory and that all other references to the old filenames have been updated.
-  - Evidence: `diff_hunk:ghost/core/core/server/services/members/importer/index.js:1`
+- `correctness` high at `ghost/core/test/unit/server/services/webhooks/trigger.test.js:6` (0.70)
+  - The test file updates the require path to a renamed module but the diff hunk does not show a corresponding change to the production module file. If the production module was renamed from WebhookTrigger.js to webhook-trigger.js, the test will fail if the rename is incomplete or the module is not found.
+  - Suggestion: Verify that the production module file has been renamed to webhook-trigger.js and that the module exports are identical.
+  - Evidence: `diff_hunk:ghost/core/test/unit/server/services/webhooks/trigger.test.js:3`
+
+- `correctness` high at `ghost/core/test/utils/e2e-framework-mock-manager.js:16` (0.70)
+  - The test utility updates the require path to a renamed module but the diff hunk does not show a corresponding change to the production module file. If the production module was renamed from MailgunClient.js to mailgun-client.js, the test will fail if the rename is incomplete or the module is not found.
+  - Suggestion: Verify that the production module file has been renamed to mailgun-client.js and that the module exports are identical.
+  - Evidence: `diff_hunk:ghost/core/test/utils/e2e-framework-mock-manager.js:13`
 
 ## Needs Human Review
 
-- `correctness` medium at `ghost/core/core/server/services/announcement-bar-service/index.js:3` (0.50)
-  - The require path was changed from './AnnouncementBarSettings' to './announcement-bar-settings' but the diff hunk does not show the corresponding file rename or existence of the new module. If the file was not renamed, this will cause a runtime module resolution failure.
-  - Suggestion: Ensure the file './announcement-bar-settings.js' exists (or was renamed accordingly) before merging.
-  - Evidence: `diff_hunk:ghost/core/core/server/services/announcement-bar-service/index.js:1`
-
-- `correctness` medium at `ghost/core/core/server/services/audience-feedback/audience-feedback-controller.js:1` (0.50)
-  - The require path was changed from './Feedback' to './feedback' but the diff hunk does not show the corresponding file rename or existence of the new module. If the file was not renamed, this will cause a runtime module resolution failure.
-  - Suggestion: Ensure the file './feedback.js' exists (or was renamed accordingly) before merging.
-  - Evidence: `diff_hunk:ghost/core/core/server/services/audience-feedback/audience-feedback-controller.js:1`
-
-- `correctness` medium at `ghost/core/core/server/services/members/service.js:19` (0.50)
-  - The require path for VerificationTrigger was changed from '../VerificationTrigger' to '../verification-trigger'. If the actual file on disk is still named 'VerificationTrigger.js', this will cause a module resolution failure at runtime.
-  - Suggestion: Ensure the file '../verification-trigger.js' exists (or rename it to match the new require path) before deploying this change.
-  - Evidence: `diff_hunk:ghost/core/core/server/services/members/service.js:16`, `diff:ghost/core/core/server/services/members/service.js:19`
+None.
 
 ## Changed Files
 

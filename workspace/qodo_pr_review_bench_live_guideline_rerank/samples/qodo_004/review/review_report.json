@@ -5,12 +5,12 @@
     "changed_file_count": 22,
     "changed_entity_count": 22,
     "risk_signal_count": 9,
-    "finding_count": 1,
-    "needs_human_review_count": 4,
-    "discarded_count": 9,
+    "finding_count": 4,
+    "needs_human_review_count": 5,
+    "discarded_count": 10,
     "evidence_count": 113,
     "missing_evidence_id_count": 0,
-    "agent_run_count": 9,
+    "agent_run_count": 11,
     "prompt_exported": false,
     "loop_enabled": true,
     "loop_iterations_completed": 1,
@@ -19,29 +19,65 @@
     "fallback_reason": null,
     "resume_used": false,
     "resume_ignored_reason": null,
-    "total_latency_ms": 360592,
-    "total_token_count_in": 35762,
-    "total_token_count_out": 2733,
+    "total_latency_ms": 379818,
+    "total_token_count_in": 42037,
+    "total_token_count_out": 5359,
     "context_budget_enabled": true,
     "context_truncated": true,
-    "selected_evidence_count": 34,
-    "omitted_evidence_count": 79,
+    "selected_evidence_count": 36,
+    "omitted_evidence_count": 77,
     "review_shard_count": 6,
-    "context_refill_count": 2,
-    "context_request_count": 4,
+    "context_refill_count": 4,
+    "context_request_count": 6,
     "target_repo_modified": false
   },
   "findings": [
     {
-      "file": "apps/signup-form/src/utils/helpers.tsx",
-      "line": 20,
+      "file": "apps/signup-form/src/components/frame.tsx",
+      "line": 1,
+      "severity": "medium",
+      "category": "best_practice",
+      "message": "React Button Elements Must Have Explicit Type Attribute: The patch does not introduce any <button> elements, so no violation of this rule.",
+      "suggestion": "No action required.",
+      "confidence": 0.99,
+      "evidence_ids": [
+        "diff_hunk:apps/signup-form/src/components/frame.tsx:1"
+      ]
+    },
+    {
+      "file": "apps/signup-form/src/components/pages/form-page.tsx",
+      "line": 30,
+      "severity": "medium",
+      "category": "correctness",
+      "message": "Removing `setLoading(false)` in the minimal branch leaves the loading state stuck as `true` when the form submission succeeds in minimal mode, causing the UI to remain in a loading state indefinitely.",
+      "suggestion": "Restore `setLoading(false)` in the minimal branch, or ensure loading state is reset elsewhere after success.",
+      "confidence": 0.85,
+      "evidence_ids": [
+        "diff_hunk:apps/signup-form/src/components/pages/form-page.tsx:27"
+      ]
+    },
+    {
+      "file": "apps/signup-form/src/components/pages/form-view.tsx",
+      "line": 56,
       "severity": "low",
-      "category": "style",
-      "message": "String literal changed from single quotes to double quotes for STORAGE_KEY, violating the 'Code Must Use Single Quotes for Strings' guideline.",
-      "suggestion": "Use single quotes: const STORAGE_KEY = 'ghost-history';",
+      "category": "best_practice",
+      "message": "Review guideline violation: 'React Button Elements Must Have Explicit Type Attribute'. The `<button>` element in this file does not have an explicit `type` attribute, which defaults to `submit` and can cause unintended form submissions.",
+      "suggestion": "Add `type=\"button\"` to buttons that are not meant to submit the form, or `type=\"submit\"` for the submit button.",
+      "confidence": 0.9,
+      "evidence_ids": [
+        "diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:53"
+      ]
+    },
+    {
+      "file": "apps/signup-form/src/components/pages/success-page.tsx",
+      "line": 2,
+      "severity": "medium",
+      "category": "best_practice",
+      "message": "File renamed to kebab-case but import path uses kebab-case, which is correct; however, the file is in apps/signup-form/ which is not an admin app (apps/admin-x-*), so the kebab-case naming guideline does not apply. No issue.",
+      "suggestion": "",
       "confidence": 0.95,
       "evidence_ids": [
-        "diff_hunk:apps/signup-form/src/utils/helpers.tsx:17"
+        "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1"
       ]
     }
   ],
@@ -60,51 +96,63 @@
       ]
     },
     {
-      "file": "apps/signup-form/src/components/frame.tsx",
-      "line": 1,
-      "severity": "warning",
-      "category": "maintainability",
-      "message": "Import path changed from './IFrame' to './iframe' but the renamed file is not in the changed files list, which may break the build if the target file does not exist or is not renamed.",
-      "suggestion": "Ensure that the file './iframe' exists and is correctly named, or update the import to match the actual file name.",
+      "file": "apps/signup-form/src/components/pages/form-view.tsx",
+      "line": 56,
+      "severity": "medium",
+      "category": "correctness",
+      "message": "React List Rendering Must Not Use Array Index as Key: The patch does not introduce a list rendering issue, but the review guideline prohibits array index keys. No evidence of list rendering in this hunk.",
+      "suggestion": "Ensure any list rendering in this file uses stable unique identifiers (e.g., item.id) instead of array indices.",
       "confidence": 0.5,
       "evidence_ids": [
-        "diff_hunk:apps/signup-form/src/components/frame.tsx:1"
-      ]
-    },
-    {
-      "file": "apps/signup-form/src/app.tsx",
-      "line": 4,
-      "severity": "warning",
-      "category": "maintainability",
-      "message": "Import path changed from './AppContext' to './app-context' but the renamed file is not in the changed files list, which may break the build if the target file does not exist or is not renamed.",
-      "suggestion": "Ensure that the file './app-context' exists and is correctly named, or update the import to match the actual file name.",
-      "confidence": 0.5,
-      "evidence_ids": [
-        "diff_hunk:apps/signup-form/src/app.tsx:1"
+        "diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:53"
       ]
     },
     {
       "file": "apps/signup-form/src/components/pages/success-page.tsx",
-      "line": 2,
+      "line": 3,
       "severity": "medium",
       "category": "correctness",
-      "message": "Import path changed from './SuccessView' to './success-view' but the file was renamed from SuccessView.tsx to success-view.tsx. The import path must match the new file name exactly.",
-      "suggestion": "Verify that the import path './success-view' resolves to the renamed file success-view.tsx. If the file is in the same directory, the import should be './success-view'.",
+      "message": "Import path changed from './SuccessView' to './success-view' but the file was renamed from SuccessView.tsx to success-view.tsx. The import path must match the actual file name exactly.",
+      "suggestion": "Verify that the import path './success-view' matches the renamed file 'success-view.tsx' in the same directory.",
       "confidence": 0.5,
       "evidence_ids": [
         "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1"
+      ]
+    },
+    {
+      "file": "apps/signup-form/src/utils/helpers.tsx",
+      "line": 20,
+      "severity": "minor",
+      "category": "code_style",
+      "message": "String literal uses double quotes instead of single quotes, violating the 'Code Must Use Single Quotes for Strings' guideline.",
+      "suggestion": "Replace double quotes with single quotes: const STORAGE_KEY = 'ghost-history';",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:apps/signup-form/src/utils/helpers.tsx:17"
+      ]
+    },
+    {
+      "file": "apps/signup-form/src/utils/helpers.tsx",
+      "line": 45,
+      "severity": "medium",
+      "category": "bug_risk",
+      "message": "Removing the null check on getDefaultUrlHistory() return value may cause downstream code to receive undefined when sessionStorage is empty or throws, potentially leading to runtime errors.",
+      "suggestion": "Restore the null check or ensure callers handle undefined history values.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:apps/signup-form/src/utils/helpers.tsx:42"
       ]
     }
   ],
   "discarded": [
     {
       "file": "apps/signup-form/.eslintrc.cjs",
-      "line": 24,
+      "line": 18,
       "severity": "medium",
       "category": "style",
-      "message": "Review guideline 'Code Must Use 4-Space Indentation' requires 4-space indentation for source files. The added rule line uses 8 spaces (two indentation levels) which is correct, but the existing file uses 4-space indentation. No violation found.",
-      "suggestion": "",
-      "confidence": 0.0,
+      "message": "Review guideline 'Code Must Use 4-Space Indentation' requires 4-space indentation for all source files. The added rule configuration uses 2-space indentation.",
+      "suggestion": "Use 4-space indentation for the new rule entry to match the codebase standard.",
+      "confidence": 0.9,
       "evidence_ids": [
         "diff_hunk:apps/signup-form/.eslintrc.cjs:15"
       ],
@@ -113,49 +161,75 @@
     {
       "file": "apps/signup-form/src/components/frame.tsx",
       "line": 1,
-      "severity": "minor",
-      "category": "best_practice",
-      "message": "File renamed from Frame.tsx to frame.tsx but does not follow kebab-case naming convention for admin React apps.",
-      "suggestion": "Rename the file to use kebab-case (e.g., signup-frame.tsx) if it belongs to an admin-x-* app, or confirm the directory is not under apps/admin-x-*.",
-      "confidence": 0.5,
-      "evidence_ids": [
-        "diff_hunk:apps/signup-form/src/components/frame.tsx:1"
-      ],
-      "filter_reason": "style_preference"
-    },
-    {
-      "file": "apps/signup-form/src/components/pages/form-page.tsx",
-      "line": 30,
       "severity": "medium",
       "category": "correctness",
-      "message": "Removed setLoading(false) call in minimal branch may leave loading state stuck when success is set",
-      "suggestion": "Ensure loading state is reset to false when setting success to true in the minimal branch",
-      "confidence": 0.85,
+      "message": "Import path changed from './IFrame' to './iframe' but the actual file rename is not shown in the patch; this may cause a broken import if the target file does not exist or is not renamed.",
+      "suggestion": "Ensure that the file './iframe' exists (or is renamed accordingly) to match the updated import path.",
+      "confidence": 0.7,
       "evidence_ids": [
-        "diff_hunk:apps/signup-form/src/components/pages/form-page.tsx:27"
+        "diff_hunk:apps/signup-form/src/components/frame.tsx:1"
       ],
       "filter_reason": "low_signal_suggestion"
     },
     {
-      "file": "apps/signup-form/src/components/pages/form-view.tsx",
-      "line": 56,
-      "severity": "low",
+      "file": "apps/signup-form/src/components/frame.tsx",
+      "line": 5,
+      "severity": "medium",
       "category": "correctness",
-      "message": "Trimming email in submitHandler may alter the email value before validation, potentially bypassing earlier validation that expected untrimmed input",
-      "suggestion": "Trim email earlier in the validation flow or re-validate after trimming",
-      "confidence": 0.6,
+      "message": "Import path changed from '../AppContext' to '../app-context' but the actual file rename is not shown in the patch; this may cause a broken import if the target file does not exist or is not renamed.",
+      "suggestion": "Ensure that the file '../app-context' exists (or is renamed accordingly) to match the updated import path.",
+      "confidence": 0.7,
       "evidence_ids": [
-        "diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:53"
+        "diff_hunk:apps/signup-form/src/components/frame.tsx:1"
+      ],
+      "filter_reason": "low_signal_suggestion"
+    },
+    {
+      "file": "apps/signup-form/src/app.tsx",
+      "line": 4,
+      "severity": "medium",
+      "category": "correctness",
+      "message": "Import path changed from './AppContext' to './app-context' but the actual file rename is not shown in the patch; this may cause a broken import if the target file does not exist or is not renamed.",
+      "suggestion": "Ensure that the file './app-context' exists (or is renamed accordingly) to match the updated import path.",
+      "confidence": 0.7,
+      "evidence_ids": [
+        "diff_hunk:apps/signup-form/src/app.tsx:1"
+      ],
+      "filter_reason": "low_signal_suggestion"
+    },
+    {
+      "file": "apps/signup-form/src/app.tsx",
+      "line": 5,
+      "severity": "medium",
+      "category": "correctness",
+      "message": "Import path changed from './components/ContentBox' to './components/content-box' but the actual file rename is not shown in the patch; this may cause a broken import if the target file does not exist or is not renamed.",
+      "suggestion": "Ensure that the file './components/content-box' exists (or is renamed accordingly) to match the updated import path.",
+      "confidence": 0.7,
+      "evidence_ids": [
+        "diff_hunk:apps/signup-form/src/app.tsx:1"
+      ],
+      "filter_reason": "low_signal_suggestion"
+    },
+    {
+      "file": "apps/signup-form/src/app.tsx",
+      "line": 6,
+      "severity": "medium",
+      "category": "correctness",
+      "message": "Import path changed from './components/Frame' to './components/frame' but the actual file rename is not shown in the patch; this may cause a broken import if the target file does not exist or is not renamed.",
+      "suggestion": "Ensure that the file './components/frame' exists (or is renamed accordingly) to match the updated import path.",
+      "confidence": 0.7,
+      "evidence_ids": [
+        "diff_hunk:apps/signup-form/src/app.tsx:1"
       ],
       "filter_reason": "low_signal_suggestion"
     },
     {
       "file": "apps/signup-form/src/components/pages/success-page.tsx",
-      "line": 3,
+      "line": 4,
       "severity": "medium",
       "category": "correctness",
-      "message": "Import path changed from '../../AppContext' to '../../app-context' but no evidence shows that the AppContext file was renamed to app-context. This may break the import.",
-      "suggestion": "Ensure that the file AppContext.tsx (or similar) has been renamed to app-context.tsx, or correct the import path to match the actual file name.",
+      "message": "Import path changed from '../../AppContext' to '../../app-context' but no corresponding file rename evidence is provided for app-context. This may break the build if the file was not renamed.",
+      "suggestion": "Ensure that the file 'AppContext.tsx' (or similar) has been renamed to 'app-context.tsx' in the parent directory, or correct the import path.",
       "confidence": 0.5,
       "evidence_ids": [
         "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1"
@@ -167,8 +241,8 @@
       "line": 3,
       "severity": "medium",
       "category": "correctness",
-      "message": "Import path changed from '../../AppContext' to '../../app-context' but no evidence shows that the AppContext file was renamed to app-context. This may break the import.",
-      "suggestion": "Ensure that the file AppContext.tsx (or similar) has been renamed to app-context.tsx, or correct the import path to match the actual file name.",
+      "message": "Import path changed from '../../AppContext' to '../../app-context' but no corresponding file rename evidence is provided for app-context. This may break the build if the file was not renamed.",
+      "suggestion": "Ensure that the file 'AppContext.tsx' (or similar) has been renamed to 'app-context.tsx' in the parent directory, or correct the import path.",
       "confidence": 0.5,
       "evidence_ids": [
         "diff_hunk:apps/signup-form/src/components/pages/success-view.tsx:1"
@@ -180,8 +254,8 @@
       "line": 1,
       "severity": "medium",
       "category": "correctness",
-      "message": "Import path changed from './App.tsx' to './app.tsx' but no evidence shows that the App.tsx file was renamed to app.tsx. This may break the import.",
-      "suggestion": "Ensure that the file App.tsx has been renamed to app.tsx, or correct the import path to match the actual file name.",
+      "message": "Import path changed from './App.tsx' to './app.tsx' but no corresponding file rename evidence is provided for app.tsx. This may break the build if the file was not renamed.",
+      "suggestion": "Ensure that the file 'App.tsx' has been renamed to 'app.tsx' in the same directory, or correct the import path.",
       "confidence": 0.5,
       "evidence_ids": [
         "diff_hunk:apps/signup-form/src/index.tsx:1"
@@ -193,26 +267,16 @@
       "line": 45,
       "severity": "medium",
       "category": "correctness",
-      "message": "Removing the null check on getDefaultUrlHistory() return value may cause getUrlHistory to return undefined instead of a valid URLHistory object, potentially breaking callers that expect a defined object.",
-      "suggestion": "Restore the guard or update the return type to allow undefined and handle it in callers.",
-      "confidence": 0.85,
-      "evidence_ids": [
-        "diff_hunk:apps/signup-form/src/utils/helpers.tsx:42"
-      ],
-      "filter_reason": "low_signal_suggestion"
-    },
-    {
-      "file": "ghost/core/core/shared/config/defaults.json",
-      "line": 305,
-      "severity": "low",
-      "category": "style",
-      "message": "Review guideline 'Code Must Use 4-Space Indentation' requires 4-space indentation for source files, but JSON files should use 2-space indentation per the guideline exception. The change only removes a space before the colon, which is a formatting fix but does not affect indentation.",
-      "suggestion": "No action needed; the change is a minor formatting fix and does not violate the indentation rule.",
+      "message": "Removing the null/undefined guard on `history` before returning it may cause the function to return an undefined value where a URLHistory object is expected, potentially breaking callers that rely on a valid object.",
+      "suggestion": "Restore the guard or ensure `getDefaultUrlHistory()` always returns a valid URLHistory object. If the guard is intentionally removed, update the return type and all callers to handle undefined.",
       "confidence": 0.5,
       "evidence_ids": [
-        "diff_hunk:ghost/core/core/shared/config/defaults.json:302"
+        "diff_hunk:apps/signup-form/src/utils/helpers.tsx:42",
+        "diff:apps/signup-form/src/utils/helpers.tsx:45",
+        "diff:apps/signup-form/src/utils/helpers.tsx:46",
+        "diff:apps/signup-form/src/utils/helpers.tsx:47"
       ],
-      "filter_reason": "style_preference"
+      "filter_reason": "low_signal_suggestion"
     }
   ],
   "changed_files": [
@@ -2847,20 +2911,18 @@
         "diff_hunk:apps/signup-form/package.json:1"
       ],
       "output_issue_ids": [
-        "style:apps/signup-form/.eslintrc.cjs:24"
+        "style:apps/signup-form/.eslintrc.cjs:18"
       ],
       "fallback_used": false,
       "iteration": 0,
       "feedback_hash": "",
-      "retry_count": 1,
-      "retry_log": [
-        "attempt=1 error=timeout delay=1.00s"
-      ],
-      "latency_ms": 65138,
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 1338,
       "token_count_in": 5465,
-      "token_count_out": 160,
-      "trace_id": "d6a5b7912f2349e8bb1a4d2b08cdccae",
-      "span_id": "bef28c567d634555",
+      "token_count_out": 157,
+      "trace_id": "37a7ba06c049474d8e83791c314532f8",
+      "span_id": "841b4ca88c7d4d48",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
@@ -2881,28 +2943,29 @@
         "diff_hunk:apps/signup-form/src/components/frame.tsx:1"
       ],
       "output_issue_ids": [
-        "maintainability:apps/signup-form/src/components/frame.tsx:1",
-        "maintainability:apps/signup-form/src/app.tsx:4",
-        "maintainability:apps/signup-form/src/app.tsx:5",
-        "maintainability:apps/signup-form/src/app.tsx:6"
+        "correctness:apps/signup-form/src/components/frame.tsx:1",
+        "correctness:apps/signup-form/src/components/frame.tsx:5",
+        "correctness:apps/signup-form/src/app.tsx:4",
+        "correctness:apps/signup-form/src/app.tsx:5",
+        "correctness:apps/signup-form/src/app.tsx:6"
       ],
       "fallback_used": false,
       "iteration": 0,
       "feedback_hash": "",
       "retry_count": 0,
       "retry_log": [],
-      "latency_ms": 7517,
-      "token_count_in": 4463,
-      "token_count_out": 756,
-      "trace_id": "3f3f6fd295194cab9517dffc11cfae8b",
-      "span_id": "cde1fc191c5b4797",
+      "latency_ms": 53966,
+      "token_count_in": 4462,
+      "token_count_out": 853,
+      "trace_id": "25933edc085e4edda2d0eebac4ddd538",
+      "span_id": "9e31e08142ed4cc0",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
       "shard_id": "shard-002",
       "shard_index": 1,
       "shard_count": 6,
-      "context_request_count": 2,
+      "context_request_count": 1,
       "context_refill_used": false
     },
     {
@@ -2912,25 +2975,32 @@
       "input_evidence_ids": [
         "diff:apps/signup-form/src/components/frame.tsx:1",
         "diff:apps/signup-form/src/components/frame.tsx:5",
-        "diff_hunk:apps/signup-form/src/components/frame.tsx:1",
-        "risk:security_sensitive:apps/signup-form/src/components/frame.tsx"
+        "diff_hunk:apps/signup-form/src/components/frame.tsx:1"
       ],
       "output_issue_ids": [
+        "best_practice:apps/signup-form/src/components/frame.tsx:1",
+        "best_practice:apps/signup-form/src/components/frame.tsx:1",
+        "best_practice:apps/signup-form/src/components/frame.tsx:1",
+        "best_practice:apps/signup-form/src/components/frame.tsx:1",
+        "best_practice:apps/signup-form/src/components/frame.tsx:1",
+        "best_practice:apps/signup-form/src/components/frame.tsx:1",
+        "best_practice:apps/signup-form/src/components/frame.tsx:1",
+        "best_practice:apps/signup-form/src/components/frame.tsx:1",
+        "best_practice:apps/signup-form/src/components/frame.tsx:1",
+        "best_practice:apps/signup-form/src/components/frame.tsx:1",
         "best_practice:apps/signup-form/src/components/frame.tsx:1",
         "best_practice:apps/signup-form/src/components/frame.tsx:1"
       ],
       "fallback_used": false,
       "iteration": 0,
       "feedback_hash": "",
-      "retry_count": 1,
-      "retry_log": [
-        "attempt=1 error=timeout delay=1.00s"
-      ],
-      "latency_ms": 69473,
-      "token_count_in": 3095,
-      "token_count_out": 314,
-      "trace_id": "62093ea431e842c5bb36d17690bc613d",
-      "span_id": "29dcfb6e22ee4869",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 12004,
+      "token_count_in": 3013,
+      "token_count_out": 1533,
+      "trace_id": "7cf7fa2f2b794b388b79bba8a1c37091",
+      "span_id": "728671b6fa8743a5",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
@@ -2954,26 +3024,64 @@
       ],
       "output_issue_ids": [
         "correctness:apps/signup-form/src/components/pages/form-page.tsx:30",
-        "correctness:apps/signup-form/src/components/pages/form-view.tsx:56"
+        "best_practice:apps/signup-form/src/components/pages/form-view.tsx:56"
       ],
       "fallback_used": false,
       "iteration": 0,
       "feedback_hash": "",
-      "retry_count": 0,
-      "retry_log": [],
-      "latency_ms": 1891,
+      "retry_count": 1,
+      "retry_log": [
+        "attempt=1 error=timeout delay=1.00s"
+      ],
+      "latency_ms": 88787,
       "token_count_in": 5401,
-      "token_count_out": 215,
-      "trace_id": "8b80403bdfe04fc08d64a85b0a35f938",
-      "span_id": "16dedd9e6f1742e0",
+      "token_count_out": 400,
+      "trace_id": "b5d79e968bab46eda8c113c91878c343",
+      "span_id": "994b61b41baa4acf",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
       "shard_id": "shard-003",
       "shard_index": 2,
       "shard_count": 6,
-      "context_request_count": 0,
+      "context_request_count": 1,
       "context_refill_used": false
+    },
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+      "input_evidence_ids": [
+        "diff:apps/signup-form/src/components/pages/form-view.tsx:56",
+        "diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:53"
+      ],
+      "output_issue_ids": [
+        "correctness:apps/signup-form/src/components/pages/form-view.tsx:56",
+        "correctness:apps/signup-form/src/components/pages/form-view.tsx:56",
+        "correctness:apps/signup-form/src/components/pages/form-view.tsx:56",
+        "correctness:apps/signup-form/src/components/pages/form-view.tsx:56",
+        "correctness:apps/signup-form/src/components/pages/form-view.tsx:56"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 1,
+      "retry_log": [
+        "attempt=1 error=timeout delay=1.00s"
+      ],
+      "latency_ms": 90986,
+      "token_count_in": 3008,
+      "token_count_out": 768,
+      "trace_id": "af0c3b5212d54f3c882dbbd78895661f",
+      "span_id": "a8ab558678564fa4",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-003-refill",
+      "shard_index": 2,
+      "shard_count": 6,
+      "context_request_count": 0,
+      "context_refill_used": true
     },
     {
       "agent_name": "openai_compatible_reviewer",
@@ -2986,28 +3094,30 @@
         "diff_hunk:apps/signup-form/src/index.tsx:1"
       ],
       "output_issue_ids": [
-        "correctness:apps/signup-form/src/components/pages/success-page.tsx:2",
         "correctness:apps/signup-form/src/components/pages/success-page.tsx:3",
+        "correctness:apps/signup-form/src/components/pages/success-page.tsx:4",
         "correctness:apps/signup-form/src/components/pages/success-view.tsx:3",
         "correctness:apps/signup-form/src/index.tsx:1"
       ],
       "fallback_used": false,
       "iteration": 0,
       "feedback_hash": "",
-      "retry_count": 0,
-      "retry_log": [],
-      "latency_ms": 15644,
+      "retry_count": 1,
+      "retry_log": [
+        "attempt=1 error=timeout delay=1.00s"
+      ],
+      "latency_ms": 93873,
       "token_count_in": 4950,
-      "token_count_out": 802,
-      "trace_id": "6fb93ef0f8cc48e1b7237a9ec494dfb3",
-      "span_id": "596e839ddfec44bb",
+      "token_count_out": 853,
+      "trace_id": "7dd14ef7318a4aa2b0ffc3b10a13cb20",
+      "span_id": "0e2ddefe9f91495e",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
       "shard_id": "shard-004",
       "shard_index": 3,
       "shard_count": 6,
-      "context_request_count": 2,
+      "context_request_count": 3,
       "context_refill_used": false
     },
     {
@@ -3018,22 +3128,24 @@
         "diff:apps/signup-form/src/components/pages/success-page.tsx:2",
         "diff:apps/signup-form/src/components/pages/success-page.tsx:3",
         "diff:apps/signup-form/src/components/pages/success-view.tsx:3",
+        "diff:apps/signup-form/src/index.tsx:1",
         "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1",
         "diff_hunk:apps/signup-form/src/components/pages/success-view.tsx:1",
-        "risk:security_sensitive:apps/signup-form/src/components/pages/success-page.tsx",
-        "risk:security_sensitive:apps/signup-form/src/components/pages/success-view.tsx"
+        "diff_hunk:apps/signup-form/src/index.tsx:1"
       ],
-      "output_issue_ids": [],
+      "output_issue_ids": [
+        "best_practice:apps/signup-form/src/components/pages/success-page.tsx:2"
+      ],
       "fallback_used": false,
       "iteration": 0,
       "feedback_hash": "",
       "retry_count": 0,
       "retry_log": [],
-      "latency_ms": 3011,
-      "token_count_in": 3897,
-      "token_count_out": 12,
-      "trace_id": "8e858c666d1d4710b469b3e5b880ba9f",
-      "span_id": "98cce6d0f4ea46c2",
+      "latency_ms": 6779,
+      "token_count_in": 4116,
+      "token_count_out": 169,
+      "trace_id": "21e42dd6df0945cda85d6397d81d7ec5",
+      "span_id": "7ac131b878fe4285",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
@@ -3056,30 +3168,59 @@
         "diff_hunk:apps/signup-form/src/utils/options.tsx:1"
       ],
       "output_issue_ids": [
-        "correctness:apps/signup-form/src/utils/helpers.tsx:45",
-        "style:apps/signup-form/src/utils/helpers.tsx:20"
+        "code_style:apps/signup-form/src/utils/helpers.tsx:20",
+        "bug_risk:apps/signup-form/src/utils/helpers.tsx:45"
       ],
       "fallback_used": false,
       "iteration": 0,
       "feedback_hash": "",
-      "retry_count": 2,
-      "retry_log": [
-        "attempt=1 error=timeout delay=1.00s",
-        "attempt=2 error=timeout delay=2.00s"
-      ],
-      "latency_ms": 162603,
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 27851,
       "token_count_in": 5372,
-      "token_count_out": 294,
-      "trace_id": "40fc195bacfa4f6c85599181b479eed8",
-      "span_id": "2f867441005f4a4d",
+      "token_count_out": 372,
+      "trace_id": "bd95dc75578c499eb42fef5bad68107f",
+      "span_id": "a110f9f333bd4fc1",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
       "shard_id": "shard-005",
       "shard_index": 4,
       "shard_count": 6,
-      "context_request_count": 0,
+      "context_request_count": 1,
       "context_refill_used": false
+    },
+    {
+      "agent_name": "openai_compatible_reviewer",
+      "model": "deepseek-ai/DeepSeek-V4-Flash",
+      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+      "input_evidence_ids": [
+        "diff:apps/signup-form/src/utils/helpers.tsx:45",
+        "diff:apps/signup-form/src/utils/helpers.tsx:46",
+        "diff:apps/signup-form/src/utils/helpers.tsx:47",
+        "diff_hunk:apps/signup-form/src/utils/helpers.tsx:42"
+      ],
+      "output_issue_ids": [
+        "correctness:apps/signup-form/src/utils/helpers.tsx:45"
+      ],
+      "fallback_used": false,
+      "iteration": 0,
+      "feedback_hash": "",
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 2593,
+      "token_count_in": 3131,
+      "token_count_out": 242,
+      "trace_id": "eb4e52350e2b4b9ea11d6a4f7eafb3b5",
+      "span_id": "937e855787204b99",
+      "parent_span_id": "",
+      "status": "ok",
+      "error_type": "",
+      "shard_id": "shard-005-refill",
+      "shard_index": 4,
+      "shard_count": 6,
+      "context_request_count": 0,
+      "context_refill_used": true
     },
     {
       "agent_name": "openai_compatible_reviewer",
@@ -3089,19 +3230,17 @@
         "diff:apps/signup-form/test/utils/is-test-env.js:1",
         "diff_hunk:ghost/core/core/shared/config/defaults.json:302"
       ],
-      "output_issue_ids": [
-        "style:ghost/core/core/shared/config/defaults.json:305"
-      ],
+      "output_issue_ids": [],
       "fallback_used": false,
       "iteration": 0,
       "feedback_hash": "",
       "retry_count": 0,
       "retry_log": [],
-      "latency_ms": 35315,
+      "latency_ms": 1641,
       "token_count_in": 3119,
-      "token_count_out": 180,
-      "trace_id": "94042db92b6d4110a81edbf06cfc4243",
-      "span_id": "92e7043093e94684",
+      "token_count_out": 12,
+      "trace_id": "e13c10d0c2a543729e136162e04c3ba8",
+      "span_id": "ab257c8ea3d84a24",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
@@ -3116,13 +3255,18 @@
       "model": null,
       "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
       "input_evidence_ids": [
-        "diff_hunk:apps/signup-form/src/app.tsx:1",
         "diff_hunk:apps/signup-form/src/components/frame.tsx:1",
+        "diff_hunk:apps/signup-form/src/components/pages/form-page.tsx:27",
+        "diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:53",
         "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1",
-        "diff_hunk:apps/signup-form/src/utils/helpers.tsx:17"
+        "diff_hunk:apps/signup-form/src/utils/helpers.tsx:17",
+        "diff_hunk:apps/signup-form/src/utils/helpers.tsx:42"
       ],
       "output_issue_ids": [
-        "style:apps/signup-form/src/utils/helpers.tsx:20"
+        "best_practice:apps/signup-form/src/components/frame.tsx:1",
+        "correctness:apps/signup-form/src/components/pages/form-page.tsx:30",
+        "best_practice:apps/signup-form/src/components/pages/form-view.tsx:56",
+        "best_practice:apps/signup-form/src/components/pages/success-page.tsx:2"
       ],
       "fallback_used": false,
       "iteration": 0,
@@ -3150,9 +3294,9 @@
     "strategy": "file_risk_shards_v1",
     "context_profile": "risk_compact_manifest_v1",
     "max_input_tokens": 9000,
-    "estimated_input_tokens": 27869,
-    "selected_evidence_count": 34,
-    "omitted_evidence_count": 79,
+    "estimated_input_tokens": 32659,
+    "selected_evidence_count": 36,
+    "omitted_evidence_count": 77,
     "selected_evidence_ids": [
       "diff_hunk:apps/signup-form/.storybook/preview.tsx:3",
       "diff_hunk:apps/signup-form/package.json:1",
@@ -3182,12 +3326,14 @@
       "diff:apps/signup-form/test/utils/is-test-env.js:1",
       "diff:apps/signup-form/src/components/frame.tsx:1",
       "diff:apps/signup-form/src/components/frame.tsx:5",
-      "risk:security_sensitive:apps/signup-form/src/components/frame.tsx",
+      "diff:apps/signup-form/src/components/pages/form-view.tsx:56",
       "diff:apps/signup-form/src/components/pages/success-page.tsx:2",
       "diff:apps/signup-form/src/components/pages/success-page.tsx:3",
       "diff:apps/signup-form/src/components/pages/success-view.tsx:3",
-      "risk:security_sensitive:apps/signup-form/src/components/pages/success-page.tsx",
-      "risk:security_sensitive:apps/signup-form/src/components/pages/success-view.tsx"
+      "diff:apps/signup-form/src/index.tsx:1",
+      "diff:apps/signup-form/src/utils/helpers.tsx:45",
+      "diff:apps/signup-form/src/utils/helpers.tsx:46",
+      "diff:apps/signup-form/src/utils/helpers.tsx:47"
     ],
     "omitted_evidence_ids": [
       "diff:apps/signup-form/.storybook/preview.tsx:6",
@@ -3225,6 +3371,7 @@
       "diff:apps/signup-form/README.md:60",
       "diff:apps/signup-form/README.md:61",
       "diff:apps/signup-form/README.md:62",
+      "risk:security_sensitive:apps/signup-form/src/components/frame.tsx",
       "entity:apps/signup-form/src/components/frame.tsx:apps.signup-form.src.components.frame",
       "entity:apps/signup-form/src/app-context.ts:apps.signup-form.src.app-context",
       "entity:apps/signup-form/src/app.tsx:apps.signup-form.src.app",
@@ -3236,7 +3383,6 @@
       "diff:apps/signup-form/src/components/pages/form-page.tsx:30",
       "diff:apps/signup-form/src/components/pages/form-page.tsx:5",
       "diff:apps/signup-form/src/components/pages/form-view.tsx:3",
-      "diff:apps/signup-form/src/components/pages/form-view.tsx:56",
       "risk:security_sensitive:apps/signup-form/src/components/pages/form-page.tsx",
       "risk:security_sensitive:apps/signup-form/src/components/pages/form-view.tsx",
       "entity:apps/signup-form/src/components/pages/form-page.tsx:apps.signup-form.src.components.pages.form-page",
@@ -3244,17 +3390,15 @@
       "entity:apps/signup-form/src/components/iframe.tsx:apps.signup-form.src.components.iframe",
       "entity:apps/signup-form/src/components/pages/form-view.stories.ts:apps.signup-form.src.components.pages.form-view.stories",
       "diff:apps/signup-form/src/components/pages/form-view.stories.ts:3",
+      "risk:security_sensitive:apps/signup-form/src/components/pages/success-page.tsx",
+      "risk:security_sensitive:apps/signup-form/src/components/pages/success-view.tsx",
       "entity:apps/signup-form/src/components/pages/success-page.tsx:apps.signup-form.src.components.pages.success-page",
       "entity:apps/signup-form/src/components/pages/success-view.tsx:apps.signup-form.src.components.pages.success-view",
       "entity:apps/signup-form/src/components/pages/success-view.stories.ts:apps.signup-form.src.components.pages.success-view.stories",
       "entity:apps/signup-form/src/index.tsx:apps.signup-form.src.index",
       "diff:apps/signup-form/src/components/pages/success-view.stories.ts:3",
-      "diff:apps/signup-form/src/index.tsx:1",
       "diff:apps/signup-form/src/utils/helpers.tsx:1",
       "diff:apps/signup-form/src/utils/helpers.tsx:20",
-      "diff:apps/signup-form/src/utils/helpers.tsx:45",
-      "diff:apps/signup-form/src/utils/helpers.tsx:46",
-      "diff:apps/signup-form/src/utils/helpers.tsx:47",
       "diff:apps/signup-form/src/utils/options.tsx:2",
       "risk:security_sensitive:apps/signup-form/src/utils/helpers.tsx",
       "risk:security_sensitive:apps/signup-form/src/utils/options.tsx",
@@ -3273,8 +3417,8 @@
     "selected_risk_signal_count": 9,
     "context_truncated": true,
     "shard_count": 6,
-    "refill_count": 2,
-    "context_request_count": 4,
+    "refill_count": 4,
+    "context_request_count": 6,
     "context_requests": [
       {
         "request_type": "same_file_more_evidence",
@@ -3294,41 +3438,41 @@
         ]
       },
       {
-        "request_type": "risk_evidence",
-        "path": "apps/signup-form/src/components/frame.tsx",
+        "request_type": "same_file_more_evidence",
+        "path": "apps/signup-form/src/components/pages/form-view.tsx",
         "evidence_ids": [
-          "risk:security_sensitive:apps/signup-form/src/components/frame.tsx"
+          "diff:apps/signup-form/src/components/pages/form-view.tsx:56"
         ],
         "risk_tag": null,
         "symbol": null,
         "reason": "",
-        "source_shard_id": "shard-002",
+        "source_shard_id": "shard-003",
         "fulfilled_evidence_ids": [
-          "risk:security_sensitive:apps/signup-form/src/components/frame.tsx"
+          "diff:apps/signup-form/src/components/pages/form-view.tsx:56",
+          "diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:53"
         ]
       },
       {
-        "request_type": "risk_evidence",
-        "path": null,
+        "request_type": "same_file_more_evidence",
+        "path": "apps/signup-form/src/components/pages/success-page.tsx",
         "evidence_ids": [
-          "risk:security_sensitive:apps/signup-form/src/components/pages/success-page.tsx",
-          "risk:security_sensitive:apps/signup-form/src/components/pages/success-view.tsx"
+          "diff:apps/signup-form/src/components/pages/success-page.tsx:2",
+          "diff:apps/signup-form/src/components/pages/success-page.tsx:3"
         ],
         "risk_tag": null,
         "symbol": null,
         "reason": "",
         "source_shard_id": "shard-004",
         "fulfilled_evidence_ids": [
-          "risk:security_sensitive:apps/signup-form/src/components/pages/success-page.tsx",
-          "risk:security_sensitive:apps/signup-form/src/components/pages/success-view.tsx"
+          "diff:apps/signup-form/src/components/pages/success-page.tsx:2",
+          "diff:apps/signup-form/src/components/pages/success-page.tsx:3",
+          "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1"
         ]
       },
       {
         "request_type": "same_file_more_evidence",
-        "path": null,
+        "path": "apps/signup-form/src/components/pages/success-view.tsx",
         "evidence_ids": [
-          "diff:apps/signup-form/src/components/pages/success-page.tsx:2",
-          "diff:apps/signup-form/src/components/pages/success-page.tsx:3",
           "diff:apps/signup-form/src/components/pages/success-view.tsx:3"
         ],
         "risk_tag": null,
@@ -3336,11 +3480,42 @@
         "reason": "",
         "source_shard_id": "shard-004",
         "fulfilled_evidence_ids": [
-          "diff:apps/signup-form/src/components/pages/success-page.tsx:2",
-          "diff:apps/signup-form/src/components/pages/success-page.tsx:3",
           "diff:apps/signup-form/src/components/pages/success-view.tsx:3",
-          "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1",
           "diff_hunk:apps/signup-form/src/components/pages/success-view.tsx:1"
+        ]
+      },
+      {
+        "request_type": "same_file_more_evidence",
+        "path": "apps/signup-form/src/index.tsx",
+        "evidence_ids": [
+          "diff:apps/signup-form/src/index.tsx:1"
+        ],
+        "risk_tag": null,
+        "symbol": null,
+        "reason": "",
+        "source_shard_id": "shard-004",
+        "fulfilled_evidence_ids": [
+          "diff:apps/signup-form/src/index.tsx:1",
+          "diff_hunk:apps/signup-form/src/index.tsx:1"
+        ]
+      },
+      {
+        "request_type": "same_file_more_evidence",
+        "path": "apps/signup-form/src/utils/helpers.tsx",
+        "evidence_ids": [
+          "diff:apps/signup-form/src/utils/helpers.tsx:45",
+          "diff:apps/signup-form/src/utils/helpers.tsx:46",
+          "diff:apps/signup-form/src/utils/helpers.tsx:47"
+        ],
+        "risk_tag": null,
+        "symbol": null,
+        "reason": "",
+        "source_shard_id": "shard-005",
+        "fulfilled_evidence_ids": [
+          "diff:apps/signup-form/src/utils/helpers.tsx:45",
+          "diff:apps/signup-form/src/utils/helpers.tsx:46",
+          "diff:apps/signup-form/src/utils/helpers.tsx:47",
+          "diff_hunk:apps/signup-form/src/utils/helpers.tsx:42"
         ]
       }
     ],
@@ -3410,9 +3585,19 @@
         "shard_index": 1,
         "is_refill": true,
         "parent_shard_id": "shard-002",
-        "selected_evidence_count": 4,
+        "selected_evidence_count": 3,
         "omitted_evidence_count": 0,
-        "estimated_input_tokens": 2377,
+        "estimated_input_tokens": 2304,
+        "context_truncated": false
+      },
+      {
+        "shard_id": "shard-003-refill",
+        "shard_index": 2,
+        "is_refill": true,
+        "parent_shard_id": "shard-003",
+        "selected_evidence_count": 2,
+        "omitted_evidence_count": 0,
+        "estimated_input_tokens": 2341,
         "context_truncated": false
       },
       {
@@ -3422,7 +3607,17 @@
         "parent_shard_id": "shard-004",
         "selected_evidence_count": 7,
         "omitted_evidence_count": 0,
-        "estimated_input_tokens": 3088,
+        "estimated_input_tokens": 3216,
+        "context_truncated": false
+      },
+      {
+        "shard_id": "shard-005-refill",
+        "shard_index": 4,
+        "is_refill": true,
+        "parent_shard_id": "shard-005",
+        "selected_evidence_count": 4,
+        "omitted_evidence_count": 0,
+        "estimated_input_tokens": 2394,
         "context_truncated": false
       }
     ],
@@ -3441,57 +3636,48 @@
     "iterations": [
       {
         "i": 0,
-        "candidate_issue_count": 15,
-        "verified_count": 6,
+        "candidate_issue_count": 18,
+        "verified_count": 8,
         "needs_human_review_count": 0,
-        "discarded_count": 9,
-        "keep_count": 1,
-        "uncertain_count": 5,
+        "discarded_count": 10,
+        "keep_count": 4,
+        "uncertain_count": 4,
         "reject_count": 0,
         "feedback_sent": [
           {
-            "issue_id": "maintainability:apps/signup-form/src/components/frame.tsx:1",
-            "category": "maintainability",
+            "issue_id": "correctness:apps/signup-form/src/components/pages/form-view.tsx:56",
+            "category": "correctness",
             "critic_reason": "low confidence",
             "original_confidence": 0.5,
             "evidence_ids": [
-              "diff_hunk:apps/signup-form/src/components/frame.tsx:1"
+              "diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:53"
             ]
           },
           {
-            "issue_id": "maintainability:apps/signup-form/src/app.tsx:4",
-            "category": "maintainability",
-            "critic_reason": "low confidence",
-            "original_confidence": 0.5,
-            "evidence_ids": [
-              "diff_hunk:apps/signup-form/src/app.tsx:1"
-            ]
-          },
-          {
-            "issue_id": "maintainability:apps/signup-form/src/app.tsx:5",
-            "category": "maintainability",
-            "critic_reason": "low confidence",
-            "original_confidence": 0.5,
-            "evidence_ids": [
-              "diff_hunk:apps/signup-form/src/app.tsx:1"
-            ]
-          },
-          {
-            "issue_id": "maintainability:apps/signup-form/src/app.tsx:6",
-            "category": "maintainability",
-            "critic_reason": "low confidence",
-            "original_confidence": 0.5,
-            "evidence_ids": [
-              "diff_hunk:apps/signup-form/src/app.tsx:1"
-            ]
-          },
-          {
-            "issue_id": "correctness:apps/signup-form/src/components/pages/success-page.tsx:2",
+            "issue_id": "correctness:apps/signup-form/src/components/pages/success-page.tsx:3",
             "category": "correctness",
             "critic_reason": "low confidence",
             "original_confidence": 0.5,
             "evidence_ids": [
               "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1"
+            ]
+          },
+          {
+            "issue_id": "code_style:apps/signup-form/src/utils/helpers.tsx:20",
+            "category": "code_style",
+            "critic_reason": "low confidence",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:apps/signup-form/src/utils/helpers.tsx:17"
+            ]
+          },
+          {
+            "issue_id": "bug_risk:apps/signup-form/src/utils/helpers.tsx:45",
+            "category": "bug_risk",
+            "critic_reason": "low confidence",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:apps/signup-form/src/utils/helpers.tsx:42"
             ]
           }
         ],
@@ -3507,20 +3693,18 @@
               "diff_hunk:apps/signup-form/package.json:1"
             ],
             "output_issue_ids": [
-              "style:apps/signup-form/.eslintrc.cjs:24"
+              "style:apps/signup-form/.eslintrc.cjs:18"
             ],
             "fallback_used": false,
             "iteration": 0,
             "feedback_hash": "",
-            "retry_count": 1,
-            "retry_log": [
-              "attempt=1 error=timeout delay=1.00s"
-            ],
-            "latency_ms": 65138,
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 1338,
             "token_count_in": 5465,
-            "token_count_out": 160,
-            "trace_id": "d6a5b7912f2349e8bb1a4d2b08cdccae",
-            "span_id": "bef28c567d634555",
+            "token_count_out": 157,
+            "trace_id": "37a7ba06c049474d8e83791c314532f8",
+            "span_id": "841b4ca88c7d4d48",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
@@ -3541,28 +3725,29 @@
               "diff_hunk:apps/signup-form/src/components/frame.tsx:1"
             ],
             "output_issue_ids": [
-              "maintainability:apps/signup-form/src/components/frame.tsx:1",
-              "maintainability:apps/signup-form/src/app.tsx:4",
-              "maintainability:apps/signup-form/src/app.tsx:5",
-              "maintainability:apps/signup-form/src/app.tsx:6"
+              "correctness:apps/signup-form/src/components/frame.tsx:1",
+              "correctness:apps/signup-form/src/components/frame.tsx:5",
+              "correctness:apps/signup-form/src/app.tsx:4",
+              "correctness:apps/signup-form/src/app.tsx:5",
+              "correctness:apps/signup-form/src/app.tsx:6"
             ],
             "fallback_used": false,
             "iteration": 0,
             "feedback_hash": "",
             "retry_count": 0,
             "retry_log": [],
-            "latency_ms": 7517,
-            "token_count_in": 4463,
-            "token_count_out": 756,
-            "trace_id": "3f3f6fd295194cab9517dffc11cfae8b",
-            "span_id": "cde1fc191c5b4797",
+            "latency_ms": 53966,
+            "token_count_in": 4462,
+            "token_count_out": 853,
+            "trace_id": "25933edc085e4edda2d0eebac4ddd538",
+            "span_id": "9e31e08142ed4cc0",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
             "shard_id": "shard-002",
             "shard_index": 1,
             "shard_count": 6,
-            "context_request_count": 2,
+            "context_request_count": 1,
             "context_refill_used": false
           },
           {
@@ -3572,25 +3757,32 @@
             "input_evidence_ids": [
               "diff:apps/signup-form/src/components/frame.tsx:1",
               "diff:apps/signup-form/src/components/frame.tsx:5",
-              "diff_hunk:apps/signup-form/src/components/frame.tsx:1",
-              "risk:security_sensitive:apps/signup-form/src/components/frame.tsx"
+              "diff_hunk:apps/signup-form/src/components/frame.tsx:1"
             ],
             "output_issue_ids": [
+              "best_practice:apps/signup-form/src/components/frame.tsx:1",
+              "best_practice:apps/signup-form/src/components/frame.tsx:1",
+              "best_practice:apps/signup-form/src/components/frame.tsx:1",
+              "best_practice:apps/signup-form/src/components/frame.tsx:1",
+              "best_practice:apps/signup-form/src/components/frame.tsx:1",
+              "best_practice:apps/signup-form/src/components/frame.tsx:1",
+              "best_practice:apps/signup-form/src/components/frame.tsx:1",
+              "best_practice:apps/signup-form/src/components/frame.tsx:1",
+              "best_practice:apps/signup-form/src/components/frame.tsx:1",
+              "best_practice:apps/signup-form/src/components/frame.tsx:1",
               "best_practice:apps/signup-form/src/components/frame.tsx:1",
               "best_practice:apps/signup-form/src/components/frame.tsx:1"
             ],
             "fallback_used": false,
             "iteration": 0,
             "feedback_hash": "",
-            "retry_count": 1,
-            "retry_log": [
-              "attempt=1 error=timeout delay=1.00s"
-            ],
-            "latency_ms": 69473,
-            "token_count_in": 3095,
-            "token_count_out": 314,
-            "trace_id": "62093ea431e842c5bb36d17690bc613d",
-            "span_id": "29dcfb6e22ee4869",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 12004,
+            "token_count_in": 3013,
+            "token_count_out": 1533,
+            "trace_id": "7cf7fa2f2b794b388b79bba8a1c37091",
+            "span_id": "728671b6fa8743a5",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
@@ -3614,26 +3806,64 @@
             ],
             "output_issue_ids": [
               "correctness:apps/signup-form/src/components/pages/form-page.tsx:30",
-              "correctness:apps/signup-form/src/components/pages/form-view.tsx:56"
+              "best_practice:apps/signup-form/src/components/pages/form-view.tsx:56"
             ],
             "fallback_used": false,
             "iteration": 0,
             "feedback_hash": "",
-            "retry_count": 0,
-            "retry_log": [],
-            "latency_ms": 1891,
+            "retry_count": 1,
+            "retry_log": [
+              "attempt=1 error=timeout delay=1.00s"
+            ],
+            "latency_ms": 88787,
             "token_count_in": 5401,
-            "token_count_out": 215,
-            "trace_id": "8b80403bdfe04fc08d64a85b0a35f938",
-            "span_id": "16dedd9e6f1742e0",
+            "token_count_out": 400,
+            "trace_id": "b5d79e968bab46eda8c113c91878c343",
+            "span_id": "994b61b41baa4acf",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
             "shard_id": "shard-003",
             "shard_index": 2,
             "shard_count": 6,
-            "context_request_count": 0,
+            "context_request_count": 1,
             "context_refill_used": false
+          },
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+            "input_evidence_ids": [
+              "diff:apps/signup-form/src/components/pages/form-view.tsx:56",
+              "diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:53"
+            ],
+            "output_issue_ids": [
+              "correctness:apps/signup-form/src/components/pages/form-view.tsx:56",
+              "correctness:apps/signup-form/src/components/pages/form-view.tsx:56",
+              "correctness:apps/signup-form/src/components/pages/form-view.tsx:56",
+              "correctness:apps/signup-form/src/components/pages/form-view.tsx:56",
+              "correctness:apps/signup-form/src/components/pages/form-view.tsx:56"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 1,
+            "retry_log": [
+              "attempt=1 error=timeout delay=1.00s"
+            ],
+            "latency_ms": 90986,
+            "token_count_in": 3008,
+            "token_count_out": 768,
+            "trace_id": "af0c3b5212d54f3c882dbbd78895661f",
+            "span_id": "a8ab558678564fa4",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-003-refill",
+            "shard_index": 2,
+            "shard_count": 6,
+            "context_request_count": 0,
+            "context_refill_used": true
           },
           {
             "agent_name": "openai_compatible_reviewer",
@@ -3646,28 +3876,30 @@
               "diff_hunk:apps/signup-form/src/index.tsx:1"
             ],
             "output_issue_ids": [
-              "correctness:apps/signup-form/src/components/pages/success-page.tsx:2",
               "correctness:apps/signup-form/src/components/pages/success-page.tsx:3",
+              "correctness:apps/signup-form/src/components/pages/success-page.tsx:4",
               "correctness:apps/signup-form/src/components/pages/success-view.tsx:3",
               "correctness:apps/signup-form/src/index.tsx:1"
             ],
             "fallback_used": false,
             "iteration": 0,
             "feedback_hash": "",
-            "retry_count": 0,
-            "retry_log": [],
-            "latency_ms": 15644,
+            "retry_count": 1,
+            "retry_log": [
+              "attempt=1 error=timeout delay=1.00s"
+            ],
+            "latency_ms": 93873,
             "token_count_in": 4950,
-            "token_count_out": 802,
-            "trace_id": "6fb93ef0f8cc48e1b7237a9ec494dfb3",
-            "span_id": "596e839ddfec44bb",
+            "token_count_out": 853,
+            "trace_id": "7dd14ef7318a4aa2b0ffc3b10a13cb20",
+            "span_id": "0e2ddefe9f91495e",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
             "shard_id": "shard-004",
             "shard_index": 3,
             "shard_count": 6,
-            "context_request_count": 2,
+            "context_request_count": 3,
             "context_refill_used": false
           },
           {
@@ -3678,22 +3910,24 @@
               "diff:apps/signup-form/src/components/pages/success-page.tsx:2",
               "diff:apps/signup-form/src/components/pages/success-page.tsx:3",
               "diff:apps/signup-form/src/components/pages/success-view.tsx:3",
+              "diff:apps/signup-form/src/index.tsx:1",
               "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1",
               "diff_hunk:apps/signup-form/src/components/pages/success-view.tsx:1",
-              "risk:security_sensitive:apps/signup-form/src/components/pages/success-page.tsx",
-              "risk:security_sensitive:apps/signup-form/src/components/pages/success-view.tsx"
+              "diff_hunk:apps/signup-form/src/index.tsx:1"
             ],
-            "output_issue_ids": [],
+            "output_issue_ids": [
+              "best_practice:apps/signup-form/src/components/pages/success-page.tsx:2"
+            ],
             "fallback_used": false,
             "iteration": 0,
             "feedback_hash": "",
             "retry_count": 0,
             "retry_log": [],
-            "latency_ms": 3011,
-            "token_count_in": 3897,
-            "token_count_out": 12,
-            "trace_id": "8e858c666d1d4710b469b3e5b880ba9f",
-            "span_id": "98cce6d0f4ea46c2",
+            "latency_ms": 6779,
+            "token_count_in": 4116,
+            "token_count_out": 169,
+            "trace_id": "21e42dd6df0945cda85d6397d81d7ec5",
+            "span_id": "7ac131b878fe4285",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
@@ -3716,30 +3950,59 @@
               "diff_hunk:apps/signup-form/src/utils/options.tsx:1"
             ],
             "output_issue_ids": [
-              "correctness:apps/signup-form/src/utils/helpers.tsx:45",
-              "style:apps/signup-form/src/utils/helpers.tsx:20"
+              "code_style:apps/signup-form/src/utils/helpers.tsx:20",
+              "bug_risk:apps/signup-form/src/utils/helpers.tsx:45"
             ],
             "fallback_used": false,
             "iteration": 0,
             "feedback_hash": "",
-            "retry_count": 2,
-            "retry_log": [
-              "attempt=1 error=timeout delay=1.00s",
-              "attempt=2 error=timeout delay=2.00s"
-            ],
-            "latency_ms": 162603,
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 27851,
             "token_count_in": 5372,
-            "token_count_out": 294,
-            "trace_id": "40fc195bacfa4f6c85599181b479eed8",
-            "span_id": "2f867441005f4a4d",
+            "token_count_out": 372,
+            "trace_id": "bd95dc75578c499eb42fef5bad68107f",
+            "span_id": "a110f9f333bd4fc1",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
             "shard_id": "shard-005",
             "shard_index": 4,
             "shard_count": 6,
-            "context_request_count": 0,
+            "context_request_count": 1,
             "context_refill_used": false
+          },
+          {
+            "agent_name": "openai_compatible_reviewer",
+            "model": "deepseek-ai/DeepSeek-V4-Flash",
+            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+            "input_evidence_ids": [
+              "diff:apps/signup-form/src/utils/helpers.tsx:45",
+              "diff:apps/signup-form/src/utils/helpers.tsx:46",
+              "diff:apps/signup-form/src/utils/helpers.tsx:47",
+              "diff_hunk:apps/signup-form/src/utils/helpers.tsx:42"
+            ],
+            "output_issue_ids": [
+              "correctness:apps/signup-form/src/utils/helpers.tsx:45"
+            ],
+            "fallback_used": false,
+            "iteration": 0,
+            "feedback_hash": "",
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 2593,
+            "token_count_in": 3131,
+            "token_count_out": 242,
+            "trace_id": "eb4e52350e2b4b9ea11d6a4f7eafb3b5",
+            "span_id": "937e855787204b99",
+            "parent_span_id": "",
+            "status": "ok",
+            "error_type": "",
+            "shard_id": "shard-005-refill",
+            "shard_index": 4,
+            "shard_count": 6,
+            "context_request_count": 0,
+            "context_refill_used": true
           },
           {
             "agent_name": "openai_compatible_reviewer",
@@ -3749,19 +4012,17 @@
               "diff:apps/signup-form/test/utils/is-test-env.js:1",
               "diff_hunk:ghost/core/core/shared/config/defaults.json:302"
             ],
-            "output_issue_ids": [
-              "style:ghost/core/core/shared/config/defaults.json:305"
-            ],
+            "output_issue_ids": [],
             "fallback_used": false,
             "iteration": 0,
             "feedback_hash": "",
             "retry_count": 0,
             "retry_log": [],
-            "latency_ms": 35315,
+            "latency_ms": 1641,
             "token_count_in": 3119,
-            "token_count_out": 180,
-            "trace_id": "94042db92b6d4110a81edbf06cfc4243",
-            "span_id": "92e7043093e94684",
+            "token_count_out": 12,
+            "trace_id": "e13c10d0c2a543729e136162e04c3ba8",
+            "span_id": "ab257c8ea3d84a24",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
@@ -3776,13 +4037,18 @@
             "model": null,
             "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
             "input_evidence_ids": [
-              "diff_hunk:apps/signup-form/src/app.tsx:1",
               "diff_hunk:apps/signup-form/src/components/frame.tsx:1",
+              "diff_hunk:apps/signup-form/src/components/pages/form-page.tsx:27",
+              "diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:53",
               "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1",
-              "diff_hunk:apps/signup-form/src/utils/helpers.tsx:17"
+              "diff_hunk:apps/signup-form/src/utils/helpers.tsx:17",
+              "diff_hunk:apps/signup-form/src/utils/helpers.tsx:42"
             ],
             "output_issue_ids": [
-              "style:apps/signup-form/src/utils/helpers.tsx:20"
+              "best_practice:apps/signup-form/src/components/frame.tsx:1",
+              "correctness:apps/signup-form/src/components/pages/form-page.tsx:30",
+              "best_practice:apps/signup-form/src/components/pages/form-view.tsx:56",
+              "best_practice:apps/signup-form/src/components/pages/success-page.tsx:2"
             ],
             "fallback_used": false,
             "iteration": 0,
@@ -3805,98 +4071,124 @@
           }
         ],
         "issue_set": [
-          "correctness:apps/signup-form/src/components/pages/success-page.tsx:2",
-          "maintainability:apps/signup-form/src/app.tsx:4",
-          "maintainability:apps/signup-form/src/app.tsx:5",
-          "maintainability:apps/signup-form/src/app.tsx:6",
-          "maintainability:apps/signup-form/src/components/frame.tsx:1",
-          "style:apps/signup-form/src/utils/helpers.tsx:20"
+          "best_practice:apps/signup-form/src/components/frame.tsx:1",
+          "best_practice:apps/signup-form/src/components/pages/form-view.tsx:56",
+          "best_practice:apps/signup-form/src/components/pages/success-page.tsx:2",
+          "bug_risk:apps/signup-form/src/utils/helpers.tsx:45",
+          "code_style:apps/signup-form/src/utils/helpers.tsx:20",
+          "correctness:apps/signup-form/src/components/pages/form-page.tsx:30",
+          "correctness:apps/signup-form/src/components/pages/form-view.tsx:56",
+          "correctness:apps/signup-form/src/components/pages/success-page.tsx:3"
         ],
         "keep": [
           {
-            "file": "apps/signup-form/src/utils/helpers.tsx",
-            "line": 20,
-            "severity": "low",
-            "category": "style",
-            "message": "String literal changed from single quotes to double quotes for STORAGE_KEY, violating the 'Code Must Use Single Quotes for Strings' guideline.",
-            "suggestion": "Use single quotes: const STORAGE_KEY = 'ghost-history';",
-            "confidence": 0.95,
-            "evidence_ids": [
-              "diff_hunk:apps/signup-form/src/utils/helpers.tsx:17"
-            ]
-          }
-        ],
-        "needs_human_review": [
-          {
             "file": "apps/signup-form/src/components/frame.tsx",
             "line": 1,
-            "severity": "warning",
-            "category": "maintainability",
-            "message": "Import path changed from './IFrame' to './iframe' but the renamed file is not in the changed files list, which may break the build if the target file does not exist or is not renamed.",
-            "suggestion": "Ensure that the file './iframe' exists and is correctly named, or update the import to match the actual file name.",
-            "confidence": 0.5,
+            "severity": "medium",
+            "category": "best_practice",
+            "message": "React Button Elements Must Have Explicit Type Attribute: The patch does not introduce any <button> elements, so no violation of this rule.",
+            "suggestion": "No action required.",
+            "confidence": 0.99,
             "evidence_ids": [
               "diff_hunk:apps/signup-form/src/components/frame.tsx:1"
             ]
           },
           {
-            "file": "apps/signup-form/src/app.tsx",
-            "line": 4,
-            "severity": "warning",
-            "category": "maintainability",
-            "message": "Import path changed from './AppContext' to './app-context' but the renamed file is not in the changed files list, which may break the build if the target file does not exist or is not renamed.",
-            "suggestion": "Ensure that the file './app-context' exists and is correctly named, or update the import to match the actual file name.",
-            "confidence": 0.5,
+            "file": "apps/signup-form/src/components/pages/form-page.tsx",
+            "line": 30,
+            "severity": "medium",
+            "category": "correctness",
+            "message": "Removing `setLoading(false)` in the minimal branch leaves the loading state stuck as `true` when the form submission succeeds in minimal mode, causing the UI to remain in a loading state indefinitely.",
+            "suggestion": "Restore `setLoading(false)` in the minimal branch, or ensure loading state is reset elsewhere after success.",
+            "confidence": 0.85,
             "evidence_ids": [
-              "diff_hunk:apps/signup-form/src/app.tsx:1"
+              "diff_hunk:apps/signup-form/src/components/pages/form-page.tsx:27"
             ]
           },
           {
-            "file": "apps/signup-form/src/app.tsx",
-            "line": 5,
-            "severity": "warning",
-            "category": "maintainability",
-            "message": "Import path changed from './components/ContentBox' to './components/content-box' but the renamed file is not in the changed files list, which may break the build if the target file does not exist or is not renamed.",
-            "suggestion": "Ensure that the file './components/content-box' exists and is correctly named, or update the import to match the actual file name.",
-            "confidence": 0.5,
+            "file": "apps/signup-form/src/components/pages/form-view.tsx",
+            "line": 56,
+            "severity": "low",
+            "category": "best_practice",
+            "message": "Review guideline violation: 'React Button Elements Must Have Explicit Type Attribute'. The `<button>` element in this file does not have an explicit `type` attribute, which defaults to `submit` and can cause unintended form submissions.",
+            "suggestion": "Add `type=\"button\"` to buttons that are not meant to submit the form, or `type=\"submit\"` for the submit button.",
+            "confidence": 0.9,
             "evidence_ids": [
-              "diff_hunk:apps/signup-form/src/app.tsx:1"
-            ]
-          },
-          {
-            "file": "apps/signup-form/src/app.tsx",
-            "line": 6,
-            "severity": "warning",
-            "category": "maintainability",
-            "message": "Import path changed from './components/Frame' to './components/frame' but the renamed file is not in the changed files list, which may break the build if the target file does not exist or is not renamed.",
-            "suggestion": "Ensure that the file './components/frame' exists and is correctly named, or update the import to match the actual file name.",
-            "confidence": 0.5,
-            "evidence_ids": [
-              "diff_hunk:apps/signup-form/src/app.tsx:1"
+              "diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:53"
             ]
           },
           {
             "file": "apps/signup-form/src/components/pages/success-page.tsx",
             "line": 2,
             "severity": "medium",
+            "category": "best_practice",
+            "message": "File renamed to kebab-case but import path uses kebab-case, which is correct; however, the file is in apps/signup-form/ which is not an admin app (apps/admin-x-*), so the kebab-case naming guideline does not apply. No issue.",
+            "suggestion": "",
+            "confidence": 0.95,
+            "evidence_ids": [
+              "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1"
+            ]
+          }
+        ],
+        "needs_human_review": [
+          {
+            "file": "apps/signup-form/src/components/pages/form-view.tsx",
+            "line": 56,
+            "severity": "medium",
             "category": "correctness",
-            "message": "Import path changed from './SuccessView' to './success-view' but the file was renamed from SuccessView.tsx to success-view.tsx. The import path must match the new file name exactly.",
-            "suggestion": "Verify that the import path './success-view' resolves to the renamed file success-view.tsx. If the file is in the same directory, the import should be './success-view'.",
+            "message": "React List Rendering Must Not Use Array Index as Key: The patch does not introduce a list rendering issue, but the review guideline prohibits array index keys. No evidence of list rendering in this hunk.",
+            "suggestion": "Ensure any list rendering in this file uses stable unique identifiers (e.g., item.id) instead of array indices.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:53"
+            ]
+          },
+          {
+            "file": "apps/signup-form/src/components/pages/success-page.tsx",
+            "line": 3,
+            "severity": "medium",
+            "category": "correctness",
+            "message": "Import path changed from './SuccessView' to './success-view' but the file was renamed from SuccessView.tsx to success-view.tsx. The import path must match the actual file name exactly.",
+            "suggestion": "Verify that the import path './success-view' matches the renamed file 'success-view.tsx' in the same directory.",
             "confidence": 0.5,
             "evidence_ids": [
               "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1"
+            ]
+          },
+          {
+            "file": "apps/signup-form/src/utils/helpers.tsx",
+            "line": 20,
+            "severity": "minor",
+            "category": "code_style",
+            "message": "String literal uses double quotes instead of single quotes, violating the 'Code Must Use Single Quotes for Strings' guideline.",
+            "suggestion": "Replace double quotes with single quotes: const STORAGE_KEY = 'ghost-history';",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:apps/signup-form/src/utils/helpers.tsx:17"
+            ]
+          },
+          {
+            "file": "apps/signup-form/src/utils/helpers.tsx",
+            "line": 45,
+            "severity": "medium",
+            "category": "bug_risk",
+            "message": "Removing the null check on getDefaultUrlHistory() return value may cause downstream code to receive undefined when sessionStorage is empty or throws, potentially leading to runtime errors.",
+            "suggestion": "Restore the null check or ensure callers handle undefined history values.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:apps/signup-form/src/utils/helpers.tsx:42"
             ]
           }
         ],
         "discarded": [
           {
             "file": "apps/signup-form/.eslintrc.cjs",
-            "line": 24,
+            "line": 18,
             "severity": "medium",
             "category": "style",
-            "message": "Review guideline 'Code Must Use 4-Space Indentation' requires 4-space indentation for source files. The added rule line uses 8 spaces (two indentation levels) which is correct, but the existing file uses 4-space indentation. No violation found.",
-            "suggestion": "",
-            "confidence": 0.0,
+            "message": "Review guideline 'Code Must Use 4-Space Indentation' requires 4-space indentation for all source files. The added rule configuration uses 2-space indentation.",
+            "suggestion": "Use 4-space indentation for the new rule entry to match the codebase standard.",
+            "confidence": 0.9,
             "evidence_ids": [
               "diff_hunk:apps/signup-form/.eslintrc.cjs:15"
             ],
@@ -3905,49 +4197,75 @@
           {
             "file": "apps/signup-form/src/components/frame.tsx",
             "line": 1,
-            "severity": "minor",
-            "category": "best_practice",
-            "message": "File renamed from Frame.tsx to frame.tsx but does not follow kebab-case naming convention for admin React apps.",
-            "suggestion": "Rename the file to use kebab-case (e.g., signup-frame.tsx) if it belongs to an admin-x-* app, or confirm the directory is not under apps/admin-x-*.",
-            "confidence": 0.5,
-            "evidence_ids": [
-              "diff_hunk:apps/signup-form/src/components/frame.tsx:1"
-            ],
-            "filter_reason": "style_preference"
-          },
-          {
-            "file": "apps/signup-form/src/components/pages/form-page.tsx",
-            "line": 30,
             "severity": "medium",
             "category": "correctness",
-            "message": "Removed setLoading(false) call in minimal branch may leave loading state stuck when success is set",
-            "suggestion": "Ensure loading state is reset to false when setting success to true in the minimal branch",
-            "confidence": 0.85,
+            "message": "Import path changed from './IFrame' to './iframe' but the actual file rename is not shown in the patch; this may cause a broken import if the target file does not exist or is not renamed.",
+            "suggestion": "Ensure that the file './iframe' exists (or is renamed accordingly) to match the updated import path.",
+            "confidence": 0.7,
             "evidence_ids": [
-              "diff_hunk:apps/signup-form/src/components/pages/form-page.tsx:27"
+              "diff_hunk:apps/signup-form/src/components/frame.tsx:1"
             ],
             "filter_reason": "low_signal_suggestion"
           },
           {
-            "file": "apps/signup-form/src/components/pages/form-view.tsx",
-            "line": 56,
-            "severity": "low",
+            "file": "apps/signup-form/src/components/frame.tsx",
+            "line": 5,
+            "severity": "medium",
             "category": "correctness",
-            "message": "Trimming email in submitHandler may alter the email value before validation, potentially bypassing earlier validation that expected untrimmed input",
-            "suggestion": "Trim email earlier in the validation flow or re-validate after trimming",
-            "confidence": 0.6,
+            "message": "Import path changed from '../AppContext' to '../app-context' but the actual file rename is not shown in the patch; this may cause a broken import if the target file does not exist or is not renamed.",
+            "suggestion": "Ensure that the file '../app-context' exists (or is renamed accordingly) to match the updated import path.",
+            "confidence": 0.7,
             "evidence_ids": [
-              "diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:53"
+              "diff_hunk:apps/signup-form/src/components/frame.tsx:1"
+            ],
+            "filter_reason": "low_signal_suggestion"
+          },
+          {
+            "file": "apps/signup-form/src/app.tsx",
+            "line": 4,
+            "severity": "medium",
+            "category": "correctness",
+            "message": "Import path changed from './AppContext' to './app-context' but the actual file rename is not shown in the patch; this may cause a broken import if the target file does not exist or is not renamed.",
+            "suggestion": "Ensure that the file './app-context' exists (or is renamed accordingly) to match the updated import path.",
+            "confidence": 0.7,
+            "evidence_ids": [
+              "diff_hunk:apps/signup-form/src/app.tsx:1"
+            ],
+            "filter_reason": "low_signal_suggestion"
+          },
+          {
+            "file": "apps/signup-form/src/app.tsx",
+            "line": 5,
+            "severity": "medium",
+            "category": "correctness",
+            "message": "Import path changed from './components/ContentBox' to './components/content-box' but the actual file rename is not shown in the patch; this may cause a broken import if the target file does not exist or is not renamed.",
+            "suggestion": "Ensure that the file './components/content-box' exists (or is renamed accordingly) to match the updated import path.",
+            "confidence": 0.7,
+            "evidence_ids": [
+              "diff_hunk:apps/signup-form/src/app.tsx:1"
+            ],
+            "filter_reason": "low_signal_suggestion"
+          },
+          {
+            "file": "apps/signup-form/src/app.tsx",
+            "line": 6,
+            "severity": "medium",
+            "category": "correctness",
+            "message": "Import path changed from './components/Frame' to './components/frame' but the actual file rename is not shown in the patch; this may cause a broken import if the target file does not exist or is not renamed.",
+            "suggestion": "Ensure that the file './components/frame' exists (or is renamed accordingly) to match the updated import path.",
+            "confidence": 0.7,
+            "evidence_ids": [
+              "diff_hunk:apps/signup-form/src/app.tsx:1"
             ],
             "filter_reason": "low_signal_suggestion"
           },
           {
             "file": "apps/signup-form/src/components/pages/success-page.tsx",
-            "line": 3,
+            "line": 4,
             "severity": "medium",
             "category": "correctness",
-            "message": "Import path changed from '../../AppContext' to '../../app-context' but no evidence shows that the AppContext file was renamed to app-context. This may break the import.",
-            "suggestion": "Ensure that the file AppContext.tsx (or similar) has been renamed to app-context.tsx, or correct the import path to match the actual file name.",
+            "message": "Import path changed from '../../AppContext' to '../../app-context' but no corresponding file rename evidence is provided for app-context. This may break the build if the file was not renamed.",
+            "suggestion": "Ensure that the file 'AppContext.tsx' (or similar) has been renamed to 'app-context.tsx' in the parent directory, or correct the import path.",
             "confidence": 0.5,
             "evidence_ids": [
               "diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1"
@@ -3959,8 +4277,8 @@
             "line": 3,
             "severity": "medium",
             "category": "correctness",
-            "message": "Import path changed from '../../AppContext' to '../../app-context' but no evidence shows that the AppContext file was renamed to app-context. This may break the import.",
-            "suggestion": "Ensure that the file AppContext.tsx (or similar) has been renamed to app-context.tsx, or correct the import path to match the actual file name.",
+            "message": "Import path changed from '../../AppContext' to '../../app-context' but no corresponding file rename evidence is provided for app-context. This may break the build if the file was not renamed.",
+            "suggestion": "Ensure that the file 'AppContext.tsx' (or similar) has been renamed to 'app-context.tsx' in the parent directory, or correct the import path.",
             "confidence": 0.5,
             "evidence_ids": [
               "diff_hunk:apps/signup-form/src/components/pages/success-view.tsx:1"
@@ -3972,8 +4290,8 @@
             "line": 1,
             "severity": "medium",
             "category": "correctness",
-            "message": "Import path changed from './App.tsx' to './app.tsx' but no evidence shows that the App.tsx file was renamed to app.tsx. This may break the import.",
-            "suggestion": "Ensure that the file App.tsx has been renamed to app.tsx, or correct the import path to match the actual file name.",
+            "message": "Import path changed from './App.tsx' to './app.tsx' but no corresponding file rename evidence is provided for app.tsx. This may break the build if the file was not renamed.",
+            "suggestion": "Ensure that the file 'App.tsx' has been renamed to 'app.tsx' in the same directory, or correct the import path.",
             "confidence": 0.5,
             "evidence_ids": [
               "diff_hunk:apps/signup-form/src/index.tsx:1"
@@ -3985,39 +4303,29 @@
             "line": 45,
             "severity": "medium",
             "category": "correctness",
-            "message": "Removing the null check on getDefaultUrlHistory() return value may cause getUrlHistory to return undefined instead of a valid URLHistory object, potentially breaking callers that expect a defined object.",
-            "suggestion": "Restore the guard or update the return type to allow undefined and handle it in callers.",
-            "confidence": 0.85,
-            "evidence_ids": [
-              "diff_hunk:apps/signup-form/src/utils/helpers.tsx:42"
-            ],
-            "filter_reason": "low_signal_suggestion"
-          },
-          {
-            "file": "ghost/core/core/shared/config/defaults.json",
-            "line": 305,
-            "severity": "low",
-            "category": "style",
-            "message": "Review guideline 'Code Must Use 4-Space Indentation' requires 4-space indentation for source files, but JSON files should use 2-space indentation per the guideline exception. The change only removes a space before the colon, which is a formatting fix but does not affect indentation.",
-            "suggestion": "No action needed; the change is a minor formatting fix and does not violate the indentation rule.",
+            "message": "Removing the null/undefined guard on `history` before returning it may cause the function to return an undefined value where a URLHistory object is expected, potentially breaking callers that rely on a valid object.",
+            "suggestion": "Restore the guard or ensure `getDefaultUrlHistory()` always returns a valid URLHistory object. If the guard is intentionally removed, update the return type and all callers to handle undefined.",
             "confidence": 0.5,
             "evidence_ids": [
-              "diff_hunk:ghost/core/core/shared/config/defaults.json:302"
+              "diff_hunk:apps/signup-form/src/utils/helpers.tsx:42",
+              "diff:apps/signup-form/src/utils/helpers.tsx:45",
+              "diff:apps/signup-form/src/utils/helpers.tsx:46",
+              "diff:apps/signup-form/src/utils/helpers.tsx:47"
             ],
-            "filter_reason": "style_preference"
+            "filter_reason": "low_signal_suggestion"
           }
         ]
       }
     ]
   },
   "tracing": {
-    "total_latency_ms": 360592,
-    "total_token_count_in": 35762,
-    "total_token_count_out": 2733,
-    "total_retry_count": 4,
-    "run_count": 9,
+    "total_latency_ms": 379818,
+    "total_token_count_in": 42037,
+    "total_token_count_out": 5359,
+    "total_retry_count": 3,
+    "run_count": 11,
     "status_counts": {
-      "ok": 9
+      "ok": 11
     }
   }
 }

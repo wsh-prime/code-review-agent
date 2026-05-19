@@ -5,85 +5,74 @@
     "changed_file_count": 3,
     "changed_entity_count": 3,
     "risk_signal_count": 1,
-    "finding_count": 0,
-    "needs_human_review_count": 4,
-    "discarded_count": 0,
+    "finding_count": 2,
+    "needs_human_review_count": 0,
+    "discarded_count": 1,
     "evidence_count": 90,
     "missing_evidence_id_count": 0,
     "agent_run_count": 3,
     "prompt_exported": false,
     "loop_enabled": true,
     "loop_iterations_completed": 1,
-    "loop_converged": false,
+    "loop_converged": true,
     "fallback_used": false,
     "fallback_reason": null,
     "resume_used": false,
     "resume_ignored_reason": null,
-    "total_latency_ms": 46379,
-    "total_token_count_in": 9435,
-    "total_token_count_out": 952,
+    "total_latency_ms": 87009,
+    "total_token_count_in": 9058,
+    "total_token_count_out": 627,
     "context_budget_enabled": true,
     "context_truncated": true,
-    "selected_evidence_count": 8,
-    "omitted_evidence_count": 82,
+    "selected_evidence_count": 5,
+    "omitted_evidence_count": 85,
     "review_shard_count": 1,
     "context_refill_count": 1,
-    "context_request_count": 1,
+    "context_request_count": 2,
     "target_repo_modified": false
   },
-  "findings": [],
-  "needs_human_review": [
+  "findings": [
     {
       "file": "src/Shared/CertificateGeneration/CertificateManager.cs",
       "line": 969,
-      "severity": "medium",
+      "severity": "low",
       "category": "maintainability",
-      "message": "Removed documentation comment that explained the verbose-only logging behavior of dotnet-dev-certs, which is important context for developers maintaining this EventSource.",
-      "suggestion": "Consider keeping the remarks comment or moving it to a more appropriate location to preserve the documentation of logging behavior.",
-      "confidence": 0.5,
+      "message": "Removed the XML documentation comment from CertificateManagerEventSource class without adding a replacement comment, reducing API documentation.",
+      "suggestion": "Restore or update the XML doc comment to describe the event source's purpose.",
+      "confidence": 0.9,
       "evidence_ids": [
         "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:966"
       ]
     },
     {
+      "file": "src/Shared/CertificateGeneration/UnixCertificateManager.cs",
+      "line": 358,
+      "severity": "medium",
+      "category": "correctness",
+      "message": "The variable 'hasValidSslCertDir' is set to false in all branches except when SSL_CERT_DIR already includes certDir; however, the 'sawTrustFailure' assignment at line 408 uses '!hasValidSslCertDir', which may incorrectly report trust failure when SSL_CERT_DIR is unset but OpenSSL directory is valid.",
+      "suggestion": "Ensure that when TryGetOpenSslDirectory succeeds, hasValidSslCertDir is set to true if the OpenSSL directory is valid, or adjust the logic to avoid false trust failures.",
+      "confidence": 0.6,
+      "evidence_ids": [
+        "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355"
+      ]
+    }
+  ],
+  "needs_human_review": [],
+  "discarded": [
+    {
       "file": "src/Tools/dotnet-dev-certs/src/Program.cs",
       "line": 132,
       "severity": "medium",
       "category": "correctness",
-      "message": "The ReporterEventListener is now created unconditionally but only enabled for verbose or LogAlways. If the listener is created and not enabled, it may still be active and could cause unexpected behavior or resource leaks.",
-      "suggestion": "Ensure the listener is disposed or only created when needed, or verify that creating it without enabling events is safe.",
-      "confidence": 0.5,
+      "message": "ReporterEventListener is created unconditionally but only enabled for verbose or LogAlways; if neither condition holds, the listener is never enabled, which may lead to unexpected event subscription behavior.",
+      "suggestion": "Move the listener creation inside the conditional blocks or ensure it is only created when it will be enabled.",
+      "confidence": 0.7,
       "evidence_ids": [
         "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124"
-      ]
-    },
-    {
-      "file": "src/Shared/CertificateGeneration/UnixCertificateManager.cs",
-      "line": 358,
-      "severity": "high",
-      "category": "correctness",
-      "message": "The variable `sawTrustFailure` is set based on `!hasValidSslCertDir` but `sawTrustFailure` is not declared or initialized in the provided evidence. If it was previously declared and used, the logic change may alter trust failure reporting behavior.",
-      "suggestion": "Verify that `sawTrustFailure` is properly declared and initialized before this assignment, and that the new logic correctly reflects trust failures.",
-      "confidence": 0.5,
-      "evidence_ids": [
-        "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355"
-      ]
-    },
-    {
-      "file": "src/Shared/CertificateGeneration/UnixCertificateManager.cs",
-      "line": 358,
-      "severity": "medium",
-      "category": "maintainability",
-      "message": "The new variable 'hasValidSslCertDir' is set to false in all branches except the 'isCertDirIncluded' branch, but the 'sawTrustFailure' assignment at line 408 uses it directly. If 'existingSslCertDir' is set and 'isCertDirIncluded' is true, 'hasValidSslCertDir' remains true and 'sawTrustFailure' is set to false, which is correct. However, if 'existingSslCertDir' is set but 'isCertDirIncluded' is false, 'hasValidSslCertDir' is set to false, and 'sawTrustFailure' becomes true. This logic is sound, but the variable is never used elsewhere and the assignment at line 408 is the only consumer. Consider removing the intermediate variable and directly assigning 'sawTrustFailure' in each branch for clarity.",
-      "suggestion": "Replace 'hasValidSslCertDir' with direct assignments to 'sawTrustFailure' in each branch to improve readability and reduce unnecessary state.",
-      "confidence": 0.5,
-      "evidence_ids": [
-        "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355",
-        "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358"
-      ]
+      ],
+      "filter_reason": "low_signal_suggestion"
     }
   ],
-  "discarded": [],
   "changed_files": [
     {
       "old_path": "src/Shared/CertificateGeneration/CertificateManager.cs",
@@ -1562,27 +1551,29 @@
         "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124"
       ],
       "output_issue_ids": [
-        "maintainability:src/Shared/CertificateGeneration/CertificateManager.cs:969",
         "correctness:src/Tools/dotnet-dev-certs/src/Program.cs:132",
+        "maintainability:src/Shared/CertificateGeneration/CertificateManager.cs:969",
         "correctness:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358"
       ],
       "fallback_used": false,
       "iteration": 0,
       "feedback_hash": "",
-      "retry_count": 0,
-      "retry_log": [],
-      "latency_ms": 12580,
+      "retry_count": 1,
+      "retry_log": [
+        "attempt=1 error=timeout delay=1.00s"
+      ],
+      "latency_ms": 86612,
       "token_count_in": 5768,
-      "token_count_out": 610,
-      "trace_id": "ff3c19d2169e4d8b84bc3f779b3ed3f4",
-      "span_id": "e47f713baab74271",
+      "token_count_out": 615,
+      "trace_id": "4b4b5b96adee42e9aaf10d856baa7dd4",
+      "span_id": "e38c4df455934d43",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
       "shard_id": "shard-001",
       "shard_index": 0,
       "shard_count": 1,
-      "context_request_count": 1,
+      "context_request_count": 2,
       "context_refill_used": false
     },
     {
@@ -1590,26 +1581,20 @@
       "model": "deepseek-ai/DeepSeek-V4-Flash",
       "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
       "input_evidence_ids": [
-        "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358",
-        "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:359",
-        "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:360",
-        "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:361",
-        "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:362",
-        "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355"
+        "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:991",
+        "risk:security_sensitive:src/Tools/dotnet-dev-certs/src/Program.cs"
       ],
-      "output_issue_ids": [
-        "maintainability:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358"
-      ],
+      "output_issue_ids": [],
       "fallback_used": false,
       "iteration": 0,
       "feedback_hash": "",
       "retry_count": 0,
       "retry_log": [],
-      "latency_ms": 33799,
-      "token_count_in": 3667,
-      "token_count_out": 342,
-      "trace_id": "98a9431109fd4b0abecf8d4f4f42176e",
-      "span_id": "c45973a05d964b8a",
+      "latency_ms": 397,
+      "token_count_in": 3290,
+      "token_count_out": 12,
+      "trace_id": "e1b19557a4014f91aabd97527b79aec5",
+      "span_id": "0401e2278a0c4e3d",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
@@ -1624,12 +1609,13 @@
       "model": null,
       "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
       "input_evidence_ids": [
-        "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358",
         "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:966",
-        "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355",
-        "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124"
+        "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355"
       ],
-      "output_issue_ids": [],
+      "output_issue_ids": [
+        "maintainability:src/Shared/CertificateGeneration/CertificateManager.cs:969",
+        "correctness:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358"
+      ],
       "fallback_used": false,
       "iteration": 0,
       "feedback_hash": "",
@@ -1656,18 +1642,15 @@
     "strategy": "file_risk_shards_v1",
     "context_profile": "risk_compact_manifest_v1",
     "max_input_tokens": 9000,
-    "estimated_input_tokens": 8633,
-    "selected_evidence_count": 8,
-    "omitted_evidence_count": 82,
+    "estimated_input_tokens": 8084,
+    "selected_evidence_count": 5,
+    "omitted_evidence_count": 85,
     "selected_evidence_ids": [
       "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124",
       "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:966",
       "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355",
-      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358",
-      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:359",
-      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:360",
-      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:361",
-      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:362"
+      "risk:security_sensitive:src/Tools/dotnet-dev-certs/src/Program.cs",
+      "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:991"
     ],
     "omitted_evidence_ids": [
       "diff:src/Tools/dotnet-dev-certs/src/Program.cs:127",
@@ -1678,11 +1661,9 @@
       "diff:src/Tools/dotnet-dev-certs/src/Program.cs:135",
       "diff:src/Tools/dotnet-dev-certs/src/Program.cs:136",
       "diff:src/Tools/dotnet-dev-certs/src/Program.cs:140",
-      "risk:security_sensitive:src/Tools/dotnet-dev-certs/src/Program.cs",
       "entity:src/Tools/dotnet-dev-certs/src/Program.cs:src.Tools.dotnet-dev-certs.src.Program",
       "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:1300",
       "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:1310",
-      "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:991",
       "entity:src/Shared/CertificateGeneration/CertificateManager.cs:src.Shared.CertificateGeneration.CertificateManager",
       "entity:src/Shared/CertificateGeneration/UnixCertificateManager.cs:src.Shared.CertificateGeneration.UnixCertificateManager",
       "diff:src/Shared/CertificateGeneration/CertificateManager.cs:1303",
@@ -1705,6 +1686,11 @@
       "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:1004",
       "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:1005",
       "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:1006",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:359",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:360",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:361",
+      "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:362",
       "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:363",
       "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:364",
       "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:365",
@@ -1757,29 +1743,34 @@
     "context_truncated": true,
     "shard_count": 1,
     "refill_count": 1,
-    "context_request_count": 1,
+    "context_request_count": 2,
     "context_requests": [
       {
         "request_type": "same_file_more_evidence",
         "path": "src/Shared/CertificateGeneration/UnixCertificateManager.cs",
         "evidence_ids": [
-          "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358",
-          "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:359",
-          "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:360",
-          "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:361",
-          "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:362"
+          "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:991"
         ],
         "risk_tag": null,
         "symbol": null,
         "reason": "",
         "source_shard_id": "shard-001",
         "fulfilled_evidence_ids": [
-          "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358",
-          "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:359",
-          "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:360",
-          "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:361",
-          "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:362",
-          "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355"
+          "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:991"
+        ]
+      },
+      {
+        "request_type": "risk_evidence",
+        "path": "src/Tools/dotnet-dev-certs/src/Program.cs",
+        "evidence_ids": [
+          "risk:security_sensitive:src/Tools/dotnet-dev-certs/src/Program.cs"
+        ],
+        "risk_tag": null,
+        "symbol": null,
+        "reason": "",
+        "source_shard_id": "shard-001",
+        "fulfilled_evidence_ids": [
+          "risk:security_sensitive:src/Tools/dotnet-dev-certs/src/Program.cs"
         ]
       }
     ],
@@ -1799,9 +1790,9 @@
         "shard_index": 0,
         "is_refill": true,
         "parent_shard_id": "shard-001",
-        "selected_evidence_count": 6,
+        "selected_evidence_count": 2,
         "omitted_evidence_count": 0,
-        "estimated_input_tokens": 3351,
+        "estimated_input_tokens": 2802,
         "context_truncated": false
       }
     ],
@@ -1811,7 +1802,7 @@
     "enabled": true,
     "max_iter": 1,
     "iterations_completed": 1,
-    "converged": false,
+    "converged": true,
     "fallback_used": false,
     "fallback_reason": null,
     "checkpoint_path": "D:\\learn\\code-review-agent\\workspace\\qodo_pr_review_bench_live_guideline_rerank\\samples\\qodo_015\\review\\loop_checkpoint.json",
@@ -1820,52 +1811,14 @@
     "iterations": [
       {
         "i": 0,
-        "candidate_issue_count": 4,
-        "verified_count": 4,
+        "candidate_issue_count": 3,
+        "verified_count": 2,
         "needs_human_review_count": 0,
-        "discarded_count": 0,
-        "keep_count": 0,
-        "uncertain_count": 4,
+        "discarded_count": 1,
+        "keep_count": 2,
+        "uncertain_count": 0,
         "reject_count": 0,
-        "feedback_sent": [
-          {
-            "issue_id": "maintainability:src/Shared/CertificateGeneration/CertificateManager.cs:969",
-            "category": "maintainability",
-            "critic_reason": "low confidence",
-            "original_confidence": 0.5,
-            "evidence_ids": [
-              "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:966"
-            ]
-          },
-          {
-            "issue_id": "correctness:src/Tools/dotnet-dev-certs/src/Program.cs:132",
-            "category": "correctness",
-            "critic_reason": "low confidence",
-            "original_confidence": 0.5,
-            "evidence_ids": [
-              "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124"
-            ]
-          },
-          {
-            "issue_id": "correctness:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358",
-            "category": "correctness",
-            "critic_reason": "low confidence",
-            "original_confidence": 0.5,
-            "evidence_ids": [
-              "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355"
-            ]
-          },
-          {
-            "issue_id": "maintainability:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358",
-            "category": "maintainability",
-            "critic_reason": "low confidence",
-            "original_confidence": 0.5,
-            "evidence_ids": [
-              "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355",
-              "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358"
-            ]
-          }
-        ],
+        "feedback_sent": [],
         "agent_runs": [
           {
             "agent_name": "openai_compatible_reviewer",
@@ -1877,27 +1830,29 @@
               "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124"
             ],
             "output_issue_ids": [
-              "maintainability:src/Shared/CertificateGeneration/CertificateManager.cs:969",
               "correctness:src/Tools/dotnet-dev-certs/src/Program.cs:132",
+              "maintainability:src/Shared/CertificateGeneration/CertificateManager.cs:969",
               "correctness:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358"
             ],
             "fallback_used": false,
             "iteration": 0,
             "feedback_hash": "",
-            "retry_count": 0,
-            "retry_log": [],
-            "latency_ms": 12580,
+            "retry_count": 1,
+            "retry_log": [
+              "attempt=1 error=timeout delay=1.00s"
+            ],
+            "latency_ms": 86612,
             "token_count_in": 5768,
-            "token_count_out": 610,
-            "trace_id": "ff3c19d2169e4d8b84bc3f779b3ed3f4",
-            "span_id": "e47f713baab74271",
+            "token_count_out": 615,
+            "trace_id": "4b4b5b96adee42e9aaf10d856baa7dd4",
+            "span_id": "e38c4df455934d43",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
             "shard_id": "shard-001",
             "shard_index": 0,
             "shard_count": 1,
-            "context_request_count": 1,
+            "context_request_count": 2,
             "context_refill_used": false
           },
           {
@@ -1905,26 +1860,20 @@
             "model": "deepseek-ai/DeepSeek-V4-Flash",
             "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
             "input_evidence_ids": [
-              "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358",
-              "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:359",
-              "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:360",
-              "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:361",
-              "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:362",
-              "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355"
+              "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:991",
+              "risk:security_sensitive:src/Tools/dotnet-dev-certs/src/Program.cs"
             ],
-            "output_issue_ids": [
-              "maintainability:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358"
-            ],
+            "output_issue_ids": [],
             "fallback_used": false,
             "iteration": 0,
             "feedback_hash": "",
             "retry_count": 0,
             "retry_log": [],
-            "latency_ms": 33799,
-            "token_count_in": 3667,
-            "token_count_out": 342,
-            "trace_id": "98a9431109fd4b0abecf8d4f4f42176e",
-            "span_id": "c45973a05d964b8a",
+            "latency_ms": 397,
+            "token_count_in": 3290,
+            "token_count_out": 12,
+            "trace_id": "e1b19557a4014f91aabd97527b79aec5",
+            "span_id": "0401e2278a0c4e3d",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
@@ -1939,12 +1888,13 @@
             "model": null,
             "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
             "input_evidence_ids": [
-              "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358",
               "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:966",
-              "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355",
-              "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124"
+              "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355"
             ],
-            "output_issue_ids": [],
+            "output_issue_ids": [
+              "maintainability:src/Shared/CertificateGeneration/CertificateManager.cs:969",
+              "correctness:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358"
+            ],
             "fallback_used": false,
             "iteration": 0,
             "feedback_hash": "",
@@ -1967,71 +1917,58 @@
         ],
         "issue_set": [
           "correctness:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358",
-          "correctness:src/Tools/dotnet-dev-certs/src/Program.cs:132",
-          "maintainability:src/Shared/CertificateGeneration/CertificateManager.cs:969",
-          "maintainability:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358"
+          "maintainability:src/Shared/CertificateGeneration/CertificateManager.cs:969"
         ],
-        "keep": [],
-        "needs_human_review": [
+        "keep": [
           {
             "file": "src/Shared/CertificateGeneration/CertificateManager.cs",
             "line": 969,
-            "severity": "medium",
+            "severity": "low",
             "category": "maintainability",
-            "message": "Removed documentation comment that explained the verbose-only logging behavior of dotnet-dev-certs, which is important context for developers maintaining this EventSource.",
-            "suggestion": "Consider keeping the remarks comment or moving it to a more appropriate location to preserve the documentation of logging behavior.",
-            "confidence": 0.5,
+            "message": "Removed the XML documentation comment from CertificateManagerEventSource class without adding a replacement comment, reducing API documentation.",
+            "suggestion": "Restore or update the XML doc comment to describe the event source's purpose.",
+            "confidence": 0.9,
             "evidence_ids": [
               "diff_hunk:src/Shared/CertificateGeneration/CertificateManager.cs:966"
             ]
           },
           {
+            "file": "src/Shared/CertificateGeneration/UnixCertificateManager.cs",
+            "line": 358,
+            "severity": "medium",
+            "category": "correctness",
+            "message": "The variable 'hasValidSslCertDir' is set to false in all branches except when SSL_CERT_DIR already includes certDir; however, the 'sawTrustFailure' assignment at line 408 uses '!hasValidSslCertDir', which may incorrectly report trust failure when SSL_CERT_DIR is unset but OpenSSL directory is valid.",
+            "suggestion": "Ensure that when TryGetOpenSslDirectory succeeds, hasValidSslCertDir is set to true if the OpenSSL directory is valid, or adjust the logic to avoid false trust failures.",
+            "confidence": 0.6,
+            "evidence_ids": [
+              "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355"
+            ]
+          }
+        ],
+        "needs_human_review": [],
+        "discarded": [
+          {
             "file": "src/Tools/dotnet-dev-certs/src/Program.cs",
             "line": 132,
             "severity": "medium",
             "category": "correctness",
-            "message": "The ReporterEventListener is now created unconditionally but only enabled for verbose or LogAlways. If the listener is created and not enabled, it may still be active and could cause unexpected behavior or resource leaks.",
-            "suggestion": "Ensure the listener is disposed or only created when needed, or verify that creating it without enabling events is safe.",
-            "confidence": 0.5,
+            "message": "ReporterEventListener is created unconditionally but only enabled for verbose or LogAlways; if neither condition holds, the listener is never enabled, which may lead to unexpected event subscription behavior.",
+            "suggestion": "Move the listener creation inside the conditional blocks or ensure it is only created when it will be enabled.",
+            "confidence": 0.7,
             "evidence_ids": [
               "diff_hunk:src/Tools/dotnet-dev-certs/src/Program.cs:124"
-            ]
-          },
-          {
-            "file": "src/Shared/CertificateGeneration/UnixCertificateManager.cs",
-            "line": 358,
-            "severity": "high",
-            "category": "correctness",
-            "message": "The variable `sawTrustFailure` is set based on `!hasValidSslCertDir` but `sawTrustFailure` is not declared or initialized in the provided evidence. If it was previously declared and used, the logic change may alter trust failure reporting behavior.",
-            "suggestion": "Verify that `sawTrustFailure` is properly declared and initialized before this assignment, and that the new logic correctly reflects trust failures.",
-            "confidence": 0.5,
-            "evidence_ids": [
-              "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355"
-            ]
-          },
-          {
-            "file": "src/Shared/CertificateGeneration/UnixCertificateManager.cs",
-            "line": 358,
-            "severity": "medium",
-            "category": "maintainability",
-            "message": "The new variable 'hasValidSslCertDir' is set to false in all branches except the 'isCertDirIncluded' branch, but the 'sawTrustFailure' assignment at line 408 uses it directly. If 'existingSslCertDir' is set and 'isCertDirIncluded' is true, 'hasValidSslCertDir' remains true and 'sawTrustFailure' is set to false, which is correct. However, if 'existingSslCertDir' is set but 'isCertDirIncluded' is false, 'hasValidSslCertDir' is set to false, and 'sawTrustFailure' becomes true. This logic is sound, but the variable is never used elsewhere and the assignment at line 408 is the only consumer. Consider removing the intermediate variable and directly assigning 'sawTrustFailure' in each branch for clarity.",
-            "suggestion": "Replace 'hasValidSslCertDir' with direct assignments to 'sawTrustFailure' in each branch to improve readability and reduce unnecessary state.",
-            "confidence": 0.5,
-            "evidence_ids": [
-              "diff_hunk:src/Shared/CertificateGeneration/UnixCertificateManager.cs:355",
-              "diff:src/Shared/CertificateGeneration/UnixCertificateManager.cs:358"
-            ]
+            ],
+            "filter_reason": "low_signal_suggestion"
           }
-        ],
-        "discarded": []
+        ]
       }
     ]
   },
   "tracing": {
-    "total_latency_ms": 46379,
-    "total_token_count_in": 9435,
-    "total_token_count_out": 952,
-    "total_retry_count": 0,
+    "total_latency_ms": 87009,
+    "total_token_count_in": 9058,
+    "total_token_count_out": 627,
+    "total_retry_count": 1,
     "run_count": 3,
     "status_counts": {
       "ok": 3

@@ -14,6 +14,7 @@ from code_review_agent.models import (
     ReviewerContext,
     RiskSignal,
 )
+from code_review_agent.review.schema import EvidenceStore
 
 
 DEFAULT_CONTEXT_BUDGET_TOKENS = 24000
@@ -585,22 +586,20 @@ def _available_evidence_ids(
     allowed_paths: set[str] | None = None,
     forced_evidence_ids: set[str] | None = None,
 ) -> list[str]:
+    store = EvidenceStore.from_legacy_package(package)
     if forced_evidence_ids is not None:
         candidate_ids = {
             evidence_id
             for evidence_id in forced_evidence_ids
-            if evidence_id in package.evidence_index
+            if store.get(evidence_id) is not None
         }
     else:
-        candidate_ids = set(package.evidence_index)
+        candidate_ids = set(store.items)
     if allowed_paths is not None:
         candidate_ids = {
             evidence_id
             for evidence_id in candidate_ids
-            if _path_for_evidence(
-                evidence_id, package.evidence_index.get(evidence_id)
-            )
-            in allowed_paths
+            if _store_item_path(store, evidence_id) in allowed_paths
         }
     return sorted(candidate_ids, key=lambda item: (-score_evidence(package, item), item))
 
@@ -637,9 +636,7 @@ def _expanded_candidate_ids(
         path = change.new_path or change.old_path
         if path is None or (allowed_paths is not None and path not in allowed_paths):
             continue
-        first_diff = _first_diff_evidence_id(package, path)
-        if first_diff is not None:
-            candidate_ids.append(first_diff)
+        candidate_ids.extend(_hunk_evidence_ids_for_change(package, change))
 
     deduped = [
         evidence_id
@@ -1181,6 +1178,24 @@ def _first_diff_evidence_id(
     return None
 
 
+def _hunk_evidence_ids_for_change(
+    package: EvidencePackage,
+    change: DiffFileChange,
+) -> list[str]:
+    path = change.new_path or change.old_path
+    if path is None:
+        return []
+    ids: list[str] = []
+    for hunk in change.hunks:
+        hunk_id = f"diff_hunk:{path}:{hunk.new_start or hunk.old_start or 1}"
+        if hunk_id in package.evidence_index:
+            ids.append(hunk_id)
+    if ids:
+        return ids
+    first_diff = _first_diff_evidence_id(package, path)
+    return [first_diff] if first_diff is not None else []
+
+
 def _hunk_evidence_id_for_line(
     package: EvidencePackage,
     evidence_id: str,
@@ -1414,11 +1429,12 @@ def _expand_explicit_refill_ids(
 
 
 def _evidence_ids_for_path(package: EvidencePackage, path: str) -> set[str]:
-    return {
-        evidence_id
-        for evidence_id, evidence in package.evidence_index.items()
-        if _path_for_evidence(evidence_id, evidence) == path
-    }
+    return set(EvidenceStore.from_legacy_package(package).ids_for_path(path))
+
+
+def _store_item_path(store: EvidenceStore, evidence_id: str) -> str | None:
+    item = store.get(evidence_id)
+    return item.path if item is not None else None
 
 
 def _test_evidence_ids(package: EvidencePackage, path: str | None) -> set[str]:

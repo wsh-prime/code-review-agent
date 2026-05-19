@@ -29,6 +29,11 @@ def test_review_pipeline_writes_report_with_findings_and_evidence(
     assert report["summary"]["changed_file_count"] == 1
     assert report["summary"]["finding_count"] == 1
     assert report["findings"][0]["category"] == TEST_GAP
+    assert report["summary"]["review_result_count"] == 1
+    assert report["review_results"]["counts_by_status"] == {"finding": 1}
+    assert report["review_results"]["items"][0]["status"] == "finding"
+    assert report["change_set"]["files"][0]["path"] == "src/shop/service.py"
+    assert report["evidence_store_summary"]["types"]["diff_hunk"] == 1
     assert report["changed_files"][0]["new_path"] == "src/shop/service.py"
     assert report["changed_entities"]
     assert any(signal["tag"] == TEST_GAP for signal in report["risk_signals"])

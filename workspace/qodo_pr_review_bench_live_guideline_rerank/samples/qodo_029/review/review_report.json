@@ -6,7 +6,7 @@
     "changed_entity_count": 6,
     "risk_signal_count": 0,
     "finding_count": 0,
-    "needs_human_review_count": 0,
+    "needs_human_review_count": 1,
     "discarded_count": 1,
     "evidence_count": 130,
     "missing_evidence_id_count": 0,
@@ -14,14 +14,14 @@
     "prompt_exported": false,
     "loop_enabled": true,
     "loop_iterations_completed": 1,
-    "loop_converged": true,
+    "loop_converged": false,
     "fallback_used": false,
     "fallback_reason": null,
     "resume_used": false,
     "resume_ignored_reason": null,
-    "total_latency_ms": 78569,
+    "total_latency_ms": 74684,
     "total_token_count_in": 10659,
-    "total_token_count_out": 178,
+    "total_token_count_out": 457,
     "context_budget_enabled": true,
     "context_truncated": true,
     "selected_evidence_count": 6,
@@ -32,15 +32,29 @@
     "target_repo_modified": false
   },
   "findings": [],
-  "needs_human_review": [],
+  "needs_human_review": [
+    {
+      "file": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts",
+      "line": 10,
+      "severity": "high",
+      "category": "architecture",
+      "message": "The file AdaptersFactory.ts in the features package exports GENERIC_CALENDAR_SUFFIXES and adds getGenericCalendarSuffixes to the AdapterFactory interface. This new method is called from CalendarSubscriptionService.ts (in the lib package) via this.deps.adapterFactory.getGenericCalendarSuffixes(). This creates a dependency from lib to features, violating the rule that lib must not import from features.",
+      "suggestion": "Move the generic calendar suffixes logic into the lib package (e.g., as a constant or configuration) or pass the suffixes as a parameter from a higher layer that already depends on features, so that lib does not import from features.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:4",
+        "diff_hunk:packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts:392"
+      ]
+    }
+  ],
   "discarded": [
     {
       "file": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts",
       "line": 5,
-      "severity": "high",
+      "severity": "medium",
       "category": "naming_convention",
-      "message": "Repository class renamed to PrismaSelectedCalendarRepository but file name does not match the naming convention 'Prisma<Entity>Repository.ts' as required by review guidelines.",
-      "suggestion": "Rename the file to PrismaSelectedCalendarRepository.ts to match the exported class name.",
+      "message": "Class renamed to PrismaSelectedCalendarRepository but file name does not match the required 'Prisma<Entity>Repository' pattern (file is SelectedCalendarRepository.ts, not PrismaSelectedCalendarRepository.ts). This violates the 'Repository and Service Classes Must Follow Naming Conventions' guideline.",
+      "suggestion": "Rename the file to PrismaSelectedCalendarRepository.ts to match the class name.",
       "confidence": 0.5,
       "evidence_ids": [
         "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:2"
@@ -2383,19 +2397,19 @@
         "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:112",
         "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:21"
       ],
-      "output_issue_ids": [],
+      "output_issue_ids": [
+        "architecture:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:10"
+      ],
       "fallback_used": false,
       "iteration": 0,
       "feedback_hash": "",
-      "retry_count": 1,
-      "retry_log": [
-        "attempt=1 error=timeout delay=1.00s"
-      ],
-      "latency_ms": 61562,
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 1973,
       "token_count_in": 6167,
-      "token_count_out": 12,
-      "trace_id": "fe5123811560450f9d5f7bfbebf5bb90",
-      "span_id": "2b4e9cdb2c9d4216",
+      "token_count_out": 271,
+      "trace_id": "c539dd7fd30b4af7bf41716196dcd870",
+      "span_id": "a2f71a2c2a344d6e",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
@@ -2419,13 +2433,15 @@
       "fallback_used": false,
       "iteration": 0,
       "feedback_hash": "",
-      "retry_count": 0,
-      "retry_log": [],
-      "latency_ms": 17007,
+      "retry_count": 1,
+      "retry_log": [
+        "attempt=1 error=timeout delay=1.00s"
+      ],
+      "latency_ms": 72711,
       "token_count_in": 4492,
-      "token_count_out": 166,
-      "trace_id": "9f923e84334549f79232caad545ce6dc",
-      "span_id": "0b493914b40a4ba8",
+      "token_count_out": 186,
+      "trace_id": "f14560c31cbf4953a362ff1f99c31f0e",
+      "span_id": "018cd723874a4f11",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
@@ -2439,7 +2455,10 @@
       "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
       "model": null,
       "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
-      "input_evidence_ids": [],
+      "input_evidence_ids": [
+        "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:4",
+        "diff_hunk:packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts:392"
+      ],
       "output_issue_ids": [],
       "fallback_used": false,
       "iteration": 0,
@@ -2638,7 +2657,7 @@
     "enabled": true,
     "max_iter": 1,
     "iterations_completed": 1,
-    "converged": true,
+    "converged": false,
     "fallback_used": false,
     "fallback_reason": null,
     "checkpoint_path": "D:\\learn\\code-review-agent\\workspace\\qodo_pr_review_bench_live_guideline_rerank\\samples\\qodo_029\\review\\loop_checkpoint.json",
@@ -2647,14 +2666,25 @@
     "iterations": [
       {
         "i": 0,
-        "candidate_issue_count": 1,
-        "verified_count": 0,
+        "candidate_issue_count": 2,
+        "verified_count": 1,
         "needs_human_review_count": 0,
         "discarded_count": 1,
         "keep_count": 0,
-        "uncertain_count": 0,
+        "uncertain_count": 1,
         "reject_count": 0,
-        "feedback_sent": [],
+        "feedback_sent": [
+          {
+            "issue_id": "architecture:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:10",
+            "category": "architecture",
+            "critic_reason": "low confidence",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:4",
+              "diff_hunk:packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts:392"
+            ]
+          }
+        ],
         "agent_runs": [
           {
             "agent_name": "openai_compatible_reviewer",
@@ -2666,19 +2696,19 @@
               "diff_hunk:packages/features/calendar-subscription/lib/__tests__/CalendarSubscriptionService.test.ts:112",
               "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.interface.ts:21"
             ],
-            "output_issue_ids": [],
+            "output_issue_ids": [
+              "architecture:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:10"
+            ],
             "fallback_used": false,
             "iteration": 0,
             "feedback_hash": "",
-            "retry_count": 1,
-            "retry_log": [
-              "attempt=1 error=timeout delay=1.00s"
-            ],
-            "latency_ms": 61562,
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 1973,
             "token_count_in": 6167,
-            "token_count_out": 12,
-            "trace_id": "fe5123811560450f9d5f7bfbebf5bb90",
-            "span_id": "2b4e9cdb2c9d4216",
+            "token_count_out": 271,
+            "trace_id": "c539dd7fd30b4af7bf41716196dcd870",
+            "span_id": "a2f71a2c2a344d6e",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
@@ -2702,13 +2732,15 @@
             "fallback_used": false,
             "iteration": 0,
             "feedback_hash": "",
-            "retry_count": 0,
-            "retry_log": [],
-            "latency_ms": 17007,
+            "retry_count": 1,
+            "retry_log": [
+              "attempt=1 error=timeout delay=1.00s"
+            ],
+            "latency_ms": 72711,
             "token_count_in": 4492,
-            "token_count_out": 166,
-            "trace_id": "9f923e84334549f79232caad545ce6dc",
-            "span_id": "0b493914b40a4ba8",
+            "token_count_out": 186,
+            "trace_id": "f14560c31cbf4953a362ff1f99c31f0e",
+            "span_id": "018cd723874a4f11",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
@@ -2722,7 +2754,10 @@
             "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
             "model": null,
             "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
-            "input_evidence_ids": [],
+            "input_evidence_ids": [
+              "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:4",
+              "diff_hunk:packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts:392"
+            ],
             "output_issue_ids": [],
             "fallback_used": false,
             "iteration": 0,
@@ -2744,17 +2779,33 @@
             "context_refill_used": false
           }
         ],
-        "issue_set": [],
+        "issue_set": [
+          "architecture:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:10"
+        ],
         "keep": [],
-        "needs_human_review": [],
+        "needs_human_review": [
+          {
+            "file": "packages/features/calendar-subscription/adapters/AdaptersFactory.ts",
+            "line": 10,
+            "severity": "high",
+            "category": "architecture",
+            "message": "The file AdaptersFactory.ts in the features package exports GENERIC_CALENDAR_SUFFIXES and adds getGenericCalendarSuffixes to the AdapterFactory interface. This new method is called from CalendarSubscriptionService.ts (in the lib package) via this.deps.adapterFactory.getGenericCalendarSuffixes(). This creates a dependency from lib to features, violating the rule that lib must not import from features.",
+            "suggestion": "Move the generic calendar suffixes logic into the lib package (e.g., as a constant or configuration) or pass the suffixes as a parameter from a higher layer that already depends on features, so that lib does not import from features.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:packages/features/calendar-subscription/adapters/AdaptersFactory.ts:4",
+              "diff_hunk:packages/features/calendar-subscription/lib/CalendarSubscriptionService.ts:392"
+            ]
+          }
+        ],
         "discarded": [
           {
             "file": "packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts",
             "line": 5,
-            "severity": "high",
+            "severity": "medium",
             "category": "naming_convention",
-            "message": "Repository class renamed to PrismaSelectedCalendarRepository but file name does not match the naming convention 'Prisma<Entity>Repository.ts' as required by review guidelines.",
-            "suggestion": "Rename the file to PrismaSelectedCalendarRepository.ts to match the exported class name.",
+            "message": "Class renamed to PrismaSelectedCalendarRepository but file name does not match the required 'Prisma<Entity>Repository' pattern (file is SelectedCalendarRepository.ts, not PrismaSelectedCalendarRepository.ts). This violates the 'Repository and Service Classes Must Follow Naming Conventions' guideline.",
+            "suggestion": "Rename the file to PrismaSelectedCalendarRepository.ts to match the class name.",
             "confidence": 0.5,
             "evidence_ids": [
               "diff_hunk:packages/features/selectedCalendar/repositories/SelectedCalendarRepository.ts:2"
@@ -2766,9 +2817,9 @@
     ]
   },
   "tracing": {
-    "total_latency_ms": 78569,
+    "total_latency_ms": 74684,
     "total_token_count_in": 10659,
-    "total_token_count_out": 178,
+    "total_token_count_out": 457,
     "total_retry_count": 1,
     "run_count": 3,
     "status_counts": {

@@ -8,8 +8,8 @@
 - Risk signals: 4
 - Findings: 0
 - Needs human review: 4
-- Discarded: 0
-- Agent runs: 7
+- Discarded: 4
+- Agent runs: 8
 - Loop enabled: True
 - Target repo modified: False
 
@@ -20,12 +20,12 @@
 | Iterations | 1 / 1 |
 | Converged | False |
 | Fallback | False |
-| Retry count | 2 |
-| Total latency | 190475 ms |
-| Token in | 37344 |
-| Token out | 966 |
+| Retry count | 5 |
+| Total latency | 455131 ms |
+| Token in | 41990 |
+| Token out | 2610 |
 
-- Iteration 0: 4 candidates, 4 verified, 4 uncertain, 0 kept, 0 rejected
+- Iteration 0: 8 candidates, 4 verified, 4 uncertain, 0 kept, 0 rejected
 
 ## Context Budget Summary
 
@@ -33,13 +33,13 @@
 |---|---:|
 | Strategy | `file_risk_shards_v1` |
 | Max input tokens | 9000 |
-| Estimated input tokens | 31754 |
-| Selected evidence | 19 |
-| Omitted evidence | 352 |
+| Estimated input tokens | 35609 |
+| Selected evidence | 22 |
+| Omitted evidence | 349 |
 | Context truncated | True |
 | Review shards | 5 |
-| Context requests | 2 |
-| Refills | 1 |
+| Context requests | 5 |
+| Refills | 2 |
 
 ## Findings
 
@@ -49,25 +49,25 @@ Checked changed files, changed entities, deterministic risk signals, and evidenc
 
 ## Needs Human Review
 
-- `style` medium at `src/Components/Web/src/Forms/DisplayName.cs:1` (0.50)
+- `best_practice` medium at `src/Components/Web/src/Forms/DisplayName.cs:1` (0.50)
   - Missing XML documentation comments on public API: class DisplayName<TValue> and its public members lack <summary> tags.
-  - Suggestion: Add XML documentation comments with at minimum <summary> tags for the class, the For property, and the public methods.
+  - Suggestion: Add XML doc comments for the class and all public members (For, Attach, SetParametersAsync).
   - Evidence: `diff_hunk:src/Components/Web/src/Forms/DisplayName.cs:1`
 
-- `style` medium at `src/Components/Web/src/Forms/ExpressionMemberAccessor.cs:1` (0.50)
+- `best_practice` medium at `src/Components/Web/src/Forms/ExpressionMemberAccessor.cs:1` (0.50)
   - Missing XML documentation comments on public API: public method GetDisplayName(MemberInfo) and GetDisplayName<TValue>(Expression<Func<TValue>>) lack <summary> tags.
-  - Suggestion: Add XML documentation comments with at minimum <summary> tags for the public methods.
+  - Suggestion: Add XML doc comments for the public methods.
   - Evidence: `diff_hunk:src/Components/Web/src/Forms/ExpressionMemberAccessor.cs:1`
 
-- `style` medium at `src/Components/Web/test/Forms/DisplayNameTest.cs:1` (0.50)
-  - Missing XML documentation comments on public API: test class DisplayNameTest and its public test methods lack <summary> tags.
-  - Suggestion: Add XML documentation comments with at minimum <summary> tags for the test class and its public methods.
-  - Evidence: `diff_hunk:src/Components/Web/test/Forms/DisplayNameTest.cs:1`
-
 - `code_style` medium at `src/Components/test/testassets/BasicTestApp/TestResources.cs:1` (0.50)
-  - New C# file TestResources.cs is missing the required MIT license header. The review_guidelines rule 'All C# Source Files Must Include MIT License Header' requires every .cs file to start with the exact two-line comment header.
-  - Suggestion: Add the license header at the top of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'
+  - New C# file TestResources.cs is missing the required MIT license header. Guideline 'All C# Source Files Must Include MIT License Header' requires the exact two-line comment header at the start of every .cs file.
+  - Suggestion: Add the standard license header: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.' at the top of the file.
   - Evidence: `diff_hunk:src/Components/test/testassets/BasicTestApp/TestResources.cs:1`
+
+- `security` medium at `src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/ResetPassword.razor:96` (0.50)
+  - The patch adds [Display(Name = "Email")] and [Display(Name = "Password")] data annotation attributes to the InputModel properties. While these are used for UI display names, the password field is also decorated with [DataType(DataType.Password)]. The change replaces hardcoded label text with a <DisplayName> component that reads from these annotations. If the DisplayName component or the underlying model binding does not properly handle the DataType.Password attribute, the password field could be rendered as plain text in the UI, exposing the password in the HTML source or on screen.
+  - Suggestion: Verify that the <DisplayName> component respects the [DataType(DataType.Password)] attribute and renders the input as a password field (type="password"). If not, ensure the password input retains type="password" explicitly or that the DisplayName component does not override the input type.
+  - Evidence: `diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/ResetPassword.razor:96`, `diff_hunk:src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/Components/Account/Pages/ResetPassword.razor:24`
 
 ## Changed Files
 

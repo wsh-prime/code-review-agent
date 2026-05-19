@@ -5,63 +5,76 @@
     "changed_file_count": 14,
     "changed_entity_count": 14,
     "risk_signal_count": 10,
-    "finding_count": 2,
-    "needs_human_review_count": 0,
-    "discarded_count": 0,
+    "finding_count": 0,
+    "needs_human_review_count": 1,
+    "discarded_count": 2,
     "evidence_count": 432,
     "missing_evidence_id_count": 0,
-    "agent_run_count": 6,
+    "agent_run_count": 5,
     "prompt_exported": false,
     "loop_enabled": true,
     "loop_iterations_completed": 1,
-    "loop_converged": true,
+    "loop_converged": false,
     "fallback_used": false,
     "fallback_reason": null,
     "resume_used": false,
     "resume_ignored_reason": null,
-    "total_latency_ms": 111095,
-    "total_token_count_in": 34842,
-    "total_token_count_out": 690,
+    "total_latency_ms": 92941,
+    "total_token_count_in": 31649,
+    "total_token_count_out": 637,
     "context_budget_enabled": true,
     "context_truncated": true,
-    "selected_evidence_count": 25,
-    "omitted_evidence_count": 407,
+    "selected_evidence_count": 23,
+    "omitted_evidence_count": 409,
     "review_shard_count": 4,
-    "context_refill_count": 1,
-    "context_request_count": 1,
+    "context_refill_count": 0,
+    "context_request_count": 0,
     "target_repo_modified": false
   },
-  "findings": [
+  "findings": [],
+  "needs_human_review": [
     {
       "file": "ghost/core/core/server/services/tinybird/TinybirdService.js",
-      "line": 146,
+      "line": 147,
       "severity": "high",
       "category": "security",
-      "message": "Removing `noTimestamp: true` from JWT signing options exposes the token to timestamp-based attacks (e.g., replay) by including the `iat` claim, which was previously suppressed.",
-      "suggestion": "Restore `noTimestamp: true` or explicitly set `{noTimestamp: true}` in the jwt.sign options to maintain the original security posture.",
-      "confidence": 0.9,
+      "message": "Removing `noTimestamp: true` from JWT signing options causes the token to include an `iat` (issued at) claim, which may break token validation on the Tinybird side if it expects tokens without timestamps.",
+      "suggestion": "Verify that Tinybird accepts JWT tokens with an `iat` claim. If not, restore `{noTimestamp: true}` or add explicit `iat` handling.",
+      "confidence": 0.5,
       "evidence_ids": [
-        "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:146",
-        "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:147",
         "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:144"
       ]
-    },
+    }
+  ],
+  "discarded": [
     {
       "file": "ghost/core/core/server/services/tinybird/TinybirdService.js",
       "line": 51,
       "severity": "medium",
       "category": "correctness",
-      "message": "Removing 'api_top_browsers', 'api_top_devices', and 'api_top_os' from TINYBIRD_PIPES without corresponding removal of test cases that filter by browser and device will cause test failures for the removed pipes.",
-      "suggestion": "Either keep the pipes in the list or remove the associated test cases that depend on them.",
-      "confidence": 0.85,
+      "message": "Removing `api_top_browsers`, `api_top_devices`, and `api_top_os` from the TINYBIRD_PIPES list without corresponding removal of test cases that filter by browser and device in the YAML test file may leave orphaned test expectations.",
+      "suggestion": "Ensure the removed pipes are no longer referenced in any test or configuration. The YAML test file already removed browser/device filter tests, which is consistent.",
+      "confidence": 0.5,
       "evidence_ids": [
         "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:48",
         "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_terms.yaml:11"
-      ]
+      ],
+      "filter_reason": "low_signal_suggestion"
+    },
+    {
+      "file": "ghost/core/core/server/data/tinybird/tests/api_top_utm_terms.yaml",
+      "line": 79,
+      "severity": "medium",
+      "category": "correctness",
+      "message": "The combined filter test parameters changed from `device=desktop&browser=firefox` to `source=bing.com&pathname=%2Fabout%2F`, but the expected results changed from 3 rows to 2 rows. The new expected results may not match the actual query output if the test data does not contain matching rows for the new filters.",
+      "suggestion": "Verify that the test data includes entries with `source=bing.com` and `pathname=/about/` that produce exactly the two expected UTM terms.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_terms.yaml:76"
+      ],
+      "filter_reason": "low_signal_suggestion"
     }
   ],
-  "needs_human_review": [],
-  "discarded": [],
   "changed_files": [
     {
       "old_path": "ghost/core/core/server/data/tinybird/endpoints/api_kpis.pipe",
@@ -7195,11 +7208,11 @@
       "feedback_hash": "",
       "retry_count": 0,
       "retry_log": [],
-      "latency_ms": 1249,
+      "latency_ms": 1336,
       "token_count_in": 5819,
       "token_count_out": 12,
-      "trace_id": "53e46624f16241dc96c4d6a7abdfeb5f",
-      "span_id": "e19f3338e600475d",
+      "trace_id": "13eab299dc624c0d9a5de463f6a36df9",
+      "span_id": "601518c08c7d4072",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
@@ -7227,11 +7240,11 @@
       "feedback_hash": "",
       "retry_count": 0,
       "retry_log": [],
-      "latency_ms": 2097,
+      "latency_ms": 52436,
       "token_count_in": 9601,
       "token_count_out": 12,
-      "trace_id": "7bff9e4122124820a995b8d5a2ad05c7",
-      "span_id": "4daa7fc7fd81411e",
+      "trace_id": "2ebb2d33dc114f1fa1ee696fa6918280",
+      "span_id": "99660fdc46c44bb0",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
@@ -7259,15 +7272,13 @@
       "fallback_used": false,
       "iteration": 0,
       "feedback_hash": "",
-      "retry_count": 1,
-      "retry_log": [
-        "attempt=1 error=timeout delay=1.00s"
-      ],
-      "latency_ms": 63066,
+      "retry_count": 0,
+      "retry_log": [],
+      "latency_ms": 830,
       "token_count_in": 10022,
       "token_count_out": 12,
-      "trace_id": "1ffda4085c4642ba894d657ccbe86dc8",
-      "span_id": "c36b060b682f4cc9",
+      "trace_id": "aaa7258ebb84448382b64b82f691d8e3",
+      "span_id": "8574520b1b3e44f0",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
@@ -7289,75 +7300,37 @@
         "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:48"
       ],
       "output_issue_ids": [
-        "security:ghost/core/core/server/services/tinybird/TinybirdService.js:146",
-        "correctness:ghost/core/core/server/services/tinybird/TinybirdService.js:51"
+        "security:ghost/core/core/server/services/tinybird/TinybirdService.js:147",
+        "correctness:ghost/core/core/server/services/tinybird/TinybirdService.js:51",
+        "correctness:ghost/core/core/server/data/tinybird/tests/api_top_utm_terms.yaml:79"
       ],
       "fallback_used": false,
       "iteration": 0,
       "feedback_hash": "",
       "retry_count": 0,
       "retry_log": [],
-      "latency_ms": 10636,
+      "latency_ms": 38339,
       "token_count_in": 6207,
-      "token_count_out": 451,
-      "trace_id": "510d2e0f569f4234876e49d654ca4a48",
-      "span_id": "579c2e2635df41e8",
+      "token_count_out": 601,
+      "trace_id": "d618c2ad4e6147bc94a46b44d166be5b",
+      "span_id": "7156a68ade6f4e78",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
       "shard_id": "shard-004",
       "shard_index": 3,
       "shard_count": 4,
-      "context_request_count": 1,
-      "context_refill_used": false
-    },
-    {
-      "agent_name": "openai_compatible_reviewer",
-      "model": "deepseek-ai/DeepSeek-V4-Flash",
-      "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
-      "input_evidence_ids": [
-        "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:146",
-        "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:147",
-        "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:144"
-      ],
-      "output_issue_ids": [
-        "security:ghost/core/core/server/services/tinybird/TinybirdService.js:147"
-      ],
-      "fallback_used": false,
-      "iteration": 0,
-      "feedback_hash": "",
-      "retry_count": 0,
-      "retry_log": [],
-      "latency_ms": 34047,
-      "token_count_in": 3193,
-      "token_count_out": 203,
-      "trace_id": "4aefb41fd1c94192b925cbe3c76a7673",
-      "span_id": "b1f9b8c0a8d743e3",
-      "parent_span_id": "",
-      "status": "ok",
-      "error_type": "",
-      "shard_id": "shard-004-refill",
-      "shard_index": 3,
-      "shard_count": 4,
       "context_request_count": 0,
-      "context_refill_used": true
+      "context_refill_used": false
     },
     {
       "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
       "model": null,
       "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
       "input_evidence_ids": [
-        "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:146",
-        "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:147",
-        "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_terms.yaml:11",
-        "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:144",
-        "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:48"
+        "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:144"
       ],
-      "output_issue_ids": [
-        "security:ghost/core/core/server/services/tinybird/TinybirdService.js:146",
-        "correctness:ghost/core/core/server/services/tinybird/TinybirdService.js:51",
-        "security:ghost/core/core/server/services/tinybird/TinybirdService.js:147"
-      ],
+      "output_issue_ids": [],
       "fallback_used": false,
       "iteration": 0,
       "feedback_hash": "",
@@ -7384,9 +7357,9 @@
     "strategy": "file_risk_shards_v1",
     "context_profile": "risk_compact_manifest_v1",
     "max_input_tokens": 9000,
-    "estimated_input_tokens": 27299,
-    "selected_evidence_count": 25,
-    "omitted_evidence_count": 407,
+    "estimated_input_tokens": 24756,
+    "selected_evidence_count": 23,
+    "omitted_evidence_count": 409,
     "selected_evidence_ids": [
       "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_kpis.pipe:140",
       "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_top_locations.pipe:39",
@@ -7410,9 +7383,7 @@
       "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:144",
       "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:48",
       "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_terms.yaml:11",
-      "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_terms.yaml:76",
-      "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:146",
-      "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:147"
+      "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_terms.yaml:76"
     ],
     "omitted_evidence_ids": [
       "entity:ghost/core/core/server/data/tinybird/endpoints/api_kpis.pipe:ghost.core.core.server.data.tinybird.endpoints.api_kpis",
@@ -7619,27 +7590,9 @@
     "selected_risk_signal_count": 10,
     "context_truncated": true,
     "shard_count": 4,
-    "refill_count": 1,
-    "context_request_count": 1,
-    "context_requests": [
-      {
-        "request_type": "same_file_more_evidence",
-        "path": "ghost/core/core/server/services/tinybird/TinybirdService.js",
-        "evidence_ids": [
-          "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:146",
-          "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:147"
-        ],
-        "risk_tag": null,
-        "symbol": null,
-        "reason": "",
-        "source_shard_id": "shard-004",
-        "fulfilled_evidence_ids": [
-          "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:146",
-          "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:147",
-          "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:144"
-        ]
-      }
-    ],
+    "refill_count": 0,
+    "context_request_count": 0,
+    "context_requests": [],
     "shards": [
       {
         "shard_id": "shard-001",
@@ -7680,16 +7633,6 @@
         "omitted_evidence_count": 63,
         "estimated_input_tokens": 4920,
         "context_truncated": true
-      },
-      {
-        "shard_id": "shard-004-refill",
-        "shard_index": 3,
-        "is_refill": true,
-        "parent_shard_id": "shard-004",
-        "selected_evidence_count": 3,
-        "omitted_evidence_count": 0,
-        "estimated_input_tokens": 2543,
-        "context_truncated": false
       }
     ],
     "warnings": []
@@ -7698,7 +7641,7 @@
     "enabled": true,
     "max_iter": 1,
     "iterations_completed": 1,
-    "converged": true,
+    "converged": false,
     "fallback_used": false,
     "fallback_reason": null,
     "checkpoint_path": "D:\\learn\\code-review-agent\\workspace\\qodo_pr_review_bench_live_guideline_rerank\\samples\\qodo_011\\review\\loop_checkpoint.json",
@@ -7708,13 +7651,23 @@
       {
         "i": 0,
         "candidate_issue_count": 3,
-        "verified_count": 3,
+        "verified_count": 1,
         "needs_human_review_count": 0,
-        "discarded_count": 0,
-        "keep_count": 3,
-        "uncertain_count": 0,
+        "discarded_count": 2,
+        "keep_count": 0,
+        "uncertain_count": 1,
         "reject_count": 0,
-        "feedback_sent": [],
+        "feedback_sent": [
+          {
+            "issue_id": "security:ghost/core/core/server/services/tinybird/TinybirdService.js:147",
+            "category": "security",
+            "critic_reason": "low confidence",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:144"
+            ]
+          }
+        ],
         "agent_runs": [
           {
             "agent_name": "openai_compatible_reviewer",
@@ -7732,11 +7685,11 @@
             "feedback_hash": "",
             "retry_count": 0,
             "retry_log": [],
-            "latency_ms": 1249,
+            "latency_ms": 1336,
             "token_count_in": 5819,
             "token_count_out": 12,
-            "trace_id": "53e46624f16241dc96c4d6a7abdfeb5f",
-            "span_id": "e19f3338e600475d",
+            "trace_id": "13eab299dc624c0d9a5de463f6a36df9",
+            "span_id": "601518c08c7d4072",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
@@ -7764,11 +7717,11 @@
             "feedback_hash": "",
             "retry_count": 0,
             "retry_log": [],
-            "latency_ms": 2097,
+            "latency_ms": 52436,
             "token_count_in": 9601,
             "token_count_out": 12,
-            "trace_id": "7bff9e4122124820a995b8d5a2ad05c7",
-            "span_id": "4daa7fc7fd81411e",
+            "trace_id": "2ebb2d33dc114f1fa1ee696fa6918280",
+            "span_id": "99660fdc46c44bb0",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
@@ -7796,15 +7749,13 @@
             "fallback_used": false,
             "iteration": 0,
             "feedback_hash": "",
-            "retry_count": 1,
-            "retry_log": [
-              "attempt=1 error=timeout delay=1.00s"
-            ],
-            "latency_ms": 63066,
+            "retry_count": 0,
+            "retry_log": [],
+            "latency_ms": 830,
             "token_count_in": 10022,
             "token_count_out": 12,
-            "trace_id": "1ffda4085c4642ba894d657ccbe86dc8",
-            "span_id": "c36b060b682f4cc9",
+            "trace_id": "aaa7258ebb84448382b64b82f691d8e3",
+            "span_id": "8574520b1b3e44f0",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
@@ -7826,75 +7777,37 @@
               "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:48"
             ],
             "output_issue_ids": [
-              "security:ghost/core/core/server/services/tinybird/TinybirdService.js:146",
-              "correctness:ghost/core/core/server/services/tinybird/TinybirdService.js:51"
+              "security:ghost/core/core/server/services/tinybird/TinybirdService.js:147",
+              "correctness:ghost/core/core/server/services/tinybird/TinybirdService.js:51",
+              "correctness:ghost/core/core/server/data/tinybird/tests/api_top_utm_terms.yaml:79"
             ],
             "fallback_used": false,
             "iteration": 0,
             "feedback_hash": "",
             "retry_count": 0,
             "retry_log": [],
-            "latency_ms": 10636,
+            "latency_ms": 38339,
             "token_count_in": 6207,
-            "token_count_out": 451,
-            "trace_id": "510d2e0f569f4234876e49d654ca4a48",
-            "span_id": "579c2e2635df41e8",
+            "token_count_out": 601,
+            "trace_id": "d618c2ad4e6147bc94a46b44d166be5b",
+            "span_id": "7156a68ade6f4e78",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
             "shard_id": "shard-004",
             "shard_index": 3,
             "shard_count": 4,
-            "context_request_count": 1,
-            "context_refill_used": false
-          },
-          {
-            "agent_name": "openai_compatible_reviewer",
-            "model": "deepseek-ai/DeepSeek-V4-Flash",
-            "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
-            "input_evidence_ids": [
-              "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:146",
-              "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:147",
-              "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:144"
-            ],
-            "output_issue_ids": [
-              "security:ghost/core/core/server/services/tinybird/TinybirdService.js:147"
-            ],
-            "fallback_used": false,
-            "iteration": 0,
-            "feedback_hash": "",
-            "retry_count": 0,
-            "retry_log": [],
-            "latency_ms": 34047,
-            "token_count_in": 3193,
-            "token_count_out": 203,
-            "trace_id": "4aefb41fd1c94192b925cbe3c76a7673",
-            "span_id": "b1f9b8c0a8d743e3",
-            "parent_span_id": "",
-            "status": "ok",
-            "error_type": "",
-            "shard_id": "shard-004-refill",
-            "shard_index": 3,
-            "shard_count": 4,
             "context_request_count": 0,
-            "context_refill_used": true
+            "context_refill_used": false
           },
           {
             "agent_name": "FakeLLMCriticAgent:precision_biased_critic",
             "model": null,
             "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
             "input_evidence_ids": [
-              "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:146",
-              "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:147",
-              "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_terms.yaml:11",
-              "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:144",
-              "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:48"
+              "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:144"
             ],
-            "output_issue_ids": [
-              "security:ghost/core/core/server/services/tinybird/TinybirdService.js:146",
-              "correctness:ghost/core/core/server/services/tinybird/TinybirdService.js:51",
-              "security:ghost/core/core/server/services/tinybird/TinybirdService.js:147"
-            ],
+            "output_issue_ids": [],
             "fallback_used": false,
             "iteration": 0,
             "feedback_hash": "",
@@ -7916,64 +7829,63 @@
           }
         ],
         "issue_set": [
-          "correctness:ghost/core/core/server/services/tinybird/TinybirdService.js:51",
-          "security:ghost/core/core/server/services/tinybird/TinybirdService.js:146",
           "security:ghost/core/core/server/services/tinybird/TinybirdService.js:147"
         ],
-        "keep": [
+        "keep": [],
+        "needs_human_review": [
           {
             "file": "ghost/core/core/server/services/tinybird/TinybirdService.js",
-            "line": 146,
+            "line": 147,
             "severity": "high",
             "category": "security",
-            "message": "Removing `noTimestamp: true` from JWT signing options exposes the token to timestamp-based attacks (e.g., replay) by including the `iat` claim, which was previously suppressed.",
-            "suggestion": "Restore `noTimestamp: true` or explicitly set `{noTimestamp: true}` in the jwt.sign options to maintain the original security posture.",
-            "confidence": 0.9,
+            "message": "Removing `noTimestamp: true` from JWT signing options causes the token to include an `iat` (issued at) claim, which may break token validation on the Tinybird side if it expects tokens without timestamps.",
+            "suggestion": "Verify that Tinybird accepts JWT tokens with an `iat` claim. If not, restore `{noTimestamp: true}` or add explicit `iat` handling.",
+            "confidence": 0.5,
             "evidence_ids": [
               "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:144"
             ]
-          },
+          }
+        ],
+        "discarded": [
           {
             "file": "ghost/core/core/server/services/tinybird/TinybirdService.js",
             "line": 51,
             "severity": "medium",
             "category": "correctness",
-            "message": "Removing 'api_top_browsers', 'api_top_devices', and 'api_top_os' from TINYBIRD_PIPES without corresponding removal of test cases that filter by browser and device will cause test failures for the removed pipes.",
-            "suggestion": "Either keep the pipes in the list or remove the associated test cases that depend on them.",
-            "confidence": 0.85,
+            "message": "Removing `api_top_browsers`, `api_top_devices`, and `api_top_os` from the TINYBIRD_PIPES list without corresponding removal of test cases that filter by browser and device in the YAML test file may leave orphaned test expectations.",
+            "suggestion": "Ensure the removed pipes are no longer referenced in any test or configuration. The YAML test file already removed browser/device filter tests, which is consistent.",
+            "confidence": 0.5,
             "evidence_ids": [
               "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:48",
               "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_terms.yaml:11"
-            ]
+            ],
+            "filter_reason": "low_signal_suggestion"
           },
           {
-            "file": "ghost/core/core/server/services/tinybird/TinybirdService.js",
-            "line": 147,
+            "file": "ghost/core/core/server/data/tinybird/tests/api_top_utm_terms.yaml",
+            "line": 79,
             "severity": "medium",
-            "category": "security",
-            "message": "Removing `noTimestamp: true` from JWT sign options introduces an `iat` (issued at) claim, which may cause token validation failures if the downstream Tinybird service does not expect or tolerate this claim, potentially breaking token-based authentication.",
-            "suggestion": "If the downstream service does not require `iat`, restore `{noTimestamp: true}` to maintain backward compatibility. If `iat` is acceptable, ensure the consuming service is updated to handle it.",
-            "confidence": 0.7,
+            "category": "correctness",
+            "message": "The combined filter test parameters changed from `device=desktop&browser=firefox` to `source=bing.com&pathname=%2Fabout%2F`, but the expected results changed from 3 rows to 2 rows. The new expected results may not match the actual query output if the test data does not contain matching rows for the new filters.",
+            "suggestion": "Verify that the test data includes entries with `source=bing.com` and `pathname=/about/` that produce exactly the two expected UTM terms.",
+            "confidence": 0.5,
             "evidence_ids": [
-              "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:146",
-              "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:147",
-              "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:144"
-            ]
+              "diff_hunk:ghost/core/core/server/data/tinybird/tests/api_top_utm_terms.yaml:76"
+            ],
+            "filter_reason": "low_signal_suggestion"
           }
-        ],
-        "needs_human_review": [],
-        "discarded": []
+        ]
       }
     ]
   },
   "tracing": {
-    "total_latency_ms": 111095,
-    "total_token_count_in": 34842,
-    "total_token_count_out": 690,
-    "total_retry_count": 1,
-    "run_count": 6,
+    "total_latency_ms": 92941,
+    "total_token_count_in": 31649,
+    "total_token_count_out": 637,
+    "total_retry_count": 0,
+    "run_count": 5,
     "status_counts": {
-      "ok": 6
+      "ok": 5
     }
   }
 }

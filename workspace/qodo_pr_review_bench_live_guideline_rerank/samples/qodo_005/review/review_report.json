@@ -5,8 +5,8 @@
     "changed_file_count": 4,
     "changed_entity_count": 4,
     "risk_signal_count": 4,
-    "finding_count": 2,
-    "needs_human_review_count": 0,
+    "finding_count": 0,
+    "needs_human_review_count": 4,
     "discarded_count": 0,
     "evidence_count": 77,
     "missing_evidence_id_count": 0,
@@ -14,14 +14,14 @@
     "prompt_exported": false,
     "loop_enabled": true,
     "loop_iterations_completed": 1,
-    "loop_converged": true,
+    "loop_converged": false,
     "fallback_used": false,
     "fallback_reason": null,
     "resume_used": false,
     "resume_ignored_reason": null,
-    "total_latency_ms": 29000,
+    "total_latency_ms": 16455,
     "total_token_count_in": 8463,
-    "total_token_count_out": 472,
+    "total_token_count_out": 830,
     "context_budget_enabled": true,
     "context_truncated": true,
     "selected_evidence_count": 9,
@@ -31,15 +31,28 @@
     "context_request_count": 0,
     "target_repo_modified": false
   },
-  "findings": [
+  "findings": [],
+  "needs_human_review": [
     {
       "file": "ghost/core/core/server/services/member-welcome-emails/jobs/index.js",
-      "line": 15,
+      "line": 14,
       "severity": "high",
       "category": "logic_error",
-      "message": "Negated condition in `scheduleMemberWelcomeEmailJob` flips scheduling logic: previously the job was scheduled when `processOutbox` was false, now it is scheduled only when `processOutbox` is true, which means the job will never be scheduled on the first call and will be scheduled repeatedly on subsequent calls.",
-      "suggestion": "Change `if (hasScheduled.processOutbox && ...)` back to `if (!hasScheduled.processOutbox && ...)` to preserve the original once-per-process scheduling guard.",
-      "confidence": 0.95,
+      "message": "Negated condition in `if (!hasScheduled.processOutbox && ...)` was changed to `if (hasScheduled.processOutbox && ...)`, which inverts the scheduling guard. Previously the job was added only when `processOutbox` was false; now it is added only when `processOutbox` is true, meaning the job will never be scheduled on the first invocation and may be scheduled repeatedly after the first run.",
+      "suggestion": "Restore the original negation `!hasScheduled.processOutbox` or confirm the intended logic and update the flag reset accordingly.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8"
+      ]
+    },
+    {
+      "file": "ghost/core/core/server/services/member-welcome-emails/jobs/index.js",
+      "line": 11,
+      "severity": "medium",
+      "category": "behavior_change",
+      "message": "The feature gate check was changed from `labs.isSet('welcomeEmails')` to `config.get('memberWelcomeEmailTestInbox')`. This replaces a boolean labs flag with a config value that is truthy when set. In production, if `memberWelcomeEmailTestInbox` is not configured, the entire welcome email job will be skipped, effectively disabling the feature for all members.",
+      "suggestion": "Ensure the config value is set appropriately for production or keep the labs flag as a fallback.",
+      "confidence": 0.5,
       "evidence_ids": [
         "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8"
       ]
@@ -47,17 +60,28 @@
     {
       "file": "ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js",
       "line": 340,
-      "severity": "high",
-      "category": "logic_error",
-      "message": "Welcome email condition changed from `labs.isSet('welcomeEmails') && WELCOME_EMAIL_SOURCES.includes(source)` to `config.get('memberWelcomeEmailTestInbox') || WELCOME_EMAIL_SOURCES.includes(source)`. The new OR logic means that if `memberWelcomeEmailTestInbox` is set to any truthy value, welcome emails are sent for *all* sources, not just the allowed ones, which can cause unintended email sending for sources like 'import' or 'admin'.",
-      "suggestion": "Change the condition to `(welcomeEmailConfig || this._labsService.isSet('welcomeEmails')) && WELCOME_EMAIL_SOURCES.includes(source)` to preserve the source restriction while allowing the test config override.",
-      "confidence": 0.9,
+      "severity": "medium",
+      "category": "behavior_change",
+      "message": "The condition for triggering welcome email outbox creation was changed from `this._labsService.isSet('welcomeEmails') && WELCOME_EMAIL_SOURCES.includes(source)` to `welcomeEmailConfig || WELCOME_EMAIL_SOURCES.includes(source)`. When `welcomeEmailConfig` is truthy, the source check is bypassed, causing outbox entries to be created for any member source (e.g., admin-created, API-created) instead of only the allowed sources.",
+      "suggestion": "Keep the source filter: `welcomeEmailConfig && WELCOME_EMAIL_SOURCES.includes(source)` or `(welcomeEmailConfig || this._labsService.isSet('welcomeEmails')) && WELCOME_EMAIL_SOURCES.includes(source)`.",
+      "confidence": 0.5,
+      "evidence_ids": [
+        "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337"
+      ]
+    },
+    {
+      "file": "ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js",
+      "line": 339,
+      "severity": "low",
+      "category": "code_style",
+      "message": "Variable declaration changed from `let member` to `var member`. While not a functional issue, it introduces a function-scoped variable in a module where `let` is used elsewhere, reducing consistency.",
+      "suggestion": "Keep `let member` for block scoping consistency.",
+      "confidence": 0.5,
       "evidence_ids": [
         "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337"
       ]
     }
   ],
-  "needs_human_review": [],
   "discarded": [],
   "changed_files": [
     {
@@ -2053,19 +2077,21 @@
         "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:527"
       ],
       "output_issue_ids": [
-        "logic_error:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:15",
-        "logic_error:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340"
+        "logic_error:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:14",
+        "behavior_change:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:11",
+        "behavior_change:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340",
+        "code_style:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:339"
       ],
       "fallback_used": false,
       "iteration": 0,
       "feedback_hash": "",
       "retry_count": 0,
       "retry_log": [],
-      "latency_ms": 29000,
+      "latency_ms": 16455,
       "token_count_in": 8463,
-      "token_count_out": 472,
-      "trace_id": "737d2e15ae6440608292f9fe93a67088",
-      "span_id": "cb35a802e0ca4350",
+      "token_count_out": 830,
+      "trace_id": "fa898a8db2b44fc7a490a0967d4987c8",
+      "span_id": "0952d0a2fcdd44f1",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
@@ -2083,10 +2109,7 @@
         "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8",
         "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337"
       ],
-      "output_issue_ids": [
-        "logic_error:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:15",
-        "logic_error:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340"
-      ],
+      "output_issue_ids": [],
       "fallback_used": false,
       "iteration": 0,
       "feedback_hash": "",
@@ -2221,7 +2244,7 @@
     "enabled": true,
     "max_iter": 1,
     "iterations_completed": 1,
-    "converged": true,
+    "converged": false,
     "fallback_used": false,
     "fallback_reason": null,
     "checkpoint_path": "D:\\learn\\code-review-agent\\workspace\\qodo_pr_review_bench_live_guideline_rerank\\samples\\qodo_005\\review\\loop_checkpoint.json",
@@ -2230,14 +2253,51 @@
     "iterations": [
       {
         "i": 0,
-        "candidate_issue_count": 2,
-        "verified_count": 2,
+        "candidate_issue_count": 4,
+        "verified_count": 4,
         "needs_human_review_count": 0,
         "discarded_count": 0,
-        "keep_count": 2,
-        "uncertain_count": 0,
+        "keep_count": 0,
+        "uncertain_count": 4,
         "reject_count": 0,
-        "feedback_sent": [],
+        "feedback_sent": [
+          {
+            "issue_id": "logic_error:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:14",
+            "category": "logic_error",
+            "critic_reason": "low confidence",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8"
+            ]
+          },
+          {
+            "issue_id": "behavior_change:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:11",
+            "category": "behavior_change",
+            "critic_reason": "requires semantic confirmation",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8"
+            ]
+          },
+          {
+            "issue_id": "behavior_change:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340",
+            "category": "behavior_change",
+            "critic_reason": "requires semantic confirmation",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337"
+            ]
+          },
+          {
+            "issue_id": "code_style:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:339",
+            "category": "code_style",
+            "critic_reason": "low confidence",
+            "original_confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337"
+            ]
+          }
+        ],
         "agent_runs": [
           {
             "agent_name": "openai_compatible_reviewer",
@@ -2255,19 +2315,21 @@
               "diff_hunk:ghost/core/test/unit/server/services/members/members-api/repositories/MemberRepository.test.js:527"
             ],
             "output_issue_ids": [
-              "logic_error:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:15",
-              "logic_error:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340"
+              "logic_error:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:14",
+              "behavior_change:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:11",
+              "behavior_change:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340",
+              "code_style:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:339"
             ],
             "fallback_used": false,
             "iteration": 0,
             "feedback_hash": "",
             "retry_count": 0,
             "retry_log": [],
-            "latency_ms": 29000,
+            "latency_ms": 16455,
             "token_count_in": 8463,
-            "token_count_out": 472,
-            "trace_id": "737d2e15ae6440608292f9fe93a67088",
-            "span_id": "cb35a802e0ca4350",
+            "token_count_out": 830,
+            "trace_id": "fa898a8db2b44fc7a490a0967d4987c8",
+            "span_id": "0952d0a2fcdd44f1",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
@@ -2285,10 +2347,7 @@
               "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8",
               "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337"
             ],
-            "output_issue_ids": [
-              "logic_error:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:15",
-              "logic_error:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340"
-            ],
+            "output_issue_ids": [],
             "fallback_used": false,
             "iteration": 0,
             "feedback_hash": "",
@@ -2310,18 +2369,33 @@
           }
         ],
         "issue_set": [
-          "logic_error:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:15",
-          "logic_error:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340"
+          "behavior_change:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:11",
+          "behavior_change:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:340",
+          "code_style:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:339",
+          "logic_error:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:14"
         ],
-        "keep": [
+        "keep": [],
+        "needs_human_review": [
           {
             "file": "ghost/core/core/server/services/member-welcome-emails/jobs/index.js",
-            "line": 15,
+            "line": 14,
             "severity": "high",
             "category": "logic_error",
-            "message": "Negated condition in `scheduleMemberWelcomeEmailJob` flips scheduling logic: previously the job was scheduled when `processOutbox` was false, now it is scheduled only when `processOutbox` is true, which means the job will never be scheduled on the first call and will be scheduled repeatedly on subsequent calls.",
-            "suggestion": "Change `if (hasScheduled.processOutbox && ...)` back to `if (!hasScheduled.processOutbox && ...)` to preserve the original once-per-process scheduling guard.",
-            "confidence": 0.95,
+            "message": "Negated condition in `if (!hasScheduled.processOutbox && ...)` was changed to `if (hasScheduled.processOutbox && ...)`, which inverts the scheduling guard. Previously the job was added only when `processOutbox` was false; now it is added only when `processOutbox` is true, meaning the job will never be scheduled on the first invocation and may be scheduled repeatedly after the first run.",
+            "suggestion": "Restore the original negation `!hasScheduled.processOutbox` or confirm the intended logic and update the flag reset accordingly.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8"
+            ]
+          },
+          {
+            "file": "ghost/core/core/server/services/member-welcome-emails/jobs/index.js",
+            "line": 11,
+            "severity": "medium",
+            "category": "behavior_change",
+            "message": "The feature gate check was changed from `labs.isSet('welcomeEmails')` to `config.get('memberWelcomeEmailTestInbox')`. This replaces a boolean labs flag with a config value that is truthy when set. In production, if `memberWelcomeEmailTestInbox` is not configured, the entire welcome email job will be skipped, effectively disabling the feature for all members.",
+            "suggestion": "Ensure the config value is set appropriately for production or keep the labs flag as a fallback.",
+            "confidence": 0.5,
             "evidence_ids": [
               "diff_hunk:ghost/core/core/server/services/member-welcome-emails/jobs/index.js:8"
             ]
@@ -2329,25 +2403,36 @@
           {
             "file": "ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js",
             "line": 340,
-            "severity": "high",
-            "category": "logic_error",
-            "message": "Welcome email condition changed from `labs.isSet('welcomeEmails') && WELCOME_EMAIL_SOURCES.includes(source)` to `config.get('memberWelcomeEmailTestInbox') || WELCOME_EMAIL_SOURCES.includes(source)`. The new OR logic means that if `memberWelcomeEmailTestInbox` is set to any truthy value, welcome emails are sent for *all* sources, not just the allowed ones, which can cause unintended email sending for sources like 'import' or 'admin'.",
-            "suggestion": "Change the condition to `(welcomeEmailConfig || this._labsService.isSet('welcomeEmails')) && WELCOME_EMAIL_SOURCES.includes(source)` to preserve the source restriction while allowing the test config override.",
-            "confidence": 0.9,
+            "severity": "medium",
+            "category": "behavior_change",
+            "message": "The condition for triggering welcome email outbox creation was changed from `this._labsService.isSet('welcomeEmails') && WELCOME_EMAIL_SOURCES.includes(source)` to `welcomeEmailConfig || WELCOME_EMAIL_SOURCES.includes(source)`. When `welcomeEmailConfig` is truthy, the source check is bypassed, causing outbox entries to be created for any member source (e.g., admin-created, API-created) instead of only the allowed sources.",
+            "suggestion": "Keep the source filter: `welcomeEmailConfig && WELCOME_EMAIL_SOURCES.includes(source)` or `(welcomeEmailConfig || this._labsService.isSet('welcomeEmails')) && WELCOME_EMAIL_SOURCES.includes(source)`.",
+            "confidence": 0.5,
+            "evidence_ids": [
+              "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337"
+            ]
+          },
+          {
+            "file": "ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js",
+            "line": 339,
+            "severity": "low",
+            "category": "code_style",
+            "message": "Variable declaration changed from `let member` to `var member`. While not a functional issue, it introduces a function-scoped variable in a module where `let` is used elsewhere, reducing consistency.",
+            "suggestion": "Keep `let member` for block scoping consistency.",
+            "confidence": 0.5,
             "evidence_ids": [
               "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/MemberRepository.js:337"
             ]
           }
         ],
-        "needs_human_review": [],
         "discarded": []
       }
     ]
   },
   "tracing": {
-    "total_latency_ms": 29000,
+    "total_latency_ms": 16455,
     "total_token_count_in": 8463,
-    "total_token_count_out": 472,
+    "total_token_count_out": 830,
     "total_retry_count": 0,
     "run_count": 2,
     "status_counts": {

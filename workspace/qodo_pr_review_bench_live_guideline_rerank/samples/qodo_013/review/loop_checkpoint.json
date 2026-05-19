@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "run_id": "412e8becd8454e949ef0d09d9bb422cf",
+  "run_id": "7e07bdb2206144d0a5fa59b092e0fb51",
   "mode": "hybrid-live",
   "max_iter": 1,
   "iteration": 1,
@@ -28,33 +28,30 @@
           ]
         },
         {
-          "issue_id": "test_framework:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:287",
-          "category": "test_framework",
-          "critic_reason": "low confidence",
-          "original_confidence": 0.5,
-          "evidence_ids": [
-            "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:285",
-            "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:287"
-          ]
-        },
-        {
-          "issue_id": "test_correctness:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:111",
-          "category": "test_correctness",
-          "critic_reason": "low confidence",
-          "original_confidence": 0.5,
-          "evidence_ids": [
-            "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:110",
-            "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:111",
-            "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:113"
-          ]
-        },
-        {
-          "issue_id": "test_correctness:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:288",
-          "category": "test_correctness",
+          "issue_id": "correctness:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:287",
+          "category": "correctness",
           "critic_reason": "low confidence",
           "original_confidence": 0.5,
           "evidence_ids": [
             "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:284"
+          ]
+        },
+        {
+          "issue_id": "best-practice:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:285",
+          "category": "best-practice",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:284"
+          ]
+        },
+        {
+          "issue_id": "correctness:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:113",
+          "category": "correctness",
+          "critic_reason": "low confidence",
+          "original_confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:110"
           ]
         }
       ],
@@ -75,11 +72,11 @@
           "feedback_hash": "",
           "retry_count": 0,
           "retry_log": [],
-          "latency_ms": 15500,
+          "latency_ms": 534,
           "token_count_in": 6983,
           "token_count_out": 12,
-          "trace_id": "820c9dbe1c8b4614951ab80fb2a50ef4",
-          "span_id": "004f0d90caf94e87",
+          "trace_id": "9b0fed2dffcd456498be8ae633c2f168",
+          "span_id": "88abcf1f0f644fd3",
           "parent_span_id": "",
           "status": "ok",
           "error_type": "",
@@ -104,11 +101,11 @@
           "feedback_hash": "",
           "retry_count": 0,
           "retry_log": [],
-          "latency_ms": 17124,
+          "latency_ms": 41472,
           "token_count_in": 3398,
-          "token_count_out": 275,
-          "trace_id": "f1f38681cfa142c68244b2ca42db6ab0",
-          "span_id": "2bc1a69d36f84a13",
+          "token_count_out": 355,
+          "trace_id": "d05d11c3976445d798eeecd86274125d",
+          "span_id": "67699790af85471c",
           "parent_span_id": "",
           "status": "ok",
           "error_type": "",
@@ -123,30 +120,27 @@
           "model": "deepseek-ai/DeepSeek-V4-Flash",
           "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
           "input_evidence_ids": [
-            "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:111",
-            "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:113",
-            "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:285",
-            "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:287",
             "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:110",
             "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:28",
-            "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:284",
-            "entity:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:src.Components.test.E2ETest.ServerRenderingTests.RedirectionTest"
+            "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:284"
           ],
           "output_issue_ids": [
-            "test_framework:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:287",
-            "test_correctness:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:111",
-            "test_correctness:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:288"
+            "correctness:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:287",
+            "best-practice:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:285",
+            "correctness:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:113"
           ],
           "fallback_used": false,
           "iteration": 0,
           "feedback_hash": "",
-          "retry_count": 0,
-          "retry_log": [],
-          "latency_ms": 9055,
-          "token_count_in": 3927,
-          "token_count_out": 649,
-          "trace_id": "49a4b474d1b4419a853de028983342d4",
-          "span_id": "d0e74394d0d74c4a",
+          "retry_count": 1,
+          "retry_log": [
+            "attempt=1 error=timeout delay=1.00s"
+          ],
+          "latency_ms": 67794,
+          "token_count_in": 3400,
+          "token_count_out": 602,
+          "trace_id": "6525f392d60b46839c60373d66c601dd",
+          "span_id": "d6544d330833479b",
           "parent_span_id": "",
           "status": "ok",
           "error_type": "",
@@ -161,10 +155,6 @@
           "model": null,
           "prompt_hash": "08cebb083dd773feef1bf613b217d0f460b42744a19a82fe32e6d239062fb5d8",
           "input_evidence_ids": [
-            "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:111",
-            "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:113",
-            "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:285",
-            "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:287",
             "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:110",
             "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:284",
             "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:5"
@@ -191,10 +181,10 @@
         }
       ],
       "issue_set": [
+        "best-practice:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:285",
         "best_practice:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:8",
-        "test_correctness:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:111",
-        "test_correctness:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:288",
-        "test_framework:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:287"
+        "correctness:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:113",
+        "correctness:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:287"
       ],
       "keep": [],
       "needs_human_review": [
@@ -203,8 +193,8 @@
           "line": 8,
           "severity": "medium",
           "category": "best_practice",
-          "message": "The file adds a using directive for Microsoft.VisualStudio.TestTools.UnitTesting, which is an MSTest namespace, but the repository standard requires xUnit as the test framework. This violates the 'Test Projects Must Use xUnit Framework' guideline.",
-          "suggestion": "Remove the using directive for Microsoft.VisualStudio.TestTools.UnitTesting and ensure all test infrastructure uses xUnit attributes and assertions.",
+          "message": "The file adds using directives for Microsoft.VisualStudio.TestTools.UnitTesting but the repository standard requires xUnit as the test framework. This violates the 'Test Projects Must Use xUnit Framework' guideline.",
+          "suggestion": "Remove the using Microsoft.VisualStudio.TestTools.UnitTesting directive and ensure all test methods use xUnit attributes ([Fact], [Theory], [InlineData]) and assertions.",
           "confidence": 0.5,
           "evidence_ids": [
             "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:5"
@@ -214,39 +204,36 @@
           "file": "src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs",
           "line": 287,
           "severity": "error",
-          "category": "test_framework",
-          "message": "Test method uses [TestMethod] attribute instead of xUnit [Fact] attribute, violating the 'Test Projects Must Use xUnit Framework' guideline.",
-          "suggestion": "Replace [TestMethod] with [Fact] to maintain consistency with the xUnit framework used across the repository.",
-          "confidence": 0.5,
-          "evidence_ids": [
-            "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:285",
-            "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:287"
-          ]
-        },
-        {
-          "file": "src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs",
-          "line": 111,
-          "severity": "warning",
-          "category": "test_correctness",
-          "message": "Changed Browser.Navigate().Back() to Browser.Navigate().Forward() in a test that verifies 'back' navigation behavior. The comment says 'See that 'back' takes you to the place from before the redirection' but the code now navigates forward, which contradicts the test's intent.",
-          "suggestion": "Verify the intended navigation direction. If the test is meant to verify back navigation, keep Browser.Navigate().Back(). If the test logic has changed, update the comment to reflect the new behavior.",
-          "confidence": 0.5,
-          "evidence_ids": [
-            "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:110",
-            "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:111",
-            "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:113"
-          ]
-        },
-        {
-          "file": "src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs",
-          "line": 288,
-          "severity": "warning",
-          "category": "test_correctness",
-          "message": "Test 'NavigationException_InAsyncContext_DoesNotBecomeUnobservedTaskException' now sets 'DisableThrowNavigationException' to true, which disables the throw behavior the test is designed to verify. This may invalidate the test's purpose.",
-          "suggestion": "Ensure the switch value aligns with the test's intent. If the test is meant to verify that exceptions do not become unobserved, consider whether the switch should remain false to actually trigger the exception path.",
+          "category": "correctness",
+          "message": "The test 'NavigationException_InAsyncContext_DoesNotBecomeUnobservedTaskException' now sets 'DisableThrowNavigationException' to true, which contradicts the test name and purpose. The test is designed to verify that a navigation exception does not become an unobserved task exception when the switch is false, but the patch changes it to true, likely breaking the test's intended validation.",
+          "suggestion": "Revert the switch to 'false' to align with the test's original intent, or update the test name and logic to reflect the new behavior.",
           "confidence": 0.5,
           "evidence_ids": [
             "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:284"
+          ]
+        },
+        {
+          "file": "src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs",
+          "line": 285,
+          "severity": "error",
+          "category": "best-practice",
+          "message": "Test method 'NavigationException_InAsyncContext_DoesNotBecomeUnobservedTaskException' uses '[TestMethod]' attribute instead of the required xUnit '[Fact]' attribute, violating the 'Test Projects Must Use xUnit Framework' guideline.",
+          "suggestion": "Replace '[TestMethod]' with '[Fact]' to comply with the repository's xUnit standard.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:284"
+          ]
+        },
+        {
+          "file": "src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs",
+          "line": 113,
+          "severity": "warning",
+          "category": "correctness",
+          "message": "Changed 'Browser.Navigate().Back()' to 'Browser.Navigate().Forward()' in the test 'RedirectEnhancedGetToInternal'. The comment says 'See that 'back' takes you to the place from before the redirection', but the code now navigates forward instead of back, which likely breaks the intended verification of the back navigation behavior.",
+          "suggestion": "Revert to 'Browser.Navigate().Back()' to correctly test the back navigation, or update the comment and assertions to match the new forward navigation intent.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:110"
           ]
         }
       ],
@@ -266,33 +253,30 @@
         ]
       },
       {
-        "issue_id": "test_framework:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:287",
-        "category": "test_framework",
-        "critic_reason": "low confidence",
-        "original_confidence": 0.5,
-        "evidence_ids": [
-          "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:285",
-          "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:287"
-        ]
-      },
-      {
-        "issue_id": "test_correctness:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:111",
-        "category": "test_correctness",
-        "critic_reason": "low confidence",
-        "original_confidence": 0.5,
-        "evidence_ids": [
-          "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:110",
-          "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:111",
-          "diff:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:113"
-        ]
-      },
-      {
-        "issue_id": "test_correctness:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:288",
-        "category": "test_correctness",
+        "issue_id": "correctness:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:287",
+        "category": "correctness",
         "critic_reason": "low confidence",
         "original_confidence": 0.5,
         "evidence_ids": [
           "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:284"
+        ]
+      },
+      {
+        "issue_id": "best-practice:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:285",
+        "category": "best-practice",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:284"
+        ]
+      },
+      {
+        "issue_id": "correctness:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:113",
+        "category": "correctness",
+        "critic_reason": "low confidence",
+        "original_confidence": 0.5,
+        "evidence_ids": [
+          "diff_hunk:src/Components/test/E2ETest/ServerRenderingTests/RedirectionTest.cs:110"
         ]
       }
     ]

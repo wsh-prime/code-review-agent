@@ -19,25 +19,38 @@
         {
           "file": "ghost/core/core/server/api/endpoints/stats.js",
           "line": 128,
-          "severity": "error",
+          "severity": "medium",
           "category": "correctness",
-          "message": "Removing 'tb_version' from allowed parameters may break existing clients that send this parameter, causing unexpected validation failures.",
-          "suggestion": "If 'tb_version' is no longer supported, ensure the API gracefully ignores unknown parameters or provides a deprecation path. If it is still needed, add it back to the allowed list.",
+          "message": "Removing 'tb_version' from allowed query parameters may break existing clients that send this parameter, causing unexpected 400 errors or silent ignoring of the parameter.",
+          "suggestion": "If the parameter is no longer supported, ensure the API returns a clear error or deprecation warning to clients. Alternatively, keep the parameter in the allowed list and ignore it server-side.",
           "confidence": 0.5,
           "evidence_ids": [
             "diff_hunk:ghost/core/core/server/api/endpoints/stats.js:125"
           ]
         },
         {
-          "file": "ghost/core/core/server/api/endpoints/stats.js",
-          "line": 128,
-          "severity": "warning",
-          "category": "maintainability",
-          "message": "The API endpoint controller in stats.js is missing the required JSDoc type annotation '@type {import('@tryghost/api-framework').Controller}' as specified by the review guideline 'API Endpoint Controllers Must Have Type Annotations'.",
-          "suggestion": "Add a JSDoc type annotation to the controller object: /** @type {import('@tryghost/api-framework').Controller} */",
+          "file": "apps/admin-x-framework/src/utils/stats-config.ts",
+          "line": 18,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "The version suffix is prepended to the endpoint name without validation, which could produce malformed pipe names (e.g., if version contains special characters or is empty string).",
+          "suggestion": "Validate that config.version is a non-empty string matching expected pattern (e.g., alphanumeric with underscores) before constructing the endpoint name.",
           "confidence": 0.5,
           "evidence_ids": [
-            "diff_hunk:ghost/core/core/server/api/endpoints/stats.js:125"
+            "diff_hunk:apps/admin-x-framework/src/utils/stats-config.ts:13"
+          ]
+        },
+        {
+          "file": "apps/admin-x-framework/src/providers/framework-provider.tsx",
+          "line": 13,
+          "severity": "low",
+          "category": "maintainability",
+          "message": "The new 'version' property in StatsConfig interface is optional but its usage in stats-config.ts does not handle the case where version is an empty string, which would produce an endpoint name like '_api_kpis'.",
+          "suggestion": "Consider treating an empty string version the same as undefined, or add validation to reject empty strings.",
+          "confidence": 0.5,
+          "evidence_ids": [
+            "diff_hunk:apps/admin-x-framework/src/providers/framework-provider.tsx:10",
+            "diff_hunk:apps/admin-x-framework/src/utils/stats-config.ts:13"
           ]
         }
       ],
@@ -53,18 +66,21 @@
         ],
         "output_issue_ids": [
           "correctness:ghost/core/core/server/api/endpoints/stats.js:128",
-          "maintainability:ghost/core/core/server/api/endpoints/stats.js:128"
+          "correctness:apps/admin-x-framework/src/utils/stats-config.ts:18",
+          "maintainability:apps/admin-x-framework/src/providers/framework-provider.tsx:13"
         ],
         "fallback_used": false,
         "iteration": 0,
         "feedback_hash": "",
-        "retry_count": 0,
-        "retry_log": [],
-        "latency_ms": 2385,
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 69952,
         "token_count_in": 4874,
-        "token_count_out": 336,
-        "trace_id": "5abbb98cf8dd4938b7e7d94b2c0d46aa",
-        "span_id": "fe2181aa82344f4a",
+        "token_count_out": 500,
+        "trace_id": "08125ae38534477b9a4022cc735f0144",
+        "span_id": "0791db996db44564",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -86,23 +102,7 @@
         "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_active_visitors_v2.pipe:1",
         "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_kpis_v2.pipe:1"
       ],
-      "context_requests": [
-        {
-          "request_type": "risk_evidence",
-          "path": "ghost/core/core/server/data/tinybird/endpoints/api_kpis_v2.pipe",
-          "evidence_ids": [
-            "diff:ghost/core/core/server/data/tinybird/endpoints/api_kpis_v2.pipe:1",
-            "diff:ghost/core/core/server/data/tinybird/endpoints/api_kpis_v2.pipe:10",
-            "diff:ghost/core/core/server/data/tinybird/endpoints/api_kpis_v2.pipe:100",
-            "diff:ghost/core/core/server/data/tinybird/endpoints/api_kpis_v2.pipe:101"
-          ],
-          "risk_tag": null,
-          "symbol": null,
-          "reason": "The api_kpis_v2.pipe is a new 162-line endpoint with a security_sensitive risk signal. The diff_hunk evidence is truncated (82 lines omitted). Full line evidence is needed to assess whether the endpoint introduces SQL injection, unsafe parameter handling, or other security issues.",
-          "source_shard_id": "shard-002",
-          "fulfilled_evidence_ids": []
-        }
-      ],
+      "context_requests": [],
       "issues": [],
       "agent_run": {
         "agent_name": "openai_compatible_reviewer",
@@ -118,83 +118,21 @@
         "fallback_used": false,
         "iteration": 0,
         "feedback_hash": "",
-        "retry_count": 2,
-        "retry_log": [
-          "attempt=1 error=timeout delay=1.00s",
-          "attempt=2 error=timeout delay=2.00s"
-        ],
-        "latency_ms": 131202,
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 6631,
         "token_count_in": 7268,
-        "token_count_out": 230,
-        "trace_id": "c2b40c0ac2a44b55ae01c06b56620f51",
-        "span_id": "e5b2f776bebd4100",
+        "token_count_out": 12,
+        "trace_id": "0e58ccf2f5984c08aaf5117389e90303",
+        "span_id": "6cb36c90268e4142",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
         "shard_id": "shard-002",
         "shard_index": 1,
         "shard_count": 10,
-        "context_request_count": 1,
+        "context_request_count": 0,
         "context_refill_used": false
-      }
-    },
-    "17305d1e9514a58cee9a2b85e2a8d3077bc51c0fe6aac25d7bac7eb82c801102": {
-      "status": "completed",
-      "shard_id": "shard-002-refill",
-      "is_refill": true,
-      "parent_shard_id": "shard-002",
-      "selected_evidence_ids": [
-        "diff:ghost/core/core/server/data/tinybird/endpoints/api_kpis_v2.pipe:1",
-        "diff:ghost/core/core/server/data/tinybird/endpoints/api_kpis_v2.pipe:10",
-        "diff:ghost/core/core/server/data/tinybird/endpoints/api_kpis_v2.pipe:100",
-        "diff:ghost/core/core/server/data/tinybird/endpoints/api_kpis_v2.pipe:101",
-        "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_kpis_v2.pipe:1"
-      ],
-      "context_requests": [
-        {
-          "request_type": "risk_evidence",
-          "path": null,
-          "evidence_ids": [
-            "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_kpis_v2.pipe"
-          ],
-          "risk_tag": null,
-          "symbol": null,
-          "reason": "The security_sensitive risk signal (confidence 0.74) was triggered for this new Tinybird pipe file, but the current evidence only shows token declarations and SQL structure. To determine if a concrete security exposure is introduced, I need to see the full pipe definition, especially any parameter usage, data filtering, or access control logic that could indicate a trust boundary change or untrusted input handling.",
-          "source_shard_id": "shard-002-refill",
-          "fulfilled_evidence_ids": []
-        }
-      ],
-      "issues": [],
-      "agent_run": {
-        "agent_name": "openai_compatible_reviewer",
-        "model": "deepseek-ai/DeepSeek-V4-Flash",
-        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
-        "input_evidence_ids": [
-          "diff:ghost/core/core/server/data/tinybird/endpoints/api_kpis_v2.pipe:1",
-          "diff:ghost/core/core/server/data/tinybird/endpoints/api_kpis_v2.pipe:10",
-          "diff:ghost/core/core/server/data/tinybird/endpoints/api_kpis_v2.pipe:100",
-          "diff:ghost/core/core/server/data/tinybird/endpoints/api_kpis_v2.pipe:101",
-          "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_kpis_v2.pipe:1"
-        ],
-        "output_issue_ids": [],
-        "fallback_used": false,
-        "iteration": 0,
-        "feedback_hash": "",
-        "retry_count": 0,
-        "retry_log": [],
-        "latency_ms": 1279,
-        "token_count_in": 3979,
-        "token_count_out": 150,
-        "trace_id": "59f9b5f6cdb74af2b5ec719ef6cfcf3d",
-        "span_id": "54ab991d5f1a468f",
-        "parent_span_id": "",
-        "status": "ok",
-        "error_type": "",
-        "shard_id": "shard-002-refill",
-        "shard_index": 1,
-        "shard_count": 10,
-        "context_request_count": 1,
-        "context_refill_used": true
       }
     },
     "3807305553322b14167fa2999f37e3f55ab6f9dd52be0a06eb53736d64fa1e6d": {
@@ -208,7 +146,23 @@
         "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_top_locations_v2.pipe:1",
         "diff_hunk:ghost/core/core/server/data/tinybird/endpoints/api_top_pages_v2.pipe:1"
       ],
-      "context_requests": [],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_post_visitor_counts_v2.pipe",
+            "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_devices_v2.pipe",
+            "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_locations_v2.pipe",
+            "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_pages_v2.pipe"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The security_sensitive risk signals have high confidence but no selected evidence was provided. The omitted evidence may contain the specific security-sensitive keywords or patterns that triggered the risk. Requesting the risk evidence to determine if a concrete security issue exists.",
+          "source_shard_id": "shard-003",
+          "fulfilled_evidence_ids": []
+        }
+      ],
       "issues": [],
       "agent_run": {
         "agent_name": "openai_compatible_reviewer",
@@ -226,19 +180,79 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 1547,
+        "latency_ms": 25545,
         "token_count_in": 7999,
-        "token_count_out": 12,
-        "trace_id": "00b40bc93d41442c965266315ee80a07",
-        "span_id": "d8632496a3384254",
+        "token_count_out": 208,
+        "trace_id": "d046e2de8b8343f4949b31dd35e06e48",
+        "span_id": "def1f48f512747b6",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
         "shard_id": "shard-003",
         "shard_index": 2,
         "shard_count": 10,
-        "context_request_count": 0,
+        "context_request_count": 1,
         "context_refill_used": false
+      }
+    },
+    "4d9572e69575d3926594ec5341301c7b2fa0031c98e2b1319976035b2b75c265": {
+      "status": "completed",
+      "shard_id": "shard-003-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-003",
+      "selected_evidence_ids": [
+        "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_post_visitor_counts_v2.pipe",
+        "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_devices_v2.pipe",
+        "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_locations_v2.pipe",
+        "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_pages_v2.pipe"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_post_visitor_counts_v2.pipe",
+            "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_devices_v2.pipe",
+            "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_locations_v2.pipe",
+            "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_pages_v2.pipe"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The security_sensitive risk signals lack expanded evidence (diff hunks) to evaluate whether the new Tinybird .pipe files introduce any concrete security issue. Requesting risk_evidence for all four files to inspect the actual query logic.",
+          "source_shard_id": "shard-003-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_post_visitor_counts_v2.pipe",
+          "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_devices_v2.pipe",
+          "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_locations_v2.pipe",
+          "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_pages_v2.pipe"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 45036,
+        "token_count_in": 4469,
+        "token_count_out": 182,
+        "trace_id": "b1a0b93ac75049dc8b4c2309af1ab881",
+        "span_id": "cf8ab5a357b641ee",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-003-refill",
+        "shard_index": 2,
+        "shard_count": 10,
+        "context_request_count": 1,
+        "context_refill_used": true
       }
     },
     "a3c14aeba9acbeff901319de36750395a4ca1c39d18d84de13dd2eabecba6d66": {
@@ -270,11 +284,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 592,
+        "latency_ms": 8209,
         "token_count_in": 7840,
         "token_count_out": 12,
-        "trace_id": "e1fdf1785a8647ca8b17a479e2ee033c",
-        "span_id": "738ca4bea1144fc7",
+        "trace_id": "76b4ce03604e4d87ba70026c287e44a4",
+        "span_id": "970135a0ce264bba",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -296,23 +310,7 @@
         "diff_hunk:ghost/core/core/server/data/tinybird/pipes/filtered_sessions_v2.pipe:1",
         "diff_hunk:ghost/core/core/server/data/tinybird/pipes/mv_session_data_v2.pipe:1"
       ],
-      "context_requests": [
-        {
-          "request_type": "risk_evidence",
-          "path": null,
-          "evidence_ids": [
-            "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_utm_sources_v2.pipe",
-            "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_utm_terms_v2.pipe",
-            "risk:security_sensitive:ghost/core/core/server/data/tinybird/pipes/filtered_sessions_v2.pipe",
-            "risk:security_sensitive:ghost/core/core/server/data/tinybird/pipes/mv_session_data_v2.pipe"
-          ],
-          "risk_tag": null,
-          "symbol": null,
-          "reason": "The security_sensitive risk signals are high-confidence but the primary diff_hunk evidence does not show any untrusted input or sensitive sink. Requesting risk_evidence to determine if there is a concrete security exposure introduced by these new Tinybird pipe files.",
-          "source_shard_id": "shard-005",
-          "fulfilled_evidence_ids": []
-        }
-      ],
+      "context_requests": [],
       "issues": [],
       "agent_run": {
         "agent_name": "openai_compatible_reviewer",
@@ -330,79 +328,19 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 1974,
+        "latency_ms": 9520,
         "token_count_in": 8832,
-        "token_count_out": 212,
-        "trace_id": "f0a170045a5044a5b73704d29ac98f6c",
-        "span_id": "3b954ab2bd20480a",
+        "token_count_out": 12,
+        "trace_id": "456c2ea0196b4976841417802e1db70d",
+        "span_id": "7701efcc43984c10",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
         "shard_id": "shard-005",
         "shard_index": 4,
         "shard_count": 10,
-        "context_request_count": 1,
+        "context_request_count": 0,
         "context_refill_used": false
-      }
-    },
-    "94bc86ffa5fef6d332d998ebcd883417ce2101bfda0d5bda88380751ff460d85": {
-      "status": "completed",
-      "shard_id": "shard-005-refill",
-      "is_refill": true,
-      "parent_shard_id": "shard-005",
-      "selected_evidence_ids": [
-        "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_utm_sources_v2.pipe",
-        "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_utm_terms_v2.pipe",
-        "risk:security_sensitive:ghost/core/core/server/data/tinybird/pipes/filtered_sessions_v2.pipe",
-        "risk:security_sensitive:ghost/core/core/server/data/tinybird/pipes/mv_session_data_v2.pipe"
-      ],
-      "context_requests": [
-        {
-          "request_type": "risk_evidence",
-          "path": null,
-          "evidence_ids": [
-            "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_utm_sources_v2.pipe",
-            "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_utm_terms_v2.pipe",
-            "risk:security_sensitive:ghost/core/core/server/data/tinybird/pipes/filtered_sessions_v2.pipe",
-            "risk:security_sensitive:ghost/core/core/server/data/tinybird/pipes/mv_session_data_v2.pipe"
-          ],
-          "risk_tag": null,
-          "symbol": null,
-          "reason": "The security_sensitive risk signals lack any diff_hunk evidence to evaluate whether a concrete security issue was introduced. Requesting risk_evidence for all four files to inspect the actual Tinybird pipe definitions.",
-          "source_shard_id": "shard-005-refill",
-          "fulfilled_evidence_ids": []
-        }
-      ],
-      "issues": [],
-      "agent_run": {
-        "agent_name": "openai_compatible_reviewer",
-        "model": "deepseek-ai/DeepSeek-V4-Flash",
-        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
-        "input_evidence_ids": [
-          "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_utm_sources_v2.pipe",
-          "risk:security_sensitive:ghost/core/core/server/data/tinybird/endpoints/api_top_utm_terms_v2.pipe",
-          "risk:security_sensitive:ghost/core/core/server/data/tinybird/pipes/filtered_sessions_v2.pipe",
-          "risk:security_sensitive:ghost/core/core/server/data/tinybird/pipes/mv_session_data_v2.pipe"
-        ],
-        "output_issue_ids": [],
-        "fallback_used": false,
-        "iteration": 0,
-        "feedback_hash": "",
-        "retry_count": 0,
-        "retry_log": [],
-        "latency_ms": 42544,
-        "token_count_in": 4528,
-        "token_count_out": 177,
-        "trace_id": "918a048c8f954023aa532763dcb4f2d7",
-        "span_id": "340dcc99f45e488e",
-        "parent_span_id": "",
-        "status": "ok",
-        "error_type": "",
-        "shard_id": "shard-005-refill",
-        "shard_index": 4,
-        "shard_count": 10,
-        "context_request_count": 1,
-        "context_refill_used": true
       }
     },
     "1c50399dd8056204e20b296932d7e1133e103c9dfa681ad12105e4312cf7ffc7": {
@@ -434,11 +372,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 36206,
+        "latency_ms": 3992,
         "token_count_in": 10651,
         "token_count_out": 12,
-        "trace_id": "2e56c8d3f48947ab9057da08475cb178",
-        "span_id": "2a4f48fcd11545df",
+        "trace_id": "b10af82acfd34edca620568a9a41107e",
+        "span_id": "9a6a2f7bf32d411a",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -474,13 +412,15 @@
         "fallback_used": false,
         "iteration": 0,
         "feedback_hash": "",
-        "retry_count": 0,
-        "retry_log": [],
-        "latency_ms": 20716,
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 64840,
         "token_count_in": 10647,
         "token_count_out": 12,
-        "trace_id": "453b92284db84f468cde2259e80ff466",
-        "span_id": "967bc238c04544ae",
+        "trace_id": "cbcd4ffb2efd4d2eb3ca51e643ef5382",
+        "span_id": "f5d678b40519411d",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -518,11 +458,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 9385,
+        "latency_ms": 6468,
         "token_count_in": 10325,
         "token_count_out": 12,
-        "trace_id": "74fd158514f74bfb90cc0588766da1a6",
-        "span_id": "670cf87701c84db6",
+        "trace_id": "481dc1a524e74c80a02fa76c21b4e2a4",
+        "span_id": "a619a87eabeb4c00",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -562,11 +502,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 3718,
+        "latency_ms": 3733,
         "token_count_in": 9347,
         "token_count_out": 12,
-        "trace_id": "6653b30688f54eb0a211ca440105b21c",
-        "span_id": "141c979cc1ba43e8",
+        "trace_id": "89677596e5cc43dba1b456bd59fd9c5f",
+        "span_id": "767a257280f64c5b",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -587,19 +527,62 @@
         "diff_hunk:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:110",
         "diff_hunk:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:70"
       ],
-      "context_requests": [],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/core/server/services/tinybird/TinybirdService.js",
+          "evidence_ids": [
+            "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:59",
+            "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:60",
+            "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:61",
+            "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:62"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-010",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "risk_evidence",
+          "path": "ghost/core/test/unit/server/services/stats/utils/tinybird.test.js",
+          "evidence_ids": [
+            "diff:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:107",
+            "diff:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:109",
+            "diff:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:113",
+            "diff:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:114"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-010",
+          "fulfilled_evidence_ids": []
+        }
+      ],
       "issues": [
         {
           "file": "ghost/core/core/server/services/tinybird/TinybirdService.js",
           "line": 59,
-          "severity": "medium",
+          "severity": "high",
           "category": "correctness",
-          "message": "The test expects the URL to contain 'test_pipe_v2.json' but the pipe name is 'api_kpis_v2'. The version suffix is appended as '_v2' to the pipe name, which already contains '_v2', resulting in a double suffix 'api_kpis_v2_v2'.",
-          "suggestion": "Either rename the pipes to not include the version suffix (e.g., 'api_kpis') and let the code append '_v2', or update the versioning logic to avoid duplicating the suffix.",
-          "confidence": 0.5,
+          "message": "The test expects the URL to contain 'test_pipe_v2.json' but the pipe name in the config is 'api_kpis_v2'. The buildRequest method likely appends the version to the pipe name, but the test uses 'test_pipe' as the pipe name and expects 'test_pipe_v2.json'. This mismatch suggests the version is being appended to the pipe name, which would produce 'test_pipe_v2.json' for pipe 'test_pipe' and version 'v2'. However, the actual pipe names in the config already include '_v2' suffix (e.g., 'api_kpis_v2'). If buildRequest appends the version to the pipe name, it would produce 'api_kpis_v2_v2' for those pipes, which is incorrect.",
+          "suggestion": "Verify that the buildRequest method does not append the version suffix to pipe names that already contain '_v2'. If it does, either remove the '_v2' suffix from the pipe names in the config or modify buildRequest to avoid double-suffixing.",
+          "confidence": 0.8,
           "evidence_ids": [
             "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:56",
             "diff_hunk:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:70"
+          ]
+        },
+        {
+          "file": "ghost/core/test/unit/server/services/stats/utils/tinybird.test.js",
+          "line": 110,
+          "severity": "medium",
+          "category": "test_quality",
+          "message": "The test 'ignores tbVersion when local is enabled' was removed. This test verified that when local mode is enabled, the tbVersion parameter is ignored and the URL does not contain '__v2'. The removal of this test reduces coverage for the local mode behavior, which could mask a regression where tbVersion is incorrectly applied in local mode.",
+          "suggestion": "Consider adding a test that verifies the version from config is ignored when local mode is enabled, similar to the removed test but adapted for the new version config approach.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:110"
           ]
         }
       ],
@@ -613,26 +596,101 @@
           "diff_hunk:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:70"
         ],
         "output_issue_ids": [
-          "correctness:ghost/core/core/server/services/tinybird/TinybirdService.js:59"
+          "correctness:ghost/core/core/server/services/tinybird/TinybirdService.js:59",
+          "test_quality:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:110"
         ],
         "fallback_used": false,
         "iteration": 0,
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 4903,
+        "latency_ms": 57985,
         "token_count_in": 5392,
-        "token_count_out": 244,
-        "trace_id": "de1883169eae4a439971a4e6f2646b0d",
-        "span_id": "b0e7d9982b8b46b3",
+        "token_count_out": 825,
+        "trace_id": "3023cb4787d24a3aa6ba4c3f55be5036",
+        "span_id": "d62ad48410b04539",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
         "shard_id": "shard-010",
         "shard_index": 9,
         "shard_count": 10,
-        "context_request_count": 0,
+        "context_request_count": 2,
         "context_refill_used": false
+      }
+    },
+    "30dfeae66447590b7745a831d04261441f83795efd7edf8d39ed5d71a8910ba3": {
+      "status": "completed",
+      "shard_id": "shard-010-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-010",
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:59",
+        "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:60",
+        "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:61",
+        "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:62",
+        "diff:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:107",
+        "diff:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:109",
+        "diff:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:113",
+        "diff:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:114",
+        "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:56",
+        "diff_hunk:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:110"
+      ],
+      "context_requests": [],
+      "issues": [
+        {
+          "file": "ghost/core/test/unit/server/services/stats/utils/tinybird.test.js",
+          "line": 110,
+          "severity": "medium",
+          "category": "test_coverage",
+          "message": "Removed test 'ignores tbVersion when local is enabled' without adding equivalent coverage for the new v2 pipes.",
+          "suggestion": "Add a test that verifies tbVersion is ignored when local is enabled, covering the new v2 pipe names to ensure the materialized view optimization does not break local mode behavior.",
+          "confidence": 0.8,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:110",
+            "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:56"
+          ]
+        }
+      ],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:59",
+          "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:60",
+          "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:61",
+          "diff:ghost/core/core/server/services/tinybird/TinybirdService.js:62",
+          "diff:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:107",
+          "diff:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:109",
+          "diff:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:113",
+          "diff:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:114",
+          "diff_hunk:ghost/core/core/server/services/tinybird/TinybirdService.js:56",
+          "diff_hunk:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:110"
+        ],
+        "output_issue_ids": [
+          "test_coverage:ghost/core/test/unit/server/services/stats/utils/tinybird.test.js:110"
+        ],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 78199,
+        "token_count_in": 4499,
+        "token_count_out": 203,
+        "trace_id": "1195cd70acae4902a264a7f4b6d2604d",
+        "span_id": "69929876eeb04a2b",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-010-refill",
+        "shard_index": 9,
+        "shard_count": 10,
+        "context_request_count": 0,
+        "context_refill_used": true
       }
     }
   }

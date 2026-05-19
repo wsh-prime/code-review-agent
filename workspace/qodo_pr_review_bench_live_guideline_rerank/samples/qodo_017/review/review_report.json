@@ -19,9 +19,9 @@
     "fallback_reason": null,
     "resume_used": false,
     "resume_ignored_reason": null,
-    "total_latency_ms": 12010,
+    "total_latency_ms": 100946,
     "total_token_count_in": 6065,
-    "total_token_count_out": 403,
+    "total_token_count_out": 436,
     "context_budget_enabled": true,
     "context_truncated": true,
     "selected_evidence_count": 3,
@@ -37,9 +37,9 @@
       "file": "src/Components/Endpoints/test/TestComponents/GenericComponent.razor",
       "line": 1,
       "severity": "medium",
-      "category": "style",
-      "message": "New file GenericComponent.razor is missing the required MIT license header. Review guideline 'All C# Source Files Must Include MIT License Header' requires the exact two-line comment header at the start of every .cs file. Although this is a .razor file, the guideline applies to all C# source files; .razor files with @code blocks are considered C# source files.",
-      "suggestion": "Add the license header at the top of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+      "category": "convention",
+      "message": "New file GenericComponent.razor is missing the required MIT license header. Review guideline 'All C# Source Files Must Include MIT License Header' requires every .cs file to start with the exact two-line comment header. Although this is a .razor file, the guideline explicitly mentions 'C# source files' and the file contains C# code in the @code block; the same licensing expectation applies.",
+      "suggestion": "Add the standard license header as the first two lines: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
       "confidence": 0.5,
       "evidence_ids": [
         "diff_hunk:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1"
@@ -49,10 +49,10 @@
   "discarded": [
     {
       "file": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs",
-      "line": 10,
+      "line": 1,
       "severity": "medium",
-      "category": "style",
-      "message": "Test class 'ServerComponentDeserializerTest' does not follow the naming convention. Review guideline 'Test Classes Must Follow Naming Convention' requires test class names to end with 'Test' or 'Tests' suffix. The class name ends with 'Test' but the guideline expects a clear suffix; however, the class name is acceptable as it ends with 'Test'. No issue.",
+      "category": "convention",
+      "message": "The class ServerComponentDeserializerTest does not follow the naming convention required by review guideline 'Test Classes Must Follow Naming Convention'. The class name ends with 'Test' but the guideline expects a 'Test' or 'Tests' suffix. The name 'ServerComponentDeserializerTest' ends with 'Test', which is acceptable per the rule. However, the class is now nested inside the namespace block (changed from file-scoped namespace to block-scoped namespace), which does not affect naming. No violation found.",
       "suggestion": "",
       "confidence": 0.5,
       "evidence_ids": [
@@ -2995,19 +2995,21 @@
         "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:1"
       ],
       "output_issue_ids": [
-        "style:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1",
-        "style:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:10"
+        "convention:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1",
+        "convention:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:1"
       ],
       "fallback_used": false,
       "iteration": 0,
       "feedback_hash": "",
-      "retry_count": 0,
-      "retry_log": [],
-      "latency_ms": 12010,
+      "retry_count": 1,
+      "retry_log": [
+        "attempt=1 error=timeout delay=1.00s"
+      ],
+      "latency_ms": 100946,
       "token_count_in": 6065,
-      "token_count_out": 403,
-      "trace_id": "8a0d7277bb284f199eec54ac20af2d5a",
-      "span_id": "1719e3d72a4544e2",
+      "token_count_out": 436,
+      "trace_id": "1d5a0fbeda384afa90cc4b3e0476fe38",
+      "span_id": "64f7bfdbcc934f57",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
@@ -3303,8 +3305,8 @@
         "reject_count": 0,
         "feedback_sent": [
           {
-            "issue_id": "style:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1",
-            "category": "style",
+            "issue_id": "convention:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1",
+            "category": "convention",
             "critic_reason": "low confidence",
             "original_confidence": 0.5,
             "evidence_ids": [
@@ -3323,19 +3325,21 @@
               "diff_hunk:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:1"
             ],
             "output_issue_ids": [
-              "style:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1",
-              "style:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:10"
+              "convention:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1",
+              "convention:src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs:1"
             ],
             "fallback_used": false,
             "iteration": 0,
             "feedback_hash": "",
-            "retry_count": 0,
-            "retry_log": [],
-            "latency_ms": 12010,
+            "retry_count": 1,
+            "retry_log": [
+              "attempt=1 error=timeout delay=1.00s"
+            ],
+            "latency_ms": 100946,
             "token_count_in": 6065,
-            "token_count_out": 403,
-            "trace_id": "8a0d7277bb284f199eec54ac20af2d5a",
-            "span_id": "1719e3d72a4544e2",
+            "token_count_out": 436,
+            "trace_id": "1d5a0fbeda384afa90cc4b3e0476fe38",
+            "span_id": "64f7bfdbcc934f57",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
@@ -3374,7 +3378,7 @@
           }
         ],
         "issue_set": [
-          "style:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1"
+          "convention:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1"
         ],
         "keep": [],
         "needs_human_review": [
@@ -3382,9 +3386,9 @@
             "file": "src/Components/Endpoints/test/TestComponents/GenericComponent.razor",
             "line": 1,
             "severity": "medium",
-            "category": "style",
-            "message": "New file GenericComponent.razor is missing the required MIT license header. Review guideline 'All C# Source Files Must Include MIT License Header' requires the exact two-line comment header at the start of every .cs file. Although this is a .razor file, the guideline applies to all C# source files; .razor files with @code blocks are considered C# source files.",
-            "suggestion": "Add the license header at the top of the file: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
+            "category": "convention",
+            "message": "New file GenericComponent.razor is missing the required MIT license header. Review guideline 'All C# Source Files Must Include MIT License Header' requires every .cs file to start with the exact two-line comment header. Although this is a .razor file, the guideline explicitly mentions 'C# source files' and the file contains C# code in the @code block; the same licensing expectation applies.",
+            "suggestion": "Add the standard license header as the first two lines: '// Licensed to the .NET Foundation under one or more agreements.' followed by '// The .NET Foundation licenses this file to you under the MIT license.'",
             "confidence": 0.5,
             "evidence_ids": [
               "diff_hunk:src/Components/Endpoints/test/TestComponents/GenericComponent.razor:1"
@@ -3394,10 +3398,10 @@
         "discarded": [
           {
             "file": "src/Components/Server/test/Circuits/ServerComponentDeserializerTest.cs",
-            "line": 10,
+            "line": 1,
             "severity": "medium",
-            "category": "style",
-            "message": "Test class 'ServerComponentDeserializerTest' does not follow the naming convention. Review guideline 'Test Classes Must Follow Naming Convention' requires test class names to end with 'Test' or 'Tests' suffix. The class name ends with 'Test' but the guideline expects a clear suffix; however, the class name is acceptable as it ends with 'Test'. No issue.",
+            "category": "convention",
+            "message": "The class ServerComponentDeserializerTest does not follow the naming convention required by review guideline 'Test Classes Must Follow Naming Convention'. The class name ends with 'Test' but the guideline expects a 'Test' or 'Tests' suffix. The name 'ServerComponentDeserializerTest' ends with 'Test', which is acceptable per the rule. However, the class is now nested inside the namespace block (changed from file-scoped namespace to block-scoped namespace), which does not affect naming. No violation found.",
             "suggestion": "",
             "confidence": 0.5,
             "evidence_ids": [
@@ -3410,10 +3414,10 @@
     ]
   },
   "tracing": {
-    "total_latency_ms": 12010,
+    "total_latency_ms": 100946,
     "total_token_count_in": 6065,
-    "total_token_count_out": 403,
-    "total_retry_count": 0,
+    "total_token_count_out": 436,
+    "total_retry_count": 1,
     "run_count": 2,
     "status_counts": {
       "ok": 2

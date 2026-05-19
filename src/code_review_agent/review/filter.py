@@ -9,6 +9,7 @@ from code_review_agent.review.issue_quality import (
     is_low_signal_review_suggestion,
     is_style_preference,
 )
+from code_review_agent.review.schema import Finding, IssueLifecycleResult
 
 
 @dataclass(slots=True)
@@ -50,73 +51,158 @@ def filter_issues(
     *,
     confidence_threshold: float = 0.6,
 ) -> FilterResult:
-    """Validate and partition review issues.
+    """Validate and partition legacy review issues.
+
+    The implementation delegates to ``filter_findings`` so the main review path
+    can use the compact lifecycle schema while older callers keep the same API.
+    """
+
+    candidates = [
+        Finding.from_legacy_issue(issue, status="candidate")
+        for issue in findings
+    ]
+    candidates.extend(
+        Finding.from_legacy_issue(issue, status="needs_human_review")
+        for issue in needs_human_review
+    )
+    lifecycle = filter_findings(
+        candidates,
+        package,
+        changed_paths,
+        confidence_threshold=confidence_threshold,
+    )
+    return FilterResult(
+        findings=lifecycle.legacy_issues_by_status("finding"),
+        needs_human_review=lifecycle.legacy_issues_by_status("needs_human_review"),
+        discarded=[
+            DiscardedIssue(
+                issue=finding.to_legacy_issue(),
+                reason=finding.reason or "discarded",
+            )
+            for finding in lifecycle.by_status("discarded")
+        ],
+    )
+
+
+def filter_findings(
+    candidates: list[Finding],
+    package: EvidencePackage,
+    changed_paths: set[str],
+    *,
+    confidence_threshold: float = 0.6,
+) -> IssueLifecycleResult:
+    """Validate and partition review findings.
 
     The filter is deliberately conservative: an issue with no valid evidence is
     discarded, while location uncertainty and low confidence are downgraded to
     ``needs_human_review``.
     """
 
-    result = FilterResult()
+    result = IssueLifecycleResult()
 
-    def discard(issue: ReviewIssue, reason: str) -> None:
-        result.discarded.append(DiscardedIssue(issue=issue, reason=reason))
+    def emit(finding: Finding, status: str, reason: str = "") -> None:
+        result.items.append(_finding_with(finding, status=status, reason=reason))
 
-    def route_issue(issue: ReviewIssue, *, already_uncertain: bool) -> None:
-        if not issue.evidence_ids:
-            discard(issue, "missing_evidence")
+    def route_finding(finding: Finding) -> None:
+        issue = finding.to_legacy_issue()
+        if not finding.evidence_ids:
+            emit(finding, "discarded", "missing_evidence")
             return
 
-        valid_ids = [eid for eid in issue.evidence_ids if eid in package.evidence_index]
+        valid_ids = [
+            eid for eid in finding.evidence_ids if eid in package.evidence_index
+        ]
         if not valid_ids:
-            discard(issue, "invalid_evidence_ids")
+            emit(finding, "discarded", "invalid_evidence_ids")
             return
 
-        clean_issue = ReviewIssue(
-            file=issue.file,
-            line=issue.line,
-            severity=issue.severity,
-            category=issue.category,
-            message=issue.message,
-            suggestion=issue.suggestion,
-            confidence=issue.confidence,
-            evidence_ids=valid_ids,
-        )
+        clean_finding = _finding_with(finding, evidence_ids=valid_ids)
+        clean_issue = clean_finding.to_legacy_issue()
 
         if is_style_preference(clean_issue):
-            discard(clean_issue, "style_preference")
+            emit(clean_finding, "discarded", "style_preference")
             return
         if is_low_signal_review_suggestion(clean_issue):
-            discard(clean_issue, "low_signal_suggestion")
+            emit(clean_finding, "discarded", "low_signal_suggestion")
             return
 
         if clean_issue.file not in changed_paths:
             if not _has_related_changed_evidence(
                 clean_issue, package=package, changed_paths=changed_paths
             ):
-                discard(clean_issue, "file_not_changed")
+                emit(clean_finding, "discarded", "file_not_changed")
                 return
-            result.needs_human_review.append(clean_issue)
+            emit(clean_finding, "needs_human_review", "related_file")
             return
 
         if not _line_is_related_to_change(clean_issue, package):
-            result.needs_human_review.append(clean_issue)
+            emit(clean_finding, "needs_human_review", "line_uncertain")
             return
 
-        if already_uncertain or clean_issue.confidence < confidence_threshold:
-            result.needs_human_review.append(clean_issue)
+        if clean_finding.status == "needs_human_review":
+            emit(clean_finding, "needs_human_review", clean_finding.reason)
+            return
+        if clean_issue.confidence < confidence_threshold:
+            emit(clean_finding, "needs_human_review", "low_confidence")
             return
 
-        result.findings.append(clean_issue)
+        emit(clean_finding, "finding")
 
-    for issue in findings:
-        route_issue(issue, already_uncertain=False)
-    for issue in needs_human_review:
-        route_issue(issue, already_uncertain=True)
+    for finding in candidates:
+        route_finding(finding)
 
-    result.findings = _merge_duplicates(result.findings)
-    result.needs_human_review = _merge_duplicates(result.needs_human_review)
+    result.items = [
+        *_merge_duplicate_findings(result.by_status("finding")),
+        *_merge_duplicate_findings(result.by_status("needs_human_review")),
+        *result.by_status("discarded"),
+    ]
     return result
+
+
+def _finding_with(
+    finding: Finding,
+    *,
+    status: str | None = None,
+    reason: str | None = None,
+    evidence_ids: list[str] | None = None,
+) -> Finding:
+    return Finding(
+        file=finding.file,
+        line=finding.line,
+        severity=finding.severity,
+        category=finding.category,
+        message=finding.message,
+        suggestion=finding.suggestion,
+        confidence=finding.confidence,
+        evidence_ids=(
+            list(finding.evidence_ids) if evidence_ids is None else list(evidence_ids)
+        ),
+        status=finding.status if status is None else status,
+        reason=finding.reason if reason is None else reason,
+    )
+
+
+def _merge_duplicate_findings(findings: list[Finding]) -> list[Finding]:
+    merged_issues = _merge_duplicates(
+        [finding.to_legacy_issue() for finding in findings]
+    )
+    reason_by_key = {
+        (finding.file, finding.category): finding.reason
+        for finding in findings
+        if finding.reason
+    }
+    status_by_key = {
+        (finding.file, finding.category): finding.status
+        for finding in findings
+    }
+    return [
+        Finding.from_legacy_issue(
+            issue,
+            status=status_by_key.get((issue.file, issue.category), "candidate"),
+            reason=reason_by_key.get((issue.file, issue.category), ""),
+        )
+        for issue in merged_issues
+    ]
 
 
 def _merge_duplicates(issues: list[ReviewIssue]) -> list[ReviewIssue]:

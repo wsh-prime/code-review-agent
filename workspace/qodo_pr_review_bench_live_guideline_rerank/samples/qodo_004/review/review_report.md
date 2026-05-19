@@ -6,10 +6,10 @@
 - Changed files: 22
 - Changed entities: 22
 - Risk signals: 9
-- Findings: 1
-- Needs human review: 4
-- Discarded: 9
-- Agent runs: 9
+- Findings: 4
+- Needs human review: 5
+- Discarded: 10
+- Agent runs: 11
 - Loop enabled: True
 - Target repo modified: False
 
@@ -20,12 +20,12 @@
 | Iterations | 1 / 1 |
 | Converged | False |
 | Fallback | False |
-| Retry count | 4 |
-| Total latency | 360592 ms |
-| Token in | 35762 |
-| Token out | 2733 |
+| Retry count | 3 |
+| Total latency | 379818 ms |
+| Token in | 42037 |
+| Token out | 5359 |
 
-- Iteration 0: 15 candidates, 6 verified, 5 uncertain, 1 kept, 0 rejected
+- Iteration 0: 18 candidates, 8 verified, 4 uncertain, 4 kept, 0 rejected
 
 ## Context Budget Summary
 
@@ -33,20 +33,35 @@
 |---|---:|
 | Strategy | `file_risk_shards_v1` |
 | Max input tokens | 9000 |
-| Estimated input tokens | 27869 |
-| Selected evidence | 34 |
-| Omitted evidence | 79 |
+| Estimated input tokens | 32659 |
+| Selected evidence | 36 |
+| Omitted evidence | 77 |
 | Context truncated | True |
 | Review shards | 6 |
-| Context requests | 4 |
-| Refills | 2 |
+| Context requests | 6 |
+| Refills | 4 |
 
 ## Findings
 
-- `style` low at `apps/signup-form/src/utils/helpers.tsx:20` (0.95)
-  - String literal changed from single quotes to double quotes for STORAGE_KEY, violating the 'Code Must Use Single Quotes for Strings' guideline.
-  - Suggestion: Use single quotes: const STORAGE_KEY = 'ghost-history';
-  - Evidence: `diff_hunk:apps/signup-form/src/utils/helpers.tsx:17`
+- `best_practice` medium at `apps/signup-form/src/components/frame.tsx:1` (0.99)
+  - React Button Elements Must Have Explicit Type Attribute: The patch does not introduce any <button> elements, so no violation of this rule.
+  - Suggestion: No action required.
+  - Evidence: `diff_hunk:apps/signup-form/src/components/frame.tsx:1`
+
+- `correctness` medium at `apps/signup-form/src/components/pages/form-page.tsx:30` (0.85)
+  - Removing `setLoading(false)` in the minimal branch leaves the loading state stuck as `true` when the form submission succeeds in minimal mode, causing the UI to remain in a loading state indefinitely.
+  - Suggestion: Restore `setLoading(false)` in the minimal branch, or ensure loading state is reset elsewhere after success.
+  - Evidence: `diff_hunk:apps/signup-form/src/components/pages/form-page.tsx:27`
+
+- `best_practice` low at `apps/signup-form/src/components/pages/form-view.tsx:56` (0.90)
+  - Review guideline violation: 'React Button Elements Must Have Explicit Type Attribute'. The `<button>` element in this file does not have an explicit `type` attribute, which defaults to `submit` and can cause unintended form submissions.
+  - Suggestion: Add `type="button"` to buttons that are not meant to submit the form, or `type="submit"` for the submit button.
+  - Evidence: `diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:53`
+
+- `best_practice` medium at `apps/signup-form/src/components/pages/success-page.tsx:2` (0.95)
+  - File renamed to kebab-case but import path uses kebab-case, which is correct; however, the file is in apps/signup-form/ which is not an admin app (apps/admin-x-*), so the kebab-case naming guideline does not apply. No issue.
+  - Suggestion: 
+  - Evidence: `diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1`
 
 ## Needs Human Review
 
@@ -55,20 +70,25 @@
   - Suggestion: Confirm lock files, compatibility, and test coverage for the dependency change.
   - Evidence: `diff:apps/signup-form/package.json:3`, `risk:dependency_change:apps/signup-form/package.json`
 
-- `maintainability` warning at `apps/signup-form/src/components/frame.tsx:1` (0.50)
-  - Import path changed from './IFrame' to './iframe' but the renamed file is not in the changed files list, which may break the build if the target file does not exist or is not renamed.
-  - Suggestion: Ensure that the file './iframe' exists and is correctly named, or update the import to match the actual file name.
-  - Evidence: `diff_hunk:apps/signup-form/src/components/frame.tsx:1`
+- `correctness` medium at `apps/signup-form/src/components/pages/form-view.tsx:56` (0.50)
+  - React List Rendering Must Not Use Array Index as Key: The patch does not introduce a list rendering issue, but the review guideline prohibits array index keys. No evidence of list rendering in this hunk.
+  - Suggestion: Ensure any list rendering in this file uses stable unique identifiers (e.g., item.id) instead of array indices.
+  - Evidence: `diff_hunk:apps/signup-form/src/components/pages/form-view.tsx:53`
 
-- `maintainability` warning at `apps/signup-form/src/app.tsx:4` (0.50)
-  - Import path changed from './AppContext' to './app-context' but the renamed file is not in the changed files list, which may break the build if the target file does not exist or is not renamed.
-  - Suggestion: Ensure that the file './app-context' exists and is correctly named, or update the import to match the actual file name.
-  - Evidence: `diff_hunk:apps/signup-form/src/app.tsx:1`
-
-- `correctness` medium at `apps/signup-form/src/components/pages/success-page.tsx:2` (0.50)
-  - Import path changed from './SuccessView' to './success-view' but the file was renamed from SuccessView.tsx to success-view.tsx. The import path must match the new file name exactly.
-  - Suggestion: Verify that the import path './success-view' resolves to the renamed file success-view.tsx. If the file is in the same directory, the import should be './success-view'.
+- `correctness` medium at `apps/signup-form/src/components/pages/success-page.tsx:3` (0.50)
+  - Import path changed from './SuccessView' to './success-view' but the file was renamed from SuccessView.tsx to success-view.tsx. The import path must match the actual file name exactly.
+  - Suggestion: Verify that the import path './success-view' matches the renamed file 'success-view.tsx' in the same directory.
   - Evidence: `diff_hunk:apps/signup-form/src/components/pages/success-page.tsx:1`
+
+- `code_style` minor at `apps/signup-form/src/utils/helpers.tsx:20` (0.50)
+  - String literal uses double quotes instead of single quotes, violating the 'Code Must Use Single Quotes for Strings' guideline.
+  - Suggestion: Replace double quotes with single quotes: const STORAGE_KEY = 'ghost-history';
+  - Evidence: `diff_hunk:apps/signup-form/src/utils/helpers.tsx:17`
+
+- `bug_risk` medium at `apps/signup-form/src/utils/helpers.tsx:45` (0.50)
+  - Removing the null check on getDefaultUrlHistory() return value may cause downstream code to receive undefined when sessionStorage is empty or throws, potentially leading to runtime errors.
+  - Suggestion: Restore the null check or ensure callers handle undefined history values.
+  - Evidence: `diff_hunk:apps/signup-form/src/utils/helpers.tsx:42`
 
 ## Changed Files
 

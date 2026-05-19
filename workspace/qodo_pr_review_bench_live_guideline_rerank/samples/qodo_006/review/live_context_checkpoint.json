@@ -70,8 +70,8 @@
           "line": 13,
           "severity": "high",
           "category": "correctness",
-          "message": "Changed require path from '../../services/Users' to '../../services/users' may break module resolution if the file system is case-sensitive or the module is not renamed accordingly.",
-          "suggestion": "Verify that the file at '../../services/users' exists and exports the same interface as the original '../../services/Users'.",
+          "message": "Changed require path from '../../services/Users' to '../../services/users' may cause module resolution failure if the target file does not exist at the new lowercase path.",
+          "suggestion": "Verify that the file 'ghost/core/core/server/services/users.js' (or 'users/index.js') exists and exports the same UsersService class as the original 'Users.js'.",
           "confidence": 0.8,
           "evidence_ids": [
             "diff_hunk:ghost/core/core/server/api/endpoints/authentication.js:10"
@@ -82,8 +82,8 @@
           "line": 9,
           "severity": "high",
           "category": "correctness",
-          "message": "Changed require path from '../../services/Users' to '../../services/users' may break module resolution if the file system is case-sensitive or the module is not renamed accordingly.",
-          "suggestion": "Verify that the file at '../../services/users' exists and exports the same interface as the original '../../services/Users'.",
+          "message": "Changed require path from '../../services/Users' to '../../services/users' may cause module resolution failure if the target file does not exist at the new lowercase path.",
+          "suggestion": "Verify that the file 'ghost/core/core/server/services/users.js' (or 'users/index.js') exists and exports the same UsersService class as the original 'Users.js'.",
           "confidence": 0.8,
           "evidence_ids": [
             "diff_hunk:ghost/core/core/server/api/endpoints/users.js:6"
@@ -94,8 +94,8 @@
           "line": 5,
           "severity": "high",
           "category": "correctness",
-          "message": "Changed require path from '../../../../../services/announcement-bar-service/AnnouncementBarSettings' to '../../../../../services/announcement-bar-service/announcement-bar-settings' may break module resolution if the file system is case-sensitive or the module is not renamed accordingly.",
-          "suggestion": "Verify that the file at '../../../../../services/announcement-bar-service/announcement-bar-settings' exists and exports the same interface as the original '../../../../../services/announcement-bar-service/AnnouncementBarSettings'.",
+          "message": "Changed require path from '../../../../../services/announcement-bar-service/AnnouncementBarSettings' to '../../../../../services/announcement-bar-service/announcement-bar-settings' may cause module resolution failure if the target file does not exist at the new lowercase path.",
+          "suggestion": "Verify that the file 'ghost/core/core/server/services/announcement-bar-service/announcement-bar-settings.js' exists and exports the same AnnouncementBarSettings class as the original 'AnnouncementBarSettings.js'.",
           "confidence": 0.8,
           "evidence_ids": [
             "diff_hunk:ghost/core/core/server/api/endpoints/utils/validators/input/settings.js:2"
@@ -106,8 +106,8 @@
           "line": 3,
           "severity": "high",
           "category": "correctness",
-          "message": "Changed import path from '../identity-tokens/IdentityTokenService' to '../identity-tokens/identity-token-service' may break module resolution if the file system is case-sensitive or the module is not renamed accordingly.",
-          "suggestion": "Verify that the file at '../identity-tokens/identity-token-service' exists and exports the same interface as the original '../identity-tokens/IdentityTokenService'.",
+          "message": "Changed import path from '../identity-tokens/IdentityTokenService' to '../identity-tokens/identity-token-service' may cause module resolution failure if the target file does not exist at the new lowercase path.",
+          "suggestion": "Verify that the file 'ghost/core/core/server/services/identity-tokens/identity-token-service.ts' exists and exports the same IdentityTokenService class as the original 'IdentityTokenService.ts'.",
           "confidence": 0.8,
           "evidence_ids": [
             "diff_hunk:ghost/core/core/server/services/activitypub/activity-pub-service.ts:1"
@@ -135,11 +135,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 6852,
+        "latency_ms": 47217,
         "token_count_in": 5755,
-        "token_count_out": 939,
-        "trace_id": "7cae3631e415489fb1c6ca6c4deacea9",
-        "span_id": "9a5a411e23a3435f",
+        "token_count_out": 968,
+        "trace_id": "d6abad7a257a438fb26fb5c25fb18a9f",
+        "span_id": "7f89092a293c474e",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -172,9 +172,9 @@
           "line": 13,
           "severity": "high",
           "category": "correctness",
-          "message": "The require path changed from '../../services/Users' to '../../services/users' but the diff_hunk shows the old path was '../../services/Users' (capital U). If the module was renamed to lowercase, this is correct; otherwise, this could break the import.",
-          "suggestion": "Verify that the module at '../../services/users' exists and exports the same UsersService class as the old '../../services/Users'.",
-          "confidence": 0.9,
+          "message": "The require path for UsersService was changed from '../../services/Users' to '../../services/users', which may break module resolution if the file system is case-sensitive or the module is exported under a different casing.",
+          "suggestion": "Verify that the module at '../../services/users' exists and exports the expected constructor. If the original path was correct, revert the change.",
+          "confidence": 0.85,
           "evidence_ids": [
             "diff_hunk:ghost/core/core/server/api/endpoints/authentication.js:10",
             "diff:ghost/core/core/server/api/endpoints/authentication.js:13"
@@ -185,9 +185,9 @@
           "line": 9,
           "severity": "high",
           "category": "correctness",
-          "message": "The require path changed from '../../services/Users' to '../../services/users' but the diff_hunk shows the old path was '../../services/Users' (capital U). If the module was renamed to lowercase, this is correct; otherwise, this could break the import.",
-          "suggestion": "Verify that the module at '../../services/users' exists and exports the same UsersService class as the old '../../services/Users'.",
-          "confidence": 0.9,
+          "message": "The require path for UsersService was changed from '../../services/Users' to '../../services/users', which may break module resolution if the file system is case-sensitive or the module is exported under a different casing.",
+          "suggestion": "Verify that the module at '../../services/users' exists and exports the expected constructor. If the original path was correct, revert the change.",
+          "confidence": 0.85,
           "evidence_ids": [
             "diff_hunk:ghost/core/core/server/api/endpoints/users.js:6",
             "diff:ghost/core/core/server/api/endpoints/users.js:9"
@@ -198,9 +198,9 @@
           "line": 5,
           "severity": "high",
           "category": "correctness",
-          "message": "The require path changed from '../../../../../services/announcement-bar-service/AnnouncementBarSettings' to '../../../../../services/announcement-bar-service/announcement-bar-settings' but the diff_hunk shows the old path was '../../../../../services/announcement-bar-service/AnnouncementBarSettings' (capital A, B, S). If the module was renamed to lowercase, this is correct; otherwise, this could break the import.",
-          "suggestion": "Verify that the module at '../../../../../services/announcement-bar-service/announcement-bar-settings' exists and exports the same AnnouncementBarSettings class as the old path.",
-          "confidence": 0.9,
+          "message": "The require path for AnnouncementBarSettings was changed from '../../../../../services/announcement-bar-service/AnnouncementBarSettings' to '../../../../../services/announcement-bar-service/announcement-bar-settings', which may break module resolution if the file system is case-sensitive or the module is exported under a different casing.",
+          "suggestion": "Verify that the module at '../../../../../services/announcement-bar-service/announcement-bar-settings' exists and exports the expected constructor. If the original path was correct, revert the change.",
+          "confidence": 0.85,
           "evidence_ids": [
             "diff_hunk:ghost/core/core/server/api/endpoints/utils/validators/input/settings.js:2",
             "diff:ghost/core/core/server/api/endpoints/utils/validators/input/settings.js:5"
@@ -211,12 +211,36 @@
           "line": 3,
           "severity": "high",
           "category": "correctness",
-          "message": "The import path changed from '../identity-tokens/IdentityTokenService' to '../identity-tokens/identity-token-service' but the diff_hunk shows the old path was '../identity-tokens/IdentityTokenService' (capital I, T, S). If the module was renamed to lowercase, this is correct; otherwise, this could break the import.",
-          "suggestion": "Verify that the module at '../identity-tokens/identity-token-service' exists and exports the same IdentityTokenService class as the old path.",
-          "confidence": 0.9,
+          "message": "The import path for IdentityTokenService was changed from '../identity-tokens/IdentityTokenService' to '../identity-tokens/identity-token-service', which may break module resolution if the file system is case-sensitive or the module is exported under a different casing.",
+          "suggestion": "Verify that the module at '../identity-tokens/identity-token-service' exists and exports the expected class. If the original path was correct, revert the change.",
+          "confidence": 0.85,
           "evidence_ids": [
             "diff_hunk:ghost/core/core/server/services/activitypub/activity-pub-service.ts:1",
             "diff:ghost/core/core/server/services/activitypub/activity-pub-service.ts:3"
+          ]
+        },
+        {
+          "file": "ghost/core/core/server/api/endpoints/authentication.js",
+          "line": 13,
+          "severity": "medium",
+          "category": "best_practice",
+          "message": "API endpoint controller file 'authentication.js' is missing the required JSDoc type annotation '@type {import('@tryghost/api-framework').Controller}' as per review guideline 'API Endpoint Controllers Must Have Type Annotations'.",
+          "suggestion": "Add a JSDoc type annotation to the exported controller object: /** @type {import('@tryghost/api-framework').Controller} */",
+          "confidence": 0.9,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/api/endpoints/authentication.js:10"
+          ]
+        },
+        {
+          "file": "ghost/core/core/server/api/endpoints/users.js",
+          "line": 9,
+          "severity": "medium",
+          "category": "best_practice",
+          "message": "API endpoint controller file 'users.js' is missing the required JSDoc type annotation '@type {import('@tryghost/api-framework').Controller}' as per review guideline 'API Endpoint Controllers Must Have Type Annotations'.",
+          "suggestion": "Add a JSDoc type annotation to the exported controller object: /** @type {import('@tryghost/api-framework').Controller} */",
+          "confidence": 0.9,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/api/endpoints/users.js:6"
           ]
         }
       ],
@@ -238,20 +262,20 @@
           "correctness:ghost/core/core/server/api/endpoints/authentication.js:13",
           "correctness:ghost/core/core/server/api/endpoints/users.js:9",
           "correctness:ghost/core/core/server/api/endpoints/utils/validators/input/settings.js:5",
-          "correctness:ghost/core/core/server/services/activitypub/activity-pub-service.ts:3"
+          "correctness:ghost/core/core/server/services/activitypub/activity-pub-service.ts:3",
+          "best_practice:ghost/core/core/server/api/endpoints/authentication.js:13",
+          "best_practice:ghost/core/core/server/api/endpoints/users.js:9"
         ],
         "fallback_used": false,
         "iteration": 0,
         "feedback_hash": "",
-        "retry_count": 1,
-        "retry_log": [
-          "attempt=1 error=timeout delay=1.00s"
-        ],
-        "latency_ms": 96586,
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 11109,
         "token_count_in": 5241,
-        "token_count_out": 887,
-        "trace_id": "a807a246a9c54aada40bc99bf19b7119",
-        "span_id": "963da2f405bf4e25",
+        "token_count_out": 1147,
+        "trace_id": "67e3ffc7a490430fa983e604e04d52cb",
+        "span_id": "dbfd3a758774427e",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -291,11 +315,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 6358,
+        "latency_ms": 2140,
         "token_count_in": 4348,
         "token_count_out": 12,
-        "trace_id": "54129629df154857813706e3d41bb525",
-        "span_id": "ee47a4eec8424e2e",
+        "trace_id": "9eeba558a61a432b90c3fc5bf984fcc3",
+        "span_id": "5a2217d04167439f",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -317,58 +341,8 @@
         "diff_hunk:ghost/core/core/server/services/announcement-bar-service/index.js:1",
         "diff_hunk:ghost/core/core/server/services/audience-feedback/audience-feedback-controller.js:1"
       ],
-      "context_requests": [
-        {
-          "request_type": "same_file_more_evidence",
-          "path": "ghost/core/core/server/services/announcement-bar-service/index.js",
-          "evidence_ids": [
-            "diff:ghost/core/core/server/services/announcement-bar-service/index.js:2"
-          ],
-          "risk_tag": null,
-          "symbol": null,
-          "reason": "Verify that the renamed module file exists and the require path is correct.",
-          "source_shard_id": "shard-003",
-          "fulfilled_evidence_ids": []
-        },
-        {
-          "request_type": "same_file_more_evidence",
-          "path": "ghost/core/core/server/services/audience-feedback/audience-feedback-controller.js",
-          "evidence_ids": [
-            "diff:ghost/core/core/server/services/audience-feedback/audience-feedback-controller.js:1"
-          ],
-          "risk_tag": null,
-          "symbol": null,
-          "reason": "Verify that the renamed module file exists and the require path is correct.",
-          "source_shard_id": "shard-003",
-          "fulfilled_evidence_ids": []
-        }
-      ],
-      "issues": [
-        {
-          "file": "ghost/core/core/server/services/announcement-bar-service/index.js",
-          "line": 3,
-          "severity": "medium",
-          "category": "correctness",
-          "message": "The require path was changed from './AnnouncementBarSettings' to './announcement-bar-settings' but the diff hunk does not show the corresponding file rename or existence of the new module. If the file was not renamed, this will cause a runtime module resolution failure.",
-          "suggestion": "Ensure the file './announcement-bar-settings.js' exists (or was renamed accordingly) before merging.",
-          "confidence": 0.5,
-          "evidence_ids": [
-            "diff_hunk:ghost/core/core/server/services/announcement-bar-service/index.js:1"
-          ]
-        },
-        {
-          "file": "ghost/core/core/server/services/audience-feedback/audience-feedback-controller.js",
-          "line": 1,
-          "severity": "medium",
-          "category": "correctness",
-          "message": "The require path was changed from './Feedback' to './feedback' but the diff hunk does not show the corresponding file rename or existence of the new module. If the file was not renamed, this will cause a runtime module resolution failure.",
-          "suggestion": "Ensure the file './feedback.js' exists (or was renamed accordingly) before merging.",
-          "confidence": 0.5,
-          "evidence_ids": [
-            "diff_hunk:ghost/core/core/server/services/audience-feedback/audience-feedback-controller.js:1"
-          ]
-        }
-      ],
+      "context_requests": [],
+      "issues": [],
       "agent_run": {
         "agent_name": "openai_compatible_reviewer",
         "model": "deepseek-ai/DeepSeek-V4-Flash",
@@ -379,76 +353,25 @@
           "diff_hunk:ghost/core/core/server/services/announcement-bar-service/index.js:1",
           "diff_hunk:ghost/core/core/server/services/audience-feedback/audience-feedback-controller.js:1"
         ],
-        "output_issue_ids": [
-          "correctness:ghost/core/core/server/services/announcement-bar-service/index.js:3",
-          "correctness:ghost/core/core/server/services/audience-feedback/audience-feedback-controller.js:1"
-        ],
+        "output_issue_ids": [],
         "fallback_used": false,
         "iteration": 0,
         "feedback_hash": "",
-        "retry_count": 1,
-        "retry_log": [
-          "attempt=1 error=timeout delay=1.00s"
-        ],
-        "latency_ms": 75819,
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 3875,
         "token_count_in": 4549,
-        "token_count_out": 520,
-        "trace_id": "4428d5d3bdad43529958c532e9a28fc2",
-        "span_id": "8b65c538a25547c6",
+        "token_count_out": 12,
+        "trace_id": "a166e9eba23e41e19bd1c161fcdb5b22",
+        "span_id": "f902122417c941bb",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
         "shard_id": "shard-003",
         "shard_index": 2,
         "shard_count": 50,
-        "context_request_count": 2,
-        "context_refill_used": false
-      }
-    },
-    "709446289a2562cd48da746984bb4e10c91c2faddfb232577b227525719a6bed": {
-      "status": "completed",
-      "shard_id": "shard-003-refill",
-      "is_refill": true,
-      "parent_shard_id": "shard-003",
-      "selected_evidence_ids": [
-        "diff:ghost/core/core/server/services/announcement-bar-service/index.js:2",
-        "diff:ghost/core/core/server/services/audience-feedback/audience-feedback-controller.js:1",
-        "diff_hunk:ghost/core/core/server/services/announcement-bar-service/index.js:1",
-        "diff_hunk:ghost/core/core/server/services/audience-feedback/audience-feedback-controller.js:1"
-      ],
-      "context_requests": [],
-      "issues": [],
-      "agent_run": {
-        "agent_name": "openai_compatible_reviewer",
-        "model": "deepseek-ai/DeepSeek-V4-Flash",
-        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
-        "input_evidence_ids": [
-          "diff:ghost/core/core/server/services/announcement-bar-service/index.js:2",
-          "diff:ghost/core/core/server/services/audience-feedback/audience-feedback-controller.js:1",
-          "diff_hunk:ghost/core/core/server/services/announcement-bar-service/index.js:1",
-          "diff_hunk:ghost/core/core/server/services/audience-feedback/audience-feedback-controller.js:1"
-        ],
-        "output_issue_ids": [],
-        "fallback_used": false,
-        "iteration": 0,
-        "feedback_hash": "",
-        "retry_count": 1,
-        "retry_log": [
-          "attempt=1 error=timeout delay=1.00s"
-        ],
-        "latency_ms": 67043,
-        "token_count_in": 3303,
-        "token_count_out": 12,
-        "trace_id": "e0e3ce6e13cc43978e8b48ab25be27d4",
-        "span_id": "9b6f83e3386d4ed9",
-        "parent_span_id": "",
-        "status": "ok",
-        "error_type": "",
-        "shard_id": "shard-003-refill",
-        "shard_index": 2,
-        "shard_count": 50,
         "context_request_count": 0,
-        "context_refill_used": true
+        "context_refill_used": false
       }
     },
     "c2e50481101406896acb846d9b7eff4581e0acf623cb02244e65775d80f2769d": {
@@ -480,11 +403,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 1078,
+        "latency_ms": 467,
         "token_count_in": 4358,
         "token_count_out": 12,
-        "trace_id": "e77eaf0a7e1a47e4bcc90627e90161a3",
-        "span_id": "ffd9e89bd43647f4",
+        "trace_id": "c50352b5c4414bf6ac396f788fdd312a",
+        "span_id": "118d00815d96409b",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -524,11 +447,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 2958,
+        "latency_ms": 432,
         "token_count_in": 4440,
         "token_count_out": 12,
-        "trace_id": "2e464fbe0a944e0bbd62e8faf59a040d",
-        "span_id": "40d787399f2c4b8e",
+        "trace_id": "26ae41f9e8be4ddf9273eb5dc5b74e55",
+        "span_id": "6541d55a0ed24cb6",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -552,95 +475,19 @@
       ],
       "context_requests": [
         {
-          "request_type": "same_file_more_evidence",
+          "request_type": "risk_evidence",
           "path": "ghost/core/core/server/services/custom-redirects/index.js",
           "evidence_ids": [
-            "diff:ghost/core/core/server/services/custom-redirects/index.js:4",
-            "diff:ghost/core/core/server/services/custom-redirects/index.js:5"
+            "risk:security_sensitive:ghost/core/core/server/services/custom-redirects/index.js"
           ],
           "risk_tag": null,
           "symbol": null,
-          "reason": "",
-          "source_shard_id": "shard-006",
-          "fulfilled_evidence_ids": []
-        },
-        {
-          "request_type": "same_file_more_evidence",
-          "path": "ghost/core/core/server/services/comments/index.js",
-          "evidence_ids": [
-            "diff:ghost/core/core/server/services/comments/index.js:3",
-            "diff:ghost/core/core/server/services/comments/index.js:4",
-            "diff:ghost/core/core/server/services/comments/index.js:5"
-          ],
-          "risk_tag": null,
-          "symbol": null,
-          "reason": "",
+          "reason": "The risk signal indicates a security-sensitive change in custom-redirects/index.js, but the primary diff hunk only shows require path renames. Need the risk evidence to determine if there is a concrete security exposure.",
           "source_shard_id": "shard-006",
           "fulfilled_evidence_ids": []
         }
       ],
-      "issues": [
-        {
-          "file": "ghost/core/core/server/services/custom-redirects/index.js",
-          "line": 4,
-          "severity": "medium",
-          "category": "correctness",
-          "message": "Renamed require path for DynamicRedirectManager may break module resolution if the new path does not exist.",
-          "suggestion": "Verify that the file '../lib/dynamic-redirect-manager' exists and exports the expected module.",
-          "confidence": 0.5,
-          "evidence_ids": [
-            "diff_hunk:ghost/core/core/server/services/custom-redirects/index.js:1"
-          ]
-        },
-        {
-          "file": "ghost/core/core/server/services/custom-redirects/index.js",
-          "line": 5,
-          "severity": "medium",
-          "category": "correctness",
-          "message": "Renamed require path for CustomRedirectsAPI may break module resolution if the new path does not exist.",
-          "suggestion": "Verify that the file './custom-redirects-api' exists and exports the expected module.",
-          "confidence": 0.5,
-          "evidence_ids": [
-            "diff_hunk:ghost/core/core/server/services/custom-redirects/index.js:1"
-          ]
-        },
-        {
-          "file": "ghost/core/core/server/services/comments/index.js",
-          "line": 3,
-          "severity": "medium",
-          "category": "correctness",
-          "message": "Renamed require path for CommentsService may break module resolution if the new path does not exist.",
-          "suggestion": "Verify that the file './comments-service' exists and exports the expected module.",
-          "confidence": 0.5,
-          "evidence_ids": [
-            "diff_hunk:ghost/core/core/server/services/comments/index.js:1"
-          ]
-        },
-        {
-          "file": "ghost/core/core/server/services/comments/index.js",
-          "line": 4,
-          "severity": "medium",
-          "category": "correctness",
-          "message": "Renamed require path for CommentsController may break module resolution if the new path does not exist.",
-          "suggestion": "Verify that the file './comments-controller' exists and exports the expected module.",
-          "confidence": 0.5,
-          "evidence_ids": [
-            "diff_hunk:ghost/core/core/server/services/comments/index.js:1"
-          ]
-        },
-        {
-          "file": "ghost/core/core/server/services/comments/index.js",
-          "line": 5,
-          "severity": "medium",
-          "category": "correctness",
-          "message": "Renamed require path for CommentsStats may break module resolution if the new path does not exist.",
-          "suggestion": "Verify that the file './comments-stats-service' exists and exports the expected module.",
-          "confidence": 0.5,
-          "evidence_ids": [
-            "diff_hunk:ghost/core/core/server/services/comments/index.js:1"
-          ]
-        }
-      ],
+      "issues": [],
       "agent_run": {
         "agent_name": "openai_compatible_reviewer",
         "model": "deepseek-ai/DeepSeek-V4-Flash",
@@ -651,61 +498,56 @@
           "diff_hunk:ghost/core/core/server/services/comments/index.js:1",
           "diff_hunk:ghost/core/core/server/services/custom-redirects/index.js:1"
         ],
-        "output_issue_ids": [
-          "correctness:ghost/core/core/server/services/custom-redirects/index.js:4",
-          "correctness:ghost/core/core/server/services/custom-redirects/index.js:5",
-          "correctness:ghost/core/core/server/services/comments/index.js:3",
-          "correctness:ghost/core/core/server/services/comments/index.js:4",
-          "correctness:ghost/core/core/server/services/comments/index.js:5"
-        ],
+        "output_issue_ids": [],
         "fallback_used": false,
         "iteration": 0,
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 21988,
+        "latency_ms": 17994,
         "token_count_in": 4649,
-        "token_count_out": 798,
-        "trace_id": "270921e899234244bf9e6ce26633213d",
-        "span_id": "747c5969ca564444",
+        "token_count_out": 127,
+        "trace_id": "74742312304b4e1fb50511afb43c0cff",
+        "span_id": "9fc5668f59264a0e",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
         "shard_id": "shard-006",
         "shard_index": 5,
         "shard_count": 50,
-        "context_request_count": 2,
+        "context_request_count": 1,
         "context_refill_used": false
       }
     },
-    "39e524c6f4e9b4a344c0d7c47d1106f9701babe453bf3cb4f5283cf5c8d00f41": {
+    "5cd7be51640310badb1fab03836b3c7296827c06411d82ffd6052541e79ae732": {
       "status": "completed",
       "shard_id": "shard-006-refill",
       "is_refill": true,
       "parent_shard_id": "shard-006",
       "selected_evidence_ids": [
-        "diff:ghost/core/core/server/services/comments/index.js:3",
-        "diff:ghost/core/core/server/services/comments/index.js:4",
-        "diff:ghost/core/core/server/services/comments/index.js:5",
-        "diff:ghost/core/core/server/services/custom-redirects/index.js:4",
-        "diff:ghost/core/core/server/services/custom-redirects/index.js:5",
-        "diff_hunk:ghost/core/core/server/services/comments/index.js:1",
-        "diff_hunk:ghost/core/core/server/services/custom-redirects/index.js:1"
+        "risk:security_sensitive:ghost/core/core/server/services/custom-redirects/index.js"
       ],
-      "context_requests": [],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/core/server/services/custom-redirects/index.js"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The security_sensitive risk signal has no expanded evidence. Need to see the actual diff hunk to determine if a concrete security issue was introduced.",
+          "source_shard_id": "shard-006-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
       "issues": [],
       "agent_run": {
         "agent_name": "openai_compatible_reviewer",
         "model": "deepseek-ai/DeepSeek-V4-Flash",
         "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
         "input_evidence_ids": [
-          "diff:ghost/core/core/server/services/comments/index.js:3",
-          "diff:ghost/core/core/server/services/comments/index.js:4",
-          "diff:ghost/core/core/server/services/comments/index.js:5",
-          "diff:ghost/core/core/server/services/custom-redirects/index.js:4",
-          "diff:ghost/core/core/server/services/custom-redirects/index.js:5",
-          "diff_hunk:ghost/core/core/server/services/comments/index.js:1",
-          "diff_hunk:ghost/core/core/server/services/custom-redirects/index.js:1"
+          "risk:security_sensitive:ghost/core/core/server/services/custom-redirects/index.js"
         ],
         "output_issue_ids": [],
         "fallback_used": false,
@@ -713,18 +555,18 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 419,
-        "token_count_in": 3713,
-        "token_count_out": 12,
-        "trace_id": "ec39e841957848d391888a3ab4bcdbdc",
-        "span_id": "cd4b336b8bc049d2",
+        "latency_ms": 2063,
+        "token_count_in": 2738,
+        "token_count_out": 75,
+        "trace_id": "6d69f0d161b24ec7b567befb968dec33",
+        "span_id": "559c15ea2c7145c7",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
         "shard_id": "shard-006-refill",
         "shard_index": 5,
         "shard_count": 50,
-        "context_request_count": 0,
+        "context_request_count": 1,
         "context_refill_used": true
       }
     },
@@ -757,11 +599,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 491,
+        "latency_ms": 50028,
         "token_count_in": 4243,
         "token_count_out": 12,
-        "trace_id": "abf8ebdeb50f486b8e95574c923bdeb0",
-        "span_id": "3262d7741247448e",
+        "trace_id": "1a393b10820543bbaaf9f0cfd0d6b880",
+        "span_id": "47d2cb02c23d4f66",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -795,7 +637,7 @@
           ],
           "risk_tag": null,
           "symbol": null,
-          "reason": "The diff_hunk shows require path changes but not the full context of the module. Need to verify that the renamed modules are correctly exported and that no import is broken.",
+          "reason": "The diff_hunk shows require path changes but not the full context of the wrapper class. Need to verify that the renamed module imports are correctly resolved and that no runtime errors are introduced.",
           "source_shard_id": "shard-008",
           "fulfilled_evidence_ids": []
         }
@@ -817,11 +659,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 18210,
+        "latency_ms": 9580,
         "token_count_in": 5466,
-        "token_count_out": 199,
-        "trace_id": "f2cba406bdf24407b9fd1ba5deeee02c",
-        "span_id": "72a62c412e4c4750",
+        "token_count_out": 202,
+        "trace_id": "f044cd61973d44db883584889a458f61",
+        "span_id": "d334536cfc864605",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -863,11 +705,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 2628,
+        "latency_ms": 8912,
         "token_count_in": 3589,
         "token_count_out": 15,
-        "trace_id": "bf38ef0c60d34a40bde7acb41e1c71c0",
-        "span_id": "19cf3debef2c4dd9",
+        "trace_id": "0ced8cdde2c54b8992abd74c588c9e00",
+        "span_id": "338fe47f09804e59",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -891,20 +733,80 @@
       ],
       "context_requests": [
         {
-          "request_type": "risk_evidence",
-          "path": null,
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/core/server/services/email-analytics/jobs/fetch-latest/index.js",
           "evidence_ids": [
-            "risk:security_sensitive:ghost/core/core/server/services/email-analytics/jobs/fetch-latest/index.js",
-            "risk:security_sensitive:ghost/core/core/server/services/email-service/EmailServiceWrapper.js"
+            "diff:ghost/core/core/server/services/email-analytics/jobs/fetch-latest/index.js:2"
           ],
           "risk_tag": null,
           "symbol": null,
-          "reason": "Security-sensitive risk signals were triggered but the primary diff hunks only show require path changes. Need the risk evidence to determine if there is a concrete security exposure.",
+          "reason": "",
+          "source_shard_id": "shard-009",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/core/server/services/email-service/EmailServiceWrapper.js",
+          "evidence_ids": [
+            "diff:ghost/core/core/server/services/email-service/EmailServiceWrapper.js:28"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-009",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/core/server/services/email-analytics/index.js",
+          "evidence_ids": [
+            "diff:ghost/core/core/server/services/email-analytics/index.js:1"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
           "source_shard_id": "shard-009",
           "fulfilled_evidence_ids": []
         }
       ],
-      "issues": [],
+      "issues": [
+        {
+          "file": "ghost/core/core/server/services/email-analytics/jobs/fetch-latest/index.js",
+          "line": 2,
+          "severity": "high",
+          "category": "correctness",
+          "message": "Renamed module import may cause runtime error if the new path does not exist or exports a different interface.",
+          "suggestion": "Verify that the file 'start-email-analytics-job-event.js' exists at the new path and exports the same interface as the old 'StartEmailAnalyticsJobEvent.js'.",
+          "confidence": 0.85,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/email-analytics/jobs/fetch-latest/index.js:1"
+          ]
+        },
+        {
+          "file": "ghost/core/core/server/services/email-service/EmailServiceWrapper.js",
+          "line": 28,
+          "severity": "high",
+          "category": "correctness",
+          "message": "Renamed module import may cause runtime error if the new path does not exist or exports a different interface.",
+          "suggestion": "Verify that the file 'mailgun-client.js' exists at the new path and exports the same interface as the old 'MailgunClient.js'.",
+          "confidence": 0.85,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/email-service/EmailServiceWrapper.js:25"
+          ]
+        },
+        {
+          "file": "ghost/core/core/server/services/email-analytics/index.js",
+          "line": 1,
+          "severity": "high",
+          "category": "correctness",
+          "message": "Renamed module import may cause runtime error if the new path does not exist or exports a different interface.",
+          "suggestion": "Verify that the file 'email-analytics-service-wrapper.js' exists at the new path and exports the same interface as the old 'EmailAnalyticsServiceWrapper.js'.",
+          "confidence": 0.85,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/email-analytics/index.js:1"
+          ]
+        }
+      ],
       "agent_run": {
         "agent_name": "openai_compatible_reviewer",
         "model": "deepseek-ai/DeepSeek-V4-Flash",
@@ -915,59 +817,57 @@
           "diff_hunk:ghost/core/core/server/services/email-analytics/jobs/fetch-latest/index.js:1",
           "diff_hunk:ghost/core/core/server/services/email-service/EmailServiceWrapper.js:25"
         ],
-        "output_issue_ids": [],
+        "output_issue_ids": [
+          "correctness:ghost/core/core/server/services/email-analytics/jobs/fetch-latest/index.js:2",
+          "correctness:ghost/core/core/server/services/email-service/EmailServiceWrapper.js:28",
+          "correctness:ghost/core/core/server/services/email-analytics/index.js:1"
+        ],
         "fallback_used": false,
         "iteration": 0,
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 9414,
+        "latency_ms": 12738,
         "token_count_in": 5057,
-        "token_count_out": 125,
-        "trace_id": "694577eef42142f3b41efbefb54dd625",
-        "span_id": "78e438fd715a4dd4",
+        "token_count_out": 656,
+        "trace_id": "310db9aac2144e32b2688ea3452ce612",
+        "span_id": "f6aa1a523c3942ab",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
         "shard_id": "shard-009",
         "shard_index": 8,
         "shard_count": 50,
-        "context_request_count": 1,
+        "context_request_count": 3,
         "context_refill_used": false
       }
     },
-    "0edebfef7bb4157512f1cce0ed032e602e46293f97b482adfeaf0de18b3370a9": {
+    "e7c857e350be6274f0d1541779482553f1ae721cb4d88aa97bcd67b1caf59eb5": {
       "status": "completed",
       "shard_id": "shard-009-refill",
       "is_refill": true,
       "parent_shard_id": "shard-009",
       "selected_evidence_ids": [
-        "risk:security_sensitive:ghost/core/core/server/services/email-analytics/jobs/fetch-latest/index.js",
-        "risk:security_sensitive:ghost/core/core/server/services/email-service/EmailServiceWrapper.js"
+        "diff:ghost/core/core/server/services/email-analytics/index.js:1",
+        "diff:ghost/core/core/server/services/email-analytics/jobs/fetch-latest/index.js:2",
+        "diff:ghost/core/core/server/services/email-service/EmailServiceWrapper.js:28",
+        "diff_hunk:ghost/core/core/server/services/email-analytics/index.js:1",
+        "diff_hunk:ghost/core/core/server/services/email-analytics/jobs/fetch-latest/index.js:1",
+        "diff_hunk:ghost/core/core/server/services/email-service/EmailServiceWrapper.js:25"
       ],
-      "context_requests": [
-        {
-          "request_type": "risk_evidence",
-          "path": null,
-          "evidence_ids": [
-            "diff_hunk:ghost/core/core/server/services/email-analytics/jobs/fetch-latest/index.js:1",
-            "diff_hunk:ghost/core/core/server/services/email-service/EmailServiceWrapper.js:25"
-          ],
-          "risk_tag": null,
-          "symbol": null,
-          "reason": "The security_sensitive risk signals lack expanded evidence (diff hunks) to determine if a concrete security issue was introduced.",
-          "source_shard_id": "shard-009-refill",
-          "fulfilled_evidence_ids": []
-        }
-      ],
+      "context_requests": [],
       "issues": [],
       "agent_run": {
         "agent_name": "openai_compatible_reviewer",
         "model": "deepseek-ai/DeepSeek-V4-Flash",
         "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
         "input_evidence_ids": [
-          "risk:security_sensitive:ghost/core/core/server/services/email-analytics/jobs/fetch-latest/index.js",
-          "risk:security_sensitive:ghost/core/core/server/services/email-service/EmailServiceWrapper.js"
+          "diff:ghost/core/core/server/services/email-analytics/index.js:1",
+          "diff:ghost/core/core/server/services/email-analytics/jobs/fetch-latest/index.js:2",
+          "diff:ghost/core/core/server/services/email-service/EmailServiceWrapper.js:28",
+          "diff_hunk:ghost/core/core/server/services/email-analytics/index.js:1",
+          "diff_hunk:ghost/core/core/server/services/email-analytics/jobs/fetch-latest/index.js:1",
+          "diff_hunk:ghost/core/core/server/services/email-service/EmailServiceWrapper.js:25"
         ],
         "output_issue_ids": [],
         "fallback_used": false,
@@ -975,18 +875,18 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 9269,
-        "token_count_in": 3291,
-        "token_count_out": 117,
-        "trace_id": "36113071cc084226930286c52b67a290",
-        "span_id": "1a1a7b34e7ec45d4",
+        "latency_ms": 415,
+        "token_count_in": 4181,
+        "token_count_out": 12,
+        "trace_id": "341e1e15d54e4c0e8be4eac772aedda4",
+        "span_id": "0194673584044d40",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
         "shard_id": "shard-009-refill",
         "shard_index": 8,
         "shard_count": 50,
-        "context_request_count": 1,
+        "context_request_count": 0,
         "context_refill_used": true
       }
     },
@@ -1001,21 +901,7 @@
         "diff_hunk:ghost/core/core/server/services/email-suppression-list/mailgun-email-suppression-list.js:1",
         "diff_hunk:ghost/core/core/server/services/email-suppression-list/service.js:2"
       ],
-      "context_requests": [
-        {
-          "request_type": "risk_evidence",
-          "path": null,
-          "evidence_ids": [
-            "diff:ghost/core/core/server/services/email-suppression-list/service.js:5",
-            "diff:ghost/core/core/server/services/email-suppression-list/service.js:6"
-          ],
-          "risk_tag": null,
-          "symbol": null,
-          "reason": "The security_sensitive risk signal has omitted evidence (diff:service.js:5, diff:service.js:6) that may reveal the actual code change triggering the signal. Without this evidence, I cannot determine if a concrete security issue was introduced.",
-          "source_shard_id": "shard-010",
-          "fulfilled_evidence_ids": []
-        }
-      ],
+      "context_requests": [],
       "issues": [],
       "agent_run": {
         "agent_name": "openai_compatible_reviewer",
@@ -1033,61 +919,19 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 2809,
+        "latency_ms": 12022,
         "token_count_in": 5012,
-        "token_count_out": 133,
-        "trace_id": "e2df2555fcb44d54a376bd324cafc1f5",
-        "span_id": "83e137ec53604501",
+        "token_count_out": 12,
+        "trace_id": "0945c7a5a15c4df3b6b7d573054b84ef",
+        "span_id": "8d68c48cbb8c4566",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
         "shard_id": "shard-010",
         "shard_index": 9,
         "shard_count": 50,
-        "context_request_count": 1,
-        "context_refill_used": false
-      }
-    },
-    "2ac2c90f64c03ab7c66be7d9425e082334a527ac8aff90dd5cd4ec56911581bd": {
-      "status": "completed",
-      "shard_id": "shard-010-refill",
-      "is_refill": true,
-      "parent_shard_id": "shard-010",
-      "selected_evidence_ids": [
-        "diff:ghost/core/core/server/services/email-suppression-list/service.js:5",
-        "diff:ghost/core/core/server/services/email-suppression-list/service.js:6",
-        "diff_hunk:ghost/core/core/server/services/email-suppression-list/service.js:2"
-      ],
-      "context_requests": [],
-      "issues": [],
-      "agent_run": {
-        "agent_name": "openai_compatible_reviewer",
-        "model": "deepseek-ai/DeepSeek-V4-Flash",
-        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
-        "input_evidence_ids": [
-          "diff:ghost/core/core/server/services/email-suppression-list/service.js:5",
-          "diff:ghost/core/core/server/services/email-suppression-list/service.js:6",
-          "diff_hunk:ghost/core/core/server/services/email-suppression-list/service.js:2"
-        ],
-        "output_issue_ids": [],
-        "fallback_used": false,
-        "iteration": 0,
-        "feedback_hash": "",
-        "retry_count": 0,
-        "retry_log": [],
-        "latency_ms": 3214,
-        "token_count_in": 3103,
-        "token_count_out": 15,
-        "trace_id": "0f531c54fba24217985e168ace86d2b9",
-        "span_id": "846b1ef9a2f84d05",
-        "parent_span_id": "",
-        "status": "ok",
-        "error_type": "",
-        "shard_id": "shard-010-refill",
-        "shard_index": 9,
-        "shard_count": 50,
         "context_request_count": 0,
-        "context_refill_used": true
+        "context_refill_used": false
       }
     },
     "64704321b2141c388b9b79eeff61bf7d8a6a71ce464f383790a5b7ab07290c4e": {
@@ -1119,11 +963,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 9101,
+        "latency_ms": 3309,
         "token_count_in": 4179,
-        "token_count_out": 12,
-        "trace_id": "111b0e5a465b4355ba3279670896282a",
-        "span_id": "b4a4a8e4d4eb4162",
+        "token_count_out": 15,
+        "trace_id": "b6ec2ad33d9a4f15b749b1c8847b3cc0",
+        "span_id": "9e19300f45f0405d",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -1163,11 +1007,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 462,
+        "latency_ms": 5058,
         "token_count_in": 4622,
         "token_count_out": 12,
-        "trace_id": "20bc4c01d21a417aaad2d085ff4929e5",
-        "span_id": "12899766217946dc",
+        "trace_id": "873b57bfdcc447818c8a98b042698ff7",
+        "span_id": "049160fcd3d44c80",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -1189,32 +1033,7 @@
         "diff_hunk:ghost/core/core/server/services/identity-tokens/index.js:1",
         "diff_hunk:ghost/core/core/server/services/invites/index.js:2"
       ],
-      "context_requests": [
-        {
-          "request_type": "risk_evidence",
-          "path": null,
-          "evidence_ids": [
-            "risk:security_sensitive:ghost/core/core/server/services/identity-tokens/index.js"
-          ],
-          "risk_tag": null,
-          "symbol": null,
-          "reason": "",
-          "source_shard_id": "shard-013",
-          "fulfilled_evidence_ids": []
-        },
-        {
-          "request_type": "same_file_more_evidence",
-          "path": null,
-          "evidence_ids": [
-            "diff:ghost/core/core/server/services/identity-tokens/index.js:1"
-          ],
-          "risk_tag": null,
-          "symbol": null,
-          "reason": "",
-          "source_shard_id": "shard-013",
-          "fulfilled_evidence_ids": []
-        }
-      ],
+      "context_requests": [],
       "issues": [],
       "agent_run": {
         "agent_name": "openai_compatible_reviewer",
@@ -1232,78 +1051,19 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 11819,
+        "latency_ms": 3075,
         "token_count_in": 4318,
-        "token_count_out": 94,
-        "trace_id": "780bb174128d494faff0a12de3dcfa85",
-        "span_id": "42c85352ee7d4bb8",
+        "token_count_out": 12,
+        "trace_id": "b5ddfb3141e44878baa285e143274c3a",
+        "span_id": "231a8e6a72e94dcd",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
         "shard_id": "shard-013",
         "shard_index": 12,
         "shard_count": 50,
-        "context_request_count": 2,
-        "context_refill_used": false
-      }
-    },
-    "31e46102dba24462b948b2af037d0fc4d1fdd3cc9d82ab88975198cdc677bf93": {
-      "status": "completed",
-      "shard_id": "shard-013-refill",
-      "is_refill": true,
-      "parent_shard_id": "shard-013",
-      "selected_evidence_ids": [
-        "diff:ghost/core/core/server/services/identity-tokens/index.js:1",
-        "diff_hunk:ghost/core/core/server/services/identity-tokens/index.js:1",
-        "risk:security_sensitive:ghost/core/core/server/services/identity-tokens/index.js"
-      ],
-      "context_requests": [],
-      "issues": [
-        {
-          "file": "ghost/core/core/server/services/identity-tokens/index.js",
-          "line": 1,
-          "severity": "medium",
-          "category": "correctness",
-          "message": "The module export path has been changed from './IdentityTokenServiceWrapper' to './identity-token-service-wrapper', which may break imports if the target file does not exist or is named differently.",
-          "suggestion": "Verify that the file './identity-token-service-wrapper' exists in the same directory and exports the expected module. If the rename is intentional, ensure all consumers are updated.",
-          "confidence": 0.5,
-          "evidence_ids": [
-            "diff_hunk:ghost/core/core/server/services/identity-tokens/index.js:1"
-          ]
-        }
-      ],
-      "agent_run": {
-        "agent_name": "openai_compatible_reviewer",
-        "model": "deepseek-ai/DeepSeek-V4-Flash",
-        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
-        "input_evidence_ids": [
-          "diff:ghost/core/core/server/services/identity-tokens/index.js:1",
-          "diff_hunk:ghost/core/core/server/services/identity-tokens/index.js:1",
-          "risk:security_sensitive:ghost/core/core/server/services/identity-tokens/index.js"
-        ],
-        "output_issue_ids": [
-          "correctness:ghost/core/core/server/services/identity-tokens/index.js:1"
-        ],
-        "fallback_used": false,
-        "iteration": 0,
-        "feedback_hash": "",
-        "retry_count": 1,
-        "retry_log": [
-          "attempt=1 error=timeout delay=1.00s"
-        ],
-        "latency_ms": 87588,
-        "token_count_in": 2937,
-        "token_count_out": 181,
-        "trace_id": "b253722b088a4b4dbdb1df320f7738c4",
-        "span_id": "483173a680d24020",
-        "parent_span_id": "",
-        "status": "ok",
-        "error_type": "",
-        "shard_id": "shard-013-refill",
-        "shard_index": 12,
-        "shard_count": 50,
         "context_request_count": 0,
-        "context_refill_used": true
+        "context_refill_used": false
       }
     },
     "af74e4ed5a53d8002af4b5371c857bb0a249282b24e51b73b2de4e69c1bca843": {
@@ -1335,11 +1095,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 6754,
+        "latency_ms": 418,
         "token_count_in": 3898,
         "token_count_out": 12,
-        "trace_id": "d08f07d531e149368dfc82f123d8baa6",
-        "span_id": "78824cb7948d4e64",
+        "trace_id": "e2f6cddcd9aa469eb6ea040d51ca60a5",
+        "span_id": "f6d090ca5ae745e2",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -1381,11 +1141,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 466,
+        "latency_ms": 1597,
         "token_count_in": 5251,
         "token_count_out": 12,
-        "trace_id": "b43b79328f494f0fb8194dcb542efc64",
-        "span_id": "4a1a6aafddce4f67",
+        "trace_id": "5b38091bad644863b9b18cf0ac78197f",
+        "span_id": "5f761d8d12d44d2d",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -1425,11 +1185,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 468,
+        "latency_ms": 19703,
         "token_count_in": 5365,
-        "token_count_out": 12,
-        "trace_id": "bb76bf4a915f4a0cbb06bd416a66431f",
-        "span_id": "ea39f554b5094665",
+        "token_count_out": 15,
+        "trace_id": "7718056f23ae4742a216ebfb55596882",
+        "span_id": "126ab385a7e447f1",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -1469,11 +1229,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 2933,
+        "latency_ms": 1642,
         "token_count_in": 4485,
         "token_count_out": 12,
-        "trace_id": "f377e0211ae943cdb0a4e869ca78b731",
-        "span_id": "e5dee8d5ae5448e4",
+        "trace_id": "a2489d85bb924f1885f1d679cac8d274",
+        "span_id": "9916fe4b362f4d18",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -1513,11 +1273,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 2851,
+        "latency_ms": 1205,
         "token_count_in": 4670,
         "token_count_out": 12,
-        "trace_id": "3ef52574e531424299deca37ea30f13f",
-        "span_id": "599b6170cfa547b8",
+        "trace_id": "1ec898d9f591414ea0d41c8255a15171",
+        "span_id": "c63d7c6599084963",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -1541,82 +1301,19 @@
       ],
       "context_requests": [
         {
-          "request_type": "same_file_more_evidence",
-          "path": "ghost/core/core/server/services/members/api.js",
+          "request_type": "risk_evidence",
+          "path": null,
           "evidence_ids": [
-            "diff:ghost/core/core/server/services/members/api.js:13"
+            "risk:security_sensitive:ghost/core/core/server/services/members/api.js"
           ],
           "risk_tag": null,
           "symbol": null,
-          "reason": "",
-          "source_shard_id": "shard-019",
-          "fulfilled_evidence_ids": []
-        },
-        {
-          "request_type": "same_file_more_evidence",
-          "path": "ghost/core/core/server/services/members-events/last-seen-at-updater.js",
-          "evidence_ids": [
-            "diff:ghost/core/core/server/services/members-events/last-seen-at-updater.js:6"
-          ],
-          "risk_tag": null,
-          "symbol": null,
-          "reason": "",
-          "source_shard_id": "shard-019",
-          "fulfilled_evidence_ids": []
-        },
-        {
-          "request_type": "same_file_more_evidence",
-          "path": "ghost/core/core/server/services/members/importer/index.js",
-          "evidence_ids": [
-            "diff:ghost/core/core/server/services/members/importer/index.js:1",
-            "diff:ghost/core/core/server/services/members/importer/index.js:2",
-            "diff:ghost/core/core/server/services/members/importer/index.js:5"
-          ],
-          "risk_tag": null,
-          "symbol": null,
-          "reason": "",
+          "reason": "The security_sensitive risk signal for api.js has omitted evidence that may reveal a concrete security concern beyond the require path rename.",
           "source_shard_id": "shard-019",
           "fulfilled_evidence_ids": []
         }
       ],
-      "issues": [
-        {
-          "file": "ghost/core/core/server/services/members/api.js",
-          "line": 13,
-          "severity": "medium",
-          "category": "correctness",
-          "message": "Renamed require path may cause module resolution failure if the target file does not exist at the new path.",
-          "suggestion": "Verify that the file 'single-use-token-provider.js' exists in the same directory and that all other references to 'SingleUseTokenProvider' have been updated accordingly.",
-          "confidence": 0.8,
-          "evidence_ids": [
-            "diff_hunk:ghost/core/core/server/services/members/api.js:10"
-          ]
-        },
-        {
-          "file": "ghost/core/core/server/services/members-events/last-seen-at-updater.js",
-          "line": 6,
-          "severity": "medium",
-          "category": "correctness",
-          "message": "Renamed require path may cause module resolution failure if the target file does not exist at the new path.",
-          "suggestion": "Verify that the file 'last-seen-at-cache.js' exists in the same directory and that all other references to 'LastSeenAtCache' have been updated accordingly.",
-          "confidence": 0.8,
-          "evidence_ids": [
-            "diff_hunk:ghost/core/core/server/services/members-events/last-seen-at-updater.js:3"
-          ]
-        },
-        {
-          "file": "ghost/core/core/server/services/members/importer/index.js",
-          "line": 1,
-          "severity": "medium",
-          "category": "correctness",
-          "message": "Renamed require paths may cause module resolution failure if the target files do not exist at the new paths.",
-          "suggestion": "Verify that the files 'members-csv-importer.js' and 'members-csv-importer-stripe-utils.js' exist in the same directory and that all other references to the old filenames have been updated.",
-          "confidence": 0.8,
-          "evidence_ids": [
-            "diff_hunk:ghost/core/core/server/services/members/importer/index.js:1"
-          ]
-        }
-      ],
+      "issues": [],
       "agent_run": {
         "agent_name": "openai_compatible_reviewer",
         "model": "deepseek-ai/DeepSeek-V4-Flash",
@@ -1627,45 +1324,88 @@
           "diff_hunk:ghost/core/core/server/services/members/api.js:10",
           "diff_hunk:ghost/core/core/server/services/members/importer/index.js:1"
         ],
-        "output_issue_ids": [
-          "correctness:ghost/core/core/server/services/members/api.js:13",
-          "correctness:ghost/core/core/server/services/members-events/last-seen-at-updater.js:6",
-          "correctness:ghost/core/core/server/services/members/importer/index.js:1"
-        ],
+        "output_issue_ids": [],
         "fallback_used": false,
         "iteration": 0,
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 16203,
+        "latency_ms": 803,
         "token_count_in": 4936,
-        "token_count_out": 691,
-        "trace_id": "1c4214c60c8f437993ab9c2f0efa656a",
-        "span_id": "ef5194c05cd8415e",
+        "token_count_out": 83,
+        "trace_id": "f165bbc05e2b4eed8f5caa6385bfa531",
+        "span_id": "763d9822bd51446d",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
         "shard_id": "shard-019",
         "shard_index": 18,
         "shard_count": 50,
-        "context_request_count": 3,
+        "context_request_count": 1,
         "context_refill_used": false
       }
     },
-    "03831eff25cae601270709cf1652f4d43c330efd2703a0e73f99e4e16a47c0c9": {
+    "d96a8e71d21b9ff3838c6d63de191b02b483a1ad62e7c3b1f98895e1b3cff3bf": {
       "status": "completed",
       "shard_id": "shard-019-refill",
       "is_refill": true,
       "parent_shard_id": "shard-019",
       "selected_evidence_ids": [
-        "diff:ghost/core/core/server/services/members-events/last-seen-at-updater.js:6",
-        "diff:ghost/core/core/server/services/members/api.js:13",
-        "diff:ghost/core/core/server/services/members/importer/index.js:1",
-        "diff:ghost/core/core/server/services/members/importer/index.js:2",
-        "diff:ghost/core/core/server/services/members/importer/index.js:5",
-        "diff_hunk:ghost/core/core/server/services/members-events/last-seen-at-updater.js:3",
-        "diff_hunk:ghost/core/core/server/services/members/api.js:10",
-        "diff_hunk:ghost/core/core/server/services/members/importer/index.js:1"
+        "risk:security_sensitive:ghost/core/core/server/services/members/api.js"
+      ],
+      "context_requests": [
+        {
+          "request_type": "risk_evidence",
+          "path": null,
+          "evidence_ids": [
+            "risk:security_sensitive:ghost/core/core/server/services/members/api.js"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-019-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "risk:security_sensitive:ghost/core/core/server/services/members/api.js"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 4884,
+        "token_count_in": 2694,
+        "token_count_out": 40,
+        "trace_id": "815263b55ae54d708640d90e4b75cec9",
+        "span_id": "2a5608a963804bc8",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-019-refill",
+        "shard_index": 18,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": true
+      }
+    },
+    "5d492225000844106fa9e1a4971cc6b897ada8a198120f92f935868531775635": {
+      "status": "completed",
+      "shard_id": "shard-020",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/members/importer/members-csv-importer.js:1",
+        "diff:ghost/core/core/server/services/members/members-api/controllers/member-controller.js:1",
+        "diff:ghost/core/core/server/services/members/members-api/controllers/router-controller.js:1",
+        "diff:ghost/core/core/server/services/members/members-api/controllers/well-known-controller.js:1"
       ],
       "context_requests": [],
       "issues": [],
@@ -1674,14 +1414,10 @@
         "model": "deepseek-ai/DeepSeek-V4-Flash",
         "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
         "input_evidence_ids": [
-          "diff:ghost/core/core/server/services/members-events/last-seen-at-updater.js:6",
-          "diff:ghost/core/core/server/services/members/api.js:13",
-          "diff:ghost/core/core/server/services/members/importer/index.js:1",
-          "diff:ghost/core/core/server/services/members/importer/index.js:2",
-          "diff:ghost/core/core/server/services/members/importer/index.js:5",
-          "diff_hunk:ghost/core/core/server/services/members-events/last-seen-at-updater.js:3",
-          "diff_hunk:ghost/core/core/server/services/members/api.js:10",
-          "diff_hunk:ghost/core/core/server/services/members/importer/index.js:1"
+          "diff:ghost/core/core/server/services/members/importer/members-csv-importer.js:1",
+          "diff:ghost/core/core/server/services/members/members-api/controllers/member-controller.js:1",
+          "diff:ghost/core/core/server/services/members/members-api/controllers/router-controller.js:1",
+          "diff:ghost/core/core/server/services/members/members-api/controllers/well-known-controller.js:1"
         ],
         "output_issue_ids": [],
         "fallback_used": false,
@@ -1689,19 +1425,19 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 2950,
-        "token_count_in": 4265,
+        "latency_ms": 1131,
+        "token_count_in": 4165,
         "token_count_out": 12,
-        "trace_id": "95f1ffdc00454c4691fca65d44ad886b",
-        "span_id": "8807c59908e14bac",
+        "trace_id": "82d1362fc56f49ad929b9ae4947e445c",
+        "span_id": "29fbb336aaea46c7",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
-        "shard_id": "shard-019-refill",
-        "shard_index": 18,
+        "shard_id": "shard-020",
+        "shard_index": 19,
         "shard_count": 50,
         "context_request_count": 0,
-        "context_refill_used": true
+        "context_refill_used": false
       }
     },
     "7e4299660f8748e2f5db0fa0853f2a576a990bcc82c9c9372170ebb485f47f6b": {
@@ -1715,21 +1451,39 @@
         "diff_hunk:ghost/core/core/server/services/members/members-api/members-api.js:1",
         "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/member-repository.js:9"
       ],
-      "context_requests": [],
-      "issues": [
+      "context_requests": [
         {
-          "file": "ghost/core/core/server/services/members/members-api/members-api.js",
-          "line": 1,
-          "severity": "medium",
-          "category": "maintainability",
-          "message": "Inconsistent semicolon usage: most require() statements in the hunk are missing trailing semicolons, while a few (EventRepository, ProductRepository, RouterController, MemberController, WellKnownController) retain them. This violates the repository's 4-space indentation guideline indirectly by introducing formatting inconsistency.",
-          "suggestion": "Add trailing semicolons to all require() statements for consistency, or remove them from the remaining ones to match the new style.",
-          "confidence": 0.9,
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/core/server/services/members/members-api/members-api.js",
           "evidence_ids": [
-            "diff_hunk:ghost/core/core/server/services/members/members-api/members-api.js:1"
-          ]
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:1",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:2",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:3",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:4",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:5",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:6",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:7",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:8",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:9",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:10",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:11",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:12",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:13",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:14",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:15",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:16",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:17",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:18",
+            "diff:ghost/core/core/server/services/members/members-api/members-api.js:19"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-021",
+          "fulfilled_evidence_ids": []
         }
       ],
+      "issues": [],
       "agent_run": {
         "agent_name": "openai_compatible_reviewer",
         "model": "deepseek-ai/DeepSeek-V4-Flash",
@@ -1740,27 +1494,90 @@
           "diff_hunk:ghost/core/core/server/services/members/members-api/members-api.js:1",
           "diff_hunk:ghost/core/core/server/services/members/members-api/repositories/member-repository.js:9"
         ],
-        "output_issue_ids": [
-          "maintainability:ghost/core/core/server/services/members/members-api/members-api.js:1"
-        ],
+        "output_issue_ids": [],
         "fallback_used": false,
         "iteration": 0,
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 34944,
+        "latency_ms": 5173,
         "token_count_in": 5969,
-        "token_count_out": 202,
-        "trace_id": "0a4819c4cca543b6832ae5a9abec897e",
-        "span_id": "5dd4d017bd9b4018",
+        "token_count_out": 424,
+        "trace_id": "1ed139c5936047ca89b9fa60ad3c80ac",
+        "span_id": "125106481a854a7a",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
         "shard_id": "shard-021",
         "shard_index": 20,
         "shard_count": 50,
-        "context_request_count": 0,
+        "context_request_count": 1,
         "context_refill_used": false
+      }
+    },
+    "58787e3651414562ba8a5e8d4b86c96cd9ffadb091ec527176c497096abb1675": {
+      "status": "completed",
+      "shard_id": "shard-021-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-021",
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/members/members-api/members-api.js:1",
+        "diff:ghost/core/core/server/services/members/members-api/members-api.js:10",
+        "diff:ghost/core/core/server/services/members/members-api/members-api.js:11",
+        "diff:ghost/core/core/server/services/members/members-api/members-api.js:12",
+        "diff:ghost/core/core/server/services/members/members-api/members-api.js:13",
+        "diff:ghost/core/core/server/services/members/members-api/members-api.js:14",
+        "diff:ghost/core/core/server/services/members/members-api/members-api.js:15",
+        "diff:ghost/core/core/server/services/members/members-api/members-api.js:16"
+      ],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": null,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/members/members-api/members-api.js:1"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "The diff evidence only shows added require statements. To assess the actual code changes and potential security risks, I need to see the full diff hunk and surrounding context.",
+          "source_shard_id": "shard-021-refill",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/members/members-api/members-api.js:1",
+          "diff:ghost/core/core/server/services/members/members-api/members-api.js:10",
+          "diff:ghost/core/core/server/services/members/members-api/members-api.js:11",
+          "diff:ghost/core/core/server/services/members/members-api/members-api.js:12",
+          "diff:ghost/core/core/server/services/members/members-api/members-api.js:13",
+          "diff:ghost/core/core/server/services/members/members-api/members-api.js:14",
+          "diff:ghost/core/core/server/services/members/members-api/members-api.js:15",
+          "diff:ghost/core/core/server/services/members/members-api/members-api.js:16"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 2382,
+        "token_count_in": 3589,
+        "token_count_out": 99,
+        "trace_id": "3609b644d5a443f3b6c5371830ac1521",
+        "span_id": "51e4d76e155d46c0",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-021-refill",
+        "shard_index": 20,
+        "shard_count": 50,
+        "context_request_count": 1,
+        "context_refill_used": true
       }
     },
     "0da13c55c78ef6a0b601529ddf9d878f26b1415fcfa18c25fc1840b39f79efa8": {
@@ -1774,7 +1591,21 @@
         "diff:ghost/core/core/server/services/members/members-api/services/token-service.js:1",
         "diff_hunk:ghost/core/core/server/services/members/members-api/services/member-bread-service.js:30"
       ],
-      "context_requests": [],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/core/server/services/members/members-api/services/member-bread-service.js",
+          "evidence_ids": [
+            "diff:ghost/core/core/server/services/members/members-api/services/member-bread-service.js:33",
+            "risk:security_sensitive:ghost/core/core/server/services/members/members-api/services/member-bread-service.js"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-022",
+          "fulfilled_evidence_ids": []
+        }
+      ],
       "issues": [],
       "agent_run": {
         "agent_name": "openai_compatible_reviewer",
@@ -1792,19 +1623,61 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 458,
+        "latency_ms": 21768,
         "token_count_in": 4609,
-        "token_count_out": 12,
-        "trace_id": "206807ad1304409da89f70014851edc9",
-        "span_id": "af4a80640cfe47b3",
+        "token_count_out": 95,
+        "trace_id": "cdc586b09bb44f2f80738d6a5cb70e26",
+        "span_id": "8a618b1aec794f69",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
         "shard_id": "shard-022",
         "shard_index": 21,
         "shard_count": 50,
-        "context_request_count": 0,
+        "context_request_count": 1,
         "context_refill_used": false
+      }
+    },
+    "a0108367cb9b170a647fe24a167da381c265310de6076195340482deec0cd3cd": {
+      "status": "completed",
+      "shard_id": "shard-022-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-022",
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/members/members-api/services/member-bread-service.js:33",
+        "diff_hunk:ghost/core/core/server/services/members/members-api/services/member-bread-service.js:30",
+        "risk:security_sensitive:ghost/core/core/server/services/members/members-api/services/member-bread-service.js"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/members/members-api/services/member-bread-service.js:33",
+          "diff_hunk:ghost/core/core/server/services/members/members-api/services/member-bread-service.js:30",
+          "risk:security_sensitive:ghost/core/core/server/services/members/members-api/services/member-bread-service.js"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 1131,
+        "token_count_in": 3191,
+        "token_count_out": 15,
+        "trace_id": "3898721bb25542ceafdf92e6db1f2104",
+        "span_id": "06939d9b104b4f88",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-022-refill",
+        "shard_index": 21,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": true
       }
     },
     "c8383feb6e359c3430e34856092f27b70c908ebc6253d693b36f0fa95a71681c": {
@@ -1831,7 +1704,7 @@
           ],
           "risk_tag": null,
           "symbol": null,
-          "reason": "The security_sensitive risk signal indicates a potential security concern in service.js, but the current diff hunks only show require path renames. The omitted diff evidence may reveal actual logic changes that introduce a security exposure.",
+          "reason": "The security_sensitive risk signal indicates a potential security concern in service.js, but the current evidence only shows require path renames. Additional diff evidence is needed to determine if any functional or security-relevant changes were made beyond file renaming.",
           "source_shard_id": "shard-023",
           "fulfilled_evidence_ids": []
         }
@@ -1852,15 +1725,13 @@
         "fallback_used": false,
         "iteration": 0,
         "feedback_hash": "",
-        "retry_count": 1,
-        "retry_log": [
-          "attempt=1 error=timeout delay=1.00s"
-        ],
-        "latency_ms": 89760,
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 1281,
         "token_count_in": 4838,
-        "token_count_out": 173,
-        "trace_id": "531b285794d24c7387f920bb319d9b8d",
-        "span_id": "3451c3b7e0a540f3",
+        "token_count_out": 178,
+        "trace_id": "b340401620ac4c7f8d3d9cefea6dca08",
+        "span_id": "16432fbb7f044ba2",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -1885,60 +1756,7 @@
         "diff_hunk:ghost/core/core/server/services/members/service.js:3"
       ],
       "context_requests": [],
-      "issues": [
-        {
-          "file": "ghost/core/core/server/services/members/service.js",
-          "line": 19,
-          "severity": "medium",
-          "category": "correctness",
-          "message": "The require path for VerificationTrigger was changed from '../VerificationTrigger' to '../verification-trigger'. If the actual file on disk is still named 'VerificationTrigger.js', this will cause a module resolution failure at runtime.",
-          "suggestion": "Ensure the file '../verification-trigger.js' exists (or rename it to match the new require path) before deploying this change.",
-          "confidence": 0.5,
-          "evidence_ids": [
-            "diff_hunk:ghost/core/core/server/services/members/service.js:16",
-            "diff:ghost/core/core/server/services/members/service.js:19"
-          ]
-        },
-        {
-          "file": "ghost/core/core/server/services/members/service.js",
-          "line": 22,
-          "severity": "medium",
-          "category": "correctness",
-          "message": "The require path for RequestIntegrityTokenProvider was changed from './RequestIntegrityTokenProvider' to './request-integrity-token-provider'. If the actual file on disk is still named 'RequestIntegrityTokenProvider.js', this will cause a module resolution failure at runtime.",
-          "suggestion": "Ensure the file './request-integrity-token-provider.js' exists (or rename it to match the new require path) before deploying this change.",
-          "confidence": 0.5,
-          "evidence_ids": [
-            "diff_hunk:ghost/core/core/server/services/members/service.js:16",
-            "diff:ghost/core/core/server/services/members/service.js:22"
-          ]
-        },
-        {
-          "file": "ghost/core/core/server/services/members/service.js",
-          "line": 6,
-          "severity": "medium",
-          "category": "correctness",
-          "message": "The require path for MembersConfigProvider was changed from './MembersConfigProvider' to './members-config-provider'. If the actual file on disk is still named 'MembersConfigProvider.js', this will cause a module resolution failure at runtime.",
-          "suggestion": "Ensure the file './members-config-provider.js' exists (or rename it to match the new require path) before deploying this change.",
-          "confidence": 0.5,
-          "evidence_ids": [
-            "diff_hunk:ghost/core/core/server/services/members/service.js:3",
-            "diff:ghost/core/core/server/services/members/service.js:6"
-          ]
-        },
-        {
-          "file": "ghost/core/core/server/services/members/service.js",
-          "line": 8,
-          "severity": "medium",
-          "category": "correctness",
-          "message": "The require path for MembersStats was changed from './stats/MembersStats' to './stats/members-stats'. If the actual file on disk is still named 'MembersStats.js', this will cause a module resolution failure at runtime.",
-          "suggestion": "Ensure the file './stats/members-stats.js' exists (or rename it to match the new require path) before deploying this change.",
-          "confidence": 0.5,
-          "evidence_ids": [
-            "diff_hunk:ghost/core/core/server/services/members/service.js:3",
-            "diff:ghost/core/core/server/services/members/service.js:8"
-          ]
-        }
-      ],
+      "issues": [],
       "agent_run": {
         "agent_name": "openai_compatible_reviewer",
         "model": "deepseek-ai/DeepSeek-V4-Flash",
@@ -1951,22 +1769,17 @@
           "diff_hunk:ghost/core/core/server/services/members/service.js:16",
           "diff_hunk:ghost/core/core/server/services/members/service.js:3"
         ],
-        "output_issue_ids": [
-          "correctness:ghost/core/core/server/services/members/service.js:19",
-          "correctness:ghost/core/core/server/services/members/service.js:22",
-          "correctness:ghost/core/core/server/services/members/service.js:6",
-          "correctness:ghost/core/core/server/services/members/service.js:8"
-        ],
+        "output_issue_ids": [],
         "fallback_used": false,
         "iteration": 0,
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 59904,
+        "latency_ms": 462,
         "token_count_in": 3554,
-        "token_count_out": 751,
-        "trace_id": "261f5324cc4e4e959947e15437fb07de",
-        "span_id": "dd2f0ed04c6041e8",
+        "token_count_out": 12,
+        "trace_id": "192ead0667e44b0ab04af57784fdf9ce",
+        "span_id": "ab57a04f02824763",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -2006,11 +1819,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 3282,
+        "latency_ms": 6817,
         "token_count_in": 4418,
-        "token_count_out": 12,
-        "trace_id": "65841080e5734d5f85f2dfb5bb580e4a",
-        "span_id": "0d750ed28e094bea",
+        "token_count_out": 15,
+        "trace_id": "8b15312d99b0435d8ba832bcf321fc89",
+        "span_id": "ee0355764be248d1",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -2050,11 +1863,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 3469,
+        "latency_ms": 582,
         "token_count_in": 4459,
         "token_count_out": 12,
-        "trace_id": "926aca98da33463fb3efcb781b0bb9cc",
-        "span_id": "1fac893c8d6c46b3",
+        "trace_id": "1c560a32cfb74215b799785a8315ce5b",
+        "span_id": "b786458e150b4063",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -2076,32 +1889,7 @@
         "diff_hunk:ghost/core/core/server/services/offers/service.js:1",
         "diff_hunk:ghost/core/core/server/services/outbox/index.js:1"
       ],
-      "context_requests": [
-        {
-          "request_type": "risk_evidence",
-          "path": null,
-          "evidence_ids": [
-            "risk:security_sensitive:ghost/core/core/server/services/offers/service.js"
-          ],
-          "risk_tag": null,
-          "symbol": null,
-          "reason": "",
-          "source_shard_id": "shard-026",
-          "fulfilled_evidence_ids": []
-        },
-        {
-          "request_type": "same_file_more_evidence",
-          "path": null,
-          "evidence_ids": [
-            "diff:ghost/core/core/server/services/offers/service.js:1"
-          ],
-          "risk_tag": null,
-          "symbol": null,
-          "reason": "",
-          "source_shard_id": "shard-026",
-          "fulfilled_evidence_ids": []
-        }
-      ],
+      "context_requests": [],
       "issues": [],
       "agent_run": {
         "agent_name": "openai_compatible_reviewer",
@@ -2119,61 +1907,19 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 15364,
+        "latency_ms": 500,
         "token_count_in": 4532,
-        "token_count_out": 92,
-        "trace_id": "a6aa619c9f98454ca26f8e4b4ebc1e4c",
-        "span_id": "849b55ffb7a2453a",
+        "token_count_out": 12,
+        "trace_id": "4526e686a7d048a0b4e2282f03f3d862",
+        "span_id": "cad127cf84ad4dcf",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
         "shard_id": "shard-026",
         "shard_index": 25,
         "shard_count": 50,
-        "context_request_count": 2,
-        "context_refill_used": false
-      }
-    },
-    "ef44896f79550be89f749a1fad8e89174bf3d3b2af5a2fe4e7f5e7dc0f176975": {
-      "status": "completed",
-      "shard_id": "shard-026-refill",
-      "is_refill": true,
-      "parent_shard_id": "shard-026",
-      "selected_evidence_ids": [
-        "diff:ghost/core/core/server/services/offers/service.js:1",
-        "diff_hunk:ghost/core/core/server/services/offers/service.js:1",
-        "risk:security_sensitive:ghost/core/core/server/services/offers/service.js"
-      ],
-      "context_requests": [],
-      "issues": [],
-      "agent_run": {
-        "agent_name": "openai_compatible_reviewer",
-        "model": "deepseek-ai/DeepSeek-V4-Flash",
-        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
-        "input_evidence_ids": [
-          "diff:ghost/core/core/server/services/offers/service.js:1",
-          "diff_hunk:ghost/core/core/server/services/offers/service.js:1",
-          "risk:security_sensitive:ghost/core/core/server/services/offers/service.js"
-        ],
-        "output_issue_ids": [],
-        "fallback_used": false,
-        "iteration": 0,
-        "feedback_hash": "",
-        "retry_count": 0,
-        "retry_log": [],
-        "latency_ms": 3148,
-        "token_count_in": 2969,
-        "token_count_out": 15,
-        "trace_id": "ff02178ed06d4493bc9b9387d78ed470",
-        "span_id": "4e1c7ed2eef44aad",
-        "parent_span_id": "",
-        "status": "ok",
-        "error_type": "",
-        "shard_id": "shard-026-refill",
-        "shard_index": 25,
-        "shard_count": 50,
         "context_request_count": 0,
-        "context_refill_used": true
+        "context_refill_used": false
       }
     },
     "cde1e5e78658adbfcab65865b7edf9068bb278ed81d462d3e12371eae4578aec": {
@@ -2188,23 +1934,7 @@
         "diff_hunk:ghost/core/core/server/services/recommendations/service/in-memory-recommendation-repository.ts:1",
         "diff_hunk:ghost/core/core/server/services/recommendations/service/recommendation-service.ts:1"
       ],
-      "context_requests": [
-        {
-          "request_type": "risk_evidence",
-          "path": null,
-          "evidence_ids": [
-            "risk:security_sensitive:ghost/core/core/server/services/outbox/jobs/outbox-job.js",
-            "risk:security_sensitive:ghost/core/core/server/services/recommendations/recommendation-enabler-service.js",
-            "risk:security_sensitive:ghost/core/core/server/services/recommendations/service/in-memory-recommendation-repository.ts",
-            "risk:security_sensitive:ghost/core/core/server/services/recommendations/service/recommendation-service.ts"
-          ],
-          "risk_tag": null,
-          "symbol": null,
-          "reason": "Security-sensitive risk signals were triggered but the primary diff hunks only show import path renames. Need the risk evidence to determine if there is an actual security exposure introduced.",
-          "source_shard_id": "shard-027",
-          "fulfilled_evidence_ids": []
-        }
-      ],
+      "context_requests": [],
       "issues": [],
       "agent_run": {
         "agent_name": "openai_compatible_reviewer",
@@ -2223,80 +1953,19 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 32529,
+        "latency_ms": 2039,
         "token_count_in": 6345,
-        "token_count_out": 185,
-        "trace_id": "e33285a9a531439880e1619c25358fab",
-        "span_id": "38e54ffaa6c14c95",
+        "token_count_out": 12,
+        "trace_id": "c9e6f77d808f4821b64b67cc1b69213f",
+        "span_id": "40aa3400a011425f",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
         "shard_id": "shard-027",
         "shard_index": 26,
         "shard_count": 50,
-        "context_request_count": 1,
+        "context_request_count": 0,
         "context_refill_used": false
-      }
-    },
-    "719145dc5f2aeeab9b0570e80e55f8ed0bb4c1db29cd4b63d8b08cd9500c223c": {
-      "status": "completed",
-      "shard_id": "shard-027-refill",
-      "is_refill": true,
-      "parent_shard_id": "shard-027",
-      "selected_evidence_ids": [
-        "risk:security_sensitive:ghost/core/core/server/services/outbox/jobs/outbox-job.js",
-        "risk:security_sensitive:ghost/core/core/server/services/recommendations/recommendation-enabler-service.js",
-        "risk:security_sensitive:ghost/core/core/server/services/recommendations/service/in-memory-recommendation-repository.ts",
-        "risk:security_sensitive:ghost/core/core/server/services/recommendations/service/recommendation-service.ts"
-      ],
-      "context_requests": [
-        {
-          "request_type": "risk_evidence",
-          "path": null,
-          "evidence_ids": [
-            "diff_hunk:ghost/core/core/server/services/outbox/jobs/outbox-job.js:1",
-            "diff_hunk:ghost/core/core/server/services/outbox/jobs/outbox-job.js:33",
-            "diff_hunk:ghost/core/core/server/services/recommendations/recommendation-enabler-service.js:1",
-            "diff_hunk:ghost/core/core/server/services/recommendations/service/in-memory-recommendation-repository.ts:1",
-            "diff_hunk:ghost/core/core/server/services/recommendations/service/recommendation-service.ts:1"
-          ],
-          "risk_tag": null,
-          "symbol": null,
-          "reason": "",
-          "source_shard_id": "shard-027-refill",
-          "fulfilled_evidence_ids": []
-        }
-      ],
-      "issues": [],
-      "agent_run": {
-        "agent_name": "openai_compatible_reviewer",
-        "model": "deepseek-ai/DeepSeek-V4-Flash",
-        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
-        "input_evidence_ids": [
-          "risk:security_sensitive:ghost/core/core/server/services/outbox/jobs/outbox-job.js",
-          "risk:security_sensitive:ghost/core/core/server/services/recommendations/recommendation-enabler-service.js",
-          "risk:security_sensitive:ghost/core/core/server/services/recommendations/service/in-memory-recommendation-repository.ts",
-          "risk:security_sensitive:ghost/core/core/server/services/recommendations/service/recommendation-service.ts"
-        ],
-        "output_issue_ids": [],
-        "fallback_used": false,
-        "iteration": 0,
-        "feedback_hash": "",
-        "retry_count": 0,
-        "retry_log": [],
-        "latency_ms": 25426,
-        "token_count_in": 4539,
-        "token_count_out": 166,
-        "trace_id": "d9ce63f9c44d498cbb26ac59a2aa5263",
-        "span_id": "291a61c2552e4149",
-        "parent_span_id": "",
-        "status": "ok",
-        "error_type": "",
-        "shard_id": "shard-027-refill",
-        "shard_index": 26,
-        "shard_count": 50,
-        "context_request_count": 1,
-        "context_refill_used": true
       }
     },
     "8ead70938755c28ca39fc858595d10b4c8f6e7937e6bb012f59e4d9da234152e": {
@@ -2328,11 +1997,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 2787,
+        "latency_ms": 550,
         "token_count_in": 4578,
         "token_count_out": 12,
-        "trace_id": "79174a4354e4423e9312780e95fc8c71",
-        "span_id": "6f6dc1429f224c8e",
+        "trace_id": "5019d46d3a2143caa055934ebf680de9",
+        "span_id": "2f00e6468e194ef9",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -2354,32 +2023,7 @@
         "diff:ghost/core/core/server/services/stats/mrr-stats-service.js:1",
         "diff_hunk:ghost/core/core/server/services/staff/staff-service-emails.js:263"
       ],
-      "context_requests": [
-        {
-          "request_type": "risk_evidence",
-          "path": null,
-          "evidence_ids": [
-            "risk:security_sensitive:ghost/core/core/server/services/staff/staff-service-emails.js"
-          ],
-          "risk_tag": null,
-          "symbol": null,
-          "reason": "",
-          "source_shard_id": "shard-029",
-          "fulfilled_evidence_ids": []
-        },
-        {
-          "request_type": "same_file_more_evidence",
-          "path": null,
-          "evidence_ids": [
-            "diff:ghost/core/core/server/services/staff/staff-service-emails.js:266"
-          ],
-          "risk_tag": null,
-          "symbol": null,
-          "reason": "",
-          "source_shard_id": "shard-029",
-          "fulfilled_evidence_ids": []
-        }
-      ],
+      "context_requests": [],
       "issues": [],
       "agent_run": {
         "agent_name": "openai_compatible_reviewer",
@@ -2397,61 +2041,19 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 3692,
+        "latency_ms": 20968,
         "token_count_in": 4340,
-        "token_count_out": 98,
-        "trace_id": "3845236815ed43fc80922b66809150b8",
-        "span_id": "b610d43e9f714629",
+        "token_count_out": 12,
+        "trace_id": "d80e0ceeb4664dee81e89d2c8071f211",
+        "span_id": "ed88b2b510c84889",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
         "shard_id": "shard-029",
         "shard_index": 28,
         "shard_count": 50,
-        "context_request_count": 2,
-        "context_refill_used": false
-      }
-    },
-    "f4bf2d6bbb62830ac361509cdd5ada569fa2b245011303c963a1290aff128800": {
-      "status": "completed",
-      "shard_id": "shard-029-refill",
-      "is_refill": true,
-      "parent_shard_id": "shard-029",
-      "selected_evidence_ids": [
-        "diff:ghost/core/core/server/services/staff/staff-service-emails.js:266",
-        "diff_hunk:ghost/core/core/server/services/staff/staff-service-emails.js:263",
-        "risk:security_sensitive:ghost/core/core/server/services/staff/staff-service-emails.js"
-      ],
-      "context_requests": [],
-      "issues": [],
-      "agent_run": {
-        "agent_name": "openai_compatible_reviewer",
-        "model": "deepseek-ai/DeepSeek-V4-Flash",
-        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
-        "input_evidence_ids": [
-          "diff:ghost/core/core/server/services/staff/staff-service-emails.js:266",
-          "diff_hunk:ghost/core/core/server/services/staff/staff-service-emails.js:263",
-          "risk:security_sensitive:ghost/core/core/server/services/staff/staff-service-emails.js"
-        ],
-        "output_issue_ids": [],
-        "fallback_used": false,
-        "iteration": 0,
-        "feedback_hash": "",
-        "retry_count": 0,
-        "retry_log": [],
-        "latency_ms": 450,
-        "token_count_in": 3072,
-        "token_count_out": 15,
-        "trace_id": "8c19eda4c75242e8a5d6b10a974d6d5d",
-        "span_id": "fbee95ba14004492",
-        "parent_span_id": "",
-        "status": "ok",
-        "error_type": "",
-        "shard_id": "shard-029-refill",
-        "shard_index": 28,
-        "shard_count": 50,
         "context_request_count": 0,
-        "context_refill_used": true
+        "context_refill_used": false
       }
     },
     "c24f399b4467597fa30e951db0ff4facac649509b73c240e88cac47ee1b5b26b": {
@@ -2483,11 +2085,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 3323,
+        "latency_ms": 2208,
         "token_count_in": 5827,
         "token_count_out": 15,
-        "trace_id": "0519b382ae204d91bb74751dc247e29e",
-        "span_id": "9c2793c6afce4c4c",
+        "trace_id": "8d70cd3c72d7465eb4aa766b174f0799",
+        "span_id": "72ebae73a9694e8f",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -2527,11 +2129,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 8420,
+        "latency_ms": 11717,
         "token_count_in": 4592,
         "token_count_out": 12,
-        "trace_id": "436ce057e90c48609a582758a0d7bfa1",
-        "span_id": "a138e887ad1e4c44",
+        "trace_id": "ea496dcf113e40b6ae79cabaf71ca1f3",
+        "span_id": "3c7d38d877b14c3c",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -2571,11 +2173,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 444,
+        "latency_ms": 963,
         "token_count_in": 3937,
         "token_count_out": 12,
-        "trace_id": "e5d5e48f5baf41cfb17c4e34f9902f77",
-        "span_id": "e62e558014d84d2c",
+        "trace_id": "4f6698a2ea004edf977cb2929ed58652",
+        "span_id": "62a975722f6b4095",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -2597,8 +2199,71 @@
         "diff_hunk:ghost/core/test/e2e-api/admin/settings.test.js:1",
         "diff_hunk:ghost/core/test/e2e-api/members/send-magic-link.test.js:876"
       ],
-      "context_requests": [],
-      "issues": [],
+      "context_requests": [
+        {
+          "request_type": "related_symbol",
+          "path": "ghost/core/core/server/services/webhooks/webhook-trigger.js",
+          "evidence_ids": [
+            "entity:ghost/core/core/server/services/webhooks/webhook-trigger.js:ghost.core.core.server.services.webhooks.webhook-trigger"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-033",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/core/server/services/webhooks/listen.js",
+          "evidence_ids": [
+            "diff:ghost/core/core/server/services/webhooks/listen.js:3"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-033",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [
+        {
+          "file": "ghost/core/core/server/services/webhooks/listen.js",
+          "line": 3,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Renamed require path from './WebhookTrigger' to './webhook-trigger' but the renamed file may not export the same interface or may not exist at the new path.",
+          "suggestion": "Verify that the file ghost/core/core/server/services/webhooks/webhook-trigger.js exists and exports the same WebhookTrigger class as the original WebhookTrigger.js.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/core/server/services/webhooks/listen.js:1",
+            "diff:ghost/core/core/server/services/webhooks/webhook-trigger.js:1"
+          ]
+        },
+        {
+          "file": "ghost/core/test/e2e-api/admin/settings.test.js",
+          "line": 4,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Require path changed from SingleUseTokenProvider to single-use-token-provider; the new path may not resolve or the module may not export the same interface.",
+          "suggestion": "Confirm that the file ghost/core/core/server/services/members/single-use-token-provider.js exists and exports the same SingleUseTokenProvider class.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/test/e2e-api/admin/settings.test.js:1"
+          ]
+        },
+        {
+          "file": "ghost/core/test/e2e-api/members/send-magic-link.test.js",
+          "line": 879,
+          "severity": "medium",
+          "category": "correctness",
+          "message": "Require path changed from SingleUseTokenProvider to single-use-token-provider; the new path may not resolve or the module may not export the same interface.",
+          "suggestion": "Confirm that the file ghost/core/core/server/services/members/single-use-token-provider.js exists and exports the same SingleUseTokenProvider class.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/test/e2e-api/members/send-magic-link.test.js:876"
+          ]
+        }
+      ],
       "agent_run": {
         "agent_name": "openai_compatible_reviewer",
         "model": "deepseek-ai/DeepSeek-V4-Flash",
@@ -2609,27 +2274,71 @@
           "diff_hunk:ghost/core/test/e2e-api/admin/settings.test.js:1",
           "diff_hunk:ghost/core/test/e2e-api/members/send-magic-link.test.js:876"
         ],
-        "output_issue_ids": [],
+        "output_issue_ids": [
+          "correctness:ghost/core/core/server/services/webhooks/listen.js:3",
+          "correctness:ghost/core/test/e2e-api/admin/settings.test.js:4",
+          "correctness:ghost/core/test/e2e-api/members/send-magic-link.test.js:879"
+        ],
         "fallback_used": false,
         "iteration": 0,
         "feedback_hash": "",
-        "retry_count": 1,
-        "retry_log": [
-          "attempt=1 error=timeout delay=1.00s"
-        ],
-        "latency_ms": 63432,
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 7197,
         "token_count_in": 4983,
-        "token_count_out": 12,
-        "trace_id": "48307565c42c489ab80251a90a1b094c",
-        "span_id": "6036dc5af2df4166",
+        "token_count_out": 661,
+        "trace_id": "d26efc1ad7fe430b8b2d2eb245c45b0a",
+        "span_id": "f8ba6a71bfdc4d14",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
         "shard_id": "shard-033",
         "shard_index": 32,
         "shard_count": 50,
-        "context_request_count": 0,
+        "context_request_count": 2,
         "context_refill_used": false
+      }
+    },
+    "c6353153841f9da6fbfbd8f7c1f1e850941f073b77a6f9663b16cd3c5c0c10cd": {
+      "status": "completed",
+      "shard_id": "shard-033-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-033",
+      "selected_evidence_ids": [
+        "diff:ghost/core/core/server/services/webhooks/listen.js:3",
+        "diff_hunk:ghost/core/core/server/services/webhooks/listen.js:1",
+        "entity:ghost/core/core/server/services/webhooks/webhook-trigger.js:ghost.core.core.server.services.webhooks.webhook-trigger"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff:ghost/core/core/server/services/webhooks/listen.js:3",
+          "diff_hunk:ghost/core/core/server/services/webhooks/listen.js:1",
+          "entity:ghost/core/core/server/services/webhooks/webhook-trigger.js:ghost.core.core.server.services.webhooks.webhook-trigger"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 2937,
+        "token_count_in": 3049,
+        "token_count_out": 15,
+        "trace_id": "de5abd417afc4080b15be57ec2cd8ade",
+        "span_id": "d353c12748b6475f",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-033-refill",
+        "shard_index": 32,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": true
       }
     },
     "c482668579abf491ee9006e03ba5c0c38cf4db341395eae6c2f6f7e1f6585ffe": {
@@ -2659,15 +2368,13 @@
         "fallback_used": false,
         "iteration": 0,
         "feedback_hash": "",
-        "retry_count": 1,
-        "retry_log": [
-          "attempt=1 error=timeout delay=1.00s"
-        ],
-        "latency_ms": 67147,
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 521,
         "token_count_in": 6113,
         "token_count_out": 12,
-        "trace_id": "85fb1106e5d846b98628b2319ef197c0",
-        "span_id": "e5418b66b86843cc",
+        "trace_id": "df90789c3db345aeaca619dd5bc79dd0",
+        "span_id": "2963b197e6254d6d",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -2705,13 +2412,15 @@
         "fallback_used": false,
         "iteration": 0,
         "feedback_hash": "",
-        "retry_count": 0,
-        "retry_log": [],
-        "latency_ms": 3109,
+        "retry_count": 1,
+        "retry_log": [
+          "attempt=1 error=timeout delay=1.00s"
+        ],
+        "latency_ms": 94181,
         "token_count_in": 6003,
         "token_count_out": 12,
-        "trace_id": "8cc4aff0f56b4791a22a60680c9142fb",
-        "span_id": "0584a1f02668466b",
+        "trace_id": "177352441eb646c7bfbb57ed65c9e11c",
+        "span_id": "b88a5cb219184c04",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -2749,15 +2458,13 @@
         "fallback_used": false,
         "iteration": 0,
         "feedback_hash": "",
-        "retry_count": 1,
-        "retry_log": [
-          "attempt=1 error=timeout delay=1.00s"
-        ],
-        "latency_ms": 64205,
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 3157,
         "token_count_in": 6387,
         "token_count_out": 12,
-        "trace_id": "20380b90f2024743bdafc41d63185361",
-        "span_id": "108a047402a843b0",
+        "trace_id": "518b116e348242138fbd88220879fca4",
+        "span_id": "8e84757a042547fe",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -2797,11 +2504,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 1801,
+        "latency_ms": 3743,
         "token_count_in": 6174,
         "token_count_out": 12,
-        "trace_id": "de57c653c3b040b7b6381abc479d9f04",
-        "span_id": "70361d0361574ced",
+        "trace_id": "dc1678fea05a41b2838c62cb486878ab",
+        "span_id": "f24cb25ebd3b4be1",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -2823,103 +2530,6 @@
         "diff_hunk:ghost/core/test/unit/server/services/lib/email-content-generator.test.js:1",
         "diff_hunk:ghost/core/test/unit/server/services/lib/in-memory-repository.test.ts:1"
       ],
-      "context_requests": [
-        {
-          "request_type": "same_file_more_evidence",
-          "path": "ghost/core/test/unit/server/services/identity-tokens/identity-token-service.test.ts",
-          "evidence_ids": [
-            "diff:ghost/core/test/unit/server/services/identity-tokens/identity-token-service.test.ts:2"
-          ],
-          "risk_tag": null,
-          "symbol": null,
-          "reason": "",
-          "source_shard_id": "shard-038",
-          "fulfilled_evidence_ids": []
-        },
-        {
-          "request_type": "same_file_more_evidence",
-          "path": "ghost/core/test/unit/server/services/lib/dynamic-redirect-manager.test.js",
-          "evidence_ids": [
-            "diff:ghost/core/test/unit/server/services/lib/dynamic-redirect-manager.test.js:2"
-          ],
-          "risk_tag": null,
-          "symbol": null,
-          "reason": "",
-          "source_shard_id": "shard-038",
-          "fulfilled_evidence_ids": []
-        },
-        {
-          "request_type": "same_file_more_evidence",
-          "path": "ghost/core/test/unit/server/services/lib/email-content-generator.test.js",
-          "evidence_ids": [
-            "diff:ghost/core/test/unit/server/services/lib/email-content-generator.test.js:4"
-          ],
-          "risk_tag": null,
-          "symbol": null,
-          "reason": "",
-          "source_shard_id": "shard-038",
-          "fulfilled_evidence_ids": []
-        },
-        {
-          "request_type": "same_file_more_evidence",
-          "path": "ghost/core/test/unit/server/services/lib/in-memory-repository.test.ts",
-          "evidence_ids": [
-            "diff:ghost/core/test/unit/server/services/lib/in-memory-repository.test.ts:2"
-          ],
-          "risk_tag": null,
-          "symbol": null,
-          "reason": "",
-          "source_shard_id": "shard-038",
-          "fulfilled_evidence_ids": []
-        }
-      ],
-      "issues": [],
-      "agent_run": {
-        "agent_name": "openai_compatible_reviewer",
-        "model": "deepseek-ai/DeepSeek-V4-Flash",
-        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
-        "input_evidence_ids": [
-          "diff_hunk:ghost/core/test/unit/server/services/identity-tokens/identity-token-service.test.ts:1",
-          "diff_hunk:ghost/core/test/unit/server/services/lib/dynamic-redirect-manager.test.js:1",
-          "diff_hunk:ghost/core/test/unit/server/services/lib/email-content-generator.test.js:1",
-          "diff_hunk:ghost/core/test/unit/server/services/lib/in-memory-repository.test.ts:1"
-        ],
-        "output_issue_ids": [],
-        "fallback_used": false,
-        "iteration": 0,
-        "feedback_hash": "",
-        "retry_count": 0,
-        "retry_log": [],
-        "latency_ms": 1982,
-        "token_count_in": 5865,
-        "token_count_out": 285,
-        "trace_id": "9e423acc96734979993c89382080eb86",
-        "span_id": "430d77e698ba4c68",
-        "parent_span_id": "",
-        "status": "ok",
-        "error_type": "",
-        "shard_id": "shard-038",
-        "shard_index": 37,
-        "shard_count": 50,
-        "context_request_count": 4,
-        "context_refill_used": false
-      }
-    },
-    "0f190f28f2b80c739f80404758b4162665ce8f6462c49e40e096e077eb0d5b3b": {
-      "status": "completed",
-      "shard_id": "shard-038-refill",
-      "is_refill": true,
-      "parent_shard_id": "shard-038",
-      "selected_evidence_ids": [
-        "diff:ghost/core/test/unit/server/services/identity-tokens/identity-token-service.test.ts:2",
-        "diff:ghost/core/test/unit/server/services/lib/dynamic-redirect-manager.test.js:2",
-        "diff:ghost/core/test/unit/server/services/lib/email-content-generator.test.js:4",
-        "diff:ghost/core/test/unit/server/services/lib/in-memory-repository.test.ts:2",
-        "diff_hunk:ghost/core/test/unit/server/services/identity-tokens/identity-token-service.test.ts:1",
-        "diff_hunk:ghost/core/test/unit/server/services/lib/dynamic-redirect-manager.test.js:1",
-        "diff_hunk:ghost/core/test/unit/server/services/lib/email-content-generator.test.js:1",
-        "diff_hunk:ghost/core/test/unit/server/services/lib/in-memory-repository.test.ts:1"
-      ],
       "context_requests": [],
       "issues": [],
       "agent_run": {
@@ -2927,10 +2537,6 @@
         "model": "deepseek-ai/DeepSeek-V4-Flash",
         "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
         "input_evidence_ids": [
-          "diff:ghost/core/test/unit/server/services/identity-tokens/identity-token-service.test.ts:2",
-          "diff:ghost/core/test/unit/server/services/lib/dynamic-redirect-manager.test.js:2",
-          "diff:ghost/core/test/unit/server/services/lib/email-content-generator.test.js:4",
-          "diff:ghost/core/test/unit/server/services/lib/in-memory-repository.test.ts:2",
           "diff_hunk:ghost/core/test/unit/server/services/identity-tokens/identity-token-service.test.ts:1",
           "diff_hunk:ghost/core/test/unit/server/services/lib/dynamic-redirect-manager.test.js:1",
           "diff_hunk:ghost/core/test/unit/server/services/lib/email-content-generator.test.js:1",
@@ -2942,19 +2548,19 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 2993,
-        "token_count_in": 5291,
+        "latency_ms": 480,
+        "token_count_in": 5865,
         "token_count_out": 12,
-        "trace_id": "59df9a7e2c184d33921217d0f5a8ff2f",
-        "span_id": "1d7c2c8777fe43e9",
+        "trace_id": "8062df209b4041b69c67b939ce631441",
+        "span_id": "f754f48e8fce49bc",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
-        "shard_id": "shard-038-refill",
+        "shard_id": "shard-038",
         "shard_index": 37,
         "shard_count": 50,
         "context_request_count": 0,
-        "context_refill_used": true
+        "context_refill_used": false
       }
     },
     "c2c65f2c1f3b0e3a9907e5faf29ef75582e719b25df31b613753dfce24f3b983": {
@@ -2986,11 +2592,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 3614,
+        "latency_ms": 33554,
         "token_count_in": 5958,
         "token_count_out": 12,
-        "trace_id": "98e84ebf4e834cae9c8a3a0312bb36b5",
-        "span_id": "077b7611598043f7",
+        "trace_id": "a734ca6eb3524ddc9a29ebd0072e2e8b",
+        "span_id": "e7f84632edc34837",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -3030,11 +2636,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 1250,
+        "latency_ms": 3552,
         "token_count_in": 5984,
         "token_count_out": 12,
-        "trace_id": "5a7b82bab545457790d6c3120ede01b0",
-        "span_id": "4d5cdb5e879142de",
+        "trace_id": "08691e034807425397a9ed275a3c2ade",
+        "span_id": "98c31982e7584a6a",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -3074,11 +2680,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 591,
+        "latency_ms": 3142,
         "token_count_in": 6411,
         "token_count_out": 12,
-        "trace_id": "0b2536e754a14956bdd08b897b08d0a3",
-        "span_id": "d626be401b1342f8",
+        "trace_id": "7cbda693c8994c7c8155661f555423c0",
+        "span_id": "70e8b11f8c0e4282",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -3118,11 +2724,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 3054,
+        "latency_ms": 518,
         "token_count_in": 6065,
         "token_count_out": 12,
-        "trace_id": "3c98f74774a74f59ac11ccf778cc3277",
-        "span_id": "049ddec828e44f88",
+        "trace_id": "2354cd82515a49b3b520925e6f7bbf66",
+        "span_id": "f490791013554fbf",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -3162,11 +2768,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 5521,
+        "latency_ms": 2964,
         "token_count_in": 6338,
         "token_count_out": 12,
-        "trace_id": "49cbec00ea15438da6237ca9fdd125fd",
-        "span_id": "30d121e683d7460b",
+        "trace_id": "b56f1ca03a0f4b15a34799998f1c5f88",
+        "span_id": "dd9a6c9c20c847f1",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -3204,15 +2810,13 @@
         "fallback_used": false,
         "iteration": 0,
         "feedback_hash": "",
-        "retry_count": 1,
-        "retry_log": [
-          "attempt=1 error=timeout delay=1.00s"
-        ],
-        "latency_ms": 61772,
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 23617,
         "token_count_in": 6200,
         "token_count_out": 12,
-        "trace_id": "9b7d2d55b1944aaf9dbec854e0711f42",
-        "span_id": "16e88614ae4845e5",
+        "trace_id": "b2dc8a5b690843a595c7200829e04f12",
+        "span_id": "145a7d9817c041cf",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -3252,11 +2856,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 1526,
+        "latency_ms": 42336,
         "token_count_in": 6243,
         "token_count_out": 12,
-        "trace_id": "2ee865c2f69848b684f29323325f52e5",
-        "span_id": "45b9a4c117b74203",
+        "trace_id": "e954b502e2a34bf0aedf9f131751cbc4",
+        "span_id": "31dfadb50f3d4b90",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -3298,11 +2902,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 6240,
+        "latency_ms": 1379,
         "token_count_in": 6133,
         "token_count_out": 12,
-        "trace_id": "1542452902bd4c89ae906f6bb655727c",
-        "span_id": "d60bc694d4024da7",
+        "trace_id": "774d7785bfba4932bbfbe702c7fdd069",
+        "span_id": "3230c4a49a49483f",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -3346,11 +2950,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 3240,
+        "latency_ms": 549,
         "token_count_in": 6269,
         "token_count_out": 12,
-        "trace_id": "0bb6d235dfb545368ba708853033ac4a",
-        "span_id": "b8f919309a6a4567",
+        "trace_id": "4606a46b38094b2fb06af0ec0813c766",
+        "span_id": "9a99b916c23642e0",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -3380,23 +2984,7 @@
         "diff_hunk:ghost/core/test/unit/server/services/stats/referrers.test.js:230",
         "diff_hunk:ghost/core/test/unit/server/services/stats/stats.test.js:1"
       ],
-      "context_requests": [
-        {
-          "request_type": "risk_evidence",
-          "path": null,
-          "evidence_ids": [
-            "risk:security_sensitive:ghost/core/test/unit/server/services/stats/mrr.test.js",
-            "risk:security_sensitive:ghost/core/test/unit/server/services/stats/posts.test.js",
-            "risk:security_sensitive:ghost/core/test/unit/server/services/stats/referrers.test.js",
-            "risk:security_sensitive:ghost/core/test/unit/server/services/stats/stats.test.js"
-          ],
-          "risk_tag": null,
-          "symbol": null,
-          "reason": "The security_sensitive risk signals are triggered by keyword changes in test files, but the primary diff_hunk evidence only shows whitespace changes and require path updates. Need the full risk evidence to determine if there is a concrete security concern.",
-          "source_shard_id": "shard-048",
-          "fulfilled_evidence_ids": []
-        }
-      ],
+      "context_requests": [],
       "issues": [],
       "agent_run": {
         "agent_name": "openai_compatible_reviewer",
@@ -3422,63 +3010,19 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 13169,
+        "latency_ms": 2408,
         "token_count_in": 9112,
-        "token_count_out": 184,
-        "trace_id": "4abb3947441d4a0995c5b8b436af6bcb",
-        "span_id": "d3bb22378fe44843",
+        "token_count_out": 12,
+        "trace_id": "9b6f9d36e1a94cbe97e32ab4584eddd1",
+        "span_id": "4005aa46f1a14397",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
         "shard_id": "shard-048",
         "shard_index": 47,
         "shard_count": 50,
-        "context_request_count": 1,
-        "context_refill_used": false
-      }
-    },
-    "f0e5294f88e7f21b2d87b3f1a9448a1e0aa7218ae94860658dcff4412b167545": {
-      "status": "completed",
-      "shard_id": "shard-048-refill",
-      "is_refill": true,
-      "parent_shard_id": "shard-048",
-      "selected_evidence_ids": [
-        "risk:security_sensitive:ghost/core/test/unit/server/services/stats/mrr.test.js",
-        "risk:security_sensitive:ghost/core/test/unit/server/services/stats/posts.test.js",
-        "risk:security_sensitive:ghost/core/test/unit/server/services/stats/referrers.test.js",
-        "risk:security_sensitive:ghost/core/test/unit/server/services/stats/stats.test.js"
-      ],
-      "context_requests": [],
-      "issues": [],
-      "agent_run": {
-        "agent_name": "openai_compatible_reviewer",
-        "model": "deepseek-ai/DeepSeek-V4-Flash",
-        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
-        "input_evidence_ids": [
-          "risk:security_sensitive:ghost/core/test/unit/server/services/stats/mrr.test.js",
-          "risk:security_sensitive:ghost/core/test/unit/server/services/stats/posts.test.js",
-          "risk:security_sensitive:ghost/core/test/unit/server/services/stats/referrers.test.js",
-          "risk:security_sensitive:ghost/core/test/unit/server/services/stats/stats.test.js"
-        ],
-        "output_issue_ids": [],
-        "fallback_used": false,
-        "iteration": 0,
-        "feedback_hash": "",
-        "retry_count": 0,
-        "retry_log": [],
-        "latency_ms": 2984,
-        "token_count_in": 5359,
-        "token_count_out": 12,
-        "trace_id": "aa1a0f630fa1453b841dc1990b8e2dab",
-        "span_id": "292b5465080048d8",
-        "parent_span_id": "",
-        "status": "ok",
-        "error_type": "",
-        "shard_id": "shard-048-refill",
-        "shard_index": 47,
-        "shard_count": 50,
         "context_request_count": 0,
-        "context_refill_used": true
+        "context_refill_used": false
       }
     },
     "9c96843bc3099d5bbc3968e14b8e0a0545408d891ac192c456c156d76b5e8636": {
@@ -3510,11 +3054,11 @@
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 1697,
+        "latency_ms": 590,
         "token_count_in": 5614,
         "token_count_out": 12,
-        "trace_id": "0839e40b64cc4913ac0fe2d9c5cb8ad9",
-        "span_id": "4d9848c11bca4b1c",
+        "trace_id": "d9bef3a2d10b465694c5f3fc9946bea4",
+        "span_id": "1f88574058114443",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
@@ -3534,8 +3078,78 @@
         "diff_hunk:ghost/core/test/unit/server/services/webhooks/trigger.test.js:3",
         "diff_hunk:ghost/core/test/utils/e2e-framework-mock-manager.js:13"
       ],
-      "context_requests": [],
-      "issues": [],
+      "context_requests": [
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/test/unit/server/services/webhooks/trigger.test.js",
+          "evidence_ids": [
+            "diff:ghost/core/test/unit/server/services/webhooks/trigger.test.js:6"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-050",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "same_file_more_evidence",
+          "path": "ghost/core/test/utils/e2e-framework-mock-manager.js",
+          "evidence_ids": [
+            "diff:ghost/core/test/utils/e2e-framework-mock-manager.js:16"
+          ],
+          "risk_tag": null,
+          "symbol": null,
+          "reason": "",
+          "source_shard_id": "shard-050",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "related_symbol",
+          "path": "ghost/core/test/unit/server/services/webhooks/trigger.test.js",
+          "evidence_ids": [],
+          "risk_tag": null,
+          "symbol": "WebhookTrigger",
+          "reason": "",
+          "source_shard_id": "shard-050",
+          "fulfilled_evidence_ids": []
+        },
+        {
+          "request_type": "related_symbol",
+          "path": "ghost/core/test/utils/e2e-framework-mock-manager.js",
+          "evidence_ids": [],
+          "risk_tag": null,
+          "symbol": "MailgunClient",
+          "reason": "",
+          "source_shard_id": "shard-050",
+          "fulfilled_evidence_ids": []
+        }
+      ],
+      "issues": [
+        {
+          "file": "ghost/core/test/unit/server/services/webhooks/trigger.test.js",
+          "line": 6,
+          "severity": "high",
+          "category": "correctness",
+          "message": "The test file updates the require path to a renamed module but the diff hunk does not show a corresponding change to the production module file. If the production module was renamed from WebhookTrigger.js to webhook-trigger.js, the test will fail if the rename is incomplete or the module is not found.",
+          "suggestion": "Verify that the production module file has been renamed to webhook-trigger.js and that the module exports are identical.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/test/unit/server/services/webhooks/trigger.test.js:3"
+          ]
+        },
+        {
+          "file": "ghost/core/test/utils/e2e-framework-mock-manager.js",
+          "line": 16,
+          "severity": "high",
+          "category": "correctness",
+          "message": "The test utility updates the require path to a renamed module but the diff hunk does not show a corresponding change to the production module file. If the production module was renamed from MailgunClient.js to mailgun-client.js, the test will fail if the rename is incomplete or the module is not found.",
+          "suggestion": "Verify that the production module file has been renamed to mailgun-client.js and that the module exports are identical.",
+          "confidence": 0.7,
+          "evidence_ids": [
+            "diff_hunk:ghost/core/test/utils/e2e-framework-mock-manager.js:13"
+          ]
+        }
+      ],
       "agent_run": {
         "agent_name": "openai_compatible_reviewer",
         "model": "deepseek-ai/DeepSeek-V4-Flash",
@@ -3544,25 +3158,76 @@
           "diff_hunk:ghost/core/test/unit/server/services/webhooks/trigger.test.js:3",
           "diff_hunk:ghost/core/test/utils/e2e-framework-mock-manager.js:13"
         ],
-        "output_issue_ids": [],
+        "output_issue_ids": [
+          "correctness:ghost/core/test/unit/server/services/webhooks/trigger.test.js:6",
+          "correctness:ghost/core/test/utils/e2e-framework-mock-manager.js:16"
+        ],
         "fallback_used": false,
         "iteration": 0,
         "feedback_hash": "",
         "retry_count": 0,
         "retry_log": [],
-        "latency_ms": 34527,
+        "latency_ms": 3655,
         "token_count_in": 4001,
-        "token_count_out": 12,
-        "trace_id": "e4f1ee20e86a4463a70d929c28348933",
-        "span_id": "a8a681640b9d46c2",
+        "token_count_out": 586,
+        "trace_id": "ba0f984f6fd74d6aa9f8f020e47f06c6",
+        "span_id": "c20679fabd6444b4",
         "parent_span_id": "",
         "status": "ok",
         "error_type": "",
         "shard_id": "shard-050",
         "shard_index": 49,
         "shard_count": 50,
-        "context_request_count": 0,
+        "context_request_count": 4,
         "context_refill_used": false
+      }
+    },
+    "fc8a9052e20faea63c8fe00e028d84a9a855e9b77b74dd844125a6c732c389bd": {
+      "status": "completed",
+      "shard_id": "shard-050-refill",
+      "is_refill": true,
+      "parent_shard_id": "shard-050",
+      "selected_evidence_ids": [
+        "diff:ghost/core/test/unit/server/services/webhooks/trigger.test.js:6",
+        "diff:ghost/core/test/utils/e2e-framework-mock-manager.js:16",
+        "diff_hunk:ghost/core/test/unit/server/services/webhooks/trigger.test.js:3",
+        "diff_hunk:ghost/core/test/utils/e2e-framework-mock-manager.js:13",
+        "entity:ghost/core/test/unit/server/services/webhooks/trigger.test.js:ghost.core.test.unit.server.services.webhooks.trigger.test",
+        "entity:ghost/core/test/utils/e2e-framework-mock-manager.js:ghost.core.test.utils.e2e-framework-mock-manager"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff:ghost/core/test/unit/server/services/webhooks/trigger.test.js:6",
+          "diff:ghost/core/test/utils/e2e-framework-mock-manager.js:16",
+          "diff_hunk:ghost/core/test/unit/server/services/webhooks/trigger.test.js:3",
+          "diff_hunk:ghost/core/test/utils/e2e-framework-mock-manager.js:13",
+          "entity:ghost/core/test/unit/server/services/webhooks/trigger.test.js:ghost.core.test.unit.server.services.webhooks.trigger.test",
+          "entity:ghost/core/test/utils/e2e-framework-mock-manager.js:ghost.core.test.utils.e2e-framework-mock-manager"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 3224,
+        "token_count_in": 4004,
+        "token_count_out": 15,
+        "trace_id": "29bc11546db044c08835bb60838f7522",
+        "span_id": "d97e774e0126416d",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-050-refill",
+        "shard_index": 49,
+        "shard_count": 50,
+        "context_request_count": 0,
+        "context_refill_used": true
       }
     }
   }

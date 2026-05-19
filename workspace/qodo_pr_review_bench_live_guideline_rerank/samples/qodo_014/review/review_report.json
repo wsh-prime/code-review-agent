@@ -5,9 +5,9 @@
     "changed_file_count": 11,
     "changed_entity_count": 11,
     "risk_signal_count": 4,
-    "finding_count": 4,
+    "finding_count": 5,
     "needs_human_review_count": 1,
-    "discarded_count": 1,
+    "discarded_count": 0,
     "evidence_count": 86,
     "missing_evidence_id_count": 0,
     "agent_run_count": 5,
@@ -19,9 +19,9 @@
     "fallback_reason": null,
     "resume_used": false,
     "resume_ignored_reason": null,
-    "total_latency_ms": 166908,
+    "total_latency_ms": 218993,
     "total_token_count_in": 19637,
-    "total_token_count_out": 1370,
+    "total_token_count_out": 1350,
     "context_budget_enabled": true,
     "context_truncated": true,
     "selected_evidence_count": 13,
@@ -33,13 +33,25 @@
   },
   "findings": [
     {
+      "file": "eng/common/core-templates/steps/source-build.yml",
+      "line": 44,
+      "severity": "medium",
+      "category": "correctness",
+      "message": "The patch changes the internal runtime source feed URL from 'https://dotnetbuilds.blob.core.windows.net/internal' to 'https://ci.dot.net/internal' and adds a new '--runtimesourcefeed' argument. The diff hunk shows the new URL and argument are appended without a space separator before '--runtimesourcefeed', which may cause the shell to interpret the concatenated string incorrectly, leading to a malformed build argument.",
+      "suggestion": "Add a space before '--runtimesourcefeed' to ensure it is passed as a separate argument: '/p:DotNetRuntimeSourceFeed=https://ci.dot.net/internal /p:DotNetRuntimeSourceFeedKey=$(dotnetbuilds-internal-container-read-token-base64) --runtimesourcefeed http...'",
+      "confidence": 0.85,
+      "evidence_ids": [
+        "diff_hunk:eng/common/core-templates/steps/source-build.yml:41"
+      ]
+    },
+    {
       "file": "eng/common/internal-feed-operations.ps1",
       "line": 29,
       "severity": "low",
       "category": "best_practice",
-      "message": "The patch adds '-UseBasicParsing' to Invoke-WebRequest. This is a safe improvement for PowerShell versions where Internet Explorer engine may not be available, but the change is not accompanied by any error handling for cases where -UseBasicParsing might cause issues with certain response types (e.g., when the response requires parsing of dynamic content).",
-      "suggestion": "Consider adding a comment explaining why -UseBasicParsing is needed, or wrap the call in a try/catch to handle potential parsing failures gracefully.",
-      "confidence": 0.7,
+      "message": "The patch adds '-UseBasicParsing' to Invoke-WebRequest. While this is a good practice for environments without Internet Explorer, the evidence does not show any concrete failure scenario introduced by the change. The change is safe and improves compatibility.",
+      "suggestion": "No action needed; the change is acceptable.",
+      "confidence": 0.95,
       "evidence_ids": [
         "diff_hunk:eng/common/internal-feed-operations.ps1:26"
       ]
@@ -49,9 +61,9 @@
       "line": 68,
       "severity": "low",
       "category": "best_practice",
-      "message": "The patch adds '-UseBasicParsing' to Invoke-WebRequest. Same as in internal-feed-operations.ps1, this is a safe improvement but lacks any comment or error handling for potential edge cases where -UseBasicParsing might alter behavior.",
-      "suggestion": "Consider adding a comment explaining why -UseBasicParsing is needed, or wrap the call in a try/catch to handle potential parsing failures gracefully.",
-      "confidence": 0.7,
+      "message": "The patch adds '-UseBasicParsing' to Invoke-WebRequest. This is a safe improvement for environments without Internet Explorer. No concrete failure scenario is introduced.",
+      "suggestion": "No action needed; the change is acceptable.",
+      "confidence": 0.95,
       "evidence_ids": [
         "diff_hunk:eng/common/post-build/nuget-verification.ps1:65"
       ]
@@ -61,9 +73,9 @@
       "line": 269,
       "severity": "low",
       "category": "best_practice",
-      "message": "The patch adds '-UseBasicParsing' to Invoke-WebRequest. Same as in other files, this is a safe improvement but lacks any comment or error handling for potential edge cases.",
-      "suggestion": "Consider adding a comment explaining why -UseBasicParsing is needed, or wrap the call in a try/catch to handle potential parsing failures gracefully.",
-      "confidence": 0.7,
+      "message": "The patch adds '-UseBasicParsing' to Invoke-WebRequest. This is a safe improvement for environments without Internet Explorer. No concrete failure scenario is introduced.",
+      "suggestion": "No action needed; the change is acceptable.",
+      "confidence": 0.95,
       "evidence_ids": [
         "diff_hunk:eng/common/tools.ps1:266"
       ]
@@ -71,11 +83,11 @@
     {
       "file": "eng/common/core-templates/steps/source-build.yml",
       "line": 44,
-      "severity": "medium",
+      "severity": "high",
       "category": "security",
-      "message": "The patch changes the internal runtime download feed URL from 'https://dotnetbuilds.blob.core.windows.net/internal' to 'https://ci.dot.net/internal' and adds a new '--runtimesourcefeed' argument with an 'http' URL. This introduces a potential security risk if the new feed or the additional argument is not properly validated, as it could allow an attacker to redirect downloads to a malicious source or leak the access token.",
-      "suggestion": "Ensure the new feed URL 'https://ci.dot.net/internal' is trusted and uses HTTPS. Validate that the added '--runtimesourcefeed' argument does not accept untrusted input or expose the access token. Consider using a secure, validated source for the runtime feed.",
-      "confidence": 0.7,
+      "message": "The patch changes the internal runtime download feed URL from 'https://dotnetbuilds.blob.core.windows.net/internal' to 'https://ci.dot.net/internal' and adds a new '--runtimesourcefeed' argument with an HTTP URL. This introduces a potential security risk if the new feed or the HTTP source feed is untrusted or if the change bypasses existing access controls, as the internal feed key is still passed as a query parameter.",
+      "suggestion": "Verify that the new feed URL 'https://ci.dot.net/internal' is authorized and that the added '--runtimesourcefeed http...' argument does not expose the internal feed key or allow redirection to an untrusted source. Consider using HTTPS for all runtime source feeds and validate the feed's integrity.",
+      "confidence": 0.74,
       "evidence_ids": [
         "diff_hunk:eng/common/core-templates/steps/source-build.yml:41",
         "diff:eng/common/core-templates/steps/source-build.yml:44",
@@ -97,21 +109,7 @@
       ]
     }
   ],
-  "discarded": [
-    {
-      "file": "eng/common/core-templates/steps/source-build.yml",
-      "line": 44,
-      "severity": "medium",
-      "category": "correctness",
-      "message": "The patch changes the internal runtime download feed URL from 'https://dotnetbuilds.blob.core.windows.net/internal' to 'https://ci.dot.net/internal' and adds a new '--runtimesourcefeed' argument. The diff_hunk shows the new URL and argument are appended without a space separator before '--runtimesourcefeed', which may cause the shell to misinterpret the argument as part of the previous value.",
-      "suggestion": "Add a space before '--runtimesourcefeed' to ensure it is treated as a separate argument: '/p:DotNetRuntimeSourceFeed=https://ci.dot.net/internal /p:DotNetRuntimeSourceFeedKey=$(dotnetbuilds-internal-container-read-token-base64) --runtimesourcefeed http...'",
-      "confidence": 0.85,
-      "evidence_ids": [
-        "diff_hunk:eng/common/core-templates/steps/source-build.yml:41"
-      ],
-      "filter_reason": "low_signal_suggestion"
-    }
-  ],
+  "discarded": [],
   "changed_files": [
     {
       "old_path": "eng/Version.Details.xml",
@@ -2357,11 +2355,11 @@
       "feedback_hash": "",
       "retry_count": 0,
       "retry_log": [],
-      "latency_ms": 4197,
+      "latency_ms": 3215,
       "token_count_in": 6254,
       "token_count_out": 12,
-      "trace_id": "9ca2bf59399548aba559bf653ce8e0b9",
-      "span_id": "d356acc4c1c840d6",
+      "trace_id": "e92671d0ff784d6cad7f5cafd63d23b8",
+      "span_id": "4379e4b3f20541bc",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
@@ -2390,13 +2388,15 @@
       "fallback_used": false,
       "iteration": 0,
       "feedback_hash": "",
-      "retry_count": 0,
-      "retry_log": [],
-      "latency_ms": 29264,
+      "retry_count": 1,
+      "retry_log": [
+        "attempt=1 error=timeout delay=1.00s"
+      ],
+      "latency_ms": 95292,
       "token_count_in": 5185,
-      "token_count_out": 856,
-      "trace_id": "723c4218952649cf955317589194edf5",
-      "span_id": "67c6903954af4b63",
+      "token_count_out": 828,
+      "trace_id": "7aa4c0f24b944502b881e408cedcdabd",
+      "span_id": "c0b35b2e14584e02",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
@@ -2421,16 +2421,15 @@
       "fallback_used": false,
       "iteration": 0,
       "feedback_hash": "",
-      "retry_count": 2,
+      "retry_count": 1,
       "retry_log": [
-        "attempt=1 error=timeout delay=1.00s",
-        "attempt=2 error=timeout delay=2.00s"
+        "attempt=1 error=timeout delay=1.00s"
       ],
-      "latency_ms": 128067,
+      "latency_ms": 90757,
       "token_count_in": 3276,
-      "token_count_out": 294,
-      "trace_id": "583636cd57b94b4cabe4a7d15da270e6",
-      "span_id": "f07a6520f5254f26",
+      "token_count_out": 302,
+      "trace_id": "f039155ab91043c4a124a27431e9a51a",
+      "span_id": "673a0ba761ab4790",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
@@ -2457,11 +2456,11 @@
       "feedback_hash": "",
       "retry_count": 0,
       "retry_log": [],
-      "latency_ms": 5380,
+      "latency_ms": 29729,
       "token_count_in": 4922,
       "token_count_out": 208,
-      "trace_id": "1b124e55ab914d27a9d810893b6a3890",
-      "span_id": "d895bd6f9cd44324",
+      "trace_id": "8e0dc84d91bb4911996b2a57670e2080",
+      "span_id": "f4268055c44b4657",
       "parent_span_id": "",
       "status": "ok",
       "error_type": "",
@@ -2485,6 +2484,7 @@
         "risk:security_sensitive:eng/common/core-templates/steps/source-build.yml"
       ],
       "output_issue_ids": [
+        "correctness:eng/common/core-templates/steps/source-build.yml:44",
         "best_practice:eng/common/internal-feed-operations.ps1:29",
         "best_practice:eng/common/post-build/nuget-verification.ps1:68",
         "best_practice:eng/common/tools.ps1:269",
@@ -2623,7 +2623,7 @@
         ],
         "risk_tag": null,
         "symbol": null,
-        "reason": "",
+        "reason": "The risk signal 'security_sensitive' for source-build.yml has omitted evidence that may clarify the security impact of the URL change.",
         "source_shard_id": "shard-002",
         "fulfilled_evidence_ids": [
           "risk:security_sensitive:eng/common/core-templates/steps/source-build.yml"
@@ -2637,7 +2637,7 @@
         ],
         "risk_tag": null,
         "symbol": null,
-        "reason": "",
+        "reason": "The diff hunk for source-build.yml is truncated; the full line with the new '--runtimesourcefeed' argument is not visible. Requesting the diff line to verify the exact syntax.",
         "source_shard_id": "shard-002",
         "fulfilled_evidence_ids": [
           "diff:eng/common/core-templates/steps/source-build.yml:44",
@@ -2703,10 +2703,10 @@
       {
         "i": 0,
         "candidate_issue_count": 6,
-        "verified_count": 5,
+        "verified_count": 6,
         "needs_human_review_count": 0,
-        "discarded_count": 1,
-        "keep_count": 4,
+        "discarded_count": 0,
+        "keep_count": 5,
         "uncertain_count": 1,
         "reject_count": 0,
         "feedback_sent": [
@@ -2737,11 +2737,11 @@
             "feedback_hash": "",
             "retry_count": 0,
             "retry_log": [],
-            "latency_ms": 4197,
+            "latency_ms": 3215,
             "token_count_in": 6254,
             "token_count_out": 12,
-            "trace_id": "9ca2bf59399548aba559bf653ce8e0b9",
-            "span_id": "d356acc4c1c840d6",
+            "trace_id": "e92671d0ff784d6cad7f5cafd63d23b8",
+            "span_id": "4379e4b3f20541bc",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
@@ -2770,13 +2770,15 @@
             "fallback_used": false,
             "iteration": 0,
             "feedback_hash": "",
-            "retry_count": 0,
-            "retry_log": [],
-            "latency_ms": 29264,
+            "retry_count": 1,
+            "retry_log": [
+              "attempt=1 error=timeout delay=1.00s"
+            ],
+            "latency_ms": 95292,
             "token_count_in": 5185,
-            "token_count_out": 856,
-            "trace_id": "723c4218952649cf955317589194edf5",
-            "span_id": "67c6903954af4b63",
+            "token_count_out": 828,
+            "trace_id": "7aa4c0f24b944502b881e408cedcdabd",
+            "span_id": "c0b35b2e14584e02",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
@@ -2801,16 +2803,15 @@
             "fallback_used": false,
             "iteration": 0,
             "feedback_hash": "",
-            "retry_count": 2,
+            "retry_count": 1,
             "retry_log": [
-              "attempt=1 error=timeout delay=1.00s",
-              "attempt=2 error=timeout delay=2.00s"
+              "attempt=1 error=timeout delay=1.00s"
             ],
-            "latency_ms": 128067,
+            "latency_ms": 90757,
             "token_count_in": 3276,
-            "token_count_out": 294,
-            "trace_id": "583636cd57b94b4cabe4a7d15da270e6",
-            "span_id": "f07a6520f5254f26",
+            "token_count_out": 302,
+            "trace_id": "f039155ab91043c4a124a27431e9a51a",
+            "span_id": "673a0ba761ab4790",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
@@ -2837,11 +2838,11 @@
             "feedback_hash": "",
             "retry_count": 0,
             "retry_log": [],
-            "latency_ms": 5380,
+            "latency_ms": 29729,
             "token_count_in": 4922,
             "token_count_out": 208,
-            "trace_id": "1b124e55ab914d27a9d810893b6a3890",
-            "span_id": "d895bd6f9cd44324",
+            "trace_id": "8e0dc84d91bb4911996b2a57670e2080",
+            "span_id": "f4268055c44b4657",
             "parent_span_id": "",
             "status": "ok",
             "error_type": "",
@@ -2865,6 +2866,7 @@
               "risk:security_sensitive:eng/common/core-templates/steps/source-build.yml"
             ],
             "output_issue_ids": [
+              "correctness:eng/common/core-templates/steps/source-build.yml:44",
               "best_practice:eng/common/internal-feed-operations.ps1:29",
               "best_practice:eng/common/post-build/nuget-verification.ps1:68",
               "best_practice:eng/common/tools.ps1:269",
@@ -2894,18 +2896,31 @@
           "best_practice:eng/common/internal-feed-operations.ps1:29",
           "best_practice:eng/common/post-build/nuget-verification.ps1:68",
           "best_practice:eng/common/tools.ps1:269",
+          "correctness:eng/common/core-templates/steps/source-build.yml:44",
           "maintainability:src/Components/test/E2ETest/ServerExecutionTests/WebSocketCompressionTests.cs:107",
           "security:eng/common/core-templates/steps/source-build.yml:44"
         ],
         "keep": [
           {
+            "file": "eng/common/core-templates/steps/source-build.yml",
+            "line": 44,
+            "severity": "medium",
+            "category": "correctness",
+            "message": "The patch changes the internal runtime source feed URL from 'https://dotnetbuilds.blob.core.windows.net/internal' to 'https://ci.dot.net/internal' and adds a new '--runtimesourcefeed' argument. The diff hunk shows the new URL and argument are appended without a space separator before '--runtimesourcefeed', which may cause the shell to interpret the concatenated string incorrectly, leading to a malformed build argument.",
+            "suggestion": "Add a space before '--runtimesourcefeed' to ensure it is passed as a separate argument: '/p:DotNetRuntimeSourceFeed=https://ci.dot.net/internal /p:DotNetRuntimeSourceFeedKey=$(dotnetbuilds-internal-container-read-token-base64) --runtimesourcefeed http...'",
+            "confidence": 0.85,
+            "evidence_ids": [
+              "diff_hunk:eng/common/core-templates/steps/source-build.yml:41"
+            ]
+          },
+          {
             "file": "eng/common/internal-feed-operations.ps1",
             "line": 29,
             "severity": "low",
             "category": "best_practice",
-            "message": "The patch adds '-UseBasicParsing' to Invoke-WebRequest. This is a safe improvement for PowerShell versions where Internet Explorer engine may not be available, but the change is not accompanied by any error handling for cases where -UseBasicParsing might cause issues with certain response types (e.g., when the response requires parsing of dynamic content).",
-            "suggestion": "Consider adding a comment explaining why -UseBasicParsing is needed, or wrap the call in a try/catch to handle potential parsing failures gracefully.",
-            "confidence": 0.7,
+            "message": "The patch adds '-UseBasicParsing' to Invoke-WebRequest. While this is a good practice for environments without Internet Explorer, the evidence does not show any concrete failure scenario introduced by the change. The change is safe and improves compatibility.",
+            "suggestion": "No action needed; the change is acceptable.",
+            "confidence": 0.95,
             "evidence_ids": [
               "diff_hunk:eng/common/internal-feed-operations.ps1:26"
             ]
@@ -2915,9 +2930,9 @@
             "line": 68,
             "severity": "low",
             "category": "best_practice",
-            "message": "The patch adds '-UseBasicParsing' to Invoke-WebRequest. Same as in internal-feed-operations.ps1, this is a safe improvement but lacks any comment or error handling for potential edge cases where -UseBasicParsing might alter behavior.",
-            "suggestion": "Consider adding a comment explaining why -UseBasicParsing is needed, or wrap the call in a try/catch to handle potential parsing failures gracefully.",
-            "confidence": 0.7,
+            "message": "The patch adds '-UseBasicParsing' to Invoke-WebRequest. This is a safe improvement for environments without Internet Explorer. No concrete failure scenario is introduced.",
+            "suggestion": "No action needed; the change is acceptable.",
+            "confidence": 0.95,
             "evidence_ids": [
               "diff_hunk:eng/common/post-build/nuget-verification.ps1:65"
             ]
@@ -2927,9 +2942,9 @@
             "line": 269,
             "severity": "low",
             "category": "best_practice",
-            "message": "The patch adds '-UseBasicParsing' to Invoke-WebRequest. Same as in other files, this is a safe improvement but lacks any comment or error handling for potential edge cases.",
-            "suggestion": "Consider adding a comment explaining why -UseBasicParsing is needed, or wrap the call in a try/catch to handle potential parsing failures gracefully.",
-            "confidence": 0.7,
+            "message": "The patch adds '-UseBasicParsing' to Invoke-WebRequest. This is a safe improvement for environments without Internet Explorer. No concrete failure scenario is introduced.",
+            "suggestion": "No action needed; the change is acceptable.",
+            "confidence": 0.95,
             "evidence_ids": [
               "diff_hunk:eng/common/tools.ps1:266"
             ]
@@ -2937,11 +2952,11 @@
           {
             "file": "eng/common/core-templates/steps/source-build.yml",
             "line": 44,
-            "severity": "medium",
+            "severity": "high",
             "category": "security",
-            "message": "The patch changes the internal runtime download feed URL from 'https://dotnetbuilds.blob.core.windows.net/internal' to 'https://ci.dot.net/internal' and adds a new '--runtimesourcefeed' argument with an 'http' URL. This introduces a potential security risk if the new feed or the additional argument is not properly validated, as it could allow an attacker to redirect downloads to a malicious source or leak the access token.",
-            "suggestion": "Ensure the new feed URL 'https://ci.dot.net/internal' is trusted and uses HTTPS. Validate that the added '--runtimesourcefeed' argument does not accept untrusted input or expose the access token. Consider using a secure, validated source for the runtime feed.",
-            "confidence": 0.7,
+            "message": "The patch changes the internal runtime download feed URL from 'https://dotnetbuilds.blob.core.windows.net/internal' to 'https://ci.dot.net/internal' and adds a new '--runtimesourcefeed' argument with an HTTP URL. This introduces a potential security risk if the new feed or the HTTP source feed is untrusted or if the change bypasses existing access controls, as the internal feed key is still passed as a query parameter.",
+            "suggestion": "Verify that the new feed URL 'https://ci.dot.net/internal' is authorized and that the added '--runtimesourcefeed http...' argument does not expose the internal feed key or allow redirection to an untrusted source. Consider using HTTPS for all runtime source feeds and validate the feed's integrity.",
+            "confidence": 0.74,
             "evidence_ids": [
               "diff_hunk:eng/common/core-templates/steps/source-build.yml:41",
               "diff:eng/common/core-templates/steps/source-build.yml:44",
@@ -2963,28 +2978,14 @@
             ]
           }
         ],
-        "discarded": [
-          {
-            "file": "eng/common/core-templates/steps/source-build.yml",
-            "line": 44,
-            "severity": "medium",
-            "category": "correctness",
-            "message": "The patch changes the internal runtime download feed URL from 'https://dotnetbuilds.blob.core.windows.net/internal' to 'https://ci.dot.net/internal' and adds a new '--runtimesourcefeed' argument. The diff_hunk shows the new URL and argument are appended without a space separator before '--runtimesourcefeed', which may cause the shell to misinterpret the argument as part of the previous value.",
-            "suggestion": "Add a space before '--runtimesourcefeed' to ensure it is treated as a separate argument: '/p:DotNetRuntimeSourceFeed=https://ci.dot.net/internal /p:DotNetRuntimeSourceFeedKey=$(dotnetbuilds-internal-container-read-token-base64) --runtimesourcefeed http...'",
-            "confidence": 0.85,
-            "evidence_ids": [
-              "diff_hunk:eng/common/core-templates/steps/source-build.yml:41"
-            ],
-            "filter_reason": "low_signal_suggestion"
-          }
-        ]
+        "discarded": []
       }
     ]
   },
   "tracing": {
-    "total_latency_ms": 166908,
+    "total_latency_ms": 218993,
     "total_token_count_in": 19637,
-    "total_token_count_out": 1370,
+    "total_token_count_out": 1350,
     "total_retry_count": 2,
     "run_count": 5,
     "status_counts": {

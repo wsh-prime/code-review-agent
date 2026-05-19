@@ -1,0 +1,55 @@
+{
+  "schema_version": "live_context_checkpoint_v1",
+  "package_hash": "sha256:93e24ba24d1b12953b892585d99edfdd459fdfe3ae0c29ff39bb63ceb80ab997",
+  "diff_hash": "sha256:062a6eb825eab43b9dfb09c5b03ccb186c6eddd9ffd082a1c6d3a05b657fcb5f",
+  "shards": {
+    "b3867a41636f10f5f5e27572e1230b45477871b542dd520c5c1c0986c6267b9c": {
+      "status": "completed",
+      "shard_id": "shard-001",
+      "is_refill": false,
+      "parent_shard_id": null,
+      "selected_evidence_ids": [
+        "diff_hunk:ghost/core/core/boot.js:310",
+        "diff_hunk:ghost/core/core/boot.js:347",
+        "diff_hunk:ghost/core/core/boot.js:361",
+        "diff_hunk:ghost/core/core/server/services/xmlrpc.js:1",
+        "diff_hunk:ghost/core/core/shared/config/env/config.development.json:23",
+        "diff_hunk:ghost/core/test/unit/server/services/xmlrpc.test.js:1"
+      ],
+      "context_requests": [],
+      "issues": [],
+      "agent_run": {
+        "agent_name": "openai_compatible_reviewer",
+        "model": "deepseek-ai/DeepSeek-V4-Flash",
+        "prompt_hash": "1529129937e9f24e4041a4818ba4b49280cafb9ffe50efd5d7a25eeaf81d7207",
+        "input_evidence_ids": [
+          "diff_hunk:ghost/core/core/boot.js:310",
+          "diff_hunk:ghost/core/core/boot.js:347",
+          "diff_hunk:ghost/core/core/boot.js:361",
+          "diff_hunk:ghost/core/core/server/services/xmlrpc.js:1",
+          "diff_hunk:ghost/core/core/shared/config/env/config.development.json:23",
+          "diff_hunk:ghost/core/test/unit/server/services/xmlrpc.test.js:1"
+        ],
+        "output_issue_ids": [],
+        "fallback_used": false,
+        "iteration": 0,
+        "feedback_hash": "",
+        "retry_count": 0,
+        "retry_log": [],
+        "latency_ms": 4799,
+        "token_count_in": 7357,
+        "token_count_out": 12,
+        "trace_id": "cf9cdb2b50dd42658630e6dff44419ee",
+        "span_id": "e8abc661f475425d",
+        "parent_span_id": "",
+        "status": "ok",
+        "error_type": "",
+        "shard_id": "shard-001",
+        "shard_index": 0,
+        "shard_count": 1,
+        "context_request_count": 0,
+        "context_refill_used": false
+      }
+    }
+  }
+}
